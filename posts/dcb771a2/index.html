@@ -1,0 +1,1637 @@
+<!DOCTYPE html>
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+
+<html class="theme-next mist use-motion" lang="zh-CN">
+<head><meta name="generator" content="Hexo 3.8.0">
+  <meta charset="UTF-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+
+
+
+
+
+
+  
+  
+    
+    
+  <script src="/lib/pace/pace.min.js?v=1.0.2"></script>
+  <link href="/lib/pace/pace-theme-minimal.min.css?v=1.0.2" rel="stylesheet">
+
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform">
+<meta http-equiv="Cache-Control" content="no-siteapp">
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css">
+
+<link href="/css/main.css?v=6.5.0" rel="stylesheet" type="text/css">
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon.png?v=6.5.0">
+
+
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32.png?v=6.5.0">
+
+
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16.png?v=6.5.0">
+
+
+  <link rel="mask-icon" href="/images/safari_pinned_tab.svg?v=6.5.0" color="#222">
+
+
+  <link rel="manifest" href="/images/manifest.json">
+
+
+  <meta name="msapplication-config" content="/images/browserconfig.xml">
+
+
+
+
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Mist',
+    version: '6.5.0',
+    sidebar: {"position":"left","display":"post","offset":12,"b2t":false,"scrollpercent":true,"onmobile":true},
+    fancybox: false,
+    fastclick: false,
+    lazyload: false,
+    tabs: true,
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+  
+
+
+
+
+  <meta name="description" content="基本环境JavaJDK:Java开发环境,其中包含运行环境. Tomcat:Java服务端开发环境,例如:Servlet,JSP等. python最好有python2和python3,使用virtualenvwrapper(Python3,不支持powershell)管理. 1234mkvirtualenv python3 --python = &apos;python3_path&apos;#创建虚拟环境worko">
+<meta name="keywords" content="environment">
+<meta property="og:type" content="article">
+<meta property="og:title" content="w4rd3n-win环境搭建">
+<meta property="og:url" content="https://hitworld.github.io/posts/dcb771a2/index.html">
+<meta property="og:site_name" content="w4rd3n">
+<meta property="og:description" content="基本环境JavaJDK:Java开发环境,其中包含运行环境. Tomcat:Java服务端开发环境,例如:Servlet,JSP等. python最好有python2和python3,使用virtualenvwrapper(Python3,不支持powershell)管理. 1234mkvirtualenv python3 --python = &apos;python3_path&apos;#创建虚拟环境worko">
+<meta property="og:locale" content="zh-CN">
+<meta property="og:updated_time" content="2020-06-20T10:21:41.182Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="w4rd3n-win环境搭建">
+<meta name="twitter:description" content="基本环境JavaJDK:Java开发环境,其中包含运行环境. Tomcat:Java服务端开发环境,例如:Servlet,JSP等. python最好有python2和python3,使用virtualenvwrapper(Python3,不支持powershell)管理. 1234mkvirtualenv python3 --python = &apos;python3_path&apos;#创建虚拟环境worko">
+
+
+
+
+
+
+  <link rel="canonical" href="https://hitworld.github.io/posts/dcb771a2/">
+
+
+
+<script type="text/javascript" id="page.configurations">
+  CONFIG.page = {
+    sidebar: "",
+  };
+</script>
+
+  <title>w4rd3n-win环境搭建 | w4rd3n</title>
+  
+
+
+
+
+
+
+
+
+
+
+
+  <noscript>
+  <style type="text/css">
+    .use-motion .motion-element,
+    .use-motion .brand,
+    .use-motion .menu-item,
+    .sidebar-inner,
+    .use-motion .post-block,
+    .use-motion .pagination,
+    .use-motion .comments,
+    .use-motion .post-header,
+    .use-motion .post-body,
+    .use-motion .collection-title { opacity: initial; }
+
+    .use-motion .logo,
+    .use-motion .site-title,
+    .use-motion .site-subtitle {
+      opacity: initial;
+      top: initial;
+    }
+
+    .use-motion {
+      .logo-line-before i { left: initial; }
+      .logo-line-after i { right: initial; }
+    }
+  </style>
+</noscript>
+
+</head>
+
+<body itemscope="" itemtype="http://schema.org/WebPage" lang="zh-CN">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope="" itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/" class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">w4rd3n</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+    
+      
+        <p class="site-subtitle">混吃等死</p>
+      
+    
+  </div>
+
+  <div class="site-nav-toggle">
+    <button aria-label="切换导航栏">
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+
+
+<nav class="site-nav">
+  
+    <ul id="menu" class="menu">
+      
+        
+        
+        
+          
+          <li class="menu-item menu-item-home">
+
+    
+    
+    
+      
+    
+
+    
+
+    <a href="/" rel="section"><i class="menu-item-icon fa fa-fw fa-home"></i> <br>首页</a>
+
+  </li>
+        
+        
+        
+          
+          <li class="menu-item menu-item-about">
+
+    
+    
+    
+      
+    
+
+    
+
+    <a href="/about/" rel="section"><i class="menu-item-icon fa fa-fw fa-user"></i> <br>友链</a>
+
+  </li>
+        
+        
+        
+          
+          <li class="menu-item menu-item-tags">
+
+    
+    
+    
+      
+    
+
+    
+
+    <a href="/tags/" rel="section"><i class="menu-item-icon fa fa-fw fa-tags"></i> <br>标签</a>
+
+  </li>
+        
+        
+        
+          
+          <li class="menu-item menu-item-categories">
+
+    
+    
+    
+      
+    
+
+    
+
+    <a href="/categories/" rel="section"><i class="menu-item-icon fa fa-fw fa-th"></i> <br>分类</a>
+
+  </li>
+        
+        
+        
+          
+          <li class="menu-item menu-item-archives">
+
+    
+    
+    
+      
+    
+
+    
+
+    <a href="/archives/" rel="section"><i class="menu-item-icon fa fa-fw fa-archive"></i> <br>归档</a>
+
+  </li>
+
+      
+      
+        <li class="menu-item menu-item-search">
+          
+            <a href="javascript:;" class="popup-trigger">
+          
+            
+              <i class="menu-item-icon fa fa-search fa-fw"></i> <br>搜索</a>
+        </li>
+      
+    </ul>
+  
+
+  
+    
+
+  
+
+  
+    <div class="site-search">
+      
+  <div class="popup search-popup local-search-popup">
+  <div class="local-search-header clearfix">
+    <span class="search-icon">
+      <i class="fa fa-search"></i>
+    </span>
+    <span class="popup-btn-close">
+      <i class="fa fa-times-circle"></i>
+    </span>
+    <div class="local-search-input-wrapper">
+      <input autocomplete="off" placeholder="搜索..." spellcheck="false" type="text" id="local-search-input">
+    </div>
+  </div>
+  <div id="local-search-result"></div>
+</div>
+
+
+
+    </div>
+  
+</nav>
+
+
+
+  
+
+
+
+</div>
+    </header>
+
+    
+
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  
+
+  <article class="post post-type-normal" itemscope="" itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="https://hitworld.github.io/posts/dcb771a2/">
+
+    <span hidden itemprop="author" itemscope="" itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="w4rd3n">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/apple-touch-icon.png">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope="" itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="w4rd3n">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">w4rd3n-win环境搭建
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+
+            
+            
+            
+
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+
+              
+                
+              
+
+              <time title="创建时间：2017-09-01 01:02:03" itemprop="dateCreated datePublished" datetime="2017-09-01T01:02:03+08:00">2017-09-01</time>
+            
+
+            
+          </span>
+
+          
+            <span class="post-category">
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope="" itemtype="http://schema.org/Thing"><a href="/categories/w4rd3n/" itemprop="url" rel="index"><span itemprop="name">w4rd3n</span></a></span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+             <span id="/posts/dcb771a2/" class="leancloud_visitors" data-flag-title="w4rd3n-win环境搭建">
+               <span class="post-meta-divider">|</span>
+               <span class="post-meta-item-icon">
+                 <i class="fa fa-eye"></i>
+               </span>
+               
+                 <span class="post-meta-item-text">热度：</span>
+               
+                 <span class="leancloud-visitors-count"></span>
+                 <span>℃</span>
+             </span>
+          
+
+          
+
+          
+            <div class="post-symbolscount">
+              
+
+              
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-file-word-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">本文字数：</span>
+                
+                <span title="本文字数">3.9k</span>
+              
+
+              
+                <span class="post-meta-divider">|</span>
+              
+
+              
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-clock-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">阅读时长 &asymp;</span>
+                
+                <span title="阅读时长">4 分钟</span>
+              
+            </div>
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <h2 id="基本环境"><a href="#基本环境" class="headerlink" title="基本环境"></a>基本环境</h2><h3 id="Java"><a href="#Java" class="headerlink" title="Java"></a>Java</h3><p><code>JDK</code>:<code>Java</code>开发环境,其中包含运行环境.</p>
+<p><code>Tomcat</code>:<code>Java</code>服务端开发环境,例如:<code>Servlet</code>,<code>JSP</code>等.</p>
+<h3 id="python"><a href="#python" class="headerlink" title="python"></a>python</h3><p>最好有<code>python2</code>和<code>python3</code>,使用<code>virtualenvwrapper</code>(<code>Python3</code>,不支持<code>powershell</code>)管理.</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">mkvirtualenv python3 --python = <span class="string">'python3_path'</span></span><br><span class="line"><span class="comment">#创建虚拟环境</span></span><br><span class="line">workon python3</span><br><span class="line"><span class="comment">#进入虚拟环境</span></span><br></pre></td></tr></table></figure>
+<h3 id="数据库"><a href="#数据库" class="headerlink" title="数据库"></a>数据库</h3><p><code>MySQL Installer for Windows</code>.用于管理<code>Windows</code>下<code>MySQL</code>环境.</p>
+<h3 id="虚拟机"><a href="#虚拟机" class="headerlink" title="虚拟机"></a>虚拟机</h3><p><code>VMware</code>:虚拟机管理软件.</p>
+<h3 id="Node-js"><a href="#Node-js" class="headerlink" title="Node.js"></a>Node.js</h3><p>基于<code>Chrome V8</code>引擎的<code>JavaScript</code>运行时环境.</p>
+<h3 id="PHP"><a href="#PHP" class="headerlink" title="PHP"></a>PHP</h3><p><code>PHP</code>运行时环境,<code>Apache24</code>,<code>PHP7</code>.</p>
+<p>需要修改<code>Apache24\conf\httpd.conf</code>.</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">Define SRVROOT &quot;A:/tools/Apache24&quot;</span><br><span class="line">...</span><br><span class="line">AddType application/x-httpd-php .php .html</span><br><span class="line">...</span><br><span class="line">LoadModule php7_module A:/tools/PHP7.3/php7apache2_4.dll</span><br><span class="line">PHPIniDir A:/tools/PHP7.3</span><br></pre></td></tr></table></figure>
+<h2 id="web安全"><a href="#web安全" class="headerlink" title="web安全"></a>web安全</h2><h3 id="dirsearch"><a href="#dirsearch" class="headerlink" title="dirsearch"></a>dirsearch</h3><p><code>web</code>目录扫描.<code>https://github.com/maurosoria/dirsearch</code>.基于<code>python3</code>.</p>
+<h3 id="sqlmap"><a href="#sqlmap" class="headerlink" title="sqlmap"></a>sqlmap</h3><p>开源渗透测试工具,自动检测和利用<code>SQL</code>注入漏洞.<code>http://sqlmap.org/</code>.</p>
+<h3 id="metasploit"><a href="#metasploit" class="headerlink" title="metasploit"></a>metasploit</h3><p>渗透测试框架.<code>https://www.metasploit.com/</code>.</p>
+<h3 id="AntSword"><a href="#AntSword" class="headerlink" title="AntSword"></a>AntSword</h3><p>可视化网站管理工具,常用于连接后门.<code>https://github.com/AntSwordProject/antSword/releases</code>.</p>
+<h3 id="BurpSuite-Pro"><a href="#BurpSuite-Pro" class="headerlink" title="BurpSuite Pro"></a>BurpSuite Pro</h3><p><code>web</code>渗透测试工具.</p>
+<h3 id="Fiddler"><a href="#Fiddler" class="headerlink" title="Fiddler"></a>Fiddler</h3><p>适用于任何浏览器,系统或平台的免费<code>Web</code>调试代理工具.<code>https://www.telerik.com/fiddler</code>.</p>
+<h3 id="d-safe"><a href="#d-safe" class="headerlink" title="d_safe"></a>d_safe</h3><p><code>web</code>后门检测工具.<code>http://www.d99net.net/</code>.</p>
+<h3 id="Nmap"><a href="#Nmap" class="headerlink" title="Nmap"></a>Nmap</h3><p>网络扫描工具.<code>https://nmap.org/</code>.</p>
+<h3 id="wireshark"><a href="#wireshark" class="headerlink" title="wireshark"></a>wireshark</h3><p>网络协议分析器.<code>https://www.wireshark.org/</code>.</p>
+<h3 id="Acunetix"><a href="#Acunetix" class="headerlink" title="Acunetix"></a>Acunetix</h3><p><code>web</code>自动化漏洞检测与渗透测试工具.</p>
+<h2 id="取证分析"><a href="#取证分析" class="headerlink" title="取证分析"></a>取证分析</h2><h3 id="010-Editor"><a href="#010-Editor" class="headerlink" title="010 Editor"></a>010 Editor</h3><p>十六进制编辑器,可以通过模板分析文件.</p>
+<h3 id="volatility"><a href="#volatility" class="headerlink" title="volatility"></a>volatility</h3><p>先进的内存取证框架.<code>https://github.com/volatilityfoundation/volatility</code>.</p>
+<h2 id="二进制工具"><a href="#二进制工具" class="headerlink" title="二进制工具"></a>二进制工具</h2><h3 id="dex2jar"><a href="#dex2jar" class="headerlink" title="dex2jar"></a>dex2jar</h3><p><code>Android</code>逆向工具.<code>https://github.com/pxb1988/dex2jar</code>.</p>
+<h3 id="apktool"><a href="#apktool" class="headerlink" title="apktool"></a>apktool</h3><p><code>Android</code>逆向工具.<code>https://ibotpeaches.github.io/Apktool/</code>.</p>
+<h3 id="dnSpy"><a href="#dnSpy" class="headerlink" title="dnSpy"></a>dnSpy</h3><p><code>.NET</code>调试器和程序集编辑器.<code>https://github.com/0xd4d/dnSpy</code>.</p>
+<h3 id="ILSpy"><a href="#ILSpy" class="headerlink" title="ILSpy"></a>ILSpy</h3><p><code>.NET</code>反编译器.<code>https://github.com/icsharpcode/ILSpy</code>.</p>
+<h3 id="petools"><a href="#petools" class="headerlink" title="petools"></a>petools</h3><p>便携式<code>PE</code>操纵工具.<code>https://github.com/petoolse/petools</code>.</p>
+<h3 id="PEiD-amp-Exeinfo-PE"><a href="#PEiD-amp-Exeinfo-PE" class="headerlink" title="PEiD &amp; Exeinfo PE"></a>PEiD &amp; Exeinfo PE</h3><p>检测常见的各种壳.</p>
+<h3 id="jd-gui"><a href="#jd-gui" class="headerlink" title="jd-gui"></a>jd-gui</h3><p>独立的<code>Java Decompiler GUI</code>.<code>https://github.com/java-decompiler/jd-gui</code>.</p>
+<h3 id="JEB"><a href="#JEB" class="headerlink" title="JEB"></a>JEB</h3><p>反编译和调试二进制代码.</p>
+<h3 id="OllyDbg"><a href="#OllyDbg" class="headerlink" title="OllyDbg"></a>OllyDbg</h3><p><code>Windows</code>平台的<code>32</code>位分析调式工具.<code>http://www.ollydbg.de/</code>.</p>
+<h3 id="IDA"><a href="#IDA" class="headerlink" title="IDA"></a>IDA</h3><p>二进制研究者必备的逆向工具.</p>
+<h3 id="upx"><a href="#upx" class="headerlink" title="upx"></a>upx</h3><p>可执行文件的加壳工具.<code>https://github.com/upx/upx</code>.</p>
+<h3 id="VB-Decompiler-Pro"><a href="#VB-Decompiler-Pro" class="headerlink" title="VB Decompiler Pro"></a>VB Decompiler Pro</h3><p>用来反编译<code>VB</code>编写的程序的工具.</p>
+<h3 id="winchecksec"><a href="#winchecksec" class="headerlink" title="winchecksec"></a>winchecksec</h3><p><code>Windows</code>平台的保护机制检测工具.<code>https://github.com/trailofbits/winchecksec</code>.</p>
+<h3 id="pwintools"><a href="#pwintools" class="headerlink" title="pwintools"></a>pwintools</h3><p><code>Windows</code>平台<code>pwntools</code>,存在<code>bug</code>.<code>https://github.com/masthoon/pwintools</code>.</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">git <span class="built_in">clone</span> https://github.com/masthoon/pwintools.git</span><br><span class="line"><span class="built_in">cd</span> pwintools\</span><br><span class="line">python setup.py install</span><br></pre></td></tr></table></figure>
+<h3 id="AppJailLauncher"><a href="#AppJailLauncher" class="headerlink" title="AppJailLauncher"></a>AppJailLauncher</h3><p><code>Windows</code>二进制程序挂起监听工具.<code>https://github.com/trailofbits/AppJailLauncher</code>.</p>
+<h3 id="huorong"><a href="#huorong" class="headerlink" title="huorong"></a>huorong</h3><p>安全软件.<code>https://www.huorong.cn/</code>.</p>
+<h3 id="x64dbg"><a href="#x64dbg" class="headerlink" title="x64dbg"></a>x64dbg</h3><p><code>Windows</code>平台的<code>32/64</code>位分析调式工具.<code>https://x64dbg.com/#start</code>.</p>
+<h2 id="日常工具"><a href="#日常工具" class="headerlink" title="日常工具"></a>日常工具</h2><h3 id="7-Zip"><a href="#7-Zip" class="headerlink" title="7-Zip"></a>7-Zip</h3><p>文件存档器.<code>https://www.7-zip.org/</code>.</p>
+<h3 id="hyper"><a href="#hyper" class="headerlink" title="hyper"></a>hyper</h3><p>终端.<code>https://hyper.is/</code>.</p>
+<h3 id="cmder"><a href="#cmder" class="headerlink" title="cmder"></a>cmder</h3><p>终端.</p>
+<h3 id="Everything"><a href="#Everything" class="headerlink" title="Everything"></a>Everything</h3><p>基于名称快速定位文件和文件夹的工具.<code>https://www.voidtools.com/zh-cn/</code>.</p>
+<h3 id="Wox"><a href="#Wox" class="headerlink" title="Wox"></a>Wox</h3><p>快速启动器,需要<code>Everything</code>.<code>http://www.wox.one/</code>.</p>
+<h3 id="pandownload"><a href="#pandownload" class="headerlink" title="pandownload"></a>pandownload</h3><p>用于快速下载百度云文件.<code>https://pandownload.com/</code>.</p>
+<h3 id="PotPlayer"><a href="#PotPlayer" class="headerlink" title="PotPlayer"></a>PotPlayer</h3><p>视频播放器.<code>https://potplayer.daum.net/</code>.</p>
+<h3 id="Hexo"><a href="#Hexo" class="headerlink" title="Hexo"></a>Hexo</h3><p>基于<code>Nodejs</code>,快速,简洁且高效的博客框架.<code>https://hexo.io/zh-cn/docs/index.html</code>.</p>
+<h3 id="ShadowsocksR"><a href="#ShadowsocksR" class="headerlink" title="ShadowsocksR"></a>ShadowsocksR</h3><p>小飞机.<code>https://github.com/shadowsocksrr/shadowsocksr-csharp/releases</code>.</p>
+<h3 id="Typora"><a href="#Typora" class="headerlink" title="Typora"></a>Typora</h3><p><code>markdown</code>编辑器.<code>https://www.typora.io/</code>.</p>
+<h3 id="Rufus"><a href="#Rufus" class="headerlink" title="Rufus"></a>Rufus</h3><p>光盘映像文件制作.<code>https://rufus.ie/</code>.</p>
+<h3 id="UltraISO"><a href="#UltraISO" class="headerlink" title="UltraISO"></a>UltraISO</h3><p>光盘映像文件制作/编辑/转换工具.<code>https://cn.ultraiso.net/xiazai.html</code>.</p>
+<h3 id="Xftp-Xshell"><a href="#Xftp-Xshell" class="headerlink" title="Xftp/Xshell"></a>Xftp/Xshell</h3><p><code>https://www.netsarang.com/zh/xftp/</code>.</p>
+<p><code>https://www.netsarang.com/zh/xshell/</code>.</p>
+<h3 id="Acrobat-DC"><a href="#Acrobat-DC" class="headerlink" title="Acrobat DC"></a>Acrobat DC</h3><p><code>PDF</code>编辑器.</p>
+<h3 id="TIM"><a href="#TIM" class="headerlink" title="TIM"></a>TIM</h3><p>办公版<code>QQ</code>.<code>https://tim.qq.com/</code>.</p>
+<h3 id="WeChat"><a href="#WeChat" class="headerlink" title="WeChat"></a>WeChat</h3><p>微信.<code>https://pc.weixin.qq.com/</code>.</p>
+<h3 id="百度网盘"><a href="#百度网盘" class="headerlink" title="百度网盘"></a>百度网盘</h3><p>网盘.</p>
+<h3 id="qBittorrent"><a href="#qBittorrent" class="headerlink" title="qBittorrent"></a>qBittorrent</h3><p><code>P2P</code>协议下载器.<code>https://www.qbittorrent.org/</code>.</p>
+<h3 id="QQ音乐"><a href="#QQ音乐" class="headerlink" title="QQ音乐"></a>QQ音乐</h3><p>音乐播放器.<code>https://y.qq.com/</code>.</p>
+<h3 id="MindMaster"><a href="#MindMaster" class="headerlink" title="MindMaster"></a>MindMaster</h3><p>思维导图编辑器.<code>https://mm.edrawsoft.cn/</code>.</p>
+<h3 id="Chrome"><a href="#Chrome" class="headerlink" title="Chrome"></a>Chrome</h3><p><code>Google</code>浏览器.<code>https://www.google.com/intl/zh-CN/chrome/</code>.</p>
+<h3 id="Firefox"><a href="#Firefox" class="headerlink" title="Firefox"></a>Firefox</h3><p>火狐浏览器.<code>https://www.mozilla.org/zh-CN/firefox/new/</code>.</p>
+<h3 id="Office"><a href="#Office" class="headerlink" title="Office"></a>Office</h3><p>微软办公软件.</p>
+<h2 id="开发"><a href="#开发" class="headerlink" title="开发"></a>开发</h2><h3 id="Git"><a href="#Git" class="headerlink" title="Git"></a>Git</h3><p>免费的开源分布式版本控制系统.<code>https://git-scm.com/</code>.</p>
+<h3 id="Android-Studio"><a href="#Android-Studio" class="headerlink" title="Android Studio"></a>Android Studio</h3><p><code>Google</code>官方<code>IDE</code>.<code>https://developer.android.com/studio/</code>.</p>
+<p>加快<code>gradle</code>的<code>build</code>.当<code>build</code>卡在下载环节时.查看<code>&lt;your project name&gt;\gradle\wrapper\gradle-wrapper.properties</code>.<code>distributionUrl</code>的值就是下载的<code>url</code>,访问这个<code>url</code>下载这个包.</p>
+<p><code>C:\Users\&lt;your user name&gt;\.gradle\wrapper\dists\</code>目录下有和你这个包名字一样的文件夹,进去发现只有个名字奇怪的文件夹,将里面的东西删除,将下载的包放进去,重新打开<code>Android Studio</code>即可.</p>
+<h3 id="IntelliJ-IDEA"><a href="#IntelliJ-IDEA" class="headerlink" title="IntelliJ IDEA"></a>IntelliJ IDEA</h3><p><code>Java</code>开发<code>IDE</code>.<code>https://www.jetbrains.com/idea/</code>.</p>
+<h3 id="VS-Code"><a href="#VS-Code" class="headerlink" title="VS Code"></a>VS Code</h3><p><code>https://code.visualstudio.com/</code>.</p>
+<h3 id="Qt"><a href="#Qt" class="headerlink" title="Qt"></a>Qt</h3><p><code>C++</code>跨平台的软件开发工具包.<code>https://www.qt.io/cn</code>.</p>
+<h3 id="WebStorm"><a href="#WebStorm" class="headerlink" title="WebStorm"></a>WebStorm</h3><p>前端<code>IDE</code>.<code>https://www.jetbrains.com/webstorm/</code>.</p>
+<h3 id="Visual-Studio"><a href="#Visual-Studio" class="headerlink" title="Visual Studio"></a>Visual Studio</h3><p>微软官方<code>IDE</code>.<code>https://visualstudio.microsoft.com/zh-hans/</code>.</p>
+<h3 id="Navicat-Premium-12"><a href="#Navicat-Premium-12" class="headerlink" title="Navicat Premium 12"></a>Navicat Premium 12</h3><p>数据库开发工具.</p>
+<h3 id="nasm"><a href="#nasm" class="headerlink" title="nasm"></a>nasm</h3><p><code>AT&amp;T</code>汇编器.<code>https://www.nasm.us/pub/nasm/releasebuilds/</code>.</p>
+<h3 id="smali"><a href="#smali" class="headerlink" title="smali"></a>smali</h3><p><code>smali/baksmali</code>.<code>https://github.com/JesusFreke/smali</code>.</p>
+
+      
+    </div>
+
+    
+
+    
+    
+    
+
+    
+
+    
+       
+    
+    
+
+    
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/environment/" rel="tag"><i class="fa fa-tag"></i> environment</a>
+          
+        </div>
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/posts/c9b1afe3/" rel="prev" title="writeup-suctf-2018-招新赛">
+                writeup-suctf-2018-招新赛 <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+  </div>
+
+
+          </div>
+          
+
+  
+
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    
+      <div id="sidebar-dimmer"></div>
+    
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview-wrap sidebar-panel">
+        <div class="site-overview">
+          <div class="site-author motion-element" itemprop="author" itemscope="" itemtype="http://schema.org/Person">
+            
+              <img class="site-author-image" itemprop="image" src="/images/apple-touch-icon.png" alt="w4rd3n">
+            
+              <p class="site-author-name" itemprop="name">w4rd3n</p>
+              <p class="site-description motion-element" itemprop="description"></p>
+          </div>
+
+          
+            <nav class="site-state motion-element">
+              
+                <div class="site-state-item site-state-posts">
+                
+                  <a href="/archives/">
+                
+                    <span class="site-state-item-count">181</span>
+                    <span class="site-state-item-name">日志</span>
+                  </a>
+                </div>
+              
+
+              
+                
+                
+                <div class="site-state-item site-state-categories">
+                  <a href="/categories/index.html">
+                    
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                    <span class="site-state-item-count">24</span>
+                    <span class="site-state-item-name">分类</span>
+                  </a>
+                </div>
+              
+
+              
+                
+                
+                <div class="site-state-item site-state-tags">
+                  <a href="/tags/index.html">
+                    
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                    <span class="site-state-item-count">50</span>
+                    <span class="site-state-item-name">标签</span>
+                  </a>
+                </div>
+              
+            </nav>
+          
+
+          
+
+          
+            <div class="links-of-author motion-element">
+              
+                <span class="links-of-author-item">
+                  
+                  
+                    
+                  
+                  
+                    
+                  
+                  <a href="https://github.com/hitworld" title="GitHub &rarr; https://github.com/hitworld" rel="noopener" target="_blank"><i class="fa fa-fw fa-github"></i>GitHub</a>
+                </span>
+              
+            </div>
+          
+
+          
+
+          
+          
+
+          
+            
+          
+          
+
+        </div>
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#基本环境"><span class="nav-number">1.</span> <span class="nav-text">基本环境</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#Java"><span class="nav-number">1.1.</span> <span class="nav-text">Java</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#python"><span class="nav-number">1.2.</span> <span class="nav-text">python</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#数据库"><span class="nav-number">1.3.</span> <span class="nav-text">数据库</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#虚拟机"><span class="nav-number">1.4.</span> <span class="nav-text">虚拟机</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Node-js"><span class="nav-number">1.5.</span> <span class="nav-text">Node.js</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#PHP"><span class="nav-number">1.6.</span> <span class="nav-text">PHP</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#web安全"><span class="nav-number">2.</span> <span class="nav-text">web安全</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#dirsearch"><span class="nav-number">2.1.</span> <span class="nav-text">dirsearch</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#sqlmap"><span class="nav-number">2.2.</span> <span class="nav-text">sqlmap</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#metasploit"><span class="nav-number">2.3.</span> <span class="nav-text">metasploit</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#AntSword"><span class="nav-number">2.4.</span> <span class="nav-text">AntSword</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#BurpSuite-Pro"><span class="nav-number">2.5.</span> <span class="nav-text">BurpSuite Pro</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Fiddler"><span class="nav-number">2.6.</span> <span class="nav-text">Fiddler</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#d-safe"><span class="nav-number">2.7.</span> <span class="nav-text">d_safe</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Nmap"><span class="nav-number">2.8.</span> <span class="nav-text">Nmap</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#wireshark"><span class="nav-number">2.9.</span> <span class="nav-text">wireshark</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Acunetix"><span class="nav-number">2.10.</span> <span class="nav-text">Acunetix</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#取证分析"><span class="nav-number">3.</span> <span class="nav-text">取证分析</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#010-Editor"><span class="nav-number">3.1.</span> <span class="nav-text">010 Editor</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#volatility"><span class="nav-number">3.2.</span> <span class="nav-text">volatility</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#二进制工具"><span class="nav-number">4.</span> <span class="nav-text">二进制工具</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#dex2jar"><span class="nav-number">4.1.</span> <span class="nav-text">dex2jar</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#apktool"><span class="nav-number">4.2.</span> <span class="nav-text">apktool</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#dnSpy"><span class="nav-number">4.3.</span> <span class="nav-text">dnSpy</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#ILSpy"><span class="nav-number">4.4.</span> <span class="nav-text">ILSpy</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#petools"><span class="nav-number">4.5.</span> <span class="nav-text">petools</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#PEiD-amp-Exeinfo-PE"><span class="nav-number">4.6.</span> <span class="nav-text">PEiD &amp; Exeinfo PE</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#jd-gui"><span class="nav-number">4.7.</span> <span class="nav-text">jd-gui</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#JEB"><span class="nav-number">4.8.</span> <span class="nav-text">JEB</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#OllyDbg"><span class="nav-number">4.9.</span> <span class="nav-text">OllyDbg</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#IDA"><span class="nav-number">4.10.</span> <span class="nav-text">IDA</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#upx"><span class="nav-number">4.11.</span> <span class="nav-text">upx</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#VB-Decompiler-Pro"><span class="nav-number">4.12.</span> <span class="nav-text">VB Decompiler Pro</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#winchecksec"><span class="nav-number">4.13.</span> <span class="nav-text">winchecksec</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#pwintools"><span class="nav-number">4.14.</span> <span class="nav-text">pwintools</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#AppJailLauncher"><span class="nav-number">4.15.</span> <span class="nav-text">AppJailLauncher</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#huorong"><span class="nav-number">4.16.</span> <span class="nav-text">huorong</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#x64dbg"><span class="nav-number">4.17.</span> <span class="nav-text">x64dbg</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#日常工具"><span class="nav-number">5.</span> <span class="nav-text">日常工具</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#7-Zip"><span class="nav-number">5.1.</span> <span class="nav-text">7-Zip</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#hyper"><span class="nav-number">5.2.</span> <span class="nav-text">hyper</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#cmder"><span class="nav-number">5.3.</span> <span class="nav-text">cmder</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Everything"><span class="nav-number">5.4.</span> <span class="nav-text">Everything</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Wox"><span class="nav-number">5.5.</span> <span class="nav-text">Wox</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#pandownload"><span class="nav-number">5.6.</span> <span class="nav-text">pandownload</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#PotPlayer"><span class="nav-number">5.7.</span> <span class="nav-text">PotPlayer</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Hexo"><span class="nav-number">5.8.</span> <span class="nav-text">Hexo</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#ShadowsocksR"><span class="nav-number">5.9.</span> <span class="nav-text">ShadowsocksR</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Typora"><span class="nav-number">5.10.</span> <span class="nav-text">Typora</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Rufus"><span class="nav-number">5.11.</span> <span class="nav-text">Rufus</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#UltraISO"><span class="nav-number">5.12.</span> <span class="nav-text">UltraISO</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Xftp-Xshell"><span class="nav-number">5.13.</span> <span class="nav-text">Xftp/Xshell</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Acrobat-DC"><span class="nav-number">5.14.</span> <span class="nav-text">Acrobat DC</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#TIM"><span class="nav-number">5.15.</span> <span class="nav-text">TIM</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#WeChat"><span class="nav-number">5.16.</span> <span class="nav-text">WeChat</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#百度网盘"><span class="nav-number">5.17.</span> <span class="nav-text">百度网盘</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#qBittorrent"><span class="nav-number">5.18.</span> <span class="nav-text">qBittorrent</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#QQ音乐"><span class="nav-number">5.19.</span> <span class="nav-text">QQ音乐</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#MindMaster"><span class="nav-number">5.20.</span> <span class="nav-text">MindMaster</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Chrome"><span class="nav-number">5.21.</span> <span class="nav-text">Chrome</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Firefox"><span class="nav-number">5.22.</span> <span class="nav-text">Firefox</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Office"><span class="nav-number">5.23.</span> <span class="nav-text">Office</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#开发"><span class="nav-number">6.</span> <span class="nav-text">开发</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#Git"><span class="nav-number">6.1.</span> <span class="nav-text">Git</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Android-Studio"><span class="nav-number">6.2.</span> <span class="nav-text">Android Studio</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#IntelliJ-IDEA"><span class="nav-number">6.3.</span> <span class="nav-text">IntelliJ IDEA</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#VS-Code"><span class="nav-number">6.4.</span> <span class="nav-text">VS Code</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Qt"><span class="nav-number">6.5.</span> <span class="nav-text">Qt</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#WebStorm"><span class="nav-number">6.6.</span> <span class="nav-text">WebStorm</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Visual-Studio"><span class="nav-number">6.7.</span> <span class="nav-text">Visual Studio</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Navicat-Premium-12"><span class="nav-number">6.8.</span> <span class="nav-text">Navicat Premium 12</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#nasm"><span class="nav-number">6.9.</span> <span class="nav-text">nasm</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#smali"><span class="nav-number">6.10.</span> <span class="nav-text">smali</span></a></li></ol></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright">&copy; <span itemprop="copyrightYear">2020</span>
+  <span class="with-love" id="animate">
+    <i class="fa fa-gg-circle"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">w4rd3n</span>
+
+  
+    <span class="post-meta-divider">|</span>
+    <span class="post-meta-item-icon">
+      <i class="fa fa-area-chart"></i>
+    </span>
+    
+    <span title="站点总字数">677k</span>
+  
+
+  
+    <span class="post-meta-divider">|</span>
+    <span class="post-meta-item-icon">
+      <i class="fa fa-coffee"></i>
+    </span>
+    
+    <span title="站点阅读时长">10:15</span>
+  
+</div>
+
+
+
+
+
+
+
+
+
+        
+<div class="busuanzi-count">
+  <script async src="https://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+  
+    <span class="site-uv" title="总访客量">
+      <i class="fa fa-user"></i>
+      <span class="busuanzi-value" id="busuanzi_value_site_uv"></span>
+    </span>
+  
+
+  
+    <span class="site-pv" title="总访问量">
+      <i class="fa fa-eye"></i>
+      <span class="busuanzi-value" id="busuanzi_value_site_pv"></span>
+    </span>
+  
+</div>
+
+
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+          <span id="scrollpercent"><span>0</span>%</span>
+        
+      </div>
+    
+
+    
+	
+    
+
+    
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+    
+      
+  
+  <script type="text/javascript" color="0,0,255" opacity="0.5" zindex="-1" count="99" src="/lib/canvas-nest/canvas-nest.min.js"></script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+  
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=6.5.0"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=6.5.0"></script>
+
+
+
+  
+  
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=6.5.0"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=6.5.0"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=6.5.0"></script>
+
+
+
+  
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+  
+
+  <script type="text/javascript">
+    // Popup Window;
+    var isfetched = false;
+    var isXml = true;
+    // Search DB path;
+    var search_path = "search.xml";
+    if (search_path.length === 0) {
+      search_path = "search.xml";
+    } else if (/json$/i.test(search_path)) {
+      isXml = false;
+    }
+    var path = "/" + search_path;
+    // monitor main search box;
+
+    var onPopupClose = function (e) {
+      $('.popup').hide();
+      $('#local-search-input').val('');
+      $('.search-result-list').remove();
+      $('#no-result').remove();
+      $(".local-search-pop-overlay").remove();
+      $('body').css('overflow', '');
+    }
+
+    function proceedsearch() {
+      $("body")
+        .append('<div class="search-popup-overlay local-search-pop-overlay"></div>')
+        .css('overflow', 'hidden');
+      $('.search-popup-overlay').click(onPopupClose);
+      $('.popup').toggle();
+      var $localSearchInput = $('#local-search-input');
+      $localSearchInput.attr("autocapitalize", "none");
+      $localSearchInput.attr("autocorrect", "off");
+      $localSearchInput.focus();
+    }
+
+    // search function;
+    var searchFunc = function(path, search_id, content_id) {
+      'use strict';
+
+      // start loading animation
+      $("body")
+        .append('<div class="search-popup-overlay local-search-pop-overlay">' +
+          '<div id="search-loading-icon">' +
+          '<i class="fa fa-spinner fa-pulse fa-5x fa-fw"></i>' +
+          '</div>' +
+          '</div>')
+        .css('overflow', 'hidden');
+      $("#search-loading-icon").css('margin', '20% auto 0 auto').css('text-align', 'center');
+
+      
+
+      $.ajax({
+        url: path,
+        dataType: isXml ? "xml" : "json",
+        async: true,
+        success: function(res) {
+          // get the contents from search data
+          isfetched = true;
+          $('.popup').detach().appendTo('.header-inner');
+          var datas = isXml ? $("entry", res).map(function() {
+            return {
+              title: $("title", this).text(),
+              content: $("content",this).text(),
+              url: $("url" , this).text()
+            };
+          }).get() : res;
+          var input = document.getElementById(search_id);
+          var resultContent = document.getElementById(content_id);
+          var inputEventFunction = function() {
+            var searchText = input.value.trim().toLowerCase();
+            var keywords = searchText.split(/[\s\-]+/);
+            if (keywords.length > 1) {
+              keywords.push(searchText);
+            }
+            var resultItems = [];
+            if (searchText.length > 0) {
+              // perform local searching
+              datas.forEach(function(data) {
+                var isMatch = false;
+                var hitCount = 0;
+                var searchTextCount = 0;
+                var title = data.title.trim();
+                var titleInLowerCase = title.toLowerCase();
+                var content = data.content.trim().replace(/<[^>]+>/g,"");
+                
+                var contentInLowerCase = content.toLowerCase();
+                var articleUrl = decodeURIComponent(data.url);
+                var indexOfTitle = [];
+                var indexOfContent = [];
+                // only match articles with not empty titles
+                if(title != '') {
+                  keywords.forEach(function(keyword) {
+                    function getIndexByWord(word, text, caseSensitive) {
+                      var wordLen = word.length;
+                      if (wordLen === 0) {
+                        return [];
+                      }
+                      var startPosition = 0, position = [], index = [];
+                      if (!caseSensitive) {
+                        text = text.toLowerCase();
+                        word = word.toLowerCase();
+                      }
+                      while ((position = text.indexOf(word, startPosition)) > -1) {
+                        index.push({position: position, word: word});
+                        startPosition = position + wordLen;
+                      }
+                      return index;
+                    }
+
+                    indexOfTitle = indexOfTitle.concat(getIndexByWord(keyword, titleInLowerCase, false));
+                    indexOfContent = indexOfContent.concat(getIndexByWord(keyword, contentInLowerCase, false));
+                  });
+                  if (indexOfTitle.length > 0 || indexOfContent.length > 0) {
+                    isMatch = true;
+                    hitCount = indexOfTitle.length + indexOfContent.length;
+                  }
+                }
+
+                // show search results
+
+                if (isMatch) {
+                  // sort index by position of keyword
+
+                  [indexOfTitle, indexOfContent].forEach(function (index) {
+                    index.sort(function (itemLeft, itemRight) {
+                      if (itemRight.position !== itemLeft.position) {
+                        return itemRight.position - itemLeft.position;
+                      } else {
+                        return itemLeft.word.length - itemRight.word.length;
+                      }
+                    });
+                  });
+
+                  // merge hits into slices
+
+                  function mergeIntoSlice(text, start, end, index) {
+                    var item = index[index.length - 1];
+                    var position = item.position;
+                    var word = item.word;
+                    var hits = [];
+                    var searchTextCountInSlice = 0;
+                    while (position + word.length <= end && index.length != 0) {
+                      if (word === searchText) {
+                        searchTextCountInSlice++;
+                      }
+                      hits.push({position: position, length: word.length});
+                      var wordEnd = position + word.length;
+
+                      // move to next position of hit
+
+                      index.pop();
+                      while (index.length != 0) {
+                        item = index[index.length - 1];
+                        position = item.position;
+                        word = item.word;
+                        if (wordEnd > position) {
+                          index.pop();
+                        } else {
+                          break;
+                        }
+                      }
+                    }
+                    searchTextCount += searchTextCountInSlice;
+                    return {
+                      hits: hits,
+                      start: start,
+                      end: end,
+                      searchTextCount: searchTextCountInSlice
+                    };
+                  }
+
+                  var slicesOfTitle = [];
+                  if (indexOfTitle.length != 0) {
+                    slicesOfTitle.push(mergeIntoSlice(title, 0, title.length, indexOfTitle));
+                  }
+
+                  var slicesOfContent = [];
+                  while (indexOfContent.length != 0) {
+                    var item = indexOfContent[indexOfContent.length - 1];
+                    var position = item.position;
+                    var word = item.word;
+                    // cut out 100 characters
+                    var start = position - 20;
+                    var end = position + 80;
+                    if(start < 0){
+                      start = 0;
+                    }
+                    if (end < position + word.length) {
+                      end = position + word.length;
+                    }
+                    if(end > content.length){
+                      end = content.length;
+                    }
+                    slicesOfContent.push(mergeIntoSlice(content, start, end, indexOfContent));
+                  }
+
+                  // sort slices in content by search text's count and hits' count
+
+                  slicesOfContent.sort(function (sliceLeft, sliceRight) {
+                    if (sliceLeft.searchTextCount !== sliceRight.searchTextCount) {
+                      return sliceRight.searchTextCount - sliceLeft.searchTextCount;
+                    } else if (sliceLeft.hits.length !== sliceRight.hits.length) {
+                      return sliceRight.hits.length - sliceLeft.hits.length;
+                    } else {
+                      return sliceLeft.start - sliceRight.start;
+                    }
+                  });
+
+                  // select top N slices in content
+
+                  var upperBound = parseInt('1');
+                  if (upperBound >= 0) {
+                    slicesOfContent = slicesOfContent.slice(0, upperBound);
+                  }
+
+                  // highlight title and content
+
+                  function highlightKeyword(text, slice) {
+                    var result = '';
+                    var prevEnd = slice.start;
+                    slice.hits.forEach(function (hit) {
+                      result += text.substring(prevEnd, hit.position);
+                      var end = hit.position + hit.length;
+                      result += '<b class="search-keyword">' + text.substring(hit.position, end) + '</b>';
+                      prevEnd = end;
+                    });
+                    result += text.substring(prevEnd, slice.end);
+                    return result;
+                  }
+
+                  var resultItem = '';
+
+                  if (slicesOfTitle.length != 0) {
+                    resultItem += "<li><a href='" + articleUrl + "' class='search-result-title'>" + highlightKeyword(title, slicesOfTitle[0]) + "</a>";
+                  } else {
+                    resultItem += "<li><a href='" + articleUrl + "' class='search-result-title'>" + title + "</a>";
+                  }
+
+                  slicesOfContent.forEach(function (slice) {
+                    resultItem += "<a href='" + articleUrl + "'>" +
+                      "<p class=\"search-result\">" + highlightKeyword(content, slice) +
+                      "...</p>" + "</a>";
+                  });
+
+                  resultItem += "</li>";
+                  resultItems.push({
+                    item: resultItem,
+                    searchTextCount: searchTextCount,
+                    hitCount: hitCount,
+                    id: resultItems.length
+                  });
+                }
+              })
+            };
+            if (keywords.length === 1 && keywords[0] === "") {
+              resultContent.innerHTML = '<div id="no-result"><i class="fa fa-search fa-5x" /></div>'
+            } else if (resultItems.length === 0) {
+              resultContent.innerHTML = '<div id="no-result"><i class="fa fa-frown-o fa-5x" /></div>'
+            } else {
+              resultItems.sort(function (resultLeft, resultRight) {
+                if (resultLeft.searchTextCount !== resultRight.searchTextCount) {
+                  return resultRight.searchTextCount - resultLeft.searchTextCount;
+                } else if (resultLeft.hitCount !== resultRight.hitCount) {
+                  return resultRight.hitCount - resultLeft.hitCount;
+                } else {
+                  return resultRight.id - resultLeft.id;
+                }
+              });
+              var searchResultList = '<ul class=\"search-result-list\">';
+              resultItems.forEach(function (result) {
+                searchResultList += result.item;
+              })
+              searchResultList += "</ul>";
+              resultContent.innerHTML = searchResultList;
+            }
+          }
+
+          if ('auto' === 'auto') {
+            input.addEventListener('input', inputEventFunction);
+          } else {
+            $('.search-icon').click(inputEventFunction);
+            input.addEventListener('keypress', function (event) {
+              if (event.keyCode === 13) {
+                inputEventFunction();
+              }
+            });
+          }
+
+          // remove loading animation
+          $(".local-search-pop-overlay").remove();
+          $('body').css('overflow', '');
+
+          proceedsearch();
+        }
+      });
+    }
+
+    // handle and trigger popup window;
+    $('.popup-trigger').click(function(e) {
+      e.stopPropagation();
+      if (isfetched === false) {
+        searchFunc(path, 'local-search-input', 'local-search-result');
+      } else {
+        proceedsearch();
+      };
+    });
+
+    $('.popup-btn-close').click(onPopupClose);
+    $('.popup').click(function(e){
+      e.stopPropagation();
+    });
+    $(document).on('keyup', function (event) {
+      var shouldDismissSearchPopup = event.which === 27 &&
+        $('.search-popup').is(':visible');
+      if (shouldDismissSearchPopup) {
+        onPopupClose();
+      }
+    });
+  </script>
+
+
+
+
+
+  
+
+  
+  <script>
+    
+    function addCount(Counter) {
+      var $visitors = $(".leancloud_visitors");
+      var url = $visitors.attr('id').trim();
+      var title = $visitors.attr('data-flag-title').trim();
+
+      Counter('get', '/classes/Counter', { where: JSON.stringify({ url }) })
+        .done(function ({ results }) {
+          if (results.length > 0) {
+            var counter = results[0];
+            
+            Counter('put', `/classes/Counter/${counter.objectId}`, JSON.stringify({ time: { "__op":"Increment", "amount":1 } }))
+            
+            .done(function () {
+                  var $element = $(document.getElementById(url));
+                  $element.find('.leancloud-visitors-count').text(counter.time + 1);
+            })
+            
+            .fail(function ({ responseJSON }) {
+                console.log('Failed to save Visitor num, with error message: ' + responseJSON.error);
+            })
+          } else {
+            
+              Counter('post', '/classes/Counter', JSON.stringify({ title: title, url: url, time: 1}))
+                .done(function () {
+                  var $element = $(document.getElementById(url));
+                  $element.find('.leancloud-visitors-count').text(1);
+                })
+                .fail(function () {
+                  console.log('Failed to create');
+                });
+            
+          }
+        })
+      .fail(function ({ responseJSON }) {
+        console.log('LeanCloud Counter Error:' + responseJSON.code + " " + responseJSON.error);
+      });
+    }
+    
+
+    $(function() {
+      $.get('https://app-router.leancloud.cn/2/route?appId=' + "no3Ip4mNLc3JyF1AeTy8LrAm-gzGzoHsz")
+        .done(function ({ api_server }) {
+          var Counter = function (method, url, data) {
+            return $.ajax({
+              method: method,
+              url: `https://${api_server}/1.1${url}`,
+              headers: {
+                'X-LC-Id': "no3Ip4mNLc3JyF1AeTy8LrAm-gzGzoHsz",
+                'X-LC-Key': "UvlYMzpJKw0Jrw61V5BA5ifU",
+                'Content-Type': 'application/json',
+              },
+              data: data,
+            });
+          };
+          
+          addCount(Counter);
+          
+        })
+    });
+  </script>
+
+
+
+  
+
+  
+
+  
+
+  
+
+  
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+  <style>
+    .copy-btn {
+      display: inline-block;
+      padding: 6px 12px;
+      font-size: 13px;
+      font-weight: 700;
+      line-height: 20px;
+      color: #333;
+      white-space: nowrap;
+      vertical-align: middle;
+      cursor: pointer;
+      background-color: #eee;
+      background-image: linear-gradient(#fcfcfc, #eee);
+      border: 1px solid #d5d5d5;
+      border-radius: 3px;
+      user-select: none;
+      outline: 0;
+    }
+
+    .highlight-wrap .copy-btn {
+      transition: opacity .3s ease-in-out;
+      opacity: 0;
+      padding: 2px 6px;
+      position: absolute;
+      right: 4px;
+      top: 8px;
+    }
+
+    .highlight-wrap:hover .copy-btn,
+    .highlight-wrap .copy-btn:focus {
+      opacity: 1
+    }
+
+    .highlight-wrap {
+      position: relative;
+    }
+  </style>
+  <script>
+    $('.highlight').each(function (i, e) {
+      var $wrap = $('<div>').addClass('highlight-wrap')
+      $(e).after($wrap)
+      $wrap.append($('<button>').addClass('copy-btn').append('复制').on('click', function (e) {
+        var code = $(this).parent().find('.code').find('.line').map(function (i, e) {
+          return $(e).text()
+        }).toArray().join('\n')
+        var ta = document.createElement('textarea')
+        document.body.appendChild(ta)
+        ta.style.position = 'absolute'
+        ta.style.top = '0px'
+        ta.style.left = '0px'
+        ta.value = code
+        ta.select()
+        ta.focus()
+        var result = document.execCommand('copy')
+        document.body.removeChild(ta)
+        
+        $(this).blur()
+      })).on('mouseleave', function (e) {
+        var $b = $(this).find('.copy-btn')
+        setTimeout(function () {
+          $b.text('复制')
+        }, 300)
+      }).append(e)
+    })
+  </script>
+
+
+  
+
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-backstretch/2.0.4/jquery.backstretch.min.js"></script>;
+  <script>
+  //$("body").backstretch("/images/background.jpg");
+  </script>
+  
+  <script type="text/javascript" src="//cdn.bootcss.com/canvas-nest.js/1.0.0/canvas-nest.min.js"></script>
+  
+<script src="/live2dw/lib/L2Dwidget.min.js?0c58a1486de42ac6cc1c59c7d98ae887"></script><script>L2Dwidget.init({"pluginRootPath":"live2dw/","pluginJsPath":"lib/","pluginModelPath":"assets/","tagMode":false,"debug":false,"model":{"jsonPath":"/live2dw/assets/koharu.model.json"},"display":{"position":"right","width":150,"height":300},"mobile":{"show":false},"log":false});</script></body>
+</html>

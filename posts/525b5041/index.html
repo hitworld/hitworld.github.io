@@ -1,0 +1,1679 @@
+<!DOCTYPE html>
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+
+<html class="theme-next mist use-motion" lang="zh-CN">
+<head><meta name="generator" content="Hexo 3.8.0">
+  <meta charset="UTF-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+
+
+
+
+
+
+  
+  
+    
+    
+  <script src="/lib/pace/pace.min.js?v=1.0.2"></script>
+  <link href="/lib/pace/pace-theme-minimal.min.css?v=1.0.2" rel="stylesheet">
+
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform">
+<meta http-equiv="Cache-Control" content="no-siteapp">
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css">
+
+<link href="/css/main.css?v=6.5.0" rel="stylesheet" type="text/css">
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon.png?v=6.5.0">
+
+
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32.png?v=6.5.0">
+
+
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16.png?v=6.5.0">
+
+
+  <link rel="mask-icon" href="/images/safari_pinned_tab.svg?v=6.5.0" color="#222">
+
+
+  <link rel="manifest" href="/images/manifest.json">
+
+
+  <meta name="msapplication-config" content="/images/browserconfig.xml">
+
+
+
+
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Mist',
+    version: '6.5.0',
+    sidebar: {"position":"left","display":"post","offset":12,"b2t":false,"scrollpercent":true,"onmobile":true},
+    fancybox: false,
+    fastclick: false,
+    lazyload: false,
+    tabs: true,
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+  
+
+
+
+
+  <meta name="description" content="准备首先进行静态分析,objdump -d bomb &amp;gt; bomb.txt. 根据bomb.c文件可以知道部分关键函数为:phase_[1-6],phase_defused,read_line. read_line从bomb.c已知此函数返回一个input.从后向前跟踪%rax. 123456789mov    0x20223b(%rip),%edx        # 603760 &amp;lt;">
+<meta name="keywords" content="CSAPP">
+<meta property="og:type" content="article">
+<meta property="og:title" content="writeup-CSAPP-bomblab">
+<meta property="og:url" content="https://hitworld.github.io/posts/525b5041/index.html">
+<meta property="og:site_name" content="w4rd3n">
+<meta property="og:description" content="准备首先进行静态分析,objdump -d bomb &amp;gt; bomb.txt. 根据bomb.c文件可以知道部分关键函数为:phase_[1-6],phase_defused,read_line. read_line从bomb.c已知此函数返回一个input.从后向前跟踪%rax. 123456789mov    0x20223b(%rip),%edx        # 603760 &amp;lt;">
+<meta property="og:locale" content="zh-CN">
+<meta property="og:image" content="https://hitworld.github.io/posts/525b5041/1.png">
+<meta property="og:image" content="https://hitworld.github.io/posts/525b5041/2.png">
+<meta property="og:image" content="https://hitworld.github.io/posts/525b5041/3.png">
+<meta property="og:image" content="https://hitworld.github.io/posts/525b5041/4.png">
+<meta property="og:image" content="https://hitworld.github.io/posts/525b5041/5.png">
+<meta property="og:updated_time" content="2020-06-20T10:21:41.190Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="writeup-CSAPP-bomblab">
+<meta name="twitter:description" content="准备首先进行静态分析,objdump -d bomb &amp;gt; bomb.txt. 根据bomb.c文件可以知道部分关键函数为:phase_[1-6],phase_defused,read_line. read_line从bomb.c已知此函数返回一个input.从后向前跟踪%rax. 123456789mov    0x20223b(%rip),%edx        # 603760 &amp;lt;">
+<meta name="twitter:image" content="https://hitworld.github.io/posts/525b5041/1.png">
+
+
+
+
+
+
+  <link rel="canonical" href="https://hitworld.github.io/posts/525b5041/">
+
+
+
+<script type="text/javascript" id="page.configurations">
+  CONFIG.page = {
+    sidebar: "",
+  };
+</script>
+
+  <title>writeup-CSAPP-bomblab | w4rd3n</title>
+  
+
+
+
+
+
+
+
+
+
+
+
+  <noscript>
+  <style type="text/css">
+    .use-motion .motion-element,
+    .use-motion .brand,
+    .use-motion .menu-item,
+    .sidebar-inner,
+    .use-motion .post-block,
+    .use-motion .pagination,
+    .use-motion .comments,
+    .use-motion .post-header,
+    .use-motion .post-body,
+    .use-motion .collection-title { opacity: initial; }
+
+    .use-motion .logo,
+    .use-motion .site-title,
+    .use-motion .site-subtitle {
+      opacity: initial;
+      top: initial;
+    }
+
+    .use-motion {
+      .logo-line-before i { left: initial; }
+      .logo-line-after i { right: initial; }
+    }
+  </style>
+</noscript>
+
+</head>
+
+<body itemscope="" itemtype="http://schema.org/WebPage" lang="zh-CN">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope="" itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/" class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">w4rd3n</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+    
+      
+        <p class="site-subtitle">混吃等死</p>
+      
+    
+  </div>
+
+  <div class="site-nav-toggle">
+    <button aria-label="切换导航栏">
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+
+
+<nav class="site-nav">
+  
+    <ul id="menu" class="menu">
+      
+        
+        
+        
+          
+          <li class="menu-item menu-item-home">
+
+    
+    
+    
+      
+    
+
+    
+
+    <a href="/" rel="section"><i class="menu-item-icon fa fa-fw fa-home"></i> <br>首页</a>
+
+  </li>
+        
+        
+        
+          
+          <li class="menu-item menu-item-about">
+
+    
+    
+    
+      
+    
+
+    
+
+    <a href="/about/" rel="section"><i class="menu-item-icon fa fa-fw fa-user"></i> <br>友链</a>
+
+  </li>
+        
+        
+        
+          
+          <li class="menu-item menu-item-tags">
+
+    
+    
+    
+      
+    
+
+    
+
+    <a href="/tags/" rel="section"><i class="menu-item-icon fa fa-fw fa-tags"></i> <br>标签</a>
+
+  </li>
+        
+        
+        
+          
+          <li class="menu-item menu-item-categories">
+
+    
+    
+    
+      
+    
+
+    
+
+    <a href="/categories/" rel="section"><i class="menu-item-icon fa fa-fw fa-th"></i> <br>分类</a>
+
+  </li>
+        
+        
+        
+          
+          <li class="menu-item menu-item-archives">
+
+    
+    
+    
+      
+    
+
+    
+
+    <a href="/archives/" rel="section"><i class="menu-item-icon fa fa-fw fa-archive"></i> <br>归档</a>
+
+  </li>
+
+      
+      
+        <li class="menu-item menu-item-search">
+          
+            <a href="javascript:;" class="popup-trigger">
+          
+            
+              <i class="menu-item-icon fa fa-search fa-fw"></i> <br>搜索</a>
+        </li>
+      
+    </ul>
+  
+
+  
+    
+
+  
+
+  
+    <div class="site-search">
+      
+  <div class="popup search-popup local-search-popup">
+  <div class="local-search-header clearfix">
+    <span class="search-icon">
+      <i class="fa fa-search"></i>
+    </span>
+    <span class="popup-btn-close">
+      <i class="fa fa-times-circle"></i>
+    </span>
+    <div class="local-search-input-wrapper">
+      <input autocomplete="off" placeholder="搜索..." spellcheck="false" type="text" id="local-search-input">
+    </div>
+  </div>
+  <div id="local-search-result"></div>
+</div>
+
+
+
+    </div>
+  
+</nav>
+
+
+
+  
+
+
+
+</div>
+    </header>
+
+    
+
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  
+
+  <article class="post post-type-normal" itemscope="" itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="https://hitworld.github.io/posts/525b5041/">
+
+    <span hidden itemprop="author" itemscope="" itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="w4rd3n">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/apple-touch-icon.png">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope="" itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="w4rd3n">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">writeup-CSAPP-bomblab
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+
+            
+            
+            
+
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+
+              
+                
+              
+
+              <time title="创建时间：2019-05-12 19:18:54" itemprop="dateCreated datePublished" datetime="2019-05-12T19:18:54+08:00">2019-05-12</time>
+            
+
+            
+          </span>
+
+          
+            <span class="post-category">
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope="" itemtype="http://schema.org/Thing"><a href="/categories/writeup/" itemprop="url" rel="index"><span itemprop="name">writeup</span></a></span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+             <span id="/posts/525b5041/" class="leancloud_visitors" data-flag-title="writeup-CSAPP-bomblab">
+               <span class="post-meta-divider">|</span>
+               <span class="post-meta-item-icon">
+                 <i class="fa fa-eye"></i>
+               </span>
+               
+                 <span class="post-meta-item-text">热度：</span>
+               
+                 <span class="leancloud-visitors-count"></span>
+                 <span>℃</span>
+             </span>
+          
+
+          
+
+          
+            <div class="post-symbolscount">
+              
+
+              
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-file-word-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">本文字数：</span>
+                
+                <span title="本文字数">8.7k</span>
+              
+
+              
+                <span class="post-meta-divider">|</span>
+              
+
+              
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-clock-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">阅读时长 &asymp;</span>
+                
+                <span title="阅读时长">8 分钟</span>
+              
+            </div>
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <h2 id="准备"><a href="#准备" class="headerlink" title="准备"></a>准备</h2><p>首先进行静态分析,<code>objdump -d bomb &gt; bomb.txt</code>.</p>
+<p>根据<code>bomb.c</code>文件可以知道部分关键函数为:<code>phase_[1-6]</code>,<code>phase_defused</code>,<code>read_line</code>.</p>
+<h3 id="read-line"><a href="#read-line" class="headerlink" title="read_line"></a>read_line</h3><p>从<code>bomb.c</code>已知此函数返回一个<code>input</code>.从后向前跟踪<code>%rax</code>.</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">mov    0x20223b(%rip),%edx        # 603760 &lt;num_input_strings&gt;</span><br><span class="line">movslq %edx,%rax</span><br><span class="line">lea    (%rax,%rax,4),%rsi</span><br><span class="line">shl    $0x4,%rsi</span><br><span class="line">add    $0x603780,%rsi</span><br><span class="line">...</span><br><span class="line">add    $0x1,%edx</span><br><span class="line">mov    %edx,0x2021a4(%rip)        # 603760 &lt;num_input_strings&gt;</span><br><span class="line">mov    %rsi,%rax</span><br></pre></td></tr></table></figure>
+<p>可知返回值为<code>0x603780 + 0x10 * 5 * *(int *)0x603760</code>.</p>
+<p>可以猜出这片缓冲区为存储我们输入字符串的地方.</p>
+<p>可知<code>0x603760 &lt;num_input_strings&gt;</code>就是当前要读的字符串的序号,也就是当前关卡序号.</p>
+<p>该函数还调用了<code>skip</code>函数.感觉没什么用,暂不分析.</p>
+<h3 id="phase-defused"><a href="#phase-defused" class="headerlink" title="phase_defused"></a>phase_defused</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">cmpl   $0x6,0x202181(%rip)        # 603760 &lt;num_input_strings&gt;</span><br><span class="line">jne    40163f &lt;phase_defused+0x7b&gt;</span><br></pre></td></tr></table></figure>
+<p>该函数首先判断了当前<code>num_input_strings</code>,只有<code>num_input_strings == 6</code>也就是第六次读入之后.可以看出这应该就是隐藏关入口.</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">lea    0x10(%rsp),%r8</span><br><span class="line">lea    0xc(%rsp),%rcx</span><br><span class="line">lea    0x8(%rsp),%rdx</span><br><span class="line">mov    $0x402619,%esi</span><br><span class="line">mov    $0x603870,%edi</span><br><span class="line">callq  400bf0 &lt;__isoc99_sscanf@plt&gt;</span><br></pre></td></tr></table></figure>
+<p><code>__isoc99_sscanf(0x603870, 0x402619, 0x8(%rsp), 0xc(%rsp), 0x10(%rsp))</code>.</p>
+<p><code>sscanf</code>相当于以第一个字符串参数为标准输入端输入内容的<code>scanf</code>.</p>
+<p>参数<code>0x603870</code>等于<code>0x603760 + 0x50 * 3</code>,可知用的是第四关答案字符串.</p>
+<p>参数<code>0x402619</code>为字符串,<code>gdb</code>查看.</p>
+<img src="/posts/525b5041/1.png" title="p1">
+<hr>
+<p>后三个参数为对应的局部变量地址.</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">cmp    $0x3,%eax</span><br><span class="line">jne    401635 &lt;phase_defused+0x71&gt;</span><br></pre></td></tr></table></figure>
+<p><code>sscanf</code>返回值为成功读入的格式化控制符对应的参数个数.</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">mov    $0x402622,%esi</span><br><span class="line">lea    0x10(%rsp),%rdi</span><br><span class="line">callq  401338 &lt;strings_not_equal&gt;</span><br><span class="line">test   %eax,%eax</span><br><span class="line">jne    401635 &lt;phase_defused+0x71&gt;</span><br></pre></td></tr></table></figure>
+<p>这里调用了<code>strings_not_equal</code>函数,顾名思义.</p>
+<p>参数为刚才的第五个参数的地址(对应<code>%s</code>)和字符串地址<code>0x402622</code>.<code>gdb</code>查看.</p>
+<img src="/posts/525b5041/2.png" title="p2">
+<hr>
+<p>后面就是通过返回值跳转然后打印大哥字符串并调用<code>secret_phase</code>(隐藏关).</p>
+<p>所以第四关答案应该为<code>&lt;number&gt; &lt;number&gt; DrEvil</code>.</p>
+<h2 id="题目"><a href="#题目" class="headerlink" title="题目"></a>题目</h2><p>有了之前的准备就可以开始做题了.</p>
+<h3 id="phase-1"><a href="#phase-1" class="headerlink" title="phase_1"></a>phase_1</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">callq  40149e &lt;read_line&gt;</span><br><span class="line">mov    %rax,%rdi</span><br><span class="line">callq  400ee0 &lt;phase_1&gt;</span><br></pre></td></tr></table></figure>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">mov    $0x402400,%esi</span><br><span class="line">callq  401338 &lt;strings_not_equal&gt;</span><br><span class="line">test   %eax,%eax</span><br><span class="line">je     400ef7 &lt;phase_1+0x17&gt;</span><br><span class="line">callq  40143a &lt;explode_bomb&gt;</span><br></pre></td></tr></table></figure>
+<p>第一题就是检测输入字符串是否与<code>0x402400</code>处字符串相同.</p>
+<h3 id="phase-2"><a href="#phase-2" class="headerlink" title="phase_2"></a>phase_2</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">push   %rbp</span><br><span class="line">push   %rbx</span><br><span class="line">sub    $0x28,%rsp</span><br><span class="line">mov    %rsp,%rsi</span><br><span class="line">callq  40145c &lt;read_six_numbers&gt;</span><br></pre></td></tr></table></figure>
+<p>函数<code>read_six_numbers</code>顾名思义.参数为一个指向栈缓冲区的指针和<code>input</code>.</p>
+<p>调用<code>read_six_numbers</code>后先判断.</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">cmpl   $0x1,(%rsp)</span><br><span class="line">je     400f30 &lt;phase_2+0x34&gt;</span><br></pre></td></tr></table></figure>
+<p>要求第一个数为<code>1</code>.然后执行循环体.</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line">lea    0x4(%rsp),%rbx</span><br><span class="line">lea    0x18(%rsp),%rbp</span><br><span class="line">jmp    400f17 &lt;phase_2+0x1b&gt;</span><br><span class="line">;0x400f17</span><br><span class="line">mov    -0x4(%rbx),%eax</span><br><span class="line">add    %eax,%eax</span><br><span class="line">cmp    %eax,(%rbx)</span><br><span class="line">je     400f25 &lt;phase_2+0x29&gt;</span><br><span class="line">;0x400f25</span><br><span class="line">add    $0x4,%rbx</span><br><span class="line">cmp    %rbp,%rbx</span><br><span class="line">jne    400f17 &lt;phase_2+0x1b&gt;</span><br></pre></td></tr></table></figure>
+<p>比较前一个值和后一个值,要求<code>a[i] = a[i - 1] * 2</code>.典型的<code>for</code>循环,循环<code>5</code>次,正好检测<code>6</code>个数.</p>
+<p>所以第二题答案为<code>1 2 4 8 16 32</code>.</p>
+<h3 id="phase-3"><a href="#phase-3" class="headerlink" title="phase_3"></a>phase_3</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">callq  40149e &lt;read_line&gt;</span><br><span class="line">mov    %rax,%rdi</span><br><span class="line">callq  400f43 &lt;phase_3&gt;</span><br></pre></td></tr></table></figure>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">lea    0xc(%rsp),%rcx</span><br><span class="line">lea    0x8(%rsp),%rdx</span><br><span class="line">mov    $0x4025cf,%esi</span><br><span class="line">mov    $0x0,%eax</span><br><span class="line">callq  400bf0 &lt;__isoc99_sscanf@plt&gt;</span><br></pre></td></tr></table></figure>
+<p>函数调用<code>__isoc99_sscanf(input, 0x4025cf, 0x8(%rsp), 0xc(%rsp))</code>.</p>
+<p><code>gdb</code>查看<code>0x4025cf</code>.</p>
+<img src="/posts/525b5041/3.png" title="p3">
+<hr>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">cmp    $0x1,%eax</span><br><span class="line">jg     400f6a &lt;phase_3+0x27&gt;</span><br></pre></td></tr></table></figure>
+<p>检测返回值是否大于<code>1</code>.</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">cmpl   $0x7,0x8(%rsp)</span><br><span class="line">ja     400fad &lt;phase_3+0x6a&gt;</span><br></pre></td></tr></table></figure>
+<p>检测第一个数是否小于等于<code>7</code>.</p>
+<p>然后就是典型的<code>switch</code>结构.<code>gdb</code>查看<code>0x402470</code>及后面的跳转表.</p>
+<img src="/posts/525b5041/4.png" title="p4">
+<hr>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">cmp    0xc(%rsp),%eax</span><br><span class="line">je     400fc9 &lt;phase_3+0x86&gt;</span><br></pre></td></tr></table></figure>
+<p>之后将第二个数与之前放入<code>%eax</code>的值比较,要求相等.所以答案多解.</p>
+<h3 id="phase-4"><a href="#phase-4" class="headerlink" title="phase_4"></a>phase_4</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">lea    0xc(%rsp),%rcx</span><br><span class="line">lea    0x8(%rsp),%rdx</span><br><span class="line">mov    $0x4025cf,%esi</span><br><span class="line">mov    $0x0,%eax</span><br><span class="line">callq  400bf0 &lt;__isoc99_sscanf@plt&gt;</span><br></pre></td></tr></table></figure>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">cmp    $0x2,%eax</span><br><span class="line">jne    401035 &lt;phase_4+0x29&gt;</span><br><span class="line">cmpl   $0xe,0x8(%rsp)</span><br><span class="line">jbe    40103a &lt;phase_4+0x2e&gt;</span><br></pre></td></tr></table></figure>
+<p>要求读两个整数,且第一个整数小于等于<code>0xe</code>.</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">mov    $0xe,%edx</span><br><span class="line">mov    $0x0,%esi</span><br><span class="line">mov    0x8(%rsp),%edi</span><br><span class="line">callq  400fce &lt;func4&gt;</span><br></pre></td></tr></table></figure>
+<p>调用<code>func4(0x8(%rsp), 0, 0xe);</code>.</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">test   %eax,%eax</span><br><span class="line">jne    401058 &lt;phase_4+0x4c&gt;</span><br><span class="line">cmpl   $0x0,0xc(%rsp)</span><br><span class="line">je     40105d &lt;phase_4+0x51&gt;</span><br></pre></td></tr></table></figure>
+<p>要求返回值等于<code>0</code>.还有第二个整数也为<code>0</code>.</p>
+<p>由于第一个整数小于等于<code>0xe</code>.可以直接爆破或者解析<code>func4</code>.</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">mov    %edx,%eax</span><br><span class="line">sub    %esi,%eax</span><br><span class="line">mov    %eax,%ecx</span><br><span class="line">shr    $0x1f,%ecx</span><br><span class="line">add    %ecx,%eax</span><br><span class="line">sar    %eax</span><br><span class="line">lea    (%rax,%rsi,1),%ecx</span><br></pre></td></tr></table></figure>
+<p><code>%ecx = (a3 - a2) / 2 + a2;</code>.</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">cmp    %edi,%ecx</span><br><span class="line">jle    400ff2 &lt;func4+0x24&gt;</span><br></pre></td></tr></table></figure>
+<p>判断<code>%ecx</code>是否小于等于<code>a1</code>(参数一).如果不,就执行下面汇编代码.</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">lea    -0x1(%rcx),%edx</span><br><span class="line">callq  400fce &lt;func4&gt;</span><br><span class="line">add    %eax,%eax</span><br><span class="line">jmp    401007 &lt;func4+0x39&gt;</span><br></pre></td></tr></table></figure>
+<p>即调用<code>func4(a1, a2, %ecx - 1)</code>,将返回值翻倍后跳转到函数返回阶段.</p>
+<p>如果是,就执行下面汇编代码.</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">mov    $0x0,%eax</span><br><span class="line">cmp    %ecx,%edx</span><br><span class="line">jge    8048cac &lt;func4+0x55&gt;</span><br></pre></td></tr></table></figure>
+<p>返回值置<code>0</code>,然后判断<code>%edx</code>是否大于等于<code>a1</code>.如果大于进入函数返回阶段.</p>
+<p>如果不,就执行下面汇编代码.</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">mov    $0x0,%eax</span><br><span class="line">cmp    %edi,%ecx</span><br><span class="line">jge    401007 &lt;func4+0x39&gt;</span><br><span class="line">lea    0x1(%rcx),%esi</span><br><span class="line">callq  400fce &lt;func4&gt;</span><br><span class="line">lea    0x1(%rax,%rax,1),%eax</span><br></pre></td></tr></table></figure>
+<p>再次判断<code>%ecx</code>是否大于<code>a1</code>,是则调用<code>func4(a1, %ecx + 1, a3)</code>,将返回值翻倍加一后跳转到函数返回阶段.</p>
+<p>逆向成<code>C</code>语言.<code>v1</code>即<code>%ecx</code>.</p>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">v1 = (a3 - a2) / <span class="number">2</span> + a2;</span><br><span class="line"><span class="keyword">if</span> ( v1 &gt; a1 )</span><br><span class="line">    <span class="keyword">return</span> <span class="number">2</span> * func4(a1, a2, v1 - <span class="number">1</span>);</span><br><span class="line">result = <span class="number">0</span>;</span><br><span class="line"><span class="keyword">if</span> ( v1 &lt; a1 )</span><br><span class="line">    result = <span class="number">2</span> * func4(a1, v1 + <span class="number">1</span>, a3) + <span class="number">1</span>;</span><br><span class="line"><span class="keyword">return</span> result;</span><br></pre></td></tr></table></figure>
+<h3 id="phase-5"><a href="#phase-5" class="headerlink" title="phase_5"></a>phase_5</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">callq  40131b &lt;string_length&gt;</span><br><span class="line">cmp    $0x6,%eax</span><br><span class="line">je     4010d2 &lt;phase_5+0x70&gt;</span><br></pre></td></tr></table></figure>
+<p>检测<code>string_length(input)</code>返回值是否为<code>6</code>.顾名思义即要求输入字符串长度为<code>6</code>.</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line">;0x401067</span><br><span class="line">mov    %rdi,%rbx</span><br><span class="line">;0X4010d2</span><br><span class="line">mov    $0x0,%eax</span><br><span class="line">jmp    40108b &lt;phase_5+0x29&gt;</span><br><span class="line">;0X40108b</span><br><span class="line">movzbl (%rbx,%rax,1),%ecx</span><br><span class="line">mov    %cl,(%rsp)</span><br><span class="line">mov    (%rsp),%rdx</span><br><span class="line">and    $0xf,%edx</span><br><span class="line">movzbl 0x4024b0(%rdx),%edx</span><br><span class="line">mov    %dl,0x10(%rsp,%rax,1)</span><br><span class="line">add    $0x1,%rax</span><br><span class="line">cmp    $0x6,%rax</span><br><span class="line">jne    40108b &lt;phase_5+0x29&gt;</span><br></pre></td></tr></table></figure>
+<p>初始化<code>%eax == 0</code>,循环<code>%rdx = input[%rax] &amp; 0xf</code>,判断<code>%rax != 6</code>则继续.</p>
+<p>然后以<code>%rdx</code>为偏移量取位于<code>0x4024b0</code>的字符数组的字符放置到<code>0x10(%rsp,%rax,1)</code>的缓冲区字符数组中.</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">movb   $0x0,0x16(%rsp)</span><br><span class="line">mov    $0x40245e,%esi</span><br><span class="line">lea    0x10(%rsp),%rdi</span><br><span class="line">callq  401338 &lt;strings_not_equal&gt;</span><br><span class="line">test   %eax,%eax</span><br><span class="line">je     4010d9 &lt;phase_5+0x77&gt;</span><br></pre></td></tr></table></figure>
+<p>在缓冲区字符数组末尾加上<code>\0</code>字符,然后调用<code>strings_not_equal(0x10(%rsp), 0x40245e)</code>.</p>
+<p><code>gdb</code>查看<code>0x4024b0</code>和<code>0x40245e</code>.</p>
+<img src="/posts/525b5041/5.png" title="p5">
+<hr>
+<h3 id="phase-6"><a href="#phase-6" class="headerlink" title="phase_6"></a>phase_6</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">sub    $0x50,%rsp</span><br><span class="line">mov    %rsp,%r13</span><br><span class="line">mov    %rsp,%rsi</span><br><span class="line">callq  40145c &lt;read_six_numbers&gt;</span><br></pre></td></tr></table></figure>
+<p>先调用<code>read_six_numbers(input, %rsp)</code>.</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br></pre></td><td class="code"><pre><span class="line">mov    %rsp,%r14</span><br><span class="line">mov    $0x0,%r12d</span><br><span class="line">;0x401114</span><br><span class="line">mov    %r13,%rbp</span><br><span class="line">mov    0x0(%r13),%eax</span><br><span class="line">sub    $0x1,%eax</span><br><span class="line">cmp    $0x5,%eax</span><br><span class="line">jbe    401128 &lt;phase_6+0x34&gt;</span><br><span class="line">;0x401128</span><br><span class="line">add    $0x1,%r12d</span><br><span class="line">cmp    $0x6,%r12d</span><br><span class="line">je     401153 &lt;phase_6+0x5f&gt;</span><br><span class="line">mov    %r12d,%ebx</span><br><span class="line">movslq %ebx,%rax</span><br><span class="line">mov    (%rsp,%rax,4),%eax</span><br><span class="line">cmp    %eax,0x0(%rbp)</span><br><span class="line">jne    401145 &lt;phase_6+0x51&gt;</span><br><span class="line">callq  40143a &lt;explode_bomb&gt;</span><br><span class="line">add    $0x1,%ebx</span><br><span class="line">cmp    $0x5,%ebx</span><br><span class="line">jle    401135 &lt;phase_6+0x41&gt;</span><br><span class="line">add    $0x4,%r13</span><br><span class="line">jmp    401114 &lt;phase_6+0x20&gt;</span><br></pre></td></tr></table></figure>
+<p>以<code>%r12d</code>为基数寄存器,检测六个数是否大于<code>6</code>,大于<code>6</code>则<code>bomb</code>.</p>
+<p>同时在此次循环中以<code>%ebx = %r12d</code>为基数寄存器循环检测其与后面的数是否相等.</p>
+<p><code>%r12d == 6</code>则跳出循环.</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">lea    0x18(%rsp),%rsi</span><br><span class="line">mov    %r14,%rax</span><br><span class="line">mov    $0x7,%ecx</span><br><span class="line">;0x401160</span><br><span class="line">mov    %ecx,%edx</span><br><span class="line">sub    (%rax),%edx</span><br><span class="line">mov    %edx,(%rax)</span><br><span class="line">add    $0x4,%rax</span><br><span class="line">cmp    %rsi,%rax</span><br><span class="line">jne    401160 &lt;phase_6+0x6c&gt;</span><br></pre></td></tr></table></figure>
+<p>然后运行到这里,循环赋值<code>num = 7 - num</code>.</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br></pre></td><td class="code"><pre><span class="line">mov    $0x0,%esi</span><br><span class="line">jmp    401197 &lt;phase_6+0xa3&gt;</span><br><span class="line">;0x401176</span><br><span class="line">mov    0x8(%rdx),%rdx</span><br><span class="line">add    $0x1,%eax</span><br><span class="line">cmp    %ecx,%eax</span><br><span class="line">jne    401176 &lt;phase_6+0x82&gt;</span><br><span class="line">jmp    401188 &lt;phase_6+0x94&gt;</span><br><span class="line">;0x401183</span><br><span class="line">mov    $0x6032d0,%edx</span><br><span class="line">;0x401188</span><br><span class="line">mov    %rdx,0x20(%rsp,%rsi,2)</span><br><span class="line">add    $0x4,%rsi</span><br><span class="line">cmp    $0x18,%rsi</span><br><span class="line">je     4011ab &lt;phase_6+0xb7&gt;</span><br><span class="line">;0x401197</span><br><span class="line">mov    (%rsp,%rsi,1),%ecx</span><br><span class="line">cmp    $0x1,%ecx</span><br><span class="line">jle    401183 &lt;phase_6+0x8f&gt;</span><br><span class="line">mov    $0x1,%eax</span><br><span class="line">mov    $0x6032d0,%edx</span><br><span class="line">jmp    401176 &lt;phase_6+0x82&gt;</span><br></pre></td></tr></table></figure>
+<p><code>gdb</code>查看<code>0x6032d0</code>,根据提示和<code>gdb</code>查看内存可知这是一个<code>node</code>链表.</p>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">struct</span> <span class="title">node</span> &#123;</span></span><br><span class="line">    <span class="keyword">int</span> num;</span><br><span class="line">    <span class="keyword">int</span> id;</span><br><span class="line">    <span class="class"><span class="keyword">struct</span> <span class="title">node</span> * <span class="title">next</span>;</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>这里按照输入的六个整数,以第<code>i</code>个整数的值来匹配<code>node</code>的<code>id</code>,将<code>node</code>的地址放置到<code>0x20(%rsp,%rsi,2)</code>缓冲区整数指针数组中.</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br></pre></td><td class="code"><pre><span class="line">mov    0x20(%rsp),%rbx</span><br><span class="line">lea    0x28(%rsp),%rax</span><br><span class="line">lea    0x50(%rsp),%rsi</span><br><span class="line">mov    %rbx,%rcx</span><br><span class="line">mov    (%rax),%rdx</span><br><span class="line">mov    %rdx,0x8(%rcx)</span><br><span class="line">add    $0x8,%rax</span><br><span class="line">cmp    %rsi,%rax</span><br><span class="line">je     4011d2 &lt;phase_6+0xde&gt;</span><br><span class="line">mov    %rdx,%rcx</span><br><span class="line">jmp    4011bd &lt;phase_6+0xc9&gt;</span><br><span class="line">movq   $0x0,0x8(%rdx)</span><br><span class="line">;code: 00</span><br><span class="line">mov    $0x5,%ebp</span><br><span class="line">mov    0x8(%rbx),%rax</span><br><span class="line">mov    (%rax),%eax</span><br><span class="line">cmp    %eax,(%rbx)</span><br><span class="line">jge    4011ee &lt;phase_6+0xfa&gt;</span><br><span class="line">callq  40143a &lt;explode_bomb&gt;</span><br><span class="line">mov    0x8(%rbx),%rbx</span><br><span class="line">sub    $0x1,%ebp</span><br><span class="line">jne    4011df &lt;phase_6+0xeb&gt;</span><br></pre></td></tr></table></figure>
+<p>最后通过地址将<code>node</code>的<code>num</code>取到缓冲区,然后循环比较缓冲区数组值是否为递减序列.</p>
+<h3 id="secret-phase"><a href="#secret-phase" class="headerlink" title="secret_phase"></a>secret_phase</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">push   %rbx</span><br><span class="line">callq  40149e &lt;read_line&gt;</span><br><span class="line">mov    $0xa,%edx</span><br><span class="line">mov    $0x0,%esi</span><br><span class="line">mov    %rax,%rdi</span><br><span class="line">callq  400bd0 &lt;strtol@plt&gt;</span><br><span class="line">mov    %rax,%rbx</span><br><span class="line">lea    -0x1(%rax),%eax</span><br><span class="line">cmp    $0x3e8,%eax</span><br><span class="line">jbe    40126c &lt;secret_phase+0x2a&gt;</span><br></pre></td></tr></table></figure>
+<p>先调用<code>read_line();</code>,然后<code>strtol(input, 0, 0xa);</code>将输入转换为整数.</p>
+<p>检测输入的数是否过大,<code>%eax - 1 &gt; 1000</code>.</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">mov    %ebx,%esi</span><br><span class="line">mov    $0x6030f0,%edi</span><br><span class="line">callq  401204 &lt;fun7&gt;</span><br><span class="line">cmp    $0x2,%eax</span><br><span class="line">je     401282 &lt;secret_phase+0x40&gt;</span><br></pre></td></tr></table></figure>
+<p>调用<code>fun7(0x6030f0, input_num);</code>.如果返回值等于<code>3</code>即可通过检测.</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line">test   %rdi,%rdi</span><br><span class="line">je     401238 &lt;fun7+0x34&gt;</span><br><span class="line">mov    (%rdi),%edx</span><br><span class="line">cmp    %esi,%edx</span><br><span class="line">jle    401220 &lt;fun7+0x1c&gt;</span><br><span class="line">mov    0x8(%rdi),%rdi</span><br><span class="line">callq  401204 &lt;fun7&gt;</span><br><span class="line">add    %eax,%eax</span><br><span class="line">jmp    40123d &lt;fun7+0x39&gt;</span><br><span class="line">mov    $0x0,%eax</span><br><span class="line">cmp    %esi,%edx</span><br><span class="line">je     40123d &lt;fun7+0x39&gt;</span><br><span class="line">mov    0x10(%rdi),%rdi</span><br><span class="line">callq  401204 &lt;fun7&gt;</span><br><span class="line">lea    0x1(%rax,%rax,1),%eax</span><br><span class="line">jmp    40123d &lt;fun7+0x39&gt;</span><br><span class="line">mov    $0xffffffff,%eax</span><br><span class="line">add    $0x8,%rsp</span><br></pre></td></tr></table></figure>
+<p>转化为<code>C</code>语言.</p>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">if</span> ( !a1 )</span><br><span class="line">  <span class="keyword">return</span> <span class="number">0xFFFFFFFF</span>LL;</span><br><span class="line"><span class="keyword">if</span> ( *(_DWORD *)a1 &gt; (<span class="keyword">signed</span> <span class="keyword">int</span>)a2 )</span><br><span class="line">  <span class="keyword">return</span> <span class="number">2</span> * (<span class="keyword">unsigned</span> <span class="keyword">int</span>)fun7(*(_QWORD *)(a1 + <span class="number">8</span>), a2);</span><br><span class="line">result = <span class="number">0L</span>L;</span><br><span class="line"><span class="keyword">if</span> ( *(_DWORD *)a1 != (_DWORD)a2 )</span><br><span class="line">  result = <span class="number">2</span> * (<span class="keyword">unsigned</span> <span class="keyword">int</span>)fun7(*(_QWORD *)(a1 + <span class="number">16</span>), a2) + <span class="number">1</span>;</span><br><span class="line"><span class="keyword">return</span> result;</span><br></pre></td></tr></table></figure>
+
+      
+    </div>
+
+    
+
+    
+    
+    
+
+    
+
+    
+       
+    
+    
+
+    
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/CSAPP/" rel="tag"><i class="fa fa-tag"></i> CSAPP</a>
+          
+        </div>
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/posts/310ebe05/" rel="next" title="binary-漏洞分析-Linux-pwn-ret2dl_resolve">
+                <i class="fa fa-chevron-left"></i> binary-漏洞分析-Linux-pwn-ret2dl_resolve
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/posts/b3e257f0/" rel="prev" title="binary-逆向分析-tool-gdb">
+                binary-逆向分析-tool-gdb <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+  </div>
+
+
+          </div>
+          
+
+  
+
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    
+      <div id="sidebar-dimmer"></div>
+    
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview-wrap sidebar-panel">
+        <div class="site-overview">
+          <div class="site-author motion-element" itemprop="author" itemscope="" itemtype="http://schema.org/Person">
+            
+              <img class="site-author-image" itemprop="image" src="/images/apple-touch-icon.png" alt="w4rd3n">
+            
+              <p class="site-author-name" itemprop="name">w4rd3n</p>
+              <p class="site-description motion-element" itemprop="description"></p>
+          </div>
+
+          
+            <nav class="site-state motion-element">
+              
+                <div class="site-state-item site-state-posts">
+                
+                  <a href="/archives/">
+                
+                    <span class="site-state-item-count">181</span>
+                    <span class="site-state-item-name">日志</span>
+                  </a>
+                </div>
+              
+
+              
+                
+                
+                <div class="site-state-item site-state-categories">
+                  <a href="/categories/index.html">
+                    
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                    <span class="site-state-item-count">24</span>
+                    <span class="site-state-item-name">分类</span>
+                  </a>
+                </div>
+              
+
+              
+                
+                
+                <div class="site-state-item site-state-tags">
+                  <a href="/tags/index.html">
+                    
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                    <span class="site-state-item-count">50</span>
+                    <span class="site-state-item-name">标签</span>
+                  </a>
+                </div>
+              
+            </nav>
+          
+
+          
+
+          
+            <div class="links-of-author motion-element">
+              
+                <span class="links-of-author-item">
+                  
+                  
+                    
+                  
+                  
+                    
+                  
+                  <a href="https://github.com/hitworld" title="GitHub &rarr; https://github.com/hitworld" rel="noopener" target="_blank"><i class="fa fa-fw fa-github"></i>GitHub</a>
+                </span>
+              
+            </div>
+          
+
+          
+
+          
+          
+
+          
+            
+          
+          
+
+        </div>
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#准备"><span class="nav-number">1.</span> <span class="nav-text">准备</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#read-line"><span class="nav-number">1.1.</span> <span class="nav-text">read_line</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#phase-defused"><span class="nav-number">1.2.</span> <span class="nav-text">phase_defused</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#题目"><span class="nav-number">2.</span> <span class="nav-text">题目</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#phase-1"><span class="nav-number">2.1.</span> <span class="nav-text">phase_1</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#phase-2"><span class="nav-number">2.2.</span> <span class="nav-text">phase_2</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#phase-3"><span class="nav-number">2.3.</span> <span class="nav-text">phase_3</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#phase-4"><span class="nav-number">2.4.</span> <span class="nav-text">phase_4</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#phase-5"><span class="nav-number">2.5.</span> <span class="nav-text">phase_5</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#phase-6"><span class="nav-number">2.6.</span> <span class="nav-text">phase_6</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#secret-phase"><span class="nav-number">2.7.</span> <span class="nav-text">secret_phase</span></a></li></ol></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright">&copy; <span itemprop="copyrightYear">2020</span>
+  <span class="with-love" id="animate">
+    <i class="fa fa-gg-circle"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">w4rd3n</span>
+
+  
+    <span class="post-meta-divider">|</span>
+    <span class="post-meta-item-icon">
+      <i class="fa fa-area-chart"></i>
+    </span>
+    
+    <span title="站点总字数">677k</span>
+  
+
+  
+    <span class="post-meta-divider">|</span>
+    <span class="post-meta-item-icon">
+      <i class="fa fa-coffee"></i>
+    </span>
+    
+    <span title="站点阅读时长">10:15</span>
+  
+</div>
+
+
+
+
+
+
+
+
+
+        
+<div class="busuanzi-count">
+  <script async src="https://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+  
+    <span class="site-uv" title="总访客量">
+      <i class="fa fa-user"></i>
+      <span class="busuanzi-value" id="busuanzi_value_site_uv"></span>
+    </span>
+  
+
+  
+    <span class="site-pv" title="总访问量">
+      <i class="fa fa-eye"></i>
+      <span class="busuanzi-value" id="busuanzi_value_site_pv"></span>
+    </span>
+  
+</div>
+
+
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+          <span id="scrollpercent"><span>0</span>%</span>
+        
+      </div>
+    
+
+    
+	
+    
+
+    
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+    
+      
+  
+  <script type="text/javascript" color="0,0,255" opacity="0.5" zindex="-1" count="99" src="/lib/canvas-nest/canvas-nest.min.js"></script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+  
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=6.5.0"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=6.5.0"></script>
+
+
+
+  
+  
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=6.5.0"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=6.5.0"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=6.5.0"></script>
+
+
+
+  
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+  
+
+  <script type="text/javascript">
+    // Popup Window;
+    var isfetched = false;
+    var isXml = true;
+    // Search DB path;
+    var search_path = "search.xml";
+    if (search_path.length === 0) {
+      search_path = "search.xml";
+    } else if (/json$/i.test(search_path)) {
+      isXml = false;
+    }
+    var path = "/" + search_path;
+    // monitor main search box;
+
+    var onPopupClose = function (e) {
+      $('.popup').hide();
+      $('#local-search-input').val('');
+      $('.search-result-list').remove();
+      $('#no-result').remove();
+      $(".local-search-pop-overlay").remove();
+      $('body').css('overflow', '');
+    }
+
+    function proceedsearch() {
+      $("body")
+        .append('<div class="search-popup-overlay local-search-pop-overlay"></div>')
+        .css('overflow', 'hidden');
+      $('.search-popup-overlay').click(onPopupClose);
+      $('.popup').toggle();
+      var $localSearchInput = $('#local-search-input');
+      $localSearchInput.attr("autocapitalize", "none");
+      $localSearchInput.attr("autocorrect", "off");
+      $localSearchInput.focus();
+    }
+
+    // search function;
+    var searchFunc = function(path, search_id, content_id) {
+      'use strict';
+
+      // start loading animation
+      $("body")
+        .append('<div class="search-popup-overlay local-search-pop-overlay">' +
+          '<div id="search-loading-icon">' +
+          '<i class="fa fa-spinner fa-pulse fa-5x fa-fw"></i>' +
+          '</div>' +
+          '</div>')
+        .css('overflow', 'hidden');
+      $("#search-loading-icon").css('margin', '20% auto 0 auto').css('text-align', 'center');
+
+      
+
+      $.ajax({
+        url: path,
+        dataType: isXml ? "xml" : "json",
+        async: true,
+        success: function(res) {
+          // get the contents from search data
+          isfetched = true;
+          $('.popup').detach().appendTo('.header-inner');
+          var datas = isXml ? $("entry", res).map(function() {
+            return {
+              title: $("title", this).text(),
+              content: $("content",this).text(),
+              url: $("url" , this).text()
+            };
+          }).get() : res;
+          var input = document.getElementById(search_id);
+          var resultContent = document.getElementById(content_id);
+          var inputEventFunction = function() {
+            var searchText = input.value.trim().toLowerCase();
+            var keywords = searchText.split(/[\s\-]+/);
+            if (keywords.length > 1) {
+              keywords.push(searchText);
+            }
+            var resultItems = [];
+            if (searchText.length > 0) {
+              // perform local searching
+              datas.forEach(function(data) {
+                var isMatch = false;
+                var hitCount = 0;
+                var searchTextCount = 0;
+                var title = data.title.trim();
+                var titleInLowerCase = title.toLowerCase();
+                var content = data.content.trim().replace(/<[^>]+>/g,"");
+                
+                var contentInLowerCase = content.toLowerCase();
+                var articleUrl = decodeURIComponent(data.url);
+                var indexOfTitle = [];
+                var indexOfContent = [];
+                // only match articles with not empty titles
+                if(title != '') {
+                  keywords.forEach(function(keyword) {
+                    function getIndexByWord(word, text, caseSensitive) {
+                      var wordLen = word.length;
+                      if (wordLen === 0) {
+                        return [];
+                      }
+                      var startPosition = 0, position = [], index = [];
+                      if (!caseSensitive) {
+                        text = text.toLowerCase();
+                        word = word.toLowerCase();
+                      }
+                      while ((position = text.indexOf(word, startPosition)) > -1) {
+                        index.push({position: position, word: word});
+                        startPosition = position + wordLen;
+                      }
+                      return index;
+                    }
+
+                    indexOfTitle = indexOfTitle.concat(getIndexByWord(keyword, titleInLowerCase, false));
+                    indexOfContent = indexOfContent.concat(getIndexByWord(keyword, contentInLowerCase, false));
+                  });
+                  if (indexOfTitle.length > 0 || indexOfContent.length > 0) {
+                    isMatch = true;
+                    hitCount = indexOfTitle.length + indexOfContent.length;
+                  }
+                }
+
+                // show search results
+
+                if (isMatch) {
+                  // sort index by position of keyword
+
+                  [indexOfTitle, indexOfContent].forEach(function (index) {
+                    index.sort(function (itemLeft, itemRight) {
+                      if (itemRight.position !== itemLeft.position) {
+                        return itemRight.position - itemLeft.position;
+                      } else {
+                        return itemLeft.word.length - itemRight.word.length;
+                      }
+                    });
+                  });
+
+                  // merge hits into slices
+
+                  function mergeIntoSlice(text, start, end, index) {
+                    var item = index[index.length - 1];
+                    var position = item.position;
+                    var word = item.word;
+                    var hits = [];
+                    var searchTextCountInSlice = 0;
+                    while (position + word.length <= end && index.length != 0) {
+                      if (word === searchText) {
+                        searchTextCountInSlice++;
+                      }
+                      hits.push({position: position, length: word.length});
+                      var wordEnd = position + word.length;
+
+                      // move to next position of hit
+
+                      index.pop();
+                      while (index.length != 0) {
+                        item = index[index.length - 1];
+                        position = item.position;
+                        word = item.word;
+                        if (wordEnd > position) {
+                          index.pop();
+                        } else {
+                          break;
+                        }
+                      }
+                    }
+                    searchTextCount += searchTextCountInSlice;
+                    return {
+                      hits: hits,
+                      start: start,
+                      end: end,
+                      searchTextCount: searchTextCountInSlice
+                    };
+                  }
+
+                  var slicesOfTitle = [];
+                  if (indexOfTitle.length != 0) {
+                    slicesOfTitle.push(mergeIntoSlice(title, 0, title.length, indexOfTitle));
+                  }
+
+                  var slicesOfContent = [];
+                  while (indexOfContent.length != 0) {
+                    var item = indexOfContent[indexOfContent.length - 1];
+                    var position = item.position;
+                    var word = item.word;
+                    // cut out 100 characters
+                    var start = position - 20;
+                    var end = position + 80;
+                    if(start < 0){
+                      start = 0;
+                    }
+                    if (end < position + word.length) {
+                      end = position + word.length;
+                    }
+                    if(end > content.length){
+                      end = content.length;
+                    }
+                    slicesOfContent.push(mergeIntoSlice(content, start, end, indexOfContent));
+                  }
+
+                  // sort slices in content by search text's count and hits' count
+
+                  slicesOfContent.sort(function (sliceLeft, sliceRight) {
+                    if (sliceLeft.searchTextCount !== sliceRight.searchTextCount) {
+                      return sliceRight.searchTextCount - sliceLeft.searchTextCount;
+                    } else if (sliceLeft.hits.length !== sliceRight.hits.length) {
+                      return sliceRight.hits.length - sliceLeft.hits.length;
+                    } else {
+                      return sliceLeft.start - sliceRight.start;
+                    }
+                  });
+
+                  // select top N slices in content
+
+                  var upperBound = parseInt('1');
+                  if (upperBound >= 0) {
+                    slicesOfContent = slicesOfContent.slice(0, upperBound);
+                  }
+
+                  // highlight title and content
+
+                  function highlightKeyword(text, slice) {
+                    var result = '';
+                    var prevEnd = slice.start;
+                    slice.hits.forEach(function (hit) {
+                      result += text.substring(prevEnd, hit.position);
+                      var end = hit.position + hit.length;
+                      result += '<b class="search-keyword">' + text.substring(hit.position, end) + '</b>';
+                      prevEnd = end;
+                    });
+                    result += text.substring(prevEnd, slice.end);
+                    return result;
+                  }
+
+                  var resultItem = '';
+
+                  if (slicesOfTitle.length != 0) {
+                    resultItem += "<li><a href='" + articleUrl + "' class='search-result-title'>" + highlightKeyword(title, slicesOfTitle[0]) + "</a>";
+                  } else {
+                    resultItem += "<li><a href='" + articleUrl + "' class='search-result-title'>" + title + "</a>";
+                  }
+
+                  slicesOfContent.forEach(function (slice) {
+                    resultItem += "<a href='" + articleUrl + "'>" +
+                      "<p class=\"search-result\">" + highlightKeyword(content, slice) +
+                      "...</p>" + "</a>";
+                  });
+
+                  resultItem += "</li>";
+                  resultItems.push({
+                    item: resultItem,
+                    searchTextCount: searchTextCount,
+                    hitCount: hitCount,
+                    id: resultItems.length
+                  });
+                }
+              })
+            };
+            if (keywords.length === 1 && keywords[0] === "") {
+              resultContent.innerHTML = '<div id="no-result"><i class="fa fa-search fa-5x" /></div>'
+            } else if (resultItems.length === 0) {
+              resultContent.innerHTML = '<div id="no-result"><i class="fa fa-frown-o fa-5x" /></div>'
+            } else {
+              resultItems.sort(function (resultLeft, resultRight) {
+                if (resultLeft.searchTextCount !== resultRight.searchTextCount) {
+                  return resultRight.searchTextCount - resultLeft.searchTextCount;
+                } else if (resultLeft.hitCount !== resultRight.hitCount) {
+                  return resultRight.hitCount - resultLeft.hitCount;
+                } else {
+                  return resultRight.id - resultLeft.id;
+                }
+              });
+              var searchResultList = '<ul class=\"search-result-list\">';
+              resultItems.forEach(function (result) {
+                searchResultList += result.item;
+              })
+              searchResultList += "</ul>";
+              resultContent.innerHTML = searchResultList;
+            }
+          }
+
+          if ('auto' === 'auto') {
+            input.addEventListener('input', inputEventFunction);
+          } else {
+            $('.search-icon').click(inputEventFunction);
+            input.addEventListener('keypress', function (event) {
+              if (event.keyCode === 13) {
+                inputEventFunction();
+              }
+            });
+          }
+
+          // remove loading animation
+          $(".local-search-pop-overlay").remove();
+          $('body').css('overflow', '');
+
+          proceedsearch();
+        }
+      });
+    }
+
+    // handle and trigger popup window;
+    $('.popup-trigger').click(function(e) {
+      e.stopPropagation();
+      if (isfetched === false) {
+        searchFunc(path, 'local-search-input', 'local-search-result');
+      } else {
+        proceedsearch();
+      };
+    });
+
+    $('.popup-btn-close').click(onPopupClose);
+    $('.popup').click(function(e){
+      e.stopPropagation();
+    });
+    $(document).on('keyup', function (event) {
+      var shouldDismissSearchPopup = event.which === 27 &&
+        $('.search-popup').is(':visible');
+      if (shouldDismissSearchPopup) {
+        onPopupClose();
+      }
+    });
+  </script>
+
+
+
+
+
+  
+
+  
+  <script>
+    
+    function addCount(Counter) {
+      var $visitors = $(".leancloud_visitors");
+      var url = $visitors.attr('id').trim();
+      var title = $visitors.attr('data-flag-title').trim();
+
+      Counter('get', '/classes/Counter', { where: JSON.stringify({ url }) })
+        .done(function ({ results }) {
+          if (results.length > 0) {
+            var counter = results[0];
+            
+            Counter('put', `/classes/Counter/${counter.objectId}`, JSON.stringify({ time: { "__op":"Increment", "amount":1 } }))
+            
+            .done(function () {
+                  var $element = $(document.getElementById(url));
+                  $element.find('.leancloud-visitors-count').text(counter.time + 1);
+            })
+            
+            .fail(function ({ responseJSON }) {
+                console.log('Failed to save Visitor num, with error message: ' + responseJSON.error);
+            })
+          } else {
+            
+              Counter('post', '/classes/Counter', JSON.stringify({ title: title, url: url, time: 1}))
+                .done(function () {
+                  var $element = $(document.getElementById(url));
+                  $element.find('.leancloud-visitors-count').text(1);
+                })
+                .fail(function () {
+                  console.log('Failed to create');
+                });
+            
+          }
+        })
+      .fail(function ({ responseJSON }) {
+        console.log('LeanCloud Counter Error:' + responseJSON.code + " " + responseJSON.error);
+      });
+    }
+    
+
+    $(function() {
+      $.get('https://app-router.leancloud.cn/2/route?appId=' + "no3Ip4mNLc3JyF1AeTy8LrAm-gzGzoHsz")
+        .done(function ({ api_server }) {
+          var Counter = function (method, url, data) {
+            return $.ajax({
+              method: method,
+              url: `https://${api_server}/1.1${url}`,
+              headers: {
+                'X-LC-Id': "no3Ip4mNLc3JyF1AeTy8LrAm-gzGzoHsz",
+                'X-LC-Key': "UvlYMzpJKw0Jrw61V5BA5ifU",
+                'Content-Type': 'application/json',
+              },
+              data: data,
+            });
+          };
+          
+          addCount(Counter);
+          
+        })
+    });
+  </script>
+
+
+
+  
+
+  
+
+  
+
+  
+
+  
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+  <style>
+    .copy-btn {
+      display: inline-block;
+      padding: 6px 12px;
+      font-size: 13px;
+      font-weight: 700;
+      line-height: 20px;
+      color: #333;
+      white-space: nowrap;
+      vertical-align: middle;
+      cursor: pointer;
+      background-color: #eee;
+      background-image: linear-gradient(#fcfcfc, #eee);
+      border: 1px solid #d5d5d5;
+      border-radius: 3px;
+      user-select: none;
+      outline: 0;
+    }
+
+    .highlight-wrap .copy-btn {
+      transition: opacity .3s ease-in-out;
+      opacity: 0;
+      padding: 2px 6px;
+      position: absolute;
+      right: 4px;
+      top: 8px;
+    }
+
+    .highlight-wrap:hover .copy-btn,
+    .highlight-wrap .copy-btn:focus {
+      opacity: 1
+    }
+
+    .highlight-wrap {
+      position: relative;
+    }
+  </style>
+  <script>
+    $('.highlight').each(function (i, e) {
+      var $wrap = $('<div>').addClass('highlight-wrap')
+      $(e).after($wrap)
+      $wrap.append($('<button>').addClass('copy-btn').append('复制').on('click', function (e) {
+        var code = $(this).parent().find('.code').find('.line').map(function (i, e) {
+          return $(e).text()
+        }).toArray().join('\n')
+        var ta = document.createElement('textarea')
+        document.body.appendChild(ta)
+        ta.style.position = 'absolute'
+        ta.style.top = '0px'
+        ta.style.left = '0px'
+        ta.value = code
+        ta.select()
+        ta.focus()
+        var result = document.execCommand('copy')
+        document.body.removeChild(ta)
+        
+        $(this).blur()
+      })).on('mouseleave', function (e) {
+        var $b = $(this).find('.copy-btn')
+        setTimeout(function () {
+          $b.text('复制')
+        }, 300)
+      }).append(e)
+    })
+  </script>
+
+
+  
+
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-backstretch/2.0.4/jquery.backstretch.min.js"></script>;
+  <script>
+  //$("body").backstretch("/images/background.jpg");
+  </script>
+  
+  <script type="text/javascript" src="//cdn.bootcss.com/canvas-nest.js/1.0.0/canvas-nest.min.js"></script>
+  
+<script src="/live2dw/lib/L2Dwidget.min.js?0c58a1486de42ac6cc1c59c7d98ae887"></script><script>L2Dwidget.init({"pluginRootPath":"live2dw/","pluginJsPath":"lib/","pluginModelPath":"assets/","tagMode":false,"debug":false,"model":{"jsonPath":"/live2dw/assets/koharu.model.json"},"display":{"position":"right","width":150,"height":300},"mobile":{"show":false},"log":false});</script></body>
+</html>

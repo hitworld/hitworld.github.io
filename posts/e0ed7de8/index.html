@@ -119,18 +119,18 @@
 
 
 
-  <meta name="description" content="概览虚拟机是指一种特殊的软件,可以在计算机平台和终端用户之间创建一种环境,而终端用户则是基于虚拟机这个软件所创建的环境来操作其它软件.虚拟机是计算机系统的仿真器,通过软件模拟具有完整硬件系统功能的,运行在一个完全隔离环境中的完整计算机系统,能提供物理计算机的功能. 对于虚拟化逃逸来说,其实就是要攻击hypervisor程序,所以主要注重guest与host的交互. 常见的漏洞形式Device在qe">
+  <meta name="description" content="未完成 0x00虚拟机是指一种特殊的软件,依靠某种环境(操作系统)运行,同时又作为其他软件的运行环境.简单说虚拟机是计算机系统的仿真器,通过软件模拟具有完整硬件系统功能的,运行在一个完全隔离环境中的完整计算机系统,能提供物理计算机的功能. 对于虚拟机逃逸来说,其实就是要攻击虚拟机管理程序hypervisor.通常把主机环境称为host,虚拟机环境称为guest. 常见的漏洞形式Device在qem">
 <meta name="keywords" content="escape-pwn">
 <meta property="og:type" content="article">
 <meta property="og:title" content="binary-漏洞分析-Linux-escape-pwn-VM逃逸基础">
 <meta property="og:url" content="https://hitworld.github.io/posts/e0ed7de8/index.html">
 <meta property="og:site_name" content="w4rd3n">
-<meta property="og:description" content="概览虚拟机是指一种特殊的软件,可以在计算机平台和终端用户之间创建一种环境,而终端用户则是基于虚拟机这个软件所创建的环境来操作其它软件.虚拟机是计算机系统的仿真器,通过软件模拟具有完整硬件系统功能的,运行在一个完全隔离环境中的完整计算机系统,能提供物理计算机的功能. 对于虚拟化逃逸来说,其实就是要攻击hypervisor程序,所以主要注重guest与host的交互. 常见的漏洞形式Device在qe">
+<meta property="og:description" content="未完成 0x00虚拟机是指一种特殊的软件,依靠某种环境(操作系统)运行,同时又作为其他软件的运行环境.简单说虚拟机是计算机系统的仿真器,通过软件模拟具有完整硬件系统功能的,运行在一个完全隔离环境中的完整计算机系统,能提供物理计算机的功能. 对于虚拟机逃逸来说,其实就是要攻击虚拟机管理程序hypervisor.通常把主机环境称为host,虚拟机环境称为guest. 常见的漏洞形式Device在qem">
 <meta property="og:locale" content="zh-CN">
-<meta property="og:updated_time" content="2020-06-20T10:21:40.998Z">
+<meta property="og:updated_time" content="2020-07-08T09:18:29.347Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="binary-漏洞分析-Linux-escape-pwn-VM逃逸基础">
-<meta name="twitter:description" content="概览虚拟机是指一种特殊的软件,可以在计算机平台和终端用户之间创建一种环境,而终端用户则是基于虚拟机这个软件所创建的环境来操作其它软件.虚拟机是计算机系统的仿真器,通过软件模拟具有完整硬件系统功能的,运行在一个完全隔离环境中的完整计算机系统,能提供物理计算机的功能. 对于虚拟化逃逸来说,其实就是要攻击hypervisor程序,所以主要注重guest与host的交互. 常见的漏洞形式Device在qe">
+<meta name="twitter:description" content="未完成 0x00虚拟机是指一种特殊的软件,依靠某种环境(操作系统)运行,同时又作为其他软件的运行环境.简单说虚拟机是计算机系统的仿真器,通过软件模拟具有完整硬件系统功能的,运行在一个完全隔离环境中的完整计算机系统,能提供物理计算机的功能. 对于虚拟机逃逸来说,其实就是要攻击虚拟机管理程序hypervisor.通常把主机环境称为host,虚拟机环境称为guest. 常见的漏洞形式Device在qem">
 
 
 
@@ -537,12 +537,11 @@
       
 
       
-        <h2 id="概览"><a href="#概览" class="headerlink" title="概览"></a>概览</h2><p>虚拟机是指一种特殊的软件,可以在计算机平台和终端用户之间创建一种环境,而终端用户则是基于虚拟机这个软件所创建的环境来操作其它软件.虚拟机是计算机系统的仿真器,通过软件模拟具有完整硬件系统功能的,运行在一个完全隔离环境中的完整计算机系统,能提供物理计算机的功能.</p>
-<p>对于虚拟化逃逸来说,其实就是要攻击<code>hypervisor</code>程序,所以主要注重<code>guest</code>与<code>host</code>的交互.</p>
-<h2 id="常见的漏洞形式"><a href="#常见的漏洞形式" class="headerlink" title="常见的漏洞形式"></a>常见的漏洞形式</h2><h3 id="Device"><a href="#Device" class="headerlink" title="Device"></a>Device</h3><p>在<code>qemu</code>中新实现一种设备并引入漏洞,<code>guest</code>通过与设备进行交互进行漏洞利用.在<code>host</code>上使用下面的命令来查看<code>qemu</code>支持的设备.</p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">./qemu-system-x86_64 -device <span class="built_in">help</span></span><br></pre></td></tr></table></figure>
-<p>也可以<code>boot</code>到<code>guest</code>之后使用<code>lspci -nvv</code>来查看<code>pci</code>设备的具体信息.</p>
-<p><code>Linux kernel</code>与设备通信有<code>PIO</code>,<code>MMIO</code>,<code>DMA</code>等形式,通常是<code>kernel</code>会实现一套<code>driver</code>并在内核态与<code>device</code>交互,再开放<code>API</code>供用户态程序使用.但其实在用户态也是可以直接访问到设备的.</p>
+        <p>未完成</p>
+<h2 id="0x00"><a href="#0x00" class="headerlink" title="0x00"></a>0x00</h2><p>虚拟机是指一种特殊的软件,依靠某种环境(操作系统)运行,同时又作为其他软件的运行环境.简单说虚拟机是计算机系统的仿真器,通过软件模拟具有完整硬件系统功能的,运行在一个完全隔离环境中的完整计算机系统,能提供物理计算机的功能.</p>
+<p>对于虚拟机逃逸来说,其实就是要攻击虚拟机管理程序<code>hypervisor</code>.通常把主机环境称为<code>host</code>,虚拟机环境称为<code>guest</code>.</p>
+<h2 id="常见的漏洞形式"><a href="#常见的漏洞形式" class="headerlink" title="常见的漏洞形式"></a>常见的漏洞形式</h2><h3 id="Device"><a href="#Device" class="headerlink" title="Device"></a>Device</h3><p>在<code>qemu</code>中新实现一种设备并引入漏洞,<code>guest</code>通过与设备进行交互进行漏洞利用.在<code>host</code>上使用<code>qemu-system-x86_64 -device help</code>查看<code>qemu</code>支持的设备.也可以<code>boot</code>到<code>guest</code>之后使用<code>lspci -nvv</code>来查看<code>pci</code>设备的具体信息.</p>
+<p><code>Linux kernel</code>与设备通信有<code>PIO</code>,<code>MMIO</code>,<code>DMA</code>等形式,通常<code>kernel</code>会实现一套<code>driver</code>并在内核态与<code>device</code>交互,再开放<code>API</code>供用户态程序使用.但其实在用户态也是可以直接访问到设备的.</p>
 <h4 id="PIO"><a href="#PIO" class="headerlink" title="PIO"></a>PIO</h4><p><code>CPU</code>执行<code>in/out</code>指令来向<code>I/O</code>端口发送数据.<code>cat /proc/ioports</code>能够看到目前<code>port</code>的一些信息和它们对应的设备.</p>
 <p><code>in/out</code>指令是特权指令,一般只有在<code>Ring 0</code>时才能执行,<code>linux</code>内核提供了<code>inb/outb/inw/outw/inl/outl</code>,用于向<code>port</code>发送不同长度的数据.</p>
 <p>在<code>linux</code>中还可以通过<code>iopl</code>,<code>ioperm</code>这两个系统调用对<code>port</code>的权能进行设置.</p>
@@ -681,7 +680,7 @@
                 
                   <a href="/archives/">
                 
-                    <span class="site-state-item-count">181</span>
+                    <span class="site-state-item-count">184</span>
                     <span class="site-state-item-name">日志</span>
                   </a>
                 </div>
@@ -855,7 +854,13 @@
                     
                       
                     
-                    <span class="site-state-item-count">50</span>
+                      
+                    
+                      
+                    
+                      
+                    
+                    <span class="site-state-item-count">53</span>
                     <span class="site-state-item-name">标签</span>
                   </a>
                 </div>
@@ -905,7 +910,7 @@
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#概览"><span class="nav-number">1.</span> <span class="nav-text">概览</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#常见的漏洞形式"><span class="nav-number">2.</span> <span class="nav-text">常见的漏洞形式</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#Device"><span class="nav-number">2.1.</span> <span class="nav-text">Device</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#PIO"><span class="nav-number">2.1.1.</span> <span class="nav-text">PIO</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#MMIO"><span class="nav-number">2.1.2.</span> <span class="nav-text">MMIO</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Hypercall"><span class="nav-number">2.2.</span> <span class="nav-text">Hypercall</span></a></li></ol></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#0x00"><span class="nav-number">1.</span> <span class="nav-text">0x00</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#常见的漏洞形式"><span class="nav-number">2.</span> <span class="nav-text">常见的漏洞形式</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#Device"><span class="nav-number">2.1.</span> <span class="nav-text">Device</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#PIO"><span class="nav-number">2.1.1.</span> <span class="nav-text">PIO</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#MMIO"><span class="nav-number">2.1.2.</span> <span class="nav-text">MMIO</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Hypercall"><span class="nav-number">2.2.</span> <span class="nav-text">Hypercall</span></a></li></ol></li></ol></div>
             
 
           </div>
@@ -937,7 +942,7 @@
       <i class="fa fa-area-chart"></i>
     </span>
     
-    <span title="站点总字数">677k</span>
+    <span title="站点总字数">693k</span>
   
 
   
@@ -946,7 +951,7 @@
       <i class="fa fa-coffee"></i>
     </span>
     
-    <span title="站点阅读时长">10:15</span>
+    <span title="站点阅读时长">10:30</span>
   
 </div>
 

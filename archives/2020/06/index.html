@@ -119,25 +119,21 @@
 
 
 
-  <meta name="description" content="glibc2.26glibc2.26之后加入了tcache机制. malloc和free都会先考虑tcache中的chunk. free时,如果size &amp;lt; smallbin size会被放到对应size的tcache中.tcache存满之后,就和之前一样了.被放入tcache的chunk不会取消其nextchunk的inuse bit. 每个thread都会维护一个tcache_preth">
-<meta name="keywords" content="heap-pwn">
-<meta property="og:type" content="article">
-<meta property="og:title" content="binary-漏洞分析-Linux-heap-pwn-glibc-2.23之后">
-<meta property="og:url" content="https://hitworld.github.io/posts/85e8d681/index.html">
+  <meta name="keywords" content="hack">
+<meta property="og:type" content="website">
+<meta property="og:title" content="w4rd3n">
+<meta property="og:url" content="https://hitworld.github.io/archives/2020/06/index.html">
 <meta property="og:site_name" content="w4rd3n">
-<meta property="og:description" content="glibc2.26glibc2.26之后加入了tcache机制. malloc和free都会先考虑tcache中的chunk. free时,如果size &amp;lt; smallbin size会被放到对应size的tcache中.tcache存满之后,就和之前一样了.被放入tcache的chunk不会取消其nextchunk的inuse bit. 每个thread都会维护一个tcache_preth">
 <meta property="og:locale" content="zh-CN">
-<meta property="og:updated_time" content="2020-06-20T10:21:41.000Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="binary-漏洞分析-Linux-heap-pwn-glibc-2.23之后">
-<meta name="twitter:description" content="glibc2.26glibc2.26之后加入了tcache机制. malloc和free都会先考虑tcache中的chunk. free时,如果size &amp;lt; smallbin size会被放到对应size的tcache中.tcache存满之后,就和之前一样了.被放入tcache的chunk不会取消其nextchunk的inuse bit. 每个thread都会维护一个tcache_preth">
+<meta name="twitter:title" content="w4rd3n">
 
 
 
 
 
 
-  <link rel="canonical" href="https://hitworld.github.io/posts/85e8d681/">
+  <link rel="canonical" href="https://hitworld.github.io/archives/2020/06/">
 
 
 
@@ -147,7 +143,7 @@
   };
 </script>
 
-  <title>binary-漏洞分析-Linux-heap-pwn-glibc-2.23之后 | w4rd3n</title>
+  <title>归档 | w4rd3n</title>
   
 
 
@@ -196,7 +192,7 @@
     
   
 
-  <div class="container sidebar-position-left page-post-detail">
+  <div class="container sidebar-position-left page-archive">
     <div class="headband"></div>
 
     <header id="header" class="header" itemscope="" itemtype="http://schema.org/WPHeader">
@@ -305,7 +301,7 @@
         
         
           
-          <li class="menu-item menu-item-archives">
+          <li class="menu-item menu-item-archives menu-item-active">
 
     
     
@@ -334,6 +330,28 @@
 
   
     
+
+    
+    
+      
+      
+    
+      
+      
+    
+      
+      
+    
+      
+      
+    
+      
+      
+    
+    
+
+  
+
 
   
 
@@ -380,264 +398,112 @@
           <div id="content" class="content">
             
 
-  <div id="posts" class="posts-expand">
-    
+  
+  
+  
+  <div class="post-block archive">
+    <div id="posts" class="posts-collapse">
+      <span class="archive-move-on"></span>
 
-  
+      
+      <span class="archive-page-counter">
+        
+        
+         
+          
+        非常好! 目前共计 184 篇日志。 继续努力。
+      </span>
+      
 
-  
-  
-  
+      
 
-  
+        
+        
+        
+
+        
+          
+          <div class="collection-title">
+            <h1 class="archive-year" id="archive-year-2020">2020</h1>
+          </div>
+        
+        
+
+        
 
   <article class="post post-type-normal" itemscope="" itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="https://hitworld.github.io/posts/85e8d681/">
+    <header class="post-header">
 
-    <span hidden itemprop="author" itemscope="" itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="w4rd3n">
-      <meta itemprop="description" content="">
-      <meta itemprop="image" content="/images/apple-touch-icon.png">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope="" itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="w4rd3n">
-    </span>
-
-    
-      <header class="post-header">
-
+      <h2 class="post-title">
         
+            <a class="post-title-link" href="/posts/b06301d2/" itemprop="url">
+              
+                <span itemprop="name">develop-BackEnd-Spring-Boot-基础</span>
+              
+            </a>
         
-          <h1 class="post-title" itemprop="name headline">binary-漏洞分析-Linux-heap-pwn-glibc-2.23之后
-              
-            
-          </h1>
-        
+      </h2>
 
-        <div class="post-meta">
-          <span class="post-time">
+      <div class="post-meta">
+        <time class="post-time" itemprop="dateCreated" datetime="2020-06-30T17:42:31+08:00" content="2020-06-30">
+          06-30
+        </time>
+      </div>
 
-            
-            
-            
-
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">发表于</span>
-              
-
-              
-                
-              
-
-              <time title="创建时间：2019-08-06 15:59:57" itemprop="dateCreated datePublished" datetime="2019-08-06T15:59:57+08:00">2019-08-06</time>
-            
-
-            
-          </span>
-
-          
-            <span class="post-category">
-            
-              <span class="post-meta-divider">|</span>
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">分类于</span>
-              
-              
-                <span itemprop="about" itemscope="" itemtype="http://schema.org/Thing"><a href="/categories/binary/" itemprop="url" rel="index"><span itemprop="name">binary</span></a></span>
-
-                
-                
-                  ，
-                
-              
-                <span itemprop="about" itemscope="" itemtype="http://schema.org/Thing"><a href="/categories/binary/漏洞分析/" itemprop="url" rel="index"><span itemprop="name">漏洞分析</span></a></span>
-
-                
-                
-              
-            </span>
-          
-
-          
-            
-          
-
-          
-          
-             <span id="/posts/85e8d681/" class="leancloud_visitors" data-flag-title="binary-漏洞分析-Linux-heap-pwn-glibc-2.23之后">
-               <span class="post-meta-divider">|</span>
-               <span class="post-meta-item-icon">
-                 <i class="fa fa-eye"></i>
-               </span>
-               
-                 <span class="post-meta-item-text">热度：</span>
-               
-                 <span class="leancloud-visitors-count"></span>
-                 <span>℃</span>
-             </span>
-          
-
-          
-
-          
-            <div class="post-symbolscount">
-              
-
-              
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-file-word-o"></i>
-                </span>
-                
-                  <span class="post-meta-item-text">本文字数：</span>
-                
-                <span title="本文字数">1.1k</span>
-              
-
-              
-                <span class="post-meta-divider">|</span>
-              
-
-              
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-clock-o"></i>
-                </span>
-                
-                  <span class="post-meta-item-text">阅读时长 &asymp;</span>
-                
-                <span title="阅读时长">1 分钟</span>
-              
-            </div>
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        <h2 id="glibc2-26"><a href="#glibc2-26" class="headerlink" title="glibc2.26"></a>glibc2.26</h2><p><code>glibc2.26</code>之后加入了<code>tcache</code>机制.</p>
-<p><code>malloc</code>和<code>free</code>都会先考虑<code>tcache</code>中的<code>chunk</code>.</p>
-<p><code>free</code>时,如果<code>size &lt; smallbin size</code>会被放到对应<code>size</code>的<code>tcache</code>中.<code>tcache</code>存满之后,就和之前一样了.被放入<code>tcache</code>的<code>chunk</code>不会取消其<code>nextchunk</code>的<code>inuse bit</code>.</p>
-<p>每个<code>thread</code>都会维护一个<code>tcache_prethread_struct</code>结构体(第一次<code>malloc</code>时会先<code>malloc</code>一块内存来存放它).</p>
-<p><code>tcache_prethread_struct</code>中包含<code>counts</code>,<code>entries</code>.</p>
-<ul>
-<li><code>counts</code>为对应<code>size</code>上的<code>tcache</code>链上的<code>chunk</code>的个数,默认最多<code>7</code>个.</li>
-<li><code>entries</code>用于链接<code>chunk</code>结构体,通过一个单向链表实现.其中的<code>next</code>指针指向下一个大小相同的<code>chunk</code>(指向<code>user data</code>而不是<code>header</code>).</li>
-</ul>
-<p><code>malloc</code>时,如果<code>size &lt; smallbin size</code>会先从<code>tcache</code>中取<code>chunk</code>,遵循<code>FILO</code>原则.直到对应<code>size</code>的<code>tcache</code>为空后才会从<code>bins</code>中找.</p>
-<p><code>tcache</code>为空时,如果<code>fastbin/smallbin/unsortedbin</code>中有符合<code>size</code>的<code>chunk</code>,会先把它们放到<code>tcache</code>中.</p>
-<h3 id="tcache-poisoning"><a href="#tcache-poisoning" class="headerlink" title="tcache poisoning"></a>tcache poisoning</h3><p>覆盖<code>tcache</code>中的<code>next</code>,无需构造<code>fakechunk</code>,即可实现<code>arbitrarily alloc</code>.</p>
-<h3 id="tcache-dup"><a href="#tcache-dup" class="headerlink" title="tcache dup"></a>tcache dup</h3><p>可以直接连续<code>free</code>两块内存而不会<code>trigger double free</code>,同样无需构造<code>fake_chunk</code>.</p>
-<h3 id="tcache-house-of-spirit"><a href="#tcache-house-of-spirit" class="headerlink" title="tcache house of spirit"></a>tcache house of spirit</h3><p>只需伪造一个<code>size</code>区域,然后将伪造的<code>fakechunk</code>释放,再次<code>malloc</code>相应大小就可以得到<code>fake_chunk</code>.</p>
-<h3 id="tcache-perthread-corruption"><a href="#tcache-perthread-corruption" class="headerlink" title="tcache perthread corruption"></a>tcache perthread corruption</h3><p>直接通过一些手段改写<code>tcache_prethread_struct</code>的内容,便可以控制了<code>malloc</code>的地址,从而达到<code>arbitrarily alloc</code>.</p>
-<h2 id="glibc2-29"><a href="#glibc2-29" class="headerlink" title="glibc2.29"></a>glibc2.29</h2><p><code>glibc2.29</code>后增加了检测机制.</p>
-<p>对于<code>malloc</code>.</p>
-<ol>
-<li>对下一个相邻<code>chunk</code>的<code>size</code>和<code>prev_size</code>检查.</li>
-<li>检查<code>unsorted bin</code>双向链表的完整性.</li>
-<li>对下一个<code>chunk</code>的<code>prev_inuse</code>位进行检查.</li>
-<li>对于<code>top chunk</code>增加了<code>size</code>检查.</li>
-</ol>
-<p>对于<code>free</code>.</p>
-<ol>
-<li>会对<code>tcache</code>链表上的所有<code>chunk</code>进行对比,检测是否有重复.</li>
-<li>在合并的时候会判断<code>prev_size</code>和要合并<code>chunk</code>的<code>size</code>是否相同.</li>
-</ol>
-
-      
-    </div>
-
-    
-
-    
-    
-    
-
-    
-
-    
-       
-    
-    
-
-    
-
-    <footer class="post-footer">
-      
-        <div class="post-tags">
-          
-            <a href="/tags/heap-pwn/" rel="tag"><i class="fa fa-tag"></i> heap-pwn</a>
-          
-        </div>
-      
-
-      
-      
-      
-
-      
-        <div class="post-nav">
-          <div class="post-nav-next post-nav-item">
-            
-              <a href="/posts/9ba3e5cb/" rel="next" title="binary-漏洞分析-Linux-heap-pwn-large_bin_attack">
-                <i class="fa fa-chevron-left"></i> binary-漏洞分析-Linux-heap-pwn-large_bin_attack
-              </a>
-            
-          </div>
-
-          <span class="post-nav-divider"></span>
-
-          <div class="post-nav-prev post-nav-item">
-            
-              <a href="/posts/e80ff632/" rel="prev" title="binary-漏洞分析-Linux-pwn-srop">
-                binary-漏洞分析-Linux-pwn-srop <i class="fa fa-chevron-right"></i>
-              </a>
-            
-          </div>
-        </div>
-      
-
-      
-      
-    </footer>
-  </div>
-  
-  
-  
+    </header>
   </article>
 
 
+
+      
+
+        
+        
+        
+
+        
+        
+
+        
+
+  <article class="post post-type-normal" itemscope="" itemtype="http://schema.org/Article">
+    <header class="post-header">
+
+      <h2 class="post-title">
+        
+            <a class="post-title-link" href="/posts/2b513091/" itemprop="url">
+              
+                <span itemprop="name">binary-漏洞分析-Linux-heap-pwn-glibc-2.23全面解析</span>
+              
+            </a>
+        
+      </h2>
+
+      <div class="post-meta">
+        <time class="post-time" itemprop="dateCreated" datetime="2020-06-11T18:34:16+08:00" content="2020-06-11">
+          06-11
+        </time>
+      </div>
+
+    </header>
+  </article>
+
+
+
+      
+
+    </div>
   </div>
-
-
-          </div>
-          
+  
+  
+  
 
   
 
 
+
+          </div>
+          
 
         </div>
         
@@ -660,17 +526,8 @@
       
 
       
-        <ul class="sidebar-nav motion-element">
-          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
-            文章目录
-          </li>
-          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
-            站点概览
-          </li>
-        </ul>
-      
 
-      <section class="site-overview-wrap sidebar-panel">
+      <section class="site-overview-wrap sidebar-panel sidebar-panel-active">
         <div class="site-overview">
           <div class="site-author motion-element" itemprop="author" itemscope="" itemtype="http://schema.org/Person">
             
@@ -687,7 +544,7 @@
                 
                   <a href="/archives/">
                 
-                    <span class="site-state-item-count">181</span>
+                    <span class="site-state-item-count">184</span>
                     <span class="site-state-item-name">日志</span>
                   </a>
                 </div>
@@ -861,7 +718,13 @@
                     
                       
                     
-                    <span class="site-state-item-count">50</span>
+                      
+                    
+                      
+                    
+                      
+                    
+                    <span class="site-state-item-count">53</span>
                     <span class="site-state-item-name">标签</span>
                   </a>
                 </div>
@@ -902,22 +765,6 @@
       </section>
 
       
-      <!--noindex-->
-        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
-          <div class="post-toc">
-
-            
-              
-            
-
-            
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#glibc2-26"><span class="nav-number">1.</span> <span class="nav-text">glibc2.26</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#tcache-poisoning"><span class="nav-number">1.1.</span> <span class="nav-text">tcache poisoning</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#tcache-dup"><span class="nav-number">1.2.</span> <span class="nav-text">tcache dup</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#tcache-house-of-spirit"><span class="nav-number">1.3.</span> <span class="nav-text">tcache house of spirit</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#tcache-perthread-corruption"><span class="nav-number">1.4.</span> <span class="nav-text">tcache perthread corruption</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#glibc2-29"><span class="nav-number">2.</span> <span class="nav-text">glibc2.29</span></a></li></ol></div>
-            
-
-          </div>
-        </section>
-      <!--/noindex-->
-      
 
       
 
@@ -943,7 +790,7 @@
       <i class="fa fa-area-chart"></i>
     </span>
     
-    <span title="站点总字数">677k</span>
+    <span title="站点总字数">693k</span>
   
 
   
@@ -952,7 +799,7 @@
       <i class="fa fa-coffee"></i>
     </span>
     
-    <span title="站点阅读时长">10:15</span>
+    <span title="站点阅读时长">10:30</span>
   
 </div>
 
@@ -1079,10 +926,6 @@
   
 
   
-  <script type="text/javascript" src="/js/src/scrollspy.js?v=6.5.0"></script>
-<script type="text/javascript" src="/js/src/post-details.js?v=6.5.0"></script>
-
-
 
   
 
@@ -1437,42 +1280,43 @@
   
   <script>
     
-    function addCount(Counter) {
+    function showTime(Counter) {
+      var entries = [];
       var $visitors = $(".leancloud_visitors");
-      var url = $visitors.attr('id').trim();
-      var title = $visitors.attr('data-flag-title').trim();
 
-      Counter('get', '/classes/Counter', { where: JSON.stringify({ url }) })
+      $visitors.each(function () {
+        entries.push( $(this).attr("id").trim() );
+      });
+
+      Counter('get', '/classes/Counter', { where: JSON.stringify({ url: { "$in": entries } }) })
         .done(function ({ results }) {
-          if (results.length > 0) {
-            var counter = results[0];
-            
-            Counter('put', `/classes/Counter/${counter.objectId}`, JSON.stringify({ time: { "__op":"Increment", "amount":1 } }))
-            
-            .done(function () {
-                  var $element = $(document.getElementById(url));
-                  $element.find('.leancloud-visitors-count').text(counter.time + 1);
-            })
-            
-            .fail(function ({ responseJSON }) {
-                console.log('Failed to save Visitor num, with error message: ' + responseJSON.error);
-            })
-          } else {
-            
-              Counter('post', '/classes/Counter', JSON.stringify({ title: title, url: url, time: 1}))
-                .done(function () {
-                  var $element = $(document.getElementById(url));
-                  $element.find('.leancloud-visitors-count').text(1);
-                })
-                .fail(function () {
-                  console.log('Failed to create');
-                });
-            
+          var COUNT_CONTAINER_REF = '.leancloud-visitors-count';
+
+          if (results.length === 0) {
+            $visitors.find(COUNT_CONTAINER_REF).text(0);
+            return;
+          }
+
+          for (var i = 0; i < results.length; i++) {
+            var item = results[i];
+            var url = item.url;
+            var time = item.time;
+            var element = document.getElementById(url);
+
+            $(element).find(COUNT_CONTAINER_REF).text(time);
+          }
+          for(var i = 0; i < entries.length; i++) {
+            var url = entries[i];
+            var element = document.getElementById(url);
+            var countSpan = $(element).find(COUNT_CONTAINER_REF);
+            if( countSpan.text() == '') {
+              countSpan.text(0);
+            }
           }
         })
-      .fail(function ({ responseJSON }) {
-        console.log('LeanCloud Counter Error:' + responseJSON.code + " " + responseJSON.error);
-      });
+        .fail(function ({ responseJSON }) {
+          console.log("LeanCloud Counter Error: " + responseJSON.code + " " + responseJSON.error);
+        });
     }
     
 
@@ -1492,7 +1336,9 @@
             });
           };
           
-          addCount(Counter);
+          if ($('.post-title-link').length >= 1) {
+            showTime(Counter);
+          }
           
         })
     });

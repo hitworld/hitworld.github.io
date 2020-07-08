@@ -127,7 +127,7 @@
 <meta property="og:site_name" content="w4rd3n">
 <meta property="og:description" content="镜像基于ubuntu-16.04.5-desktop-amd64.iso/ubuntu-18.04.1-desktop-amd64.iso/ubuntu-19.04-desktop-amd64.iso. 基础环境配置apt换源修改配置文件. 123sudo gedit /etc/apt/sources.listsudo apt-get update#sudo apt-get upgrade sou">
 <meta property="og:locale" content="zh-CN">
-<meta property="og:updated_time" content="2020-06-20T10:21:41.182Z">
+<meta property="og:updated_time" content="2020-06-29T10:15:52.758Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="w4rd3n-linux-pwn虚拟机环境搭建">
 <meta name="twitter:description" content="镜像基于ubuntu-16.04.5-desktop-amd64.iso/ubuntu-18.04.1-desktop-amd64.iso/ubuntu-19.04-desktop-amd64.iso. 基础环境配置apt换源修改配置文件. 123sudo gedit /etc/apt/sources.listsudo apt-get update#sudo apt-get upgrade sou">
@@ -496,7 +496,7 @@
                 
                   <span class="post-meta-item-text">本文字数：</span>
                 
-                <span title="本文字数">5.7k</span>
+                <span title="本文字数">6.1k</span>
               
 
               
@@ -510,7 +510,7 @@
                 
                   <span class="post-meta-item-text">阅读时长 &asymp;</span>
                 
-                <span title="阅读时长">5 分钟</span>
+                <span title="阅读时长">6 分钟</span>
               
             </div>
           
@@ -538,13 +538,15 @@
 <h3 id="pip换源"><a href="#pip换源" class="headerlink" title="pip换源"></a>pip换源</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">mkdir ~/.pip</span><br><span class="line">touch ~/.pip/pip.conf</span><br><span class="line">gedit ~/.pip/pip.conf</span><br></pre></td></tr></table></figure>
 <p><code>~/.pip/pip.conf</code>.</p>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">[global]</span><br><span class="line">index-url = https://pypi.mirrors.ustc.edu.cn/simple</span><br></pre></td></tr></table></figure>
-<h3 id="工具"><a href="#工具" class="headerlink" title="工具"></a>工具</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">sudo apt-get install python3-pip gdb git vim tmux socat python g++ python-pip python3 gdebi synaptic</span><br><span class="line">sudo apt install python-pip --reinstall</span><br><span class="line">pip install --upgrade pip</span><br><span class="line">pip install pycrypto</span><br></pre></td></tr></table></figure>
+<h3 id="工具"><a href="#工具" class="headerlink" title="工具"></a>工具</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">sudo apt-get purge libreoffice-common unity-webapps-common thunderbird totem rhythmbox empathy brasero simple-scan gnome-mahjongg aisleriot gnome-mines cheese gnome-sudoku transmission-common gnome-orca webbrowser-app landscape-client-ui-install deja-dup</span><br><span class="line">sudo apt-get install python3-pip gdb git vim tmux socat python g++ python-pip python3 gdebi synaptic</span><br><span class="line">sudo apt install python-pip --reinstall</span><br><span class="line">pip install --upgrade pip</span><br><span class="line">pip install pycrypto</span><br></pre></td></tr></table></figure>
 <h3 id="docker"><a href="#docker" class="headerlink" title="docker"></a>docker</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">sudo apt-get remove docker docker-engine docker.io containerd runc</span><br><span class="line">sudo apt-get install apt-transport-https ca-certificates curl gnupg-agent software-properties-common</span><br><span class="line">curl -fsSL https://download.docker.com/linux/ubuntu/gpg | sudo apt-key add -</span><br><span class="line">sudo add-apt-repository <span class="string">"deb [arch=amd64] https://download.docker.com/linux/ubuntu <span class="variable">$(lsb_release -cs)</span> stable"</span></span><br><span class="line">sudo apt-get update</span><br><span class="line">sudo apt-get install docker-ce docker-ce-cli containerd.io</span><br><span class="line">sudo vim /etc/docker/daemon.json</span><br><span class="line"><span class="comment"># &#123;"registry-mirrors": ["https://docker.mirrors.ustc.edu.cn"]&#125;</span></span><br><span class="line">sudo systemctl start docker</span><br><span class="line">sudo systemctl <span class="built_in">enable</span> docker</span><br></pre></td></tr></table></figure>
 <h2 id="pwn环境配置"><a href="#pwn环境配置" class="headerlink" title="pwn环境配置"></a>pwn环境配置</h2><h3 id="x86"><a href="#x86" class="headerlink" title="x86"></a>x86</h3><p><code>64</code>位系统编译和运行<code>32</code>位程序需要另装库.</p>
 <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sudo apt-get install gcc-multilib libc6:i386</span><br></pre></td></tr></table></figure>
 <h3 id="搜索动态库文件"><a href="#搜索动态库文件" class="headerlink" title="搜索动态库文件"></a>搜索动态库文件</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">sudo apt-get install apt-file</span><br><span class="line">sudo apt-file update</span><br><span class="line"><span class="comment">#apt-file search libcrypto.so.1.0.0</span></span><br></pre></td></tr></table></figure>
 <h3 id="常用动态库"><a href="#常用动态库" class="headerlink" title="常用动态库"></a>常用动态库</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">sudo apt-get install libssl1.0.0 libssl1.0.0:i386</span><br><span class="line">sudo apt-get install libncurses5-dev libssl-dev</span><br></pre></td></tr></table></figure>
-<h3 id="调试工具"><a href="#调试工具" class="headerlink" title="调试工具"></a>调试工具</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">git <span class="built_in">clone</span> https://github.com/pwndbg/pwndbg</span><br><span class="line"><span class="built_in">cd</span> pwndbg</span><br><span class="line">sudo ./setup.sh</span><br></pre></td></tr></table></figure>
+<h3 id="调试工具"><a href="#调试工具" class="headerlink" title="调试工具"></a>调试工具</h3><p><code>https://github.com/hugsy/gef</code>.</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">git <span class="built_in">clone</span> -b stable https://github.com/pwndbg/pwndbg</span><br><span class="line"><span class="built_in">cd</span> pwndbg</span><br><span class="line">sudo ./setup.sh</span><br></pre></td></tr></table></figure>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">git <span class="built_in">clone</span> https://github.com/longld/peda.git ~/peda</span><br><span class="line"><span class="built_in">echo</span> <span class="string">"source ~/peda/peda.py"</span> &gt;&gt; ~/.gdbinit</span><br></pre></td></tr></table></figure>
 <p>调试其他架构程序.</p>
 <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sudo apt-get install gdb-multiarch</span><br></pre></td></tr></table></figure>
 <h3 id="pwntools"><a href="#pwntools" class="headerlink" title="pwntools"></a>pwntools</h3><p>推荐使用<code>python2</code>版本.</p>
@@ -554,6 +556,7 @@
 <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sudo apt-get install qemu</span><br></pre></td></tr></table></figure>
 <p><code>qemu2.5</code>存在一些问题,可下载最新版源码安装.</p>
 <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">sudo apt-get install libpixman-1-dev</span><br><span class="line">./configure</span><br><span class="line">sudo make install -j8</span><br></pre></td></tr></table></figure>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sudo apt-get install -y qemu-kvm</span><br></pre></td></tr></table></figure>
 <h3 id="gcc"><a href="#gcc" class="headerlink" title="gcc"></a>gcc</h3><p>有些老版本内核使用新版本<code>gcc</code>可能编译不过.</p>
 <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">sudo apt-get install gcc-4.7</span><br><span class="line">sudo update-alternatives --install /usr/bin/gcc gcc /usr/bin/gcc-4.7 40</span><br><span class="line">sudo update-alternatives --install /usr/bin/gcc gcc /usr/bin/gcc-5 50</span><br><span class="line">sudo update-alternatives --config gcc</span><br></pre></td></tr></table></figure>
 <h3 id="常用工具"><a href="#常用工具" class="headerlink" title="常用工具"></a>常用工具</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">#sudo add-apt-repository ppa:brightbox/ruby-ng</span></span><br><span class="line"><span class="comment">#删除:sudo add-apt-repository -r ppa:brightbox/ruby-ng</span></span><br><span class="line"><span class="comment">#sudo apt-get update</span></span><br><span class="line"><span class="comment">#sudo apt-get install ruby2.6 ruby2.6-dev</span></span><br><span class="line">sudo apt-get install ruby ruby-dev</span><br><span class="line">sudo gem install one_gadget seccomp-tools</span><br><span class="line"></span><br><span class="line">sudo pip install setuptools --upgrade</span><br><span class="line"></span><br><span class="line">sudo pip3 install setuptools --upgrade</span><br><span class="line">sudo pip3 install lief</span><br><span class="line"></span><br><span class="line">sudo apt-get install binwalk</span><br><span class="line">sudo apt install musl-tools</span><br><span class="line"></span><br><span class="line">git <span class="built_in">clone</span> https://github.com/niklasb/libc-database.git</span><br><span class="line"></span><br><span class="line">git <span class="built_in">clone</span> https://github.com/maroueneboubakri/lscan.git</span><br></pre></td></tr></table></figure>
@@ -693,7 +696,7 @@
                 
                   <a href="/archives/">
                 
-                    <span class="site-state-item-count">181</span>
+                    <span class="site-state-item-count">184</span>
                     <span class="site-state-item-name">日志</span>
                   </a>
                 </div>
@@ -867,7 +870,13 @@
                     
                       
                     
-                    <span class="site-state-item-count">50</span>
+                      
+                    
+                      
+                    
+                      
+                    
+                    <span class="site-state-item-count">53</span>
                     <span class="site-state-item-name">标签</span>
                   </a>
                 </div>
@@ -949,7 +958,7 @@
       <i class="fa fa-area-chart"></i>
     </span>
     
-    <span title="站点总字数">677k</span>
+    <span title="站点总字数">693k</span>
   
 
   
@@ -958,7 +967,7 @@
       <i class="fa fa-coffee"></i>
     </span>
     
-    <span title="站点阅读时长">10:15</span>
+    <span title="站点阅读时长">10:30</span>
   
 </div>
 

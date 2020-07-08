@@ -127,7 +127,7 @@
 <meta property="og:site_name" content="w4rd3n">
 <meta property="og:description" content="漏洞要素可以修改free chunk的fd,可以溢出下一个chunk的size. 利用思路 首先分配3个chunk,大小分别为0x20,0xd0,0x70. 在chunk2 + 0x78处设置p64(0x61),作用是fake size,用于后面的fastbin attack. 释放掉chunk2,再次分配0xd0,会分配到chunk2,此时chunk2 + 0x10和chunk2 + 0x18中">
 <meta property="og:locale" content="zh-CN">
-<meta property="og:updated_time" content="2020-06-20T10:21:41.001Z">
+<meta property="og:updated_time" content="2020-06-22T01:53:34.171Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="binary-漏洞分析-Linux-heap-pwn-house_of_roman">
 <meta name="twitter:description" content="漏洞要素可以修改free chunk的fd,可以溢出下一个chunk的size. 利用思路 首先分配3个chunk,大小分别为0x20,0xd0,0x70. 在chunk2 + 0x78处设置p64(0x61),作用是fake size,用于后面的fastbin attack. 释放掉chunk2,再次分配0xd0,会分配到chunk2,此时chunk2 + 0x10和chunk2 + 0x18中">
@@ -671,7 +671,7 @@
                 
                   <a href="/archives/">
                 
-                    <span class="site-state-item-count">181</span>
+                    <span class="site-state-item-count">184</span>
                     <span class="site-state-item-name">日志</span>
                   </a>
                 </div>
@@ -845,7 +845,13 @@
                     
                       
                     
-                    <span class="site-state-item-count">50</span>
+                      
+                    
+                      
+                    
+                      
+                    
+                    <span class="site-state-item-count">53</span>
                     <span class="site-state-item-name">标签</span>
                   </a>
                 </div>
@@ -927,7 +933,7 @@
       <i class="fa fa-area-chart"></i>
     </span>
     
-    <span title="站点总字数">677k</span>
+    <span title="站点总字数">693k</span>
   
 
   
@@ -936,7 +942,7 @@
       <i class="fa fa-coffee"></i>
     </span>
     
-    <span title="站点阅读时长">10:15</span>
+    <span title="站点阅读时长">10:30</span>
   
 </div>
 

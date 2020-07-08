@@ -133,7 +133,7 @@
 <meta property="og:image" content="https://hitworld.github.io/posts/2db7688d/2.png">
 <meta property="og:image" content="https://hitworld.github.io/posts/2db7688d/3.png">
 <meta property="og:image" content="https://hitworld.github.io/posts/2db7688d/6.png">
-<meta property="og:updated_time" content="2020-06-20T10:21:41.175Z">
+<meta property="og:updated_time" content="2020-07-04T11:49:42.709Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="pl-assembly-IA32-基础">
 <meta name="twitter:description" content="IA-32简介IA-32是Intel研发的一种CPU架构.包括Intel 80386/80486,Intel Pentium,Intel Xeon,Intel Core. 汇编语言与机器语言之间是一一对应的,不同的CPU支持的机器指令也是不一样的,一种CPU能执行的全局机器指令集合就是该CPU的指令集.CPU顺序的执行机器指令,访问存储器获取数据,同时有若干寄存器存放临时数据. 工作方式IA-32">
@@ -673,7 +673,7 @@
 <h3 id="寄存器保护"><a href="#寄存器保护" class="headerlink" title="寄存器保护"></a>寄存器保护</h3><p>由于程序运行过程中会使用到各寄存器来进行数据处理,而子程序可能会改变主程序正在使用的寄存器.这就需要进行选择,子程序和主程序谁来保护寄存器的值.</p>
 <p>其中<code>x86-64</code>采用了一组统一的寄存器使用惯例,<code>%rbx</code>,<code>%rbp</code>,<code>%r12~%r15</code>为被调用者保存寄存器,而所有其他寄存器除了<code>%rsp</code>都为调用者保存寄存器.</p>
 <h2 id="系统调用"><a href="#系统调用" class="headerlink" title="系统调用"></a>系统调用</h2><p><code>32</code>位<code>Linux</code>系统调用通过<code>int 0x80</code>来实现的,<code>eax</code>寄存器中为调用的功能号,<code>ebx</code>,<code>ecx</code>,<code>edx</code>,<code>esi</code>等寄存器则依次为参数.</p>
-<p>该调用是从左至右依次传参,与普通函数不同.<a href="http://syscalls.kernelgrok.com/" target="_blank" rel="noopener">在线<code>32</code>位系统调用号</a>.</p>
+<p>该调用是从左至右依次传参,与普通函数不同.<a href="https://github.com/torvalds/linux/blob/master/arch/x86/entry/syscalls/syscall_32.tbl" target="_blank" rel="noopener">在线<code>32</code>位系统调用号</a>.</p>
 <p><code>64</code>位<code>Linux</code>系统调用通过<code>syscall</code>指令进入,传参寄存器为:<code>rdi</code>,<code>rsi</code>,<code>rdx</code>,<code>r10</code>,<code>r8</code>和<code>r9</code>.<code>rax</code>为系统调用号.</p>
 <p>系统调用限制最多<code>6</code>个参数.返回结果在<code>rax</code>寄存器中.<a href="https://github.com/torvalds/linux/blob/master/arch/x86/entry/syscalls/syscall_64.tbl" target="_blank" rel="noopener">在线<code>64</code>位系统调用号</a>.</p>
 <p>系统调用定义文件<code>/usr/include/asm/unistd_32.h</code>,<code>/usr/include/asm/unistd_64.h</code>,<code>/usr/include/bits/syscall.h</code>.</p>
@@ -804,7 +804,7 @@
                 
                   <a href="/archives/">
                 
-                    <span class="site-state-item-count">181</span>
+                    <span class="site-state-item-count">184</span>
                     <span class="site-state-item-name">日志</span>
                   </a>
                 </div>
@@ -978,7 +978,13 @@
                     
                       
                     
-                    <span class="site-state-item-count">50</span>
+                      
+                    
+                      
+                    
+                      
+                    
+                    <span class="site-state-item-count">53</span>
                     <span class="site-state-item-name">标签</span>
                   </a>
                 </div>
@@ -1060,7 +1066,7 @@
       <i class="fa fa-area-chart"></i>
     </span>
     
-    <span title="站点总字数">677k</span>
+    <span title="站点总字数">693k</span>
   
 
   
@@ -1069,7 +1075,7 @@
       <i class="fa fa-coffee"></i>
     </span>
     
-    <span title="站点阅读时长">10:15</span>
+    <span title="站点阅读时长">10:30</span>
   
 </div>
 

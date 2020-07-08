@@ -119,18 +119,18 @@
 
 
 
-  <meta name="description" content="漏洞要素Vim &amp;lt; 8.1.1365,Neovim &amp;lt; 0.3.6.启用modeline模式. modeline详解vim共有4种模式:正常模式,插入模式,命令模式,可视模式. 启动vim时,当前用户根目录下的.vimrc文件会被自动加载..vimrc中的设置会对打开的所有文件生效,不便于对单个文件作个性化设置. vim的modeline可以针对每个文件进行文件级别的设置,这些设置是覆">
+  <meta name="description" content="0x00CVE-2019-12735,环境Vim &amp;lt; 8.1.1365,Neovim &amp;lt; 0.3.6.启用modeline模式. modeline详解vim共有4种模式:正常模式,插入模式,命令模式,可视模式. 启动vim时,当前用户根目录下的.vimrc配置文件会被自动加载,~/.vimrc中的设置会对打开的所有文件生效,不便于个性化设置. vim的modeline可以针对每个文件进">
 <meta name="keywords" content="escape-pwn">
 <meta property="og:type" content="article">
 <meta property="og:title" content="binary-漏洞分析-Linux-escape-pwn-CVE-2019-12735">
 <meta property="og:url" content="https://hitworld.github.io/posts/943ea10d/index.html">
 <meta property="og:site_name" content="w4rd3n">
-<meta property="og:description" content="漏洞要素Vim &amp;lt; 8.1.1365,Neovim &amp;lt; 0.3.6.启用modeline模式. modeline详解vim共有4种模式:正常模式,插入模式,命令模式,可视模式. 启动vim时,当前用户根目录下的.vimrc文件会被自动加载..vimrc中的设置会对打开的所有文件生效,不便于对单个文件作个性化设置. vim的modeline可以针对每个文件进行文件级别的设置,这些设置是覆">
+<meta property="og:description" content="0x00CVE-2019-12735,环境Vim &amp;lt; 8.1.1365,Neovim &amp;lt; 0.3.6.启用modeline模式. modeline详解vim共有4种模式:正常模式,插入模式,命令模式,可视模式. 启动vim时,当前用户根目录下的.vimrc配置文件会被自动加载,~/.vimrc中的设置会对打开的所有文件生效,不便于个性化设置. vim的modeline可以针对每个文件进">
 <meta property="og:locale" content="zh-CN">
-<meta property="og:updated_time" content="2020-06-20T10:21:40.998Z">
+<meta property="og:updated_time" content="2020-07-08T09:18:18.665Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="binary-漏洞分析-Linux-escape-pwn-CVE-2019-12735">
-<meta name="twitter:description" content="漏洞要素Vim &amp;lt; 8.1.1365,Neovim &amp;lt; 0.3.6.启用modeline模式. modeline详解vim共有4种模式:正常模式,插入模式,命令模式,可视模式. 启动vim时,当前用户根目录下的.vimrc文件会被自动加载..vimrc中的设置会对打开的所有文件生效,不便于对单个文件作个性化设置. vim的modeline可以针对每个文件进行文件级别的设置,这些设置是覆">
+<meta name="twitter:description" content="0x00CVE-2019-12735,环境Vim &amp;lt; 8.1.1365,Neovim &amp;lt; 0.3.6.启用modeline模式. modeline详解vim共有4种模式:正常模式,插入模式,命令模式,可视模式. 启动vim时,当前用户根目录下的.vimrc配置文件会被自动加载,~/.vimrc中的设置会对打开的所有文件生效,不便于个性化设置. vim的modeline可以针对每个文件进">
 
 
 
@@ -537,12 +537,12 @@
       
 
       
-        <h2 id="漏洞要素"><a href="#漏洞要素" class="headerlink" title="漏洞要素"></a>漏洞要素</h2><p><code>Vim &lt; 8.1.1365</code>,<code>Neovim &lt; 0.3.6</code>.启用<code>modeline</code>模式.</p>
+        <h2 id="0x00"><a href="#0x00" class="headerlink" title="0x00"></a>0x00</h2><p><code>CVE-2019-12735</code>,环境<code>Vim &lt; 8.1.1365</code>,<code>Neovim &lt; 0.3.6</code>.启用<code>modeline</code>模式.</p>
 <h2 id="modeline详解"><a href="#modeline详解" class="headerlink" title="modeline详解"></a>modeline详解</h2><p><code>vim</code>共有<code>4</code>种模式:正常模式,插入模式,命令模式,可视模式.</p>
-<p>启动<code>vim</code>时,当前用户根目录下的<code>.vimrc</code>文件会被自动加载.<code>.vimrc</code>中的设置会对打开的所有文件生效,不便于对单个文件作个性化设置.</p>
+<p>启动<code>vim</code>时,当前用户根目录下的<code>.vimrc</code>配置文件会被自动加载,<code>~/.vimrc</code>中的设置会对打开的所有文件生效,不便于个性化设置.</p>
 <p><code>vim</code>的<code>modeline</code>可以针对每个文件进行文件级别的设置,这些设置是覆盖<code>.vimrc</code>中的设置的.<code>vim</code>默认关闭<code>modeline</code>,在<code>.vimrc</code>末尾追加<code>set modeline</code>即可打开.</p>
-<p>如果<code>modeline</code>打开,<code>vim</code>在打开文件时会解析文件开头及末尾符合一定格式的设置行.为了安全考虑,在<code>modeline</code>的设置中只支持<code>set</code>命令.</p>
-<p><code>foldexpr</code>,<code>formatexpr</code>,<code>includeexpr</code>,<code>indentexpr</code>,<code>statusline</code>,<code>foldtext</code>等选项的值可以是一个表达式,如果选项是在<code>modeline</code>中设置,表达式在沙箱中执行.沙箱实质上就是对表达式所能实现的功能做了限制,如在沙箱中不能执行<code>shell</code>命令,不能读写文件,不能修改缓冲区等等.</p>
+<p>如果<code>modeline</code>打开,<code>vim</code>在打开文件时会解析文件开头及末尾符合一定格式的设置行.为了安全考虑,在<code>modeline</code>的设置中只支持<code>set</code>命令.具体参考:<code>https://vimjc.com/vim-modeline.html</code>.</p>
+<p>但是<code>foldexpr</code>,<code>formatexpr</code>,<code>includeexpr</code>,<code>indentexpr</code>,<code>statusline</code>,<code>foldtext</code>等选项的值可以是一个表达式,如果选项是在<code>modeline</code>中设置,表达式在沙箱中执行.沙箱实质上就是对表达式所能实现的功能做了限制,如在沙箱中不能执行<code>shell</code>命令,不能读写文件,不能修改缓冲区等等.</p>
 <p><code>vim</code>的沙箱检查函数<code>check_secure()</code>在<code>libcall</code>,<code>luaeval</code>等危险指令的开头进行沙箱检查,如果发现在沙箱中调用,直接<code>return</code>掉.</p>
 <h2 id="CVE-2019-12735"><a href="#CVE-2019-12735" class="headerlink" title="CVE-2019-12735"></a>CVE-2019-12735</h2><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">Product: Vim &lt; 8.1.1365, Neovim &lt; 0.3.6</span><br><span class="line">Type:    Arbitrary Code Execution</span><br><span class="line">CVE:     CVE-2019-12735</span><br><span class="line">Date:    2019-06-04</span><br><span class="line">Author:  Arminius (@rawsec)</span><br></pre></td></tr></table></figure>
 <p>问题来源于命令<code>source</code>.</p>
@@ -675,7 +675,7 @@
                 
                   <a href="/archives/">
                 
-                    <span class="site-state-item-count">181</span>
+                    <span class="site-state-item-count">184</span>
                     <span class="site-state-item-name">日志</span>
                   </a>
                 </div>
@@ -849,7 +849,13 @@
                     
                       
                     
-                    <span class="site-state-item-count">50</span>
+                      
+                    
+                      
+                    
+                      
+                    
+                    <span class="site-state-item-count">53</span>
                     <span class="site-state-item-name">标签</span>
                   </a>
                 </div>
@@ -899,7 +905,7 @@
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#漏洞要素"><span class="nav-number">1.</span> <span class="nav-text">漏洞要素</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#modeline详解"><span class="nav-number">2.</span> <span class="nav-text">modeline详解</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#CVE-2019-12735"><span class="nav-number">3.</span> <span class="nav-text">CVE-2019-12735</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#参考链接"><span class="nav-number">4.</span> <span class="nav-text">参考链接</span></a></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#0x00"><span class="nav-number">1.</span> <span class="nav-text">0x00</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#modeline详解"><span class="nav-number">2.</span> <span class="nav-text">modeline详解</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#CVE-2019-12735"><span class="nav-number">3.</span> <span class="nav-text">CVE-2019-12735</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#参考链接"><span class="nav-number">4.</span> <span class="nav-text">参考链接</span></a></li></ol></div>
             
 
           </div>
@@ -931,7 +937,7 @@
       <i class="fa fa-area-chart"></i>
     </span>
     
-    <span title="站点总字数">677k</span>
+    <span title="站点总字数">693k</span>
   
 
   
@@ -940,7 +946,7 @@
       <i class="fa fa-coffee"></i>
     </span>
     
-    <span title="站点阅读时长">10:15</span>
+    <span title="站点阅读时长">10:30</span>
   
 </div>
 

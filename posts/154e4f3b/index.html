@@ -119,25 +119,25 @@
 
 
 
-  <meta name="description" content="基本环境JavaJDK:Java开发环境,其中包含运行环境. Tomcat:Java服务端开发环境,例如:Servlet,JSP等. python最好有python2和python3,使用virtualenvwrapper(Python3,不支持powershell)管理. 1234mkvirtualenv python3 --python = &apos;python3_path&apos;#创建虚拟环境worko">
-<meta name="keywords" content="environment">
+  <meta name="description" content="0x00存储管理的主要功能:内存分配和回收,共享,保护和扩充. 装载与链接程序的装入和链接将一个用户源程序变为一个可在内存中执行的程序,通常要经过:编译,链接,装入. 将一个装入模块装入内存时,可采用三种方式. 绝对装入方式:装入模块中用实际地址,装入预定地方,适用于单道环境. 可重定位方式:装入模块中为相对地址,由可重定位装入程序在装入时一次修改为绝对地址,适用于多道环境,地址变换通常是在装入时">
+<meta name="keywords" content="operating-system">
 <meta property="og:type" content="article">
-<meta property="og:title" content="w4rd3n-win环境搭建">
-<meta property="og:url" content="https://hitworld.github.io/posts/dcb771a2/index.html">
+<meta property="og:title" content="CS-operating-system-存储器管理">
+<meta property="og:url" content="https://hitworld.github.io/posts/154e4f3b/index.html">
 <meta property="og:site_name" content="w4rd3n">
-<meta property="og:description" content="基本环境JavaJDK:Java开发环境,其中包含运行环境. Tomcat:Java服务端开发环境,例如:Servlet,JSP等. python最好有python2和python3,使用virtualenvwrapper(Python3,不支持powershell)管理. 1234mkvirtualenv python3 --python = &apos;python3_path&apos;#创建虚拟环境worko">
+<meta property="og:description" content="0x00存储管理的主要功能:内存分配和回收,共享,保护和扩充. 装载与链接程序的装入和链接将一个用户源程序变为一个可在内存中执行的程序,通常要经过:编译,链接,装入. 将一个装入模块装入内存时,可采用三种方式. 绝对装入方式:装入模块中用实际地址,装入预定地方,适用于单道环境. 可重定位方式:装入模块中为相对地址,由可重定位装入程序在装入时一次修改为绝对地址,适用于多道环境,地址变换通常是在装入时">
 <meta property="og:locale" content="zh-CN">
-<meta property="og:updated_time" content="2020-06-20T10:21:41.182Z">
+<meta property="og:updated_time" content="2020-07-05T07:00:27.570Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="w4rd3n-win环境搭建">
-<meta name="twitter:description" content="基本环境JavaJDK:Java开发环境,其中包含运行环境. Tomcat:Java服务端开发环境,例如:Servlet,JSP等. python最好有python2和python3,使用virtualenvwrapper(Python3,不支持powershell)管理. 1234mkvirtualenv python3 --python = &apos;python3_path&apos;#创建虚拟环境worko">
+<meta name="twitter:title" content="CS-operating-system-存储器管理">
+<meta name="twitter:description" content="0x00存储管理的主要功能:内存分配和回收,共享,保护和扩充. 装载与链接程序的装入和链接将一个用户源程序变为一个可在内存中执行的程序,通常要经过:编译,链接,装入. 将一个装入模块装入内存时,可采用三种方式. 绝对装入方式:装入模块中用实际地址,装入预定地方,适用于单道环境. 可重定位方式:装入模块中为相对地址,由可重定位装入程序在装入时一次修改为绝对地址,适用于多道环境,地址变换通常是在装入时">
 
 
 
 
 
 
-  <link rel="canonical" href="https://hitworld.github.io/posts/dcb771a2/">
+  <link rel="canonical" href="https://hitworld.github.io/posts/154e4f3b/">
 
 
 
@@ -147,7 +147,7 @@
   };
 </script>
 
-  <title>w4rd3n-win环境搭建 | w4rd3n</title>
+  <title>CS-operating-system-存储器管理 | w4rd3n</title>
   
 
 
@@ -396,7 +396,7 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="https://hitworld.github.io/posts/dcb771a2/">
+    <link itemprop="mainEntityOfPage" href="https://hitworld.github.io/posts/154e4f3b/">
 
     <span hidden itemprop="author" itemscope="" itemtype="http://schema.org/Person">
       <meta itemprop="name" content="w4rd3n">
@@ -413,7 +413,7 @@
 
         
         
-          <h1 class="post-title" itemprop="name headline">w4rd3n-win环境搭建
+          <h1 class="post-title" itemprop="name headline">CS-operating-system-存储器管理
               
             
           </h1>
@@ -438,7 +438,7 @@
                 
               
 
-              <time title="创建时间：2017-09-01 01:02:03" itemprop="dateCreated datePublished" datetime="2017-09-01T01:02:03+08:00">2017-09-01</time>
+              <time title="创建时间：2020-07-05 12:09:26" itemprop="dateCreated datePublished" datetime="2020-07-05T12:09:26+08:00">2020-07-05</time>
             
 
             
@@ -456,7 +456,14 @@
                 <span class="post-meta-item-text">分类于</span>
               
               
-                <span itemprop="about" itemscope="" itemtype="http://schema.org/Thing"><a href="/categories/w4rd3n/" itemprop="url" rel="index"><span itemprop="name">w4rd3n</span></a></span>
+                <span itemprop="about" itemscope="" itemtype="http://schema.org/Thing"><a href="/categories/CS/" itemprop="url" rel="index"><span itemprop="name">CS</span></a></span>
+
+                
+                
+                  ，
+                
+              
+                <span itemprop="about" itemscope="" itemtype="http://schema.org/Thing"><a href="/categories/CS/operating-system/" itemprop="url" rel="index"><span itemprop="name">operating-system</span></a></span>
 
                 
                 
@@ -470,7 +477,7 @@
 
           
           
-             <span id="/posts/dcb771a2/" class="leancloud_visitors" data-flag-title="w4rd3n-win环境搭建">
+             <span id="/posts/154e4f3b/" class="leancloud_visitors" data-flag-title="CS-operating-system-存储器管理">
                <span class="post-meta-divider">|</span>
                <span class="post-meta-item-icon">
                  <i class="fa fa-eye"></i>
@@ -496,7 +503,7 @@
                 
                   <span class="post-meta-item-text">本文字数：</span>
                 
-                <span title="本文字数">3.9k</span>
+                <span title="本文字数">4.2k</span>
               
 
               
@@ -530,83 +537,59 @@
       
 
       
-        <h2 id="基本环境"><a href="#基本环境" class="headerlink" title="基本环境"></a>基本环境</h2><h3 id="Java"><a href="#Java" class="headerlink" title="Java"></a>Java</h3><p><code>JDK</code>:<code>Java</code>开发环境,其中包含运行环境.</p>
-<p><code>Tomcat</code>:<code>Java</code>服务端开发环境,例如:<code>Servlet</code>,<code>JSP</code>等.</p>
-<h3 id="python"><a href="#python" class="headerlink" title="python"></a>python</h3><p>最好有<code>python2</code>和<code>python3</code>,使用<code>virtualenvwrapper</code>(<code>Python3</code>,不支持<code>powershell</code>)管理.</p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">mkvirtualenv python3 --python = <span class="string">'python3_path'</span></span><br><span class="line"><span class="comment">#创建虚拟环境</span></span><br><span class="line">workon python3</span><br><span class="line"><span class="comment">#进入虚拟环境</span></span><br></pre></td></tr></table></figure>
-<h3 id="数据库"><a href="#数据库" class="headerlink" title="数据库"></a>数据库</h3><p><code>MySQL Installer for Windows</code>.用于管理<code>Windows</code>下<code>MySQL</code>环境.</p>
-<h3 id="虚拟机"><a href="#虚拟机" class="headerlink" title="虚拟机"></a>虚拟机</h3><p><code>VMware</code>:虚拟机管理软件.</p>
-<h3 id="Node-js"><a href="#Node-js" class="headerlink" title="Node.js"></a>Node.js</h3><p>基于<code>Chrome V8</code>引擎的<code>JavaScript</code>运行时环境.</p>
-<h3 id="PHP"><a href="#PHP" class="headerlink" title="PHP"></a>PHP</h3><p><code>PHP</code>运行时环境,<code>Apache24</code>,<code>PHP7</code>.</p>
-<p>需要修改<code>Apache24\conf\httpd.conf</code>.</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">Define SRVROOT &quot;A:/tools/Apache24&quot;</span><br><span class="line">...</span><br><span class="line">AddType application/x-httpd-php .php .html</span><br><span class="line">...</span><br><span class="line">LoadModule php7_module A:/tools/PHP7.3/php7apache2_4.dll</span><br><span class="line">PHPIniDir A:/tools/PHP7.3</span><br></pre></td></tr></table></figure>
-<h2 id="web安全"><a href="#web安全" class="headerlink" title="web安全"></a>web安全</h2><h3 id="dirsearch"><a href="#dirsearch" class="headerlink" title="dirsearch"></a>dirsearch</h3><p><code>web</code>目录扫描.<code>https://github.com/maurosoria/dirsearch</code>.基于<code>python3</code>.</p>
-<h3 id="sqlmap"><a href="#sqlmap" class="headerlink" title="sqlmap"></a>sqlmap</h3><p>开源渗透测试工具,自动检测和利用<code>SQL</code>注入漏洞.<code>http://sqlmap.org/</code>.</p>
-<h3 id="metasploit"><a href="#metasploit" class="headerlink" title="metasploit"></a>metasploit</h3><p>渗透测试框架.<code>https://www.metasploit.com/</code>.</p>
-<h3 id="AntSword"><a href="#AntSword" class="headerlink" title="AntSword"></a>AntSword</h3><p>可视化网站管理工具,常用于连接后门.<code>https://github.com/AntSwordProject/antSword/releases</code>.</p>
-<h3 id="BurpSuite-Pro"><a href="#BurpSuite-Pro" class="headerlink" title="BurpSuite Pro"></a>BurpSuite Pro</h3><p><code>web</code>渗透测试工具.</p>
-<h3 id="Fiddler"><a href="#Fiddler" class="headerlink" title="Fiddler"></a>Fiddler</h3><p>适用于任何浏览器,系统或平台的免费<code>Web</code>调试代理工具.<code>https://www.telerik.com/fiddler</code>.</p>
-<h3 id="d-safe"><a href="#d-safe" class="headerlink" title="d_safe"></a>d_safe</h3><p><code>web</code>后门检测工具.<code>http://www.d99net.net/</code>.</p>
-<h3 id="Nmap"><a href="#Nmap" class="headerlink" title="Nmap"></a>Nmap</h3><p>网络扫描工具.<code>https://nmap.org/</code>.</p>
-<h3 id="wireshark"><a href="#wireshark" class="headerlink" title="wireshark"></a>wireshark</h3><p>网络协议分析器.<code>https://www.wireshark.org/</code>.</p>
-<h3 id="Acunetix"><a href="#Acunetix" class="headerlink" title="Acunetix"></a>Acunetix</h3><p><code>web</code>自动化漏洞检测与渗透测试工具.</p>
-<h2 id="取证分析"><a href="#取证分析" class="headerlink" title="取证分析"></a>取证分析</h2><h3 id="010-Editor"><a href="#010-Editor" class="headerlink" title="010 Editor"></a>010 Editor</h3><p>十六进制编辑器,可以通过模板分析文件.</p>
-<h3 id="volatility"><a href="#volatility" class="headerlink" title="volatility"></a>volatility</h3><p>先进的内存取证框架.<code>https://github.com/volatilityfoundation/volatility</code>.</p>
-<h2 id="二进制工具"><a href="#二进制工具" class="headerlink" title="二进制工具"></a>二进制工具</h2><h3 id="dex2jar"><a href="#dex2jar" class="headerlink" title="dex2jar"></a>dex2jar</h3><p><code>Android</code>逆向工具.<code>https://github.com/pxb1988/dex2jar</code>.</p>
-<h3 id="apktool"><a href="#apktool" class="headerlink" title="apktool"></a>apktool</h3><p><code>Android</code>逆向工具.<code>https://ibotpeaches.github.io/Apktool/</code>.</p>
-<h3 id="dnSpy"><a href="#dnSpy" class="headerlink" title="dnSpy"></a>dnSpy</h3><p><code>.NET</code>调试器和程序集编辑器.<code>https://github.com/0xd4d/dnSpy</code>.</p>
-<h3 id="ILSpy"><a href="#ILSpy" class="headerlink" title="ILSpy"></a>ILSpy</h3><p><code>.NET</code>反编译器.<code>https://github.com/icsharpcode/ILSpy</code>.</p>
-<h3 id="petools"><a href="#petools" class="headerlink" title="petools"></a>petools</h3><p>便携式<code>PE</code>操纵工具.<code>https://github.com/petoolse/petools</code>.</p>
-<h3 id="PEiD-amp-Exeinfo-PE"><a href="#PEiD-amp-Exeinfo-PE" class="headerlink" title="PEiD &amp; Exeinfo PE"></a>PEiD &amp; Exeinfo PE</h3><p>检测常见的各种壳.</p>
-<h3 id="jd-gui"><a href="#jd-gui" class="headerlink" title="jd-gui"></a>jd-gui</h3><p>独立的<code>Java Decompiler GUI</code>.<code>https://github.com/java-decompiler/jd-gui</code>.</p>
-<h3 id="JEB"><a href="#JEB" class="headerlink" title="JEB"></a>JEB</h3><p>反编译和调试二进制代码.</p>
-<h3 id="OllyDbg"><a href="#OllyDbg" class="headerlink" title="OllyDbg"></a>OllyDbg</h3><p><code>Windows</code>平台的<code>32</code>位分析调式工具.<code>http://www.ollydbg.de/</code>.</p>
-<h3 id="IDA"><a href="#IDA" class="headerlink" title="IDA"></a>IDA</h3><p>二进制研究者必备的逆向工具.</p>
-<h3 id="upx"><a href="#upx" class="headerlink" title="upx"></a>upx</h3><p>可执行文件的加壳工具.<code>https://github.com/upx/upx</code>.</p>
-<h3 id="VB-Decompiler-Pro"><a href="#VB-Decompiler-Pro" class="headerlink" title="VB Decompiler Pro"></a>VB Decompiler Pro</h3><p>用来反编译<code>VB</code>编写的程序的工具.</p>
-<h3 id="winchecksec"><a href="#winchecksec" class="headerlink" title="winchecksec"></a>winchecksec</h3><p><code>Windows</code>平台的保护机制检测工具.<code>https://github.com/trailofbits/winchecksec</code>.</p>
-<h3 id="pwintools"><a href="#pwintools" class="headerlink" title="pwintools"></a>pwintools</h3><p><code>Windows</code>平台<code>pwntools</code>,存在<code>bug</code>.<code>https://github.com/masthoon/pwintools</code>.</p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">git <span class="built_in">clone</span> https://github.com/masthoon/pwintools.git</span><br><span class="line"><span class="built_in">cd</span> pwintools\</span><br><span class="line">python setup.py install</span><br></pre></td></tr></table></figure>
-<h3 id="AppJailLauncher"><a href="#AppJailLauncher" class="headerlink" title="AppJailLauncher"></a>AppJailLauncher</h3><p><code>Windows</code>二进制程序挂起监听工具.<code>https://github.com/trailofbits/AppJailLauncher</code>.</p>
-<h3 id="huorong"><a href="#huorong" class="headerlink" title="huorong"></a>huorong</h3><p>安全软件.<code>https://www.huorong.cn/</code>.</p>
-<h3 id="x64dbg"><a href="#x64dbg" class="headerlink" title="x64dbg"></a>x64dbg</h3><p><code>Windows</code>平台的<code>32/64</code>位分析调式工具.<code>https://x64dbg.com/#start</code>.</p>
-<h2 id="日常工具"><a href="#日常工具" class="headerlink" title="日常工具"></a>日常工具</h2><h3 id="7-Zip"><a href="#7-Zip" class="headerlink" title="7-Zip"></a>7-Zip</h3><p>文件存档器.<code>https://www.7-zip.org/</code>.</p>
-<h3 id="hyper"><a href="#hyper" class="headerlink" title="hyper"></a>hyper</h3><p>终端.<code>https://hyper.is/</code>.</p>
-<h3 id="cmder"><a href="#cmder" class="headerlink" title="cmder"></a>cmder</h3><p>终端.</p>
-<h3 id="Everything"><a href="#Everything" class="headerlink" title="Everything"></a>Everything</h3><p>基于名称快速定位文件和文件夹的工具.<code>https://www.voidtools.com/zh-cn/</code>.</p>
-<h3 id="Wox"><a href="#Wox" class="headerlink" title="Wox"></a>Wox</h3><p>快速启动器,需要<code>Everything</code>.<code>http://www.wox.one/</code>.</p>
-<h3 id="pandownload"><a href="#pandownload" class="headerlink" title="pandownload"></a>pandownload</h3><p>用于快速下载百度云文件.<code>https://pandownload.com/</code>.</p>
-<h3 id="PotPlayer"><a href="#PotPlayer" class="headerlink" title="PotPlayer"></a>PotPlayer</h3><p>视频播放器.<code>https://potplayer.daum.net/</code>.</p>
-<h3 id="Hexo"><a href="#Hexo" class="headerlink" title="Hexo"></a>Hexo</h3><p>基于<code>Nodejs</code>,快速,简洁且高效的博客框架.<code>https://hexo.io/zh-cn/docs/index.html</code>.</p>
-<h3 id="ShadowsocksR"><a href="#ShadowsocksR" class="headerlink" title="ShadowsocksR"></a>ShadowsocksR</h3><p>小飞机.<code>https://github.com/shadowsocksrr/shadowsocksr-csharp/releases</code>.</p>
-<h3 id="Typora"><a href="#Typora" class="headerlink" title="Typora"></a>Typora</h3><p><code>markdown</code>编辑器.<code>https://www.typora.io/</code>.</p>
-<h3 id="Rufus"><a href="#Rufus" class="headerlink" title="Rufus"></a>Rufus</h3><p>光盘映像文件制作.<code>https://rufus.ie/</code>.</p>
-<h3 id="UltraISO"><a href="#UltraISO" class="headerlink" title="UltraISO"></a>UltraISO</h3><p>光盘映像文件制作/编辑/转换工具.<code>https://cn.ultraiso.net/xiazai.html</code>.</p>
-<h3 id="Xftp-Xshell"><a href="#Xftp-Xshell" class="headerlink" title="Xftp/Xshell"></a>Xftp/Xshell</h3><p><code>https://www.netsarang.com/zh/xftp/</code>.</p>
-<p><code>https://www.netsarang.com/zh/xshell/</code>.</p>
-<h3 id="Acrobat-DC"><a href="#Acrobat-DC" class="headerlink" title="Acrobat DC"></a>Acrobat DC</h3><p><code>PDF</code>编辑器.</p>
-<h3 id="TIM"><a href="#TIM" class="headerlink" title="TIM"></a>TIM</h3><p>办公版<code>QQ</code>.<code>https://tim.qq.com/</code>.</p>
-<h3 id="WeChat"><a href="#WeChat" class="headerlink" title="WeChat"></a>WeChat</h3><p>微信.<code>https://pc.weixin.qq.com/</code>.</p>
-<h3 id="百度网盘"><a href="#百度网盘" class="headerlink" title="百度网盘"></a>百度网盘</h3><p>网盘.</p>
-<h3 id="qBittorrent"><a href="#qBittorrent" class="headerlink" title="qBittorrent"></a>qBittorrent</h3><p><code>P2P</code>协议下载器.<code>https://www.qbittorrent.org/</code>.</p>
-<h3 id="QQ音乐"><a href="#QQ音乐" class="headerlink" title="QQ音乐"></a>QQ音乐</h3><p>音乐播放器.<code>https://y.qq.com/</code>.</p>
-<h3 id="MindMaster"><a href="#MindMaster" class="headerlink" title="MindMaster"></a>MindMaster</h3><p>思维导图编辑器.<code>https://mm.edrawsoft.cn/</code>.</p>
-<h3 id="Chrome"><a href="#Chrome" class="headerlink" title="Chrome"></a>Chrome</h3><p><code>Google</code>浏览器.<code>https://www.google.com/intl/zh-CN/chrome/</code>.</p>
-<h3 id="Firefox"><a href="#Firefox" class="headerlink" title="Firefox"></a>Firefox</h3><p>火狐浏览器.<code>https://www.mozilla.org/zh-CN/firefox/new/</code>.</p>
-<h3 id="Office"><a href="#Office" class="headerlink" title="Office"></a>Office</h3><p>微软办公软件.</p>
-<h2 id="开发"><a href="#开发" class="headerlink" title="开发"></a>开发</h2><h3 id="Git"><a href="#Git" class="headerlink" title="Git"></a>Git</h3><p>免费的开源分布式版本控制系统.<code>https://git-scm.com/</code>.</p>
-<h3 id="Android-Studio"><a href="#Android-Studio" class="headerlink" title="Android Studio"></a>Android Studio</h3><p><code>Google</code>官方<code>IDE</code>.<code>https://developer.android.com/studio/</code>.</p>
-<p>加快<code>gradle</code>的<code>build</code>.当<code>build</code>卡在下载环节时.查看<code>&lt;your project name&gt;\gradle\wrapper\gradle-wrapper.properties</code>.<code>distributionUrl</code>的值就是下载的<code>url</code>,访问这个<code>url</code>下载这个包.</p>
-<p><code>C:\Users\&lt;your user name&gt;\.gradle\wrapper\dists\</code>目录下有和你这个包名字一样的文件夹,进去发现只有个名字奇怪的文件夹,将里面的东西删除,将下载的包放进去,重新打开<code>Android Studio</code>即可.</p>
-<h3 id="IntelliJ-IDEA"><a href="#IntelliJ-IDEA" class="headerlink" title="IntelliJ IDEA"></a>IntelliJ IDEA</h3><p><code>Java</code>开发<code>IDE</code>.<code>https://www.jetbrains.com/idea/</code>.</p>
-<h3 id="VS-Code"><a href="#VS-Code" class="headerlink" title="VS Code"></a>VS Code</h3><p><code>https://code.visualstudio.com/</code>.</p>
-<h3 id="Qt"><a href="#Qt" class="headerlink" title="Qt"></a>Qt</h3><p><code>C++</code>跨平台的软件开发工具包.<code>https://www.qt.io/cn</code>.</p>
-<h3 id="WebStorm"><a href="#WebStorm" class="headerlink" title="WebStorm"></a>WebStorm</h3><p>前端<code>IDE</code>.<code>https://www.jetbrains.com/webstorm/</code>.</p>
-<h3 id="Visual-Studio"><a href="#Visual-Studio" class="headerlink" title="Visual Studio"></a>Visual Studio</h3><p>微软官方<code>IDE</code>.<code>https://visualstudio.microsoft.com/zh-hans/</code>.</p>
-<h3 id="Navicat-Premium-12"><a href="#Navicat-Premium-12" class="headerlink" title="Navicat Premium 12"></a>Navicat Premium 12</h3><p>数据库开发工具.</p>
-<h3 id="nasm"><a href="#nasm" class="headerlink" title="nasm"></a>nasm</h3><p><code>AT&amp;T</code>汇编器.<code>https://www.nasm.us/pub/nasm/releasebuilds/</code>.</p>
-<h3 id="smali"><a href="#smali" class="headerlink" title="smali"></a>smali</h3><p><code>smali/baksmali</code>.<code>https://github.com/JesusFreke/smali</code>.</p>
-
+        <h2 id="0x00"><a href="#0x00" class="headerlink" title="0x00"></a>0x00</h2><p>存储管理的主要功能:内存分配和回收,共享,保护和扩充.</p>
+<h2 id="装载与链接"><a href="#装载与链接" class="headerlink" title="装载与链接"></a>装载与链接</h2><h3 id="程序的装入和链接"><a href="#程序的装入和链接" class="headerlink" title="程序的装入和链接"></a>程序的装入和链接</h3><p>将一个用户源程序变为一个可在内存中执行的程序,通常要经过:编译,链接,装入.</p>
+<p>将一个装入模块装入内存时,可采用三种方式.</p>
+<p>绝对装入方式:装入模块中用实际地址,装入预定地方,适用于单道环境.</p>
+<p>可重定位方式:装入模块中为相对地址,由可重定位装入程序在装入时一次修改为绝对地址,适用于多道环境,地址变换通常是在装入时一次完成的,以后不再改变该地址,此变换过程称为静态重定位.</p>
+<p>动态运行时装入方式:可重定位方式,不允许程序运行时在内存中移动位置,但实际运行中,程序在内存中的位置可能要改变.动态运行时的装入程序,在把装入模块装入内存后,并不立即把装入模块中的相对地址转换为绝对地址,而是把这种地址转换推迟到程序要真正执行时才进行,动态地址重定位.装入内存后的所有地址都仍是相对地址,为使地址转换不影响指令的执行速度,这种方式需要一定的特殊硬件的支持.</p>
+<h3 id="程序的链接"><a href="#程序的链接" class="headerlink" title="程序的链接"></a>程序的链接</h3><p>链接程序的功能,是将经过编译或汇编后所得到的一组目标模块以及它们所需要的库函数,装配成一个完整的装入模块.</p>
+<p>实现链接的方法有三种:静态链接,装入时动态链接和运行时动态链接.</p>
+<p>静态链接:在将这几个目标模块装配成一个装入模块时,须对相对地址进行修改,变换外部调用符号.链接时,把各目标模块的相对地址修改为统一的以<code>0</code>为始址的线性地址或多维地址空间,外部调用变为相对地址.</p>
+<p>装入时动态链接:便于修改和更新,便于实现对目标模块的共享.应用程序在运行时,每次运行的模块无法预计,采用装入时动态链接只能将所有可能要运行的模块全部装入内存.</p>
+<p>运行时动态链接:动态链接方式,是将对模块的链接推迟到执行时才执行,亦即,在执行过程中,当发现一个被调用模块尚未装入内存时,立即由<code>OS</code>去找到该模块并将之装入内存,把它链接到调用者模块上.凡在执行过程中未被用到的目标模块,都不会被调入内存和被链接到装入模块上,这样不仅可加快程序的装入过程,而且可节省大量的内存空间.</p>
+<p>动态链接库的优点:节省内存;<code>DLL</code>中的函数改变时,不需要重新编译链接;用运行时动态链接可以使本次不用的函数不链接.</p>
+<h2 id="连续分配存储管理方式"><a href="#连续分配存储管理方式" class="headerlink" title="连续分配存储管理方式"></a>连续分配存储管理方式</h2><p>连续分配是指为一个用户程序分配一个连续的内存空间.</p>
+<h3 id="单一连续分配"><a href="#单一连续分配" class="headerlink" title="单一连续分配"></a>单一连续分配</h3><p>这是最简单的一种存储管理方式,但只能用于单用户,单任务的操作系统中.</p>
+<p>内存分为以下两个分区:系统区,仅提供给操作系统使用,它可以驻留在内存的低址部分,也可驻留在内存的高址部分,由于中断向量通常驻留在低址部分,故<code>OS</code>通常也驻留在内存的低址部分;用户区,指除系统区以外的全部内存空间,提供给用户使用.</p>
+<p>编程时可将作业分成四个段:即代码段,数据段,供程序使用的栈段,以及作为用户工作区的附加段.这几个段的地址空间可以邻接或分开,也可部分或全部重叠.由段寄存器左移<code>4</code>位加偏移值形成物理地址.</p>
+<h3 id="固定分区分配"><a href="#固定分区分配" class="headerlink" title="固定分区分配"></a>固定分区分配</h3><p>固定分区式分配,是最早使用的一种可运行多道程序的存储管理方式.将内存空间划分为若干个固定大小的区域,每个分区大小可相同,也可不同.<code>OS</code>占一区,其余每个分区中可以装入一道作业.为了便于内存分配,系统需建立一张分区使用表.当有一用户程序要装入时,从表中找出一个能满足要求的,尚未分配的分区分配给该程序,然后修改分区使用表.</p>
+<p>内存分配:将分区从小到大排队,建立一张分区使用表.当有程序要装入时,检索该表,找出能满足大小的分区,修改分配位.若未找到则失败.</p>
+<h3 id="动态分区分配"><a href="#动态分区分配" class="headerlink" title="动态分区分配"></a>动态分区分配</h3><p>装入和处理过程中建立分区,使其大小和作业大小相等.分区数和大小都可变.</p>
+<p>常用数据结构:空闲分区表,内存中每个尚未分配出去的分区设置一个表项(分区号,大小,起始地址,状态);空闲分区链,每个分区首尾,设置一些用于控制分区分配的信息,以及用于链接各分区的指针.状态位<code>0</code>未分配,<code>1</code>已分配.</p>
+<h3 id="分区分配算法"><a href="#分区分配算法" class="headerlink" title="分区分配算法"></a>分区分配算法</h3><p>首次适应算法<code>FF</code>:空闲分区以地址递增的次序链接,分配时,从链首开始顺序查找,找到后,再按照作业的大小,从该分区中划出一块内存空间分配给请求者,余下的空闲分区仍留在空闲链中.优点:先利用内存中低址部分,故留下高址部分的大空闲区.缺点:低址部分留下许多无用留碎片,而每次查找又都从低址部分开始.</p>
+<p>循环首次适应算法:是<code>FF</code>的改进,从上次找到的空闲分区的下一个开始查找.优点:该算法能使内存中的空闲分区分布比较均匀,从而减少查找空闲分区的时间.缺点:会缺乏大的空闲分区.</p>
+<p>最佳适应算法:空闲分区按其从小到大的顺序链接,顺链找第一个满足要求的空闲区.缺点:会在留下许多难以利用的小空闲块.</p>
+<h3 id="分区分配操作"><a href="#分区分配操作" class="headerlink" title="分区分配操作"></a>分区分配操作</h3><p>用某种分配算法,从空闲分区链(表)中找到所需的分区,若该分区大分为两部分,一部分分配出去,余下的部分仍留在空闲分区链或空闲分区表中,并修改空闲分区链(表),将分配区的首址返回给调用者.</p>
+<h3 id="回收内存"><a href="#回收内存" class="headerlink" title="回收内存"></a>回收内存</h3><p>当一个作业运行完毕释放内存时,系统根据释放区的首地址,从空闲区说明表中找到相应的插入点.</p>
+<p>此时可能出现下列四种情况.</p>
+<ol>
+<li>回收区不与其他空闲块相连,为回收区单独建立一项新表目,填写回收区的起址和大小,并根据其起址,插入到空闲区说明表的适当位置.</li>
+<li>回收区与前一个空闲分区相连时,将回收区与前一个空闲分区合并,不再为回收区分配新的表目,而只需修改前一个空闲分区表目的大小即可.</li>
+<li>回收区与后一个空闲分区相连时,将两个空闲区合并,修改后一个空闲分区的表目,把回收区的起址作为新空闲区的起址,大小为两个分区之和.</li>
+<li>回收区与前后两个空闲分区都相连时,合并三个分区,用前一个空闲分区表目的起址作为新空闲区的起址,修改其大小为三块分区之和,最后取消后一个空闲分区的表目.</li>
+</ol>
+<h3 id="动态重定位分区分配"><a href="#动态重定位分区分配" class="headerlink" title="动态重定位分区分配"></a>动态重定位分区分配</h3><p>在系统不断地分配和回收中,必定会出现一些不连续的小的空闲区,称为外零头.虽然可能所有零头的总和超过某一个作业的要求,但是由于不连续而无法分配.</p>
+<p>解决零头的方法是拼接,即向一个方向移动已分配的作业,使那些零散的小空闲区在另一方向连成一片.分区的拼接技术,一方面是要求能够对作业进行重定位,另一方面系统在拼接时要耗费较多的时间.</p>
+<p>动态重定位:允许作业在内存中移动必须硬件(重定位寄存器)支持,执行时,访问的内存地址是相对地址与重定位寄存器中的地址相加而形成的.地址变换过程是在程序执行期间,随着对每条指令和数据的访问而自动进行的,故称为动态重定位.    </p>
+<p>动态重定位分区分配算法:当请求分配模块找不到足够大的自由分区分给用户时进行紧缩,判断空闲分区总和是否大于请求的大小,是则进行紧凑形成连续空闲区并修改相关数据结构,然后继续正常分配.</p>
+<h3 id="分区的存储保护"><a href="#分区的存储保护" class="headerlink" title="分区的存储保护"></a>分区的存储保护</h3><p>采用上下界限寄存器:<code>OS</code>将分区的上,下界置入上下界寄存器<code>R</code>上,<code>R</code>下,在运行过程中,将作业所形成的每一个访问存储器的物理地址<code>D</code>同上下界限寄存器中的内容相比较,如果不满足则产生地址中断,由<code>OS</code>进行处理.</p>
+<p>采用基址限长寄存器:在逻辑地址一端设置一对寄存器实现存储保护,基址寄存器也起重定位的作用,存放该分区的起始地址,限长寄存器存放分配给作业的分区的大小.作业在运行时形成的有效地址(逻辑地址)<code>D</code>,如果不满足则产生地址越界中断.</p>
+<p>由于在分区式管理中通常采用界限寄存器作为重定位寄存器和实现存储保护的手段,所以分区管理也称为界地址存储管理.</p>
+<p>采用保护键:在<code>IBM 360</code>系统中使用保护键(<code>Protection Key</code>)的存储保护机制.在该系统中,内存分成<code>16</code>块,每块<code>4K</code>字节,每块设一个保护键(<code>0-15</code>).按块分配,一个作业各块相连,并给该作业分配一个键号,填入该作业的各块的保护键中(这个保护键相当于锁);并把该键号置入<code>PSW</code>的保护键字段(相当于钥匙).当程序执行时,如所访问的保护键与钥匙不匹配,则产生保护键违例中断.</p>
+<h3 id="对换"><a href="#对换" class="headerlink" title="对换"></a>对换</h3><p>所谓对换,是指把内存中暂时不能运行的进程或者暂时不用的程序和数据,调出到外存上,以便腾出足够的内存空间,再把已具备运行条件的进程或进程所需要的程序和数据,调入内存.对换是提高内存利用率的有效措施.</p>
+<p>为了能对对换区中的空闲盘块进行管理,在系统中应配置相应的数据结构,以记录外存的使用情况.其形式与内存在动态分区分配方式中所用数据结构相似,即同样可以用空闲分区表或空闲分区链.在空闲分区表中的每个表目中应包含两项,即对换区的首址及其大小,它们的单位是盘块号和盘块数.</p>
+<p>进程的换出:系统首先选择处于阻塞状态且优先级最低的进程作为换出进程,然后启动盘块,将该进程的程序和数据传送到磁盘的对换区上.若传送过程未出现错误,便可回收该进程所占用的内存空间,并对该进程的进程控制块做相应的修改.</p>
+<p>进程的换入:系统应定时地查看所有进程的状态,从中找出就绪状态但已换出的进程,将其中换出时间(换出到磁盘上)最久的进程作为换入进程,将之换入,直至已无可换入的进程或无可换出的进程为止. </p>
+<h2 id="基本分页存储管理方式"><a href="#基本分页存储管理方式" class="headerlink" title="基本分页存储管理方式"></a>基本分页存储管理方式</h2><h3 id="页面与页表"><a href="#页面与页表" class="headerlink" title="页面与页表"></a>页面与页表</h3><p>页面:页存储管理,是将一个进程的逻辑地址空间分成若干个大小相等的片,称为页面或页.为各页加以编号,从<code>0</code>开始.相应地,也把内存空间分成与页面相同大小的若干个存储块,称为(物理)块或页框(<code>frame</code>),也同样为它们加以编号,如<code>0#</code>块,<code>1#</code>块等等.</p>
+<p>在为进程分配内存时,以块为单位将进程中的若干个页分别装入到多个可以不相邻接的物理块中.由于进程的最后一页经常装不满一块而形成了不可利用的碎片,称之为页内碎片.</p>
+<p>在分页系统中的页面其大小应适中,且页面大小应是<code>2</code>的幂.页面若太小,一方面虽然可使内存碎片减小,从而减少了内存碎片的总空间,有利于提高内存利用率.但另一方面也会使每个进程占用较多的页面,从而导致进程的页表过长,占用大量内存,此外还会降低页面换进换出的效率.</p>
+<h3 id="地址结构"><a href="#地址结构" class="headerlink" title="地址结构"></a>地址结构</h3><p>对某特定机器,其地址结构是一定的.</p>
+<p>对于单级页表,若给定一个逻辑地址空间中的地址为<code>A</code>,页面的大小为<code>L</code>,则页号<code>P</code>为<code>A/L</code>(向下取整),页内地址<code>d</code>为<code>A%L</code>.</p>
+<p>两级页表,访问外部页表寄存器获取外部页表地址,通过外部页号获取对应外部页表,再通过外部页内地址和外部页表获取块号和页内地址组成物理地址.多级页表依次类推.</p>
+<h3 id="地址变换机构"><a href="#地址变换机构" class="headerlink" title="地址变换机构"></a>地址变换机构</h3><p>通过逻辑地址的高位获得页号<code>X</code>,通过页表寄存器获取页表的起始地址,访问对应的表项获得块号组成物理地址.</p>
+<p>由于页表每次要从磁盘访问,所以有了常驻内存的快表,快表缓存一部分页表项(包括页号和对应的块号),通过输入寄存器获得快表地址.</p>
+<h2 id="分段存储管理"><a href="#分段存储管理" class="headerlink" title="分段存储管理"></a>分段存储管理</h2>
       
     </div>
 
@@ -629,7 +612,7 @@
       
         <div class="post-tags">
           
-            <a href="/tags/environment/" rel="tag"><i class="fa fa-tag"></i> environment</a>
+            <a href="/tags/operating-system/" rel="tag"><i class="fa fa-tag"></i> operating-system</a>
           
         </div>
       
@@ -642,14 +625,18 @@
         <div class="post-nav">
           <div class="post-nav-next post-nav-item">
             
+              <a href="/posts/745d8496/" rel="next" title="CS-operating-system-文件管理">
+                <i class="fa fa-chevron-left"></i> CS-operating-system-文件管理
+              </a>
+            
           </div>
 
           <span class="post-nav-divider"></span>
 
           <div class="post-nav-prev post-nav-item">
             
-              <a href="/posts/c9b1afe3/" rel="prev" title="writeup-suctf-2018-招新赛">
-                writeup-suctf-2018-招新赛 <i class="fa fa-chevron-right"></i>
+              <a href="/posts/61d4f1b9/" rel="prev" title="pl-ruby-基础">
+                pl-ruby-基础 <i class="fa fa-chevron-right"></i>
               </a>
             
           </div>
@@ -724,7 +711,7 @@
                 
                   <a href="/archives/">
                 
-                    <span class="site-state-item-count">181</span>
+                    <span class="site-state-item-count">184</span>
                     <span class="site-state-item-name">日志</span>
                   </a>
                 </div>
@@ -898,7 +885,13 @@
                     
                       
                     
-                    <span class="site-state-item-count">50</span>
+                      
+                    
+                      
+                    
+                      
+                    
+                    <span class="site-state-item-count">53</span>
                     <span class="site-state-item-name">标签</span>
                   </a>
                 </div>
@@ -948,7 +941,7 @@
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#基本环境"><span class="nav-number">1.</span> <span class="nav-text">基本环境</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#Java"><span class="nav-number">1.1.</span> <span class="nav-text">Java</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#python"><span class="nav-number">1.2.</span> <span class="nav-text">python</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#数据库"><span class="nav-number">1.3.</span> <span class="nav-text">数据库</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#虚拟机"><span class="nav-number">1.4.</span> <span class="nav-text">虚拟机</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Node-js"><span class="nav-number">1.5.</span> <span class="nav-text">Node.js</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#PHP"><span class="nav-number">1.6.</span> <span class="nav-text">PHP</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#web安全"><span class="nav-number">2.</span> <span class="nav-text">web安全</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#dirsearch"><span class="nav-number">2.1.</span> <span class="nav-text">dirsearch</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#sqlmap"><span class="nav-number">2.2.</span> <span class="nav-text">sqlmap</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#metasploit"><span class="nav-number">2.3.</span> <span class="nav-text">metasploit</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#AntSword"><span class="nav-number">2.4.</span> <span class="nav-text">AntSword</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#BurpSuite-Pro"><span class="nav-number">2.5.</span> <span class="nav-text">BurpSuite Pro</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Fiddler"><span class="nav-number">2.6.</span> <span class="nav-text">Fiddler</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#d-safe"><span class="nav-number">2.7.</span> <span class="nav-text">d_safe</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Nmap"><span class="nav-number">2.8.</span> <span class="nav-text">Nmap</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#wireshark"><span class="nav-number">2.9.</span> <span class="nav-text">wireshark</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Acunetix"><span class="nav-number">2.10.</span> <span class="nav-text">Acunetix</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#取证分析"><span class="nav-number">3.</span> <span class="nav-text">取证分析</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#010-Editor"><span class="nav-number">3.1.</span> <span class="nav-text">010 Editor</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#volatility"><span class="nav-number">3.2.</span> <span class="nav-text">volatility</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#二进制工具"><span class="nav-number">4.</span> <span class="nav-text">二进制工具</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#dex2jar"><span class="nav-number">4.1.</span> <span class="nav-text">dex2jar</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#apktool"><span class="nav-number">4.2.</span> <span class="nav-text">apktool</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#dnSpy"><span class="nav-number">4.3.</span> <span class="nav-text">dnSpy</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#ILSpy"><span class="nav-number">4.4.</span> <span class="nav-text">ILSpy</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#petools"><span class="nav-number">4.5.</span> <span class="nav-text">petools</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#PEiD-amp-Exeinfo-PE"><span class="nav-number">4.6.</span> <span class="nav-text">PEiD &amp; Exeinfo PE</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#jd-gui"><span class="nav-number">4.7.</span> <span class="nav-text">jd-gui</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#JEB"><span class="nav-number">4.8.</span> <span class="nav-text">JEB</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#OllyDbg"><span class="nav-number">4.9.</span> <span class="nav-text">OllyDbg</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#IDA"><span class="nav-number">4.10.</span> <span class="nav-text">IDA</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#upx"><span class="nav-number">4.11.</span> <span class="nav-text">upx</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#VB-Decompiler-Pro"><span class="nav-number">4.12.</span> <span class="nav-text">VB Decompiler Pro</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#winchecksec"><span class="nav-number">4.13.</span> <span class="nav-text">winchecksec</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#pwintools"><span class="nav-number">4.14.</span> <span class="nav-text">pwintools</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#AppJailLauncher"><span class="nav-number">4.15.</span> <span class="nav-text">AppJailLauncher</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#huorong"><span class="nav-number">4.16.</span> <span class="nav-text">huorong</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#x64dbg"><span class="nav-number">4.17.</span> <span class="nav-text">x64dbg</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#日常工具"><span class="nav-number">5.</span> <span class="nav-text">日常工具</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#7-Zip"><span class="nav-number">5.1.</span> <span class="nav-text">7-Zip</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#hyper"><span class="nav-number">5.2.</span> <span class="nav-text">hyper</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#cmder"><span class="nav-number">5.3.</span> <span class="nav-text">cmder</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Everything"><span class="nav-number">5.4.</span> <span class="nav-text">Everything</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Wox"><span class="nav-number">5.5.</span> <span class="nav-text">Wox</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#pandownload"><span class="nav-number">5.6.</span> <span class="nav-text">pandownload</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#PotPlayer"><span class="nav-number">5.7.</span> <span class="nav-text">PotPlayer</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Hexo"><span class="nav-number">5.8.</span> <span class="nav-text">Hexo</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#ShadowsocksR"><span class="nav-number">5.9.</span> <span class="nav-text">ShadowsocksR</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Typora"><span class="nav-number">5.10.</span> <span class="nav-text">Typora</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Rufus"><span class="nav-number">5.11.</span> <span class="nav-text">Rufus</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#UltraISO"><span class="nav-number">5.12.</span> <span class="nav-text">UltraISO</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Xftp-Xshell"><span class="nav-number">5.13.</span> <span class="nav-text">Xftp/Xshell</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Acrobat-DC"><span class="nav-number">5.14.</span> <span class="nav-text">Acrobat DC</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#TIM"><span class="nav-number">5.15.</span> <span class="nav-text">TIM</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#WeChat"><span class="nav-number">5.16.</span> <span class="nav-text">WeChat</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#百度网盘"><span class="nav-number">5.17.</span> <span class="nav-text">百度网盘</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#qBittorrent"><span class="nav-number">5.18.</span> <span class="nav-text">qBittorrent</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#QQ音乐"><span class="nav-number">5.19.</span> <span class="nav-text">QQ音乐</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#MindMaster"><span class="nav-number">5.20.</span> <span class="nav-text">MindMaster</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Chrome"><span class="nav-number">5.21.</span> <span class="nav-text">Chrome</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Firefox"><span class="nav-number">5.22.</span> <span class="nav-text">Firefox</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Office"><span class="nav-number">5.23.</span> <span class="nav-text">Office</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#开发"><span class="nav-number">6.</span> <span class="nav-text">开发</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#Git"><span class="nav-number">6.1.</span> <span class="nav-text">Git</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Android-Studio"><span class="nav-number">6.2.</span> <span class="nav-text">Android Studio</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#IntelliJ-IDEA"><span class="nav-number">6.3.</span> <span class="nav-text">IntelliJ IDEA</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#VS-Code"><span class="nav-number">6.4.</span> <span class="nav-text">VS Code</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Qt"><span class="nav-number">6.5.</span> <span class="nav-text">Qt</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#WebStorm"><span class="nav-number">6.6.</span> <span class="nav-text">WebStorm</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Visual-Studio"><span class="nav-number">6.7.</span> <span class="nav-text">Visual Studio</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Navicat-Premium-12"><span class="nav-number">6.8.</span> <span class="nav-text">Navicat Premium 12</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#nasm"><span class="nav-number">6.9.</span> <span class="nav-text">nasm</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#smali"><span class="nav-number">6.10.</span> <span class="nav-text">smali</span></a></li></ol></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#0x00"><span class="nav-number">1.</span> <span class="nav-text">0x00</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#装载与链接"><span class="nav-number">2.</span> <span class="nav-text">装载与链接</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#程序的装入和链接"><span class="nav-number">2.1.</span> <span class="nav-text">程序的装入和链接</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#程序的链接"><span class="nav-number">2.2.</span> <span class="nav-text">程序的链接</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#连续分配存储管理方式"><span class="nav-number">3.</span> <span class="nav-text">连续分配存储管理方式</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#单一连续分配"><span class="nav-number">3.1.</span> <span class="nav-text">单一连续分配</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#固定分区分配"><span class="nav-number">3.2.</span> <span class="nav-text">固定分区分配</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#动态分区分配"><span class="nav-number">3.3.</span> <span class="nav-text">动态分区分配</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#分区分配算法"><span class="nav-number">3.4.</span> <span class="nav-text">分区分配算法</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#分区分配操作"><span class="nav-number">3.5.</span> <span class="nav-text">分区分配操作</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#回收内存"><span class="nav-number">3.6.</span> <span class="nav-text">回收内存</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#动态重定位分区分配"><span class="nav-number">3.7.</span> <span class="nav-text">动态重定位分区分配</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#分区的存储保护"><span class="nav-number">3.8.</span> <span class="nav-text">分区的存储保护</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#对换"><span class="nav-number">3.9.</span> <span class="nav-text">对换</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#基本分页存储管理方式"><span class="nav-number">4.</span> <span class="nav-text">基本分页存储管理方式</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#页面与页表"><span class="nav-number">4.1.</span> <span class="nav-text">页面与页表</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#地址结构"><span class="nav-number">4.2.</span> <span class="nav-text">地址结构</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#地址变换机构"><span class="nav-number">4.3.</span> <span class="nav-text">地址变换机构</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#分段存储管理"><span class="nav-number">5.</span> <span class="nav-text">分段存储管理</span></a></li></ol></div>
             
 
           </div>
@@ -980,7 +973,7 @@
       <i class="fa fa-area-chart"></i>
     </span>
     
-    <span title="站点总字数">677k</span>
+    <span title="站点总字数">693k</span>
   
 
   
@@ -989,7 +982,7 @@
       <i class="fa fa-coffee"></i>
     </span>
     
-    <span title="站点阅读时长">10:15</span>
+    <span title="站点阅读时长">10:30</span>
   
 </div>
 

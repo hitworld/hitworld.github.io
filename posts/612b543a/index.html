@@ -119,18 +119,18 @@
 
 
 
-  <meta name="description" content="apt换源sources.list. 12deb http://mirrors.zju.edu.cn/kali kali-rolling main contrib non-free deb-src http://mirrors.zju.edu.cn/kali kali-rolling main contrib non-free docker1234567curl -fsSL https://dow">
+  <meta name="description" content="apt换源sources.list. 12deb http://mirrors.aliyun.com/kali kali-rolling main non-free contribdeb-src http://mirrors.aliyun.com/kali kali-rolling main non-free contrib docker1234567curl -fsSL https://down">
 <meta name="keywords" content="environment">
 <meta property="og:type" content="article">
 <meta property="og:title" content="w4rd3n-kali虚拟机环境搭建">
 <meta property="og:url" content="https://hitworld.github.io/posts/612b543a/index.html">
 <meta property="og:site_name" content="w4rd3n">
-<meta property="og:description" content="apt换源sources.list. 12deb http://mirrors.zju.edu.cn/kali kali-rolling main contrib non-free deb-src http://mirrors.zju.edu.cn/kali kali-rolling main contrib non-free docker1234567curl -fsSL https://dow">
+<meta property="og:description" content="apt换源sources.list. 12deb http://mirrors.aliyun.com/kali kali-rolling main non-free contribdeb-src http://mirrors.aliyun.com/kali kali-rolling main non-free contrib docker1234567curl -fsSL https://down">
 <meta property="og:locale" content="zh-CN">
-<meta property="og:updated_time" content="2020-06-20T10:21:41.181Z">
+<meta property="og:updated_time" content="2020-06-30T04:51:13.607Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="w4rd3n-kali虚拟机环境搭建">
-<meta name="twitter:description" content="apt换源sources.list. 12deb http://mirrors.zju.edu.cn/kali kali-rolling main contrib non-free deb-src http://mirrors.zju.edu.cn/kali kali-rolling main contrib non-free docker1234567curl -fsSL https://dow">
+<meta name="twitter:description" content="apt换源sources.list. 12deb http://mirrors.aliyun.com/kali kali-rolling main non-free contribdeb-src http://mirrors.aliyun.com/kali kali-rolling main non-free contrib docker1234567curl -fsSL https://down">
 
 
 
@@ -531,7 +531,7 @@
 
       
         <h2 id="apt换源"><a href="#apt换源" class="headerlink" title="apt换源"></a>apt换源</h2><p><code>sources.list</code>.</p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">deb http://mirrors.zju.edu.cn/kali kali-rolling main contrib non-free </span><br><span class="line">deb-src http://mirrors.zju.edu.cn/kali kali-rolling main contrib non-free</span><br></pre></td></tr></table></figure>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">deb http://mirrors.aliyun.com/kali kali-rolling main non-free contrib</span><br><span class="line">deb-src http://mirrors.aliyun.com/kali kali-rolling main non-free contrib</span><br></pre></td></tr></table></figure>
 <h2 id="docker"><a href="#docker" class="headerlink" title="docker"></a>docker</h2><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">curl -fsSL https://download.docker.com/linux/debian/gpg | apt-key add -</span><br><span class="line"><span class="built_in">echo</span> <span class="string">'deb [arch=amd64] https://download.docker.com/linux/debian buster stable'</span> &gt; /etc/apt/sources.list.d/docker.list</span><br><span class="line">apt-get update</span><br><span class="line">apt-get remove docker docker-engine docker.io</span><br><span class="line">apt-get install docker-ce</span><br><span class="line">sudo vim /etc/docker/daemon.json</span><br><span class="line"><span class="comment"># &#123;"registry-mirrors": ["https://docker.mirrors.ustc.edu.cn"]&#125;</span></span><br></pre></td></tr></table></figure>
 <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">systemctl start docker</span><br><span class="line">systemctl <span class="built_in">enable</span> docker</span><br><span class="line"><span class="comment">#开机自启</span></span><br></pre></td></tr></table></figure>
 <p><code>docker-compose</code>安装.</p>
@@ -662,7 +662,7 @@
                 
                   <a href="/archives/">
                 
-                    <span class="site-state-item-count">181</span>
+                    <span class="site-state-item-count">184</span>
                     <span class="site-state-item-name">日志</span>
                   </a>
                 </div>
@@ -836,7 +836,13 @@
                     
                       
                     
-                    <span class="site-state-item-count">50</span>
+                      
+                    
+                      
+                    
+                      
+                    
+                    <span class="site-state-item-count">53</span>
                     <span class="site-state-item-name">标签</span>
                   </a>
                 </div>
@@ -918,7 +924,7 @@
       <i class="fa fa-area-chart"></i>
     </span>
     
-    <span title="站点总字数">677k</span>
+    <span title="站点总字数">693k</span>
   
 
   
@@ -927,7 +933,7 @@
       <i class="fa fa-coffee"></i>
     </span>
     
-    <span title="站点阅读时长">10:15</span>
+    <span title="站点阅读时长">10:30</span>
   
 </div>
 

@@ -127,14 +127,14 @@
 <meta property="og:site_name" content="w4rd3n">
 <meta property="og:description" content="安装内核123456uname -r#查看本机的内核sudo apt-get install linux-headers-version-generic linux-image-version-generic linux-image-extra-version-generic#安装对应版本内核sudo dpkg --list | grep linux-image#查看已安装的内核版本 编译内核li">
 <meta property="og:locale" content="zh-CN">
-<meta property="og:image" content="https://hitworld.github.io/posts/b79717f3/1.png">
-<meta property="og:image" content="https://hitworld.github.io/posts/b79717f3/2.png">
-<meta property="og:image" content="https://hitworld.github.io/posts/b79717f3/3.png">
-<meta property="og:updated_time" content="2020-06-20T10:21:41.005Z">
+<meta property="og:image" content="https://hitworld.github.io/posts/undefined/1.png">
+<meta property="og:image" content="https://hitworld.github.io/posts/undefined/2.png">
+<meta property="og:image" content="https://hitworld.github.io/posts/undefined/3.png">
+<meta property="og:updated_time" content="2020-07-09T03:19:40.526Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="binary-漏洞分析-Linux-kernel-pwn-调试">
 <meta name="twitter:description" content="安装内核123456uname -r#查看本机的内核sudo apt-get install linux-headers-version-generic linux-image-version-generic linux-image-extra-version-generic#安装对应版本内核sudo dpkg --list | grep linux-image#查看已安装的内核版本 编译内核li">
-<meta name="twitter:image" content="https://hitworld.github.io/posts/b79717f3/1.png">
+<meta name="twitter:image" content="https://hitworld.github.io/posts/undefined/1.png">
 
 
 
@@ -578,9 +578,9 @@
 <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">sudo gdb -q ./vmlinux</span><br><span class="line"><span class="comment">#加载vmlinux符号文件.</span></span><br><span class="line">gdb&gt; target remote :1234</span><br><span class="line">gdb&gt; add-symbol-file ./test.ko &lt;addr of test.ko&gt;</span><br><span class="line"><span class="comment">#addr of test.ko可以通过cat /proc/modules | grep test.ko获得.需要root权限,修改init文件获得.</span></span><br></pre></td></tr></table></figure>
 <h2 id="双机调试"><a href="#双机调试" class="headerlink" title="双机调试"></a>双机调试</h2><h3 id="虚拟机配置"><a href="#虚拟机配置" class="headerlink" title="虚拟机配置"></a>虚拟机配置</h3><p>首先移除打印机,然后配置双机的串口.</p>
 <p><code>host</code>.</p>
-<img src="/posts/b79717f3/1.png" title="p1">
+<img src="/posts/undefined/1.png" title="p1">
 <p><code>target</code>.</p>
-<img src="/posts/b79717f3/2.png" title="p2">
+<img src="/posts/undefined/2.png" title="p2">
 <h3 id="配置target"><a href="#配置target" class="headerlink" title="配置target"></a>配置target</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">sudo vim /etc/grub.d/40_custom</span><br><span class="line">sudo update-grub</span><br></pre></td></tr></table></figure>
 <p><code>/etc/grub.d/40_custom</code>.</p>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br></pre></td><td class="code"><pre><span class="line">#!/bin/sh</span><br><span class="line">exec tail -n +3 $0</span><br><span class="line"># This file provides an easy way to add custom menu entries.  Simply type the</span><br><span class="line"># menu entries you want to add after this comment.  Be careful not to change</span><br><span class="line"># the &apos;exec tail&apos; line above.</span><br><span class="line">menuentry &apos;KGDB&apos; --class ubuntu --class gnu-linux --class gnu --class os $menuentry_id_option &apos;gnulinux-simple-1dd33836-1426-45f7-8cfb-5667fb92953d&apos; &#123;</span><br><span class="line">	recordfail</span><br><span class="line">	load_video</span><br><span class="line">	gfxmode $linux_gfx_mode</span><br><span class="line">	insmod gzio</span><br><span class="line">	if [ x$grub_platform = xxen ]; then insmod xzio; insmod lzopio; fi</span><br><span class="line">	insmod part_msdos</span><br><span class="line">	insmod ext2</span><br><span class="line">	set root=&apos;hd0,msdos1&apos;</span><br><span class="line">	if [ x$feature_platform_search_hint = xy ]; then</span><br><span class="line">	  search --no-floppy --fs-uuid --set=root --hint-bios=hd0,msdos1 --hint-efi=hd0,msdos1 --hint-baremetal=ahci0,msdos1  1dd33836-1426-45f7-8cfb-5667fb92953d</span><br><span class="line">	else</span><br><span class="line">	  search --no-floppy --fs-uuid --set=root 1dd33836-1426-45f7-8cfb-5667fb92953d</span><br><span class="line">	fi</span><br><span class="line">        linux	/boot/vmlinuz-4.15.0-91-generic root=UUID=1dd33836-1426-45f7-8cfb-5667fb92953d ro find_preseed=/preseed.cfg auto noprompt priority=critical locale=en_US quiet kgdbwait kgdb8250=io,03f8,ttyS0,115200,4 kgdboc=ttyS0,115200 kgdbcon nokaslr</span><br><span class="line">	initrd	/boot/initrd.img-4.15.0-91-generic</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
@@ -588,7 +588,7 @@
 <p><code>kgdbwait</code>让系统启动时就进入调试模式,<code>kgdboc</code>是<code>KGDB over console</code>的缩写,<code>ttyS0</code>代表通过<code>1</code>号串口进行通信,波特率为<code>115200</code>.后面的<code>nokaslr</code>是禁止内核空间的地址随机化.</p>
 <h3 id="配置host"><a href="#配置host" class="headerlink" title="配置host"></a>配置host</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">sudo stty -F /dev/ttyS0 115200</span><br><span class="line"><span class="comment">#设置串口通信的波特率,该选项每次重启会重置</span></span><br><span class="line">sudo stty -F /dev/ttyS0</span><br><span class="line"><span class="comment">#查看是否设置成功</span></span><br></pre></td></tr></table></figure>
 <h3 id="调试-1"><a href="#调试-1" class="headerlink" title="调试"></a>调试</h3><p>启动<code>target</code>,开机时按住<code>shift</code>选择对应启动项,进入等待连接状态.</p>
-<img src="/posts/b79717f3/3.png" title="p3">
+<img src="/posts/undefined/3.png" title="p3">
 <p><code>host</code>配置好后,<code>gdb</code>连接调试即可.</p>
 <p>因为默认用户没有串口设备的使用权限，所以应该先使用如下命令来增加权限.也可以使用<code>sudo</code>方式来启动<code>gdb</code>.</p>
 <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">!sudo usermod -a -G dialout user</span><br></pre></td></tr></table></figure>
@@ -979,7 +979,7 @@
       <i class="fa fa-area-chart"></i>
     </span>
     
-    <span title="站点总字数">693k</span>
+    <span title="站点总字数">697k</span>
   
 
   
@@ -988,7 +988,7 @@
       <i class="fa fa-coffee"></i>
     </span>
     
-    <span title="站点阅读时长">10:30</span>
+    <span title="站点阅读时长">10:33</span>
   
 </div>
 

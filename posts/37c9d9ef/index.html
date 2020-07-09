@@ -119,18 +119,18 @@
 
 
 
-  <meta name="description" content="漏洞要素 没有free. 存在堆溢出或者其他可改写top_chunk大小的漏洞.  利用思路首先修改top_chunk的大小,如果malloc申请的堆块大小超过了top_chunk的大小,将调用sysmalloc来进行分配. sysmalloc针对这种情况有两种处理,如果申请大小大于等于mp_.mmap_threshold就直接调用mmap,否则就扩展top_chunk. 扩展top_chunk前">
+  <meta name="description" content="0x00house_of_orange利用环境.  没有free. 存在堆溢出或者其他可改写top_chunk大小的漏洞.  利用思路首先修改top_chunk的大小,如果malloc申请的堆块大小超过了top_chunk的大小,将调用sysmalloc来进行分配. sysmalloc针对这种情况有两种处理,如果申请大小大于等于mp_.mmap_threshold就直接调用mmap,否则就扩展to">
 <meta name="keywords" content="heap-pwn">
 <meta property="og:type" content="article">
 <meta property="og:title" content="binary-漏洞分析-Linux-heap-pwn-house_of_orange">
 <meta property="og:url" content="https://hitworld.github.io/posts/37c9d9ef/index.html">
 <meta property="og:site_name" content="w4rd3n">
-<meta property="og:description" content="漏洞要素 没有free. 存在堆溢出或者其他可改写top_chunk大小的漏洞.  利用思路首先修改top_chunk的大小,如果malloc申请的堆块大小超过了top_chunk的大小,将调用sysmalloc来进行分配. sysmalloc针对这种情况有两种处理,如果申请大小大于等于mp_.mmap_threshold就直接调用mmap,否则就扩展top_chunk. 扩展top_chunk前">
+<meta property="og:description" content="0x00house_of_orange利用环境.  没有free. 存在堆溢出或者其他可改写top_chunk大小的漏洞.  利用思路首先修改top_chunk的大小,如果malloc申请的堆块大小超过了top_chunk的大小,将调用sysmalloc来进行分配. sysmalloc针对这种情况有两种处理,如果申请大小大于等于mp_.mmap_threshold就直接调用mmap,否则就扩展to">
 <meta property="og:locale" content="zh-CN">
-<meta property="og:updated_time" content="2020-06-20T10:21:41.001Z">
+<meta property="og:updated_time" content="2020-07-09T03:19:40.518Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="binary-漏洞分析-Linux-heap-pwn-house_of_orange">
-<meta name="twitter:description" content="漏洞要素 没有free. 存在堆溢出或者其他可改写top_chunk大小的漏洞.  利用思路首先修改top_chunk的大小,如果malloc申请的堆块大小超过了top_chunk的大小,将调用sysmalloc来进行分配. sysmalloc针对这种情况有两种处理,如果申请大小大于等于mp_.mmap_threshold就直接调用mmap,否则就扩展top_chunk. 扩展top_chunk前">
+<meta name="twitter:description" content="0x00house_of_orange利用环境.  没有free. 存在堆溢出或者其他可改写top_chunk大小的漏洞.  利用思路首先修改top_chunk的大小,如果malloc申请的堆块大小超过了top_chunk的大小,将调用sysmalloc来进行分配. sysmalloc针对这种情况有两种处理,如果申请大小大于等于mp_.mmap_threshold就直接调用mmap,否则就扩展to">
 
 
 
@@ -537,7 +537,8 @@
       
 
       
-        <h2 id="漏洞要素"><a href="#漏洞要素" class="headerlink" title="漏洞要素"></a>漏洞要素</h2><ul>
+        <h2 id="0x00"><a href="#0x00" class="headerlink" title="0x00"></a>0x00</h2><p><code>house_of_orange</code>利用环境.</p>
+<ul>
 <li>没有<code>free</code>.</li>
 <li>存在堆溢出或者其他可改写<code>top_chunk</code>大小的漏洞.</li>
 </ul>
@@ -911,7 +912,7 @@
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#漏洞要素"><span class="nav-number">1.</span> <span class="nav-text">漏洞要素</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#利用思路"><span class="nav-number">2.</span> <span class="nav-text">利用思路</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#hitcon-2016-house-of-orange-payload"><span class="nav-number">3.</span> <span class="nav-text">hitcon-2016-house_of_orange payload</span></a></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#0x00"><span class="nav-number">1.</span> <span class="nav-text">0x00</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#利用思路"><span class="nav-number">2.</span> <span class="nav-text">利用思路</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#hitcon-2016-house-of-orange-payload"><span class="nav-number">3.</span> <span class="nav-text">hitcon-2016-house_of_orange payload</span></a></li></ol></div>
             
 
           </div>
@@ -943,7 +944,7 @@
       <i class="fa fa-area-chart"></i>
     </span>
     
-    <span title="站点总字数">693k</span>
+    <span title="站点总字数">697k</span>
   
 
   
@@ -952,7 +953,7 @@
       <i class="fa fa-coffee"></i>
     </span>
     
-    <span title="站点阅读时长">10:30</span>
+    <span title="站点阅读时长">10:33</span>
   
 </div>
 

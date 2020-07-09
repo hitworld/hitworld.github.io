@@ -127,12 +127,12 @@
 <meta property="og:site_name" content="w4rd3n">
 <meta property="og:description" content="分析题目给了三个二进制文件:hypervisor.elf,kernel.bin,user.elf. 其中hypervisor.elf,user.elf是ELF64文件,而kernel.bin是纯二进制代码文件. 分析可知主程序为hypervisor.elf,该程序利用kvm给VM分配VCPU和memory,并加载一个小型的内核kernel.bin到虚拟机的0地址开始的内存空间,然后使用ioctl的">
 <meta property="og:locale" content="zh-CN">
-<meta property="og:image" content="https://hitworld.github.io/posts/ddc429e1/1.png">
-<meta property="og:updated_time" content="2020-06-20T10:21:41.199Z">
+<meta property="og:image" content="https://hitworld.github.io/posts/undefined/1.png">
+<meta property="og:updated_time" content="2020-07-09T03:19:40.639Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="writeup-hitcon-2018-abyss">
 <meta name="twitter:description" content="分析题目给了三个二进制文件:hypervisor.elf,kernel.bin,user.elf. 其中hypervisor.elf,user.elf是ELF64文件,而kernel.bin是纯二进制代码文件. 分析可知主程序为hypervisor.elf,该程序利用kvm给VM分配VCPU和memory,并加载一个小型的内核kernel.bin到虚拟机的0地址开始的内存空间,然后使用ioctl的">
-<meta name="twitter:image" content="https://hitworld.github.io/posts/ddc429e1/1.png">
+<meta name="twitter:image" content="https://hitworld.github.io/posts/undefined/1.png">
 
 
 
@@ -546,7 +546,7 @@
 <p>首先通过<code>/proc/self/maps</code>文件泄露地址,之后构造一个<code>memory region</code>.</p>
 <figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">struct</span> <span class="title">kvm_userspace_memory_region</span> <span class="title">region</span> = &#123;</span></span><br><span class="line">  .slot = <span class="number">1</span>,</span><br><span class="line">  .flags = <span class="number">0</span>,</span><br><span class="line">  .guest_phys_addr = <span class="number">0x2000000</span>,</span><br><span class="line">  .memory_size = <span class="number">0x21000</span>,</span><br><span class="line">  .userspace_addr = [stack_addr]</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
 <p>但现在还不能直接在<code>kernel</code>中访问这块地址,因为它没有页表项.在64位的<code>long mode</code>下,所有的访存都需要经过页表,而<code>hypervisor</code>和<code>kernel</code>并没有为高于<code>0x2000000</code>设置页映射,所以需要手动为它加上一个页表项.</p>
-<img src="/posts/ddc429e1/1.png" title="p1">
+<img src="/posts/undefined/1.png" title="p1">
 <p><code>kernel</code>在刚启动时对<code>page table</code>做了下面的操作.</p>
 <figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">/* Maps</span></span><br><span class="line"><span class="comment"> *  0x8000000000 ~ 0x8002000000 -&gt; 0 ~ 0x2000000</span></span><br><span class="line"><span class="comment"> */</span></span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">init_pagetable</span><span class="params">()</span> </span>&#123;</span><br><span class="line">  <span class="keyword">uint64_t</span>* pml4;</span><br><span class="line">  <span class="keyword">asm</span>(<span class="string">"mov %[pml4], cr3"</span> : [pml4]<span class="string">"=r"</span>(pml4));</span><br><span class="line">  <span class="keyword">uint64_t</span>* pdp = (<span class="keyword">uint64_t</span>*) ((<span class="keyword">uint64_t</span>) pml4 + <span class="number">0x3000</span>);</span><br><span class="line">  pml4[<span class="number">1</span>] = PDE64_PRESENT | PDE64_RW | (<span class="keyword">uint64_t</span>) pdp; <span class="comment">// 0x8000000000</span></span><br><span class="line">  <span class="keyword">uint64_t</span>* pd = (<span class="keyword">uint64_t</span>*) ((<span class="keyword">uint64_t</span>) pdp + <span class="number">0x1000</span>);</span><br><span class="line">  pdp[<span class="number">0</span>] = PDE64_PRESENT | PDE64_RW | (<span class="keyword">uint64_t</span>) pd;</span><br><span class="line">  <span class="keyword">for</span>(<span class="keyword">uint64_t</span> i = <span class="number">0</span>; i &lt; <span class="number">0x10</span>; i++)</span><br><span class="line">    pd[i] = PDE64_PRESENT | PDE64_RW | PDE64_PS | (i * KERNEL_PAGING_SIZE);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 <p>在<code>PML4</code>第<code>1</code>项上放了<code>1</code>个<code>PDP</code>,在<code>PDP</code>中初始化了<code>16</code>个<code>page</code>,这些<code>page</code>都是带有<code>PDE64_PS</code>标志位的,这代表着它们不是下一级<code>PD</code>的地址,而是<code>1</code>个<code>0x200000</code>的<code>page</code>的直接映射.因为<code>PML4</code>第<code>1</code>项对应的<code>Virtual Address</code>的<code>39-47</code>位为<code>1</code>,实际上就是一组<code>0x8000000000 ~ 0x8002000000</code>到<code>0 ~ 0x2000000</code>的映射.</p>
@@ -937,7 +937,7 @@
       <i class="fa fa-area-chart"></i>
     </span>
     
-    <span title="站点总字数">693k</span>
+    <span title="站点总字数">697k</span>
   
 
   
@@ -946,7 +946,7 @@
       <i class="fa fa-coffee"></i>
     </span>
     
-    <span title="站点阅读时长">10:30</span>
+    <span title="站点阅读时长">10:33</span>
   
 </div>
 

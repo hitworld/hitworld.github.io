@@ -127,16 +127,16 @@
 <meta property="og:site_name" content="w4rd3n">
 <meta property="og:description" content="准备首先进行静态分析,objdump -d bomb &amp;gt; bomb.txt. 根据bomb.c文件可以知道部分关键函数为:phase_[1-6],phase_defused,read_line. read_line从bomb.c已知此函数返回一个input.从后向前跟踪%rax. 123456789mov    0x20223b(%rip),%edx        # 603760 &amp;lt;">
 <meta property="og:locale" content="zh-CN">
-<meta property="og:image" content="https://hitworld.github.io/posts/525b5041/1.png">
-<meta property="og:image" content="https://hitworld.github.io/posts/525b5041/2.png">
-<meta property="og:image" content="https://hitworld.github.io/posts/525b5041/3.png">
-<meta property="og:image" content="https://hitworld.github.io/posts/525b5041/4.png">
-<meta property="og:image" content="https://hitworld.github.io/posts/525b5041/5.png">
-<meta property="og:updated_time" content="2020-06-20T10:21:41.190Z">
+<meta property="og:image" content="https://hitworld.github.io/posts/undefined/1.png">
+<meta property="og:image" content="https://hitworld.github.io/posts/undefined/2.png">
+<meta property="og:image" content="https://hitworld.github.io/posts/undefined/3.png">
+<meta property="og:image" content="https://hitworld.github.io/posts/undefined/4.png">
+<meta property="og:image" content="https://hitworld.github.io/posts/undefined/5.png">
+<meta property="og:updated_time" content="2020-07-09T03:19:40.634Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="writeup-CSAPP-bomblab">
 <meta name="twitter:description" content="准备首先进行静态分析,objdump -d bomb &amp;gt; bomb.txt. 根据bomb.c文件可以知道部分关键函数为:phase_[1-6],phase_defused,read_line. read_line从bomb.c已知此函数返回一个input.从后向前跟踪%rax. 123456789mov    0x20223b(%rip),%edx        # 603760 &amp;lt;">
-<meta name="twitter:image" content="https://hitworld.github.io/posts/525b5041/1.png">
+<meta name="twitter:image" content="https://hitworld.github.io/posts/undefined/1.png">
 
 
 
@@ -551,7 +551,7 @@
 <p><code>sscanf</code>相当于以第一个字符串参数为标准输入端输入内容的<code>scanf</code>.</p>
 <p>参数<code>0x603870</code>等于<code>0x603760 + 0x50 * 3</code>,可知用的是第四关答案字符串.</p>
 <p>参数<code>0x402619</code>为字符串,<code>gdb</code>查看.</p>
-<img src="/posts/525b5041/1.png" title="p1">
+<img src="/posts/undefined/1.png" title="p1">
 <hr>
 <p>后三个参数为对应的局部变量地址.</p>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">cmp    $0x3,%eax</span><br><span class="line">jne    401635 &lt;phase_defused+0x71&gt;</span><br></pre></td></tr></table></figure>
@@ -559,7 +559,7 @@
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">mov    $0x402622,%esi</span><br><span class="line">lea    0x10(%rsp),%rdi</span><br><span class="line">callq  401338 &lt;strings_not_equal&gt;</span><br><span class="line">test   %eax,%eax</span><br><span class="line">jne    401635 &lt;phase_defused+0x71&gt;</span><br></pre></td></tr></table></figure>
 <p>这里调用了<code>strings_not_equal</code>函数,顾名思义.</p>
 <p>参数为刚才的第五个参数的地址(对应<code>%s</code>)和字符串地址<code>0x402622</code>.<code>gdb</code>查看.</p>
-<img src="/posts/525b5041/2.png" title="p2">
+<img src="/posts/undefined/2.png" title="p2">
 <hr>
 <p>后面就是通过返回值跳转然后打印大哥字符串并调用<code>secret_phase</code>(隐藏关).</p>
 <p>所以第四关答案应该为<code>&lt;number&gt; &lt;number&gt; DrEvil</code>.</p>
@@ -579,14 +579,14 @@
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">lea    0xc(%rsp),%rcx</span><br><span class="line">lea    0x8(%rsp),%rdx</span><br><span class="line">mov    $0x4025cf,%esi</span><br><span class="line">mov    $0x0,%eax</span><br><span class="line">callq  400bf0 &lt;__isoc99_sscanf@plt&gt;</span><br></pre></td></tr></table></figure>
 <p>函数调用<code>__isoc99_sscanf(input, 0x4025cf, 0x8(%rsp), 0xc(%rsp))</code>.</p>
 <p><code>gdb</code>查看<code>0x4025cf</code>.</p>
-<img src="/posts/525b5041/3.png" title="p3">
+<img src="/posts/undefined/3.png" title="p3">
 <hr>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">cmp    $0x1,%eax</span><br><span class="line">jg     400f6a &lt;phase_3+0x27&gt;</span><br></pre></td></tr></table></figure>
 <p>检测返回值是否大于<code>1</code>.</p>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">cmpl   $0x7,0x8(%rsp)</span><br><span class="line">ja     400fad &lt;phase_3+0x6a&gt;</span><br></pre></td></tr></table></figure>
 <p>检测第一个数是否小于等于<code>7</code>.</p>
 <p>然后就是典型的<code>switch</code>结构.<code>gdb</code>查看<code>0x402470</code>及后面的跳转表.</p>
-<img src="/posts/525b5041/4.png" title="p4">
+<img src="/posts/undefined/4.png" title="p4">
 <hr>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">cmp    0xc(%rsp),%eax</span><br><span class="line">je     400fc9 &lt;phase_3+0x86&gt;</span><br></pre></td></tr></table></figure>
 <p>之后将第二个数与之前放入<code>%eax</code>的值比较,要求相等.所以答案多解.</p>
@@ -620,7 +620,7 @@
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">movb   $0x0,0x16(%rsp)</span><br><span class="line">mov    $0x40245e,%esi</span><br><span class="line">lea    0x10(%rsp),%rdi</span><br><span class="line">callq  401338 &lt;strings_not_equal&gt;</span><br><span class="line">test   %eax,%eax</span><br><span class="line">je     4010d9 &lt;phase_5+0x77&gt;</span><br></pre></td></tr></table></figure>
 <p>在缓冲区字符数组末尾加上<code>\0</code>字符,然后调用<code>strings_not_equal(0x10(%rsp), 0x40245e)</code>.</p>
 <p><code>gdb</code>查看<code>0x4024b0</code>和<code>0x40245e</code>.</p>
-<img src="/posts/525b5041/5.png" title="p5">
+<img src="/posts/undefined/5.png" title="p5">
 <hr>
 <h3 id="phase-6"><a href="#phase-6" class="headerlink" title="phase_6"></a>phase_6</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">sub    $0x50,%rsp</span><br><span class="line">mov    %rsp,%r13</span><br><span class="line">mov    %rsp,%rsi</span><br><span class="line">callq  40145c &lt;read_six_numbers&gt;</span><br></pre></td></tr></table></figure>
 <p>先调用<code>read_six_numbers(input, %rsp)</code>.</p>
@@ -1028,7 +1028,7 @@
       <i class="fa fa-area-chart"></i>
     </span>
     
-    <span title="站点总字数">693k</span>
+    <span title="站点总字数">697k</span>
   
 
   
@@ -1037,7 +1037,7 @@
       <i class="fa fa-coffee"></i>
     </span>
     
-    <span title="站点阅读时长">10:30</span>
+    <span title="站点阅读时长">10:33</span>
   
 </div>
 

@@ -127,7 +127,7 @@
 <meta property="og:site_name" content="w4rd3n">
 <meta property="og:description" content="FHSFHS(Filesystem Hierarchy Standard)是一个标准,主要是关于如何规范Linux种软件与数据的存放. FHS依据文件系统使用的频繁与否和是否允许用户随意改动将目录定义成为四种交互作用的形态:可分享的/不可分享的,不变的/可变动的.  可分享的指能够分享给网络上其他主机挂载的目录,不可分享就是不能,即是否允许用户随意改动. 不变可变主要依据文件系统使用的频繁.  F">
 <meta property="og:locale" content="zh-CN">
-<meta property="og:updated_time" content="2020-06-20T10:21:40.877Z">
+<meta property="og:updated_time" content="2020-07-09T03:19:40.574Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="CS-Linux-文件与目录">
 <meta name="twitter:description" content="FHSFHS(Filesystem Hierarchy Standard)是一个标准,主要是关于如何规范Linux种软件与数据的存放. FHS依据文件系统使用的频繁与否和是否允许用户随意改动将目录定义成为四种交互作用的形态:可分享的/不可分享的,不变的/可变动的.  可分享的指能够分享给网络上其他主机挂载的目录,不可分享就是不能,即是否允许用户随意改动. 不变可变主要依据文件系统使用的频繁.  F">
@@ -503,7 +503,7 @@
                 
                   <span class="post-meta-item-text">本文字数：</span>
                 
-                <span title="本文字数">1.9k</span>
+                <span title="本文字数">4.8k</span>
               
 
               
@@ -517,7 +517,7 @@
                 
                   <span class="post-meta-item-text">阅读时长 &asymp;</span>
                 
-                <span title="阅读时长">2 分钟</span>
+                <span title="阅读时长">4 分钟</span>
               
             </div>
           
@@ -573,6 +573,58 @@
 <li><code>/sys</code>:同上是以恶搞虚拟文件系统,数据也存在内存中,也就是不占用硬盘,用于记录与内核有关的信息.</li>
 </ul>
 <p>开机过程中仅有根目录所在分区会挂载,其他分区在开机完成后才会挂载.所以以下目录必须与根目录在同一分区:<code>etc</code>,<code>bin</code>,<code>dev</code>,<code>lib</code>,<code>sbin</code>.</p>
+<h3 id="proc"><a href="#proc" class="headerlink" title="proc"></a>proc</h3><p><code>/proc</code>中存储的是当前内核运行状态的一系列特殊文件(被称作虚拟文件),可以通过这些文件查看有关系统硬件及当前正在运行进程的信息,甚至可以通过更改其中某些文件来改变内核的运行状态.</p>
+<h4 id="proc-pid"><a href="#proc-pid" class="headerlink" title="/proc/pid"></a>/proc/pid</h4><p><code>/proc</code>目录中包含许多以数字命名的子目录,这些数字表示系统当前正在运行进程的进程号,里面包含对应进程相关的多个信息文件.</p>
+<ul>
+<li><code>cmdline</code>:启动当前进程的完整命令,僵尸进程目录中的此文件不包含任何信息.</li>
+<li><code>cwd</code>:指向当前进程运行目录的一个符号链接.</li>
+<li><code>environ</code>:当前进程的环境变量列表,彼此间用空字符隔开.</li>
+<li><code>exe</code>:指向启动当前进程的可执行文件的符号链接,通过<code>/proc/pid/exe</code>可以启动当前进程的一个拷贝.</li>
+<li><code>fd</code>:这是个目录,包含当前进程打开的每一个文件的文件描述符,这些文件描述符是指向实际文件的一个符号链接.</li>
+<li><code>limits</code>:当前进程所使用的每一个受限资源的软限制,硬限制和管理单元;此文件仅可由实际启动当前进程的<code>UID</code>用户读取.</li>
+<li><code>maps</code>:当前进程关联到的每个可执行文件和库文件在内存中的映射区域及其访问权限所组成的列表.</li>
+<li><code>mem</code>:当前进程所占用的内存空间,由<code>open</code>,<code>read</code>和<code>lseek</code>等系统调用使用,不能被用户读取.</li>
+<li><code>root</code>:指向当前进程运行根目录的符号链接;在<code>Unix</code>和<code>Linux</code>系统上,通常采用<code>chroot</code>命令使每个进程运行于独立的根目录.</li>
+<li><code>stat</code>:当前进程的状态信息,包含一系统格式化后的数据列,可读性差,通常由<code>ps</code>命令使用.</li>
+<li><code>statm</code>:前进程占用内存的状态信息,通常以页面<code>page</code>表示.</li>
+<li><code>status</code>:与<code>stat</code>所提供信息类似,但可读性较好.</li>
+<li><code>task</code>:目录文件,包含由当前进程所运行的每一个线程的相关信息,每个线程的相关信息文件均保存在一个由线程号<code>tid</code>命名的目录中,这类似于其内容类似于每个进程目录中的内容.</li>
+</ul>
+<h4 id="proc目录下常见文件"><a href="#proc目录下常见文件" class="headerlink" title="/proc目录下常见文件"></a>/proc目录下常见文件</h4><ul>
+<li><code>/proc/apm</code>:高级电源管理<code>APM</code>版本信息及电池相关状态信息,通常由<code>apm</code>命令使用.</li>
+<li><code>/proc/buddyinfo</code>:用于诊断内存碎片问题的相关信息文件.</li>
+<li><code>/proc/cmdline</code>:在启动时传递至内核的相关参数信息,这些信息通常由<code>lilo</code>或<code>grub</code>等启动管理工具进行传递.</li>
+<li><code>/proc/cpuinfo</code>:处理器的相关信息的文件.</li>
+<li><code>/proc/crypto</code>:系统上已安装的内核使用的密码算法及每个算法的详细信息列表.</li>
+<li><code>/proc/devices</code>:系统已经加载的所有块设备和字符设备的信息,包含主设备号和设备组(与主设备号对应的设备类型)名.</li>
+<li><code>/proc/diskstats</code>:每块磁盘设备的磁盘<code>I/O</code>统计信息列表.</li>
+<li><code>/proc/dma</code>:每个正在使用且注册的<code>ISA DMA</code>通道的信息列表.</li>
+<li><code>/proc/execdomains</code>:内核当前支持的执行域信息列表.</li>
+<li><code>/proc/fb</code>:帧缓冲设备列表文件,包含帧缓冲设备的设备号和相关驱动信息.</li>
+<li><code>/proc/filesystems</code>:当前被内核支持的文件系统类型列表文件,被标示为<code>nodev</code>的文件系统表示不需要块设备的支持;通常<code>mount</code>一个设备时,如果没有指定文件系统类型将通过此文件来决定其所需文件系统的类型.</li>
+<li><code>/proc/interrupts</code>:<code>X86</code>或<code>X86_64</code>体系架构系统上每个<code>IRQ</code>相关的中断号列表;多路处理器平台上每个<code>CPU</code>对于每个<code>I/O</code>设备均有自己的中断号.</li>
+<li><code>/proc/iomem</code>:每个物理设备上的记忆体(<code>RAM</code>或者<code>ROM</code>)在系统内存中的映射信息.</li>
+<li><code>/proc/ioports</code>:当前正在使用且已经注册过的与物理设备进行通讯的输入输出端口范围信息列表.</li>
+<li><code>/proc/kallsyms</code>:模块管理工具用来动态链接或绑定可装载模块的符号定义,由内核输出.</li>
+<li><code>/proc/kcore</code>:系统使用的物理内存,以<code>ELF</code>核心文件格式存储,其文件大小为已使用的物理内存加上<code>4KB</code>.这个文件用来检查内核数据结构的当前状态,通常由<code>gdb</code>等调试工具使用,不能使用文件查看命令打开此文件.</li>
+<li><code>/proc/kmsg</code>:用来保存由内核输出的信息,通常由<code>/sbin/klogd</code>或<code>/bin/dmsg</code>等程序使用,不要试图使用查看命令打开此文件.</li>
+<li><code>/proc/loadavg</code>:保存关于<code>CPU</code>和磁盘<code>I/O</code>的负载平均值.</li>
+<li><code>/proc/locks</code>:保存当前由内核锁定的文件的相关信息,包含内核内部的调试数据,每个锁定占据一行,且具有一个惟一的编号.</li>
+<li><code>/proc/mdstat</code>:保存<code>RAID</code>相关的多块磁盘的当前状态信息.</li>
+<li><code>/proc/meminfo</code>:系统中关于当前内存的利用状况等的信息,常由<code>free</code>命令使用.</li>
+<li><code>/proc/mounts</code>:在内核<code>2.4.29</code>版本以前,此文件的内容为系统当前挂载的所有文件系统,在<code>2.4.19</code>以后的内核中引进了每个进程使用独立挂载名称空间,此文件变成了指向<code>/proc/self/mounts</code>(每个进程自身挂载名称空间中的所有挂载点列表)文件的符号链接.</li>
+<li><code>/proc/modules</code>:当前装入内核的所有模块名称列表,可以由<code>lsmod</code>命令使用.</li>
+<li><code>/proc/partitions</code>:块设备每个分区的主设备号(<code>major</code>)和次设备号(<code>minor</code>)等信息,同时包括每个分区所包含的块(<code>block</code>)数目.</li>
+<li><code>/proc/pci</code>:内核初始化时发现的所有<code>PCI</code>设备及其配置信息列表,其配置信息多为某<code>PCI</code>设备相关<code>IRQ</code>信息.可以用<code>/sbin/lspci –vb</code>命令获得较易理解的相关信息.在<code>2.6</code>内核以后此文件已被<code>/proc/bus/pci</code>目录及其下的文件代替.</li>
+<li><code>/proc/slabinfo</code>:在内核中频繁使用的对象(如<code>inode</code>,<code>dentry</code>等)都有自己的<code>cache</code>,即<code>slab pool</code>,而<code>/proc/slabinfo</code>文件列出了这些对象相关<code>slap</code>的信息.</li>
+<li><code>/proc/stat</code>:实时追踪自系统上次启动以来的多种统计信息.</li>
+<li><code>/proc/swaps</code>:当前系统上的交换分区及其空间利用信息,如果有多个交换分区的话,则会每个交换分区的信息分别存储于<code>/proc/swap</code>目录中的单独文件中,而其优先级数字越低,被使用到的可能性越大.</li>
+<li><code>/proc/uptime</code>:系统上次启动以来的运行时间.</li>
+<li><code>/proc/version</code>:当前系统运行的内核版本号.</li>
+<li><code>/proc/vmstat</code>:当前系统虚拟内存的多种统计数据.</li>
+<li><code>/proc/zoneinfo</code>:内存区域<code>zone</code>的详细信息列表.</li>
+<li><code>/proc/sys</code>:与<code>/proc</code>下其它文件的只读属性不同的是,<code>root</code>可对<code>/proc/sys</code>子目录中的许多文件内容进行修改以更改内核的运行特性,需要注意的是,即使文件可写,其一般也不可以使用编辑器进行编辑.<code>/proc/sys/debug</code>子目录通常是一空目录.<code>/proc/sys/dev</code>子目录为系统上特殊设备提供参数信息文件的目录,其不同设备的信息文件分别存储于不同的子目录中.如<code>/proc/sys/dev/cdrom</code>和<code>/proc/sys/dev/raid</code>(如果内核编译时开启了支持<code>raid</code>的功能)目录,其内存储的通常是系统上<code>cdrom</code>和<code>raid</code>的相关参数信息文件.</li>
+</ul>
 <h3 id="usr"><a href="#usr" class="headerlink" title="usr"></a>usr</h3><p><code>/usr</code>目录的数据是属于可分享且不可变动的,一般会占用较大的硬盘容量.</p>
 <p><code>FHS</code>定义了<code>/usr</code>下面应该存在的子目录.</p>
 <ul>
@@ -948,7 +1000,7 @@
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#FHS"><span class="nav-number">1.</span> <span class="nav-text">FHS</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#根目录"><span class="nav-number">1.1.</span> <span class="nav-text">根目录(/)</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#usr"><span class="nav-number">1.2.</span> <span class="nav-text">usr</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#var"><span class="nav-number">1.3.</span> <span class="nav-text">var</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#目录与路径"><span class="nav-number">2.</span> <span class="nav-text">目录与路径</span></a></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#FHS"><span class="nav-number">1.</span> <span class="nav-text">FHS</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#根目录"><span class="nav-number">1.1.</span> <span class="nav-text">根目录(/)</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#proc"><span class="nav-number">1.2.</span> <span class="nav-text">proc</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#proc-pid"><span class="nav-number">1.2.1.</span> <span class="nav-text">/proc/pid</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#proc目录下常见文件"><span class="nav-number">1.2.2.</span> <span class="nav-text">/proc目录下常见文件</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#usr"><span class="nav-number">1.3.</span> <span class="nav-text">usr</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#var"><span class="nav-number">1.4.</span> <span class="nav-text">var</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#目录与路径"><span class="nav-number">2.</span> <span class="nav-text">目录与路径</span></a></li></ol></div>
             
 
           </div>
@@ -980,7 +1032,7 @@
       <i class="fa fa-area-chart"></i>
     </span>
     
-    <span title="站点总字数">693k</span>
+    <span title="站点总字数">697k</span>
   
 
   
@@ -989,7 +1041,7 @@
       <i class="fa fa-coffee"></i>
     </span>
     
-    <span title="站点阅读时长">10:30</span>
+    <span title="站点阅读时长">10:33</span>
   
 </div>
 

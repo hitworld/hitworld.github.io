@@ -1762,7 +1762,7 @@ Linux信号处理当内核向某个进程发起一个signal,该进程会被暂�
                 
                   <span class="post-meta-item-text">本文字数：</span>
                 
-                <span title="本文字数">201</span>
+                <span title="本文字数">228</span>
               
 
               
@@ -1798,8 +1798,8 @@ Linux信号处理当内核向某个进程发起一个signal,该进程会被暂�
       
         
           
-          漏洞要素改写top chunk为一个很大的值,同时程序允许malloc一个很大的值.
-利用思路只需要malloc一个chunk,使得这个chunk分配到需要控制的区域为止,然后就可以malloc出需要
+          0x00house_of_force利用过程就是改写top chunk为一个很大的值,然后通过malloc一个计算后的值进行任意地址分配.
+利用思路只需要malloc一个chunk,使得这个chunk
           ...
           <!--noindex-->
           
@@ -1974,7 +1974,7 @@ Linux信号处理当内核向某个进程发起一个signal,该进程会被暂�
                 
                   <span class="post-meta-item-text">本文字数：</span>
                 
-                <span title="本文字数">585</span>
+                <span title="本文字数">610</span>
               
 
               
@@ -2010,8 +2010,8 @@ Linux信号处理当内核向某个进程发起一个signal,该进程会被暂�
       
         
           
-          漏洞要素改写small bin chunk的bk指针,同时有足够的可控区域来构造一个fake small bin链表.
-利用思路首先分配一个small bin chunk,然后free(free前再m
+          0x00house_of_lore通过改写small bin chunk的bk指针,同时构造一个fake small bin链表,从而分配一个fake chunk出来.
+利用思路首先分配一个small
           ...
           <!--noindex-->
           
@@ -2782,7 +2782,7 @@ poison_null_bytemalloc合适大小的三个chunk,首先free掉chunk2(chunk2的�
       <i class="fa fa-area-chart"></i>
     </span>
     
-    <span title="站点总字数">693k</span>
+    <span title="站点总字数">697k</span>
   
 
   
@@ -2791,7 +2791,7 @@ poison_null_bytemalloc合适大小的三个chunk,首先free掉chunk2(chunk2的�
       <i class="fa fa-coffee"></i>
     </span>
     
-    <span title="站点阅读时长">10:30</span>
+    <span title="站点阅读时长">10:33</span>
   
 </div>
 

@@ -127,7 +127,7 @@
 <meta property="og:site_name" content="w4rd3n">
 <meta property="og:description" content="漏洞要素写一个free后的large chunk,可用于修改两个任意地址的值为libc的一个地址 利用思路首先分配chunk p1,p2和p3(2,3一样大),并且在它们之间插入其他的chunk以防止在释放时被合并. 依次释放掉p1和p2,这两个chunk将被放入unsorted bin. 接下来随便malloc一个chunk使p1被切分为两块(小于p1即可),同时p2回到对应的large bin">
 <meta property="og:locale" content="zh-CN">
-<meta property="og:updated_time" content="2020-06-20T10:21:41.001Z">
+<meta property="og:updated_time" content="2020-07-09T03:19:40.521Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="binary-漏洞分析-Linux-heap-pwn-large_bin_attack">
 <meta name="twitter:description" content="漏洞要素写一个free后的large chunk,可用于修改两个任意地址的值为libc的一个地址 利用思路首先分配chunk p1,p2和p3(2,3一样大),并且在它们之间插入其他的chunk以防止在释放时被合并. 依次释放掉p1和p2,这两个chunk将被放入unsorted bin. 接下来随便malloc一个chunk使p1被切分为两块(小于p1即可),同时p2回到对应的large bin">
@@ -931,7 +931,7 @@
       <i class="fa fa-area-chart"></i>
     </span>
     
-    <span title="站点总字数">693k</span>
+    <span title="站点总字数">697k</span>
   
 
   
@@ -940,7 +940,7 @@
       <i class="fa fa-coffee"></i>
     </span>
     
-    <span title="站点阅读时长">10:30</span>
+    <span title="站点阅读时长">10:33</span>
   
 </div>
 

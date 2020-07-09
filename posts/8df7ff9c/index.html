@@ -127,13 +127,13 @@
 <meta property="og:site_name" content="w4rd3n">
 <meta property="og:description" content="概览C++与C都是生成可执行程序,只不过C++有一些常用的自定义数据结构. mangleC++的符号名是被mangle过的,使用gdb时可以使用set print asm-demangle on恢复.类似的还有命令行工具c++filt. 虚函数表虚函数是支持C++多态的关键机制,对于每个具有虚函数的类,编译器将根据类的继承层次结构创建一个或多个相关的虚函数表(位于只读段). 相应的对象实例会有一个">
 <meta property="og:locale" content="zh-CN">
-<meta property="og:image" content="https://hitworld.github.io/posts/undefined/1.png">
-<meta property="og:image" content="https://hitworld.github.io/posts/undefined/2.png">
-<meta property="og:updated_time" content="2020-07-09T03:19:40.527Z">
+<meta property="og:image" content="https://hitworld.github.io/posts/8df7ff9c/1.png">
+<meta property="og:image" content="https://hitworld.github.io/posts/8df7ff9c/2.png">
+<meta property="og:updated_time" content="2020-07-09T03:20:02.825Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="binary-漏洞分析-Linux-pwn-CPP">
 <meta name="twitter:description" content="概览C++与C都是生成可执行程序,只不过C++有一些常用的自定义数据结构. mangleC++的符号名是被mangle过的,使用gdb时可以使用set print asm-demangle on恢复.类似的还有命令行工具c++filt. 虚函数表虚函数是支持C++多态的关键机制,对于每个具有虚函数的类,编译器将根据类的继承层次结构创建一个或多个相关的虚函数表(位于只读段). 相应的对象实例会有一个">
-<meta name="twitter:image" content="https://hitworld.github.io/posts/undefined/1.png">
+<meta name="twitter:image" content="https://hitworld.github.io/posts/8df7ff9c/1.png">
 
 
 
@@ -544,11 +544,11 @@
 <h2 id="mangle"><a href="#mangle" class="headerlink" title="mangle"></a>mangle</h2><p><code>C++</code>的符号名是被<code>mangle</code>过的,使用<code>gdb</code>时可以使用<code>set print asm-demangle on</code>恢复.类似的还有命令行工具<code>c++filt</code>.</p>
 <h2 id="虚函数表"><a href="#虚函数表" class="headerlink" title="虚函数表"></a>虚函数表</h2><p>虚函数是支持<code>C++</code>多态的关键机制,对于每个具有虚函数的类,编译器将根据类的继承层次结构创建一个或多个相关的虚函数表(位于只读段).</p>
 <p>相应的对象实例会有一个虚函数表指针指向对于类的虚函数表,而虚表劫持就是通过其他漏洞修改类实例的虚函数表指针.</p>
-<img src="/posts/undefined/1.png" title="p1">
+<img src="/posts/8df7ff9c/1.png" title="p1">
 <h2 id="vector"><a href="#vector" class="headerlink" title="vector"></a>vector</h2><p><code>vector</code>是<code>C++</code>实现的动态数组类,空间不够时会申请两倍大小来放置内容,分配在堆中.</p>
 <p>成员:<code>_M_start</code>,<code>vector</code>起始位置;<code>_M_finish</code>,<code>vector</code>结尾位置;<code>_M_end_of_storage</code>:容器最后位置.</p>
 <p><code>vector</code>通过<code>_M_finish</code>和<code>_M_end_of_storage</code>判断空间是否足够.</p>
-<img src="/posts/undefined/2.png" title="p2">
+<img src="/posts/8df7ff9c/2.png" title="p2">
 <h2 id="new-amp-delete"><a href="#new-amp-delete" class="headerlink" title="new &amp; delete"></a>new &amp; delete</h2><p><code>new</code>与<code>malloc</code>类似,但配置失败会进行异常处理,而<code>malloc</code>返回<code>null</code>.</p>
 <p><code>delete</code>与<code>free</code>类似.</p>
 <h2 id="复制构造函数与赋值操作符"><a href="#复制构造函数与赋值操作符" class="headerlink" title="复制构造函数与赋值操作符"></a>复制构造函数与赋值操作符</h2><p>默认的复制构造函数与赋值操作符都是进行浅拷贝,也就是对于指针进行值复制.</p>
@@ -676,7 +676,7 @@
                 
                   <a href="/archives/">
                 
-                    <span class="site-state-item-count">184</span>
+                    <span class="site-state-item-count">186</span>
                     <span class="site-state-item-name">日志</span>
                   </a>
                 </div>
@@ -938,7 +938,7 @@
       <i class="fa fa-area-chart"></i>
     </span>
     
-    <span title="站点总字数">697k</span>
+    <span title="站点总字数">699k</span>
   
 
   
@@ -947,7 +947,7 @@
       <i class="fa fa-coffee"></i>
     </span>
     
-    <span title="站点阅读时长">10:33</span>
+    <span title="站点阅读时长">10:36</span>
   
 </div>
 

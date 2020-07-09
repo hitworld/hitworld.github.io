@@ -127,13 +127,13 @@
 <meta property="og:site_name" content="w4rd3n">
 <meta property="og:description" content="原理服务器执行PHP文件时,可以通过文件包含函数加载另一个文件中的PHP代码来执行. PHP中文件包含函数有以下四种. 1234require()require_once()include()include_once() include在包含的过程中如果出现错误,会抛出一个警告,程序继续正常运行;而require函数出现错误的时候,会直接报错并退出程序的执行. 而include_once(),re">
 <meta property="og:locale" content="zh-CN">
-<meta property="og:image" content="https://hitworld.github.io/posts/undefined/1.png">
-<meta property="og:image" content="https://hitworld.github.io/posts/undefined/2.png">
-<meta property="og:updated_time" content="2020-07-09T03:19:40.621Z">
+<meta property="og:image" content="https://hitworld.github.io/posts/6ef2fcfa/1.png">
+<meta property="og:image" content="https://hitworld.github.io/posts/6ef2fcfa/2.png">
+<meta property="og:updated_time" content="2020-07-09T03:20:02.860Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="web安全-PHP-文件包含漏洞">
 <meta name="twitter:description" content="原理服务器执行PHP文件时,可以通过文件包含函数加载另一个文件中的PHP代码来执行. PHP中文件包含函数有以下四种. 1234require()require_once()include()include_once() include在包含的过程中如果出现错误,会抛出一个警告,程序继续正常运行;而require函数出现错误的时候,会直接报错并退出程序的执行. 而include_once(),re">
-<meta name="twitter:image" content="https://hitworld.github.io/posts/undefined/1.png">
+<meta name="twitter:image" content="https://hitworld.github.io/posts/6ef2fcfa/1.png">
 
 
 
@@ -553,10 +553,10 @@
 <figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&lt;?php</span></span><br><span class="line">    <span class="keyword">include</span>($_GET[<span class="string">'filename'</span>] . <span class="string">".html"</span>);</span><br><span class="line"><span class="meta">?&gt;</span></span><br></pre></td></tr></table></figure>
 <p>可以使用<code>?</code>,<code>#</code>,<code></code>绕过后缀.</p>
 <h3 id="PHP伪协议"><a href="#PHP伪协议" class="headerlink" title="PHP伪协议"></a>PHP伪协议</h3><p><code>PHP</code>带有很多内置<code>URL</code>风格的封装协议,可用于部分文件系统函数.</p>
-<img src="/posts/undefined/1.png" title="PHP伪协议">
+<img src="/posts/6ef2fcfa/1.png" title="PHP伪协议">
 <h4 id="php-filter"><a href="#php-filter" class="headerlink" title="php://filter"></a>php://filter</h4><p>条件:需要开启<code>allow_url_include</code>,不需要开启<code>allow_url_fopen</code>.</p>
 <p><code>php://filter</code>(本地磁盘文件进行读取).</p>
-<img src="/posts/undefined/2.png" title="php://filter">
+<img src="/posts/6ef2fcfa/2.png" title="php://filter">
 <p>用法:<code>?filename=php://filter/convert.base64-encode/resource=xxx.php</code>,同<code>?filename=php://filter/read=convert.base64-encode/resource=xxx.php</code>.</p>
 <h4 id="php-input"><a href="#php-input" class="headerlink" title="php://input"></a>php://input</h4><p>条件:需要开启<code>allow_url_fopen</code>,不需要开启<code>allow_url_include</code>.</p>
 <p><code>php://input</code>用于访问请求的原始数据的只读流.即直接读取到<code>POST</code>上没有经过解析的原始数据.<code>enctype=&quot;multipart/form-data&quot;</code>时无效.</p>
@@ -689,7 +689,7 @@
                 
                   <a href="/archives/">
                 
-                    <span class="site-state-item-count">184</span>
+                    <span class="site-state-item-count">186</span>
                     <span class="site-state-item-name">日志</span>
                   </a>
                 </div>
@@ -951,7 +951,7 @@
       <i class="fa fa-area-chart"></i>
     </span>
     
-    <span title="站点总字数">697k</span>
+    <span title="站点总字数">699k</span>
   
 
   
@@ -960,7 +960,7 @@
       <i class="fa fa-coffee"></i>
     </span>
     
-    <span title="站点阅读时长">10:33</span>
+    <span title="站点阅读时长">10:36</span>
   
 </div>
 

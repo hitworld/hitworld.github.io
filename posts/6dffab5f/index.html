@@ -127,12 +127,12 @@
 <meta property="og:site_name" content="w4rd3n">
 <meta property="og:description" content="概览Win和Linux上二进制漏洞利用的差别主要体现在不同的程序保护机制,堆管理机制和进程管理机制等上面. 函数调用x86架构的微软操作系统使用stdcall:参数从右往左一次入栈,被调用者实现栈平衡,返回值存放在eax中. x86-64架构的微软操作系统的前四个整型参数使用rcx,rdx,r8,r9存储,使用xmm0到xmm3来放置浮点参数,其他的参数入栈(从右至左向8字节对齐). 同时x86-">
 <meta property="og:locale" content="zh-CN">
-<meta property="og:image" content="https://hitworld.github.io/posts/undefined/2.png">
-<meta property="og:updated_time" content="2020-07-09T03:19:40.539Z">
+<meta property="og:image" content="https://hitworld.github.io/posts/6dffab5f/2.png">
+<meta property="og:updated_time" content="2020-07-09T03:20:02.832Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="binary-漏洞分析-Windows-pwn-基础">
 <meta name="twitter:description" content="概览Win和Linux上二进制漏洞利用的差别主要体现在不同的程序保护机制,堆管理机制和进程管理机制等上面. 函数调用x86架构的微软操作系统使用stdcall:参数从右往左一次入栈,被调用者实现栈平衡,返回值存放在eax中. x86-64架构的微软操作系统的前四个整型参数使用rcx,rdx,r8,r9存储,使用xmm0到xmm3来放置浮点参数,其他的参数入栈(从右至左向8字节对齐). 同时x86-">
-<meta name="twitter:image" content="https://hitworld.github.io/posts/undefined/2.png">
+<meta name="twitter:image" content="https://hitworld.github.io/posts/6dffab5f/2.png">
 
 
 
@@ -576,7 +576,7 @@
 <li>如果位等于<code>1</code>,意味着间接调用的目标是可靠的,函数将返回并继续执行间接调用.如果位等于<code>0</code>,意味着间接调用的目标是不可靠的,将触发异常阻止不可靠地址的运行.</li>
 </ol>
 <h4 id="检测CFG"><a href="#检测CFG" class="headerlink" title="检测CFG"></a>检测CFG</h4><p>使用<code>dumpbin.exe /all file</code>可以看到该程序关于<code>CFG</code>的支持信息(<code>Load Config Table</code>部分).</p>
-<img src="/posts/undefined/2.png" title="p2">
+<img src="/posts/6dffab5f/2.png" title="p2">
 <ul>
 <li><code>Guard CF address of check-function pointer</code>:就是<code>_guard_check_icall</code>函数的地址,有<code>CFG</code>支持时将被修改成<code>nt!LdrpValidateUserCallTarget</code>函数的地址.</li>
 <li><code>Guard CF function table</code>:函数的相对虚拟地址(<code>RVA</code>)列表的指针,其包含了程序的代码.<code>CFGBitmap</code>的位信息来自<code>Guard CF function table</code>.</li>
@@ -705,7 +705,7 @@
                 
                   <a href="/archives/">
                 
-                    <span class="site-state-item-count">184</span>
+                    <span class="site-state-item-count">186</span>
                     <span class="site-state-item-name">日志</span>
                   </a>
                 </div>
@@ -967,7 +967,7 @@
       <i class="fa fa-area-chart"></i>
     </span>
     
-    <span title="站点总字数">697k</span>
+    <span title="站点总字数">699k</span>
   
 
   
@@ -976,7 +976,7 @@
       <i class="fa fa-coffee"></i>
     </span>
     
-    <span title="站点阅读时长">10:33</span>
+    <span title="站点阅读时长">10:36</span>
   
 </div>
 

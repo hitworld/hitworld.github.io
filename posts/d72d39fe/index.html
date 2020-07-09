@@ -127,7 +127,7 @@
 <meta property="og:site_name" content="w4rd3n">
 <meta property="og:description" content="tips参数的传递过程就是赋值,其约束条件也是如此. const关键字并不真正表示常量. 链接时-lthread等同于libthread.so. 预处理器C预处理器主要实现三个功能,字符串替换(#define str_a str_b),头文件包含(#include &amp;lt;stdio.h&amp;gt;)和宏扩展(#define a(y) a_do(y)). 未定义行为 整型数右移要不要扩展符号位. 参数">
 <meta property="og:locale" content="zh-CN">
-<meta property="og:updated_time" content="2020-07-09T03:19:40.605Z">
+<meta property="og:updated_time" content="2020-07-09T04:03:10.752Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="pl-C专家编程-笔记">
 <meta name="twitter:description" content="tips参数的传递过程就是赋值,其约束条件也是如此. const关键字并不真正表示常量. 链接时-lthread等同于libthread.so. 预处理器C预处理器主要实现三个功能,字符串替换(#define str_a str_b),头文件包含(#include &amp;lt;stdio.h&amp;gt;)和宏扩展(#define a(y) a_do(y)). 未定义行为 整型数右移要不要扩展符号位. 参数">
@@ -496,7 +496,7 @@
                 
                   <span class="post-meta-item-text">本文字数：</span>
                 
-                <span title="本文字数">1.7k</span>
+                <span title="本文字数">2.1k</span>
               
 
               
@@ -592,7 +592,8 @@
 <p>前者直接访问数据,后者要通过指针内容(地址)间接访问.</p>
 <h2 id="运行时数据结构"><a href="#运行时数据结构" class="headerlink" title="运行时数据结构"></a>运行时数据结构</h2><p>段,<code>heap</code>,<code>stack</code>,<code>libc</code>等.</p>
 <p>全局的<code>goto</code>与标签–<code>setjmp</code>与<code>longjmp</code>.</p>
-
+<h2 id="指定初始化"><a href="#指定初始化" class="headerlink" title="指定初始化"></a>指定初始化</h2><p>源于<code>ISO C99</code>标准.</p>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">static</span> <span class="class"><span class="keyword">struct</span> <span class="title">usb_driver</span> <span class="title">usb_storage_driver</span> = &#123;</span></span><br><span class="line">  .owner = THIS_MODULE,</span><br><span class="line">  .name = <span class="string">"usb-storage"</span>,</span><br><span class="line">  .probe = storage_probe,</span><br><span class="line">  .disconnect = storage_disconnect,</span><br><span class="line">  .id_table = storage_usb_ids,</span><br><span class="line">&#125;;</span><br><span class="line"></span><br><span class="line"><span class="keyword">int</span> a[<span class="number">6</span>] = &#123;[<span class="number">4</span>] = <span class="number">29</span>, [<span class="number">2</span>] = <span class="number">15</span>&#125;;</span><br><span class="line"></span><br><span class="line"><span class="keyword">int</span> widths[] = &#123;[<span class="number">0</span> ... <span class="number">9</span>] = <span class="number">1</span>, [<span class="number">10</span> ... <span class="number">99</span>] = <span class="number">2</span>, [<span class="number">100</span>] = <span class="number">3</span>&#125;;<span class="comment">//GNU扩展</span></span><br></pre></td></tr></table></figure>
       
     </div>
 
@@ -714,7 +715,7 @@
                 
                   <a href="/archives/">
                 
-                    <span class="site-state-item-count">184</span>
+                    <span class="site-state-item-count">186</span>
                     <span class="site-state-item-name">日志</span>
                   </a>
                 </div>
@@ -944,7 +945,7 @@
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#tips"><span class="nav-number">1.</span> <span class="nav-text">tips</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#预处理器"><span class="nav-number">2.</span> <span class="nav-text">预处理器</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#未定义行为"><span class="nav-number">3.</span> <span class="nav-text">未定义行为</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#缺省可见性"><span class="nav-number">4.</span> <span class="nav-text">缺省可见性</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#容易误解的运算符优先性"><span class="nav-number">5.</span> <span class="nav-text">容易误解的运算符优先性</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#maximal-munch-strategy"><span class="nav-number">6.</span> <span class="nav-text">maximal munch strategy</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#声明"><span class="nav-number">7.</span> <span class="nav-text">声明</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#优先级规则"><span class="nav-number">7.1.</span> <span class="nav-text">优先级规则</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#C名称空间"><span class="nav-number">8.</span> <span class="nav-text">C名称空间</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#隐式转换"><span class="nav-number">9.</span> <span class="nav-text">隐式转换</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#数组与指针"><span class="nav-number">10.</span> <span class="nav-text">数组与指针</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#运行时数据结构"><span class="nav-number">11.</span> <span class="nav-text">运行时数据结构</span></a></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#tips"><span class="nav-number">1.</span> <span class="nav-text">tips</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#预处理器"><span class="nav-number">2.</span> <span class="nav-text">预处理器</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#未定义行为"><span class="nav-number">3.</span> <span class="nav-text">未定义行为</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#缺省可见性"><span class="nav-number">4.</span> <span class="nav-text">缺省可见性</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#容易误解的运算符优先性"><span class="nav-number">5.</span> <span class="nav-text">容易误解的运算符优先性</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#maximal-munch-strategy"><span class="nav-number">6.</span> <span class="nav-text">maximal munch strategy</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#声明"><span class="nav-number">7.</span> <span class="nav-text">声明</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#优先级规则"><span class="nav-number">7.1.</span> <span class="nav-text">优先级规则</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#C名称空间"><span class="nav-number">8.</span> <span class="nav-text">C名称空间</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#隐式转换"><span class="nav-number">9.</span> <span class="nav-text">隐式转换</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#数组与指针"><span class="nav-number">10.</span> <span class="nav-text">数组与指针</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#运行时数据结构"><span class="nav-number">11.</span> <span class="nav-text">运行时数据结构</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#指定初始化"><span class="nav-number">12.</span> <span class="nav-text">指定初始化</span></a></li></ol></div>
             
 
           </div>
@@ -976,7 +977,7 @@
       <i class="fa fa-area-chart"></i>
     </span>
     
-    <span title="站点总字数">697k</span>
+    <span title="站点总字数">699k</span>
   
 
   
@@ -985,7 +986,7 @@
       <i class="fa fa-coffee"></i>
     </span>
     
-    <span title="站点阅读时长">10:33</span>
+    <span title="站点阅读时长">10:36</span>
   
 </div>
 

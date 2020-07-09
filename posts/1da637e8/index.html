@@ -127,7 +127,7 @@
 <meta property="og:site_name" content="w4rd3n">
 <meta property="og:description" content="漏洞要素覆盖一个堆指针变量,使其指向足够可控的区域,free后系统会错误的将该区域作为堆块放到相应的bin里面,再分配出来. 利用思路关键在于伪造两个fast bin chunk(两个fast bin chunk中间的内容不可控). 然后覆盖一个堆指针变量使其指向第一个fast bin chunk,free后再malloc使两个fast bin chunk间的区域可控. free时的检测. 123">
 <meta property="og:locale" content="zh-CN">
-<meta property="og:updated_time" content="2020-07-09T03:19:40.520Z">
+<meta property="og:updated_time" content="2020-07-09T03:20:02.821Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="binary-漏洞分析-Linux-heap-pwn-house_of_spirit">
 <meta name="twitter:description" content="漏洞要素覆盖一个堆指针变量,使其指向足够可控的区域,free后系统会错误的将该区域作为堆块放到相应的bin里面,再分配出来. 利用思路关键在于伪造两个fast bin chunk(两个fast bin chunk中间的内容不可控). 然后覆盖一个堆指针变量使其指向第一个fast bin chunk,free后再malloc使两个fast bin chunk间的区域可控. free时的检测. 123">
@@ -670,7 +670,7 @@
                 
                   <a href="/archives/">
                 
-                    <span class="site-state-item-count">184</span>
+                    <span class="site-state-item-count">186</span>
                     <span class="site-state-item-name">日志</span>
                   </a>
                 </div>
@@ -932,7 +932,7 @@
       <i class="fa fa-area-chart"></i>
     </span>
     
-    <span title="站点总字数">697k</span>
+    <span title="站点总字数">699k</span>
   
 
   
@@ -941,7 +941,7 @@
       <i class="fa fa-coffee"></i>
     </span>
     
-    <span title="站点阅读时长">10:33</span>
+    <span title="站点阅读时长">10:36</span>
   
 </div>
 

@@ -1,9 +1,31 @@
 <?xml version="1.0" encoding="utf-8"?>
 <search>
   <entry>
+    <title><![CDATA[w4rd3n-朝花夕拾]]></title>
+    <url>%2Fposts%2F36159cdd%2F</url>
+    <content type="text"><![CDATA[0x002020/7/8 Python爬虫之模拟知乎登录—https://juejin.im/post/58dce2248d6d8100613a4cfb。 使用Python读写处理Excel表格—https://blog.csdn.net/Cloudox_/article/details/53812213。 Shell脚本编程30分钟入门—https://github.com/qinjx/30min_guides/blob/master/shell.md#%E4%BD%BF%E7%94%A8%E5%8F%98%E9%87%8F。 深入理解linux系统下proc文件系统内容—https://www.cnblogs.com/cute/archive/2011/04/20/2022280.html。 2020/7/9 内核 API，第 1 部分：从内核调用用户空间应用程序—https://www.ibm.com/developerworks/cn/linux/l-user-space-apps/index.html。 指定初始化—https://blog.csdn.net/comwise/article/details/9087279。 学习React官方文档，写了一个demo：https://github.com/hitworld/react-demo。 学习Linux内核模块编程。 2020/7/10 打游戏。 2020/7/11-2020/7/12 继续打游戏。 2020/7/13 学习数论概论华章数学译丛（原书第三版）的1~13章。 2020/7/14 学习数论概论华章数学译丛（原书第三版）的14~18章。 写制作带virtio驱动的win虚拟机的制作过程。]]></content>
+      <categories>
+        <category>w4rd3n</category>
+      </categories>
+      <tags>
+        <tag>朝花夕拾</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title><![CDATA[mathematics-number-theory-基础]]></title>
+    <url>%2Fposts%2F8aba96b3%2F</url>
+    <content type="text"><![CDATA[0x00数论研究自然数集合(正整数集合),特别的,数论研究不同类型数之间的关系. 数论的常用研究步骤. 积累数据,通常是数值数据,也可能更抽象.这一步是研究的事实基础. 分析数据,设法找出模式和关系.例如平方数,立方数. 形成解释模式与关系的猜想(即猜测),通常借助公式来表达这些猜想. 通过收集额外数据,检查新信息是否符合猜想来验证自己的猜想. 给出自己的猜想的论证即证明. 习题第一章1.1给出求三角平方数的有效方法,是否有无穷多个三角平方数?]]></content>
+      <categories>
+        <category>mathematics</category>
+      </categories>
+      <tags>
+        <tag>number-theory</tag>
+      </tags>
+  </entry>
+  <entry>
     <title><![CDATA[develop-FrontEnd-React-基础]]></title>
     <url>%2Fposts%2Fa03be718%2F</url>
-    <content type="text"><![CDATA[0x00React是一个声明式,高效且灵活的用于构建用户界面的JavaScript库.使用React可以将一些简短,独立的代码片段组合成复杂的UI界面,这些代码片段被称作组件. 组件React中拥有多种不同类型的组件.通过使用组件来告诉React要在屏幕上显示什么.当数据发生改变时,React会高效地更新并重新渲染组件. 1234567891011121314class ShoppingList extends React.Component &#123; render() &#123; return ( &lt;div className="shopping-list"&gt; &lt;h1&gt;Shopping List for &#123;this.props.name&#125;&lt;/h1&gt; &lt;ul&gt; &lt;li&gt;Instagram&lt;/li&gt; &lt;li&gt;WhatsApp&lt;/li&gt; &lt;li&gt;Oculus&lt;/li&gt; &lt;/ul&gt; &lt;/div&gt; ); &#125;&#125; ShoppingList是一个React组件类,组件参数叫做props,然后通过render方法返回需要展示在屏幕上的视图的层次结构,这是一种对渲染内容的轻量级描述JSX. JSX是一种特殊语法,在JSX中可以任意使用JavaScript表达式,只需要用大括号把表达式括起来. 每一个React元素事实上都是一个JavaScript对象,可以把它当保存在变量中或者作为参数传递.可以通过&lt;ShoppingList /&gt;来表示整个ShoppingList组件.每个组件都是封装好的,并且可以单独运行,通过组合简单的组件来构建复杂的UI界面.]]></content>
+    <content type="text"><![CDATA[0x00React是一个声明式,高效且灵活的用于构建用户界面的JavaScript库.使用React可以将一些简短,独立的代码片段组合成复杂的UI界面,这些代码片段被称作组件. nodejs默认附带React,新建项目. 1npx create-react-app my-app demo解析123456789101112131415161718192021222324252627282930313233343536373839404142434445464748495051525354555657585960616263646566676869707172737475767778798081828384858687888990919293949596979899100101102103104105106107108109110111112113114115116117118119120121122123124125126127128129130131132133134135136137138139140141142143144145146147148149150151152153154155156157158159160161162163164165import React from 'react';import ReactDOM from 'react-dom';import './index.css';//导入React项目基础模块//定义函数组件function Square(props) &#123; //props是定义的参数,可以接收父组件的数据 return ( //组件中return返回的是对渲染内容的轻量级描述,语法为JSX. /* 以下JSX编译后即以下代码 React.createElement("button", &#123; className: "square", onClick: props.onClick &#125;, props.value); */ &lt;button className="square" onClick=&#123;props.onClick&#125;&gt; &#123;props.value&#125; &lt;/button&gt; //button是原生组件 //通过props读取父组件传来的数据 );&#125;//定义组件类,继承React.Componentclass Board extends React.Component &#123; renderSquare(i) &#123; return ( &lt;Square value=&#123;this.props.squares[i]&#125; onClick=&#123;() =&gt; this.props.onClick(i)&#125; /&gt; //自定义组件的使用方法与原生组件类似,属性通过参数props传递,用于父子组件的数据通信 ); &#125; //render返回的即该组件的视图层次 render() &#123; return ( &lt;div&gt; &lt;div className="board-row"&gt; &#123;this.renderSquare(0)&#125; &#123;this.renderSquare(1)&#125; &#123;this.renderSquare(2)&#125; &lt;/div&gt; &lt;div className="board-row"&gt; &#123;this.renderSquare(3)&#125; &#123;this.renderSquare(4)&#125; &#123;this.renderSquare(5)&#125; &lt;/div&gt; &lt;div className="board-row"&gt; &#123;this.renderSquare(6)&#125; &#123;this.renderSquare(7)&#125; &#123;this.renderSquare(8)&#125; &lt;/div&gt; &lt;/div&gt; ); &#125;&#125;class Game extends React.Component &#123; constructor(props) &#123; super(props); //JavaScript class中每次定义其子类的构造函数时,都需要调用super方法,所有含有构造函数的的React组件中构造函数必须以super(props)开头. this.state = &#123; history: [ &#123; squares: Array(9).fill(null) &#125; ], stepNumber: 0, xIsNext: true &#125;; &#125; handleClick(i) &#123; const history = this.state.history.slice(0, this.state.stepNumber + 1); const current = history[history.length - 1]; const squares = current.squares.slice(); if (calculateWinner(squares) || squares[i]) &#123; return; &#125; squares[i] = this.state.xIsNext ? "X" : "O"; this.setState(&#123; history: history.concat([ &#123; squares: squares &#125; ]), stepNumber: history.length, xIsNext: !this.state.xIsNext &#125;); &#125; jumpTo(step) &#123; this.setState(&#123; stepNumber: step, xIsNext: (step % 2) === 0 &#125;); &#125; render() &#123; const history = this.state.history; const current = history[this.state.stepNumber]; const winner = calculateWinner(current.squares); const moves = history.map((step, move) =&gt; &#123; const desc = move ? 'Go to move #' + move : 'Go to game start'; return ( &lt;li key=&#123;move&#125;&gt; &lt;button onClick=&#123;() =&gt; this.jumpTo(move)&#125;&gt;&#123;desc&#125;&lt;/button&gt; &lt;/li&gt; ); &#125;); //map方法 let status; if (winner) &#123; status = "Winner: " + winner; &#125; else &#123; status = "Next player: " + (this.state.xIsNext ? "X" : "O"); &#125; return ( &lt;div className="game"&gt; &lt;div className="game-board"&gt; &lt;Board squares=&#123;current.squares&#125; onClick=&#123;i =&gt; this.handleClick(i)&#125; /&gt; &lt;/div&gt; &lt;div className="game-info"&gt; &lt;div&gt;&#123;status&#125;&lt;/div&gt; &lt;ol&gt;&#123;moves&#125;&lt;/ol&gt; &lt;/div&gt; &lt;/div&gt; ); &#125;&#125;ReactDOM.render(&lt;Game /&gt;, document.getElementById("root"));//项目的基本DOMfunction calculateWinner(squares) &#123; const lines = [ [0, 1, 2], [3, 4, 5], [6, 7, 8], [0, 3, 6], [1, 4, 7], [2, 5, 8], [0, 4, 8], [2, 4, 6] ]; for (let i = 0; i &lt; lines.length; i++) &#123; const [a, b, c] = lines[i]; if (squares[a] &amp;&amp; squares[a] === squares[b] &amp;&amp; squares[a] === squares[c]) &#123; return squares[a]; &#125; &#125; return null;&#125;]]></content>
       <categories>
         <category>develop</category>
       </categories>
@@ -66,17 +88,6 @@
       </categories>
       <tags>
         <tag>operating-system</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title><![CDATA[w4rd3n-朝花夕拾]]></title>
-    <url>%2Fposts%2F36159cdd%2F</url>
-    <content type="text"><![CDATA[0x002020/7/8 Python爬虫之模拟知乎登录—https://juejin.im/post/58dce2248d6d8100613a4cfb。 使用Python读写处理Excel表格—https://blog.csdn.net/Cloudox_/article/details/53812213。 Shell脚本编程30分钟入门—https://github.com/qinjx/30min_guides/blob/master/shell.md#%E4%BD%BF%E7%94%A8%E5%8F%98%E9%87%8F。 深入理解linux系统下proc文件系统内容—https://www.cnblogs.com/cute/archive/2011/04/20/2022280.html。 2020/7/9 内核 API，第 1 部分：从内核调用用户空间应用程序—https://www.ibm.com/developerworks/cn/linux/l-user-space-apps/index.html。 指定初始化—https://blog.csdn.net/comwise/article/details/9087279。 学习React。]]></content>
-      <categories>
-        <category>w4rd3n</category>
-      </categories>
-      <tags>
-        <tag>朝花夕拾</tag>
       </tags>
   </entry>
   <entry>

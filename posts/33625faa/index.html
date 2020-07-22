@@ -119,18 +119,18 @@
 
 
 
-  <meta name="description" content="概念当printf等格式化字符串函数的第一个参数用户可控时,即可任意读写.这就是格式化字符串漏洞. 原理格式化字符串的格式如下. 1%[parameter][flags][width][.precision][length]type parameter:n$,使用第n个参数.flags:在width设置后指定可以用来作为填充的内容之类的内容.width:最小输出长度.precision:最大输出长">
+  <meta name="description" content="未完成 概念当printf等格式化字符串函数的第一个参数用户可控时,即可任意读写.这就是格式化字符串漏洞. 原理格式化字符串的格式如下. 1%[parameter][flags][width][.precision][length]type parameter:n$,使用第n个参数.flags:在width设置后指定可以用来作为填充的内容之类的内容.width:最小输出长度.precision:最">
 <meta name="keywords" content="Linux-pwn">
 <meta property="og:type" content="article">
 <meta property="og:title" content="binary-漏洞分析-Linux-pwn-格式化字符串漏洞">
 <meta property="og:url" content="https://hitworld.github.io/posts/33625faa/index.html">
 <meta property="og:site_name" content="w4rd3n">
-<meta property="og:description" content="概念当printf等格式化字符串函数的第一个参数用户可控时,即可任意读写.这就是格式化字符串漏洞. 原理格式化字符串的格式如下. 1%[parameter][flags][width][.precision][length]type parameter:n$,使用第n个参数.flags:在width设置后指定可以用来作为填充的内容之类的内容.width:最小输出长度.precision:最大输出长">
+<meta property="og:description" content="未完成 概念当printf等格式化字符串函数的第一个参数用户可控时,即可任意读写.这就是格式化字符串漏洞. 原理格式化字符串的格式如下. 1%[parameter][flags][width][.precision][length]type parameter:n$,使用第n个参数.flags:在width设置后指定可以用来作为填充的内容之类的内容.width:最小输出长度.precision:最">
 <meta property="og:locale" content="zh-CN">
-<meta property="og:updated_time" content="2020-07-09T03:20:02.829Z">
+<meta property="og:updated_time" content="2020-07-22T09:21:24.061Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="binary-漏洞分析-Linux-pwn-格式化字符串漏洞">
-<meta name="twitter:description" content="概念当printf等格式化字符串函数的第一个参数用户可控时,即可任意读写.这就是格式化字符串漏洞. 原理格式化字符串的格式如下. 1%[parameter][flags][width][.precision][length]type parameter:n$,使用第n个参数.flags:在width设置后指定可以用来作为填充的内容之类的内容.width:最小输出长度.precision:最大输出长">
+<meta name="twitter:description" content="未完成 概念当printf等格式化字符串函数的第一个参数用户可控时,即可任意读写.这就是格式化字符串漏洞. 原理格式化字符串的格式如下. 1%[parameter][flags][width][.precision][length]type parameter:n$,使用第n个参数.flags:在width设置后指定可以用来作为填充的内容之类的内容.width:最小输出长度.precision:最">
 
 
 
@@ -503,7 +503,7 @@
                 
                   <span class="post-meta-item-text">本文字数：</span>
                 
-                <span title="本文字数">964</span>
+                <span title="本文字数">968</span>
               
 
               
@@ -537,7 +537,8 @@
       
 
       
-        <h2 id="概念"><a href="#概念" class="headerlink" title="概念"></a>概念</h2><p>当<code>printf</code>等格式化字符串函数的第一个参数用户可控时,即可任意读写.这就是格式化字符串漏洞.</p>
+        <p>未完成</p>
+<h2 id="概念"><a href="#概念" class="headerlink" title="概念"></a>概念</h2><p>当<code>printf</code>等格式化字符串函数的第一个参数用户可控时,即可任意读写.这就是格式化字符串漏洞.</p>
 <h2 id="原理"><a href="#原理" class="headerlink" title="原理"></a>原理</h2><p>格式化字符串的格式如下.</p>
 <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">%[parameter][flags][width][.precision][length]<span class="built_in">type</span></span><br></pre></td></tr></table></figure>
 <p><code>parameter</code>:<code>n$</code>,使用第<code>n</code>个参数.<br><code>flags</code>:在<code>width</code>设置后指定可以用来作为填充的内容之类的内容.<br><code>width</code>:最小输出长度.<br><code>precision</code>:最大输出长度.<br><code>length</code>:参数长度,<code>h</code>,<code>ll</code>.配合<code>type</code>.</p>
@@ -683,7 +684,7 @@
                 
                   <a href="/archives/">
                 
-                    <span class="site-state-item-count">188</span>
+                    <span class="site-state-item-count">185</span>
                     <span class="site-state-item-name">日志</span>
                   </a>
                 </div>
@@ -867,9 +868,7 @@
                     
                       
                     
-                      
-                    
-                    <span class="site-state-item-count">55</span>
+                    <span class="site-state-item-count">54</span>
                     <span class="site-state-item-name">标签</span>
                   </a>
                 </div>
@@ -951,7 +950,7 @@
       <i class="fa fa-area-chart"></i>
     </span>
     
-    <span title="站点总字数">713k</span>
+    <span title="站点总字数">708k</span>
   
 
   
@@ -960,7 +959,7 @@
       <i class="fa fa-coffee"></i>
     </span>
     
-    <span title="站点阅读时长">10:48</span>
+    <span title="站点阅读时长">10:44</span>
   
 </div>
 

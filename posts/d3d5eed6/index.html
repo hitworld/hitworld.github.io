@@ -119,18 +119,18 @@
 
 
 
-  <meta name="description" content="0x00house_of_roman利用条件,可以修改free chunk的fd,可以溢出下一个chunk的size. 利用思路 首先分配3个chunk,大小分别为0x20,0xd0,0x70. 在chunk2 + 0x78处设置p64(0x61),作用是fake size,用于后面的fastbin attack. 释放掉chunk2,再次分配0xd0,会分配到chunk2,此时chunk2 +">
+  <meta name="description" content="未完成 0x00house_of_roman利用条件,可以修改free chunk的fd,可以溢出下一个chunk的size. 利用思路 首先分配3个chunk,大小分别为0x20,0xd0,0x70. 在chunk2 + 0x78处设置p64(0x61),作用是fake size,用于后面的fastbin attack. 释放掉chunk2,再次分配0xd0,会分配到chunk2,此时chunk">
 <meta name="keywords" content="heap-pwn">
 <meta property="og:type" content="article">
 <meta property="og:title" content="binary-漏洞分析-Linux-heap-pwn-house_of_roman">
 <meta property="og:url" content="https://hitworld.github.io/posts/d3d5eed6/index.html">
 <meta property="og:site_name" content="w4rd3n">
-<meta property="og:description" content="0x00house_of_roman利用条件,可以修改free chunk的fd,可以溢出下一个chunk的size. 利用思路 首先分配3个chunk,大小分别为0x20,0xd0,0x70. 在chunk2 + 0x78处设置p64(0x61),作用是fake size,用于后面的fastbin attack. 释放掉chunk2,再次分配0xd0,会分配到chunk2,此时chunk2 +">
+<meta property="og:description" content="未完成 0x00house_of_roman利用条件,可以修改free chunk的fd,可以溢出下一个chunk的size. 利用思路 首先分配3个chunk,大小分别为0x20,0xd0,0x70. 在chunk2 + 0x78处设置p64(0x61),作用是fake size,用于后面的fastbin attack. 释放掉chunk2,再次分配0xd0,会分配到chunk2,此时chunk">
 <meta property="og:locale" content="zh-CN">
-<meta property="og:updated_time" content="2020-07-09T03:20:02.820Z">
+<meta property="og:updated_time" content="2020-07-22T09:20:25.190Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="binary-漏洞分析-Linux-heap-pwn-house_of_roman">
-<meta name="twitter:description" content="0x00house_of_roman利用条件,可以修改free chunk的fd,可以溢出下一个chunk的size. 利用思路 首先分配3个chunk,大小分别为0x20,0xd0,0x70. 在chunk2 + 0x78处设置p64(0x61),作用是fake size,用于后面的fastbin attack. 释放掉chunk2,再次分配0xd0,会分配到chunk2,此时chunk2 +">
+<meta name="twitter:description" content="未完成 0x00house_of_roman利用条件,可以修改free chunk的fd,可以溢出下一个chunk的size. 利用思路 首先分配3个chunk,大小分别为0x20,0xd0,0x70. 在chunk2 + 0x78处设置p64(0x61),作用是fake size,用于后面的fastbin attack. 释放掉chunk2,再次分配0xd0,会分配到chunk2,此时chunk">
 
 
 
@@ -537,7 +537,8 @@
       
 
       
-        <h2 id="0x00"><a href="#0x00" class="headerlink" title="0x00"></a>0x00</h2><p><code>house_of_roman</code>利用条件,可以修改<code>free chunk</code>的<code>fd</code>,可以溢出下一个<code>chunk</code>的<code>size</code>.</p>
+        <p>未完成</p>
+<h2 id="0x00"><a href="#0x00" class="headerlink" title="0x00"></a>0x00</h2><p><code>house_of_roman</code>利用条件,可以修改<code>free chunk</code>的<code>fd</code>,可以溢出下一个<code>chunk</code>的<code>size</code>.</p>
 <h2 id="利用思路"><a href="#利用思路" class="headerlink" title="利用思路"></a>利用思路</h2><ol>
 <li>首先分配<code>3</code>个<code>chunk</code>,大小分别为<code>0x20</code>,<code>0xd0</code>,<code>0x70</code>.</li>
 <li>在<code>chunk2 + 0x78</code>处设置<code>p64(0x61)</code>,作用是<code>fake size</code>,用于后面的<code>fastbin attack</code>.</li>
@@ -671,7 +672,7 @@
                 
                   <a href="/archives/">
                 
-                    <span class="site-state-item-count">188</span>
+                    <span class="site-state-item-count">185</span>
                     <span class="site-state-item-name">日志</span>
                   </a>
                 </div>
@@ -855,9 +856,7 @@
                     
                       
                     
-                      
-                    
-                    <span class="site-state-item-count">55</span>
+                    <span class="site-state-item-count">54</span>
                     <span class="site-state-item-name">标签</span>
                   </a>
                 </div>
@@ -939,7 +938,7 @@
       <i class="fa fa-area-chart"></i>
     </span>
     
-    <span title="站点总字数">713k</span>
+    <span title="站点总字数">708k</span>
   
 
   
@@ -948,7 +947,7 @@
       <i class="fa fa-coffee"></i>
     </span>
     
-    <span title="站点阅读时长">10:48</span>
+    <span title="站点阅读时长">10:44</span>
   
 </div>
 

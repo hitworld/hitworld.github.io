@@ -119,18 +119,18 @@
 
 
 
-  <meta name="description" content="环境推荐使用NASM加32位Windows 7. 实地址方式实地址方式可以访问8个32位通用寄存器,但EIP,ESP,EFLAGS都只有低16位起作用.实地址方式下处理器的基本执行环境和基本指令集与保护方式是相同的.不过间接寻址中不能使用比例因子. NASM编程NASM大小写敏感. 12345NASM 1.asm -o 1.com#COM程序会从段内偏移100H开始执行,因为COM为纯二进制文件N">
+  <meta name="description" content="未完成 环境推荐使用NASM加32位Windows 7. 实地址方式实地址方式可以访问8个32位通用寄存器,但EIP,ESP,EFLAGS都只有低16位起作用.实地址方式下处理器的基本执行环境和基本指令集与保护方式是相同的.不过间接寻址中不能使用比例因子. NASM编程NASM大小写敏感. 12345NASM 1.asm -o 1.com#COM程序会从段内偏移100H开始执行,因为COM为纯二进">
 <meta name="keywords" content="assembly">
 <meta property="og:type" content="article">
 <meta property="og:title" content="pl-assembly-IA32-实地址方式">
 <meta property="og:url" content="https://hitworld.github.io/posts/26987864/index.html">
 <meta property="og:site_name" content="w4rd3n">
-<meta property="og:description" content="环境推荐使用NASM加32位Windows 7. 实地址方式实地址方式可以访问8个32位通用寄存器,但EIP,ESP,EFLAGS都只有低16位起作用.实地址方式下处理器的基本执行环境和基本指令集与保护方式是相同的.不过间接寻址中不能使用比例因子. NASM编程NASM大小写敏感. 12345NASM 1.asm -o 1.com#COM程序会从段内偏移100H开始执行,因为COM为纯二进制文件N">
+<meta property="og:description" content="未完成 环境推荐使用NASM加32位Windows 7. 实地址方式实地址方式可以访问8个32位通用寄存器,但EIP,ESP,EFLAGS都只有低16位起作用.实地址方式下处理器的基本执行环境和基本指令集与保护方式是相同的.不过间接寻址中不能使用比例因子. NASM编程NASM大小写敏感. 12345NASM 1.asm -o 1.com#COM程序会从段内偏移100H开始执行,因为COM为纯二进">
 <meta property="og:locale" content="zh-CN">
-<meta property="og:updated_time" content="2020-07-09T03:20:02.849Z">
+<meta property="og:updated_time" content="2020-07-22T09:28:25.979Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="pl-assembly-IA32-实地址方式">
-<meta name="twitter:description" content="环境推荐使用NASM加32位Windows 7. 实地址方式实地址方式可以访问8个32位通用寄存器,但EIP,ESP,EFLAGS都只有低16位起作用.实地址方式下处理器的基本执行环境和基本指令集与保护方式是相同的.不过间接寻址中不能使用比例因子. NASM编程NASM大小写敏感. 12345NASM 1.asm -o 1.com#COM程序会从段内偏移100H开始执行,因为COM为纯二进制文件N">
+<meta name="twitter:description" content="未完成 环境推荐使用NASM加32位Windows 7. 实地址方式实地址方式可以访问8个32位通用寄存器,但EIP,ESP,EFLAGS都只有低16位起作用.实地址方式下处理器的基本执行环境和基本指令集与保护方式是相同的.不过间接寻址中不能使用比例因子. NASM编程NASM大小写敏感. 12345NASM 1.asm -o 1.com#COM程序会从段内偏移100H开始执行,因为COM为纯二进">
 
 
 
@@ -530,7 +530,8 @@
       
 
       
-        <h2 id="环境"><a href="#环境" class="headerlink" title="环境"></a>环境</h2><p>推荐使用<code>NASM</code>加<code>32</code>位<code>Windows 7</code>.</p>
+        <p>未完成</p>
+<h2 id="环境"><a href="#环境" class="headerlink" title="环境"></a>环境</h2><p>推荐使用<code>NASM</code>加<code>32</code>位<code>Windows 7</code>.</p>
 <h2 id="实地址方式"><a href="#实地址方式" class="headerlink" title="实地址方式"></a>实地址方式</h2><p>实地址方式可以访问<code>8</code>个<code>32</code>位通用寄存器,但<code>EIP</code>,<code>ESP</code>,<code>EFLAGS</code>都只有低<code>16</code>位起作用.实地址方式下处理器的基本执行环境和基本指令集与保护方式是相同的.不过间接寻址中不能使用比例因子.</p>
 <h2 id="NASM编程"><a href="#NASM编程" class="headerlink" title="NASM编程"></a>NASM编程</h2><p><code>NASM</code>大小写敏感.</p>
 <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">NASM 1.asm -o 1.com</span><br><span class="line"><span class="comment">#COM程序会从段内偏移100H开始执行,因为COM为纯二进制文件</span></span><br><span class="line">NASM 1.asm -f obj -o 1.obj</span><br><span class="line">LINK 1.obj;</span><br><span class="line"><span class="comment">#生成exe程序,从标号..start开始执行</span></span><br></pre></td></tr></table></figure>
@@ -681,7 +682,7 @@
                 
                   <a href="/archives/">
                 
-                    <span class="site-state-item-count">188</span>
+                    <span class="site-state-item-count">185</span>
                     <span class="site-state-item-name">日志</span>
                   </a>
                 </div>
@@ -865,9 +866,7 @@
                     
                       
                     
-                      
-                    
-                    <span class="site-state-item-count">55</span>
+                    <span class="site-state-item-count">54</span>
                     <span class="site-state-item-name">标签</span>
                   </a>
                 </div>
@@ -949,7 +948,7 @@
       <i class="fa fa-area-chart"></i>
     </span>
     
-    <span title="站点总字数">713k</span>
+    <span title="站点总字数">708k</span>
   
 
   
@@ -958,7 +957,7 @@
       <i class="fa fa-coffee"></i>
     </span>
     
-    <span title="站点阅读时长">10:48</span>
+    <span title="站点阅读时长">10:44</span>
   
 </div>
 

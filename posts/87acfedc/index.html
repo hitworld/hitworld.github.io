@@ -119,18 +119,18 @@
 
 
 
-  <meta name="description" content="概览经典的算法问题模型,对于一个元素数组,根据其主键(如整数数组的数值)的全序关系(如数值的大小关系)进行排序. 排序算法模板类. 1234567891011121314151617181920212223242526272829public class Example &amp;#123;  public static void sort(Comparable[] a) &amp;#123; /* code *">
+  <meta name="description" content="未完成 概览经典的算法问题模型,对于一个元素数组,根据其主键(如整数数组的数值)的全序关系(如数值的大小关系)进行排序. 排序算法模板类. 1234567891011121314151617181920212223242526272829public class Example &amp;#123;  public static void sort(Comparable[] a) &amp;#123; /* co">
 <meta name="keywords" content="算法模型">
 <meta property="og:type" content="article">
 <meta property="og:title" content="CS-algorithm-排序算法">
 <meta property="og:url" content="https://hitworld.github.io/posts/87acfedc/index.html">
 <meta property="og:site_name" content="w4rd3n">
-<meta property="og:description" content="概览经典的算法问题模型,对于一个元素数组,根据其主键(如整数数组的数值)的全序关系(如数值的大小关系)进行排序. 排序算法模板类. 1234567891011121314151617181920212223242526272829public class Example &amp;#123;  public static void sort(Comparable[] a) &amp;#123; /* code *">
+<meta property="og:description" content="未完成 概览经典的算法问题模型,对于一个元素数组,根据其主键(如整数数组的数值)的全序关系(如数值的大小关系)进行排序. 排序算法模板类. 1234567891011121314151617181920212223242526272829public class Example &amp;#123;  public static void sort(Comparable[] a) &amp;#123; /* co">
 <meta property="og:locale" content="zh-CN">
-<meta property="og:updated_time" content="2020-07-09T03:20:02.799Z">
+<meta property="og:updated_time" content="2020-07-22T09:24:24.314Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="CS-algorithm-排序算法">
-<meta name="twitter:description" content="概览经典的算法问题模型,对于一个元素数组,根据其主键(如整数数组的数值)的全序关系(如数值的大小关系)进行排序. 排序算法模板类. 1234567891011121314151617181920212223242526272829public class Example &amp;#123;  public static void sort(Comparable[] a) &amp;#123; /* code *">
+<meta name="twitter:description" content="未完成 概览经典的算法问题模型,对于一个元素数组,根据其主键(如整数数组的数值)的全序关系(如数值的大小关系)进行排序. 排序算法模板类. 1234567891011121314151617181920212223242526272829public class Example &amp;#123;  public static void sort(Comparable[] a) &amp;#123; /* co">
 
 
 
@@ -537,7 +537,8 @@
       
 
       
-        <h2 id="概览"><a href="#概览" class="headerlink" title="概览"></a>概览</h2><p>经典的算法问题模型,对于一个元素数组,根据其主键(如整数数组的数值)的全序关系(如数值的大小关系)进行排序.</p>
+        <p>未完成</p>
+<h2 id="概览"><a href="#概览" class="headerlink" title="概览"></a>概览</h2><p>经典的算法问题模型,对于一个元素数组,根据其主键(如整数数组的数值)的全序关系(如数值的大小关系)进行排序.</p>
 <p>排序算法模板类.</p>
 <figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">Example</span> </span>&#123;</span><br><span class="line">  <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">sort</span><span class="params">(Comparable[] a)</span> </span>&#123; <span class="comment">/* code */</span> &#125;</span><br><span class="line">  <span class="function"><span class="keyword">private</span> <span class="keyword">static</span> <span class="keyword">boolean</span> <span class="title">less</span><span class="params">(Comparable v, Comparable w)</span> </span>&#123; <span class="keyword">return</span> v.compareTo(w) &lt; <span class="number">0</span>; &#125;</span><br><span class="line">  <span class="function"><span class="keyword">private</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">swap</span><span class="params">(Comparable[] a, <span class="keyword">int</span> i, <span class="keyword">int</span> j)</span> </span>&#123;</span><br><span class="line">    Comparable t = a[i];</span><br><span class="line">    a[i] = a[j];</span><br><span class="line">    a[j] = t;</span><br><span class="line">  &#125;</span><br><span class="line">  <span class="function"><span class="keyword">private</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">show</span><span class="params">(Comparable[] a)</span> </span>&#123;</span><br><span class="line">    <span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">0</span>;i &lt; a.length;i++) &#123;</span><br><span class="line">      StdOut.print(a[i] + <span class="string">" "</span>);</span><br><span class="line">    &#125;</span><br><span class="line">    StdOut.println();</span><br><span class="line">  &#125;</span><br><span class="line">  <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">boolean</span> <span class="title">isSorted</span><span class="params">(Comparable[] a)</span> </span>&#123;</span><br><span class="line">    <span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">1</span>;i &lt; a.length;i++) &#123;</span><br><span class="line">      <span class="keyword">if</span> (less(a[i], a[i - <span class="number">1</span>])) &#123;</span><br><span class="line">        <span class="keyword">return</span> <span class="keyword">false</span>;</span><br><span class="line">      &#125;</span><br><span class="line">      <span class="keyword">return</span> <span class="keyword">true</span>;</span><br><span class="line">    &#125;</span><br><span class="line">  &#125;</span><br><span class="line">  <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span> </span>&#123;</span><br><span class="line">    String[] a = In.readStrings();</span><br><span class="line">    sort(a);</span><br><span class="line">    <span class="function"><span class="keyword">assert</span> <span class="title">isSorted</span><span class="params">(a)</span></span>;</span><br><span class="line">    show(a);</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 <h2 id="选择排序"><a href="#选择排序" class="headerlink" title="选择排序"></a>选择排序</h2><p>核心思想:取出数组元素中的最值,放入另一个数组,另一个数组将被维护成一个被排序的数组.</p>
@@ -672,7 +673,7 @@
                 
                   <a href="/archives/">
                 
-                    <span class="site-state-item-count">188</span>
+                    <span class="site-state-item-count">185</span>
                     <span class="site-state-item-name">日志</span>
                   </a>
                 </div>
@@ -856,9 +857,7 @@
                     
                       
                     
-                      
-                    
-                    <span class="site-state-item-count">55</span>
+                    <span class="site-state-item-count">54</span>
                     <span class="site-state-item-name">标签</span>
                   </a>
                 </div>
@@ -940,7 +939,7 @@
       <i class="fa fa-area-chart"></i>
     </span>
     
-    <span title="站点总字数">713k</span>
+    <span title="站点总字数">708k</span>
   
 
   
@@ -949,7 +948,7 @@
       <i class="fa fa-coffee"></i>
     </span>
     
-    <span title="站点阅读时长">10:48</span>
+    <span title="站点阅读时长">10:44</span>
   
 </div>
 

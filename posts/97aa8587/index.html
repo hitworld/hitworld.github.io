@@ -119,18 +119,18 @@
 
 
 
-  <meta name="description" content="漏洞要素改写unsorted_bin_chunk的bk. 漏洞分析1234567891011121314bck = victim-&amp;gt;bk;/* code */unsorted_chunks (av)-&amp;gt;bk = bck;bck-&amp;gt;fd = unsorted_chunks (av);//*(fake_bk + 0x10) = unsorted_chunks (av)if (size">
+  <meta name="description" content="未完成 漏洞要素改写unsorted_bin_chunk的bk. 漏洞分析1234567891011121314bck = victim-&amp;gt;bk;/* code */unsorted_chunks (av)-&amp;gt;bk = bck;bck-&amp;gt;fd = unsorted_chunks (av);//*(fake_bk + 0x10) = unsorted_chunks (av)if (">
 <meta name="keywords" content="heap-pwn">
 <meta property="og:type" content="article">
 <meta property="og:title" content="binary-漏洞分析-Linux-heap-pwn-unsorted_bin_attack">
 <meta property="og:url" content="https://hitworld.github.io/posts/97aa8587/index.html">
 <meta property="og:site_name" content="w4rd3n">
-<meta property="og:description" content="漏洞要素改写unsorted_bin_chunk的bk. 漏洞分析1234567891011121314bck = victim-&amp;gt;bk;/* code */unsorted_chunks (av)-&amp;gt;bk = bck;bck-&amp;gt;fd = unsorted_chunks (av);//*(fake_bk + 0x10) = unsorted_chunks (av)if (size">
+<meta property="og:description" content="未完成 漏洞要素改写unsorted_bin_chunk的bk. 漏洞分析1234567891011121314bck = victim-&amp;gt;bk;/* code */unsorted_chunks (av)-&amp;gt;bk = bck;bck-&amp;gt;fd = unsorted_chunks (av);//*(fake_bk + 0x10) = unsorted_chunks (av)if (">
 <meta property="og:locale" content="zh-CN">
-<meta property="og:updated_time" content="2020-07-09T03:20:02.823Z">
+<meta property="og:updated_time" content="2020-07-22T09:20:48.574Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="binary-漏洞分析-Linux-heap-pwn-unsorted_bin_attack">
-<meta name="twitter:description" content="漏洞要素改写unsorted_bin_chunk的bk. 漏洞分析1234567891011121314bck = victim-&amp;gt;bk;/* code */unsorted_chunks (av)-&amp;gt;bk = bck;bck-&amp;gt;fd = unsorted_chunks (av);//*(fake_bk + 0x10) = unsorted_chunks (av)if (size">
+<meta name="twitter:description" content="未完成 漏洞要素改写unsorted_bin_chunk的bk. 漏洞分析1234567891011121314bck = victim-&amp;gt;bk;/* code */unsorted_chunks (av)-&amp;gt;bk = bck;bck-&amp;gt;fd = unsorted_chunks (av);//*(fake_bk + 0x10) = unsorted_chunks (av)if (">
 
 
 
@@ -503,7 +503,7 @@
                 
                   <span class="post-meta-item-text">本文字数：</span>
                 
-                <span title="本文字数">757</span>
+                <span title="本文字数">761</span>
               
 
               
@@ -537,7 +537,8 @@
       
 
       
-        <h2 id="漏洞要素"><a href="#漏洞要素" class="headerlink" title="漏洞要素"></a>漏洞要素</h2><p>改写<code>unsorted_bin_chunk</code>的<code>bk</code>.</p>
+        <p>未完成</p>
+<h2 id="漏洞要素"><a href="#漏洞要素" class="headerlink" title="漏洞要素"></a>漏洞要素</h2><p>改写<code>unsorted_bin_chunk</code>的<code>bk</code>.</p>
 <h2 id="漏洞分析"><a href="#漏洞分析" class="headerlink" title="漏洞分析"></a>漏洞分析</h2><figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line">bck = victim-&gt;bk;</span><br><span class="line"><span class="comment">/* code */</span></span><br><span class="line">unsorted_chunks (av)-&gt;bk = bck;</span><br><span class="line">bck-&gt;fd = unsorted_chunks (av);<span class="comment">//*(fake_bk + 0x10) = unsorted_chunks (av)</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">if</span> (size == nb) &#123;</span><br><span class="line">	set_inuse_bit_at_offset (victim, size);</span><br><span class="line">  <span class="keyword">if</span> (av != &amp;main_arena)</span><br><span class="line">		set_non_main_arena (victim);</span><br><span class="line">  check_malloced_chunk (av, victim, nb);</span><br><span class="line">  <span class="keyword">void</span> *p = chunk2mem (victim);</span><br><span class="line">  alloc_perturb (p, bytes);</span><br><span class="line">  <span class="keyword">return</span> p;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 <p>通过改写<code>victim</code>的<code>bk</code>可以将<code>libc</code>的信息写到可控区域.不过之后<code>unsorted bin</code>链表就无法使用了.</p>
 <p>注意<code>unsorted_bin_attack</code>的时候需要把<code>unsorted_bin</code>中剩下的<code>chunk</code>一下申请完,否则会报错.</p>
@@ -666,7 +667,7 @@
                 
                   <a href="/archives/">
                 
-                    <span class="site-state-item-count">188</span>
+                    <span class="site-state-item-count">185</span>
                     <span class="site-state-item-name">日志</span>
                   </a>
                 </div>
@@ -850,9 +851,7 @@
                     
                       
                     
-                      
-                    
-                    <span class="site-state-item-count">55</span>
+                    <span class="site-state-item-count">54</span>
                     <span class="site-state-item-name">标签</span>
                   </a>
                 </div>
@@ -934,7 +933,7 @@
       <i class="fa fa-area-chart"></i>
     </span>
     
-    <span title="站点总字数">713k</span>
+    <span title="站点总字数">708k</span>
   
 
   
@@ -943,7 +942,7 @@
       <i class="fa fa-coffee"></i>
     </span>
     
-    <span title="站点阅读时长">10:48</span>
+    <span title="站点阅读时长">10:44</span>
   
 </div>
 

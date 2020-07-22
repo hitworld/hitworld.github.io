@@ -119,20 +119,20 @@
 
 
 
-  <meta name="description" content="ARMv8ARMv8的架构继承以往ARMv7与之前处理器技术的基础,除了现有的16/32bit的Thumb2指令支持外,也向前兼容现有的A32(ARM 32bit)指令集,称为AArch32,引入了64bit的AArch64架构. 除了新增A64(ARM 64bit)指令集外,也扩充了现有的A32(ARM 32bit)和T32(Thumb2 32bit)指令集(二者统称AArch32 ISA),另">
+  <meta name="description" content="未完成 ARMv8ARMv8的架构继承以往ARMv7与之前处理器技术的基础,除了现有的16/32bit的Thumb2指令支持外,也向前兼容现有的A32(ARM 32bit)指令集,称为AArch32,引入了64bit的AArch64架构. 除了新增A64(ARM 64bit)指令集外,也扩充了现有的A32(ARM 32bit)和T32(Thumb2 32bit)指令集(二者统称AArch32 IS">
 <meta name="keywords" content="assembly">
 <meta property="og:type" content="article">
 <meta property="og:title" content="pl-assembly-ARM-ARMv8">
 <meta property="og:url" content="https://hitworld.github.io/posts/165ef9ad/index.html">
 <meta property="og:site_name" content="w4rd3n">
-<meta property="og:description" content="ARMv8ARMv8的架构继承以往ARMv7与之前处理器技术的基础,除了现有的16/32bit的Thumb2指令支持外,也向前兼容现有的A32(ARM 32bit)指令集,称为AArch32,引入了64bit的AArch64架构. 除了新增A64(ARM 64bit)指令集外,也扩充了现有的A32(ARM 32bit)和T32(Thumb2 32bit)指令集(二者统称AArch32 ISA),另">
+<meta property="og:description" content="未完成 ARMv8ARMv8的架构继承以往ARMv7与之前处理器技术的基础,除了现有的16/32bit的Thumb2指令支持外,也向前兼容现有的A32(ARM 32bit)指令集,称为AArch32,引入了64bit的AArch64架构. 除了新增A64(ARM 64bit)指令集外,也扩充了现有的A32(ARM 32bit)和T32(Thumb2 32bit)指令集(二者统称AArch32 IS">
 <meta property="og:locale" content="zh-CN">
-<meta property="og:image" content="https://hitworld.github.io/posts/165ef9ad/1.png">
-<meta property="og:updated_time" content="2020-07-09T03:20:02.847Z">
+<meta property="og:image" content="https://hitworld.github.io/posts/undefined/1.png">
+<meta property="og:updated_time" content="2020-07-22T09:28:19.804Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="pl-assembly-ARM-ARMv8">
-<meta name="twitter:description" content="ARMv8ARMv8的架构继承以往ARMv7与之前处理器技术的基础,除了现有的16/32bit的Thumb2指令支持外,也向前兼容现有的A32(ARM 32bit)指令集,称为AArch32,引入了64bit的AArch64架构. 除了新增A64(ARM 64bit)指令集外,也扩充了现有的A32(ARM 32bit)和T32(Thumb2 32bit)指令集(二者统称AArch32 ISA),另">
-<meta name="twitter:image" content="https://hitworld.github.io/posts/165ef9ad/1.png">
+<meta name="twitter:description" content="未完成 ARMv8ARMv8的架构继承以往ARMv7与之前处理器技术的基础,除了现有的16/32bit的Thumb2指令支持外,也向前兼容现有的A32(ARM 32bit)指令集,称为AArch32,引入了64bit的AArch64架构. 除了新增A64(ARM 64bit)指令集外,也扩充了现有的A32(ARM 32bit)和T32(Thumb2 32bit)指令集(二者统称AArch32 IS">
+<meta name="twitter:image" content="https://hitworld.github.io/posts/undefined/1.png">
 
 
 
@@ -532,7 +532,8 @@
       
 
       
-        <h2 id="ARMv8"><a href="#ARMv8" class="headerlink" title="ARMv8"></a>ARMv8</h2><p><code>ARMv8</code>的架构继承以往<code>ARMv7</code>与之前处理器技术的基础,除了现有的<code>16/32bit</code>的<code>Thumb2</code>指令支持外,也向前兼容现有的<code>A32</code>(<code>ARM 32bit</code>)指令集,称为<code>AArch32</code>,引入了<code>64bit</code>的<code>AArch64</code>架构.</p>
+        <p>未完成</p>
+<h2 id="ARMv8"><a href="#ARMv8" class="headerlink" title="ARMv8"></a>ARMv8</h2><p><code>ARMv8</code>的架构继承以往<code>ARMv7</code>与之前处理器技术的基础,除了现有的<code>16/32bit</code>的<code>Thumb2</code>指令支持外,也向前兼容现有的<code>A32</code>(<code>ARM 32bit</code>)指令集,称为<code>AArch32</code>,引入了<code>64bit</code>的<code>AArch64</code>架构.</p>
 <p>除了新增<code>A64</code>(<code>ARM 64bit</code>)指令集外,也扩充了现有的<code>A32</code>(<code>ARM 32bit</code>)和<code>T32</code>(<code>Thumb2 32bit</code>)指令集(二者统称<code>AArch32 ISA</code>),另外还新增加了<code>CRYPTO</code>(加密)模块支持。</p>
 <p><code>ARMv8</code>提供<code>AArch32 state</code>和<code>AArch64 state</code>两种<code>Execution State</code>.</p>
 <p><code>ARMv8</code>新增了两种模式:<code>hyp</code>,用于虚拟化扩展;<code>monitor</code>,用于<code>Security</code>扩展.</p>
@@ -558,7 +559,7 @@
 <p>还有<code>4</code>个堆栈指针寄存器<code>SP_EL0</code>,<code>SP_EL1</code>,<code>SP_EL2</code>,<code>SP_EL3</code>(<code>64</code>位,还有<code>32</code>位的<code>WSP</code>).<code>3</code>个异常链接寄存器<code>ELR_EL1</code>,<code>ELR_EL2</code>,<code>ELR_EL3</code>(<code>64</code>位).<code>3</code>个存储状态寄存器<code>SPSR_EL1</code>,<code>SPSR_EL2</code>,<code>SPSR_EL3</code>(<code>32</code>位).状态寄存器<code>CPSR</code>.一个程序计数器<code>PC</code>(<code>64</code>位).还有<code>Zero register</code>(<code>WZR 32bits</code>,<code>XZR 64bits</code>).</p>
 <p>当在指令中使用<code>32</code>位的寄存器时,源寄存器高<code>32</code>位会被忽略,目的寄存器高<code>32</code>位置零.</p>
 <p>通用寄存器分为<code>4</code>组.</p>
-<img src="/posts/165ef9ad/1.png" title="p1">
+<img src="/posts/undefined/1.png" title="p1">
 <p>参数寄存器(<code>X0 - X7</code>):用作临时寄存器或可以保存的调用者保存的寄存器变量函数内的中间值,调用其他函数之间的值(可用于传递参数).</p>
 <p>调用者保护寄存器(<code>X9 - X15</code>):如果调用者要求在任何这些寄存器中保留值调用另一个函数,调用者必须将受影响的寄存器保存在自己的堆栈中.它们可以通过被调用的子程序进行修改,而无需保存并在返回调用者之前恢复它们.</p>
 <p>被调用者保存的寄存器(<code>X19 - X29</code>):这些寄存器保存在被调用者帧中,它们可以被被调用者修改子程序,只要它们在返回之前保存并恢复.</p>
@@ -707,7 +708,7 @@
                 
                   <a href="/archives/">
                 
-                    <span class="site-state-item-count">188</span>
+                    <span class="site-state-item-count">185</span>
                     <span class="site-state-item-name">日志</span>
                   </a>
                 </div>
@@ -891,9 +892,7 @@
                     
                       
                     
-                      
-                    
-                    <span class="site-state-item-count">55</span>
+                    <span class="site-state-item-count">54</span>
                     <span class="site-state-item-name">标签</span>
                   </a>
                 </div>
@@ -975,7 +974,7 @@
       <i class="fa fa-area-chart"></i>
     </span>
     
-    <span title="站点总字数">713k</span>
+    <span title="站点总字数">708k</span>
   
 
   
@@ -984,7 +983,7 @@
       <i class="fa fa-coffee"></i>
     </span>
     
-    <span title="站点阅读时长">10:48</span>
+    <span title="站点阅读时长">10:44</span>
   
 </div>
 

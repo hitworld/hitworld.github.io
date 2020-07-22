@@ -119,20 +119,20 @@
 
 
 
-  <meta name="description" content="概述漏洞是在硬件,软件,协议的具体实现或系统安全策略上存在的缺陷,从而可以使攻击者能够在未授权的情况下访问或破坏系统.二进制漏洞就是指机器代码层面的漏洞. pwn即二进制漏洞利用,通过漏洞来提升权限或得到shell或达到某种目的. 预备知识前期主要为:x86/x86-64架构下Linux平台的C语言,汇编语言,python(写利用脚本),Linux常用操作,操作系统原理. 不同CPU架构下的Lin">
+  <meta name="description" content="未完成 概述漏洞是在硬件,软件,协议的具体实现或系统安全策略上存在的缺陷,从而可以使攻击者能够在未授权的情况下访问或破坏系统.二进制漏洞就是指机器代码层面的漏洞. pwn即二进制漏洞利用,通过漏洞来提升权限或得到shell或达到某种目的. 预备知识前期主要为:x86/x86-64架构下Linux平台的C语言,汇编语言,python(写利用脚本),Linux常用操作,操作系统原理. 不同CPU架构下">
 <meta name="keywords" content="Linux-pwn">
 <meta property="og:type" content="article">
 <meta property="og:title" content="binary-漏洞分析-Linux-pwn-基础">
 <meta property="og:url" content="https://hitworld.github.io/posts/507ee6ce/index.html">
 <meta property="og:site_name" content="w4rd3n">
-<meta property="og:description" content="概述漏洞是在硬件,软件,协议的具体实现或系统安全策略上存在的缺陷,从而可以使攻击者能够在未授权的情况下访问或破坏系统.二进制漏洞就是指机器代码层面的漏洞. pwn即二进制漏洞利用,通过漏洞来提升权限或得到shell或达到某种目的. 预备知识前期主要为:x86/x86-64架构下Linux平台的C语言,汇编语言,python(写利用脚本),Linux常用操作,操作系统原理. 不同CPU架构下的Lin">
+<meta property="og:description" content="未完成 概述漏洞是在硬件,软件,协议的具体实现或系统安全策略上存在的缺陷,从而可以使攻击者能够在未授权的情况下访问或破坏系统.二进制漏洞就是指机器代码层面的漏洞. pwn即二进制漏洞利用,通过漏洞来提升权限或得到shell或达到某种目的. 预备知识前期主要为:x86/x86-64架构下Linux平台的C语言,汇编语言,python(写利用脚本),Linux常用操作,操作系统原理. 不同CPU架构下">
 <meta property="og:locale" content="zh-CN">
-<meta property="og:image" content="https://hitworld.github.io/posts/507ee6ce/4.png">
-<meta property="og:updated_time" content="2020-07-09T03:20:02.828Z">
+<meta property="og:image" content="https://hitworld.github.io/posts/undefined/4.png">
+<meta property="og:updated_time" content="2020-07-22T09:21:28.627Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="binary-漏洞分析-Linux-pwn-基础">
-<meta name="twitter:description" content="概述漏洞是在硬件,软件,协议的具体实现或系统安全策略上存在的缺陷,从而可以使攻击者能够在未授权的情况下访问或破坏系统.二进制漏洞就是指机器代码层面的漏洞. pwn即二进制漏洞利用,通过漏洞来提升权限或得到shell或达到某种目的. 预备知识前期主要为:x86/x86-64架构下Linux平台的C语言,汇编语言,python(写利用脚本),Linux常用操作,操作系统原理. 不同CPU架构下的Lin">
-<meta name="twitter:image" content="https://hitworld.github.io/posts/507ee6ce/4.png">
+<meta name="twitter:description" content="未完成 概述漏洞是在硬件,软件,协议的具体实现或系统安全策略上存在的缺陷,从而可以使攻击者能够在未授权的情况下访问或破坏系统.二进制漏洞就是指机器代码层面的漏洞. pwn即二进制漏洞利用,通过漏洞来提升权限或得到shell或达到某种目的. 预备知识前期主要为:x86/x86-64架构下Linux平台的C语言,汇编语言,python(写利用脚本),Linux常用操作,操作系统原理. 不同CPU架构下">
+<meta name="twitter:image" content="https://hitworld.github.io/posts/undefined/4.png">
 
 
 
@@ -539,7 +539,8 @@
       
 
       
-        <h2 id="概述"><a href="#概述" class="headerlink" title="概述"></a>概述</h2><p>漏洞是在硬件,软件,协议的具体实现或系统安全策略上存在的缺陷,从而可以使攻击者能够在未授权的情况下访问或破坏系统.二进制漏洞就是指机器代码层面的漏洞.</p>
+        <p>未完成</p>
+<h2 id="概述"><a href="#概述" class="headerlink" title="概述"></a>概述</h2><p>漏洞是在硬件,软件,协议的具体实现或系统安全策略上存在的缺陷,从而可以使攻击者能够在未授权的情况下访问或破坏系统.二进制漏洞就是指机器代码层面的漏洞.</p>
 <p><code>pwn</code>即二进制漏洞利用,通过漏洞来提升权限或得到<code>shell</code>或达到某种目的.</p>
 <h2 id="预备知识"><a href="#预备知识" class="headerlink" title="预备知识"></a>预备知识</h2><p>前期主要为:<code>x86/x86-64</code>架构下<code>Linux</code>平台的<code>C</code>语言,汇编语言,<code>python</code>(写利用脚本),<code>Linux</code>常用操作,操作系统原理.</p>
 <p>不同<code>CPU</code>架构下的<code>Linux</code>在利用上区别大多体现在汇编语言(严格说是<code>ISA</code>)层面.</p>
@@ -624,7 +625,7 @@
 <li>无法由<code>code</code>段推出<code>libc</code>位置.</li>
 <li>但可以用<code>libc</code>推出<code>mmap</code>及其他<code>Library</code>的位置.</li>
 </ul>
-<img src="/posts/507ee6ce/4.png" title="p4">
+<img src="/posts/undefined/4.png" title="p4">
 <h3 id="stack-Canary"><a href="#stack-Canary" class="headerlink" title="stack Canary"></a>stack Canary</h3><p>在栈中保存的<code>ebp</code>和局部变量之间维护一个变量,函数执行完的时候检测这个值是否改变来检测栈是否被破坏.(这个值每个进程唯一).</p>
 <p><code>Linux</code>程序的<code>Canary</code>保护是通过<code>gcc</code>编译选项来控制的.</p>
 <ul>
@@ -767,7 +768,7 @@
                 
                   <a href="/archives/">
                 
-                    <span class="site-state-item-count">188</span>
+                    <span class="site-state-item-count">185</span>
                     <span class="site-state-item-name">日志</span>
                   </a>
                 </div>
@@ -951,9 +952,7 @@
                     
                       
                     
-                      
-                    
-                    <span class="site-state-item-count">55</span>
+                    <span class="site-state-item-count">54</span>
                     <span class="site-state-item-name">标签</span>
                   </a>
                 </div>
@@ -1035,7 +1034,7 @@
       <i class="fa fa-area-chart"></i>
     </span>
     
-    <span title="站点总字数">713k</span>
+    <span title="站点总字数">708k</span>
   
 
   
@@ -1044,7 +1043,7 @@
       <i class="fa fa-coffee"></i>
     </span>
     
-    <span title="站点阅读时长">10:48</span>
+    <span title="站点阅读时长">10:44</span>
   
 </div>
 

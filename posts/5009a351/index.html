@@ -119,18 +119,18 @@
 
 
 
-  <meta name="description" content="前言基于glibc-2.23. ptmalloc内存管理结构体ptmalloc使用malloc_state结构体来管理分配区,而参数管理使用malloc_par结构体,全局拥有一个唯一的malloc_par实例. 使用chunk来组织分配区的内存.使用heap_info在非主分配区模拟堆. malloc_state1234567891011121314struct malloc_state &amp;#1">
+  <meta name="description" content="未完成 前言基于glibc-2.23. ptmalloc内存管理结构体ptmalloc使用malloc_state结构体来管理分配区,而参数管理使用malloc_par结构体,全局拥有一个唯一的malloc_par实例. 使用chunk来组织分配区的内存.使用heap_info在非主分配区模拟堆. malloc_state1234567891011121314struct malloc_state">
 <meta name="keywords" content="Linux">
 <meta property="og:type" content="article">
 <meta property="og:title" content="binary-源码分析-Linux-ptmalloc-初始化与结构体">
 <meta property="og:url" content="https://hitworld.github.io/posts/5009a351/index.html">
 <meta property="og:site_name" content="w4rd3n">
-<meta property="og:description" content="前言基于glibc-2.23. ptmalloc内存管理结构体ptmalloc使用malloc_state结构体来管理分配区,而参数管理使用malloc_par结构体,全局拥有一个唯一的malloc_par实例. 使用chunk来组织分配区的内存.使用heap_info在非主分配区模拟堆. malloc_state1234567891011121314struct malloc_state &amp;#1">
+<meta property="og:description" content="未完成 前言基于glibc-2.23. ptmalloc内存管理结构体ptmalloc使用malloc_state结构体来管理分配区,而参数管理使用malloc_par结构体,全局拥有一个唯一的malloc_par实例. 使用chunk来组织分配区的内存.使用heap_info在非主分配区模拟堆. malloc_state1234567891011121314struct malloc_state">
 <meta property="og:locale" content="zh-CN">
-<meta property="og:updated_time" content="2020-07-09T03:20:02.815Z">
+<meta property="og:updated_time" content="2020-07-22T09:23:30.435Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="binary-源码分析-Linux-ptmalloc-初始化与结构体">
-<meta name="twitter:description" content="前言基于glibc-2.23. ptmalloc内存管理结构体ptmalloc使用malloc_state结构体来管理分配区,而参数管理使用malloc_par结构体,全局拥有一个唯一的malloc_par实例. 使用chunk来组织分配区的内存.使用heap_info在非主分配区模拟堆. malloc_state1234567891011121314struct malloc_state &amp;#1">
+<meta name="twitter:description" content="未完成 前言基于glibc-2.23. ptmalloc内存管理结构体ptmalloc使用malloc_state结构体来管理分配区,而参数管理使用malloc_par结构体,全局拥有一个唯一的malloc_par实例. 使用chunk来组织分配区的内存.使用heap_info在非主分配区模拟堆. malloc_state1234567891011121314struct malloc_state">
 
 
 
@@ -537,7 +537,8 @@
       
 
       
-        <h2 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h2><p>基于<code>glibc-2.23</code>.</p>
+        <p>未完成</p>
+<h2 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h2><p>基于<code>glibc-2.23</code>.</p>
 <h2 id="ptmalloc内存管理结构体"><a href="#ptmalloc内存管理结构体" class="headerlink" title="ptmalloc内存管理结构体"></a>ptmalloc内存管理结构体</h2><p><code>ptmalloc</code>使用<code>malloc_state</code>结构体来管理分配区,而参数管理使用<code>malloc_par</code>结构体,全局拥有一个唯一的<code>malloc_par</code>实例.</p>
 <p>使用<code>chunk</code>来组织分配区的内存.使用<code>heap_info</code>在非主分配区模拟堆.</p>
 <h3 id="malloc-state"><a href="#malloc-state" class="headerlink" title="malloc_state"></a>malloc_state</h3><figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">struct</span> <span class="title">malloc_state</span> &#123;</span></span><br><span class="line">  <span class="keyword">mutex_t</span> mutex;</span><br><span class="line">  <span class="keyword">int</span> flags;</span><br><span class="line">  mfastbinptr fastbinsY[NFASTBINS];</span><br><span class="line">  mchunkptr top;</span><br><span class="line">  mchunkptr last_remainder;</span><br><span class="line">  mchunkptr bins[NBINS * <span class="number">2</span> - <span class="number">2</span>];</span><br><span class="line">  <span class="keyword">unsigned</span> <span class="keyword">int</span> binmap[BINMAPSIZE];</span><br><span class="line">  <span class="class"><span class="keyword">struct</span> <span class="title">malloc_state</span> *<span class="title">next</span>;</span></span><br><span class="line">  <span class="class"><span class="keyword">struct</span> <span class="title">malloc_state</span> *<span class="title">next_free</span>;</span></span><br><span class="line">  INTERNAL_SIZE_T attached_threads;</span><br><span class="line">  INTERNAL_SIZE_T system_mem;</span><br><span class="line">  INTERNAL_SIZE_T max_system_mem;</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
@@ -678,8 +679,8 @@
         <div class="post-nav">
           <div class="post-nav-next post-nav-item">
             
-              <a href="/posts/943ea10d/" rel="next" title="binary-漏洞分析-Linux-escape-pwn-CVE-2019-12735">
-                <i class="fa fa-chevron-left"></i> binary-漏洞分析-Linux-escape-pwn-CVE-2019-12735
+              <a href="/posts/708790b2/" rel="next" title="writeup-starctf-2019-pwn">
+                <i class="fa fa-chevron-left"></i> writeup-starctf-2019-pwn
               </a>
             
           </div>
@@ -764,7 +765,7 @@
                 
                   <a href="/archives/">
                 
-                    <span class="site-state-item-count">188</span>
+                    <span class="site-state-item-count">185</span>
                     <span class="site-state-item-name">日志</span>
                   </a>
                 </div>
@@ -948,9 +949,7 @@
                     
                       
                     
-                      
-                    
-                    <span class="site-state-item-count">55</span>
+                    <span class="site-state-item-count">54</span>
                     <span class="site-state-item-name">标签</span>
                   </a>
                 </div>
@@ -1032,7 +1031,7 @@
       <i class="fa fa-area-chart"></i>
     </span>
     
-    <span title="站点总字数">713k</span>
+    <span title="站点总字数">708k</span>
   
 
   
@@ -1041,7 +1040,7 @@
       <i class="fa fa-coffee"></i>
     </span>
     
-    <span title="站点阅读时长">10:48</span>
+    <span title="站点阅读时长">10:44</span>
   
 </div>
 

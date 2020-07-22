@@ -119,18 +119,18 @@
 
 
 
-  <meta name="description" content="概览PHP弱类型导致的漏洞主要来源于类型转换和内置函数对于传入错误类型的参数时的错误处理. 自动类型转换在PHP中变量是以C语言的结构体来存储的,空字符串,NULL,false都是以0存储.这个结构体有个zend_uchartype成员变量,用来保存变量的类型. 不同类型的变量进行比较的时候就会存在类型转换比较其值.当其中一个变量为整数时,会把另一个变量强制转化为整数,相当于intval函数. 1">
+  <meta name="description" content="未完成 概览PHP弱类型导致的漏洞主要来源于类型转换和内置函数对于传入错误类型的参数时的错误处理. 自动类型转换在PHP中变量是以C语言的结构体来存储的,空字符串,NULL,false都是以0存储.这个结构体有个zend_uchartype成员变量,用来保存变量的类型. 不同类型的变量进行比较的时候就会存在类型转换比较其值.当其中一个变量为整数时,会把另一个变量强制转化为整数,相当于intval函">
 <meta name="keywords" content="PHP">
 <meta property="og:type" content="article">
 <meta property="og:title" content="web安全-PHP-弱类型">
 <meta property="og:url" content="https://hitworld.github.io/posts/a92ea0b6/index.html">
 <meta property="og:site_name" content="w4rd3n">
-<meta property="og:description" content="概览PHP弱类型导致的漏洞主要来源于类型转换和内置函数对于传入错误类型的参数时的错误处理. 自动类型转换在PHP中变量是以C语言的结构体来存储的,空字符串,NULL,false都是以0存储.这个结构体有个zend_uchartype成员变量,用来保存变量的类型. 不同类型的变量进行比较的时候就会存在类型转换比较其值.当其中一个变量为整数时,会把另一个变量强制转化为整数,相当于intval函数. 1">
+<meta property="og:description" content="未完成 概览PHP弱类型导致的漏洞主要来源于类型转换和内置函数对于传入错误类型的参数时的错误处理. 自动类型转换在PHP中变量是以C语言的结构体来存储的,空字符串,NULL,false都是以0存储.这个结构体有个zend_uchartype成员变量,用来保存变量的类型. 不同类型的变量进行比较的时候就会存在类型转换比较其值.当其中一个变量为整数时,会把另一个变量强制转化为整数,相当于intval函">
 <meta property="og:locale" content="zh-CN">
-<meta property="og:updated_time" content="2020-07-09T03:20:02.859Z">
+<meta property="og:updated_time" content="2020-07-22T09:30:22.477Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="web安全-PHP-弱类型">
-<meta name="twitter:description" content="概览PHP弱类型导致的漏洞主要来源于类型转换和内置函数对于传入错误类型的参数时的错误处理. 自动类型转换在PHP中变量是以C语言的结构体来存储的,空字符串,NULL,false都是以0存储.这个结构体有个zend_uchartype成员变量,用来保存变量的类型. 不同类型的变量进行比较的时候就会存在类型转换比较其值.当其中一个变量为整数时,会把另一个变量强制转化为整数,相当于intval函数. 1">
+<meta name="twitter:description" content="未完成 概览PHP弱类型导致的漏洞主要来源于类型转换和内置函数对于传入错误类型的参数时的错误处理. 自动类型转换在PHP中变量是以C语言的结构体来存储的,空字符串,NULL,false都是以0存储.这个结构体有个zend_uchartype成员变量,用来保存变量的类型. 不同类型的变量进行比较的时候就会存在类型转换比较其值.当其中一个变量为整数时,会把另一个变量强制转化为整数,相当于intval函">
 
 
 
@@ -496,7 +496,7 @@
                 
                   <span class="post-meta-item-text">本文字数：</span>
                 
-                <span title="本文字数">564</span>
+                <span title="本文字数">568</span>
               
 
               
@@ -530,7 +530,8 @@
       
 
       
-        <h2 id="概览"><a href="#概览" class="headerlink" title="概览"></a>概览</h2><p><code>PHP</code>弱类型导致的漏洞主要来源于类型转换和内置函数对于传入错误类型的参数时的错误处理.</p>
+        <p>未完成</p>
+<h2 id="概览"><a href="#概览" class="headerlink" title="概览"></a>概览</h2><p><code>PHP</code>弱类型导致的漏洞主要来源于类型转换和内置函数对于传入错误类型的参数时的错误处理.</p>
 <h2 id="自动类型转换"><a href="#自动类型转换" class="headerlink" title="自动类型转换"></a>自动类型转换</h2><p>在<code>PHP</code>中变量是以<code>C</code>语言的结构体来存储的,空字符串,<code>NULL</code>,<code>false</code>都是以<code>0</code>存储.这个结构体有个<code>zend_uchartype</code>成员变量,用来保存变量的类型.</p>
 <p>不同类型的变量进行比较的时候就会存在类型转换比较其值.当其中一个变量为整数时,会把另一个变量强制转化为整数,相当于<code>intval</code>函数.</p>
 <figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="number">0</span> == <span class="string">'0'</span>         <span class="comment">//true</span></span><br><span class="line"><span class="number">0</span> == <span class="string">'abcdefg'</span>   <span class="comment">//true</span></span><br><span class="line"><span class="number">1</span> == <span class="string">'1abcdef'</span>   <span class="comment">//true</span></span><br><span class="line"><span class="comment">#==比较值,===既比较类型也比较值.</span></span><br></pre></td></tr></table></figure>
@@ -665,7 +666,7 @@
                 
                   <a href="/archives/">
                 
-                    <span class="site-state-item-count">188</span>
+                    <span class="site-state-item-count">185</span>
                     <span class="site-state-item-name">日志</span>
                   </a>
                 </div>
@@ -849,9 +850,7 @@
                     
                       
                     
-                      
-                    
-                    <span class="site-state-item-count">55</span>
+                    <span class="site-state-item-count">54</span>
                     <span class="site-state-item-name">标签</span>
                   </a>
                 </div>
@@ -933,7 +932,7 @@
       <i class="fa fa-area-chart"></i>
     </span>
     
-    <span title="站点总字数">713k</span>
+    <span title="站点总字数">708k</span>
   
 
   
@@ -942,7 +941,7 @@
       <i class="fa fa-coffee"></i>
     </span>
     
-    <span title="站点阅读时长">10:48</span>
+    <span title="站点阅读时长">10:44</span>
   
 </div>
 

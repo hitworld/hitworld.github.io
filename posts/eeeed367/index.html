@@ -119,18 +119,18 @@
 
 
 
-  <meta name="description" content="前言基于glibc-2.27. 对应结构体tcache_entry.类似于fastbin,tcache也是以单向链表连接. 12345/* We overlay this structure on the user-data portion of a chunk when   the chunk is stored in the per-thread cache.  */typedef struc">
+  <meta name="description" content="未完成 前言基于glibc-2.27. 对应结构体tcache_entry.类似于fastbin,tcache也是以单向链表连接. 12345/* We overlay this structure on the user-data portion of a chunk when   the chunk is stored in the per-thread cache.  */typedef s">
 <meta name="keywords" content="Linux">
 <meta property="og:type" content="article">
 <meta property="og:title" content="binary-源码分析-Linux-ptmalloc-tcache">
 <meta property="og:url" content="https://hitworld.github.io/posts/eeeed367/index.html">
 <meta property="og:site_name" content="w4rd3n">
-<meta property="og:description" content="前言基于glibc-2.27. 对应结构体tcache_entry.类似于fastbin,tcache也是以单向链表连接. 12345/* We overlay this structure on the user-data portion of a chunk when   the chunk is stored in the per-thread cache.  */typedef struc">
+<meta property="og:description" content="未完成 前言基于glibc-2.27. 对应结构体tcache_entry.类似于fastbin,tcache也是以单向链表连接. 12345/* We overlay this structure on the user-data portion of a chunk when   the chunk is stored in the per-thread cache.  */typedef s">
 <meta property="og:locale" content="zh-CN">
-<meta property="og:updated_time" content="2020-07-09T03:20:02.815Z">
+<meta property="og:updated_time" content="2020-07-22T09:23:36.278Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="binary-源码分析-Linux-ptmalloc-tcache">
-<meta name="twitter:description" content="前言基于glibc-2.27. 对应结构体tcache_entry.类似于fastbin,tcache也是以单向链表连接. 12345/* We overlay this structure on the user-data portion of a chunk when   the chunk is stored in the per-thread cache.  */typedef struc">
+<meta name="twitter:description" content="未完成 前言基于glibc-2.27. 对应结构体tcache_entry.类似于fastbin,tcache也是以单向链表连接. 12345/* We overlay this structure on the user-data portion of a chunk when   the chunk is stored in the per-thread cache.  */typedef s">
 
 
 
@@ -537,7 +537,8 @@
       
 
       
-        <h2 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h2><p>基于<code>glibc-2.27</code>.</p>
+        <p>未完成</p>
+<h2 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h2><p>基于<code>glibc-2.27</code>.</p>
 <h2 id="对应结构体"><a href="#对应结构体" class="headerlink" title="对应结构体"></a>对应结构体</h2><p><code>tcache_entry</code>.类似于<code>fastbin</code>,<code>tcache</code>也是以单向链表连接.</p>
 <figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">/* We overlay this structure on the user-data portion of a chunk when</span></span><br><span class="line"><span class="comment">   the chunk is stored in the per-thread cache.  */</span></span><br><span class="line"><span class="keyword">typedef</span> <span class="class"><span class="keyword">struct</span> <span class="title">tcache_entry</span> &#123;</span></span><br><span class="line">  <span class="class"><span class="keyword">struct</span> <span class="title">tcache_entry</span> *<span class="title">next</span>;</span></span><br><span class="line">&#125; tcache_entry;</span><br></pre></td></tr></table></figure>
 <p><code>tcache_perthread_struct</code>.每个线程使用一个<code>tcache_perthread_struct</code>管理当前线程的<code>tcache</code>.</p>
@@ -683,7 +684,7 @@
                 
                   <a href="/archives/">
                 
-                    <span class="site-state-item-count">188</span>
+                    <span class="site-state-item-count">185</span>
                     <span class="site-state-item-name">日志</span>
                   </a>
                 </div>
@@ -867,9 +868,7 @@
                     
                       
                     
-                      
-                    
-                    <span class="site-state-item-count">55</span>
+                    <span class="site-state-item-count">54</span>
                     <span class="site-state-item-name">标签</span>
                   </a>
                 </div>
@@ -951,7 +950,7 @@
       <i class="fa fa-area-chart"></i>
     </span>
     
-    <span title="站点总字数">713k</span>
+    <span title="站点总字数">708k</span>
   
 
   
@@ -960,7 +959,7 @@
       <i class="fa fa-coffee"></i>
     </span>
     
-    <span title="站点阅读时长">10:48</span>
+    <span title="站点阅读时长">10:44</span>
   
 </div>
 

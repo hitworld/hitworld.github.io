@@ -119,18 +119,18 @@
 
 
 
-  <meta name="description" content="概览Ajax指异步的JavaScript和XML,是对构建动态Web应用程序所必备技术的一个统称,由JavaScript与CSS,XML,DOM加上XMLHttpRequest. XMLHttpRequestAjax的实现主要依赖XMLHttpRequest对象,该对象也是Ajax的核心. 获取XMLHttpRequest对象. 1234567891011121314151617var reque">
+  <meta name="description" content="未完成 概览Ajax指异步的JavaScript和XML,是对构建动态Web应用程序所必备技术的一个统称,由JavaScript与CSS,XML,DOM加上XMLHttpRequest. XMLHttpRequestAjax的实现主要依赖XMLHttpRequest对象,该对象也是Ajax的核心. 获取XMLHttpRequest对象. 1234567891011121314151617var r">
 <meta name="keywords" content="FrontEnd">
 <meta property="og:type" content="article">
 <meta property="og:title" content="develop-FrontEnd-Ajax">
 <meta property="og:url" content="https://hitworld.github.io/posts/dfa99733/index.html">
 <meta property="og:site_name" content="w4rd3n">
-<meta property="og:description" content="概览Ajax指异步的JavaScript和XML,是对构建动态Web应用程序所必备技术的一个统称,由JavaScript与CSS,XML,DOM加上XMLHttpRequest. XMLHttpRequestAjax的实现主要依赖XMLHttpRequest对象,该对象也是Ajax的核心. 获取XMLHttpRequest对象. 1234567891011121314151617var reque">
+<meta property="og:description" content="未完成 概览Ajax指异步的JavaScript和XML,是对构建动态Web应用程序所必备技术的一个统称,由JavaScript与CSS,XML,DOM加上XMLHttpRequest. XMLHttpRequestAjax的实现主要依赖XMLHttpRequest对象,该对象也是Ajax的核心. 获取XMLHttpRequest对象. 1234567891011121314151617var r">
 <meta property="og:locale" content="zh-CN">
-<meta property="og:updated_time" content="2020-07-09T03:20:02.842Z">
+<meta property="og:updated_time" content="2020-07-22T09:27:06.994Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="develop-FrontEnd-Ajax">
-<meta name="twitter:description" content="概览Ajax指异步的JavaScript和XML,是对构建动态Web应用程序所必备技术的一个统称,由JavaScript与CSS,XML,DOM加上XMLHttpRequest. XMLHttpRequestAjax的实现主要依赖XMLHttpRequest对象,该对象也是Ajax的核心. 获取XMLHttpRequest对象. 1234567891011121314151617var reque">
+<meta name="twitter:description" content="未完成 概览Ajax指异步的JavaScript和XML,是对构建动态Web应用程序所必备技术的一个统称,由JavaScript与CSS,XML,DOM加上XMLHttpRequest. XMLHttpRequestAjax的实现主要依赖XMLHttpRequest对象,该对象也是Ajax的核心. 获取XMLHttpRequest对象. 1234567891011121314151617var r">
 
 
 
@@ -530,7 +530,8 @@
       
 
       
-        <h2 id="概览"><a href="#概览" class="headerlink" title="概览"></a>概览</h2><p><code>Ajax</code>指异步的<code>JavaScript</code>和<code>XML</code>,是对构建动态<code>Web</code>应用程序所必备技术的一个统称,由<code>JavaScript</code>与<code>CSS</code>,<code>XML</code>,<code>DOM</code>加上<code>XMLHttpRequest</code>.</p>
+        <p>未完成</p>
+<h2 id="概览"><a href="#概览" class="headerlink" title="概览"></a>概览</h2><p><code>Ajax</code>指异步的<code>JavaScript</code>和<code>XML</code>,是对构建动态<code>Web</code>应用程序所必备技术的一个统称,由<code>JavaScript</code>与<code>CSS</code>,<code>XML</code>,<code>DOM</code>加上<code>XMLHttpRequest</code>.</p>
 <h2 id="XMLHttpRequest"><a href="#XMLHttpRequest" class="headerlink" title="XMLHttpRequest"></a>XMLHttpRequest</h2><p><code>Ajax</code>的实现主要依赖<code>XMLHttpRequest</code>对象,该对象也是<code>Ajax</code>的核心.</p>
 <p>获取<code>XMLHttpRequest</code>对象.</p>
 <figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> request = <span class="literal">false</span>;</span><br><span class="line"><span class="keyword">if</span>(<span class="built_in">window</span>.XMLHttpRequest) &#123;</span><br><span class="line">  request = <span class="keyword">new</span> XMLHttpRequest();</span><br><span class="line">  <span class="keyword">if</span>(request.overrideMimeType) &#123;</span><br><span class="line">    request.overrideMimeType(<span class="string">'text/xml'</span>);</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br><span class="line"><span class="keyword">else</span> <span class="keyword">if</span>(<span class="built_in">window</span>.ActiveXObject) &#123;</span><br><span class="line">  <span class="keyword">var</span> versions = [<span class="string">'Microsoft.XMLHTTP'</span>,<span class="string">'MSXML.XMLHTTP'</span>,<span class="string">'Microsoft.XMLHTTP'</span>];<span class="comment">//...</span></span><br><span class="line">  <span class="keyword">for</span>(<span class="keyword">var</span> i = <span class="number">0</span>;i &lt; versions.length;i++) &#123;</span><br><span class="line">    <span class="keyword">try</span> &#123;</span><br><span class="line">      request = <span class="keyword">new</span> ActiveXObject(versions[i]);</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">catch</span>(e) &#123;&#125;</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br><span class="line">xmlhttp = request;</span><br></pre></td></tr></table></figure>
@@ -678,7 +679,7 @@
                 
                   <a href="/archives/">
                 
-                    <span class="site-state-item-count">188</span>
+                    <span class="site-state-item-count">185</span>
                     <span class="site-state-item-name">日志</span>
                   </a>
                 </div>
@@ -862,9 +863,7 @@
                     
                       
                     
-                      
-                    
-                    <span class="site-state-item-count">55</span>
+                    <span class="site-state-item-count">54</span>
                     <span class="site-state-item-name">标签</span>
                   </a>
                 </div>
@@ -946,7 +945,7 @@
       <i class="fa fa-area-chart"></i>
     </span>
     
-    <span title="站点总字数">713k</span>
+    <span title="站点总字数">708k</span>
   
 
   
@@ -955,7 +954,7 @@
       <i class="fa fa-coffee"></i>
     </span>
     
-    <span title="站点阅读时长">10:48</span>
+    <span title="站点阅读时长">10:44</span>
   
 </div>
 

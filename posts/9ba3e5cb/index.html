@@ -119,18 +119,18 @@
 
 
 
-  <meta name="description" content="漏洞要素写一个free后的large chunk,可用于修改两个任意地址的值为libc的一个地址 利用思路首先分配chunk p1,p2和p3(2,3一样大),并且在它们之间插入其他的chunk以防止在释放时被合并. 依次释放掉p1和p2,这两个chunk将被放入unsorted bin. 接下来随便malloc一个chunk使p1被切分为两块(小于p1即可),同时p2回到对应的large bin">
+  <meta name="description" content="未完成 漏洞要素写一个free后的large chunk,可用于修改两个任意地址的值为libc的一个地址 利用思路首先分配chunk p1,p2和p3(2,3一样大),并且在它们之间插入其他的chunk以防止在释放时被合并. 依次释放掉p1和p2,这两个chunk将被放入unsorted bin. 接下来随便malloc一个chunk使p1被切分为两块(小于p1即可),同时p2回到对应的large">
 <meta name="keywords" content="heap-pwn">
 <meta property="og:type" content="article">
 <meta property="og:title" content="binary-漏洞分析-Linux-heap-pwn-large_bin_attack">
 <meta property="og:url" content="https://hitworld.github.io/posts/9ba3e5cb/index.html">
 <meta property="og:site_name" content="w4rd3n">
-<meta property="og:description" content="漏洞要素写一个free后的large chunk,可用于修改两个任意地址的值为libc的一个地址 利用思路首先分配chunk p1,p2和p3(2,3一样大),并且在它们之间插入其他的chunk以防止在释放时被合并. 依次释放掉p1和p2,这两个chunk将被放入unsorted bin. 接下来随便malloc一个chunk使p1被切分为两块(小于p1即可),同时p2回到对应的large bin">
+<meta property="og:description" content="未完成 漏洞要素写一个free后的large chunk,可用于修改两个任意地址的值为libc的一个地址 利用思路首先分配chunk p1,p2和p3(2,3一样大),并且在它们之间插入其他的chunk以防止在释放时被合并. 依次释放掉p1和p2,这两个chunk将被放入unsorted bin. 接下来随便malloc一个chunk使p1被切分为两块(小于p1即可),同时p2回到对应的large">
 <meta property="og:locale" content="zh-CN">
-<meta property="og:updated_time" content="2020-07-09T03:20:02.821Z">
+<meta property="og:updated_time" content="2020-07-22T09:20:34.361Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="binary-漏洞分析-Linux-heap-pwn-large_bin_attack">
-<meta name="twitter:description" content="漏洞要素写一个free后的large chunk,可用于修改两个任意地址的值为libc的一个地址 利用思路首先分配chunk p1,p2和p3(2,3一样大),并且在它们之间插入其他的chunk以防止在释放时被合并. 依次释放掉p1和p2,这两个chunk将被放入unsorted bin. 接下来随便malloc一个chunk使p1被切分为两块(小于p1即可),同时p2回到对应的large bin">
+<meta name="twitter:description" content="未完成 漏洞要素写一个free后的large chunk,可用于修改两个任意地址的值为libc的一个地址 利用思路首先分配chunk p1,p2和p3(2,3一样大),并且在它们之间插入其他的chunk以防止在释放时被合并. 依次释放掉p1和p2,这两个chunk将被放入unsorted bin. 接下来随便malloc一个chunk使p1被切分为两块(小于p1即可),同时p2回到对应的large">
 
 
 
@@ -537,7 +537,8 @@
       
 
       
-        <h2 id="漏洞要素"><a href="#漏洞要素" class="headerlink" title="漏洞要素"></a>漏洞要素</h2><p>写一个<code>free</code>后的<code>large chunk</code>,可用于修改两个任意地址的值为<code>libc</code>的一个地址</p>
+        <p>未完成</p>
+<h2 id="漏洞要素"><a href="#漏洞要素" class="headerlink" title="漏洞要素"></a>漏洞要素</h2><p>写一个<code>free</code>后的<code>large chunk</code>,可用于修改两个任意地址的值为<code>libc</code>的一个地址</p>
 <h2 id="利用思路"><a href="#利用思路" class="headerlink" title="利用思路"></a>利用思路</h2><p>首先分配<code>chunk p1</code>,<code>p2</code>和<code>p3</code>(<code>2</code>,<code>3</code>一样大),并且在它们之间插入其他的<code>chunk</code>以防止在释放时被合并.</p>
 <p>依次释放掉<code>p1</code>和<code>p2</code>,这两个<code>chunk</code>将被放入<code>unsorted bin</code>.</p>
 <p>接下来随便<code>malloc</code>一个<code>chunk</code>使<code>p1</code>被切分为两块(小于<code>p1</code>即可),同时<code>p2</code>回到对应的<code>large bin</code>链表中.</p>
@@ -669,7 +670,7 @@
                 
                   <a href="/archives/">
                 
-                    <span class="site-state-item-count">188</span>
+                    <span class="site-state-item-count">185</span>
                     <span class="site-state-item-name">日志</span>
                   </a>
                 </div>
@@ -853,9 +854,7 @@
                     
                       
                     
-                      
-                    
-                    <span class="site-state-item-count">55</span>
+                    <span class="site-state-item-count">54</span>
                     <span class="site-state-item-name">标签</span>
                   </a>
                 </div>
@@ -937,7 +936,7 @@
       <i class="fa fa-area-chart"></i>
     </span>
     
-    <span title="站点总字数">713k</span>
+    <span title="站点总字数">708k</span>
   
 
   
@@ -946,7 +945,7 @@
       <i class="fa fa-coffee"></i>
     </span>
     
-    <span title="站点阅读时长">10:48</span>
+    <span title="站点阅读时长">10:44</span>
   
 </div>
 

@@ -119,24 +119,24 @@
 
 
 
-  <meta name="description" content="前言基于glibc-2.23. Linux进程内存布局Linux系统在装载elf格式的程序文件时,会调用loader把可执行文件中的各个段依次载入到从某一地址开始的空间中,载入地址取决link editor(ld)和机器地址位数. 32位进程内存经典布局.  64与之类似.除了载入位置外最大的不同就是Memory Mapping Segment生长的方向不一样.  内核数据结构mm_struct的">
+  <meta name="description" content="未完成 前言基于glibc-2.23. Linux进程内存布局Linux系统在装载elf格式的程序文件时,会调用loader把可执行文件中的各个段依次载入到从某一地址开始的空间中,载入地址取决link editor(ld)和机器地址位数. 32位进程内存经典布局.  64与之类似.除了载入位置外最大的不同就是Memory Mapping Segment生长的方向不一样.  内核数据结构mm_str">
 <meta name="keywords" content="Linux">
 <meta property="og:type" content="article">
 <meta property="og:title" content="binary-源码分析-Linux-ptmalloc-概览">
 <meta property="og:url" content="https://hitworld.github.io/posts/24c64c77/index.html">
 <meta property="og:site_name" content="w4rd3n">
-<meta property="og:description" content="前言基于glibc-2.23. Linux进程内存布局Linux系统在装载elf格式的程序文件时,会调用loader把可执行文件中的各个段依次载入到从某一地址开始的空间中,载入地址取决link editor(ld)和机器地址位数. 32位进程内存经典布局.  64与之类似.除了载入位置外最大的不同就是Memory Mapping Segment生长的方向不一样.  内核数据结构mm_struct的">
+<meta property="og:description" content="未完成 前言基于glibc-2.23. Linux进程内存布局Linux系统在装载elf格式的程序文件时,会调用loader把可执行文件中的各个段依次载入到从某一地址开始的空间中,载入地址取决link editor(ld)和机器地址位数. 32位进程内存经典布局.  64与之类似.除了载入位置外最大的不同就是Memory Mapping Segment生长的方向不一样.  内核数据结构mm_str">
 <meta property="og:locale" content="zh-CN">
-<meta property="og:image" content="https://hitworld.github.io/posts/24c64c77/1.png">
-<meta property="og:image" content="https://hitworld.github.io/posts/24c64c77/2.png">
-<meta property="og:image" content="https://hitworld.github.io/posts/24c64c77/3.png">
-<meta property="og:image" content="https://hitworld.github.io/posts/24c64c77/4.png">
-<meta property="og:image" content="https://hitworld.github.io/posts/24c64c77/5.png">
-<meta property="og:updated_time" content="2020-07-09T03:20:02.816Z">
+<meta property="og:image" content="https://hitworld.github.io/posts/undefined/1.png">
+<meta property="og:image" content="https://hitworld.github.io/posts/undefined/2.png">
+<meta property="og:image" content="https://hitworld.github.io/posts/undefined/3.png">
+<meta property="og:image" content="https://hitworld.github.io/posts/undefined/4.png">
+<meta property="og:image" content="https://hitworld.github.io/posts/undefined/5.png">
+<meta property="og:updated_time" content="2020-07-22T09:23:33.150Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="binary-源码分析-Linux-ptmalloc-概览">
-<meta name="twitter:description" content="前言基于glibc-2.23. Linux进程内存布局Linux系统在装载elf格式的程序文件时,会调用loader把可执行文件中的各个段依次载入到从某一地址开始的空间中,载入地址取决link editor(ld)和机器地址位数. 32位进程内存经典布局.  64与之类似.除了载入位置外最大的不同就是Memory Mapping Segment生长的方向不一样.  内核数据结构mm_struct的">
-<meta name="twitter:image" content="https://hitworld.github.io/posts/24c64c77/1.png">
+<meta name="twitter:description" content="未完成 前言基于glibc-2.23. Linux进程内存布局Linux系统在装载elf格式的程序文件时,会调用loader把可执行文件中的各个段依次载入到从某一地址开始的空间中,载入地址取决link editor(ld)和机器地址位数. 32位进程内存经典布局.  64与之类似.除了载入位置外最大的不同就是Memory Mapping Segment生长的方向不一样.  内核数据结构mm_str">
+<meta name="twitter:image" content="https://hitworld.github.io/posts/undefined/1.png">
 
 
 
@@ -543,12 +543,13 @@
       
 
       
-        <h2 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h2><p>基于<code>glibc-2.23</code>.</p>
+        <p>未完成</p>
+<h2 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h2><p>基于<code>glibc-2.23</code>.</p>
 <h2 id="Linux进程内存布局"><a href="#Linux进程内存布局" class="headerlink" title="Linux进程内存布局"></a>Linux进程内存布局</h2><p><code>Linux</code>系统在装载<code>elf</code>格式的程序文件时,会调用<code>loader</code>把可执行文件中的各个段依次载入到从某一地址开始的空间中,载入地址取决<code>link editor(ld)</code>和机器地址位数.</p>
 <p><code>32</code>位进程内存经典布局.</p>
-<img src="/posts/24c64c77/1.png" title="p1">
+<img src="/posts/undefined/1.png" title="p1">
 <p><code>64</code>与之类似.除了载入位置外最大的不同就是<code>Memory Mapping Segment</code>生长的方向不一样.</p>
-<img src="/posts/24c64c77/2.png" title="p2">
+<img src="/posts/undefined/2.png" title="p2">
 <p>内核数据结构<code>mm_struct</code>的成员变量<code>start_code</code>和<code>end_code</code>是进程代码段的起始和终止地址,<code>start_data</code>和<code>end_data</code>是进程数据段的起始和终止地址,<code>start_stack</code>是进程堆栈段起始地址,<code>start_brk</code>和<code>brk</code>是进程主分配区中<code>heap</code>的起始和终止地址.</p>
 <h2 id="Linux动态内存分配"><a href="#Linux动态内存分配" class="headerlink" title="Linux动态内存分配"></a>Linux动态内存分配</h2><p><code>heap</code>和<code>mmap</code>映射区域是可以运行时分配的内存空间.操作系统提供了相关的系统调用来分配内存给这两个区域.</p>
 <p>对于<code>heap</code>,操作系统提供了<code>brk()</code>系统调用函数,<code>C</code>运行时库提供了<code>sbrk()</code>函数.</p>
@@ -584,13 +585,13 @@
 <h3 id="chunk"><a href="#chunk" class="headerlink" title="chunk"></a>chunk</h3><p>用户请求分配的内存空间在<code>ptmalloc</code>中使用<code>chunk</code>来表示.用户请求释放的内存空间并不会马上归还系统,会先表示为空闲<code>chunk</code>,<code>ptmalloc</code>使用特定的数据结构来管理空闲<code>chunk</code>.</p>
 <p><code>ptmalloc</code>在给用户分配的空间前后加上一些控制信息来记录分配的信息.</p>
 <p>使用中的<code>chunk</code>(未<code>free</code>).</p>
-<img src="/posts/24c64c77/3.png" title="p3">
+<img src="/posts/undefined/3.png" title="p3">
 <p><code>chunk</code>指针指向一个<code>chunk</code>的开始.<code>mem</code>指针才是真正返回给用户的指针.</p>
 <p><code>chunk</code>的第二个域的最低一位为<code>P</code>,标识前一<code>chunk</code>是否在使用,为<code>0</code>表示前一<code>chunk</code>空闲,此时此<code>chunk</code>的<code>prev_size</code>有效(前一<code>chunk</code>的<code>size</code>).为<code>1</code>则<code>prev_size</code>无效.<code>ptmalloc</code>分配的第一个<code>chunk</code>总是将<code>P</code>设为<code>1</code>.</p>
 <p><code>chunk</code>的第二个域的倒数第二个位为<code>M</code>,表示此<code>chunk</code>是从哪个内存区域获得的虚拟内存.为<code>1</code>表示是从<code>mmap</code>映射区域分配的,为<code>0</code>则是从<code>heap</code>区域分配的.</p>
 <p><code>chunk</code>的第二个域的倒数第三个位为<code>A</code>,表示此<code>chunk</code>属于主分配区或者非主分配区,为<code>1</code>表示属于非主分配区,为<code>0</code>则是非主分配区.</p>
 <p>空闲<code>chunk</code>.</p>
-<img src="/posts/24c64c77/4.png" title="p4">
+<img src="/posts/undefined/4.png" title="p4">
 <p>空闲<code>chunk</code>不存在<code>M</code>状态.</p>
 <p>空闲<code>chunk</code>中原本为数据区的地方存储了两个指针,<code>fd</code>指向所在<code>bin</code>(空闲<code>chunk</code>容器,双向链表)的后一空闲<code>chunk</code>,<code>bk</code>指向前一空闲<code>chunk</code>.<code>ptmalloc</code>通过这两个指针将大小相近的<code>chunk</code>连成一个<code>bin</code>.</p>
 <p>对于<code>large bin</code>中的空闲<code>chunk</code>,还有两个指针,<code>fd_nextsize</code>和<code>bk_nextsize</code>,用于加快在<code>large bin</code>中查找最近大小匹配的空闲<code>chunk</code>.</p>
@@ -600,7 +601,7 @@
 <p>空闲的<code>chunk</code>和使用中的<code>chunk</code>使用的是同一块空间.所以最终的分配空间<code>chunk_size = max(in_use_size, 16)</code>(<code>64</code>位<code>max(in_use_size, 32)</code>).这就是<code>ptmalloc</code>实际需要分配的内存大小.</p>
 <h3 id="空闲chunk容器"><a href="#空闲chunk容器" class="headerlink" title="空闲chunk容器"></a>空闲chunk容器</h3><p><code>ptmalloc</code>统一管理<code>heap</code>和<code>mmap</code>映射区域中的空闲<code>chunk</code>,当用户进行下一次分配请求时,<code>ptmalloc</code>会首先试图在空闲<code>chunk</code>中寻找.</p>
 <p><code>ptmalloc</code>将相似大小的<code>chunk</code>用双向链表链接起来,这样的一个链表被称为一个<code>bin</code>.<code>ptmalloc</code>一共维护了<code>128</code>个<code>bin</code>,并使用一个数组<code>Bins</code>来存储这些<code>bin</code>.</p>
-<img src="/posts/24c64c77/5.png" title="p5">
+<img src="/posts/undefined/5.png" title="p5">
 <h4 id="Bins"><a href="#Bins" class="headerlink" title="Bins"></a>Bins</h4><p><code>bins</code>数组的第一个为<code>unsorted bin</code>.每个<code>bin</code>都是一个双向链表.</p>
 <p><code>2 - 64</code>标号的<code>bin</code>统称为<code>small bins</code>,同一<code>small bin</code>中的<code>chunk</code>大小相同.相邻<code>small bin</code>的<code>chunk</code>大小相差<code>8bytes</code>(<code>64</code>位<code>16B</code>).释放的<code>chunk</code>被插入链表头部,寻找<code>chunk</code>是从链表尾部开始.</p>
 <p><code>small bins</code>后面的被称作<code>large bins</code>.<code>large bins</code>中的<code>bin</code>分别包含给定范围内的<code>chunk</code>,并按大小序排列.相同大小的<code>chunk</code>同<code>small bin</code>按照最近使用顺序排列.<code>ptmalloc</code>使用<code>smallest-first,best-fit</code>原则在<code>large bins</code>中寻找<code>chunk</code>.</p>
@@ -784,7 +785,7 @@
                 
                   <a href="/archives/">
                 
-                    <span class="site-state-item-count">188</span>
+                    <span class="site-state-item-count">185</span>
                     <span class="site-state-item-name">日志</span>
                   </a>
                 </div>
@@ -968,9 +969,7 @@
                     
                       
                     
-                      
-                    
-                    <span class="site-state-item-count">55</span>
+                    <span class="site-state-item-count">54</span>
                     <span class="site-state-item-name">标签</span>
                   </a>
                 </div>
@@ -1052,7 +1051,7 @@
       <i class="fa fa-area-chart"></i>
     </span>
     
-    <span title="站点总字数">713k</span>
+    <span title="站点总字数">708k</span>
   
 
   
@@ -1061,7 +1060,7 @@
       <i class="fa fa-coffee"></i>
     </span>
     
-    <span title="站点阅读时长">10:48</span>
+    <span title="站点阅读时长">10:44</span>
   
 </div>
 

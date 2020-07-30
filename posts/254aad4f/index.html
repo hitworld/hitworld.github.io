@@ -127,13 +127,13 @@
 <meta property="og:site_name" content="w4rd3n">
 <meta property="og:description" content="逆向入门逆向把mov的数值表示成字符获得flag. Easy_vbVB_Decompiler打开看code获得flag(也可IDA看String窗口). Easy_ReIDA打开查看程序逻辑,发现把输入进行比较,比较对象为逆序的flag. 游戏过关OllyICE打开通过关键字符串找到程序主逻辑,往下走找到8个比较,把所有jmp目标改变(不必要),输入获得flag. 逆向入门IDA打开发现是bina">
 <meta property="og:locale" content="zh-CN">
-<meta property="og:image" content="https://hitworld.github.io/posts/undefined/1.png">
-<meta property="og:image" content="https://hitworld.github.io/posts/undefined/2.png">
-<meta property="og:updated_time" content="2020-07-22T09:18:30.785Z">
+<meta property="og:image" content="https://hitworld.github.io/posts/254aad4f/1.png">
+<meta property="og:image" content="https://hitworld.github.io/posts/254aad4f/2.png">
+<meta property="og:updated_time" content="2020-07-22T09:32:52.580Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="writeup-bugku">
 <meta name="twitter:description" content="逆向入门逆向把mov的数值表示成字符获得flag. Easy_vbVB_Decompiler打开看code获得flag(也可IDA看String窗口). Easy_ReIDA打开查看程序逻辑,发现把输入进行比较,比较对象为逆序的flag. 游戏过关OllyICE打开通过关键字符串找到程序主逻辑,往下走找到8个比较,把所有jmp目标改变(不必要),输入获得flag. 逆向入门IDA打开发现是bina">
-<meta name="twitter:image" content="https://hitworld.github.io/posts/undefined/1.png">
+<meta name="twitter:image" content="https://hitworld.github.io/posts/254aad4f/1.png">
 
 
 
@@ -542,7 +542,7 @@
 <h2 id="WEB"><a href="#WEB" class="headerlink" title="WEB"></a>WEB</h2><h3 id="web2"><a href="#web2" class="headerlink" title="web2"></a>web2</h3><p><code>F12</code>看源代码获得<code>flag</code>.</p>
 <h3 id="计算器"><a href="#计算器" class="headerlink" title="计算器"></a>计算器</h3><p><code>F12</code>改<code>minsize = &quot;1&quot;</code>为<code>minsize = &quot;10&quot;</code>获得<code>flag</code>.</p>
 <h3 id="web基础-GET"><a href="#web基础-GET" class="headerlink" title="web基础$_GET"></a>web基础$_GET</h3><p><code>http://123.206.87.240:8002/get/?what=flag</code>.</p>
-<h3 id="web基础-POST"><a href="#web基础-POST" class="headerlink" title="web基础$_POST"></a>web基础$_POST</h3><img src="/posts/undefined/1.png" title="Postman">
+<h3 id="web基础-POST"><a href="#web基础-POST" class="headerlink" title="web基础$_POST"></a>web基础$_POST</h3><img src="/posts/254aad4f/1.png" title="Postman">
 <h3 id="矛盾"><a href="#矛盾" class="headerlink" title="矛盾"></a>矛盾</h3><p><code>PHP</code>数字与字符串弱相等<code>==</code>判定.</p>
 <p><code>http://123.206.87.240:8002/get/index1.php?num=1a</code>.</p>
 <h3 id="web3"><a href="#web3" class="headerlink" title="web3"></a>web3</h3><p><code>F12</code>,<code>js</code>最后面注释里有<code>html</code>编码,解出<code>flag</code>.</p>
@@ -555,7 +555,7 @@
 <h3 id="web5"><a href="#web5" class="headerlink" title="web5"></a>web5</h3><p><code>F12</code>发现<code>JSFuck</code>,<code>console</code>运行获得<code>flag:ctf{whatfk}</code>.<br>…然而不行,看上面提示可知要大写.</p>
 <h3 id="头等舱"><a href="#头等舱" class="headerlink" title="头等舱"></a>头等舱</h3><p>抓包,看<code>response</code>的<code>header</code>获得<code>flag</code>.</p>
 <h3 id="welcome-to-bugkuctf"><a href="#welcome-to-bugkuctf" class="headerlink" title="welcome to bugkuctf"></a>welcome to bugkuctf</h3><p>第一步绕过,<code>php</code>可以使用<code>file_get_contents(&quot;php://input&quot;,&#39;r&#39;)</code>读取<code>post</code>数据.</p>
-<img src="/posts/undefined/2.png" title="p2">
+<img src="/posts/254aad4f/2.png" title="p2">
 <p>利用文件包含获取<code>hint.php</code></p>
 <figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&lt;?php</span></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Flag</span> </span>&#123;<span class="comment">//flag.php  </span></span><br><span class="line">  <span class="keyword">public</span> $file;  </span><br><span class="line">  <span class="keyword">public</span> <span class="function"><span class="keyword">function</span> <span class="title">__tostring</span><span class="params">()</span> </span>&#123;  </span><br><span class="line">    <span class="keyword">if</span>(<span class="keyword">isset</span>(<span class="keyword">$this</span>-&gt;file)) &#123;  </span><br><span class="line">      <span class="keyword">echo</span> file_get_contents(<span class="keyword">$this</span>-&gt;file); </span><br><span class="line">			<span class="keyword">echo</span> <span class="string">"&lt;br&gt;"</span>;</span><br><span class="line">		  <span class="keyword">return</span> (<span class="string">"good"</span>);</span><br><span class="line">    &#125;</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br><span class="line"><span class="meta">?&gt;</span></span><br></pre></td></tr></table></figure>
 <p>获取<code>index.php</code>.</p>
@@ -959,7 +959,7 @@
       <i class="fa fa-area-chart"></i>
     </span>
     
-    <span title="站点总字数">708k</span>
+    <span title="站点总字数">717k</span>
   
 
   
@@ -968,7 +968,7 @@
       <i class="fa fa-coffee"></i>
     </span>
     
-    <span title="站点阅读时长">10:44</span>
+    <span title="站点阅读时长">10:52</span>
   
 </div>
 

@@ -127,13 +127,13 @@
 <meta property="og:site_name" content="w4rd3n">
 <meta property="og:description" content="未完成 概览kernel是一个软件,用于管理其他所有软件发出的数据I/O要求并将这其转义为指令交给CPU和计算机中的其他组件处理,并进行权限控制,系统调用,进程管理,内存管理等多项功能,kernel是现代操作系统最基本的部分. Intel CPU将CPU的特权级别分为4个级别:Ring 0 ~ 3.Ring 0只给OS使用,Ring 3所有程序都可以使用,内层Ring可以随便使用外层Ring的资源">
 <meta property="og:locale" content="zh-CN">
-<meta property="og:image" content="https://hitworld.github.io/posts/undefined/2.png">
-<meta property="og:image" content="https://hitworld.github.io/posts/undefined/1.png">
-<meta property="og:updated_time" content="2020-07-22T09:21:03.436Z">
+<meta property="og:image" content="https://hitworld.github.io/posts/3db9858b/2.png">
+<meta property="og:image" content="https://hitworld.github.io/posts/3db9858b/1.png">
+<meta property="og:updated_time" content="2020-07-22T09:32:52.545Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="binary-漏洞分析-Linux-kernel-pwn-基础">
 <meta name="twitter:description" content="未完成 概览kernel是一个软件,用于管理其他所有软件发出的数据I/O要求并将这其转义为指令交给CPU和计算机中的其他组件处理,并进行权限控制,系统调用,进程管理,内存管理等多项功能,kernel是现代操作系统最基本的部分. Intel CPU将CPU的特权级别分为4个级别:Ring 0 ~ 3.Ring 0只给OS使用,Ring 3所有程序都可以使用,内层Ring可以随便使用外层Ring的资源">
-<meta name="twitter:image" content="https://hitworld.github.io/posts/undefined/2.png">
+<meta name="twitter:image" content="https://hitworld.github.io/posts/3db9858b/2.png">
 
 
 
@@ -549,7 +549,7 @@
 <p><code>linux</code>内核源码:<code>https://github.com/torvalds/linux</code>.</p>
 <p><code>linux</code>内核源码在线查看:<code>https://elixir.bootlin.com/linux/latest/source</code>.</p>
 <p><code>linux</code>内核内存分布图.</p>
-<img src="/posts/undefined/2.png" title="p2">
+<img src="/posts/3db9858b/2.png" title="p2">
 <h2 id="LKM"><a href="#LKM" class="headerlink" title="LKM"></a>LKM</h2><p>可加载核心模块(<code>LKM</code>)就是运行在内核空间的可执行程序,包括:驱动程序(如设备驱动,文件系统驱动),内核扩展模块(<code>modules</code>)等.</p>
 <p><code>LKM</code>的文件格式和用户态的可执行程序相同,后缀常常是<code>ko</code>,因此可以直接用<code>IDA</code>等工具来分析.模块不能单独运行(就像一个动态链接库),它在运行时被链接到内核作为内核的一部分在内核空间运行.</p>
 <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">modinfo test.ko</span><br><span class="line"><span class="comment">#获得模块信息</span></span><br><span class="line">insmod test.ko</span><br><span class="line"><span class="comment">#加载内核模块,需要root权限</span></span><br><span class="line">lsmod</span><br><span class="line"><span class="comment">#列出已加载的内核模块</span></span><br><span class="line">rmmod test.ko</span><br><span class="line"><span class="comment">#卸载内核模块,需要root权限</span></span><br></pre></td></tr></table></figure>
@@ -598,7 +598,7 @@
 <li><code>Stack Protector</code>:关于函数返回地址的检测,属于<code>CFI</code>(<code>Control Flow Integrity</code>,控制流完整性保护)中的后向控制流完整性保护.</li>
 </ul>
 <p><code>CR4</code>寄存器用于存储内核的标志位.</p>
-<img src="/posts/undefined/1.png" title="p1">
+<img src="/posts/3db9858b/1.png" title="p1">
 <h2 id="上传二进制文件"><a href="#上传二进制文件" class="headerlink" title="上传二进制文件"></a>上传二进制文件</h2><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">exp_base = system(<span class="string">"base64 exp"</span>)</span><br><span class="line">r. sendline(<span class="string">"echo "</span> + exp_base + <span class="string">" &gt; exp.txt"</span>)</span><br><span class="line">r. sendline(<span class="string">"base64 -d exp.txt &gt; exp"</span>)</span><br></pre></td></tr></table></figure>
 
       
@@ -988,7 +988,7 @@
       <i class="fa fa-area-chart"></i>
     </span>
     
-    <span title="站点总字数">708k</span>
+    <span title="站点总字数">717k</span>
   
 
   
@@ -997,7 +997,7 @@
       <i class="fa fa-coffee"></i>
     </span>
     
-    <span title="站点阅读时长">10:44</span>
+    <span title="站点阅读时长">10:52</span>
   
 </div>
 

@@ -119,18 +119,18 @@
 
 
 
-  <meta name="description" content="未完成 结构体的识别汇编层面对于数据的处理只分为字节,字,双字,四字等.所以IDA在没有符号信息时对于数组和结构体是难以正确识别的(通常数组会通过行为判断). 体现在代码中就是结构体成员在汇编代码中的引用通常表现为基址加偏移. 自定义IDA结构体打开结构体窗口,按Insert键增加一个结构体(或者联合),将光标放在新建的结构体的最后一行按d加入数据结构体成员,按a加入ASCII字符串为结构体成员.">
+  <meta name="description" content="结构体的识别汇编层面对于数据的处理只分为字节,字,双字,四字等.所以IDA在没有符号信息时对于数组和结构体是难以正确识别的(通常数组会通过行为判断). 体现在代码中就是结构体成员在汇编代码中的引用通常表现为基址加偏移. 自定义IDA结构体打开结构体窗口,按Insert键增加一个结构体(或者联合),将光标放在新建的结构体的最后一行按d加入数据结构体成员,按a加入ASCII字符串为结构体成员. u仅能">
 <meta name="keywords" content="tool">
 <meta property="og:type" content="article">
 <meta property="og:title" content="binary-逆向分析-tool-IDA-结构体处理">
 <meta property="og:url" content="https://hitworld.github.io/posts/14dce122/index.html">
 <meta property="og:site_name" content="w4rd3n">
-<meta property="og:description" content="未完成 结构体的识别汇编层面对于数据的处理只分为字节,字,双字,四字等.所以IDA在没有符号信息时对于数组和结构体是难以正确识别的(通常数组会通过行为判断). 体现在代码中就是结构体成员在汇编代码中的引用通常表现为基址加偏移. 自定义IDA结构体打开结构体窗口,按Insert键增加一个结构体(或者联合),将光标放在新建的结构体的最后一行按d加入数据结构体成员,按a加入ASCII字符串为结构体成员.">
+<meta property="og:description" content="结构体的识别汇编层面对于数据的处理只分为字节,字,双字,四字等.所以IDA在没有符号信息时对于数组和结构体是难以正确识别的(通常数组会通过行为判断). 体现在代码中就是结构体成员在汇编代码中的引用通常表现为基址加偏移. 自定义IDA结构体打开结构体窗口,按Insert键增加一个结构体(或者联合),将光标放在新建的结构体的最后一行按d加入数据结构体成员,按a加入ASCII字符串为结构体成员. u仅能">
 <meta property="og:locale" content="zh-CN">
-<meta property="og:updated_time" content="2020-07-22T09:32:52.556Z">
+<meta property="og:updated_time" content="2020-08-02T07:56:29.640Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="binary-逆向分析-tool-IDA-结构体处理">
-<meta name="twitter:description" content="未完成 结构体的识别汇编层面对于数据的处理只分为字节,字,双字,四字等.所以IDA在没有符号信息时对于数组和结构体是难以正确识别的(通常数组会通过行为判断). 体现在代码中就是结构体成员在汇编代码中的引用通常表现为基址加偏移. 自定义IDA结构体打开结构体窗口,按Insert键增加一个结构体(或者联合),将光标放在新建的结构体的最后一行按d加入数据结构体成员,按a加入ASCII字符串为结构体成员.">
+<meta name="twitter:description" content="结构体的识别汇编层面对于数据的处理只分为字节,字,双字,四字等.所以IDA在没有符号信息时对于数组和结构体是难以正确识别的(通常数组会通过行为判断). 体现在代码中就是结构体成员在汇编代码中的引用通常表现为基址加偏移. 自定义IDA结构体打开结构体窗口,按Insert键增加一个结构体(或者联合),将光标放在新建的结构体的最后一行按d加入数据结构体成员,按a加入ASCII字符串为结构体成员. u仅能">
 
 
 
@@ -503,7 +503,7 @@
                 
                   <span class="post-meta-item-text">本文字数：</span>
                 
-                <span title="本文字数">298</span>
+                <span title="本文字数">294</span>
               
 
               
@@ -537,8 +537,7 @@
       
 
       
-        <p>未完成</p>
-<h2 id="结构体的识别"><a href="#结构体的识别" class="headerlink" title="结构体的识别"></a>结构体的识别</h2><p>汇编层面对于数据的处理只分为字节,字,双字,四字等.所以<code>IDA</code>在没有符号信息时对于数组和结构体是难以正确识别的(通常数组会通过行为判断).</p>
+        <h2 id="结构体的识别"><a href="#结构体的识别" class="headerlink" title="结构体的识别"></a>结构体的识别</h2><p>汇编层面对于数据的处理只分为字节,字,双字,四字等.所以<code>IDA</code>在没有符号信息时对于数组和结构体是难以正确识别的(通常数组会通过行为判断).</p>
 <p>体现在代码中就是结构体成员在汇编代码中的引用通常表现为基址加偏移.</p>
 <h2 id="自定义IDA结构体"><a href="#自定义IDA结构体" class="headerlink" title="自定义IDA结构体"></a>自定义IDA结构体</h2><p>打开结构体窗口,按<code>Insert</code>键增加一个结构体(或者联合),将光标放在新建的结构体的最后一行按<code>d</code>加入数据结构体成员,按<code>a</code>加入<code>ASCII</code>字符串为结构体成员.</p>
 <p><code>u</code>仅能删除最后一个结构体成员的定义,对于其他成员只会删除成员名,而不会删除对应的内存空间.<code>IDA</code>不会对字段进行对齐,如果有对其要求需要自行填充字节.</p>

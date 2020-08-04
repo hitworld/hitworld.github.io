@@ -119,21 +119,21 @@
 
 
 
-  <meta name="description" content="未完成 简介AFL是一种Fuzzing测试工具.通过对源码进行编译时插桩(通过注入探针代码来实现程序分析)的方式监测边界(代码)覆盖率,通过算法自动变异新的测试用例来探索二进制程序内部新的执行路径.AFL也支持直接对没有源码的二进制程序进行测试,但需要QEMU的支持. 原理AFL的一个特点就是基于边界覆盖率的反馈机制,边界覆盖率的统计工作通过插桩完成,然后通过边界覆盖率来进行状态分析.记录输入样本">
+  <meta name="description" content="简介AFL是一种Fuzzing测试工具.通过对源码进行编译时插桩(通过注入探针代码来实现程序分析)的方式监测边界(代码)覆盖率,通过算法自动变异新的测试用例来探索二进制程序内部新的执行路径.AFL也支持直接对没有源码的二进制程序进行测试,但需要QEMU的支持. 原理AFL的一个特点就是基于边界覆盖率的反馈机制,边界覆盖率的统计工作通过插桩完成,然后通过边界覆盖率来进行状态分析.记录输入样本的代码覆">
 <meta name="keywords" content="fuzz">
 <meta property="og:type" content="article">
 <meta property="og:title" content="binary-漏洞挖掘-fuzz-AFL基础">
 <meta property="og:url" content="https://hitworld.github.io/posts/d71c55d/index.html">
 <meta property="og:site_name" content="w4rd3n">
-<meta property="og:description" content="未完成 简介AFL是一种Fuzzing测试工具.通过对源码进行编译时插桩(通过注入探针代码来实现程序分析)的方式监测边界(代码)覆盖率,通过算法自动变异新的测试用例来探索二进制程序内部新的执行路径.AFL也支持直接对没有源码的二进制程序进行测试,但需要QEMU的支持. 原理AFL的一个特点就是基于边界覆盖率的反馈机制,边界覆盖率的统计工作通过插桩完成,然后通过边界覆盖率来进行状态分析.记录输入样本">
+<meta property="og:description" content="简介AFL是一种Fuzzing测试工具.通过对源码进行编译时插桩(通过注入探针代码来实现程序分析)的方式监测边界(代码)覆盖率,通过算法自动变异新的测试用例来探索二进制程序内部新的执行路径.AFL也支持直接对没有源码的二进制程序进行测试,但需要QEMU的支持. 原理AFL的一个特点就是基于边界覆盖率的反馈机制,边界覆盖率的统计工作通过插桩完成,然后通过边界覆盖率来进行状态分析.记录输入样本的代码覆">
 <meta property="og:locale" content="zh-CN">
 <meta property="og:image" content="https://hitworld.github.io/posts/d71c55d/2.png">
 <meta property="og:image" content="https://hitworld.github.io/posts/d71c55d/3.png">
 <meta property="og:image" content="https://hitworld.github.io/posts/d71c55d/4.png">
-<meta property="og:updated_time" content="2020-07-22T09:32:52.554Z">
+<meta property="og:updated_time" content="2020-08-02T07:55:37.000Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="binary-漏洞挖掘-fuzz-AFL基础">
-<meta name="twitter:description" content="未完成 简介AFL是一种Fuzzing测试工具.通过对源码进行编译时插桩(通过注入探针代码来实现程序分析)的方式监测边界(代码)覆盖率,通过算法自动变异新的测试用例来探索二进制程序内部新的执行路径.AFL也支持直接对没有源码的二进制程序进行测试,但需要QEMU的支持. 原理AFL的一个特点就是基于边界覆盖率的反馈机制,边界覆盖率的统计工作通过插桩完成,然后通过边界覆盖率来进行状态分析.记录输入样本">
+<meta name="twitter:description" content="简介AFL是一种Fuzzing测试工具.通过对源码进行编译时插桩(通过注入探针代码来实现程序分析)的方式监测边界(代码)覆盖率,通过算法自动变异新的测试用例来探索二进制程序内部新的执行路径.AFL也支持直接对没有源码的二进制程序进行测试,但需要QEMU的支持. 原理AFL的一个特点就是基于边界覆盖率的反馈机制,边界覆盖率的统计工作通过插桩完成,然后通过边界覆盖率来进行状态分析.记录输入样本的代码覆">
 <meta name="twitter:image" content="https://hitworld.github.io/posts/d71c55d/2.png">
 
 
@@ -541,8 +541,7 @@
       
 
       
-        <p>未完成</p>
-<h2 id="简介"><a href="#简介" class="headerlink" title="简介"></a>简介</h2><p><code>AFL</code>是一种<code>Fuzzing</code>测试工具.通过对源码进行编译时插桩(通过注入探针代码来实现程序分析)的方式监测边界(代码)覆盖率,通过算法自动变异新的测试用例来探索二进制程序内部新的执行路径.<code>AFL</code>也支持直接对没有源码的二进制程序进行测试,但需要<code>QEMU</code>的支持.</p>
+        <h2 id="简介"><a href="#简介" class="headerlink" title="简介"></a>简介</h2><p><code>AFL</code>是一种<code>Fuzzing</code>测试工具.通过对源码进行编译时插桩(通过注入探针代码来实现程序分析)的方式监测边界(代码)覆盖率,通过算法自动变异新的测试用例来探索二进制程序内部新的执行路径.<code>AFL</code>也支持直接对没有源码的二进制程序进行测试,但需要<code>QEMU</code>的支持.</p>
 <h2 id="原理"><a href="#原理" class="headerlink" title="原理"></a>原理</h2><p><code>AFL</code>的一个特点就是基于边界覆盖率的反馈机制,边界覆盖率的统计工作通过插桩完成,然后通过边界覆盖率来进行状态分析.记录输入样本的代码覆盖率,从而调整输入样本以提高覆盖率,增加发现漏洞的概率.</p>
 <p><code>fuzz</code>过程中<code>AFL</code>会维护一个语料库队列<code>queue</code>,包含了初始测试用例及变异后有新状态产生的测试用例,变异策略分为确定性策略和随机性策略.</p>
 <p><code>AFL</code>通过跳转指令将程序分为一个个基本块,将源基本块和目的基本块的配对组合称为<code>tuple</code>(元组).通过记录<code>tuple</code>统计边界覆盖率,<code>AFL</code>通过<code>bitmap</code>(以<code>byte</code>为单位从而记录<code>tuple</code>的命中数)来记录这些信息.<br>出现新<code>tuple</code>或已有<code>tuple</code>中出现的新命中组视为产生新状态(也意味着更新覆盖范围),相应的测试用例将被归入到语料库队列<code>queue</code>中.</p>

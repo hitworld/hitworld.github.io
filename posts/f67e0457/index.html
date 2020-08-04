@@ -119,13 +119,13 @@
 
 
 
-  <meta name="description" content="未完成 前言参考:https://www.slideshare.net/AngelBoy1/windows-10-nt-heap-exploitation-chinese-version. 适用版本:win10(1809) 64bit OS build - 17763.379. 内存分配机制win10默认内存分配机制为Nt Heap,win10还有一套全新的内存分配机制SegmentHeap,现用">
+  <meta name="description" content="前言参考:https://www.slideshare.net/AngelBoy1/windows-10-nt-heap-exploitation-chinese-version. 适用版本:win10(1809) 64bit OS build - 17763.379. 内存分配机制win10默认内存分配机制为Nt Heap,win10还有一套全新的内存分配机制SegmentHeap,现用于部分系">
 <meta name="keywords" content="NtHeap-pwn">
 <meta property="og:type" content="article">
 <meta property="og:title" content="binary-漏洞分析-Windows-NtHeap-pwn-基础">
 <meta property="og:url" content="https://hitworld.github.io/posts/f67e0457/index.html">
 <meta property="og:site_name" content="w4rd3n">
-<meta property="og:description" content="未完成 前言参考:https://www.slideshare.net/AngelBoy1/windows-10-nt-heap-exploitation-chinese-version. 适用版本:win10(1809) 64bit OS build - 17763.379. 内存分配机制win10默认内存分配机制为Nt Heap,win10还有一套全新的内存分配机制SegmentHeap,现用">
+<meta property="og:description" content="前言参考:https://www.slideshare.net/AngelBoy1/windows-10-nt-heap-exploitation-chinese-version. 适用版本:win10(1809) 64bit OS build - 17763.379. 内存分配机制win10默认内存分配机制为Nt Heap,win10还有一套全新的内存分配机制SegmentHeap,现用于部分系">
 <meta property="og:locale" content="zh-CN">
 <meta property="og:image" content="https://hitworld.github.io/posts/f67e0457/1.png">
 <meta property="og:image" content="https://hitworld.github.io/posts/f67e0457/2.png">
@@ -134,10 +134,10 @@
 <meta property="og:image" content="https://hitworld.github.io/posts/f67e0457/5.png">
 <meta property="og:image" content="https://hitworld.github.io/posts/f67e0457/6.png">
 <meta property="og:image" content="https://hitworld.github.io/posts/f67e0457/7.png">
-<meta property="og:updated_time" content="2020-07-22T09:32:52.551Z">
+<meta property="og:updated_time" content="2020-08-02T07:55:16.045Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="binary-漏洞分析-Windows-NtHeap-pwn-基础">
-<meta name="twitter:description" content="未完成 前言参考:https://www.slideshare.net/AngelBoy1/windows-10-nt-heap-exploitation-chinese-version. 适用版本:win10(1809) 64bit OS build - 17763.379. 内存分配机制win10默认内存分配机制为Nt Heap,win10还有一套全新的内存分配机制SegmentHeap,现用">
+<meta name="twitter:description" content="前言参考:https://www.slideshare.net/AngelBoy1/windows-10-nt-heap-exploitation-chinese-version. 适用版本:win10(1809) 64bit OS build - 17763.379. 内存分配机制win10默认内存分配机制为Nt Heap,win10还有一套全新的内存分配机制SegmentHeap,现用于部分系">
 <meta name="twitter:image" content="https://hitworld.github.io/posts/f67e0457/1.png">
 
 
@@ -545,8 +545,7 @@
       
 
       
-        <p>未完成</p>
-<h2 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h2><p>参考:<code>https://www.slideshare.net/AngelBoy1/windows-10-nt-heap-exploitation-chinese-version</code>.</p>
+        <h2 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h2><p>参考:<code>https://www.slideshare.net/AngelBoy1/windows-10-nt-heap-exploitation-chinese-version</code>.</p>
 <p>适用版本:<code>win10(1809) 64bit OS build - 17763.379</code>.</p>
 <h2 id="内存分配机制"><a href="#内存分配机制" class="headerlink" title="内存分配机制"></a>内存分配机制</h2><p><code>win10</code>默认内存分配机制为<code>Nt Heap</code>,<code>win10</code>还有一套全新的内存分配机制<code>SegmentHeap</code>,现用于部分系统程序及<code>UWP</code>程序.这里主要讨论<code>Nt Heap</code>.</p>
 <p><code>win10</code>的内存分配机制与<code>win7/Linux</code>最大的差别在于分配的结果随机化,难以预测分配的堆块.</p>

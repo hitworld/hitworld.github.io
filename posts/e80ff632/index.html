@@ -119,22 +119,22 @@
 
 
 
-  <meta name="description" content="未完成 概览SROP(Sigreturn Oriented Programming),即利用Linux信号处理完成的rop攻击. Linux信号处理当内核向某个进程发起一个signal,该进程会被暂时挂起,进入内核,然后内核为该进程保存相应的上下文,跳转到之前注册好的signal handler中处理相应signal,当signal handler返回之后,内核为该进程恢复之前保存的上下文,最后恢">
+  <meta name="description" content="概览SROP(Sigreturn Oriented Programming),即利用Linux信号处理完成的rop攻击. Linux信号处理当内核向某个进程发起一个signal,该进程会被暂时挂起,进入内核,然后内核为该进程保存相应的上下文,跳转到之前注册好的signal handler中处理相应signal,当signal handler返回之后,内核为该进程恢复之前保存的上下文,最后恢复进程的">
 <meta name="keywords" content="Linux-pwn">
 <meta property="og:type" content="article">
 <meta property="og:title" content="binary-漏洞分析-Linux-pwn-srop">
 <meta property="og:url" content="https://hitworld.github.io/posts/e80ff632/index.html">
 <meta property="og:site_name" content="w4rd3n">
-<meta property="og:description" content="未完成 概览SROP(Sigreturn Oriented Programming),即利用Linux信号处理完成的rop攻击. Linux信号处理当内核向某个进程发起一个signal,该进程会被暂时挂起,进入内核,然后内核为该进程保存相应的上下文,跳转到之前注册好的signal handler中处理相应signal,当signal handler返回之后,内核为该进程恢复之前保存的上下文,最后恢">
+<meta property="og:description" content="概览SROP(Sigreturn Oriented Programming),即利用Linux信号处理完成的rop攻击. Linux信号处理当内核向某个进程发起一个signal,该进程会被暂时挂起,进入内核,然后内核为该进程保存相应的上下文,跳转到之前注册好的signal handler中处理相应signal,当signal handler返回之后,内核为该进程恢复之前保存的上下文,最后恢复进程的">
 <meta property="og:locale" content="zh-CN">
 <meta property="og:image" content="https://hitworld.github.io/posts/e80ff632/1.png">
 <meta property="og:image" content="https://hitworld.github.io/posts/e80ff632/2.png">
 <meta property="og:image" content="https://hitworld.github.io/posts/e80ff632/6.png">
 <meta property="og:image" content="https://hitworld.github.io/posts/e80ff632/3.png">
-<meta property="og:updated_time" content="2020-07-22T09:32:52.548Z">
+<meta property="og:updated_time" content="2020-08-02T07:55:08.101Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="binary-漏洞分析-Linux-pwn-srop">
-<meta name="twitter:description" content="未完成 概览SROP(Sigreturn Oriented Programming),即利用Linux信号处理完成的rop攻击. Linux信号处理当内核向某个进程发起一个signal,该进程会被暂时挂起,进入内核,然后内核为该进程保存相应的上下文,跳转到之前注册好的signal handler中处理相应signal,当signal handler返回之后,内核为该进程恢复之前保存的上下文,最后恢">
+<meta name="twitter:description" content="概览SROP(Sigreturn Oriented Programming),即利用Linux信号处理完成的rop攻击. Linux信号处理当内核向某个进程发起一个signal,该进程会被暂时挂起,进入内核,然后内核为该进程保存相应的上下文,跳转到之前注册好的signal handler中处理相应signal,当signal handler返回之后,内核为该进程恢复之前保存的上下文,最后恢复进程的">
 <meta name="twitter:image" content="https://hitworld.github.io/posts/e80ff632/1.png">
 
 
@@ -508,7 +508,7 @@
                 
                   <span class="post-meta-item-text">本文字数：</span>
                 
-                <span title="本文字数">2.9k</span>
+                <span title="本文字数">2.8k</span>
               
 
               
@@ -542,8 +542,7 @@
       
 
       
-        <p>未完成</p>
-<h2 id="概览"><a href="#概览" class="headerlink" title="概览"></a>概览</h2><p><code>SROP</code>(<code>Sigreturn Oriented Programming</code>),即利用<code>Linux</code>信号处理完成的<code>rop</code>攻击.</p>
+        <h2 id="概览"><a href="#概览" class="headerlink" title="概览"></a>概览</h2><p><code>SROP</code>(<code>Sigreturn Oriented Programming</code>),即利用<code>Linux</code>信号处理完成的<code>rop</code>攻击.</p>
 <h3 id="Linux信号处理"><a href="#Linux信号处理" class="headerlink" title="Linux信号处理"></a>Linux信号处理</h3><p>当内核向某个进程发起一个<code>signal</code>,该进程会被暂时挂起,进入内核,然后内核为该进程保存相应的上下文,跳转到之前注册好的<code>signal handler</code>中处理相应<code>signal</code>,当<code>signal handler</code>返回之后,内核为该进程恢复之前保存的上下文,最后恢复进程的执行.</p>
 <p>如何使得用户态的<code>signal handler</code>执行完成之后能够顺利返回内核态是关键.在类<code>UNIX</code>的各种不同的系统中,这个过程有些许的区别,但是大致过程是一样的.</p>
 <p>以<code>Linux</code>为例,在第二步的时候,内核会帮用户进程将其上下文(<code>signal frame</code>)保存在该进程的栈上,然后在栈顶填上一个地址<code>rt_sigreturn</code>,这个地址指向一段代码,在这段代码中会调用<code>rt_sigreturn</code>系统调用.因此,当<code>signal handler</code>执行完之后,最后一条<code>ret</code>指令会使得执行流跳转到这段<code>rt_sigreturn</code>代码,被动地进行<code>rt_sigreturn</code>系统调用.</p>

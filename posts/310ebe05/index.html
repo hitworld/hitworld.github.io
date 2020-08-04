@@ -119,21 +119,21 @@
 
 
 
-  <meta name="description" content="未完成 动态链接数据基础程序分为静态链接跟动态链接,在处理动态链接程序时会采取延迟绑定(lazy binding)的技术.即位于动态链接库的函数被调用时才会确定函数在进程中的位置. 下面用一个x86程序分析. 123456789101112131415161718w4rd3n@cws:~/temp$ readelf -S pwn共有 31 个节头，从偏移量 0x17f0 开始：节头：  [Nr]">
+  <meta name="description" content="动态链接数据基础程序分为静态链接跟动态链接,在处理动态链接程序时会采取延迟绑定(lazy binding)的技术.即位于动态链接库的函数被调用时才会确定函数在进程中的位置. 下面用一个x86程序分析. 123456789101112131415161718w4rd3n@cws:~/temp$ readelf -S pwn共有 31 个节头，从偏移量 0x17f0 开始：节头：  [Nr] Name">
 <meta name="keywords" content="Linux-pwn">
 <meta property="og:type" content="article">
 <meta property="og:title" content="binary-漏洞分析-Linux-pwn-ret2dl_resolve">
 <meta property="og:url" content="https://hitworld.github.io/posts/310ebe05/index.html">
 <meta property="og:site_name" content="w4rd3n">
-<meta property="og:description" content="未完成 动态链接数据基础程序分为静态链接跟动态链接,在处理动态链接程序时会采取延迟绑定(lazy binding)的技术.即位于动态链接库的函数被调用时才会确定函数在进程中的位置. 下面用一个x86程序分析. 123456789101112131415161718w4rd3n@cws:~/temp$ readelf -S pwn共有 31 个节头，从偏移量 0x17f0 开始：节头：  [Nr]">
+<meta property="og:description" content="动态链接数据基础程序分为静态链接跟动态链接,在处理动态链接程序时会采取延迟绑定(lazy binding)的技术.即位于动态链接库的函数被调用时才会确定函数在进程中的位置. 下面用一个x86程序分析. 123456789101112131415161718w4rd3n@cws:~/temp$ readelf -S pwn共有 31 个节头，从偏移量 0x17f0 开始：节头：  [Nr] Name">
 <meta property="og:locale" content="zh-CN">
 <meta property="og:image" content="https://hitworld.github.io/posts/310ebe05/1.png">
 <meta property="og:image" content="https://hitworld.github.io/posts/310ebe05/2.png">
 <meta property="og:image" content="https://hitworld.github.io/posts/310ebe05/3.png">
-<meta property="og:updated_time" content="2020-07-22T09:32:52.547Z">
+<meta property="og:updated_time" content="2020-08-02T07:54:58.288Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="binary-漏洞分析-Linux-pwn-ret2dl_resolve">
-<meta name="twitter:description" content="未完成 动态链接数据基础程序分为静态链接跟动态链接,在处理动态链接程序时会采取延迟绑定(lazy binding)的技术.即位于动态链接库的函数被调用时才会确定函数在进程中的位置. 下面用一个x86程序分析. 123456789101112131415161718w4rd3n@cws:~/temp$ readelf -S pwn共有 31 个节头，从偏移量 0x17f0 开始：节头：  [Nr]">
+<meta name="twitter:description" content="动态链接数据基础程序分为静态链接跟动态链接,在处理动态链接程序时会采取延迟绑定(lazy binding)的技术.即位于动态链接库的函数被调用时才会确定函数在进程中的位置. 下面用一个x86程序分析. 123456789101112131415161718w4rd3n@cws:~/temp$ readelf -S pwn共有 31 个节头，从偏移量 0x17f0 开始：节头：  [Nr] Name">
 <meta name="twitter:image" content="https://hitworld.github.io/posts/310ebe05/1.png">
 
 
@@ -541,8 +541,7 @@
       
 
       
-        <p>未完成</p>
-<h2 id="动态链接数据基础"><a href="#动态链接数据基础" class="headerlink" title="动态链接数据基础"></a>动态链接数据基础</h2><p>程序分为静态链接跟动态链接,在处理动态链接程序时会采取延迟绑定(<code>lazy binding</code>)的技术.即位于动态链接库的函数被调用时才会确定函数在进程中的位置.</p>
+        <h2 id="动态链接数据基础"><a href="#动态链接数据基础" class="headerlink" title="动态链接数据基础"></a>动态链接数据基础</h2><p>程序分为静态链接跟动态链接,在处理动态链接程序时会采取延迟绑定(<code>lazy binding</code>)的技术.即位于动态链接库的函数被调用时才会确定函数在进程中的位置.</p>
 <p>下面用一个<code>x86</code>程序分析.</p>
 <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line">w4rd3n@cws:~/temp$ readelf -S pwn</span><br><span class="line">共有 31 个节头，从偏移量 0x17f0 开始：</span><br><span class="line"></span><br><span class="line">节头：</span><br><span class="line">  [Nr] Name              Type            Addr     Off    Size   ES Flg Lk Inf Al</span><br><span class="line">  ...</span><br><span class="line">  [ 5] .dynsym           DYNSYM          080481cc 0001cc 000050 10   A  6   1  4  <span class="comment">#动态链接符号表</span></span><br><span class="line">  [ 6] .dynstr           STRTAB          0804821c 00021c 00004a 00   A  0   0  1  <span class="comment">#动态链接的字符串</span></span><br><span class="line">  ...</span><br><span class="line">  [ 9] .rel.dyn          REL             08048290 000290 000008 08   A  5   0  4  <span class="comment">#用于对数据引用的修正,修正的位置位于.got和数据段</span></span><br><span class="line">  [10] .rel.plt          REL             08048298 000298 000010 08  AI  5  24  4  <span class="comment">#用于对函数引用的修正,修正的位置位于.got.plt</span></span><br><span class="line">  ...</span><br><span class="line">  [12] .plt              PROGBITS        080482d0 0002d0 000030 04  AX  0   0 16  <span class="comment">#全局函数plt表,用于跳转,第一项用于解析函数地址</span></span><br><span class="line">  ...</span><br><span class="line">  [22] .dynamic          DYNAMIC         08049f14 000f14 0000e8 08  WA  6   0  4  <span class="comment">#动态链接信息</span></span><br><span class="line">  [23] .got              PROGBITS        08049ffc 000ffc 000004 04  WA  0   0  4  <span class="comment">#全局变量偏移表</span></span><br><span class="line">  [24] .got.plt          PROGBITS        0804a000 001000 000014 04  WA  0   0  4  <span class="comment">#全局函数偏移表</span></span><br><span class="line">  ...</span><br></pre></td></tr></table></figure>
 <p>其中<code>.got.plt</code>前三项不是全局函数偏移.</p>

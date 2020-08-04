@@ -119,19 +119,19 @@
 
 
 
-  <meta name="description" content="未完成 概览Win和Linux上二进制漏洞利用的差别主要体现在不同的程序保护机制,堆管理机制和进程管理机制等上面. 函数调用x86架构的微软操作系统使用stdcall:参数从右往左一次入栈,被调用者实现栈平衡,返回值存放在eax中. x86-64架构的微软操作系统的前四个整型参数使用rcx,rdx,r8,r9存储,使用xmm0到xmm3来放置浮点参数,其他的参数入栈(从右至左向8字节对齐). 同时">
+  <meta name="description" content="概览Win和Linux上二进制漏洞利用的差别主要体现在不同的程序保护机制,堆管理机制和进程管理机制等上面. 函数调用x86架构的微软操作系统使用stdcall:参数从右往左一次入栈,被调用者实现栈平衡,返回值存放在eax中. x86-64架构的微软操作系统的前四个整型参数使用rcx,rdx,r8,r9存储,使用xmm0到xmm3来放置浮点参数,其他的参数入栈(从右至左向8字节对齐). 同时x86-">
 <meta name="keywords" content="winpwn">
 <meta property="og:type" content="article">
 <meta property="og:title" content="binary-漏洞分析-Windows-pwn-基础">
 <meta property="og:url" content="https://hitworld.github.io/posts/6dffab5f/index.html">
 <meta property="og:site_name" content="w4rd3n">
-<meta property="og:description" content="未完成 概览Win和Linux上二进制漏洞利用的差别主要体现在不同的程序保护机制,堆管理机制和进程管理机制等上面. 函数调用x86架构的微软操作系统使用stdcall:参数从右往左一次入栈,被调用者实现栈平衡,返回值存放在eax中. x86-64架构的微软操作系统的前四个整型参数使用rcx,rdx,r8,r9存储,使用xmm0到xmm3来放置浮点参数,其他的参数入栈(从右至左向8字节对齐). 同时">
+<meta property="og:description" content="概览Win和Linux上二进制漏洞利用的差别主要体现在不同的程序保护机制,堆管理机制和进程管理机制等上面. 函数调用x86架构的微软操作系统使用stdcall:参数从右往左一次入栈,被调用者实现栈平衡,返回值存放在eax中. x86-64架构的微软操作系统的前四个整型参数使用rcx,rdx,r8,r9存储,使用xmm0到xmm3来放置浮点参数,其他的参数入栈(从右至左向8字节对齐). 同时x86-">
 <meta property="og:locale" content="zh-CN">
 <meta property="og:image" content="https://hitworld.github.io/posts/6dffab5f/2.png">
-<meta property="og:updated_time" content="2020-07-22T09:32:52.552Z">
+<meta property="og:updated_time" content="2020-08-02T07:55:25.670Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="binary-漏洞分析-Windows-pwn-基础">
-<meta name="twitter:description" content="未完成 概览Win和Linux上二进制漏洞利用的差别主要体现在不同的程序保护机制,堆管理机制和进程管理机制等上面. 函数调用x86架构的微软操作系统使用stdcall:参数从右往左一次入栈,被调用者实现栈平衡,返回值存放在eax中. x86-64架构的微软操作系统的前四个整型参数使用rcx,rdx,r8,r9存储,使用xmm0到xmm3来放置浮点参数,其他的参数入栈(从右至左向8字节对齐). 同时">
+<meta name="twitter:description" content="概览Win和Linux上二进制漏洞利用的差别主要体现在不同的程序保护机制,堆管理机制和进程管理机制等上面. 函数调用x86架构的微软操作系统使用stdcall:参数从右往左一次入栈,被调用者实现栈平衡,返回值存放在eax中. x86-64架构的微软操作系统的前四个整型参数使用rcx,rdx,r8,r9存储,使用xmm0到xmm3来放置浮点参数,其他的参数入栈(从右至左向8字节对齐). 同时x86-">
 <meta name="twitter:image" content="https://hitworld.github.io/posts/6dffab5f/2.png">
 
 
@@ -539,8 +539,7 @@
       
 
       
-        <p>未完成</p>
-<h2 id="概览"><a href="#概览" class="headerlink" title="概览"></a>概览</h2><p><code>Win</code>和<code>Linux</code>上二进制漏洞利用的差别主要体现在不同的程序保护机制,堆管理机制和进程管理机制等上面.</p>
+        <h2 id="概览"><a href="#概览" class="headerlink" title="概览"></a>概览</h2><p><code>Win</code>和<code>Linux</code>上二进制漏洞利用的差别主要体现在不同的程序保护机制,堆管理机制和进程管理机制等上面.</p>
 <h2 id="函数调用"><a href="#函数调用" class="headerlink" title="函数调用"></a>函数调用</h2><p><code>x86</code>架构的微软操作系统使用<code>stdcall</code>:参数从右往左一次入栈,被调用者实现栈平衡,返回值存放在<code>eax</code>中.</p>
 <p><code>x86-64</code>架构的微软操作系统的前四个整型参数使用<code>rcx</code>,<code>rdx</code>,<code>r8</code>,<code>r9</code>存储,使用<code>xmm0</code>到<code>xmm3</code>来放置浮点参数,其他的参数入栈(从右至左向<code>8</code>字节对齐).</p>
 <p>同时<code>x86-64</code>中调用者有一个职责:在调用函数之前(无论实际的传参使用多大空间),在栈上的函数返回地址之上(靠近栈顶)分配一个<code>32</code>字节的影子空间,并且在调用结束后恢复.影子空间是给<code>rcx</code>,<code>rdx</code>,<code>r8</code>,<code>r9</code>保存值的,对于少于四个参数的函数也要分配影子空间.</p>

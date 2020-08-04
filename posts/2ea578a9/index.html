@@ -119,18 +119,18 @@
 
 
 
-  <meta name="description" content="未完成 反汇编IDA是一个反汇编工具,软件开发过程中,程序员使用编译器,汇编器和链接器来创建可执行程序.对应的可以使用反汇编器和反编译器来获得可执行程序的可阅读的代码. 但反编译会面临由于编译过程的损失,编译过程的多对多等问题.(反汇编由于是一对一,处理过程简单很多) 汇编语言源代码主要采用两种语法:AT&amp;amp;T和Intel语法. 反汇编算法首先要确定代码区域,这需要知道对应可执行文件的文件格">
+  <meta name="description" content="反汇编IDA是一个反汇编工具,软件开发过程中,程序员使用编译器,汇编器和链接器来创建可执行程序.对应的可以使用反汇编器和反编译器来获得可执行程序的可阅读的代码. 但反编译会面临由于编译过程的损失,编译过程的多对多等问题.(反汇编由于是一对一,处理过程简单很多) 汇编语言源代码主要采用两种语法:AT&amp;amp;T和Intel语法. 反汇编算法首先要确定代码区域,这需要知道对应可执行文件的文件格式从而找">
 <meta name="keywords" content="IDA">
 <meta property="og:type" content="article">
 <meta property="og:title" content="binary-逆向分析-tool-IDA-基础">
 <meta property="og:url" content="https://hitworld.github.io/posts/2ea578a9/index.html">
 <meta property="og:site_name" content="w4rd3n">
-<meta property="og:description" content="未完成 反汇编IDA是一个反汇编工具,软件开发过程中,程序员使用编译器,汇编器和链接器来创建可执行程序.对应的可以使用反汇编器和反编译器来获得可执行程序的可阅读的代码. 但反编译会面临由于编译过程的损失,编译过程的多对多等问题.(反汇编由于是一对一,处理过程简单很多) 汇编语言源代码主要采用两种语法:AT&amp;amp;T和Intel语法. 反汇编算法首先要确定代码区域,这需要知道对应可执行文件的文件格">
+<meta property="og:description" content="反汇编IDA是一个反汇编工具,软件开发过程中,程序员使用编译器,汇编器和链接器来创建可执行程序.对应的可以使用反汇编器和反编译器来获得可执行程序的可阅读的代码. 但反编译会面临由于编译过程的损失,编译过程的多对多等问题.(反汇编由于是一对一,处理过程简单很多) 汇编语言源代码主要采用两种语法:AT&amp;amp;T和Intel语法. 反汇编算法首先要确定代码区域,这需要知道对应可执行文件的文件格式从而找">
 <meta property="og:locale" content="zh-CN">
-<meta property="og:updated_time" content="2020-07-22T09:32:52.556Z">
+<meta property="og:updated_time" content="2020-08-02T07:56:25.595Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="binary-逆向分析-tool-IDA-基础">
-<meta name="twitter:description" content="未完成 反汇编IDA是一个反汇编工具,软件开发过程中,程序员使用编译器,汇编器和链接器来创建可执行程序.对应的可以使用反汇编器和反编译器来获得可执行程序的可阅读的代码. 但反编译会面临由于编译过程的损失,编译过程的多对多等问题.(反汇编由于是一对一,处理过程简单很多) 汇编语言源代码主要采用两种语法:AT&amp;amp;T和Intel语法. 反汇编算法首先要确定代码区域,这需要知道对应可执行文件的文件格">
+<meta name="twitter:description" content="反汇编IDA是一个反汇编工具,软件开发过程中,程序员使用编译器,汇编器和链接器来创建可执行程序.对应的可以使用反汇编器和反编译器来获得可执行程序的可阅读的代码. 但反编译会面临由于编译过程的损失,编译过程的多对多等问题.(反汇编由于是一对一,处理过程简单很多) 汇编语言源代码主要采用两种语法:AT&amp;amp;T和Intel语法. 反汇编算法首先要确定代码区域,这需要知道对应可执行文件的文件格式从而找">
 
 
 
@@ -537,8 +537,7 @@
       
 
       
-        <p>未完成</p>
-<h2 id="反汇编"><a href="#反汇编" class="headerlink" title="反汇编"></a>反汇编</h2><p><code>IDA</code>是一个反汇编工具,软件开发过程中,程序员使用编译器,汇编器和链接器来创建可执行程序.对应的可以使用反汇编器和反编译器来获得可执行程序的可阅读的代码.</p>
+        <h2 id="反汇编"><a href="#反汇编" class="headerlink" title="反汇编"></a>反汇编</h2><p><code>IDA</code>是一个反汇编工具,软件开发过程中,程序员使用编译器,汇编器和链接器来创建可执行程序.对应的可以使用反汇编器和反编译器来获得可执行程序的可阅读的代码.</p>
 <p>但反编译会面临由于编译过程的损失,编译过程的多对多等问题.(反汇编由于是一对一,处理过程简单很多)</p>
 <p>汇编语言源代码主要采用两种语法:<code>AT&amp;T</code>和<code>Intel</code>语法.</p>
 <h3 id="反汇编算法"><a href="#反汇编算法" class="headerlink" title="反汇编算法"></a>反汇编算法</h3><p>首先要确定代码区域,这需要知道对应可执行文件的文件格式从而找到代码段的起始地址,找到后读取进行查表找到其汇编语言助记符,这一步需要明晰当前指令集,然后解码后输出汇编代码.反复执行这些即可.</p>

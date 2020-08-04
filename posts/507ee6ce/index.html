@@ -119,19 +119,19 @@
 
 
 
-  <meta name="description" content="未完成 概述漏洞是在硬件,软件,协议的具体实现或系统安全策略上存在的缺陷,从而可以使攻击者能够在未授权的情况下访问或破坏系统.二进制漏洞就是指机器代码层面的漏洞. pwn即二进制漏洞利用,通过漏洞来提升权限或得到shell或达到某种目的. 预备知识前期主要为:x86/x86-64架构下Linux平台的C语言,汇编语言,python(写利用脚本),Linux常用操作,操作系统原理. 不同CPU架构下">
+  <meta name="description" content="概述漏洞是在硬件,软件,协议的具体实现或系统安全策略上存在的缺陷,从而可以使攻击者能够在未授权的情况下访问或破坏系统.二进制漏洞就是指机器代码层面的漏洞. pwn即二进制漏洞利用,通过漏洞来提升权限或得到shell或达到某种目的. 预备知识前期主要为:x86/x86-64架构下Linux平台的C语言,汇编语言,python(写利用脚本),Linux常用操作,操作系统原理. 不同CPU架构下的Lin">
 <meta name="keywords" content="Linux-pwn">
 <meta property="og:type" content="article">
 <meta property="og:title" content="binary-漏洞分析-Linux-pwn-基础">
 <meta property="og:url" content="https://hitworld.github.io/posts/507ee6ce/index.html">
 <meta property="og:site_name" content="w4rd3n">
-<meta property="og:description" content="未完成 概述漏洞是在硬件,软件,协议的具体实现或系统安全策略上存在的缺陷,从而可以使攻击者能够在未授权的情况下访问或破坏系统.二进制漏洞就是指机器代码层面的漏洞. pwn即二进制漏洞利用,通过漏洞来提升权限或得到shell或达到某种目的. 预备知识前期主要为:x86/x86-64架构下Linux平台的C语言,汇编语言,python(写利用脚本),Linux常用操作,操作系统原理. 不同CPU架构下">
+<meta property="og:description" content="概述漏洞是在硬件,软件,协议的具体实现或系统安全策略上存在的缺陷,从而可以使攻击者能够在未授权的情况下访问或破坏系统.二进制漏洞就是指机器代码层面的漏洞. pwn即二进制漏洞利用,通过漏洞来提升权限或得到shell或达到某种目的. 预备知识前期主要为:x86/x86-64架构下Linux平台的C语言,汇编语言,python(写利用脚本),Linux常用操作,操作系统原理. 不同CPU架构下的Lin">
 <meta property="og:locale" content="zh-CN">
 <meta property="og:image" content="https://hitworld.github.io/posts/507ee6ce/4.png">
-<meta property="og:updated_time" content="2020-07-22T09:32:52.549Z">
+<meta property="og:updated_time" content="2020-08-02T07:54:23.041Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="binary-漏洞分析-Linux-pwn-基础">
-<meta name="twitter:description" content="未完成 概述漏洞是在硬件,软件,协议的具体实现或系统安全策略上存在的缺陷,从而可以使攻击者能够在未授权的情况下访问或破坏系统.二进制漏洞就是指机器代码层面的漏洞. pwn即二进制漏洞利用,通过漏洞来提升权限或得到shell或达到某种目的. 预备知识前期主要为:x86/x86-64架构下Linux平台的C语言,汇编语言,python(写利用脚本),Linux常用操作,操作系统原理. 不同CPU架构下">
+<meta name="twitter:description" content="概述漏洞是在硬件,软件,协议的具体实现或系统安全策略上存在的缺陷,从而可以使攻击者能够在未授权的情况下访问或破坏系统.二进制漏洞就是指机器代码层面的漏洞. pwn即二进制漏洞利用,通过漏洞来提升权限或得到shell或达到某种目的. 预备知识前期主要为:x86/x86-64架构下Linux平台的C语言,汇编语言,python(写利用脚本),Linux常用操作,操作系统原理. 不同CPU架构下的Lin">
 <meta name="twitter:image" content="https://hitworld.github.io/posts/507ee6ce/4.png">
 
 
@@ -539,8 +539,7 @@
       
 
       
-        <p>未完成</p>
-<h2 id="概述"><a href="#概述" class="headerlink" title="概述"></a>概述</h2><p>漏洞是在硬件,软件,协议的具体实现或系统安全策略上存在的缺陷,从而可以使攻击者能够在未授权的情况下访问或破坏系统.二进制漏洞就是指机器代码层面的漏洞.</p>
+        <h2 id="概述"><a href="#概述" class="headerlink" title="概述"></a>概述</h2><p>漏洞是在硬件,软件,协议的具体实现或系统安全策略上存在的缺陷,从而可以使攻击者能够在未授权的情况下访问或破坏系统.二进制漏洞就是指机器代码层面的漏洞.</p>
 <p><code>pwn</code>即二进制漏洞利用,通过漏洞来提升权限或得到<code>shell</code>或达到某种目的.</p>
 <h2 id="预备知识"><a href="#预备知识" class="headerlink" title="预备知识"></a>预备知识</h2><p>前期主要为:<code>x86/x86-64</code>架构下<code>Linux</code>平台的<code>C</code>语言,汇编语言,<code>python</code>(写利用脚本),<code>Linux</code>常用操作,操作系统原理.</p>
 <p>不同<code>CPU</code>架构下的<code>Linux</code>在利用上区别大多体现在汇编语言(严格说是<code>ISA</code>)层面.</p>

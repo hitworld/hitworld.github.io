@@ -119,18 +119,18 @@
 
 
 
-  <meta name="description" content="未完成 OLLVMOLLVM(Obfuscator-LLVM)旨在提供一套开源的针对LLVM的代码混淆工具,以增加对逆向工程的难度. OLLVM是基于LLVM实现的,LLVM是一个编译器框架,采用经典的三段式设计:前端可以使用不同的编译工具对代码文件做词法分析以形成抽象语法树AST,然后将分析好的代码转换成LLVM的中间表示IR;中间部分的优化器只对中间表示IR操作,通过一系列的Pass对IR做优">
+  <meta name="description" content="OLLVMOLLVM(Obfuscator-LLVM)旨在提供一套开源的针对LLVM的代码混淆工具,以增加对逆向工程的难度. OLLVM是基于LLVM实现的,LLVM是一个编译器框架,采用经典的三段式设计:前端可以使用不同的编译工具对代码文件做词法分析以形成抽象语法树AST,然后将分析好的代码转换成LLVM的中间表示IR;中间部分的优化器只对中间表示IR操作,通过一系列的Pass对IR做优化;后端">
 <meta name="keywords" content="混淆与反混淆">
 <meta property="og:type" content="article">
 <meta property="og:title" content="binary-逆向分析-混淆与反混淆-OLLVM">
 <meta property="og:url" content="https://hitworld.github.io/posts/59a6c39/index.html">
 <meta property="og:site_name" content="w4rd3n">
-<meta property="og:description" content="未完成 OLLVMOLLVM(Obfuscator-LLVM)旨在提供一套开源的针对LLVM的代码混淆工具,以增加对逆向工程的难度. OLLVM是基于LLVM实现的,LLVM是一个编译器框架,采用经典的三段式设计:前端可以使用不同的编译工具对代码文件做词法分析以形成抽象语法树AST,然后将分析好的代码转换成LLVM的中间表示IR;中间部分的优化器只对中间表示IR操作,通过一系列的Pass对IR做优">
+<meta property="og:description" content="OLLVMOLLVM(Obfuscator-LLVM)旨在提供一套开源的针对LLVM的代码混淆工具,以增加对逆向工程的难度. OLLVM是基于LLVM实现的,LLVM是一个编译器框架,采用经典的三段式设计:前端可以使用不同的编译工具对代码文件做词法分析以形成抽象语法树AST,然后将分析好的代码转换成LLVM的中间表示IR;中间部分的优化器只对中间表示IR操作,通过一系列的Pass对IR做优化;后端">
 <meta property="og:locale" content="zh-CN">
-<meta property="og:updated_time" content="2020-07-22T09:32:52.558Z">
+<meta property="og:updated_time" content="2020-08-02T07:55:54.628Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="binary-逆向分析-混淆与反混淆-OLLVM">
-<meta name="twitter:description" content="未完成 OLLVMOLLVM(Obfuscator-LLVM)旨在提供一套开源的针对LLVM的代码混淆工具,以增加对逆向工程的难度. OLLVM是基于LLVM实现的,LLVM是一个编译器框架,采用经典的三段式设计:前端可以使用不同的编译工具对代码文件做词法分析以形成抽象语法树AST,然后将分析好的代码转换成LLVM的中间表示IR;中间部分的优化器只对中间表示IR操作,通过一系列的Pass对IR做优">
+<meta name="twitter:description" content="OLLVMOLLVM(Obfuscator-LLVM)旨在提供一套开源的针对LLVM的代码混淆工具,以增加对逆向工程的难度. OLLVM是基于LLVM实现的,LLVM是一个编译器框架,采用经典的三段式设计:前端可以使用不同的编译工具对代码文件做词法分析以形成抽象语法树AST,然后将分析好的代码转换成LLVM的中间表示IR;中间部分的优化器只对中间表示IR操作,通过一系列的Pass对IR做优化;后端">
 
 
 
@@ -537,8 +537,7 @@
       
 
       
-        <p>未完成</p>
-<h2 id="OLLVM"><a href="#OLLVM" class="headerlink" title="OLLVM"></a>OLLVM</h2><p><code>OLLVM</code>(<code>Obfuscator-LLVM</code>)旨在提供一套开源的针对<code>LLVM</code>的代码混淆工具,以增加对逆向工程的难度.</p>
+        <h2 id="OLLVM"><a href="#OLLVM" class="headerlink" title="OLLVM"></a>OLLVM</h2><p><code>OLLVM</code>(<code>Obfuscator-LLVM</code>)旨在提供一套开源的针对<code>LLVM</code>的代码混淆工具,以增加对逆向工程的难度.</p>
 <p><code>OLLVM</code>是基于<code>LLVM</code>实现的,<code>LLVM</code>是一个编译器框架,采用经典的三段式设计:前端可以使用不同的编译工具对代码文件做词法分析以形成抽象语法树<code>AST</code>,然后将分析好的代码转换成<code>LLVM</code>的中间表示<code>IR</code>;中间部分的优化器只对中间表示<code>IR</code>操作,通过一系列的<code>Pass</code>对<code>IR</code>做优化;后端负责将优化好的<code>IR</code>解释成对应平台的机器码.</p>
 <p><code>OLLVM</code>的混淆操作就是在中间表示<code>IR</code>层,通过编写<code>Pass</code>来混淆<code>IR</code>.<code>OLLVM</code>适用<code>LLVM</code>支持的所有语言和目标平台.</p>
 <p><code>OLLVM</code>默认支持<code>-fla</code>,<code>-sub</code>,<code>-bcf</code>三个混淆参数,可以单独使用,也可以配合使用.<code>-fla</code>参数表示使用控制流平展(<code>Control Flow Flattening</code>)模式,<code>-sub</code>参数表示使用指令替换(<code>Instructions Substitution</code>)模式,<code>-bcf</code>参数表示使用控制流伪造(<code>Bogus Control Flow</code>)模式.</p>

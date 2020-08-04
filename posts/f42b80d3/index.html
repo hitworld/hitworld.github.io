@@ -119,18 +119,18 @@
 
 
 
-  <meta name="description" content="未完成 0x00house_of_force利用过程就是改写top chunk为一个很大的值,然后通过malloc一个计算后的值进行任意地址分配. 利用思路只需要malloc一个chunk,使得这个chunk分配到需要控制的区域为止,然后就可以malloc出需要控制的区域. 例如:想要改写的变量位置在target,top chunk的位置在top,再算上head的大小,只需要malloc出targ">
+  <meta name="description" content="0x00house_of_force利用过程就是改写top chunk为一个很大的值,然后通过malloc一个计算后的值进行任意地址分配. 利用思路只需要malloc一个chunk,使得这个chunk分配到需要控制的区域为止,然后就可以malloc出需要控制的区域. 例如:想要改写的变量位置在target,top chunk的位置在top,再算上head的大小,只需要malloc出target -">
 <meta name="keywords" content="heap-pwn">
 <meta property="og:type" content="article">
 <meta property="og:title" content="binary-漏洞分析-Linux-heap-pwn-house_of_force">
 <meta property="og:url" content="https://hitworld.github.io/posts/f42b80d3/index.html">
 <meta property="og:site_name" content="w4rd3n">
-<meta property="og:description" content="未完成 0x00house_of_force利用过程就是改写top chunk为一个很大的值,然后通过malloc一个计算后的值进行任意地址分配. 利用思路只需要malloc一个chunk,使得这个chunk分配到需要控制的区域为止,然后就可以malloc出需要控制的区域. 例如:想要改写的变量位置在target,top chunk的位置在top,再算上head的大小,只需要malloc出targ">
+<meta property="og:description" content="0x00house_of_force利用过程就是改写top chunk为一个很大的值,然后通过malloc一个计算后的值进行任意地址分配. 利用思路只需要malloc一个chunk,使得这个chunk分配到需要控制的区域为止,然后就可以malloc出需要控制的区域. 例如:想要改写的变量位置在target,top chunk的位置在top,再算上head的大小,只需要malloc出target -">
 <meta property="og:locale" content="zh-CN">
-<meta property="og:updated_time" content="2020-07-22T09:32:52.540Z">
+<meta property="og:updated_time" content="2020-08-02T07:53:05.142Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="binary-漏洞分析-Linux-heap-pwn-house_of_force">
-<meta name="twitter:description" content="未完成 0x00house_of_force利用过程就是改写top chunk为一个很大的值,然后通过malloc一个计算后的值进行任意地址分配. 利用思路只需要malloc一个chunk,使得这个chunk分配到需要控制的区域为止,然后就可以malloc出需要控制的区域. 例如:想要改写的变量位置在target,top chunk的位置在top,再算上head的大小,只需要malloc出targ">
+<meta name="twitter:description" content="0x00house_of_force利用过程就是改写top chunk为一个很大的值,然后通过malloc一个计算后的值进行任意地址分配. 利用思路只需要malloc一个chunk,使得这个chunk分配到需要控制的区域为止,然后就可以malloc出需要控制的区域. 例如:想要改写的变量位置在target,top chunk的位置在top,再算上head的大小,只需要malloc出target -">
 
 
 
@@ -503,7 +503,7 @@
                 
                   <span class="post-meta-item-text">本文字数：</span>
                 
-                <span title="本文字数">232</span>
+                <span title="本文字数">228</span>
               
 
               
@@ -537,8 +537,7 @@
       
 
       
-        <p>未完成</p>
-<h2 id="0x00"><a href="#0x00" class="headerlink" title="0x00"></a>0x00</h2><p><code>house_of_force</code>利用过程就是改写<code>top chunk</code>为一个很大的值,然后通过<code>malloc</code>一个计算后的值进行任意地址分配.</p>
+        <h2 id="0x00"><a href="#0x00" class="headerlink" title="0x00"></a>0x00</h2><p><code>house_of_force</code>利用过程就是改写<code>top chunk</code>为一个很大的值,然后通过<code>malloc</code>一个计算后的值进行任意地址分配.</p>
 <h2 id="利用思路"><a href="#利用思路" class="headerlink" title="利用思路"></a>利用思路</h2><p>只需要<code>malloc</code>一个<code>chunk</code>,使得这个<code>chunk</code>分配到需要控制的区域为止,然后就可以<code>malloc</code>出需要控制的区域.</p>
 <p>例如:想要改写的变量位置在<code>target</code>,<code>top chunk</code>的位置在<code>top</code>,再算上<code>head</code>的大小,只需要<code>malloc</code>出<code>target - top - 0x10</code>个字节(可以为负数,溢出运算).</p>
 

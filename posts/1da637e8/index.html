@@ -119,18 +119,18 @@
 
 
 
-  <meta name="description" content="未完成 漏洞要素覆盖一个堆指针变量,使其指向足够可控的区域,free后系统会错误的将该区域作为堆块放到相应的bin里面,再分配出来. 利用思路关键在于伪造两个fast bin chunk(两个fast bin chunk中间的内容不可控). 然后覆盖一个堆指针变量使其指向第一个fast bin chunk,free后再malloc使两个fast bin chunk间的区域可控. free时的检测.">
+  <meta name="description" content="漏洞要素覆盖一个堆指针变量,使其指向足够可控的区域,free后系统会错误的将该区域作为堆块放到相应的bin里面,再分配出来. 利用思路关键在于伪造两个fast bin chunk(两个fast bin chunk中间的内容不可控). 然后覆盖一个堆指针变量使其指向第一个fast bin chunk,free后再malloc使两个fast bin chunk间的区域可控. free时的检测. 123">
 <meta name="keywords" content="heap-pwn">
 <meta property="og:type" content="article">
 <meta property="og:title" content="binary-漏洞分析-Linux-heap-pwn-house_of_spirit">
 <meta property="og:url" content="https://hitworld.github.io/posts/1da637e8/index.html">
 <meta property="og:site_name" content="w4rd3n">
-<meta property="og:description" content="未完成 漏洞要素覆盖一个堆指针变量,使其指向足够可控的区域,free后系统会错误的将该区域作为堆块放到相应的bin里面,再分配出来. 利用思路关键在于伪造两个fast bin chunk(两个fast bin chunk中间的内容不可控). 然后覆盖一个堆指针变量使其指向第一个fast bin chunk,free后再malloc使两个fast bin chunk间的区域可控. free时的检测.">
+<meta property="og:description" content="漏洞要素覆盖一个堆指针变量,使其指向足够可控的区域,free后系统会错误的将该区域作为堆块放到相应的bin里面,再分配出来. 利用思路关键在于伪造两个fast bin chunk(两个fast bin chunk中间的内容不可控). 然后覆盖一个堆指针变量使其指向第一个fast bin chunk,free后再malloc使两个fast bin chunk间的区域可控. free时的检测. 123">
 <meta property="og:locale" content="zh-CN">
-<meta property="og:updated_time" content="2020-07-22T09:32:52.542Z">
+<meta property="og:updated_time" content="2020-08-02T07:53:25.776Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="binary-漏洞分析-Linux-heap-pwn-house_of_spirit">
-<meta name="twitter:description" content="未完成 漏洞要素覆盖一个堆指针变量,使其指向足够可控的区域,free后系统会错误的将该区域作为堆块放到相应的bin里面,再分配出来. 利用思路关键在于伪造两个fast bin chunk(两个fast bin chunk中间的内容不可控). 然后覆盖一个堆指针变量使其指向第一个fast bin chunk,free后再malloc使两个fast bin chunk间的区域可控. free时的检测.">
+<meta name="twitter:description" content="漏洞要素覆盖一个堆指针变量,使其指向足够可控的区域,free后系统会错误的将该区域作为堆块放到相应的bin里面,再分配出来. 利用思路关键在于伪造两个fast bin chunk(两个fast bin chunk中间的内容不可控). 然后覆盖一个堆指针变量使其指向第一个fast bin chunk,free后再malloc使两个fast bin chunk间的区域可控. free时的检测. 123">
 
 
 
@@ -537,8 +537,7 @@
       
 
       
-        <p>未完成</p>
-<h2 id="漏洞要素"><a href="#漏洞要素" class="headerlink" title="漏洞要素"></a>漏洞要素</h2><p>覆盖一个堆指针变量,使其指向足够可控的区域,<code>free</code>后系统会错误的将该区域作为堆块放到相应的<code>bin</code>里面,再分配出来.</p>
+        <h2 id="漏洞要素"><a href="#漏洞要素" class="headerlink" title="漏洞要素"></a>漏洞要素</h2><p>覆盖一个堆指针变量,使其指向足够可控的区域,<code>free</code>后系统会错误的将该区域作为堆块放到相应的<code>bin</code>里面,再分配出来.</p>
 <h2 id="利用思路"><a href="#利用思路" class="headerlink" title="利用思路"></a>利用思路</h2><p>关键在于伪造两个<code>fast bin chunk</code>(两个<code>fast bin chunk</code>中间的内容不可控).</p>
 <p>然后覆盖一个堆指针变量使其指向第一个<code>fast bin chunk</code>,<code>free</code>后再<code>malloc</code>使两个<code>fast bin chunk</code>间的区域可控.</p>
 <p><code>free</code>时的检测.</p>

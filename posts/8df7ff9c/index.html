@@ -119,20 +119,20 @@
 
 
 
-  <meta name="description" content="未完成 概览C++与C都是生成可执行程序,只不过C++有一些常用的自定义数据结构. mangleC++的符号名是被mangle过的,使用gdb时可以使用set print asm-demangle on恢复.类似的还有命令行工具c++filt. 虚函数表虚函数是支持C++多态的关键机制,对于每个具有虚函数的类,编译器将根据类的继承层次结构创建一个或多个相关的虚函数表(位于只读段). 相应的对象实例">
+  <meta name="description" content="概览C++与C都是生成可执行程序,只不过C++有一些常用的自定义数据结构. mangleC++的符号名是被mangle过的,使用gdb时可以使用set print asm-demangle on恢复.类似的还有命令行工具c++filt. 虚函数表虚函数是支持C++多态的关键机制,对于每个具有虚函数的类,编译器将根据类的继承层次结构创建一个或多个相关的虚函数表(位于只读段). 相应的对象实例会有一个">
 <meta name="keywords" content="Linux-pwn">
 <meta property="og:type" content="article">
 <meta property="og:title" content="binary-漏洞分析-Linux-pwn-CPP">
 <meta property="og:url" content="https://hitworld.github.io/posts/8df7ff9c/index.html">
 <meta property="og:site_name" content="w4rd3n">
-<meta property="og:description" content="未完成 概览C++与C都是生成可执行程序,只不过C++有一些常用的自定义数据结构. mangleC++的符号名是被mangle过的,使用gdb时可以使用set print asm-demangle on恢复.类似的还有命令行工具c++filt. 虚函数表虚函数是支持C++多态的关键机制,对于每个具有虚函数的类,编译器将根据类的继承层次结构创建一个或多个相关的虚函数表(位于只读段). 相应的对象实例">
+<meta property="og:description" content="概览C++与C都是生成可执行程序,只不过C++有一些常用的自定义数据结构. mangleC++的符号名是被mangle过的,使用gdb时可以使用set print asm-demangle on恢复.类似的还有命令行工具c++filt. 虚函数表虚函数是支持C++多态的关键机制,对于每个具有虚函数的类,编译器将根据类的继承层次结构创建一个或多个相关的虚函数表(位于只读段). 相应的对象实例会有一个">
 <meta property="og:locale" content="zh-CN">
 <meta property="og:image" content="https://hitworld.github.io/posts/8df7ff9c/1.png">
 <meta property="og:image" content="https://hitworld.github.io/posts/8df7ff9c/2.png">
-<meta property="og:updated_time" content="2020-07-22T09:32:52.547Z">
+<meta property="og:updated_time" content="2020-08-02T07:54:43.635Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="binary-漏洞分析-Linux-pwn-CPP">
-<meta name="twitter:description" content="未完成 概览C++与C都是生成可执行程序,只不过C++有一些常用的自定义数据结构. mangleC++的符号名是被mangle过的,使用gdb时可以使用set print asm-demangle on恢复.类似的还有命令行工具c++filt. 虚函数表虚函数是支持C++多态的关键机制,对于每个具有虚函数的类,编译器将根据类的继承层次结构创建一个或多个相关的虚函数表(位于只读段). 相应的对象实例">
+<meta name="twitter:description" content="概览C++与C都是生成可执行程序,只不过C++有一些常用的自定义数据结构. mangleC++的符号名是被mangle过的,使用gdb时可以使用set print asm-demangle on恢复.类似的还有命令行工具c++filt. 虚函数表虚函数是支持C++多态的关键机制,对于每个具有虚函数的类,编译器将根据类的继承层次结构创建一个或多个相关的虚函数表(位于只读段). 相应的对象实例会有一个">
 <meta name="twitter:image" content="https://hitworld.github.io/posts/8df7ff9c/1.png">
 
 
@@ -506,7 +506,7 @@
                 
                   <span class="post-meta-item-text">本文字数：</span>
                 
-                <span title="本文字数">602</span>
+                <span title="本文字数">598</span>
               
 
               
@@ -540,8 +540,7 @@
       
 
       
-        <p>未完成</p>
-<h2 id="概览"><a href="#概览" class="headerlink" title="概览"></a>概览</h2><p><code>C++</code>与<code>C</code>都是生成可执行程序,只不过<code>C++</code>有一些常用的自定义数据结构.</p>
+        <h2 id="概览"><a href="#概览" class="headerlink" title="概览"></a>概览</h2><p><code>C++</code>与<code>C</code>都是生成可执行程序,只不过<code>C++</code>有一些常用的自定义数据结构.</p>
 <h2 id="mangle"><a href="#mangle" class="headerlink" title="mangle"></a>mangle</h2><p><code>C++</code>的符号名是被<code>mangle</code>过的,使用<code>gdb</code>时可以使用<code>set print asm-demangle on</code>恢复.类似的还有命令行工具<code>c++filt</code>.</p>
 <h2 id="虚函数表"><a href="#虚函数表" class="headerlink" title="虚函数表"></a>虚函数表</h2><p>虚函数是支持<code>C++</code>多态的关键机制,对于每个具有虚函数的类,编译器将根据类的继承层次结构创建一个或多个相关的虚函数表(位于只读段).</p>
 <p>相应的对象实例会有一个虚函数表指针指向对于类的虚函数表,而虚表劫持就是通过其他漏洞修改类实例的虚函数表指针.</p>

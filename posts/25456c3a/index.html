@@ -119,20 +119,20 @@
 
 
 
-  <meta name="description" content="未完成 概念glibc利用_IO_FILE结构实现了文件流,是基本文件描述符的高级接口,支持流缓冲. 通过fopen打开文件获得,fopen首先在堆中分配一片区域存放文件结构体,然后对结构体初始化并链接到以一个_IO_FILE_plus链表中,最后打开文件. 可以通过攻击原有的stdout等_IO_FILE结构体或者覆盖_IO_FILE指针指向伪造的_IO_FILE从而利用结构中一个叫做vtabl">
+  <meta name="description" content="概念glibc利用_IO_FILE结构实现了文件流,是基本文件描述符的高级接口,支持流缓冲. 通过fopen打开文件获得,fopen首先在堆中分配一片区域存放文件结构体,然后对结构体初始化并链接到以一个_IO_FILE_plus链表中,最后打开文件. 可以通过攻击原有的stdout等_IO_FILE结构体或者覆盖_IO_FILE指针指向伪造的_IO_FILE从而利用结构中一个叫做vtable的指针">
 <meta name="keywords" content="Linux-pwn">
 <meta property="og:type" content="article">
 <meta property="og:title" content="binary-漏洞分析-Linux-pwn-IO_FILE分析与利用">
 <meta property="og:url" content="https://hitworld.github.io/posts/25456c3a/index.html">
 <meta property="og:site_name" content="w4rd3n">
-<meta property="og:description" content="未完成 概念glibc利用_IO_FILE结构实现了文件流,是基本文件描述符的高级接口,支持流缓冲. 通过fopen打开文件获得,fopen首先在堆中分配一片区域存放文件结构体,然后对结构体初始化并链接到以一个_IO_FILE_plus链表中,最后打开文件. 可以通过攻击原有的stdout等_IO_FILE结构体或者覆盖_IO_FILE指针指向伪造的_IO_FILE从而利用结构中一个叫做vtabl">
+<meta property="og:description" content="概念glibc利用_IO_FILE结构实现了文件流,是基本文件描述符的高级接口,支持流缓冲. 通过fopen打开文件获得,fopen首先在堆中分配一片区域存放文件结构体,然后对结构体初始化并链接到以一个_IO_FILE_plus链表中,最后打开文件. 可以通过攻击原有的stdout等_IO_FILE结构体或者覆盖_IO_FILE指针指向伪造的_IO_FILE从而利用结构中一个叫做vtable的指针">
 <meta property="og:locale" content="zh-CN">
 <meta property="og:image" content="https://hitworld.github.io/posts/25456c3a/1.png">
 <meta property="og:image" content="https://hitworld.github.io/posts/25456c3a/2.png">
-<meta property="og:updated_time" content="2020-07-22T09:32:52.548Z">
+<meta property="og:updated_time" content="2020-08-02T07:54:54.360Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="binary-漏洞分析-Linux-pwn-IO_FILE分析与利用">
-<meta name="twitter:description" content="未完成 概念glibc利用_IO_FILE结构实现了文件流,是基本文件描述符的高级接口,支持流缓冲. 通过fopen打开文件获得,fopen首先在堆中分配一片区域存放文件结构体,然后对结构体初始化并链接到以一个_IO_FILE_plus链表中,最后打开文件. 可以通过攻击原有的stdout等_IO_FILE结构体或者覆盖_IO_FILE指针指向伪造的_IO_FILE从而利用结构中一个叫做vtabl">
+<meta name="twitter:description" content="概念glibc利用_IO_FILE结构实现了文件流,是基本文件描述符的高级接口,支持流缓冲. 通过fopen打开文件获得,fopen首先在堆中分配一片区域存放文件结构体,然后对结构体初始化并链接到以一个_IO_FILE_plus链表中,最后打开文件. 可以通过攻击原有的stdout等_IO_FILE结构体或者覆盖_IO_FILE指针指向伪造的_IO_FILE从而利用结构中一个叫做vtable的指针">
 <meta name="twitter:image" content="https://hitworld.github.io/posts/25456c3a/1.png">
 
 
@@ -540,8 +540,7 @@
       
 
       
-        <p>未完成</p>
-<h2 id="概念"><a href="#概念" class="headerlink" title="概念"></a>概念</h2><p><code>glibc</code>利用<code>_IO_FILE</code>结构实现了文件流,是基本文件描述符的高级接口,支持流缓冲.</p>
+        <h2 id="概念"><a href="#概念" class="headerlink" title="概念"></a>概念</h2><p><code>glibc</code>利用<code>_IO_FILE</code>结构实现了文件流,是基本文件描述符的高级接口,支持流缓冲.</p>
 <p>通过<code>fopen</code>打开文件获得,<code>fopen</code>首先在堆中分配一片区域存放文件结构体,然后对结构体初始化并链接到以一个<code>_IO_FILE_plus</code>链表中,最后打开文件.</p>
 <p>可以通过攻击原有的<code>stdout</code>等<code>_IO_FILE</code>结构体或者覆盖<code>_IO_FILE</code>指针指向伪造的<code>_IO_FILE</code>从而利用结构中一个叫做<code>vtable</code>的指针来执行任意代码.也可以覆盖<code>stdout</code>泄露<code>libc</code>基址.</p>
 <h2 id="源码分析"><a href="#源码分析" class="headerlink" title="源码分析"></a>源码分析</h2><p><code>glibc 2.23</code>中对应结构体名称是<code>_IO_FILE_plus</code>,包含了一个<code>_IO_FILE</code>结构体和一个<code>_IO_jump_t</code>结构体指针<code>vtable</code>(<code>_IO_FILE_plus</code>和<code>_IO_jump_t</code>定义于<code>libio/libioP.h</code>,<code>_IO_FILE</code>定义于<code>libio/libio.h</code>),<code>vtable</code>是一种兼容<code>C++</code>虚函数的实现.当对流进行函数调用时,会调用该流跳转表中对应的函数.</p>

@@ -134,7 +134,7 @@
 <meta property="og:image" content="https://hitworld.github.io/posts/1ceec498/7.png">
 <meta property="og:image" content="https://hitworld.github.io/posts/1ceec498/2.png">
 <meta property="og:image" content="https://hitworld.github.io/posts/1ceec498/3.png">
-<meta property="og:updated_time" content="2020-07-30T07:47:35.367Z">
+<meta property="og:updated_time" content="2020-08-02T07:36:56.429Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="crypto-现代密码-非对称加密-RSA">
 <meta name="twitter:description" content="未完成 0x00RSA加密算法是一种非对称加密算法,RSA算法的可靠性由极大整数因数分解的难度决定. 基础首先选取两个素数p,q. 接下来将p和q相乘获得模m = p * q.同时也就知道了:ϕ(m) = ϕ(p) * ϕ(q) = (p − 1)(q − 1). 选取与ϕ(m)互素的整数k,即gcd(k, ϕ(m)) = 1. 此时可以将m和k作为公钥告诉别人,别人可以利用m和k加密信息,收到密">
@@ -602,8 +602,7 @@
 <li><a href="https://sourceforge.net/projects/rsaconverter/" target="_blank" rel="noopener"><code>RsaConverter.exe</code></a>.</li>
 </ul>
 <figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">#将数转化为AB CD EF格式的字符串.</span></span><br><span class="line">s = hex(N)[<span class="number">2</span>:<span class="number">-1</span>]</span><br><span class="line"><span class="keyword">if</span> len(s) % <span class="number">2</span>:</span><br><span class="line">    s = <span class="string">"0"</span> + s</span><br><span class="line">s2 = <span class="string">""</span></span><br><span class="line"><span class="keyword">for</span> i <span class="keyword">in</span> range(<span class="number">0</span>, len(s), <span class="number">2</span>):</span><br><span class="line">    s2 += s[i:i+<span class="number">2</span>]</span><br><span class="line">    s2 += <span class="string">" "</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">print</span> s2</span><br></pre></td></tr></table></figure>
-<h3 id="Wiener’s-Attack"><a href="#Wiener’s-Attack" class="headerlink" title="Wiener’s Attack"></a>Wiener’s Attack</h3>
-<p>工具:<code>https://github.com/pablocelayes/rsa-wiener-attack</code>.</p>
+<h3 id="Wiener’s-Attack"><a href="#Wiener’s-Attack" class="headerlink" title="Wiener’s Attack"></a>Wiener’s Attack</h3><p>工具:<code>https://github.com/pablocelayes/rsa-wiener-attack</code>.</p>
 <h2 id="tool"><a href="#tool" class="headerlink" title="tool"></a>tool</h2><h3 id="RSAtool"><a href="#RSAtool" class="headerlink" title="RSAtool"></a>RSAtool</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">git <span class="built_in">clone</span> https://github.com/ius/rsatool.git</span><br><span class="line"><span class="built_in">cd</span> rsatool</span><br><span class="line">python rsatool.py -h</span><br></pre></td></tr></table></figure>
 <h3 id="openssl"><a href="#openssl" class="headerlink" title="openssl"></a>openssl</h3><p><code>openssl rsautl</code>.</p>
 <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">openssl rsautl [-<span class="keyword">in</span> file] [-out file] [-inkey file] [-passin arg] [-keyform PEM|DER|NET] [-pubin] [-certin][-asn1parse] [-hexdump] [-raw] [-oaep] [-ssl] [-pkcs] [-x931] [-sign] [-verify][-encrypt] [-decrypt] [-rev] [-engine e]</span><br></pre></td></tr></table></figure>

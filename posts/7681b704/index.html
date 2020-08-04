@@ -119,18 +119,18 @@
 
 
 
-  <meta name="description" content="未完成 0x00house_of_lore通过改写small bin chunk的bk指针,同时构造一个fake small bin链表,从而分配一个fake chunk出来. 利用思路首先分配一个small bin chunk,然后free(free前再malloc一次避免该chunk和top chunk合并). 此时该chunk在unsorted bin中,所以需要再次malloc一个比该ch">
+  <meta name="description" content="0x00house_of_lore通过改写small bin chunk的bk指针,同时构造一个fake small bin链表,从而分配一个fake chunk出来. 利用思路首先分配一个small bin chunk,然后free(free前再malloc一次避免该chunk和top chunk合并). 此时该chunk在unsorted bin中,所以需要再次malloc一个比该chunk大">
 <meta name="keywords" content="heap-pwn">
 <meta property="og:type" content="article">
 <meta property="og:title" content="binary-漏洞分析-Linux-heap-pwn-house_of_lore">
 <meta property="og:url" content="https://hitworld.github.io/posts/7681b704/index.html">
 <meta property="og:site_name" content="w4rd3n">
-<meta property="og:description" content="未完成 0x00house_of_lore通过改写small bin chunk的bk指针,同时构造一个fake small bin链表,从而分配一个fake chunk出来. 利用思路首先分配一个small bin chunk,然后free(free前再malloc一次避免该chunk和top chunk合并). 此时该chunk在unsorted bin中,所以需要再次malloc一个比该ch">
+<meta property="og:description" content="0x00house_of_lore通过改写small bin chunk的bk指针,同时构造一个fake small bin链表,从而分配一个fake chunk出来. 利用思路首先分配一个small bin chunk,然后free(free前再malloc一次避免该chunk和top chunk合并). 此时该chunk在unsorted bin中,所以需要再次malloc一个比该chunk大">
 <meta property="og:locale" content="zh-CN">
-<meta property="og:updated_time" content="2020-07-22T09:32:52.541Z">
+<meta property="og:updated_time" content="2020-08-02T07:53:09.633Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="binary-漏洞分析-Linux-heap-pwn-house_of_lore">
-<meta name="twitter:description" content="未完成 0x00house_of_lore通过改写small bin chunk的bk指针,同时构造一个fake small bin链表,从而分配一个fake chunk出来. 利用思路首先分配一个small bin chunk,然后free(free前再malloc一次避免该chunk和top chunk合并). 此时该chunk在unsorted bin中,所以需要再次malloc一个比该ch">
+<meta name="twitter:description" content="0x00house_of_lore通过改写small bin chunk的bk指针,同时构造一个fake small bin链表,从而分配一个fake chunk出来. 利用思路首先分配一个small bin chunk,然后free(free前再malloc一次避免该chunk和top chunk合并). 此时该chunk在unsorted bin中,所以需要再次malloc一个比该chunk大">
 
 
 
@@ -503,7 +503,7 @@
                 
                   <span class="post-meta-item-text">本文字数：</span>
                 
-                <span title="本文字数">614</span>
+                <span title="本文字数">610</span>
               
 
               
@@ -537,8 +537,7 @@
       
 
       
-        <p>未完成</p>
-<h2 id="0x00"><a href="#0x00" class="headerlink" title="0x00"></a>0x00</h2><p><code>house_of_lore</code>通过改写<code>small bin chunk</code>的<code>bk</code>指针,同时构造一个<code>fake small bin</code>链表,从而分配一个<code>fake chunk</code>出来.</p>
+        <h2 id="0x00"><a href="#0x00" class="headerlink" title="0x00"></a>0x00</h2><p><code>house_of_lore</code>通过改写<code>small bin chunk</code>的<code>bk</code>指针,同时构造一个<code>fake small bin</code>链表,从而分配一个<code>fake chunk</code>出来.</p>
 <h2 id="利用思路"><a href="#利用思路" class="headerlink" title="利用思路"></a>利用思路</h2><p>首先分配一个<code>small bin chunk</code>,然后<code>free</code>(<code>free</code>前再<code>malloc</code>一次避免该<code>chunk</code>和<code>top chunk</code>合并).</p>
 <p>此时该<code>chunk</code>在<code>unsorted bin</code>中,所以需要再次<code>malloc</code>一个比该<code>chunk</code>大的<code>chunk</code>使其进入<code>small bin</code>.</p>
 <p>现在就可以伪造了,由于空闲<code>chunk</code>取出时要过<code>fd</code>,<code>bk</code>的<code>pass</code>.所以链表要够长.</p>

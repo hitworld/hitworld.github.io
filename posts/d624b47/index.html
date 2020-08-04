@@ -119,18 +119,18 @@
 
 
 
-  <meta name="description" content="未完成 前言针对Nt Heap的Back-End的攻击方式,同样是利用释放堆块时触发合并之后的unlink. 漏洞使用通过构造fake chunk并使其被unlink导致一次固定地址写. 由于Nt Heap有SmallTagindex的检测,所以一定要构造好头部,另外Flink和Blink指针指向的是User Data部分. 12345//检测语句Q-&amp;gt;Blink-&amp;gt;Flink ==">
+  <meta name="description" content="前言针对Nt Heap的Back-End的攻击方式,同样是利用释放堆块时触发合并之后的unlink. 漏洞使用通过构造fake chunk并使其被unlink导致一次固定地址写. 由于Nt Heap有SmallTagindex的检测,所以一定要构造好头部,另外Flink和Blink指针指向的是User Data部分. 12345//检测语句Q-&amp;gt;Blink-&amp;gt;Flink == Q &amp;a">
 <meta name="keywords" content="NtHeap-pwn">
 <meta property="og:type" content="article">
 <meta property="og:title" content="binary-漏洞分析-Windows-NtHeap-pwn-unlink">
 <meta property="og:url" content="https://hitworld.github.io/posts/d624b47/index.html">
 <meta property="og:site_name" content="w4rd3n">
-<meta property="og:description" content="未完成 前言针对Nt Heap的Back-End的攻击方式,同样是利用释放堆块时触发合并之后的unlink. 漏洞使用通过构造fake chunk并使其被unlink导致一次固定地址写. 由于Nt Heap有SmallTagindex的检测,所以一定要构造好头部,另外Flink和Blink指针指向的是User Data部分. 12345//检测语句Q-&amp;gt;Blink-&amp;gt;Flink ==">
+<meta property="og:description" content="前言针对Nt Heap的Back-End的攻击方式,同样是利用释放堆块时触发合并之后的unlink. 漏洞使用通过构造fake chunk并使其被unlink导致一次固定地址写. 由于Nt Heap有SmallTagindex的检测,所以一定要构造好头部,另外Flink和Blink指针指向的是User Data部分. 12345//检测语句Q-&amp;gt;Blink-&amp;gt;Flink == Q &amp;a">
 <meta property="og:locale" content="zh-CN">
-<meta property="og:updated_time" content="2020-07-22T09:32:52.551Z">
+<meta property="og:updated_time" content="2020-08-02T07:55:20.329Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="binary-漏洞分析-Windows-NtHeap-pwn-unlink">
-<meta name="twitter:description" content="未完成 前言针对Nt Heap的Back-End的攻击方式,同样是利用释放堆块时触发合并之后的unlink. 漏洞使用通过构造fake chunk并使其被unlink导致一次固定地址写. 由于Nt Heap有SmallTagindex的检测,所以一定要构造好头部,另外Flink和Blink指针指向的是User Data部分. 12345//检测语句Q-&amp;gt;Blink-&amp;gt;Flink ==">
+<meta name="twitter:description" content="前言针对Nt Heap的Back-End的攻击方式,同样是利用释放堆块时触发合并之后的unlink. 漏洞使用通过构造fake chunk并使其被unlink导致一次固定地址写. 由于Nt Heap有SmallTagindex的检测,所以一定要构造好头部,另外Flink和Blink指针指向的是User Data部分. 12345//检测语句Q-&amp;gt;Blink-&amp;gt;Flink == Q &amp;a">
 
 
 
@@ -503,7 +503,7 @@
                 
                   <span class="post-meta-item-text">本文字数：</span>
                 
-                <span title="本文字数">448</span>
+                <span title="本文字数">444</span>
               
 
               
@@ -537,8 +537,7 @@
       
 
       
-        <p>未完成</p>
-<h2 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h2><p>针对<code>Nt Heap</code>的<code>Back-End</code>的攻击方式,同样是利用释放堆块时触发合并之后的<code>unlink</code>.</p>
+        <h2 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h2><p>针对<code>Nt Heap</code>的<code>Back-End</code>的攻击方式,同样是利用释放堆块时触发合并之后的<code>unlink</code>.</p>
 <h2 id="漏洞使用"><a href="#漏洞使用" class="headerlink" title="漏洞使用"></a>漏洞使用</h2><p>通过构造<code>fake chunk</code>并使其被<code>unlink</code>导致一次固定地址写.</p>
 <p>由于<code>Nt Heap</code>有<code>SmallTagindex</code>的检测,所以一定要构造好头部,另外<code>Flink</code>和<code>Blink</code>指针指向的是<code>User Data</code>部分.</p>
 <figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//检测语句</span></span><br><span class="line">Q-&gt;Blink-&gt;Flink == Q &amp;&amp; Q-&gt;Flink-&gt;Blink == Q;</span><br><span class="line"><span class="comment">//unlink关键语句</span></span><br><span class="line">Q-&gt;Blink-&gt;Flink = Q-&gt;Flink;</span><br><span class="line">Q-&gt;Flink-&gt;Blink = Q-&gt;Blink;</span><br></pre></td></tr></table></figure>

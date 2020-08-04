@@ -119,18 +119,18 @@
 
 
 
-  <meta name="description" content="未完成 字符检测绕过有时候程序会对输入进行一些可打印检查,导致平常的shellcode失效,这个时候需要对shellcode进行编码. 可打印检查一般分为Alphanumeric(字符在[A-Za-z0-9]区间)和Printable(字符的ascii码在0x1f和0x7f区间,不包含边界). Printable x86x86下可以使用msf内置的encoder. 1234567msfvenom">
+  <meta name="description" content="字符检测绕过有时候程序会对输入进行一些可打印检查,导致平常的shellcode失效,这个时候需要对shellcode进行编码. 可打印检查一般分为Alphanumeric(字符在[A-Za-z0-9]区间)和Printable(字符的ascii码在0x1f和0x7f区间,不包含边界). Printable x86x86下可以使用msf内置的encoder. 1234567msfvenom -a x">
 <meta name="keywords" content="Linux-pwn">
 <meta property="og:type" content="article">
 <meta property="og:title" content="binary-漏洞分析-Linux-pwn-shellcode编写">
 <meta property="og:url" content="https://hitworld.github.io/posts/6d02208d/index.html">
 <meta property="og:site_name" content="w4rd3n">
-<meta property="og:description" content="未完成 字符检测绕过有时候程序会对输入进行一些可打印检查,导致平常的shellcode失效,这个时候需要对shellcode进行编码. 可打印检查一般分为Alphanumeric(字符在[A-Za-z0-9]区间)和Printable(字符的ascii码在0x1f和0x7f区间,不包含边界). Printable x86x86下可以使用msf内置的encoder. 1234567msfvenom">
+<meta property="og:description" content="字符检测绕过有时候程序会对输入进行一些可打印检查,导致平常的shellcode失效,这个时候需要对shellcode进行编码. 可打印检查一般分为Alphanumeric(字符在[A-Za-z0-9]区间)和Printable(字符的ascii码在0x1f和0x7f区间,不包含边界). Printable x86x86下可以使用msf内置的encoder. 1234567msfvenom -a x">
 <meta property="og:locale" content="zh-CN">
-<meta property="og:updated_time" content="2020-07-22T09:32:52.547Z">
+<meta property="og:updated_time" content="2020-08-02T07:55:02.188Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="binary-漏洞分析-Linux-pwn-shellcode编写">
-<meta name="twitter:description" content="未完成 字符检测绕过有时候程序会对输入进行一些可打印检查,导致平常的shellcode失效,这个时候需要对shellcode进行编码. 可打印检查一般分为Alphanumeric(字符在[A-Za-z0-9]区间)和Printable(字符的ascii码在0x1f和0x7f区间,不包含边界). Printable x86x86下可以使用msf内置的encoder. 1234567msfvenom">
+<meta name="twitter:description" content="字符检测绕过有时候程序会对输入进行一些可打印检查,导致平常的shellcode失效,这个时候需要对shellcode进行编码. 可打印检查一般分为Alphanumeric(字符在[A-Za-z0-9]区间)和Printable(字符的ascii码在0x1f和0x7f区间,不包含边界). Printable x86x86下可以使用msf内置的encoder. 1234567msfvenom -a x">
 
 
 
@@ -537,8 +537,7 @@
       
 
       
-        <p>未完成</p>
-<h2 id="字符检测绕过"><a href="#字符检测绕过" class="headerlink" title="字符检测绕过"></a>字符检测绕过</h2><p>有时候程序会对输入进行一些可打印检查,导致平常的<code>shellcode</code>失效,这个时候需要对<code>shellcode</code>进行编码.</p>
+        <h2 id="字符检测绕过"><a href="#字符检测绕过" class="headerlink" title="字符检测绕过"></a>字符检测绕过</h2><p>有时候程序会对输入进行一些可打印检查,导致平常的<code>shellcode</code>失效,这个时候需要对<code>shellcode</code>进行编码.</p>
 <p>可打印检查一般分为<code>Alphanumeric</code>(字符在<code>[A-Za-z0-9]</code>区间)和<code>Printable</code>(字符的<code>ascii</code>码在<code>0x1f</code>和<code>0x7f</code>区间,不包含边界).</p>
 <h3 id="Printable-x86"><a href="#Printable-x86" class="headerlink" title="Printable x86"></a>Printable x86</h3><p><code>x86</code>下可以使用<code>msf</code>内置的<code>encoder</code>.</p>
 <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">msfvenom -a x86 --platform linux -p linux/x86/<span class="built_in">exec</span> CMD=<span class="string">"/bin/sh"</span> -e x86/alpha_upper BufferRegister=eax</span><br><span class="line"><span class="comment">#可以直接生成shellcode,BufferRegister是指向shellcode的寄存器.</span></span><br><span class="line"><span class="comment">#如果不声明BufferRegister,生成的shellcode会有额外的几条并不是可打印字符的指令来确定shellcode的位置.</span></span><br><span class="line"><span class="comment">#x86/alpha_mixed这个encoder也可.x86/unicode_mixed与x86/unicode_upper用于宽字节的情况.</span></span><br><span class="line"></span><br><span class="line">cat shellcode | msfvenom -a x86 --platform linux -e x86/alpha_upper BufferRegister=eax</span><br><span class="line"><span class="comment">#也可以用msf来编码已有的shellcode</span></span><br></pre></td></tr></table></figure>

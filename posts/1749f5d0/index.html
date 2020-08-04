@@ -119,20 +119,20 @@
 
 
 
-  <meta name="description" content="未完成 概览(ELF)[https://paper.seebug.org/papers/Archive/refs/elf/Understanding_ELF.pdf],即`Executable and Linking Format(可执行可连接格式),具有这种格式的文件称为ELF`文件. ELF文件主要分为以下三种类型.  可重定位文件(relocatable file):用于与其它目标文件进行连">
+  <meta name="description" content="概览(ELF)[https://paper.seebug.org/papers/Archive/refs/elf/Understanding_ELF.pdf],即`Executable and Linking Format(可执行可连接格式),具有这种格式的文件称为ELF`文件. ELF文件主要分为以下三种类型.  可重定位文件(relocatable file):用于与其它目标文件进行连接以构建">
 <meta name="keywords" content="Linux">
 <meta property="og:type" content="article">
 <meta property="og:title" content="binary-逆向分析-Linux-ELF">
 <meta property="og:url" content="https://hitworld.github.io/posts/1749f5d0/index.html">
 <meta property="og:site_name" content="w4rd3n">
-<meta property="og:description" content="未完成 概览(ELF)[https://paper.seebug.org/papers/Archive/refs/elf/Understanding_ELF.pdf],即`Executable and Linking Format(可执行可连接格式),具有这种格式的文件称为ELF`文件. ELF文件主要分为以下三种类型.  可重定位文件(relocatable file):用于与其它目标文件进行连">
+<meta property="og:description" content="概览(ELF)[https://paper.seebug.org/papers/Archive/refs/elf/Understanding_ELF.pdf],即`Executable and Linking Format(可执行可连接格式),具有这种格式的文件称为ELF`文件. ELF文件主要分为以下三种类型.  可重定位文件(relocatable file):用于与其它目标文件进行连接以构建">
 <meta property="og:locale" content="zh-CN">
 <meta property="og:image" content="https://hitworld.github.io/posts/1749f5d0/1.png">
 <meta property="og:image" content="https://hitworld.github.io/posts/1749f5d0/2.png">
-<meta property="og:updated_time" content="2020-07-22T09:32:52.554Z">
+<meta property="og:updated_time" content="2020-08-02T07:56:11.507Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="binary-逆向分析-Linux-ELF">
-<meta name="twitter:description" content="未完成 概览(ELF)[https://paper.seebug.org/papers/Archive/refs/elf/Understanding_ELF.pdf],即`Executable and Linking Format(可执行可连接格式),具有这种格式的文件称为ELF`文件. ELF文件主要分为以下三种类型.  可重定位文件(relocatable file):用于与其它目标文件进行连">
+<meta name="twitter:description" content="概览(ELF)[https://paper.seebug.org/papers/Archive/refs/elf/Understanding_ELF.pdf],即`Executable and Linking Format(可执行可连接格式),具有这种格式的文件称为ELF`文件. ELF文件主要分为以下三种类型.  可重定位文件(relocatable file):用于与其它目标文件进行连接以构建">
 <meta name="twitter:image" content="https://hitworld.github.io/posts/1749f5d0/1.png">
 
 
@@ -540,8 +540,7 @@
       
 
       
-        <p>未完成</p>
-<h2 id="概览"><a href="#概览" class="headerlink" title="概览"></a>概览</h2><p>(<code>ELF</code>)[<a href="https://paper.seebug.org/papers/Archive/refs/elf/Understanding_ELF.pdf],即`Executable" target="_blank" rel="noopener">https://paper.seebug.org/papers/Archive/refs/elf/Understanding_ELF.pdf],即`Executable</a> and Linking Format<code>(可执行可连接格式),具有这种格式的文件称为</code>ELF`文件.</p>
+        <h2 id="概览"><a href="#概览" class="headerlink" title="概览"></a>概览</h2><p>(<code>ELF</code>)[<a href="https://paper.seebug.org/papers/Archive/refs/elf/Understanding_ELF.pdf],即`Executable" target="_blank" rel="noopener">https://paper.seebug.org/papers/Archive/refs/elf/Understanding_ELF.pdf],即`Executable</a> and Linking Format<code>(可执行可连接格式),具有这种格式的文件称为</code>ELF`文件.</p>
 <p><code>ELF</code>文件主要分为以下三种类型.</p>
 <ul>
 <li>可重定位文件(<code>relocatable file</code>):用于与其它目标文件进行连接以构建可执行文件或动态链接库.可重定位文件就是常说的目标文件,由源文件编译而成,但还没有连接成可执行文件.在<code>UNIX</code>系统下,一般有扩展名<code>.o</code>.</li>

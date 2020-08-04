@@ -119,18 +119,18 @@
 
 
 
-  <meta name="description" content="未完成 0x00house_of_orange利用环境.  没有free. 存在堆溢出或者其他可改写top_chunk大小的漏洞.  利用思路首先修改top_chunk的大小,如果malloc申请的堆块大小超过了top_chunk的大小,将调用sysmalloc来进行分配. sysmalloc针对这种情况有两种处理,如果申请大小大于等于mp_.mmap_threshold就直接调用mmap,否则就">
+  <meta name="description" content="0x00house_of_orange利用环境.  没有free. 存在堆溢出或者其他可改写top_chunk大小的漏洞.  利用思路首先修改top_chunk的大小,如果malloc申请的堆块大小超过了top_chunk的大小,将调用sysmalloc来进行分配. sysmalloc针对这种情况有两种处理,如果申请大小大于等于mp_.mmap_threshold就直接调用mmap,否则就扩展to">
 <meta name="keywords" content="heap-pwn">
 <meta property="og:type" content="article">
 <meta property="og:title" content="binary-漏洞分析-Linux-heap-pwn-house_of_orange">
 <meta property="og:url" content="https://hitworld.github.io/posts/37c9d9ef/index.html">
 <meta property="og:site_name" content="w4rd3n">
-<meta property="og:description" content="未完成 0x00house_of_orange利用环境.  没有free. 存在堆溢出或者其他可改写top_chunk大小的漏洞.  利用思路首先修改top_chunk的大小,如果malloc申请的堆块大小超过了top_chunk的大小,将调用sysmalloc来进行分配. sysmalloc针对这种情况有两种处理,如果申请大小大于等于mp_.mmap_threshold就直接调用mmap,否则就">
+<meta property="og:description" content="0x00house_of_orange利用环境.  没有free. 存在堆溢出或者其他可改写top_chunk大小的漏洞.  利用思路首先修改top_chunk的大小,如果malloc申请的堆块大小超过了top_chunk的大小,将调用sysmalloc来进行分配. sysmalloc针对这种情况有两种处理,如果申请大小大于等于mp_.mmap_threshold就直接调用mmap,否则就扩展to">
 <meta property="og:locale" content="zh-CN">
-<meta property="og:updated_time" content="2020-07-22T09:32:52.541Z">
+<meta property="og:updated_time" content="2020-08-02T07:53:15.992Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="binary-漏洞分析-Linux-heap-pwn-house_of_orange">
-<meta name="twitter:description" content="未完成 0x00house_of_orange利用环境.  没有free. 存在堆溢出或者其他可改写top_chunk大小的漏洞.  利用思路首先修改top_chunk的大小,如果malloc申请的堆块大小超过了top_chunk的大小,将调用sysmalloc来进行分配. sysmalloc针对这种情况有两种处理,如果申请大小大于等于mp_.mmap_threshold就直接调用mmap,否则就">
+<meta name="twitter:description" content="0x00house_of_orange利用环境.  没有free. 存在堆溢出或者其他可改写top_chunk大小的漏洞.  利用思路首先修改top_chunk的大小,如果malloc申请的堆块大小超过了top_chunk的大小,将调用sysmalloc来进行分配. sysmalloc针对这种情况有两种处理,如果申请大小大于等于mp_.mmap_threshold就直接调用mmap,否则就扩展to">
 
 
 
@@ -537,8 +537,7 @@
       
 
       
-        <p>未完成</p>
-<h2 id="0x00"><a href="#0x00" class="headerlink" title="0x00"></a>0x00</h2><p><code>house_of_orange</code>利用环境.</p>
+        <h2 id="0x00"><a href="#0x00" class="headerlink" title="0x00"></a>0x00</h2><p><code>house_of_orange</code>利用环境.</p>
 <ul>
 <li>没有<code>free</code>.</li>
 <li>存在堆溢出或者其他可改写<code>top_chunk</code>大小的漏洞.</li>

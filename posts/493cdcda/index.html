@@ -16,7 +16,7 @@
 
 <html class="theme-next mist use-motion" lang="zh-CN">
 <head><meta name="generator" content="Hexo 3.8.0">
-  <meta charset="UTF-8">
+  <!-- hexo-inject:begin --><!-- hexo-inject:end --><meta charset="UTF-8">
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
 <meta name="theme-color" content="#222">
@@ -119,13 +119,13 @@
 
 
 
-  <meta name="description" content="未完成 程序设计语言现今有几千种程序设计语言,可以通过不同方式进行分类. 第一代语言机器语言,第二代语言汇编语言,第三代语言为Fortran,C,C++等高级程序设计语言,第四代语言是为特定应用设计的语言,如SQL,第五代语言指基于逻辑和约束的语言,如Prolog. 指明如何完成一个计算任务的语言称为强制式语言,如C,C++,FORTRAN.指明要进行哪些计算的语言称为声明式语言,如ML,LISP">
+  <meta name="description" content="未完成 程序设计语言 现今有几千种程序设计语言,可以通过不同方式进行分类. 第一代语言机器语言,第二代语言汇编语言,第三代语言为Fortran,C,C++等高级程序设计语言,第四代语言是为特定应用设计的语言,如SQL,第五代语言指基于逻辑和约束的语言,如Prolog. 指明如何完成一个计算任务的语言称为强制式语言,如C,C++,FORTRAN.指明要进行哪些计算的语言称为声明式语言,如ML">
 <meta name="keywords" content="compiler-principles">
 <meta property="og:type" content="article">
 <meta property="og:title" content="CS-BASIC-compiler-principles-基础">
 <meta property="og:url" content="https://hitworld.github.io/posts/493cdcda/index.html">
 <meta property="og:site_name" content="w4rd3n">
-<meta property="og:description" content="未完成 程序设计语言现今有几千种程序设计语言,可以通过不同方式进行分类. 第一代语言机器语言,第二代语言汇编语言,第三代语言为Fortran,C,C++等高级程序设计语言,第四代语言是为特定应用设计的语言,如SQL,第五代语言指基于逻辑和约束的语言,如Prolog. 指明如何完成一个计算任务的语言称为强制式语言,如C,C++,FORTRAN.指明要进行哪些计算的语言称为声明式语言,如ML,LISP">
+<meta property="og:description" content="未完成 程序设计语言 现今有几千种程序设计语言,可以通过不同方式进行分类. 第一代语言机器语言,第二代语言汇编语言,第三代语言为Fortran,C,C++等高级程序设计语言,第四代语言是为特定应用设计的语言,如SQL,第五代语言指基于逻辑和约束的语言,如Prolog. 指明如何完成一个计算任务的语言称为强制式语言,如C,C++,FORTRAN.指明要进行哪些计算的语言称为声明式语言,如ML">
 <meta property="og:locale" content="zh-CN">
 <meta property="og:image" content="https://hitworld.github.io/posts/493cdcda/1.png">
 <meta property="og:image" content="https://hitworld.github.io/posts/493cdcda/2.png">
@@ -141,7 +141,7 @@
 <meta property="og:updated_time" content="2020-08-09T06:34:17.776Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="CS-BASIC-compiler-principles-基础">
-<meta name="twitter:description" content="未完成 程序设计语言现今有几千种程序设计语言,可以通过不同方式进行分类. 第一代语言机器语言,第二代语言汇编语言,第三代语言为Fortran,C,C++等高级程序设计语言,第四代语言是为特定应用设计的语言,如SQL,第五代语言指基于逻辑和约束的语言,如Prolog. 指明如何完成一个计算任务的语言称为强制式语言,如C,C++,FORTRAN.指明要进行哪些计算的语言称为声明式语言,如ML,LISP">
+<meta name="twitter:description" content="未完成 程序设计语言 现今有几千种程序设计语言,可以通过不同方式进行分类. 第一代语言机器语言,第二代语言汇编语言,第三代语言为Fortran,C,C++等高级程序设计语言,第四代语言是为特定应用设计的语言,如SQL,第五代语言指基于逻辑和约束的语言,如Prolog. 指明如何完成一个计算任务的语言称为强制式语言,如C,C++,FORTRAN.指明要进行哪些计算的语言称为声明式语言,如ML">
 <meta name="twitter:image" content="https://hitworld.github.io/posts/493cdcda/1.png">
 
 
@@ -197,7 +197,7 @@
       .logo-line-after i { right: initial; }
     }
   </style>
-</noscript>
+</noscript><!-- hexo-inject:begin --><!-- hexo-inject:end -->
 
 </head>
 
@@ -208,7 +208,7 @@
     
   
 
-  <div class="container sidebar-position-left page-post-detail">
+  <!-- hexo-inject:begin --><!-- hexo-inject:end --><div class="container sidebar-position-left page-post-detail">
     <div class="headband"></div>
 
     <header id="header" class="header" itemscope="" itemtype="http://schema.org/WPHeader">
@@ -515,7 +515,7 @@
                 
                   <span class="post-meta-item-text">本文字数：</span>
                 
-                <span title="本文字数">3.4k</span>
+                <span title="本文字数">3.5k</span>
               
 
               
@@ -550,19 +550,23 @@
 
       
         <p>未完成</p>
-<h2 id="程序设计语言"><a href="#程序设计语言" class="headerlink" title="程序设计语言"></a>程序设计语言</h2><p>现今有几千种程序设计语言,可以通过不同方式进行分类.</p>
+<h2 id="程序设计语言">程序设计语言</h2>
+<p>现今有几千种程序设计语言,可以通过不同方式进行分类.</p>
 <p>第一代语言机器语言,第二代语言汇编语言,第三代语言为<code>Fortran</code>,<code>C</code>,<code>C++</code>等高级程序设计语言,第四代语言是为特定应用设计的语言,如<code>SQL</code>,第五代语言指基于逻辑和约束的语言,如<code>Prolog</code>.</p>
 <p>指明如何完成一个计算任务的语言称为强制式语言,如<code>C</code>,<code>C++</code>,<code>FORTRAN</code>.指明要进行哪些计算的语言称为声明式语言,如<code>ML</code>,<code>LISP</code>等函数式语言.还有如面对对象语言,脚本语言等分类.</p>
 <p>高级程序语言都可看成是一个字符集上的字符串.程序语言主要是由语法和语义两方面定义.</p>
 <p>语义规则定义了语言的单词符号和语法单位的意义.</p>
 <p>语言的语法是用来形成一个合法程序的一组规则,这些规则一部分称为词法规则,另一部分称为语法规则.词法规则定义了单词符号的形成规则,而语法规则定义了语法单位的形成规则.常见语法单位:表达式,语句,函数,过程和程序等.</p>
-<h2 id="编译技术的应用"><a href="#编译技术的应用" class="headerlink" title="编译技术的应用"></a>编译技术的应用</h2><p>编译技术基本的数学模型有:有限自动机和正规式,上下文无法文法,树形结构.</p>
+<h2 id="编译技术的应用">编译技术的应用</h2>
+<p>编译技术基本的数学模型有:有限自动机和正规式,上下文无法文法,树形结构.</p>
 <p>编译技术被用于:高级程序设计语言的实现,针对计算机体系结构的优化,新计算机体系结构的设计,程序的翻译(二进制翻译,硬件合成,数据查询解释器,翻译后模拟),软件生成率工具(错误检测,类型检查,边界检查,内存管理工具).</p>
-<h2 id="语言处理器"><a href="#语言处理器" class="headerlink" title="语言处理器"></a>语言处理器</h2><p>常见的语言处理器有编译器和解释器.</p>
+<h2 id="语言处理器">语言处理器</h2>
+<p>常见的语言处理器有编译器和解释器.</p>
 <p>编译器是一个读取以源语言编写的程序并把其翻译为一个等价的使用目标语言编写的程序.</p>
 <p>解释器是一个读取以源语言编写的程序并逐个语句的执行.</p>
 <p>也有一些即时编译器(<code>JIT</code>)在运行中处理输入的前一刻将字节码翻译成目标语言再执行.</p>
-<h2 id="编译器概览"><a href="#编译器概览" class="headerlink" title="编译器概览"></a>编译器概览</h2><p>编译器就是一个映射,由两部分组成:分析部分(前端)和综合部分(后端).</p>
+<h2 id="编译器概览">编译器概览</h2>
+<p>编译器就是一个映射,由两部分组成:分析部分(前端)和综合部分(后端).</p>
 <p>分析部分主要进行词法分析,语法分析,语义分析,中间代码生成,这个过程中也会产生相应的中间表示形式,并生成符号表,分析部分是与源语言有关但与目标机无关的那些部分.</p>
 <p>综合部份根据中间语言生成目标程序,主要包括编译程序中与目标机有关的那些部分,也就是优化和目标代码生成.</p>
 <p>编译器第一个步骤称为词法分析或扫描,词法分析器将源代码解析成有意义的词素的序列并生成对应的符号表,对于每个词素,词法分析器输出形如<code>&lt;token-name, attribute-value&gt;</code>的词法单元,<code>token-name</code>是该词法单元的类型(如基本字,标识符,常数,算符和界符.基本字又称为保留字,界符又称为分隔符),<code>attribute-value</code>是对应的符号或指向对应的符号(某些词法单元无属性值,例如:<code>=</code>).</p>
@@ -572,14 +576,17 @@
 <p>编译器还可能会对中间代码进行优化(公共子表达式的提取,强度削弱,删除无用代码),产生时间或空间上更良好的中间代码,最后将优化结果映射为目标代码.</p>
 <p>其中符号表一直存在,用于记录变量的名字和信息,同时在编译的过程中不断补充类型等信息.</p>
 <p>编译程序在各个阶段应诊断和报告源程序中的错误,包括词法错误,语法错误,语义错误等.编译程序应报告出错地点,并给出简明准确的提示信息.</p>
-<h3 id="编译器构造工具"><a href="#编译器构造工具" class="headerlink" title="编译器构造工具"></a>编译器构造工具</h3><p>常用的编译器构造工具.</p>
+<h3 id="编译器构造工具">编译器构造工具</h3>
+<p>常用的编译器构造工具.</p>
 <ul>
 <li>词法分析器的生成器:例如<code>Lex</code>,<code>Flex</code>.</li>
 <li>语法分析器的生成器:例如<code>Lex</code>,<code>Yacc</code>,<code>bison++</code>.</li>
 </ul>
-<h3 id="编译程序的移植"><a href="#编译程序的移植" class="headerlink" title="编译程序的移植"></a>编译程序的移植</h3><p>利用<code>A</code>机器上已有的高级语言<code>L</code>编写一个在<code>B</code>机器上运行的高级语言<code>L</code>的编译程序.</p>
+<h3 id="编译程序的移植">编译程序的移植</h3>
+<p>利用<code>A</code>机器上已有的高级语言<code>L</code>编写一个在<code>B</code>机器上运行的高级语言<code>L</code>的编译程序.</p>
 <p>先用<code>L</code>语言编写产生<code>B</code>机器代码的<code>L</code>编译程序源程序<code>R</code>,<code>R</code>经过<code>A</code>机器上的<code>L</code>的编译程序编译后,生成能够在<code>A</code>机器上运行的,产生<code>B</code>机器代码的编译程序<code>I</code>,现在用<code>I</code>编译<code>R</code>,就产生了<code>P</code>程序,<code>P</code>程序可以将<code>L</code>语言编译成能够在<code>B</code>机器上运行的,由<code>B</code>机器代码构成的目标程序.</p>
-<h2 id="符号串"><a href="#符号串" class="headerlink" title="符号串"></a>符号串</h2><p>字母表是符号的非空有穷集合.任何程序语言都有自己的字母表,一个程序语言只使用一个有限字符集作为字母表,用<code>∑</code>表示.</p>
+<h2 id="符号串">符号串</h2>
+<p>字母表是符号的非空有穷集合.任何程序语言都有自己的字母表,一个程序语言只使用一个有限字符集作为字母表,用<code>∑</code>表示.</p>
 <p><code>∑</code>上的一个符号串(字)是指由<code>∑</code>中的符号所构成的一个有穷序列.</p>
 <ul>
 <li>空字<code>ε</code>是<code>∑</code>上的一个符号串,空字<code>ε</code>是不包含任何符号的序列.</li>
@@ -604,7 +611,8 @@
 </ul>
 <p>符号串集合的运算.</p>
 <img src="/posts/493cdcda/1.png" title="p1">
-<h2 id="文法"><a href="#文法" class="headerlink" title="文法"></a>文法</h2><p>程序语言的语法规则是用文法来描述的,目前的程序语言一般用上下文无关的文法来描述.</p>
+<h2 id="文法">文法</h2>
+<p>程序语言的语法规则是用文法来描述的,目前的程序语言一般用上下文无关的文法来描述.</p>
 <p>几个基本概念.</p>
 <ul>
 <li>非终结符号:需进一步定义的符号,只是一个中间产物.</li>
@@ -621,14 +629,16 @@
 <p>假定<code>G</code>是一个文法,<code>S</code>是它的开始符号.如果<code>S</code>能推导出<code>a</code>,则称<code>a</code>是一个句型.仅含终结符的句型是一个句子.文法<code>G</code>所产生句子的全体是一个语言,将它记为:<code>L(G)</code>.</p>
 <p>文法和语言之间并不存在一一对应关系,对于一给定的文法,唯一地确定它所产生的语言;但对于一个给定的语言往往可用若干个不同的文法来产.</p>
 <p>化简了的文法:文法中不含有任何形如<code>P -&gt; P</code>的产生式;每个非终结符号<code>P</code>必须都有用处,即必须存在含<code>P</code>的句型,同时对于<code>P</code>不存在永不终结的回路.</p>
-<h3 id="语法分析树与二义性"><a href="#语法分析树与二义性" class="headerlink" title="语法分析树与二义性"></a>语法分析树与二义性</h3><p>语法分析树定义.</p>
+<h3 id="语法分析树与二义性">语法分析树与二义性</h3>
+<p>语法分析树定义.</p>
 <img src="/posts/493cdcda/4.png" title="p4">
 <p>画语法树的两种方法:自顶向下,根据推导序列,对每步推导画相应分枝;自底向上,根据归约序列,对每步归约画相应分枝.分析树是推导的图形表示.</p>
 <p>一个句型推导或分析用一棵树结构图示出来,它反应了一个句子的语法结构层次.若文法是无二义性的,对于一个句子的多种推导画出的分析树是一样的,分析树并未描述推导过程.</p>
 <p>描述一个句子的文法不是唯一的,对于一个句子的分析应是唯一的.</p>
 <p>如果一个文法的句子存在两棵不同的分析树,那么该句子是二义性的.如果一个文法包含二义性的句子,则称这个文法是二义性的;否则,该文法是无二义性的.</p>
 <p>对于任意一个上下文无关文法,不存在一个算法,能够在有限的步骤内判定它是无二义性的;但能给出一组充分条件,满足这组充分条件的文法是无二义性的.</p>
-<h3 id="文法的分类"><a href="#文法的分类" class="headerlink" title="文法的分类"></a>文法的分类</h3><p>乔姆斯基文法有四种类型:<code>0</code>型,<code>1</code>型,<code>2</code>型,<code>3</code>型.</p>
+<h3 id="文法的分类">文法的分类</h3>
+<p>乔姆斯基文法有四种类型:<code>0</code>型,<code>1</code>型,<code>2</code>型,<code>3</code>型.</p>
 <img src="/posts/493cdcda/5.png" title="p5">
 <img src="/posts/493cdcda/6.png" title="p6">
 <img src="/posts/493cdcda/7.png" title="p7">
@@ -986,7 +996,7 @@
       <i class="fa fa-area-chart"></i>
     </span>
     
-    <span title="站点总字数">710k</span>
+    <span title="站点总字数">720k</span>
   
 
   
@@ -995,7 +1005,7 @@
       <i class="fa fa-coffee"></i>
     </span>
     
-    <span title="站点阅读时长">10:46</span>
+    <span title="站点阅读时长">10:54</span>
   
 </div>
 
@@ -1646,5 +1656,5 @@
   
   <script type="text/javascript" src="//cdn.bootcss.com/canvas-nest.js/1.0.0/canvas-nest.min.js"></script>
   
-<script src="/live2dw/lib/L2Dwidget.min.js?0c58a1486de42ac6cc1c59c7d98ae887"></script><script>L2Dwidget.init({"pluginRootPath":"live2dw/","pluginJsPath":"lib/","pluginModelPath":"assets/","tagMode":false,"debug":false,"model":{"jsonPath":"/live2dw/assets/koharu.model.json"},"display":{"position":"right","width":150,"height":300},"mobile":{"show":false},"log":false});</script></body>
+<script src="/live2dw/lib/L2Dwidget.min.js?0c58a1486de42ac6cc1c59c7d98ae887"></script><script>L2Dwidget.init({"pluginRootPath":"live2dw/","pluginJsPath":"lib/","pluginModelPath":"assets/","tagMode":false,"debug":false,"model":{"jsonPath":"/live2dw/assets/koharu.model.json"},"display":{"position":"right","width":150,"height":300},"mobile":{"show":false},"log":false});</script><!-- hexo-inject:begin --><!-- hexo-inject:end --></body>
 </html>

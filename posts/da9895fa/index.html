@@ -16,7 +16,7 @@
 
 <html class="theme-next mist use-motion" lang="zh-CN">
 <head><meta name="generator" content="Hexo 3.8.0">
-  <meta charset="UTF-8">
+  <!-- hexo-inject:begin --><!-- hexo-inject:end --><meta charset="UTF-8">
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
 <meta name="theme-color" content="#222">
@@ -119,18 +119,18 @@
 
 
 
-  <meta name="description" content="未完成 tips参数的传递过程就是赋值,其约束条件也是如此. const关键字并不真正表示常量. 链接时-lthread等同于libthread.so. 预处理器C预处理器主要实现三个功能,字符串替换(#define str_a str_b),头文件包含(#include &amp;lt;stdio.h&amp;gt;)和宏扩展(#define a(y) a_do(y)). 未定义行为 整型数右移要不要扩展符号位">
+  <meta name="description" content="未完成 tips 参数的传递过程就是赋值,其约束条件也是如此. const关键字并不真正表示常量. 链接时-lthread等同于libthread.so. 预处理器 C预处理器主要实现三个功能,字符串替换(#define str_a str_b),头文件包含(#include &amp;lt;stdio.h&amp;gt;)和宏扩展(#define a(y) a_do(y)). 未定义行为  整">
 <meta name="keywords" content="C专家编程">
 <meta property="og:type" content="article">
 <meta property="og:title" content="CS-NOTES-C专家编程-笔记">
 <meta property="og:url" content="https://hitworld.github.io/posts/da9895fa/index.html">
 <meta property="og:site_name" content="w4rd3n">
-<meta property="og:description" content="未完成 tips参数的传递过程就是赋值,其约束条件也是如此. const关键字并不真正表示常量. 链接时-lthread等同于libthread.so. 预处理器C预处理器主要实现三个功能,字符串替换(#define str_a str_b),头文件包含(#include &amp;lt;stdio.h&amp;gt;)和宏扩展(#define a(y) a_do(y)). 未定义行为 整型数右移要不要扩展符号位">
+<meta property="og:description" content="未完成 tips 参数的传递过程就是赋值,其约束条件也是如此. const关键字并不真正表示常量. 链接时-lthread等同于libthread.so. 预处理器 C预处理器主要实现三个功能,字符串替换(#define str_a str_b),头文件包含(#include &amp;lt;stdio.h&amp;gt;)和宏扩展(#define a(y) a_do(y)). 未定义行为  整">
 <meta property="og:locale" content="zh-CN">
 <meta property="og:updated_time" content="2020-08-09T06:34:17.785Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="CS-NOTES-C专家编程-笔记">
-<meta name="twitter:description" content="未完成 tips参数的传递过程就是赋值,其约束条件也是如此. const关键字并不真正表示常量. 链接时-lthread等同于libthread.so. 预处理器C预处理器主要实现三个功能,字符串替换(#define str_a str_b),头文件包含(#include &amp;lt;stdio.h&amp;gt;)和宏扩展(#define a(y) a_do(y)). 未定义行为 整型数右移要不要扩展符号位">
+<meta name="twitter:description" content="未完成 tips 参数的传递过程就是赋值,其约束条件也是如此. const关键字并不真正表示常量. 链接时-lthread等同于libthread.so. 预处理器 C预处理器主要实现三个功能,字符串替换(#define str_a str_b),头文件包含(#include &amp;lt;stdio.h&amp;gt;)和宏扩展(#define a(y) a_do(y)). 未定义行为  整">
 
 
 
@@ -185,7 +185,7 @@
       .logo-line-after i { right: initial; }
     }
   </style>
-</noscript>
+</noscript><!-- hexo-inject:begin --><!-- hexo-inject:end -->
 
 </head>
 
@@ -196,7 +196,7 @@
     
   
 
-  <div class="container sidebar-position-left page-post-detail">
+  <!-- hexo-inject:begin --><!-- hexo-inject:end --><div class="container sidebar-position-left page-post-detail">
     <div class="headband"></div>
 
     <header id="header" class="header" itemscope="" itemtype="http://schema.org/WPHeader">
@@ -503,7 +503,7 @@
                 
                   <span class="post-meta-item-text">本文字数：</span>
                 
-                <span title="本文字数">2.1k</span>
+                <span title="本文字数">2.2k</span>
               
 
               
@@ -538,70 +538,84 @@
 
       
         <p>未完成</p>
-<h2 id="tips"><a href="#tips" class="headerlink" title="tips"></a>tips</h2><p>参数的传递过程就是赋值,其约束条件也是如此.</p>
+<h2 id="tips">tips</h2>
+<p>参数的传递过程就是赋值,其约束条件也是如此.</p>
 <p><code>const</code>关键字并不真正表示常量.</p>
 <p>链接时<code>-lthread</code>等同于<code>libthread.so</code>.</p>
-<h2 id="预处理器"><a href="#预处理器" class="headerlink" title="预处理器"></a>预处理器</h2><p><code>C</code>预处理器主要实现三个功能,字符串替换(<code>#define str_a str_b</code>),头文件包含(<code>#include &lt;stdio.h&gt;</code>)和宏扩展(<code>#define a(y) a_do(y)</code>).</p>
-<h2 id="未定义行为"><a href="#未定义行为" class="headerlink" title="未定义行为"></a>未定义行为</h2><ul>
+<h2 id="预处理器">预处理器</h2>
+<p><code>C</code>预处理器主要实现三个功能,字符串替换(<code>#define str_a str_b</code>),头文件包含(<code>#include &lt;stdio.h&gt;</code>)和宏扩展(<code>#define a(y) a_do(y)</code>).</p>
+<h2 id="未定义行为">未定义行为</h2>
+<ul>
 <li>整型数右移要不要扩展符号位.</li>
 <li>参数求值的顺序.</li>
 <li>优先级与结合性之外的计算顺序,包括表达式中函数求值顺序.</li>
 </ul>
-<h2 id="缺省可见性"><a href="#缺省可见性" class="headerlink" title="缺省可见性"></a>缺省可见性</h2><p><code>C</code>语言函数定义时是缺省下全局可见的,这种大范围的全局可见与<code>C</code>语言另一个特性<code>interpositioning</code>相互影响,在<code>C</code>语言中一个符号要么全局可见,要么对其他文件都不可见.</p>
-<h2 id="容易误解的运算符优先性"><a href="#容易误解的运算符优先性" class="headerlink" title="容易误解的运算符优先性"></a>容易误解的运算符优先性</h2><ol>
+<h2 id="缺省可见性">缺省可见性</h2>
+<p><code>C</code>语言函数定义时是缺省下全局可见的,这种大范围的全局可见与<code>C</code>语言另一个特性<code>interpositioning</code>相互影响,在<code>C</code>语言中一个符号要么全局可见,要么对其他文件都不可见.</p>
+<h2 id="容易误解的运算符优先性">容易误解的运算符优先性</h2>
+<ol type="1">
 <li><code>.</code>优先性高于<code>*</code>,所以<code>*p.f</code>相当于<code>*(p.f)</code>而不是<code>(*p).f</code>.</li>
 <li><code>[]</code>优先性高于<code>*</code>,所以<code>int * ap[]</code>声明的是一个数组,存储类型为<code>int</code>指针.</li>
 <li>算术运算优先性高于移位运算.</li>
 <li>逗号运算符优先级最低.</li>
 </ol>
-<h2 id="maximal-munch-strategy"><a href="#maximal-munch-strategy" class="headerlink" title="maximal munch strategy"></a><code>maximal munch strategy</code></h2><p>这是一个编译策略,即如果下一个标记有超过一种的解释方案,编译器将选取最长字符序列的方案.</p>
-<h2 id="声明"><a href="#声明" class="headerlink" title="声明"></a>声明</h2><p><code>C</code>中的声明包括至少一个类型说明符,有且只有一个的声明器(直接声明器,如<code>name</code>,<code>name[N]</code>,<code>name(arg,...)</code>等),<code>,</code>连接的零个或更多声明器(指针),和零个或一个的初始化内容组成.</p>
+<h2 id="maximal-munch-strategy"><code>maximal munch strategy</code></h2>
+<p>这是一个编译策略,即如果下一个标记有超过一种的解释方案,编译器将选取最长字符序列的方案.</p>
+<h2 id="声明">声明</h2>
+<p><code>C</code>中的声明包括至少一个类型说明符,有且只有一个的声明器(直接声明器,如<code>name</code>,<code>name[N]</code>,<code>name(arg,...)</code>等),<code>,</code>连接的零个或更多声明器(指针),和零个或一个的初始化内容组成.</p>
 <p>类型说明符包括存储类型(原生基础类型和聚合类型)和类型限定符(例如:<code>auto</code>,<code>const</code>等).</p>
 <p>声明说明了其他地方创建的对象名称并允许使用.定义是一种特殊的声明,它还创建了一个对象.</p>
-<h3 id="优先级规则"><a href="#优先级规则" class="headerlink" title="优先级规则"></a>优先级规则</h3><p>声明从标识符开始读取,然后按照优先级顺序读取.</p>
-<ol>
+<h3 id="优先级规则">优先级规则</h3>
+<p>声明从标识符开始读取,然后按照优先级顺序读取.</p>
+<ol type="1">
 <li>声明中被括号括起来的那部分.</li>
 <li>后缀操作符<code>()</code>,<code>[]</code>.</li>
 <li>前缀操作符<code>*</code>.</li>
 </ol>
 <p>如果<code>const</code>,<code>volatile</code>后面紧跟类型说明符,那么它作用于类型说明符.其他情况下作用于左边紧邻的指针星号.</p>
-<h2 id="C名称空间"><a href="#C名称空间" class="headerlink" title="C名称空间"></a>C名称空间</h2><p><code>C</code>存在多种名称空间</p>
-<ol>
+<h2 id="c名称空间">C名称空间</h2>
+<p><code>C</code>存在多种名称空间</p>
+<ol type="1">
 <li>标签名(<code>goto</code>).</li>
 <li>标签(<code>tag</code>):用于所有的结构,枚举和联合.</li>
 <li>成员名:每个结构或联合都有自己的名称空间.</li>
 <li>其他.</li>
 </ol>
 <p>例如:<code>struct foo{ int foo; }foo;</code>是合法的.</p>
-<h2 id="隐式转换"><a href="#隐式转换" class="headerlink" title="隐式转换"></a>隐式转换</h2><p>对于大多数<code>C</code>语言的实现,处理同样字长的有符号数和无符号数之间相互转换的一般规则是:数值可能会变,但位模式不变.对于不同字长的数据类型之间的转换,<code>C</code>语言标准要求先转换大小再转换有无符号.对应的就可能会产生截断.所有比<code>int</code>小的整型计算时都会升级成<code>int</code>进行计算.</p>
+<h2 id="隐式转换">隐式转换</h2>
+<p>对于大多数<code>C</code>语言的实现,处理同样字长的有符号数和无符号数之间相互转换的一般规则是:数值可能会变,但位模式不变.对于不同字长的数据类型之间的转换,<code>C</code>语言标准要求先转换大小再转换有无符号.对应的就可能会产生截断.所有比<code>int</code>小的整型计算时都会升级成<code>int</code>进行计算.</p>
 <p>而当执行一个运算时,如果一个有符号一个无符号,<code>C</code>语言会隐式地将有符号数强制类型转换为无符号数.</p>
 <p><code>C</code>语言中的移位运算和大小转换涉及到无符号扩展和符号扩展,还有对应的截断.</p>
 <p>在<code>C</code>语言中当<code>float</code>和<code>double</code>转换成<code>int</code>时溢出会产生整数不确定值(在<code>Intel</code>兼容的微处理器中即<code>0x10000...</code>).</p>
-<h2 id="数组与指针"><a href="#数组与指针" class="headerlink" title="数组与指针"></a>数组与指针</h2><p><code>C</code>语言引入了可修改的左值这个术语,即允许出现在赋值语句的左边的左值.</p>
+<h2 id="数组与指针">数组与指针</h2>
+<p><code>C</code>语言引入了可修改的左值这个术语,即允许出现在赋值语句的左边的左值.</p>
 <figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">x = y;</span><br><span class="line"><span class="comment">//x为左值,y为右值</span></span><br></pre></td></tr></table></figure>
 <p>左值在编译时可知,表示存储数据(结果)的地址.而对应的右值表示存储的数据内容.数组名是左值但不是可修改的左值.</p>
 <blockquote>
-<p>当一个数组名出现在一个表达式时,它会被转换为一个指向该数组第一个元素的指针.<br>C语言将数组下标作为指针的偏移量.<br>作为函数参数的数组名等同于指针.</p>
+<p>当一个数组名出现在一个表达式时,它会被转换为一个指向该数组第一个元素的指针. C语言将数组下标作为指针的偏移量. 作为函数参数的数组名等同于指针.</p>
 </blockquote>
 <p>编译器为每个变量分配一个地址(左值),而这个变量的内容(右值)是运行时才可知的.</p>
 <p>数组名并不是指针,其使用过程并不相同.</p>
 <figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">char</span> a[<span class="number">5</span>] = <span class="string">"1234"</span>;</span><br><span class="line">a[<span class="number">3</span>];</span><br></pre></td></tr></table></figure>
 <p>这里对<code>a[3]</code>的访问过程为:</p>
-<ol>
+<ol type="1">
 <li>从符号表获得变量数组<code>a</code>的地址(左值),加上<code>3</code>.</li>
 <li>取结果地址的内容(右值).</li>
 </ol>
 <figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">char</span> * a = <span class="string">"1234"</span>;</span><br><span class="line">a[<span class="number">3</span>];</span><br></pre></td></tr></table></figure>
 <p>这里对<code>a[3]</code>的访问过程为:</p>
-<ol>
+<ol type="1">
 <li>从符号表获得变量指针<code>a</code>的地址(左值),获取其内容(右值,指向字符串).</li>
 <li>将获取内容与<code>3</code>相加,去结果地址内容(右值).</li>
 </ol>
 <p>前者直接访问数据,后者要通过指针内容(地址)间接访问.</p>
-<h2 id="运行时数据结构"><a href="#运行时数据结构" class="headerlink" title="运行时数据结构"></a>运行时数据结构</h2><p>段,<code>heap</code>,<code>stack</code>,<code>libc</code>等.</p>
-<p>全局的<code>goto</code>与标签–<code>setjmp</code>与<code>longjmp</code>.</p>
-<h2 id="指定初始化"><a href="#指定初始化" class="headerlink" title="指定初始化"></a>指定初始化</h2><p>源于<code>ISO C99</code>标准.</p>
+<h2 id="运行时数据结构">运行时数据结构</h2>
+<p>段,<code>heap</code>,<code>stack</code>,<code>libc</code>等.</p>
+<p>全局的<code>goto</code>与标签--<code>setjmp</code>与<code>longjmp</code>.</p>
+<h2 id="指定初始化">指定初始化</h2>
+<p>源于<code>ISO C99</code>标准.</p>
 <figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">static</span> <span class="class"><span class="keyword">struct</span> <span class="title">usb_driver</span> <span class="title">usb_storage_driver</span> = &#123;</span></span><br><span class="line">  .owner = THIS_MODULE,</span><br><span class="line">  .name = <span class="string">"usb-storage"</span>,</span><br><span class="line">  .probe = storage_probe,</span><br><span class="line">  .disconnect = storage_disconnect,</span><br><span class="line">  .id_table = storage_usb_ids,</span><br><span class="line">&#125;;</span><br><span class="line"></span><br><span class="line"><span class="keyword">int</span> a[<span class="number">6</span>] = &#123;[<span class="number">4</span>] = <span class="number">29</span>, [<span class="number">2</span>] = <span class="number">15</span>&#125;;</span><br><span class="line"></span><br><span class="line"><span class="keyword">int</span> widths[] = &#123;[<span class="number">0</span> ... <span class="number">9</span>] = <span class="number">1</span>, [<span class="number">10</span> ... <span class="number">99</span>] = <span class="number">2</span>, [<span class="number">100</span>] = <span class="number">3</span>&#125;;<span class="comment">//GNU扩展</span></span><br></pre></td></tr></table></figure>
+
       
     </div>
 
@@ -915,7 +929,7 @@
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#tips"><span class="nav-number">1.</span> <span class="nav-text">tips</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#预处理器"><span class="nav-number">2.</span> <span class="nav-text">预处理器</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#未定义行为"><span class="nav-number">3.</span> <span class="nav-text">未定义行为</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#缺省可见性"><span class="nav-number">4.</span> <span class="nav-text">缺省可见性</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#容易误解的运算符优先性"><span class="nav-number">5.</span> <span class="nav-text">容易误解的运算符优先性</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#maximal-munch-strategy"><span class="nav-number">6.</span> <span class="nav-text">maximal munch strategy</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#声明"><span class="nav-number">7.</span> <span class="nav-text">声明</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#优先级规则"><span class="nav-number">7.1.</span> <span class="nav-text">优先级规则</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#C名称空间"><span class="nav-number">8.</span> <span class="nav-text">C名称空间</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#隐式转换"><span class="nav-number">9.</span> <span class="nav-text">隐式转换</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#数组与指针"><span class="nav-number">10.</span> <span class="nav-text">数组与指针</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#运行时数据结构"><span class="nav-number">11.</span> <span class="nav-text">运行时数据结构</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#指定初始化"><span class="nav-number">12.</span> <span class="nav-text">指定初始化</span></a></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#tips"><span class="nav-number">1.</span> <span class="nav-text">tips</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#预处理器"><span class="nav-number">2.</span> <span class="nav-text">预处理器</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#未定义行为"><span class="nav-number">3.</span> <span class="nav-text">未定义行为</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#缺省可见性"><span class="nav-number">4.</span> <span class="nav-text">缺省可见性</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#容易误解的运算符优先性"><span class="nav-number">5.</span> <span class="nav-text">容易误解的运算符优先性</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#maximal-munch-strategy"><span class="nav-number">6.</span> <span class="nav-text">maximal munch strategy</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#声明"><span class="nav-number">7.</span> <span class="nav-text">声明</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#优先级规则"><span class="nav-number">7.1.</span> <span class="nav-text">优先级规则</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#c名称空间"><span class="nav-number">8.</span> <span class="nav-text">C名称空间</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#隐式转换"><span class="nav-number">9.</span> <span class="nav-text">隐式转换</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#数组与指针"><span class="nav-number">10.</span> <span class="nav-text">数组与指针</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#运行时数据结构"><span class="nav-number">11.</span> <span class="nav-text">运行时数据结构</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#指定初始化"><span class="nav-number">12.</span> <span class="nav-text">指定初始化</span></a></li></ol></div>
             
 
           </div>
@@ -947,7 +961,7 @@
       <i class="fa fa-area-chart"></i>
     </span>
     
-    <span title="站点总字数">710k</span>
+    <span title="站点总字数">720k</span>
   
 
   
@@ -956,7 +970,7 @@
       <i class="fa fa-coffee"></i>
     </span>
     
-    <span title="站点阅读时长">10:46</span>
+    <span title="站点阅读时长">10:54</span>
   
 </div>
 
@@ -1607,5 +1621,5 @@
   
   <script type="text/javascript" src="//cdn.bootcss.com/canvas-nest.js/1.0.0/canvas-nest.min.js"></script>
   
-<script src="/live2dw/lib/L2Dwidget.min.js?0c58a1486de42ac6cc1c59c7d98ae887"></script><script>L2Dwidget.init({"pluginRootPath":"live2dw/","pluginJsPath":"lib/","pluginModelPath":"assets/","tagMode":false,"debug":false,"model":{"jsonPath":"/live2dw/assets/koharu.model.json"},"display":{"position":"right","width":150,"height":300},"mobile":{"show":false},"log":false});</script></body>
+<script src="/live2dw/lib/L2Dwidget.min.js?0c58a1486de42ac6cc1c59c7d98ae887"></script><script>L2Dwidget.init({"pluginRootPath":"live2dw/","pluginJsPath":"lib/","pluginModelPath":"assets/","tagMode":false,"debug":false,"model":{"jsonPath":"/live2dw/assets/koharu.model.json"},"display":{"position":"right","width":150,"height":300},"mobile":{"show":false},"log":false});</script><!-- hexo-inject:begin --><!-- hexo-inject:end --></body>
 </html>

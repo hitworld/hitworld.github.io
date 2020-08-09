@@ -16,7 +16,7 @@
 
 <html class="theme-next mist use-motion" lang="zh-CN">
 <head><meta name="generator" content="Hexo 3.8.0">
-  <meta charset="UTF-8">
+  <!-- hexo-inject:begin --><!-- hexo-inject:end --><meta charset="UTF-8">
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
 <meta name="theme-color" content="#222">
@@ -119,18 +119,18 @@
 
 
 
-  <meta name="description" content="概念栈溢出指由于程序使用了不安全的函数或逻辑错误,导致攻击者溢出栈中缓冲区破坏(篡改)其他数据. 可以看到在栈中,位于局部变量(溢出点)后面的有:部分其他局部变量,返回地址,和所有的之前的栈帧.栈溢出可以让攻击者劫持PC register(eip/rip). 有时候要劫持ebp(即被保存的栈指针)来控制栈的位置从而劫持控制流. 利用方法可执行的代码有两种,进程内存空间本身的代码(包括程序代码,动态">
+  <meta name="description" content="概念 栈溢出指由于程序使用了不安全的函数或逻辑错误,导致攻击者溢出栈中缓冲区破坏(篡改)其他数据. 可以看到在栈中,位于局部变量(溢出点)后面的有:部分其他局部变量,返回地址,和所有的之前的栈帧.栈溢出可以让攻击者劫持PC register(eip/rip). 有时候要劫持ebp(即被保存的栈指针)来控制栈的位置从而劫持控制流. 利用方法 可执行的代码有两种,进程内存空间本身的代码(包括">
 <meta name="keywords" content="Linux">
 <meta property="og:type" content="article">
 <meta property="og:title" content="IS-pwn-Linux-栈溢出概览">
 <meta property="og:url" content="https://hitworld.github.io/posts/eb1fae06/index.html">
 <meta property="og:site_name" content="w4rd3n">
-<meta property="og:description" content="概念栈溢出指由于程序使用了不安全的函数或逻辑错误,导致攻击者溢出栈中缓冲区破坏(篡改)其他数据. 可以看到在栈中,位于局部变量(溢出点)后面的有:部分其他局部变量,返回地址,和所有的之前的栈帧.栈溢出可以让攻击者劫持PC register(eip/rip). 有时候要劫持ebp(即被保存的栈指针)来控制栈的位置从而劫持控制流. 利用方法可执行的代码有两种,进程内存空间本身的代码(包括程序代码,动态">
+<meta property="og:description" content="概念 栈溢出指由于程序使用了不安全的函数或逻辑错误,导致攻击者溢出栈中缓冲区破坏(篡改)其他数据. 可以看到在栈中,位于局部变量(溢出点)后面的有:部分其他局部变量,返回地址,和所有的之前的栈帧.栈溢出可以让攻击者劫持PC register(eip/rip). 有时候要劫持ebp(即被保存的栈指针)来控制栈的位置从而劫持控制流. 利用方法 可执行的代码有两种,进程内存空间本身的代码(包括">
 <meta property="og:locale" content="zh-CN">
 <meta property="og:updated_time" content="2020-08-09T06:34:17.817Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="IS-pwn-Linux-栈溢出概览">
-<meta name="twitter:description" content="概念栈溢出指由于程序使用了不安全的函数或逻辑错误,导致攻击者溢出栈中缓冲区破坏(篡改)其他数据. 可以看到在栈中,位于局部变量(溢出点)后面的有:部分其他局部变量,返回地址,和所有的之前的栈帧.栈溢出可以让攻击者劫持PC register(eip/rip). 有时候要劫持ebp(即被保存的栈指针)来控制栈的位置从而劫持控制流. 利用方法可执行的代码有两种,进程内存空间本身的代码(包括程序代码,动态">
+<meta name="twitter:description" content="概念 栈溢出指由于程序使用了不安全的函数或逻辑错误,导致攻击者溢出栈中缓冲区破坏(篡改)其他数据. 可以看到在栈中,位于局部变量(溢出点)后面的有:部分其他局部变量,返回地址,和所有的之前的栈帧.栈溢出可以让攻击者劫持PC register(eip/rip). 有时候要劫持ebp(即被保存的栈指针)来控制栈的位置从而劫持控制流. 利用方法 可执行的代码有两种,进程内存空间本身的代码(包括">
 
 
 
@@ -185,7 +185,7 @@
       .logo-line-after i { right: initial; }
     }
   </style>
-</noscript>
+</noscript><!-- hexo-inject:begin --><!-- hexo-inject:end -->
 
 </head>
 
@@ -196,7 +196,7 @@
     
   
 
-  <div class="container sidebar-position-left page-post-detail">
+  <!-- hexo-inject:begin --><!-- hexo-inject:end --><div class="container sidebar-position-left page-post-detail">
     <div class="headband"></div>
 
     <header id="header" class="header" itemscope="" itemtype="http://schema.org/WPHeader">
@@ -503,7 +503,7 @@
                 
                   <span class="post-meta-item-text">本文字数：</span>
                 
-                <span title="本文字数">2.9k</span>
+                <span title="本文字数">3k</span>
               
 
               
@@ -537,26 +537,32 @@
       
 
       
-        <h2 id="概念"><a href="#概念" class="headerlink" title="概念"></a>概念</h2><p>栈溢出指由于程序使用了不安全的函数或逻辑错误,导致攻击者溢出栈中缓冲区破坏(篡改)其他数据.</p>
+        <h2 id="概念">概念</h2>
+<p>栈溢出指由于程序使用了不安全的函数或逻辑错误,导致攻击者溢出栈中缓冲区破坏(篡改)其他数据.</p>
 <p>可以看到在栈中,位于局部变量(溢出点)后面的有:部分其他局部变量,返回地址,和所有的之前的栈帧.栈溢出可以让攻击者劫持<code>PC register(eip/rip)</code>.</p>
 <p>有时候要劫持<code>ebp</code>(即被保存的栈指针)来控制栈的位置从而劫持控制流.</p>
-<h2 id="利用方法"><a href="#利用方法" class="headerlink" title="利用方法"></a>利用方法</h2><p>可执行的代码有两种,进程内存空间本身的代码(包括程序代码,动态库代码,甚至错误偏移产生的代码等等)和攻击者写进去的<code>shellcode</code>(如果程序没有开启<code>DEP</code>,也就是<code>NX</code>).</p>
+<h2 id="利用方法">利用方法</h2>
+<p>可执行的代码有两种,进程内存空间本身的代码(包括程序代码,动态库代码,甚至错误偏移产生的代码等等)和攻击者写进去的<code>shellcode</code>(如果程序没有开启<code>DEP</code>,也就是<code>NX</code>).</p>
 <p>利用前者的方法也叫做面向返回编程(<code>Return-Oriented Programming</code>,缩写:<code>ROP</code>).即攻击者控制堆栈调用以劫持程序控制流并执行针对性的机器语言指令序列(称为<code>gadget</code>).<code>gadget</code>通常结束于<code>ret</code>指令.对于动态库代码中的<code>gadget</code>需要先泄露<code>libc</code>基址(绕过<code>ASLR</code>).</p>
 <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">ROPgadget --binary [fileName] | grep <span class="string">"pop rdi"</span></span><br><span class="line"><span class="comment">#寻找对应二进制文件pop rdi的gadget</span></span><br><span class="line">ROPgadget --binary [fileName] --string /bin/sh</span><br><span class="line"><span class="comment">#寻找对应二进制文件中字符串的偏移</span></span><br></pre></td></tr></table></figure>
 <p>根据不同的程序保护机制,要采用不同的漏洞利用方法.(<code>ASLR</code>基本都是默认开启)</p>
-<h3 id="Return-2-Shellcode"><a href="#Return-2-Shellcode" class="headerlink" title="Return-2-Shellcode"></a>Return-2-Shellcode</h3><p>如果程序未开启<code>NX</code>,可以直接写<code>shellcode</code>到栈(或者堆,<code>bss</code>等可控区域)上,如果能泄露对应地址(通过缓冲区泄露)就可以通过偏移直接<code>ret</code>到<code>shellcode</code>上,或者寻找<code>jmp esp</code>(<code>32</code>位)这种<code>gadget</code>控制<code>PC register(eip/rip)</code>到栈上.</p>
-<h3 id="Return-2-libc"><a href="#Return-2-libc" class="headerlink" title="Return-2-libc"></a>Return-2-libc</h3><p>其实就是指利用<code>libc</code>中的函数来获取<code>shell</code>,最典型的就是<code>system(&quot;/bin/sh&quot;);</code>.这个可以用来绕过<code>DEP</code>.</p>
+<h3 id="return-2-shellcode">Return-2-Shellcode</h3>
+<p>如果程序未开启<code>NX</code>,可以直接写<code>shellcode</code>到栈(或者堆,<code>bss</code>等可控区域)上,如果能泄露对应地址(通过缓冲区泄露)就可以通过偏移直接<code>ret</code>到<code>shellcode</code>上,或者寻找<code>jmp esp</code>(<code>32</code>位)这种<code>gadget</code>控制<code>PC register(eip/rip)</code>到栈上.</p>
+<h3 id="return-2-libc">Return-2-libc</h3>
+<p>其实就是指利用<code>libc</code>中的函数来获取<code>shell</code>,最典型的就是<code>system("/bin/sh");</code>.这个可以用来绕过<code>DEP</code>.</p>
 <p>这种利用的前提是已经泄露了一个<code>libc</code>地址(如果是动态链接,静态链接直接<code>ROP</code>即可).这样就能绕过<code>ASLR</code>获得<code>system</code>的地址.</p>
 <figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">libc = ELF(<span class="string">"libc.so"</span>)</span><br><span class="line">off_system = libc.symbols[<span class="string">'write'</span>] - libc.symbols[<span class="string">'system'</span>]</span><br><span class="line">system_addr = write_addr - off_system</span><br><span class="line"><span class="comment">#write_addr是泄露的函数地址,其他函数也行,只要有对应的动态库文件或者其偏移信息</span></span><br></pre></td></tr></table></figure>
 <p>也可以用工具获得动态库的导出函数偏移.</p>
 <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">nm -D libc.so | grep <span class="string">"system"</span></span><br><span class="line">objdump -T libc.so | grep <span class="string">"system"</span></span><br></pre></td></tr></table></figure>
 <p>具体<code>libc</code>信息可以通过<code>LibcSearcher</code>确定.</p>
-<h3 id="Return-2-csu"><a href="#Return-2-csu" class="headerlink" title="Return-2-csu"></a>Return-2-csu</h3><p><code>64bit</code>要控制<code>rdi</code>等寄存器才能控制参数.使用工具<code>ROPgadget --binary pwn</code>可以找到<code>pop rdi; ret;</code>等<code>gadget</code>.其他和<code>32bit</code>类似.</p>
+<h3 id="return-2-csu">Return-2-csu</h3>
+<p><code>64bit</code>要控制<code>rdi</code>等寄存器才能控制参数.使用工具<code>ROPgadget --binary pwn</code>可以找到<code>pop rdi; ret;</code>等<code>gadget</code>.其他和<code>32bit</code>类似.</p>
 <p><code>ROPgadget</code>的<code>--ropchain</code>可以自动化生成<code>ROP</code>链(一般都用不了).</p>
 <p><code>/bin/sh</code>的地址也可以用<code>ROPgadget</code>找到.</p>
 <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">ROPgadget --binary ./pwn --string /bin/sh</span><br></pre></td></tr></table></figure>
 <p>而实际上这就是<code>Return-2-csu</code>,因为<code>libc_init_cus</code>函数中就有控制<code>rdi</code>和<code>rsi</code>的<code>gadget</code>,还有组合起来可以控制<code>rdx</code>的<code>gadget</code>.</p>
-<h3 id="vDSO-and-vsyscall"><a href="#vDSO-and-vsyscall" class="headerlink" title="vDSO-and-vsyscall"></a>vDSO-and-vsyscall</h3><p>由于使用<code>int 0x80</code>进行系统调用效率低,<code>Intel</code>和<code>AMD</code>分别实现了<code>sysenter/sysexit</code>和<code>syscall/sysret</code>(快速系统调用指令).</p>
+<h3 id="vdso-and-vsyscall">vDSO-and-vsyscall</h3>
+<p>由于使用<code>int 0x80</code>进行系统调用效率低,<code>Intel</code>和<code>AMD</code>分别实现了<code>sysenter/sysexit</code>和<code>syscall/sysret</code>(快速系统调用指令).</p>
 <p>为了兼容这两种快速系统调用指令和未实现快速系统调用指令的<code>CPU</code>,<code>Linux</code>实现了<code>vsyscall</code>,程序调用<code>vsyscall</code>,具体的选择由内核来决定.而<code>vsyscall</code>的实现就在<code>vDSO</code>中.</p>
 <p><code>vsyscall</code>在每个进程中静态分配在相同的地址,只允许<code>4</code>个系统调用,<code>gettimeofday</code>,<code>time</code>和<code>getcpu</code>.由内核提供功能.</p>
 <p><code>vDSO</code>(<code>Virtual Dynamic Shared Object</code>,虚拟动态共享对象)是指内核和用户空间共享的代码空间,动态分配,地址随机(栈上的环境变量中存在这个地址),提供超过<code>4</code>个系统调用,由<code>glibc</code>库提供功能.</p>
@@ -564,9 +570,11 @@
 <p><code>x86_64</code>从<code>AMD</code>引进了<code>syscall</code>指令,但是<code>vDSO</code>,<code>vsyscall</code>的机制依旧未变.</p>
 <p><code>vsyscall</code>执行时会进行检查,如果不是从函数开头执行的话就会出错,所以一般只能用于平滑跳转,类似于<code>shellcode</code>中<code>nop</code>的作用.</p>
 <p><code>vDSO</code>常用于寻找系统调用指令或者搭配<code>srop</code>,<code>x86</code>环境下<code>vDSO</code>只有一字节是<code>random</code>,也就是<code>1/256</code>的命中率,范围为<code>0xf7700000 ~ 0xf7800000</code>.</p>
-<h3 id="绕过PIE"><a href="#绕过PIE" class="headerlink" title="绕过PIE"></a>绕过PIE</h3><p>泄露一个属于该可执行文件里的内容的地址从而求出基址,或者使用部分覆盖.</p>
+<h3 id="绕过pie">绕过PIE</h3>
+<p>泄露一个属于该可执行文件里的内容的地址从而求出基址,或者使用部分覆盖.</p>
 <p>还有一种思路是利用<code>vDSO</code>和<code>vsyscall</code>.</p>
-<h3 id="绕过canary"><a href="#绕过canary" class="headerlink" title="绕过canary"></a>绕过canary</h3><ol>
+<h3 id="绕过canary">绕过canary</h3>
+<ol type="1">
 <li>泄露,通过栈泄露或者格式化字符串等方式.</li>
 <li>对于有<code>fork</code>的进程,子进程<code>canary</code>值是一样的,就可以逐位爆破.</li>
 <li>劫持<code>__stack_chk_fail</code>,或者更深层的调用.</li>
@@ -575,15 +583,18 @@
 <li>栈溢出足够多的数据来复写<code>TLS</code>中的<code>tcbhead_t.stack_guard</code>的值,从而<code>bypass canary</code>.</li>
 <li>在<code>glibc2.23</code>下<code>mmap</code>一个合适堆可以分配到<code>TLS</code>结构上方附近,再通过堆溢出即可覆盖<code>TLS</code>中的<code>tcbhead_t.stack_guard</code>的值,例如:<code>32</code>位下<code>malloc(1024*130)</code>,此时堆指针到<code>tcbhead_t.stack_guard</code>的偏移为:<code>0x216FC</code>.</li>
 </ol>
-<h3 id="BROP"><a href="#BROP" class="headerlink" title="BROP"></a>BROP</h3><p>基于没有二进制文件这种情况而产生的一系列技术.</p>
+<h3 id="brop">BROP</h3>
+<p>基于没有二进制文件这种情况而产生的一系列技术.</p>
 <p>其思路为触发漏洞后通过回显或者连接状态得出信息.常见漏洞有栈溢出和格式化字符串漏洞.</p>
 <p>格式化字符串漏洞发现后即可泄露栈上数据并任意地址读写.</p>
 <p>主要研究栈溢出漏洞.</p>
 <p>如果存在栈溢出的函数调用后还有输出或者其他操作,可以通过递增输入长度得到返回地址的偏移.</p>
 <p>知道返回地址偏移后就可以通过测试不同的<code>gadget</code>得出一些有用的<code>gadget</code>.</p>
 <p>最重要的是<code>stop gadget</code>,即不会使程序<code>crash</code>且有一定特征的<code>gadget</code>.可以利用这种<code>gadget</code>去寻找需要的<code>gadget</code>.</p>
-<h3 id="stack-pivot"><a href="#stack-pivot" class="headerlink" title="stack pivot"></a>stack pivot</h3><p>需要存在类似<code>pop esp; ret;</code>等栈迁移<code>gadget</code>,作用是将栈迁移到可控区域从而使第二次<code>ROP</code>链的内容更可控.</p>
-<h3 id="其他"><a href="#其他" class="headerlink" title="其他"></a>其他</h3><p>具体环境不同设计,重要就是找到可写区域,可读区域和可执行区域然后通过构造<code>ROP</code>链等操作获得<code>shell</code>.</p>
+<h3 id="stack-pivot">stack pivot</h3>
+<p>需要存在类似<code>pop esp; ret;</code>等栈迁移<code>gadget</code>,作用是将栈迁移到可控区域从而使第二次<code>ROP</code>链的内容更可控.</p>
+<h3 id="其他">其他</h3>
+<p>具体环境不同设计,重要就是找到可写区域,可读区域和可执行区域然后通过构造<code>ROP</code>链等操作获得<code>shell</code>.</p>
 
       
     </div>
@@ -898,7 +909,7 @@
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#概念"><span class="nav-number">1.</span> <span class="nav-text">概念</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#利用方法"><span class="nav-number">2.</span> <span class="nav-text">利用方法</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#Return-2-Shellcode"><span class="nav-number">2.1.</span> <span class="nav-text">Return-2-Shellcode</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Return-2-libc"><span class="nav-number">2.2.</span> <span class="nav-text">Return-2-libc</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Return-2-csu"><span class="nav-number">2.3.</span> <span class="nav-text">Return-2-csu</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#vDSO-and-vsyscall"><span class="nav-number">2.4.</span> <span class="nav-text">vDSO-and-vsyscall</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#绕过PIE"><span class="nav-number">2.5.</span> <span class="nav-text">绕过PIE</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#绕过canary"><span class="nav-number">2.6.</span> <span class="nav-text">绕过canary</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#BROP"><span class="nav-number">2.7.</span> <span class="nav-text">BROP</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#stack-pivot"><span class="nav-number">2.8.</span> <span class="nav-text">stack pivot</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#其他"><span class="nav-number">2.9.</span> <span class="nav-text">其他</span></a></li></ol></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#概念"><span class="nav-number">1.</span> <span class="nav-text">概念</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#利用方法"><span class="nav-number">2.</span> <span class="nav-text">利用方法</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#return-2-shellcode"><span class="nav-number">2.1.</span> <span class="nav-text">Return-2-Shellcode</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#return-2-libc"><span class="nav-number">2.2.</span> <span class="nav-text">Return-2-libc</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#return-2-csu"><span class="nav-number">2.3.</span> <span class="nav-text">Return-2-csu</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#vdso-and-vsyscall"><span class="nav-number">2.4.</span> <span class="nav-text">vDSO-and-vsyscall</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#绕过pie"><span class="nav-number">2.5.</span> <span class="nav-text">绕过PIE</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#绕过canary"><span class="nav-number">2.6.</span> <span class="nav-text">绕过canary</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#brop"><span class="nav-number">2.7.</span> <span class="nav-text">BROP</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#stack-pivot"><span class="nav-number">2.8.</span> <span class="nav-text">stack pivot</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#其他"><span class="nav-number">2.9.</span> <span class="nav-text">其他</span></a></li></ol></li></ol></div>
             
 
           </div>
@@ -930,7 +941,7 @@
       <i class="fa fa-area-chart"></i>
     </span>
     
-    <span title="站点总字数">710k</span>
+    <span title="站点总字数">720k</span>
   
 
   
@@ -939,7 +950,7 @@
       <i class="fa fa-coffee"></i>
     </span>
     
-    <span title="站点阅读时长">10:46</span>
+    <span title="站点阅读时长">10:54</span>
   
 </div>
 
@@ -1590,5 +1601,5 @@
   
   <script type="text/javascript" src="//cdn.bootcss.com/canvas-nest.js/1.0.0/canvas-nest.min.js"></script>
   
-<script src="/live2dw/lib/L2Dwidget.min.js?0c58a1486de42ac6cc1c59c7d98ae887"></script><script>L2Dwidget.init({"pluginRootPath":"live2dw/","pluginJsPath":"lib/","pluginModelPath":"assets/","tagMode":false,"debug":false,"model":{"jsonPath":"/live2dw/assets/koharu.model.json"},"display":{"position":"right","width":150,"height":300},"mobile":{"show":false},"log":false});</script></body>
+<script src="/live2dw/lib/L2Dwidget.min.js?0c58a1486de42ac6cc1c59c7d98ae887"></script><script>L2Dwidget.init({"pluginRootPath":"live2dw/","pluginJsPath":"lib/","pluginModelPath":"assets/","tagMode":false,"debug":false,"model":{"jsonPath":"/live2dw/assets/koharu.model.json"},"display":{"position":"right","width":150,"height":300},"mobile":{"show":false},"log":false});</script><!-- hexo-inject:begin --><!-- hexo-inject:end --></body>
 </html>

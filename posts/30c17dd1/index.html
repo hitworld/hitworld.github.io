@@ -16,7 +16,7 @@
 
 <html class="theme-next mist use-motion" lang="zh-CN">
 <head><meta name="generator" content="Hexo 3.8.0">
-  <meta charset="UTF-8">
+  <!-- hexo-inject:begin --><!-- hexo-inject:end --><meta charset="UTF-8">
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
 <meta name="theme-color" content="#222">
@@ -119,18 +119,18 @@
 
 
 
-  <meta name="description" content="准备与漏洞分析下载源码:https://mirrors.tuna.tsinghua.edu.cn/kernel/v3.x/linux-3.7.1.tar.bz2. 在虚拟机中解压:tar -jxvf linux-3.7.1.tar.bz2. patch:https://git.kernel.org/pub/scm/linux/kernel/git/torvalds/linux.git/commit">
+  <meta name="description" content="准备与漏洞分析 下载源码:https://mirrors.tuna.tsinghua.edu.cn/kernel/v3.x/linux-3.7.1.tar.bz2. 在虚拟机中解压:tar -jxvf linux-3.7.1.tar.bz2. patch:https://git.kernel.org/pub/scm/linux/kernel/git/torvalds/linux.git/co">
 <meta name="keywords" content="Linux-kernel">
 <meta property="og:type" content="article">
 <meta property="og:title" content="IS-pwn-Linux-kernel-CVE-2013-1763">
 <meta property="og:url" content="https://hitworld.github.io/posts/30c17dd1/index.html">
 <meta property="og:site_name" content="w4rd3n">
-<meta property="og:description" content="准备与漏洞分析下载源码:https://mirrors.tuna.tsinghua.edu.cn/kernel/v3.x/linux-3.7.1.tar.bz2. 在虚拟机中解压:tar -jxvf linux-3.7.1.tar.bz2. patch:https://git.kernel.org/pub/scm/linux/kernel/git/torvalds/linux.git/commit">
+<meta property="og:description" content="准备与漏洞分析 下载源码:https://mirrors.tuna.tsinghua.edu.cn/kernel/v3.x/linux-3.7.1.tar.bz2. 在虚拟机中解压:tar -jxvf linux-3.7.1.tar.bz2. patch:https://git.kernel.org/pub/scm/linux/kernel/git/torvalds/linux.git/co">
 <meta property="og:locale" content="zh-CN">
 <meta property="og:updated_time" content="2020-08-09T06:34:17.809Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="IS-pwn-Linux-kernel-CVE-2013-1763">
-<meta name="twitter:description" content="准备与漏洞分析下载源码:https://mirrors.tuna.tsinghua.edu.cn/kernel/v3.x/linux-3.7.1.tar.bz2. 在虚拟机中解压:tar -jxvf linux-3.7.1.tar.bz2. patch:https://git.kernel.org/pub/scm/linux/kernel/git/torvalds/linux.git/commit">
+<meta name="twitter:description" content="准备与漏洞分析 下载源码:https://mirrors.tuna.tsinghua.edu.cn/kernel/v3.x/linux-3.7.1.tar.bz2. 在虚拟机中解压:tar -jxvf linux-3.7.1.tar.bz2. patch:https://git.kernel.org/pub/scm/linux/kernel/git/torvalds/linux.git/co">
 
 
 
@@ -185,7 +185,7 @@
       .logo-line-after i { right: initial; }
     }
   </style>
-</noscript>
+</noscript><!-- hexo-inject:begin --><!-- hexo-inject:end -->
 
 </head>
 
@@ -196,7 +196,7 @@
     
   
 
-  <div class="container sidebar-position-left page-post-detail">
+  <!-- hexo-inject:begin --><!-- hexo-inject:end --><div class="container sidebar-position-left page-post-detail">
     <div class="headband"></div>
 
     <header id="header" class="header" itemscope="" itemtype="http://schema.org/WPHeader">
@@ -537,7 +537,8 @@
       
 
       
-        <h2 id="准备与漏洞分析"><a href="#准备与漏洞分析" class="headerlink" title="准备与漏洞分析"></a>准备与漏洞分析</h2><p>下载源码:<code>https://mirrors.tuna.tsinghua.edu.cn/kernel/v3.x/linux-3.7.1.tar.bz2</code>.</p>
+        <h2 id="准备与漏洞分析">准备与漏洞分析</h2>
+<p>下载源码:<code>https://mirrors.tuna.tsinghua.edu.cn/kernel/v3.x/linux-3.7.1.tar.bz2</code>.</p>
 <p>在虚拟机中解压:<code>tar -jxvf linux-3.7.1.tar.bz2</code>.</p>
 <p><code>patch</code>:<code>https://git.kernel.org/pub/scm/linux/kernel/git/torvalds/linux.git/commit/?id=6e601a53566d84e1ffd25e7b6fe0b6894ffd79c0</code>.</p>
 <p>漏洞点在于没有检查数组越界.可以伪造函数指针进行越权.</p>
@@ -551,7 +552,8 @@
 <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">cd</span> /usr/include</span><br><span class="line">sudo ln -s asm-generic/ asm</span><br></pre></td></tr></table></figure>
 <p>运行.</p>
 <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">qemu-system-i386 -kernel linux-3.7.1/arch/x86/boot/bzImage -initrd rootfs.img -append <span class="string">"console=ttyS0 root=/dev/ram rdinit=/sbin/init"</span> --nographic -gdb tcp::1234</span><br></pre></td></tr></table></figure>
-<h2 id="exploit代码分析"><a href="#exploit代码分析" class="headerlink" title="exploit代码分析"></a>exploit代码分析</h2><p>现在已经可以通过数组越界跳转到其他地址,问题在于跳转到哪.</p>
+<h2 id="exploit代码分析">exploit代码分析</h2>
+<p>现在已经可以通过数组越界跳转到其他地址,问题在于跳转到哪.</p>
 <figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">struct</span> <span class="title">nlmsghdr</span> &#123;</span></span><br><span class="line">  __u32       nlmsg_len;  <span class="comment">/* Length of message including header */</span></span><br><span class="line">  __u16       nlmsg_type; <span class="comment">/* Message content */</span></span><br><span class="line">  __u16       nlmsg_flags;    <span class="comment">/* Additional flags */</span></span><br><span class="line">  __u32       nlmsg_seq;  <span class="comment">/* Sequence number */</span></span><br><span class="line">  __u32       nlmsg_pid;  <span class="comment">/* Sending process port ID */</span></span><br><span class="line">&#125;;</span><br><span class="line"></span><br><span class="line"><span class="class"><span class="keyword">struct</span> <span class="title">unix_diag_req</span> &#123;</span></span><br><span class="line">  __u8    sdiag_family;</span><br><span class="line">  __u8    sdiag_protocol;</span><br><span class="line">  __u16   pad;</span><br><span class="line">  __u32   udiag_states;</span><br><span class="line">  __u32   udiag_ino;</span><br><span class="line">  __u32   udiag_show;</span><br><span class="line">  __u32   udiag_cookie[<span class="number">2</span>];</span><br><span class="line">&#125;;</span><br><span class="line"></span><br><span class="line"><span class="class"><span class="keyword">struct</span> <span class="title">sock_diag_handler</span> &#123;</span></span><br><span class="line">  __u8 family;</span><br><span class="line">  <span class="keyword">int</span> (*dump)(struct sk_buff *skb, struct nlmsghdr *nlh);</span><br><span class="line">&#125;;</span><br><span class="line"></span><br><span class="line"><span class="class"><span class="keyword">struct</span> <span class="title">netlink_table</span> &#123;</span></span><br><span class="line">  <span class="class"><span class="keyword">struct</span> <span class="title">nl_portid_hash</span>   <span class="title">hash</span>;</span></span><br><span class="line">  <span class="class"><span class="keyword">struct</span> <span class="title">hlist_head</span>       <span class="title">mc_list</span>;</span></span><br><span class="line">  <span class="class"><span class="keyword">struct</span> <span class="title">listeners</span> __<span class="title">rcu</span>  *<span class="title">listeners</span>;</span></span><br><span class="line">  <span class="keyword">unsigned</span> <span class="keyword">int</span>            flags;</span><br><span class="line">  <span class="keyword">unsigned</span> <span class="keyword">int</span>            groups;</span><br><span class="line">  <span class="class"><span class="keyword">struct</span> <span class="title">mutex</span>            *<span class="title">cb_mutex</span>;</span></span><br><span class="line">  <span class="class"><span class="keyword">struct</span> <span class="title">module</span>           *<span class="title">module</span>;</span></span><br><span class="line">  <span class="keyword">void</span>                    (*bind)(<span class="keyword">int</span> group);</span><br><span class="line">  <span class="keyword">int</span>                     registered;</span><br><span class="line">&#125;;</span><br><span class="line"></span><br><span class="line"><span class="class"><span class="keyword">struct</span> <span class="title">nl_portid_hash</span> &#123;</span></span><br><span class="line">  <span class="class"><span class="keyword">struct</span> <span class="title">hlist_head</span>       *<span class="title">table</span>;</span> 四个字节</span><br><span class="line">  <span class="keyword">unsigned</span> <span class="keyword">long</span>           rehash_time; <span class="comment">//也是四个字节.0x00012b59</span></span><br><span class="line">  <span class="keyword">unsigned</span> <span class="keyword">int</span>            mask;</span><br><span class="line">  <span class="keyword">unsigned</span> <span class="keyword">int</span>            shift;</span><br><span class="line">  <span class="keyword">unsigned</span> <span class="keyword">int</span>            entries;</span><br><span class="line">  <span class="keyword">unsigned</span> <span class="keyword">int</span>            max_shift;</span><br><span class="line">  u32                     rnd;</span><br><span class="line">&#125;;</span><br><span class="line"></span><br><span class="line"><span class="keyword">static</span> <span class="class"><span class="keyword">struct</span> <span class="title">netlink_table</span> *<span class="title">nl_table</span>;</span></span><br></pre></td></tr></table></figure>
 <p><code>nl_table</code>里面有一个变量<code>rehash_time</code>的值正好在<code>0x10000-0x130000</code>这个区域内,所以可以利用这个值来跳转,只需要使<code>sock_diag_handlers[sdiag_family] - dump</code>正好落在这个值上就可以了.</p>
 <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">$ cat /proc/kallsyms | grep nl_table</span><br><span class="line">c09f2180 d nl_table_lock</span><br><span class="line">c09f2184 d nl_table_wait</span><br><span class="line">c0b328c0 b nl_table_users</span><br><span class="line">c0b328c4 b nl_table</span><br><span class="line">$ cat /proc/kallsyms | grep sock_diag_handlers</span><br><span class="line">c0b32780 b sock_diag_handlers</span><br><span class="line"><span class="comment">#(0xc0b328c4 - 0xc0b32780) / 4 = 81</span></span><br></pre></td></tr></table></figure>
@@ -902,7 +904,7 @@
       <i class="fa fa-area-chart"></i>
     </span>
     
-    <span title="站点总字数">710k</span>
+    <span title="站点总字数">720k</span>
   
 
   
@@ -911,7 +913,7 @@
       <i class="fa fa-coffee"></i>
     </span>
     
-    <span title="站点阅读时长">10:46</span>
+    <span title="站点阅读时长">10:54</span>
   
 </div>
 
@@ -1562,5 +1564,5 @@
   
   <script type="text/javascript" src="//cdn.bootcss.com/canvas-nest.js/1.0.0/canvas-nest.min.js"></script>
   
-<script src="/live2dw/lib/L2Dwidget.min.js?0c58a1486de42ac6cc1c59c7d98ae887"></script><script>L2Dwidget.init({"pluginRootPath":"live2dw/","pluginJsPath":"lib/","pluginModelPath":"assets/","tagMode":false,"debug":false,"model":{"jsonPath":"/live2dw/assets/koharu.model.json"},"display":{"position":"right","width":150,"height":300},"mobile":{"show":false},"log":false});</script></body>
+<script src="/live2dw/lib/L2Dwidget.min.js?0c58a1486de42ac6cc1c59c7d98ae887"></script><script>L2Dwidget.init({"pluginRootPath":"live2dw/","pluginJsPath":"lib/","pluginModelPath":"assets/","tagMode":false,"debug":false,"model":{"jsonPath":"/live2dw/assets/koharu.model.json"},"display":{"position":"right","width":150,"height":300},"mobile":{"show":false},"log":false});</script><!-- hexo-inject:begin --><!-- hexo-inject:end --></body>
 </html>

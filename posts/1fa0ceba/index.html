@@ -16,7 +16,7 @@
 
 <html class="theme-next mist use-motion" lang="zh-CN">
 <head><meta name="generator" content="Hexo 3.8.0">
-  <meta charset="UTF-8">
+  <!-- hexo-inject:begin --><!-- hexo-inject:end --><meta charset="UTF-8">
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
 <meta name="theme-color" content="#222">
@@ -119,18 +119,18 @@
 
 
 
-  <meta name="description" content="未完成 异常处理Java的异常处理与C++的十分类似,都是由发生错误的方法抛出异常,然后异常处理机制捕获异常并使用对应的异常处理器处理异常. 异常分类在Java中异常对象都是派生于Throwable类的实例,同时支持创建自己的异常类. 所有异常都是由Throwable继承而来,Throwable有两个子类:Error和Exception. Error类及其派生类描述了Java运行时系统的内部错误和">
+  <meta name="description" content="未完成 异常处理 Java的异常处理与C++的十分类似,都是由发生错误的方法抛出异常,然后异常处理机制捕获异常并使用对应的异常处理器处理异常. 异常分类 在Java中异常对象都是派生于Throwable类的实例,同时支持创建自己的异常类. 所有异常都是由Throwable继承而来,Throwable有两个子类:Error和Exception. Error类及其派生类描述了Java运行时">
 <meta name="keywords" content="java">
 <meta property="og:type" content="article">
 <meta property="og:title" content="CS-develop-java-异常与断言">
 <meta property="og:url" content="https://hitworld.github.io/posts/1fa0ceba/index.html">
 <meta property="og:site_name" content="w4rd3n">
-<meta property="og:description" content="未完成 异常处理Java的异常处理与C++的十分类似,都是由发生错误的方法抛出异常,然后异常处理机制捕获异常并使用对应的异常处理器处理异常. 异常分类在Java中异常对象都是派生于Throwable类的实例,同时支持创建自己的异常类. 所有异常都是由Throwable继承而来,Throwable有两个子类:Error和Exception. Error类及其派生类描述了Java运行时系统的内部错误和">
+<meta property="og:description" content="未完成 异常处理 Java的异常处理与C++的十分类似,都是由发生错误的方法抛出异常,然后异常处理机制捕获异常并使用对应的异常处理器处理异常. 异常分类 在Java中异常对象都是派生于Throwable类的实例,同时支持创建自己的异常类. 所有异常都是由Throwable继承而来,Throwable有两个子类:Error和Exception. Error类及其派生类描述了Java运行时">
 <meta property="og:locale" content="zh-CN">
 <meta property="og:updated_time" content="2020-08-09T06:34:17.795Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="CS-develop-java-异常与断言">
-<meta name="twitter:description" content="未完成 异常处理Java的异常处理与C++的十分类似,都是由发生错误的方法抛出异常,然后异常处理机制捕获异常并使用对应的异常处理器处理异常. 异常分类在Java中异常对象都是派生于Throwable类的实例,同时支持创建自己的异常类. 所有异常都是由Throwable继承而来,Throwable有两个子类:Error和Exception. Error类及其派生类描述了Java运行时系统的内部错误和">
+<meta name="twitter:description" content="未完成 异常处理 Java的异常处理与C++的十分类似,都是由发生错误的方法抛出异常,然后异常处理机制捕获异常并使用对应的异常处理器处理异常. 异常分类 在Java中异常对象都是派生于Throwable类的实例,同时支持创建自己的异常类. 所有异常都是由Throwable继承而来,Throwable有两个子类:Error和Exception. Error类及其派生类描述了Java运行时">
 
 
 
@@ -185,7 +185,7 @@
       .logo-line-after i { right: initial; }
     }
   </style>
-</noscript>
+</noscript><!-- hexo-inject:begin --><!-- hexo-inject:end -->
 
 </head>
 
@@ -196,7 +196,7 @@
     
   
 
-  <div class="container sidebar-position-left page-post-detail">
+  <!-- hexo-inject:begin --><!-- hexo-inject:end --><div class="container sidebar-position-left page-post-detail">
     <div class="headband"></div>
 
     <header id="header" class="header" itemscope="" itemtype="http://schema.org/WPHeader">
@@ -503,7 +503,7 @@
                 
                   <span class="post-meta-item-text">本文字数：</span>
                 
-                <span title="本文字数">1.6k</span>
+                <span title="本文字数">1.7k</span>
               
 
               
@@ -517,7 +517,7 @@
                 
                   <span class="post-meta-item-text">阅读时长 &asymp;</span>
                 
-                <span title="阅读时长">1 分钟</span>
+                <span title="阅读时长">2 分钟</span>
               
             </div>
           
@@ -538,21 +538,26 @@
 
       
         <p>未完成</p>
-<h2 id="异常处理"><a href="#异常处理" class="headerlink" title="异常处理"></a>异常处理</h2><p><code>Java</code>的异常处理与<code>C++</code>的十分类似,都是由发生错误的方法抛出异常,然后异常处理机制捕获异常并使用对应的异常处理器处理异常.</p>
-<h3 id="异常分类"><a href="#异常分类" class="headerlink" title="异常分类"></a>异常分类</h3><p>在<code>Java</code>中异常对象都是派生于<code>Throwable</code>类的实例,同时支持创建自己的异常类.</p>
+<h2 id="异常处理">异常处理</h2>
+<p><code>Java</code>的异常处理与<code>C++</code>的十分类似,都是由发生错误的方法抛出异常,然后异常处理机制捕获异常并使用对应的异常处理器处理异常.</p>
+<h3 id="异常分类">异常分类</h3>
+<p>在<code>Java</code>中异常对象都是派生于<code>Throwable</code>类的实例,同时支持创建自己的异常类.</p>
 <p>所有异常都是由<code>Throwable</code>继承而来,<code>Throwable</code>有两个子类:<code>Error</code>和<code>Exception</code>.</p>
 <p><code>Error</code>类及其派生类描述了<code>Java</code>运行时系统的内部错误和资源耗尽错误.应用程序不应该抛出这种错误.</p>
 <p><code>Exception</code>又分两种:<code>RuntimeException</code>和其他异常.前者及其派生类用于描述程序错误导致的异常,后者及其派生类描述如<code>IO</code>错误导致的异常(即不属于<code>Error</code>和<code>Exception</code>范围的,也称为受查异常).</p>
 <p>程序开发者导致的问题都属于<code>RuntimeException</code>负责的范围,也就是说自己创建的类应该派生于<code>Exception</code>或其子类.同时异常类应该包含两个构造器,一个无参的默认构造器,一个带有描述信息的构造器.</p>
 <figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">MyException</span> <span class="keyword">extends</span> <span class="title">IOException</span> </span>&#123;</span><br><span class="line">  <span class="function"><span class="keyword">public</span> <span class="title">MyException</span><span class="params">()</span> </span>&#123;&#125;</span><br><span class="line">  <span class="function"><span class="keyword">public</span> <span class="title">MyException</span><span class="params">(String gripe)</span> </span>&#123;</span><br><span class="line">    <span class="keyword">super</span>(gripe);</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 <p>编译器将核查是否所有受查异常都提供了异常处理器.</p>
-<h3 id="声明并抛出受查异常"><a href="#声明并抛出受查异常" class="headerlink" title="声明并抛出受查异常"></a>声明并抛出受查异常</h3><p>方法需要告诉编译器所有可能抛出的受查异常,子类方法中声明的受查异常不能比超类方法中的更通用.</p>
+<h3 id="声明并抛出受查异常">声明并抛出受查异常</h3>
+<p>方法需要告诉编译器所有可能抛出的受查异常,子类方法中声明的受查异常不能比超类方法中的更通用.</p>
 <figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">public</span> <span class="title">FileInputStream</span><span class="params">(String name)</span> <span class="keyword">throws</span> FileNotFoundException, EOFException </span>&#123;</span><br><span class="line">  <span class="comment">//..</span></span><br><span class="line">  <span class="keyword">if</span> (b &lt; len) &#123;</span><br><span class="line">    <span class="keyword">throw</span> <span class="keyword">new</span> EOFException();</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<h3 id="捕获异常"><a href="#捕获异常" class="headerlink" title="捕获异常"></a>捕获异常</h3><p>如果抛出的异常未被捕获则程序会终止执行并打印异常信息,包括异常的类型和堆栈内容(图形化程序捕获异常后也会打印堆栈信息).</p>
+<h3 id="捕获异常">捕获异常</h3>
+<p>如果抛出的异常未被捕获则程序会终止执行并打印异常信息,包括异常的类型和堆栈内容(图形化程序捕获异常后也会打印堆栈信息).</p>
 <p><code>Java</code>中通过<code>try/catch</code>语句块捕获异常.</p>
 <figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">try</span> &#123;</span><br><span class="line">  <span class="comment">//code</span></span><br><span class="line">&#125; <span class="keyword">catch</span> (EOFException e) &#123;</span><br><span class="line">  <span class="comment">//code</span></span><br><span class="line">&#125; <span class="keyword">catch</span> (MyException e) &#123;</span><br><span class="line">  <span class="comment">//可捕获多种异常</span></span><br><span class="line">  <span class="comment">//code</span></span><br><span class="line">&#125; <span class="keyword">catch</span> (MyException1 | MyException2 e) &#123;</span><br><span class="line">  <span class="comment">//Java SE 7后支持,区别在于这样两种异常共用一个异常处理块</span></span><br><span class="line">  <span class="comment">//code</span></span><br><span class="line">&#125; <span class="keyword">finally</span> &#123;</span><br><span class="line">  <span class="comment">//无论try语句中是否发生异常(即使try中已经返回)都会执行finally中的语句,常用于回收资源</span></span><br><span class="line">  <span class="comment">//code</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 <p>如果异常类型不对未被捕获,则函数会终止并返回(控制权交给调用者函数,看调用者函数是否处理该种异常).异常处理代码中可再次抛出异常.</p>
-<h2 id="断言"><a href="#断言" class="headerlink" title="断言"></a>断言</h2><p>断言机制允许在测试期间在代码中插入一些检查语句,当代码发布时这些语句会被自动移走.</p>
+<h2 id="断言">断言</h2>
+<p>断言机制允许在测试期间在代码中插入一些检查语句,当代码发布时这些语句会被自动移走.</p>
 <figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">assert</span> x &gt;= <span class="number">0</span>;</span><br><span class="line"><span class="comment">//assert 条件;</span></span><br><span class="line"><span class="keyword">assert</span> x &gt;= <span class="number">0</span> : x;</span><br><span class="line"><span class="comment">//assert 条件 : 表达式;</span></span><br></pre></td></tr></table></figure>
 <p>如果条件判断为<code>false</code>则会抛出一个<code>AssertionError</code>异常,若有表达式则表达式会被传入<code>AssertionError</code>的构造器.</p>
 <p>断言机制默认关闭,通过运行时<code>-ea</code>或<code>-enableassertions</code>选项来对某个类或包启用该机制,<code>-da/-disableassertions</code>选项来对某个类或包禁用该机制(对于系统类使用<code>-esa/-dsa</code>选项).</p>
@@ -903,7 +908,7 @@
       <i class="fa fa-area-chart"></i>
     </span>
     
-    <span title="站点总字数">710k</span>
+    <span title="站点总字数">720k</span>
   
 
   
@@ -912,7 +917,7 @@
       <i class="fa fa-coffee"></i>
     </span>
     
-    <span title="站点阅读时长">10:46</span>
+    <span title="站点阅读时长">10:54</span>
   
 </div>
 
@@ -1563,5 +1568,5 @@
   
   <script type="text/javascript" src="//cdn.bootcss.com/canvas-nest.js/1.0.0/canvas-nest.min.js"></script>
   
-<script src="/live2dw/lib/L2Dwidget.min.js?0c58a1486de42ac6cc1c59c7d98ae887"></script><script>L2Dwidget.init({"pluginRootPath":"live2dw/","pluginJsPath":"lib/","pluginModelPath":"assets/","tagMode":false,"debug":false,"model":{"jsonPath":"/live2dw/assets/koharu.model.json"},"display":{"position":"right","width":150,"height":300},"mobile":{"show":false},"log":false});</script></body>
+<script src="/live2dw/lib/L2Dwidget.min.js?0c58a1486de42ac6cc1c59c7d98ae887"></script><script>L2Dwidget.init({"pluginRootPath":"live2dw/","pluginJsPath":"lib/","pluginModelPath":"assets/","tagMode":false,"debug":false,"model":{"jsonPath":"/live2dw/assets/koharu.model.json"},"display":{"position":"right","width":150,"height":300},"mobile":{"show":false},"log":false});</script><!-- hexo-inject:begin --><!-- hexo-inject:end --></body>
 </html>

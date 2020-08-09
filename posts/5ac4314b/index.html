@@ -16,7 +16,7 @@
 
 <html class="theme-next mist use-motion" lang="zh-CN">
 <head><meta name="generator" content="Hexo 3.8.0">
-  <meta charset="UTF-8">
+  <!-- hexo-inject:begin --><!-- hexo-inject:end --><meta charset="UTF-8">
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
 <meta name="theme-color" content="#222">
@@ -119,19 +119,19 @@
 
 
 
-  <meta name="description" content="未完成 寄存器MIPS32寄存器分为两类:通用寄存器和特殊寄存器. MIPS体系结构中有32个通用寄存器,汇编程序中用$0 ~ $31表示.也可以用名称表示,如$sp,$t1等. MIPS体系结构中有3个特殊寄存器:PC(程序计数器),HI(乘除结果高位寄存器)和LO(乘除结果低位寄存器).  指令MIPS32指令特点:固定4字节指令长度;数据访问(load/store)必须严格对齐;MIPS采用">
+  <meta name="description" content="未完成 寄存器 MIPS32寄存器分为两类:通用寄存器和特殊寄存器. MIPS体系结构中有32个通用寄存器,汇编程序中用$0 ~ $31表示.也可以用名称表示,如$sp,$t1等. MIPS体系结构中有3个特殊寄存器:PC(程序计数器),HI(乘除结果高位寄存器)和LO(乘除结果低位寄存器).  指令 MIPS32指令特点:固定4字节指令长度;数据访问(load/store)必须严格">
 <meta name="keywords" content="assembly">
 <meta property="og:type" content="article">
 <meta property="og:title" content="CS-BASIC-assembly-MIPS-基础">
 <meta property="og:url" content="https://hitworld.github.io/posts/5ac4314b/index.html">
 <meta property="og:site_name" content="w4rd3n">
-<meta property="og:description" content="未完成 寄存器MIPS32寄存器分为两类:通用寄存器和特殊寄存器. MIPS体系结构中有32个通用寄存器,汇编程序中用$0 ~ $31表示.也可以用名称表示,如$sp,$t1等. MIPS体系结构中有3个特殊寄存器:PC(程序计数器),HI(乘除结果高位寄存器)和LO(乘除结果低位寄存器).  指令MIPS32指令特点:固定4字节指令长度;数据访问(load/store)必须严格对齐;MIPS采用">
+<meta property="og:description" content="未完成 寄存器 MIPS32寄存器分为两类:通用寄存器和特殊寄存器. MIPS体系结构中有32个通用寄存器,汇编程序中用$0 ~ $31表示.也可以用名称表示,如$sp,$t1等. MIPS体系结构中有3个特殊寄存器:PC(程序计数器),HI(乘除结果高位寄存器)和LO(乘除结果低位寄存器).  指令 MIPS32指令特点:固定4字节指令长度;数据访问(load/store)必须严格">
 <meta property="og:locale" content="zh-CN">
 <meta property="og:image" content="https://hitworld.github.io/posts/5ac4314b/1.png">
 <meta property="og:updated_time" content="2020-08-09T06:34:17.773Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="CS-BASIC-assembly-MIPS-基础">
-<meta name="twitter:description" content="未完成 寄存器MIPS32寄存器分为两类:通用寄存器和特殊寄存器. MIPS体系结构中有32个通用寄存器,汇编程序中用$0 ~ $31表示.也可以用名称表示,如$sp,$t1等. MIPS体系结构中有3个特殊寄存器:PC(程序计数器),HI(乘除结果高位寄存器)和LO(乘除结果低位寄存器).  指令MIPS32指令特点:固定4字节指令长度;数据访问(load/store)必须严格对齐;MIPS采用">
+<meta name="twitter:description" content="未完成 寄存器 MIPS32寄存器分为两类:通用寄存器和特殊寄存器. MIPS体系结构中有32个通用寄存器,汇编程序中用$0 ~ $31表示.也可以用名称表示,如$sp,$t1等. MIPS体系结构中有3个特殊寄存器:PC(程序计数器),HI(乘除结果高位寄存器)和LO(乘除结果低位寄存器).  指令 MIPS32指令特点:固定4字节指令长度;数据访问(load/store)必须严格">
 <meta name="twitter:image" content="https://hitworld.github.io/posts/5ac4314b/1.png">
 
 
@@ -187,7 +187,7 @@
       .logo-line-after i { right: initial; }
     }
   </style>
-</noscript>
+</noscript><!-- hexo-inject:begin --><!-- hexo-inject:end -->
 
 </head>
 
@@ -198,7 +198,7 @@
     
   
 
-  <div class="container sidebar-position-left page-post-detail">
+  <!-- hexo-inject:begin --><!-- hexo-inject:end --><div class="container sidebar-position-left page-post-detail">
     <div class="headband"></div>
 
     <header id="header" class="header" itemscope="" itemtype="http://schema.org/WPHeader">
@@ -505,7 +505,7 @@
                 
                   <span class="post-meta-item-text">本文字数：</span>
                 
-                <span title="本文字数">731</span>
+                <span title="本文字数">755</span>
               
 
               
@@ -540,13 +540,16 @@
 
       
         <p>未完成</p>
-<h2 id="寄存器"><a href="#寄存器" class="headerlink" title="寄存器"></a>寄存器</h2><p><code>MIPS32</code>寄存器分为两类:通用寄存器和特殊寄存器.</p>
+<h2 id="寄存器">寄存器</h2>
+<p><code>MIPS32</code>寄存器分为两类:通用寄存器和特殊寄存器.</p>
 <p><code>MIPS</code>体系结构中有<code>32</code>个通用寄存器,汇编程序中用<code>$0 ~ $31</code>表示.也可以用名称表示,如<code>$sp</code>,<code>$t1</code>等.</p>
 <p><code>MIPS</code>体系结构中有<code>3</code>个特殊寄存器:<code>PC</code>(程序计数器),<code>HI</code>(乘除结果高位寄存器)和<code>LO</code>(乘除结果低位寄存器).</p>
 <img src="/posts/5ac4314b/1.png" title="p1">
-<h2 id="指令"><a href="#指令" class="headerlink" title="指令"></a>指令</h2><p><code>MIPS32</code>指令特点:固定<code>4</code>字节指令长度;数据访问(<code>load/store</code>)必须严格对齐;<code>MIPS</code>采用了高度的流水线,其中一个重要的效应是分支延迟效应.</p>
+<h2 id="指令">指令</h2>
+<p><code>MIPS32</code>指令特点:固定<code>4</code>字节指令长度;数据访问(<code>load/store</code>)必须严格对齐;<code>MIPS</code>采用了高度的流水线,其中一个重要的效应是分支延迟效应.</p>
 <p>系统调用指令:<code>SYSCALL</code>指令是一个软中断,系统调用号存放在<code>$v0</code>中,参数存放在<code>$a0-$a3</code>中,如果参数过多,会存放在栈中.</p>
-<h2 id="函数调用"><a href="#函数调用" class="headerlink" title="函数调用"></a>函数调用</h2><p><code>MIPS32</code>架构函数调用时对堆栈的分配和使用方式与<code>x86</code>架构有相似之处,但又有很大的区别.</p>
+<h2 id="函数调用">函数调用</h2>
+<p><code>MIPS32</code>架构函数调用时对堆栈的分配和使用方式与<code>x86</code>架构有相似之处,但又有很大的区别.</p>
 <ul>
 <li>没有<code>ebp</code>,进入一个函数时将当前栈指针向下移动<code>n</code>比特,这就是此函数的栈帧存储区域.</li>
 <li>如果函数<code>A</code>调用函数<code>B</code>,调用者函数<code>A</code>会在自己的栈顶预留一部分空间来保存被调用者函数<code>B</code>的参数,称之为调用参数空间.</li>
@@ -554,7 +557,8 @@
 <li><code>MIPS32</code>的调用指令把函数的返回地址直接存入<code>$ra</code>寄存器中.</li>
 </ul>
 <p><code>MIPS32</code>架构根据函数是否调用其他函数将函数分成叶子函数与非叶子函数.父函数调用子函数时,会复制当前<code>$PC</code>的值到<code>$ra</code>寄存器,然后跳到子函数执行.子函数如果为非叶子函数,则会将返回地址存入堆栈,否则仍在<code>$ra</code>寄存器中.返回时,如果子函数为叶子函数,<code>jr $ra</code>直接返回,否则先从堆栈取出再返回.</p>
-<h2 id="系统调用"><a href="#系统调用" class="headerlink" title="系统调用"></a>系统调用</h2><p><code>MIPS32</code>系统调用指令<code>SYSCALL</code>是一个软中断,系统调用号存放在<code>$v0</code>中,参数存放在<code>$a0 ~ $a3</code>中,如果参数过多,会存放在栈中.</p>
+<h2 id="系统调用">系统调用</h2>
+<p><code>MIPS32</code>系统调用指令<code>SYSCALL</code>是一个软中断,系统调用号存放在<code>$v0</code>中,参数存放在<code>$a0 ~ $a3</code>中,如果参数过多,会存放在栈中.</p>
 
       
     </div>
@@ -901,7 +905,7 @@
       <i class="fa fa-area-chart"></i>
     </span>
     
-    <span title="站点总字数">710k</span>
+    <span title="站点总字数">720k</span>
   
 
   
@@ -910,7 +914,7 @@
       <i class="fa fa-coffee"></i>
     </span>
     
-    <span title="站点阅读时长">10:46</span>
+    <span title="站点阅读时长">10:54</span>
   
 </div>
 
@@ -1561,5 +1565,5 @@
   
   <script type="text/javascript" src="//cdn.bootcss.com/canvas-nest.js/1.0.0/canvas-nest.min.js"></script>
   
-<script src="/live2dw/lib/L2Dwidget.min.js?0c58a1486de42ac6cc1c59c7d98ae887"></script><script>L2Dwidget.init({"pluginRootPath":"live2dw/","pluginJsPath":"lib/","pluginModelPath":"assets/","tagMode":false,"debug":false,"model":{"jsonPath":"/live2dw/assets/koharu.model.json"},"display":{"position":"right","width":150,"height":300},"mobile":{"show":false},"log":false});</script></body>
+<script src="/live2dw/lib/L2Dwidget.min.js?0c58a1486de42ac6cc1c59c7d98ae887"></script><script>L2Dwidget.init({"pluginRootPath":"live2dw/","pluginJsPath":"lib/","pluginModelPath":"assets/","tagMode":false,"debug":false,"model":{"jsonPath":"/live2dw/assets/koharu.model.json"},"display":{"position":"right","width":150,"height":300},"mobile":{"show":false},"log":false});</script><!-- hexo-inject:begin --><!-- hexo-inject:end --></body>
 </html>

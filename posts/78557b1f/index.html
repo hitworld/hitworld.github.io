@@ -16,7 +16,7 @@
 
 <html class="theme-next mist use-motion" lang="zh-CN">
 <head><meta name="generator" content="Hexo 3.8.0">
-  <meta charset="UTF-8">
+  <!-- hexo-inject:begin --><!-- hexo-inject:end --><meta charset="UTF-8">
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
 <meta name="theme-color" content="#222">
@@ -119,18 +119,18 @@
 
 
 
-  <meta name="description" content="未完成 接口在Java中接口是对类的一组需求描述.如果类遵从某个特定接口,就履行这项服务.  接口中所有方法自动属于public,且可以被扩展. 接口有除函数原型外对方法作用的要求. 接口不能有实例域,但可以有常量(接口的域自动设为public static final).在Java SE 8前不能在接口中实现方法,之后可以实现静态方法(实际使用中常用伴随类代替). 接口不能实例化,但是可以声明变">
+  <meta name="description" content="未完成 接口 在Java中接口是对类的一组需求描述.如果类遵从某个特定接口,就履行这项服务.  接口中所有方法自动属于public,且可以被扩展. 接口有除函数原型外对方法作用的要求. 接口不能有实例域,但可以有常量(接口的域自动设为public static final).在Java SE 8前不能在接口中实现方法,之后可以实现静态方法(实际使用中常用伴随类代替). 接口不能实例化">
 <meta name="keywords" content="java">
 <meta property="og:type" content="article">
 <meta property="og:title" content="CS-develop-java-接口与lambda表达式">
 <meta property="og:url" content="https://hitworld.github.io/posts/78557b1f/index.html">
 <meta property="og:site_name" content="w4rd3n">
-<meta property="og:description" content="未完成 接口在Java中接口是对类的一组需求描述.如果类遵从某个特定接口,就履行这项服务.  接口中所有方法自动属于public,且可以被扩展. 接口有除函数原型外对方法作用的要求. 接口不能有实例域,但可以有常量(接口的域自动设为public static final).在Java SE 8前不能在接口中实现方法,之后可以实现静态方法(实际使用中常用伴随类代替). 接口不能实例化,但是可以声明变">
+<meta property="og:description" content="未完成 接口 在Java中接口是对类的一组需求描述.如果类遵从某个特定接口,就履行这项服务.  接口中所有方法自动属于public,且可以被扩展. 接口有除函数原型外对方法作用的要求. 接口不能有实例域,但可以有常量(接口的域自动设为public static final).在Java SE 8前不能在接口中实现方法,之后可以实现静态方法(实际使用中常用伴随类代替). 接口不能实例化">
 <meta property="og:locale" content="zh-CN">
 <meta property="og:updated_time" content="2020-08-09T06:34:17.797Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="CS-develop-java-接口与lambda表达式">
-<meta name="twitter:description" content="未完成 接口在Java中接口是对类的一组需求描述.如果类遵从某个特定接口,就履行这项服务.  接口中所有方法自动属于public,且可以被扩展. 接口有除函数原型外对方法作用的要求. 接口不能有实例域,但可以有常量(接口的域自动设为public static final).在Java SE 8前不能在接口中实现方法,之后可以实现静态方法(实际使用中常用伴随类代替). 接口不能实例化,但是可以声明变">
+<meta name="twitter:description" content="未完成 接口 在Java中接口是对类的一组需求描述.如果类遵从某个特定接口,就履行这项服务.  接口中所有方法自动属于public,且可以被扩展. 接口有除函数原型外对方法作用的要求. 接口不能有实例域,但可以有常量(接口的域自动设为public static final).在Java SE 8前不能在接口中实现方法,之后可以实现静态方法(实际使用中常用伴随类代替). 接口不能实例化">
 
 
 
@@ -185,7 +185,7 @@
       .logo-line-after i { right: initial; }
     }
   </style>
-</noscript>
+</noscript><!-- hexo-inject:begin --><!-- hexo-inject:end -->
 
 </head>
 
@@ -196,7 +196,7 @@
     
   
 
-  <div class="container sidebar-position-left page-post-detail">
+  <!-- hexo-inject:begin --><!-- hexo-inject:end --><div class="container sidebar-position-left page-post-detail">
     <div class="headband"></div>
 
     <header id="header" class="header" itemscope="" itemtype="http://schema.org/WPHeader">
@@ -538,7 +538,8 @@
 
       
         <p>未完成</p>
-<h2 id="接口"><a href="#接口" class="headerlink" title="接口"></a>接口</h2><p>在<code>Java</code>中接口是对类的一组需求描述.如果类遵从某个特定接口,就履行这项服务.</p>
+<h2 id="接口">接口</h2>
+<p>在<code>Java</code>中接口是对类的一组需求描述.如果类遵从某个特定接口,就履行这项服务.</p>
 <ul>
 <li>接口中所有方法自动属于<code>public</code>,且可以被扩展.</li>
 <li>接口有除函数原型外对方法作用的要求.</li>
@@ -556,16 +557,19 @@
 <li>超类优先.</li>
 <li>接口冲突(至少一个接口提供了默认实现,就会发生冲突)则必须覆盖方法.</li>
 </ul>
-<h3 id="示例"><a href="#示例" class="headerlink" title="示例"></a>示例</h3><p><code>Cloneable</code>接口,该接口的默认实现为浅拷贝,有时候程序的情景需要深拷贝.</p>
+<h3 id="示例">示例</h3>
+<p><code>Cloneable</code>接口,该接口的默认实现为浅拷贝,有时候程序的情景需要深拷贝.</p>
 <figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">MyTest</span> <span class="keyword">implements</span> <span class="title">Cloneable</span> </span>&#123;</span><br><span class="line">    <span class="function"><span class="keyword">public</span> MyTest <span class="title">clone</span><span class="params">()</span> <span class="keyword">throws</span> CloneNotSupportedException </span>&#123;</span><br><span class="line">        MyTest cloned = (MyTest) <span class="keyword">super</span>.clone();</span><br><span class="line">        cloned.day = (Date) day.clone();</span><br><span class="line"></span><br><span class="line">        <span class="keyword">return</span> cloned;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<h2 id="lambda表达式"><a href="#lambda表达式" class="headerlink" title="lambda表达式"></a>lambda表达式</h2><p><code>lambda</code>表达式是一个可传递的代码块和必须传入代码的变量(就像参数)规范,可供之后执行.<code>lambda</code>表达式无需指定返回类型,<code>lambda</code>表达式的返回类型总是会由上下文推导得出(所以要合理返回).</p>
+<h2 id="lambda表达式">lambda表达式</h2>
+<p><code>lambda</code>表达式是一个可传递的代码块和必须传入代码的变量(就像参数)规范,可供之后执行.<code>lambda</code>表达式无需指定返回类型,<code>lambda</code>表达式的返回类型总是会由上下文推导得出(所以要合理返回).</p>
 <figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">(String first, String second) -&gt; first.length() - second.length()</span><br><span class="line"><span class="comment">//等同于(first, second) -&gt; first.length() - second.length()</span></span><br><span class="line">() -&gt; &#123; System.out.println(<span class="string">"hello"</span>); &#125;</span><br><span class="line"><span class="comment">//即使没有参数仍然要提供空括号</span></span><br><span class="line">event -&gt; System.out.println(event);</span><br><span class="line"><span class="comment">//如果可以推导出参数类型,则可以忽略参数类型,且如果此时只有一个参数,可以省略小括号</span></span><br></pre></td></tr></table></figure>
 <p><code>lambda</code>表达式与接口兼容,对于只有一个抽象方法的接口,需要该接口的对象时可以提供一个<code>lambda</code>表达式,这种接口称为函数式接口.或者可以直接方法引用代替.</p>
 <figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">Timer t = <span class="keyword">new</span> Timer(<span class="number">1000</span>, System.out::println);</span><br><span class="line"><span class="comment">//System.out::println等价于x -&gt; System.out.println(x)</span></span><br></pre></td></tr></table></figure>
 <p>构造器引用与方法引用类似,只不过方法名为<code>new</code>,例如:<code>Person::new</code>,<code>Person[]::new</code>.</p>
 <p><code>lambda</code>表达式包括三个部分:一个代码块,参数,自由变量的值(非参数而且不在代码中定义的最终变量,即初始化后不会再赋值),表示<code>lambda</code>表达式得数据结构必须存储自由变量的值.这种代码块存储自由变量的值的情况叫做闭包.</p>
 <p><code>lambda</code>表达式的体与嵌套块有相同的作用域,所以不能定义同名的变量.<code>lambda</code>表达式中的<code>this</code>关键字是指创建这个<code>lambda</code>表达式的方法的<code>this</code>参数.</p>
-<h2 id="内部类"><a href="#内部类" class="headerlink" title="内部类"></a>内部类</h2><p>内部类是定义在另一个类中的类,内部类方法可以访问该类定义所在的作用域中的数据,包括私有数据;内部类对同一个包的其他类是不可见的.非<code>static</code>内部类的对象有一个隐式引用,其引用了实例化该内部对象的外围类对象(与<code>C++</code>中嵌套类的主要区别).</p>
+<h2 id="内部类">内部类</h2>
+<p>内部类是定义在另一个类中的类,内部类方法可以访问该类定义所在的作用域中的数据,包括私有数据;内部类对同一个包的其他类是不可见的.非<code>static</code>内部类的对象有一个隐式引用,其引用了实例化该内部对象的外围类对象(与<code>C++</code>中嵌套类的主要区别).</p>
 <p>内部类是一种编译器现象,与虚拟机无关,编译器会将内部类翻译成:外部类名<code>$</code>内部类名.类似于方法重载的本质.</p>
 <p><code>Java</code>还支持在方法中定义局部内部类,其作用域为当前块.同时局部内部类还可以访问当前块的<code>final</code>局部变量,其原理是局部内部类会在局部变量释放前将其备份一次.</p>
 <p><code>Java</code>还支持匿名内部类,匿名内部类没有类名,所以不能有构造器,如果构造参数的小括号后跟一个大括号,正在定义的就是匿名内部类.</p>
@@ -916,7 +920,7 @@
       <i class="fa fa-area-chart"></i>
     </span>
     
-    <span title="站点总字数">710k</span>
+    <span title="站点总字数">720k</span>
   
 
   
@@ -925,7 +929,7 @@
       <i class="fa fa-coffee"></i>
     </span>
     
-    <span title="站点阅读时长">10:46</span>
+    <span title="站点阅读时长">10:54</span>
   
 </div>
 
@@ -1576,5 +1580,5 @@
   
   <script type="text/javascript" src="//cdn.bootcss.com/canvas-nest.js/1.0.0/canvas-nest.min.js"></script>
   
-<script src="/live2dw/lib/L2Dwidget.min.js?0c58a1486de42ac6cc1c59c7d98ae887"></script><script>L2Dwidget.init({"pluginRootPath":"live2dw/","pluginJsPath":"lib/","pluginModelPath":"assets/","tagMode":false,"debug":false,"model":{"jsonPath":"/live2dw/assets/koharu.model.json"},"display":{"position":"right","width":150,"height":300},"mobile":{"show":false},"log":false});</script></body>
+<script src="/live2dw/lib/L2Dwidget.min.js?0c58a1486de42ac6cc1c59c7d98ae887"></script><script>L2Dwidget.init({"pluginRootPath":"live2dw/","pluginJsPath":"lib/","pluginModelPath":"assets/","tagMode":false,"debug":false,"model":{"jsonPath":"/live2dw/assets/koharu.model.json"},"display":{"position":"right","width":150,"height":300},"mobile":{"show":false},"log":false});</script><!-- hexo-inject:begin --><!-- hexo-inject:end --></body>
 </html>

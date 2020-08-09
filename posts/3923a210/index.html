@@ -16,7 +16,7 @@
 
 <html class="theme-next mist use-motion" lang="zh-CN">
 <head><meta name="generator" content="Hexo 3.8.0">
-  <meta charset="UTF-8">
+  <!-- hexo-inject:begin --><!-- hexo-inject:end --><meta charset="UTF-8">
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
 <meta name="theme-color" content="#222">
@@ -119,19 +119,19 @@
 
 
 
-  <meta name="description" content="未完成 ARMv8ARMv8的架构继承以往ARMv7与之前处理器技术的基础,除了现有的16/32bit的Thumb2指令支持外,也向前兼容现有的A32(ARM 32bit)指令集,称为AArch32,引入了64bit的AArch64架构. 除了新增A64(ARM 64bit)指令集外,也扩充了现有的A32(ARM 32bit)和T32(Thumb2 32bit)指令集(二者统称AArch32 IS">
+  <meta name="description" content="未完成 ARMv8 ARMv8的架构继承以往ARMv7与之前处理器技术的基础,除了现有的16/32bit的Thumb2指令支持外,也向前兼容现有的A32(ARM 32bit)指令集,称为AArch32,引入了64bit的AArch64架构. 除了新增A64(ARM 64bit)指令集外,也扩充了现有的A32(ARM 32bit)和T32(Thumb2 32bit)指令集(二者统称AArch3">
 <meta name="keywords" content="assembly">
 <meta property="og:type" content="article">
 <meta property="og:title" content="CS-BASIC-assembly-ARM-ARMv8">
 <meta property="og:url" content="https://hitworld.github.io/posts/3923a210/index.html">
 <meta property="og:site_name" content="w4rd3n">
-<meta property="og:description" content="未完成 ARMv8ARMv8的架构继承以往ARMv7与之前处理器技术的基础,除了现有的16/32bit的Thumb2指令支持外,也向前兼容现有的A32(ARM 32bit)指令集,称为AArch32,引入了64bit的AArch64架构. 除了新增A64(ARM 64bit)指令集外,也扩充了现有的A32(ARM 32bit)和T32(Thumb2 32bit)指令集(二者统称AArch32 IS">
+<meta property="og:description" content="未完成 ARMv8 ARMv8的架构继承以往ARMv7与之前处理器技术的基础,除了现有的16/32bit的Thumb2指令支持外,也向前兼容现有的A32(ARM 32bit)指令集,称为AArch32,引入了64bit的AArch64架构. 除了新增A64(ARM 64bit)指令集外,也扩充了现有的A32(ARM 32bit)和T32(Thumb2 32bit)指令集(二者统称AArch3">
 <meta property="og:locale" content="zh-CN">
 <meta property="og:image" content="https://hitworld.github.io/posts/3923a210/1.png">
 <meta property="og:updated_time" content="2020-08-09T06:34:17.774Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="CS-BASIC-assembly-ARM-ARMv8">
-<meta name="twitter:description" content="未完成 ARMv8ARMv8的架构继承以往ARMv7与之前处理器技术的基础,除了现有的16/32bit的Thumb2指令支持外,也向前兼容现有的A32(ARM 32bit)指令集,称为AArch32,引入了64bit的AArch64架构. 除了新增A64(ARM 64bit)指令集外,也扩充了现有的A32(ARM 32bit)和T32(Thumb2 32bit)指令集(二者统称AArch32 IS">
+<meta name="twitter:description" content="未完成 ARMv8 ARMv8的架构继承以往ARMv7与之前处理器技术的基础,除了现有的16/32bit的Thumb2指令支持外,也向前兼容现有的A32(ARM 32bit)指令集,称为AArch32,引入了64bit的AArch64架构. 除了新增A64(ARM 64bit)指令集外,也扩充了现有的A32(ARM 32bit)和T32(Thumb2 32bit)指令集(二者统称AArch3">
 <meta name="twitter:image" content="https://hitworld.github.io/posts/3923a210/1.png">
 
 
@@ -187,7 +187,7 @@
       .logo-line-after i { right: initial; }
     }
   </style>
-</noscript>
+</noscript><!-- hexo-inject:begin --><!-- hexo-inject:end -->
 
 </head>
 
@@ -198,7 +198,7 @@
     
   
 
-  <div class="container sidebar-position-left page-post-detail">
+  <!-- hexo-inject:begin --><!-- hexo-inject:end --><div class="container sidebar-position-left page-post-detail">
     <div class="headband"></div>
 
     <header id="header" class="header" itemscope="" itemtype="http://schema.org/WPHeader">
@@ -540,29 +540,37 @@
 
       
         <p>未完成</p>
-<h2 id="ARMv8"><a href="#ARMv8" class="headerlink" title="ARMv8"></a>ARMv8</h2><p><code>ARMv8</code>的架构继承以往<code>ARMv7</code>与之前处理器技术的基础,除了现有的<code>16/32bit</code>的<code>Thumb2</code>指令支持外,也向前兼容现有的<code>A32</code>(<code>ARM 32bit</code>)指令集,称为<code>AArch32</code>,引入了<code>64bit</code>的<code>AArch64</code>架构.</p>
+<h2 id="armv8">ARMv8</h2>
+<p><code>ARMv8</code>的架构继承以往<code>ARMv7</code>与之前处理器技术的基础,除了现有的<code>16/32bit</code>的<code>Thumb2</code>指令支持外,也向前兼容现有的<code>A32</code>(<code>ARM 32bit</code>)指令集,称为<code>AArch32</code>,引入了<code>64bit</code>的<code>AArch64</code>架构.</p>
 <p>除了新增<code>A64</code>(<code>ARM 64bit</code>)指令集外,也扩充了现有的<code>A32</code>(<code>ARM 32bit</code>)和<code>T32</code>(<code>Thumb2 32bit</code>)指令集(二者统称<code>AArch32 ISA</code>),另外还新增加了<code>CRYPTO</code>(加密)模块支持。</p>
 <p><code>ARMv8</code>提供<code>AArch32 state</code>和<code>AArch64 state</code>两种<code>Execution State</code>.</p>
 <p><code>ARMv8</code>新增了两种模式:<code>hyp</code>,用于虚拟化扩展;<code>monitor</code>,用于<code>Security</code>扩展.</p>
-<h3 id="异常级别"><a href="#异常级别" class="headerlink" title="异常级别"></a>异常级别</h3><p><code>Armv8</code>架构定义了四个异常级别<code>EL0 ~ EL3</code>:<code>EL0</code>对应应用程序,<code>EL1</code>对应操作系统内核,<code>EL2</code>对应<code>Hypervisor</code>,<code>EL3</code>对应安全监控模式,实现<code>EL0</code>和<code>EL1</code>的<code>Secure</code>和<code>Non-Secure</code>之间的切换,可起到物理屏障安全隔离作用.</p>
+<h3 id="异常级别">异常级别</h3>
+<p><code>Armv8</code>架构定义了四个异常级别<code>EL0 ~ EL3</code>:<code>EL0</code>对应应用程序,<code>EL1</code>对应操作系统内核,<code>EL2</code>对应<code>Hypervisor</code>,<code>EL3</code>对应安全监控模式,实现<code>EL0</code>和<code>EL1</code>的<code>Secure</code>和<code>Non-Secure</code>之间的切换,可起到物理屏障安全隔离作用.</p>
 <p>发生异常时可以保留异常级别或者提升异常级别,从异常退出可以保留异常级别或者降低异常级别.</p>
 <p>当从低异常级别陷入高异常级别,可以保持执行状态也可以从<code>AArch32</code>变为<code>AArch64</code>.</p>
 <p>当从高异常级别返回低异常级别,可以保持执行状态也可以从<code>AArch64</code>变为<code>AArch32</code>.</p>
-<h3 id="模式与异常等级之间的关系"><a href="#模式与异常等级之间的关系" class="headerlink" title="模式与异常等级之间的关系"></a>模式与异常等级之间的关系</h3><ul>
+<h3 id="模式与异常等级之间的关系">模式与异常等级之间的关系</h3>
+<ul>
 <li><code>user</code>模式:只能在<code>EL0</code>执行.</li>
 <li><code>monitor</code>模式:只能在<code>Secure</code>的<code>EL3</code>执行.</li>
 <li><code>hyp</code>模式:只能在<code>Non-Secure</code>的<code>EL2</code>执行,虚拟机.</li>
 <li><code>system</code>,<code>supervisor</code>,<code>abort</code>,<code>undefined</code>,<code>IRQ</code>,<code>FIQ</code>模式:依赖于<code>Secure</code>模式.</li>
 </ul>
-<h2 id="Execution-State"><a href="#Execution-State" class="headerlink" title="Execution State"></a>Execution State</h2><h3 id="AArch32-state"><a href="#AArch32-state" class="headerlink" title="AArch32 state"></a>AArch32 state</h3><p>提供<code>13</code>个<code>32bit</code>通用寄存器<code>R0 - R12</code>,一个<code>32bit</code>的<code>PC</code>指针(<code>R15</code>),堆栈指针<code>SP</code>(<code>R13</code>),链接寄存器<code>LR</code>(<code>R14</code>).提供一个<code>32bit</code>异常链接寄存器<code>ELR</code>,用于<code>hyp mode</code>下的异常返回.</p>
+<h2 id="execution-state">Execution State</h2>
+<h3 id="aarch32-state">AArch32 state</h3>
+<p>提供<code>13</code>个<code>32bit</code>通用寄存器<code>R0 - R12</code>,一个<code>32bit</code>的<code>PC</code>指针(<code>R15</code>),堆栈指针<code>SP</code>(<code>R13</code>),链接寄存器<code>LR</code>(<code>R14</code>).提供一个<code>32bit</code>异常链接寄存器<code>ELR</code>,用于<code>hyp mode</code>下的异常返回.</p>
 <p>提供<code>32</code>个<code>64bit</code>的<code>SIMD</code>向量和标量<code>floating-point</code>支持.提供两个指令集<code>A32</code>,<code>T32</code>.兼容<code>ARMv7</code>的异常模型.协处理器只支持<code>CP10\CP11\CP14\CP15</code>.</p>
-<h3 id="AArch64-state"><a href="#AArch64-state" class="headerlink" title="AArch64 state"></a>AArch64 state</h3><p>提供<code>31</code>个<code>64bit</code>通用寄存器<code>X0 - X30</code>(<code>W0 - W30</code>),其中<code>X30</code>是程序链接寄存器<code>LR</code>.提供一个<code>64bit</code>的<code>PC</code>指针,堆栈指针<code>SPx</code>,异常链接寄存器<code>ELRx</code>.</p>
+<h3 id="aarch64-state">AArch64 state</h3>
+<p>提供<code>31</code>个<code>64bit</code>通用寄存器<code>X0 - X30</code>(<code>W0 - W30</code>),其中<code>X30</code>是程序链接寄存器<code>LR</code>.提供一个<code>64bit</code>的<code>PC</code>指针,堆栈指针<code>SPx</code>,异常链接寄存器<code>ELRx</code>.</p>
 <p>提供<code>32</code>个<code>128bit</code>的<code>SIMD</code>向量和标量<code>floating-point</code>支持.定义<code>ARMv8</code>异常等级<code>ELx</code>.定义一组<code>PE state</code>寄存器<code>PSTATE</code>(<code>NZCV/DAIF/CurrentEL/SPSel</code>等),用于保存<code>PE</code>当前的状态信息.没有协处理器概念.</p>
-<h3 id="决定Execution-State的条件"><a href="#决定Execution-State的条件" class="headerlink" title="决定Execution State的条件"></a>决定Execution State的条件</h3><p><code>SPSR_EL1.M[4]</code>决定<code>EL0</code>的执行状态,为<code>0 =&gt; 64bit</code>,<code>1 =&gt; 32bit</code>.</p>
+<h3 id="决定execution-state的条件">决定Execution State的条件</h3>
+<p><code>SPSR_EL1.M[4]</code>决定<code>EL0</code>的执行状态,为<code>0 =&gt; 64bit</code>,<code>1 =&gt; 32bit</code>.</p>
 <p><code>HCR_EL2.RW</code>决定<code>EL1</code>的执行状态,为<code>1 =&gt; 64bit</code>,<code>0 =&gt; 32bit</code>.</p>
 <p><code>SCR_EL3.RW</code>确定<code>EL2</code>或<code>EL1</code>的执行状态,为<code>1 =&gt; 64bit</code>,<code>0 =&gt; 32bit</code>.</p>
 <p><code>AArch32</code>和<code>AArch64</code>之间的切换只能通过发生异常或者系统<code>Reset</code>来实现.(<code>A32</code>与<code>T32</code>之间是通过<code>BX</code>指令切换的).</p>
-<h2 id="AArch64寄存器"><a href="#AArch64寄存器" class="headerlink" title="AArch64寄存器"></a>AArch64寄存器</h2><p><code>AArch64</code>有<code>31</code>个通用的<code>64</code>位寄存器,系统运行在<code>64</code>位状态下的时候名字叫<code>Xn</code>,运行在<code>32</code>位的时候就叫<code>Wn</code>.<code>32</code>个<code>128bits</code>浮点寄存器(<code>v0 - v31</code>),可以通过<code>Bn</code>(<code>8</code>位),<code>Hn</code>(<code>16</code>位),<code>Sn</code>(<code>32</code>位),<code>Dn</code>(<code>64</code>位),<code>Qn</code>(<code>128</code>位)来访问不同的位数.</p>
+<h2 id="aarch64寄存器">AArch64寄存器</h2>
+<p><code>AArch64</code>有<code>31</code>个通用的<code>64</code>位寄存器,系统运行在<code>64</code>位状态下的时候名字叫<code>Xn</code>,运行在<code>32</code>位的时候就叫<code>Wn</code>.<code>32</code>个<code>128bits</code>浮点寄存器(<code>v0 - v31</code>),可以通过<code>Bn</code>(<code>8</code>位),<code>Hn</code>(<code>16</code>位),<code>Sn</code>(<code>32</code>位),<code>Dn</code>(<code>64</code>位),<code>Qn</code>(<code>128</code>位)来访问不同的位数.</p>
 <p>还有<code>4</code>个堆栈指针寄存器<code>SP_EL0</code>,<code>SP_EL1</code>,<code>SP_EL2</code>,<code>SP_EL3</code>(<code>64</code>位,还有<code>32</code>位的<code>WSP</code>).<code>3</code>个异常链接寄存器<code>ELR_EL1</code>,<code>ELR_EL2</code>,<code>ELR_EL3</code>(<code>64</code>位).<code>3</code>个存储状态寄存器<code>SPSR_EL1</code>,<code>SPSR_EL2</code>,<code>SPSR_EL3</code>(<code>32</code>位).状态寄存器<code>CPSR</code>.一个程序计数器<code>PC</code>(<code>64</code>位).还有<code>Zero register</code>(<code>WZR 32bits</code>,<code>XZR 64bits</code>).</p>
 <p>当在指令中使用<code>32</code>位的寄存器时,源寄存器高<code>32</code>位会被忽略,目的寄存器高<code>32</code>位置零.</p>
 <p>通用寄存器分为<code>4</code>组.</p>
@@ -579,8 +587,10 @@
 <li><code>X30</code>:链接寄存器(<code>LR</code>),存储着函数的返回地址.</li>
 <li><code>X31</code>:堆栈指针寄存器<code>SP</code>或零寄存器<code>XZR</code>.</li>
 </ul>
-<h2 id="链接寄存器"><a href="#链接寄存器" class="headerlink" title="链接寄存器"></a>链接寄存器</h2><p><code>AArch64</code>状态有两种链接寄存器:<code>LR</code>和<code>ELR</code>.通常<code>LR</code>(<code>X30</code>)用来存储子程序的返回地址,<code>ELR</code>通常在陷入异常(出现级别提升)时用来存储返回地址,例如<code>EL0</code>到<code>EL1</code>时返回地址就会存储在<code>ELR_EL1</code>.同一异常级别的子程序调用的返回地址存储在<code>LR</code>.</p>
-<h2 id="A64指令集"><a href="#A64指令集" class="headerlink" title="A64指令集"></a>A64指令集</h2><p><code>AArch64</code>指令集特点.</p>
+<h2 id="链接寄存器">链接寄存器</h2>
+<p><code>AArch64</code>状态有两种链接寄存器:<code>LR</code>和<code>ELR</code>.通常<code>LR</code>(<code>X30</code>)用来存储子程序的返回地址,<code>ELR</code>通常在陷入异常(出现级别提升)时用来存储返回地址,例如<code>EL0</code>到<code>EL1</code>时返回地址就会存储在<code>ELR_EL1</code>.同一异常级别的子程序调用的返回地址存储在<code>LR</code>.</p>
+<h2 id="a64指令集">A64指令集</h2>
+<p><code>AArch64</code>指令集特点.</p>
 <ul>
 <li>移除了<code>LDM/STM</code>,<code>PUSH/POP</code>,使用<code>STP/LDP</code>代替.</li>
 <li>没有提供访问<code>CPSR</code>的单一寄存器,但是提供访问<code>PSTATE</code>的状态域寄存器.</li>
@@ -907,7 +917,7 @@
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#ARMv8"><span class="nav-number">1.</span> <span class="nav-text">ARMv8</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#异常级别"><span class="nav-number">1.1.</span> <span class="nav-text">异常级别</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#模式与异常等级之间的关系"><span class="nav-number">1.2.</span> <span class="nav-text">模式与异常等级之间的关系</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Execution-State"><span class="nav-number">2.</span> <span class="nav-text">Execution State</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#AArch32-state"><span class="nav-number">2.1.</span> <span class="nav-text">AArch32 state</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#AArch64-state"><span class="nav-number">2.2.</span> <span class="nav-text">AArch64 state</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#决定Execution-State的条件"><span class="nav-number">2.3.</span> <span class="nav-text">决定Execution State的条件</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#AArch64寄存器"><span class="nav-number">3.</span> <span class="nav-text">AArch64寄存器</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#链接寄存器"><span class="nav-number">4.</span> <span class="nav-text">链接寄存器</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#A64指令集"><span class="nav-number">5.</span> <span class="nav-text">A64指令集</span></a></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#armv8"><span class="nav-number">1.</span> <span class="nav-text">ARMv8</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#异常级别"><span class="nav-number">1.1.</span> <span class="nav-text">异常级别</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#模式与异常等级之间的关系"><span class="nav-number">1.2.</span> <span class="nav-text">模式与异常等级之间的关系</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#execution-state"><span class="nav-number">2.</span> <span class="nav-text">Execution State</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#aarch32-state"><span class="nav-number">2.1.</span> <span class="nav-text">AArch32 state</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#aarch64-state"><span class="nav-number">2.2.</span> <span class="nav-text">AArch64 state</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#决定execution-state的条件"><span class="nav-number">2.3.</span> <span class="nav-text">决定Execution State的条件</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#aarch64寄存器"><span class="nav-number">3.</span> <span class="nav-text">AArch64寄存器</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#链接寄存器"><span class="nav-number">4.</span> <span class="nav-text">链接寄存器</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#a64指令集"><span class="nav-number">5.</span> <span class="nav-text">A64指令集</span></a></li></ol></div>
             
 
           </div>
@@ -939,7 +949,7 @@
       <i class="fa fa-area-chart"></i>
     </span>
     
-    <span title="站点总字数">710k</span>
+    <span title="站点总字数">720k</span>
   
 
   
@@ -948,7 +958,7 @@
       <i class="fa fa-coffee"></i>
     </span>
     
-    <span title="站点阅读时长">10:46</span>
+    <span title="站点阅读时长">10:54</span>
   
 </div>
 
@@ -1599,5 +1609,5 @@
   
   <script type="text/javascript" src="//cdn.bootcss.com/canvas-nest.js/1.0.0/canvas-nest.min.js"></script>
   
-<script src="/live2dw/lib/L2Dwidget.min.js?0c58a1486de42ac6cc1c59c7d98ae887"></script><script>L2Dwidget.init({"pluginRootPath":"live2dw/","pluginJsPath":"lib/","pluginModelPath":"assets/","tagMode":false,"debug":false,"model":{"jsonPath":"/live2dw/assets/koharu.model.json"},"display":{"position":"right","width":150,"height":300},"mobile":{"show":false},"log":false});</script></body>
+<script src="/live2dw/lib/L2Dwidget.min.js?0c58a1486de42ac6cc1c59c7d98ae887"></script><script>L2Dwidget.init({"pluginRootPath":"live2dw/","pluginJsPath":"lib/","pluginModelPath":"assets/","tagMode":false,"debug":false,"model":{"jsonPath":"/live2dw/assets/koharu.model.json"},"display":{"position":"right","width":150,"height":300},"mobile":{"show":false},"log":false});</script><!-- hexo-inject:begin --><!-- hexo-inject:end --></body>
 </html>

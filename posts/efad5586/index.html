@@ -16,7 +16,7 @@
 
 <html class="theme-next mist use-motion" lang="zh-CN">
 <head><meta name="generator" content="Hexo 3.8.0">
-  <meta charset="UTF-8">
+  <!-- hexo-inject:begin --><!-- hexo-inject:end --><meta charset="UTF-8">
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
 <meta name="theme-color" content="#222">
@@ -119,18 +119,18 @@
 
 
 
-  <meta name="description" content="SmaliAndroid代码一般是用Java编写的,使用专门的Android虚拟机(5.0以下为Dalvik,5.0以上为ART)执行.Android虚拟机的可执行文件是dex文件.dex文件反编译之后就是Smali代码.Smali是Android虚拟机的反汇编语言. 通过修改Smali代码,再重新编译打包成新的APK来修改APK运行逻辑. 语法Smali数据类型.    Smali Java 备">
+  <meta name="description" content="Smali Android代码一般是用Java编写的,使用专门的Android虚拟机(5.0以下为Dalvik,5.0以上为ART)执行.Android虚拟机的可执行文件是dex文件.dex文件反编译之后就是Smali代码.Smali是Android虚拟机的反汇编语言. 通过修改Smali代码,再重新编译打包成新的APK来修改APK运行逻辑. 语法 Smali数据类型.    Sm">
 <meta name="keywords" content="Android">
 <meta property="og:type" content="article">
 <meta property="og:title" content="IS-reverse-Android-Smali-语法">
 <meta property="og:url" content="https://hitworld.github.io/posts/efad5586/index.html">
 <meta property="og:site_name" content="w4rd3n">
-<meta property="og:description" content="SmaliAndroid代码一般是用Java编写的,使用专门的Android虚拟机(5.0以下为Dalvik,5.0以上为ART)执行.Android虚拟机的可执行文件是dex文件.dex文件反编译之后就是Smali代码.Smali是Android虚拟机的反汇编语言. 通过修改Smali代码,再重新编译打包成新的APK来修改APK运行逻辑. 语法Smali数据类型.    Smali Java 备">
+<meta property="og:description" content="Smali Android代码一般是用Java编写的,使用专门的Android虚拟机(5.0以下为Dalvik,5.0以上为ART)执行.Android虚拟机的可执行文件是dex文件.dex文件反编译之后就是Smali代码.Smali是Android虚拟机的反汇编语言. 通过修改Smali代码,再重新编译打包成新的APK来修改APK运行逻辑. 语法 Smali数据类型.    Sm">
 <meta property="og:locale" content="zh-CN">
 <meta property="og:updated_time" content="2020-08-09T06:34:17.824Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="IS-reverse-Android-Smali-语法">
-<meta name="twitter:description" content="SmaliAndroid代码一般是用Java编写的,使用专门的Android虚拟机(5.0以下为Dalvik,5.0以上为ART)执行.Android虚拟机的可执行文件是dex文件.dex文件反编译之后就是Smali代码.Smali是Android虚拟机的反汇编语言. 通过修改Smali代码,再重新编译打包成新的APK来修改APK运行逻辑. 语法Smali数据类型.    Smali Java 备">
+<meta name="twitter:description" content="Smali Android代码一般是用Java编写的,使用专门的Android虚拟机(5.0以下为Dalvik,5.0以上为ART)执行.Android虚拟机的可执行文件是dex文件.dex文件反编译之后就是Smali代码.Smali是Android虚拟机的反汇编语言. 通过修改Smali代码,再重新编译打包成新的APK来修改APK运行逻辑. 语法 Smali数据类型.    Sm">
 
 
 
@@ -185,7 +185,7 @@
       .logo-line-after i { right: initial; }
     }
   </style>
-</noscript>
+</noscript><!-- hexo-inject:begin --><!-- hexo-inject:end -->
 
 </head>
 
@@ -196,7 +196,7 @@
     
   
 
-  <div class="container sidebar-position-left page-post-detail">
+  <!-- hexo-inject:begin --><!-- hexo-inject:end --><div class="container sidebar-position-left page-post-detail">
     <div class="headband"></div>
 
     <header id="header" class="header" itemscope="" itemtype="http://schema.org/WPHeader">
@@ -503,7 +503,7 @@
                 
                   <span class="post-meta-item-text">本文字数：</span>
                 
-                <span title="本文字数">2.4k</span>
+                <span title="本文字数">2.6k</span>
               
 
               
@@ -537,153 +537,157 @@
       
 
       
-        <h2 id="Smali"><a href="#Smali" class="headerlink" title="Smali"></a>Smali</h2><p><code>Android</code>代码一般是用<code>Java</code>编写的,使用专门的<code>Android</code>虚拟机(<code>5.0</code>以下为<code>Dalvik</code>,<code>5.0</code>以上为<code>ART</code>)执行.<code>Android</code>虚拟机的可执行文件是<code>dex</code>文件.<code>dex</code>文件反编译之后就是<code>Smali</code>代码.<code>Smali</code>是<code>Android</code>虚拟机的反汇编语言.</p>
+        <h2 id="smali">Smali</h2>
+<p><code>Android</code>代码一般是用<code>Java</code>编写的,使用专门的<code>Android</code>虚拟机(<code>5.0</code>以下为<code>Dalvik</code>,<code>5.0</code>以上为<code>ART</code>)执行.<code>Android</code>虚拟机的可执行文件是<code>dex</code>文件.<code>dex</code>文件反编译之后就是<code>Smali</code>代码.<code>Smali</code>是<code>Android</code>虚拟机的反汇编语言.</p>
 <p>通过修改<code>Smali</code>代码,再重新编译打包成新的<code>APK</code>来修改<code>APK</code>运行逻辑.</p>
-<h2 id="语法"><a href="#语法" class="headerlink" title="语法"></a>语法</h2><p><code>Smali</code>数据类型.</p>
+<h2 id="语法">语法</h2>
+<p><code>Smali</code>数据类型.</p>
 <table>
 <thead>
-<tr>
-<th style="text-align:left"><code>Smali</code></th>
-<th style="text-align:left"><code>Java</code></th>
-<th style="text-align:left">备注</th>
+<tr class="header">
+<th style="text-align: left;"><code>Smali</code></th>
+<th style="text-align: left;"><code>Java</code></th>
+<th style="text-align: left;">备注</th>
 </tr>
 </thead>
 <tbody>
-<tr>
-<td style="text-align:left"><code>v</code></td>
-<td style="text-align:left"><code>void</code></td>
-<td style="text-align:left">只能用于返回值类型</td>
+<tr class="odd">
+<td style="text-align: left;"><code>v</code></td>
+<td style="text-align: left;"><code>void</code></td>
+<td style="text-align: left;">只能用于返回值类型</td>
 </tr>
-<tr>
-<td style="text-align:left"><code>Z</code></td>
-<td style="text-align:left"><code>boolean</code></td>
-<td style="text-align:left"></td>
+<tr class="even">
+<td style="text-align: left;"><code>Z</code></td>
+<td style="text-align: left;"><code>boolean</code></td>
+<td style="text-align: left;"></td>
 </tr>
-<tr>
-<td style="text-align:left"><code>B</code></td>
-<td style="text-align:left"><code>byte</code></td>
-<td style="text-align:left"></td>
+<tr class="odd">
+<td style="text-align: left;"><code>B</code></td>
+<td style="text-align: left;"><code>byte</code></td>
+<td style="text-align: left;"></td>
 </tr>
-<tr>
-<td style="text-align:left"><code>S</code></td>
-<td style="text-align:left"><code>short</code></td>
-<td style="text-align:left"></td>
+<tr class="even">
+<td style="text-align: left;"><code>S</code></td>
+<td style="text-align: left;"><code>short</code></td>
+<td style="text-align: left;"></td>
 </tr>
-<tr>
-<td style="text-align:left"><code>C</code></td>
-<td style="text-align:left"><code>char</code></td>
-<td style="text-align:left"></td>
+<tr class="odd">
+<td style="text-align: left;"><code>C</code></td>
+<td style="text-align: left;"><code>char</code></td>
+<td style="text-align: left;"></td>
 </tr>
-<tr>
-<td style="text-align:left"><code>I</code></td>
-<td style="text-align:left"><code>int</code></td>
-<td style="text-align:left"></td>
+<tr class="even">
+<td style="text-align: left;"><code>I</code></td>
+<td style="text-align: left;"><code>int</code></td>
+<td style="text-align: left;"></td>
 </tr>
-<tr>
-<td style="text-align:left"><code>J</code></td>
-<td style="text-align:left"><code>long</code></td>
-<td style="text-align:left"></td>
+<tr class="odd">
+<td style="text-align: left;"><code>J</code></td>
+<td style="text-align: left;"><code>long</code></td>
+<td style="text-align: left;"></td>
 </tr>
-<tr>
-<td style="text-align:left"><code>F</code></td>
-<td style="text-align:left"><code>float</code></td>
-<td style="text-align:left"></td>
+<tr class="even">
+<td style="text-align: left;"><code>F</code></td>
+<td style="text-align: left;"><code>float</code></td>
+<td style="text-align: left;"></td>
 </tr>
-<tr>
-<td style="text-align:left"><code>D</code></td>
-<td style="text-align:left"><code>double</code></td>
-<td style="text-align:left"></td>
+<tr class="odd">
+<td style="text-align: left;"><code>D</code></td>
+<td style="text-align: left;"><code>double</code></td>
+<td style="text-align: left;"></td>
 </tr>
-<tr>
-<td style="text-align:left"><code>Lpackage/name;</code></td>
-<td style="text-align:left">对象类型</td>
-<td style="text-align:left"><code>L</code>表示这是一个对象类型,<code>package</code>表示该对象所在的包,<code>;</code>表示对象名称的结束</td>
+<tr class="even">
+<td style="text-align: left;"><code>Lpackage/name;</code></td>
+<td style="text-align: left;">对象类型</td>
+<td style="text-align: left;"><code>L</code>表示这是一个对象类型,<code>package</code>表示该对象所在的包,<code>;</code>表示对象名称的结束</td>
 </tr>
-<tr>
-<td style="text-align:left"><code>[&lt;type&gt;</code></td>
-<td style="text-align:left">数组</td>
-<td style="text-align:left"><code>[I</code>表示一个<code>int</code>型数组</td>
+<tr class="odd">
+<td style="text-align: left;"><code>[&lt;type&gt;</code></td>
+<td style="text-align: left;">数组</td>
+<td style="text-align: left;"><code>[I</code>表示一个<code>int</code>型数组</td>
 </tr>
 </tbody>
 </table>
 <p><code>Smali</code>关键词.</p>
 <table>
 <thead>
-<tr>
-<th style="text-align:left">关键词</th>
-<th style="text-align:left">说明</th>
+<tr class="header">
+<th style="text-align: left;">关键词</th>
+<th style="text-align: left;">说明</th>
 </tr>
 </thead>
 <tbody>
-<tr>
-<td style="text-align:left"><code>.class</code></td>
-<td style="text-align:left">定义<code>Java</code>类名</td>
+<tr class="odd">
+<td style="text-align: left;"><code>.class</code></td>
+<td style="text-align: left;">定义<code>Java</code>类名</td>
 </tr>
-<tr>
-<td style="text-align:left"><code>.super</code></td>
-<td style="text-align:left">定义父类名</td>
+<tr class="even">
+<td style="text-align: left;"><code>.super</code></td>
+<td style="text-align: left;">定义父类名</td>
 </tr>
-<tr>
-<td style="text-align:left"><code>.source</code></td>
-<td style="text-align:left">定义<code>Java</code>源文件名</td>
+<tr class="odd">
+<td style="text-align: left;"><code>.source</code></td>
+<td style="text-align: left;">定义<code>Java</code>源文件名</td>
 </tr>
-<tr>
-<td style="text-align:left"><code>.filed</code></td>
-<td style="text-align:left">定义字段</td>
+<tr class="even">
+<td style="text-align: left;"><code>.filed</code></td>
+<td style="text-align: left;">定义字段</td>
 </tr>
-<tr>
-<td style="text-align:left"><code>.method</code></td>
-<td style="text-align:left">定义方法开始</td>
+<tr class="odd">
+<td style="text-align: left;"><code>.method</code></td>
+<td style="text-align: left;">定义方法开始</td>
 </tr>
-<tr>
-<td style="text-align:left"><code>.end method</code></td>
-<td style="text-align:left">定义方法结束</td>
+<tr class="even">
+<td style="text-align: left;"><code>.end method</code></td>
+<td style="text-align: left;">定义方法结束</td>
 </tr>
-<tr>
-<td style="text-align:left"><code>.annotation</code></td>
-<td style="text-align:left">定义注解开始</td>
+<tr class="odd">
+<td style="text-align: left;"><code>.annotation</code></td>
+<td style="text-align: left;">定义注解开始</td>
 </tr>
-<tr>
-<td style="text-align:left"><code>.end annotation</code></td>
-<td style="text-align:left">定义注解结束</td>
+<tr class="even">
+<td style="text-align: left;"><code>.end annotation</code></td>
+<td style="text-align: left;">定义注解结束</td>
 </tr>
-<tr>
-<td style="text-align:left"><code>.implements</code></td>
-<td style="text-align:left">定义接口指令</td>
+<tr class="odd">
+<td style="text-align: left;"><code>.implements</code></td>
+<td style="text-align: left;">定义接口指令</td>
 </tr>
-<tr>
-<td style="text-align:left"><code>.local</code></td>
-<td style="text-align:left">指定了方法内局部变量的个数</td>
+<tr class="even">
+<td style="text-align: left;"><code>.local</code></td>
+<td style="text-align: left;">指定了方法内局部变量的个数</td>
 </tr>
-<tr>
-<td style="text-align:left"><code>.registers</code></td>
-<td style="text-align:left">指定方法内使用寄存器的总数</td>
+<tr class="odd">
+<td style="text-align: left;"><code>.registers</code></td>
+<td style="text-align: left;">指定方法内使用寄存器的总数</td>
 </tr>
-<tr>
-<td style="text-align:left"><code>.prologue</code></td>
-<td style="text-align:left">表示方法中代码的开始处</td>
+<tr class="even">
+<td style="text-align: left;"><code>.prologue</code></td>
+<td style="text-align: left;">表示方法中代码的开始处</td>
 </tr>
-<tr>
-<td style="text-align:left"><code>.line</code></td>
-<td style="text-align:left">表示<code>Java</code>源文件中指定行</td>
+<tr class="odd">
+<td style="text-align: left;"><code>.line</code></td>
+<td style="text-align: left;">表示<code>Java</code>源文件中指定行</td>
 </tr>
-<tr>
-<td style="text-align:left"><code>.paramter</code></td>
-<td style="text-align:left">指定了方法的参数</td>
+<tr class="even">
+<td style="text-align: left;"><code>.paramter</code></td>
+<td style="text-align: left;">指定了方法的参数</td>
 </tr>
-<tr>
-<td style="text-align:left"><code>.param</code></td>
-<td style="text-align:left">和<code>.paramter</code>含义一致,但是表达格式不同</td>
+<tr class="odd">
+<td style="text-align: left;"><code>.param</code></td>
+<td style="text-align: left;">和<code>.paramter</code>含义一致,但是表达格式不同</td>
 </tr>
 </tbody>
 </table>
 <p><code>Java</code>中变量都是存放在内存中的,<code>Android</code>为了提高性能,变量都是存放在寄存器中的,寄存器为<code>32</code>位,可以支持任何类型.寄存器分为:本地寄存器,用<code>v</code>开头数字结尾的符号来表示,例如<code>v0</code>;参数寄存器,用<code>p</code>开头数字结尾的符号来表示,例如<code>p0</code>.</p>
 <p>在非<code>static</code>方法中,<code>p0</code>代指<code>this</code>,<code>p1</code>为方法的第一个参数.在<code>static</code>方法中，<code>p0</code>为方法的第一个参数.</p>
-<h3 id="赋值与获取"><a href="#赋值与获取" class="headerlink" title="赋值与获取"></a>赋值与获取</h3><p>成员变量定义格式为:<code>.field public/private [static][final] varName:&lt;type&gt;</code>.</p>
+<h3 id="赋值与获取">赋值与获取</h3>
+<p>成员变量定义格式为:<code>.field public/private [static][final] varName:&lt;type&gt;</code>.</p>
 <p>获取指令:<code>iget</code>,<code>sget</code>,<code>iget-boolean</code>,<code>sget-boolean</code>,<code>iget-object</code>,<code>sget-object</code>,<code>aget</code>.</p>
 <p>赋值指令:<code>iput</code>,<code>sput</code>,<code>iput-boolean</code>,<code>sput-boolean</code>,<code>iput-object</code>,<code>sput-object</code>,<code>aput</code>.</p>
 <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">sget-object v0,Lcom/aaa;-&gt;ID:Ljava/lang/String;</span><br><span class="line"><span class="comment">#获取ID这个String类型的成员变量并放到v0这个寄存器中.</span></span><br><span class="line">iget-object v0,p0,Lcom/aaa;-&gt;view:Lcom/aaa/view;</span><br><span class="line"><span class="comment">#iget-object比sget-object多一个参数p0,这个参数代表变量所在类的实例,这里p0就是this.</span></span><br><span class="line"></span><br><span class="line">.<span class="built_in">local</span> v0, args:Landroid/os/Message;</span><br><span class="line">const/4 v1, 0x12</span><br><span class="line">iput v1,v0,Landroid/os/Message;-&gt;what:I</span><br><span class="line"><span class="comment">#相当于java代码:args.what = 18;其中args为Message的实例.</span></span><br></pre></td></tr></table></figure>
-<h3 id="函数"><a href="#函数" class="headerlink" title="函数"></a>函数</h3><p>函数定义格式.</p>
+<h3 id="函数">函数</h3>
+<p>函数定义格式.</p>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">.method public/private [static][final] methodName()&lt;type&gt;</span><br><span class="line">.end method</span><br></pre></td></tr></table></figure>
 <p>函数分为两类:<code>direct method</code>和<code>virtual method</code>,<code>direct method</code>就是<code>private</code>方法,<code>virtual method</code>就是指其余的方法.</p>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line">.method private ifRegistered()Z</span><br><span class="line">    .locals 2            // 本地寄存器的个数</span><br><span class="line">    .prologue</span><br><span class="line">    const/4 v0, 0x1      //v0赋值为1</span><br><span class="line">    if-eqz v0, :cond_0   //判断v0是否等于0,等于0则跳到cond_0执行</span><br><span class="line">    const/4 v1, 0x1      //符合条件分支</span><br><span class="line">    :goto_0              //标签</span><br><span class="line">    return v1            //返回v1的值</span><br><span class="line">    :cond_0              //标签</span><br><span class="line">    const/4 v1, 0x0      //cond_0分支</span><br><span class="line">    goto :goto_0         //跳到goto_0执行</span><br><span class="line">.end method</span><br></pre></td></tr></table></figure>
@@ -1005,7 +1009,7 @@
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#Smali"><span class="nav-number">1.</span> <span class="nav-text">Smali</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#语法"><span class="nav-number">2.</span> <span class="nav-text">语法</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#赋值与获取"><span class="nav-number">2.1.</span> <span class="nav-text">赋值与获取</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#函数"><span class="nav-number">2.2.</span> <span class="nav-text">函数</span></a></li></ol></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#smali"><span class="nav-number">1.</span> <span class="nav-text">Smali</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#语法"><span class="nav-number">2.</span> <span class="nav-text">语法</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#赋值与获取"><span class="nav-number">2.1.</span> <span class="nav-text">赋值与获取</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#函数"><span class="nav-number">2.2.</span> <span class="nav-text">函数</span></a></li></ol></li></ol></div>
             
 
           </div>
@@ -1037,7 +1041,7 @@
       <i class="fa fa-area-chart"></i>
     </span>
     
-    <span title="站点总字数">710k</span>
+    <span title="站点总字数">720k</span>
   
 
   
@@ -1046,7 +1050,7 @@
       <i class="fa fa-coffee"></i>
     </span>
     
-    <span title="站点阅读时长">10:46</span>
+    <span title="站点阅读时长">10:54</span>
   
 </div>
 
@@ -1697,5 +1701,5 @@
   
   <script type="text/javascript" src="//cdn.bootcss.com/canvas-nest.js/1.0.0/canvas-nest.min.js"></script>
   
-<script src="/live2dw/lib/L2Dwidget.min.js?0c58a1486de42ac6cc1c59c7d98ae887"></script><script>L2Dwidget.init({"pluginRootPath":"live2dw/","pluginJsPath":"lib/","pluginModelPath":"assets/","tagMode":false,"debug":false,"model":{"jsonPath":"/live2dw/assets/koharu.model.json"},"display":{"position":"right","width":150,"height":300},"mobile":{"show":false},"log":false});</script></body>
+<script src="/live2dw/lib/L2Dwidget.min.js?0c58a1486de42ac6cc1c59c7d98ae887"></script><script>L2Dwidget.init({"pluginRootPath":"live2dw/","pluginJsPath":"lib/","pluginModelPath":"assets/","tagMode":false,"debug":false,"model":{"jsonPath":"/live2dw/assets/koharu.model.json"},"display":{"position":"right","width":150,"height":300},"mobile":{"show":false},"log":false});</script><!-- hexo-inject:begin --><!-- hexo-inject:end --></body>
 </html>

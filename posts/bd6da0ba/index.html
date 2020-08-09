@@ -16,7 +16,7 @@
 
 <html class="theme-next mist use-motion" lang="zh-CN">
 <head><meta name="generator" content="Hexo 3.8.0">
-  <meta charset="UTF-8">
+  <!-- hexo-inject:begin --><!-- hexo-inject:end --><meta charset="UTF-8">
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
 <meta name="theme-color" content="#222">
@@ -119,18 +119,18 @@
 
 
 
-  <meta name="description" content="基础环境apt换源修改配置文件. 123sudo gedit /etc/apt/sources.listsudo apt-get update#sudo apt-get upgrade sources.list. 123456789101112131415161718#ubuntu16deb http://mirrors.ustc.edu.cn/ubuntu/ xenial main restri">
+  <meta name="description" content="基础环境 apt换源 修改配置文件. 123sudo gedit /etc/apt/sources.listsudo apt-get update#sudo apt-get upgrade sources.list. 123456789101112131415161718#ubuntu16deb http://mirrors.ustc.edu.cn/ubuntu/ xenial main">
 <meta name="keywords" content="environment">
 <meta property="og:type" content="article">
 <meta property="og:title" content="w4rd3n-ubuntu虚拟机环境搭建">
 <meta property="og:url" content="https://hitworld.github.io/posts/bd6da0ba/index.html">
 <meta property="og:site_name" content="w4rd3n">
-<meta property="og:description" content="基础环境apt换源修改配置文件. 123sudo gedit /etc/apt/sources.listsudo apt-get update#sudo apt-get upgrade sources.list. 123456789101112131415161718#ubuntu16deb http://mirrors.ustc.edu.cn/ubuntu/ xenial main restri">
+<meta property="og:description" content="基础环境 apt换源 修改配置文件. 123sudo gedit /etc/apt/sources.listsudo apt-get update#sudo apt-get upgrade sources.list. 123456789101112131415161718#ubuntu16deb http://mirrors.ustc.edu.cn/ubuntu/ xenial main">
 <meta property="og:locale" content="zh-CN">
 <meta property="og:updated_time" content="2020-08-09T06:34:17.845Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="w4rd3n-ubuntu虚拟机环境搭建">
-<meta name="twitter:description" content="基础环境apt换源修改配置文件. 123sudo gedit /etc/apt/sources.listsudo apt-get update#sudo apt-get upgrade sources.list. 123456789101112131415161718#ubuntu16deb http://mirrors.ustc.edu.cn/ubuntu/ xenial main restri">
+<meta name="twitter:description" content="基础环境 apt换源 修改配置文件. 123sudo gedit /etc/apt/sources.listsudo apt-get update#sudo apt-get upgrade sources.list. 123456789101112131415161718#ubuntu16deb http://mirrors.ustc.edu.cn/ubuntu/ xenial main">
 
 
 
@@ -185,7 +185,7 @@
       .logo-line-after i { right: initial; }
     }
   </style>
-</noscript>
+</noscript><!-- hexo-inject:begin --><!-- hexo-inject:end -->
 
 </head>
 
@@ -196,7 +196,7 @@
     
   
 
-  <div class="container sidebar-position-left page-post-detail">
+  <!-- hexo-inject:begin --><!-- hexo-inject:end --><div class="container sidebar-position-left page-post-detail">
     <div class="headband"></div>
 
     <header id="header" class="header" itemscope="" itemtype="http://schema.org/WPHeader">
@@ -496,7 +496,7 @@
                 
                   <span class="post-meta-item-text">本文字数：</span>
                 
-                <span title="本文字数">6.1k</span>
+                <span title="本文字数">6.2k</span>
               
 
               
@@ -530,35 +530,50 @@
       
 
       
-        <h2 id="基础环境"><a href="#基础环境" class="headerlink" title="基础环境"></a>基础环境</h2><h3 id="apt换源"><a href="#apt换源" class="headerlink" title="apt换源"></a>apt换源</h3><p>修改配置文件.</p>
+        <h2 id="基础环境">基础环境</h2>
+<h3 id="apt换源">apt换源</h3>
+<p>修改配置文件.</p>
 <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">sudo gedit /etc/apt/sources.list</span><br><span class="line">sudo apt-get update</span><br><span class="line"><span class="comment">#sudo apt-get upgrade</span></span><br></pre></td></tr></table></figure>
 <p><code>sources.list</code>.</p>
 <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">#ubuntu16</span></span><br><span class="line">deb http://mirrors.ustc.edu.cn/ubuntu/ xenial main restricted universe multiverse</span><br><span class="line">deb http://mirrors.ustc.edu.cn/ubuntu/ xenial-security main restricted universe multiverse</span><br><span class="line">deb http://mirrors.ustc.edu.cn/ubuntu/ xenial-updates main restricted universe multiverse</span><br><span class="line">deb http://mirrors.ustc.edu.cn/ubuntu/ xenial-proposed main restricted universe multiverse</span><br><span class="line">deb http://mirrors.ustc.edu.cn/ubuntu/ xenial-backports main restricted universe multiverse</span><br><span class="line"><span class="comment">##ubuntu18</span></span><br><span class="line">deb https://mirrors.ustc.edu.cn/ubuntu/ bionic main restricted universe multiverse</span><br><span class="line">deb https://mirrors.ustc.edu.cn/ubuntu/ bionic-updates main restricted universe multiverse</span><br><span class="line">deb https://mirrors.ustc.edu.cn/ubuntu/ bionic-backports main restricted universe multiverse</span><br><span class="line">deb https://mirrors.ustc.edu.cn/ubuntu/ bionic-security main restricted universe multiverse</span><br><span class="line">deb https://mirrors.ustc.edu.cn/ubuntu/ bionic-proposed main restricted universe multiverse</span><br><span class="line"><span class="comment">#ubuntu20</span></span><br><span class="line">deb https://mirrors.ustc.edu.cn/ubuntu/ focal main restricted universe multiverse</span><br><span class="line">deb https://mirrors.ustc.edu.cn/ubuntu/ focal-updates main restricted universe multiverse</span><br><span class="line">deb https://mirrors.ustc.edu.cn/ubuntu/ focal-backports main restricted universe multiverse</span><br><span class="line">deb https://mirrors.ustc.edu.cn/ubuntu/ focal-security main restricted universe multiverse</span><br><span class="line">deb https://mirrors.ustc.edu.cn/ubuntu/ focal-proposed main restricted universe multiverse</span><br></pre></td></tr></table></figure>
-<h3 id="pip换源"><a href="#pip换源" class="headerlink" title="pip换源"></a>pip换源</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">mkdir ~/.pip</span><br><span class="line">touch ~/.pip/pip.conf</span><br><span class="line">gedit ~/.pip/pip.conf</span><br></pre></td></tr></table></figure>
+<h3 id="pip换源">pip换源</h3>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">mkdir ~/.pip</span><br><span class="line">touch ~/.pip/pip.conf</span><br><span class="line">gedit ~/.pip/pip.conf</span><br></pre></td></tr></table></figure>
 <p><code>~/.pip/pip.conf</code>.</p>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">[global]</span><br><span class="line">index-url = https://pypi.mirrors.ustc.edu.cn/simple</span><br></pre></td></tr></table></figure>
-<h3 id="工具"><a href="#工具" class="headerlink" title="工具"></a>工具</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">sudo apt-get purge libreoffice-common unity-webapps-common thunderbird totem rhythmbox empathy brasero simple-scan gnome-mahjongg aisleriot gnome-mines cheese gnome-sudoku transmission-common gnome-orca webbrowser-app landscape-client-ui-install deja-dup</span><br><span class="line">sudo apt-get install python3-pip gdb git vim tmux socat python g++ python-pip python3 gdebi synaptic</span><br><span class="line">sudo apt install traceroute</span><br><span class="line">sudo apt install python-pip --reinstall</span><br><span class="line">pip install --upgrade pip</span><br></pre></td></tr></table></figure>
+<h3 id="工具">工具</h3>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">sudo apt-get purge libreoffice-common unity-webapps-common thunderbird totem rhythmbox empathy brasero simple-scan gnome-mahjongg aisleriot gnome-mines cheese gnome-sudoku transmission-common gnome-orca webbrowser-app landscape-client-ui-install deja-dup</span><br><span class="line">sudo apt-get install python3-pip gdb git vim tmux socat python g++ python-pip python3 gdebi synaptic</span><br><span class="line">sudo apt install traceroute</span><br><span class="line">sudo apt install python-pip --reinstall</span><br><span class="line">pip install --upgrade pip</span><br></pre></td></tr></table></figure>
 <p>常用工具:<code>vscode</code>.</p>
-<h3 id="docker"><a href="#docker" class="headerlink" title="docker"></a>docker</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">sudo apt-get remove docker docker-engine docker.io containerd runc</span><br><span class="line">sudo apt-get install apt-transport-https ca-certificates curl gnupg-agent software-properties-common</span><br><span class="line">curl -fsSL https://download.docker.com/linux/ubuntu/gpg | sudo apt-key add -</span><br><span class="line">sudo add-apt-repository <span class="string">"deb [arch=amd64] https://mirrors.aliyun.com/docker-ce/linux/ubuntu <span class="variable">$(lsb_release -cs)</span> stable"</span></span><br><span class="line">sudo apt-get update</span><br><span class="line">sudo apt-get install docker-ce docker-ce-cli containerd.io</span><br><span class="line">sudo vim /etc/docker/daemon.json</span><br><span class="line"><span class="comment"># &#123;"registry-mirrors": ["https://docker.mirrors.ustc.edu.cn"]&#125;</span></span><br><span class="line">sudo systemctl start docker</span><br><span class="line">sudo systemctl <span class="built_in">enable</span> docker</span><br></pre></td></tr></table></figure>
-<h3 id="常用动态库"><a href="#常用动态库" class="headerlink" title="常用动态库"></a>常用动态库</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">sudo apt-get install apt-file</span><br><span class="line">sudo apt-file update</span><br><span class="line"><span class="comment">#apt-file search libcrypto.so.1.0.0</span></span><br><span class="line">sudo apt-get install libssl1.0.0 libssl1.0.0:i386</span><br><span class="line">sudo apt-get install libncurses5-dev libssl-dev</span><br><span class="line">sudo apt-get install libpixman-1-dev</span><br></pre></td></tr></table></figure>
-<h2 id="二进制环境配置"><a href="#二进制环境配置" class="headerlink" title="二进制环境配置"></a>二进制环境配置</h2><h3 id="x86"><a href="#x86" class="headerlink" title="x86"></a>x86</h3><p><code>64</code>位系统编译和运行<code>32</code>位程序需要另装库.</p>
+<h3 id="docker">docker</h3>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">sudo apt-get remove docker docker-engine docker.io containerd runc</span><br><span class="line">sudo apt-get install apt-transport-https ca-certificates curl gnupg-agent software-properties-common</span><br><span class="line">curl -fsSL https://download.docker.com/linux/ubuntu/gpg | sudo apt-key add -</span><br><span class="line">sudo add-apt-repository <span class="string">"deb [arch=amd64] https://mirrors.aliyun.com/docker-ce/linux/ubuntu <span class="variable">$(lsb_release -cs)</span> stable"</span></span><br><span class="line">sudo apt-get update</span><br><span class="line">sudo apt-get install docker-ce docker-ce-cli containerd.io</span><br><span class="line">sudo vim /etc/docker/daemon.json</span><br><span class="line"><span class="comment"># &#123;"registry-mirrors": ["https://docker.mirrors.ustc.edu.cn"]&#125;</span></span><br><span class="line">sudo systemctl start docker</span><br><span class="line">sudo systemctl <span class="built_in">enable</span> docker</span><br></pre></td></tr></table></figure>
+<h3 id="常用动态库">常用动态库</h3>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">sudo apt-get install apt-file</span><br><span class="line">sudo apt-file update</span><br><span class="line"><span class="comment">#apt-file search libcrypto.so.1.0.0</span></span><br><span class="line">sudo apt-get install libssl1.0.0 libssl1.0.0:i386</span><br><span class="line">sudo apt-get install libncurses5-dev libssl-dev</span><br><span class="line">sudo apt-get install libpixman-1-dev</span><br></pre></td></tr></table></figure>
+<h2 id="二进制环境配置">二进制环境配置</h2>
+<h3 id="x86">x86</h3>
+<p><code>64</code>位系统编译和运行<code>32</code>位程序需要另装库.</p>
 <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sudo apt-get install gcc-multilib libc6:i386</span><br></pre></td></tr></table></figure>
-<h3 id="调试工具"><a href="#调试工具" class="headerlink" title="调试工具"></a>调试工具</h3><p><code>https://github.com/hugsy/gef</code>.</p>
+<h3 id="调试工具">调试工具</h3>
+<p><code>https://github.com/hugsy/gef</code>.</p>
 <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">git <span class="built_in">clone</span> -b stable https://github.com/pwndbg/pwndbg</span><br><span class="line"><span class="built_in">cd</span> pwndbg</span><br><span class="line">sudo ./setup.sh</span><br></pre></td></tr></table></figure>
 <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">git <span class="built_in">clone</span> https://github.com/longld/peda.git ~/peda</span><br><span class="line"><span class="built_in">echo</span> <span class="string">"source ~/peda/peda.py"</span> &gt;&gt; ~/.gdbinit</span><br></pre></td></tr></table></figure>
 <p>调试其他架构程序.</p>
 <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sudo apt-get install gdb-multiarch</span><br></pre></td></tr></table></figure>
-<h3 id="pwntools"><a href="#pwntools" class="headerlink" title="pwntools"></a>pwntools</h3><p>推荐使用<code>python2</code>版本.</p>
+<h3 id="pwntools">pwntools</h3>
+<p>推荐使用<code>python2</code>版本.</p>
 <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sudo pip install pwntools</span><br></pre></td></tr></table></figure>
 <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">sudo apt-get update</span><br><span class="line">sudo apt-get install python3 python3-pip python3-dev git libssl-dev libffi-dev build-essential</span><br><span class="line">sudo python3 -m pip install --upgrade pip</span><br><span class="line">sudo python3 -m pip install --upgrade pwntools</span><br></pre></td></tr></table></figure>
-<h3 id="qume"><a href="#qume" class="headerlink" title="qume"></a>qume</h3><p>下载最新版源码安装.</p>
+<h3 id="qume">qume</h3>
+<p>下载最新版源码安装.</p>
 <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">./configure</span><br><span class="line">sudo make install -j20</span><br></pre></td></tr></table></figure>
 <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sudo apt-get install -y qemu-kvm</span><br></pre></td></tr></table></figure>
-<h3 id="gcc"><a href="#gcc" class="headerlink" title="gcc"></a>gcc</h3><p>有些老版本内核使用新版本<code>gcc</code>可能编译不过.</p>
+<h3 id="gcc">gcc</h3>
+<p>有些老版本内核使用新版本<code>gcc</code>可能编译不过.</p>
 <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">sudo apt-get install gcc-4.7</span><br><span class="line">sudo update-alternatives --install /usr/bin/gcc gcc /usr/bin/gcc-4.7 40</span><br><span class="line">sudo update-alternatives --install /usr/bin/gcc gcc /usr/bin/gcc-5 50</span><br><span class="line">sudo update-alternatives --config gcc</span><br></pre></td></tr></table></figure>
-<h3 id="常用工具"><a href="#常用工具" class="headerlink" title="常用工具"></a>常用工具</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">#sudo add-apt-repository ppa:brightbox/ruby-ng</span></span><br><span class="line"><span class="comment">#删除:sudo add-apt-repository -r ppa:brightbox/ruby-ng</span></span><br><span class="line"><span class="comment">#sudo apt-get update</span></span><br><span class="line"><span class="comment">#sudo apt-get install ruby2.6 ruby2.6-dev</span></span><br><span class="line">sudo apt-get install ruby ruby-dev</span><br><span class="line">sudo gem install one_gadget seccomp-tools</span><br><span class="line"></span><br><span class="line">sudo pip install setuptools --upgrade</span><br><span class="line"></span><br><span class="line">sudo pip3 install setuptools --upgrade</span><br><span class="line">sudo pip3 install lief</span><br><span class="line"></span><br><span class="line">sudo apt-get install binwalk</span><br><span class="line">sudo apt install musl-tools</span><br><span class="line"></span><br><span class="line">git <span class="built_in">clone</span> https://github.com/niklasb/libc-database.git</span><br><span class="line"></span><br><span class="line">git <span class="built_in">clone</span> https://github.com/maroueneboubakri/lscan.git</span><br></pre></td></tr></table></figure>
-<h3 id="多架构"><a href="#多架构" class="headerlink" title="多架构"></a>多架构</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">sudo apt-get install <span class="string">"binfmt*"</span></span><br><span class="line"><span class="comment">#binfmt用来识别多架构文件类型</span></span><br><span class="line">sudo apt-get install gcc-arm-linux-gnueabi g++-arm-linux-gnueabi gcc-aarch64-linux-gnu g++-aarch64-linux-gnu gcc-arm-linux-gnueabihf g++-arm-linux-gnueabihf</span><br><span class="line"><span class="comment">#ARM/AARCH64运行环境+交叉编译链</span></span><br><span class="line">sudo apt-get install linux-libc-dev-mips-cross libc6-mips-cross libc6-dev-mips-cross binutils-mips-linux-gnu gcc-mips-linux-gnu g++-mips-linux-gnu</span><br><span class="line"><span class="comment">#MIPS运行环境+交叉编译链</span></span><br></pre></td></tr></table></figure>
-<h3 id="v8环境配置"><a href="#v8环境配置" class="headerlink" title="v8环境配置"></a>v8环境配置</h3><p>配置<code>git</code>代理.</p>
+<h3 id="常用工具">常用工具</h3>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">#sudo add-apt-repository ppa:brightbox/ruby-ng</span></span><br><span class="line"><span class="comment">#删除:sudo add-apt-repository -r ppa:brightbox/ruby-ng</span></span><br><span class="line"><span class="comment">#sudo apt-get update</span></span><br><span class="line"><span class="comment">#sudo apt-get install ruby2.6 ruby2.6-dev</span></span><br><span class="line">sudo apt-get install ruby ruby-dev</span><br><span class="line">sudo gem install one_gadget seccomp-tools</span><br><span class="line"></span><br><span class="line">sudo pip install setuptools --upgrade</span><br><span class="line"></span><br><span class="line">sudo pip3 install setuptools --upgrade</span><br><span class="line">sudo pip3 install lief</span><br><span class="line"></span><br><span class="line">sudo apt-get install binwalk</span><br><span class="line">sudo apt install musl-tools</span><br><span class="line"></span><br><span class="line">git <span class="built_in">clone</span> https://github.com/niklasb/libc-database.git</span><br><span class="line"></span><br><span class="line">git <span class="built_in">clone</span> https://github.com/maroueneboubakri/lscan.git</span><br></pre></td></tr></table></figure>
+<h3 id="多架构">多架构</h3>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">sudo apt-get install <span class="string">"binfmt*"</span></span><br><span class="line"><span class="comment">#binfmt用来识别多架构文件类型</span></span><br><span class="line">sudo apt-get install gcc-arm-linux-gnueabi g++-arm-linux-gnueabi gcc-aarch64-linux-gnu g++-aarch64-linux-gnu gcc-arm-linux-gnueabihf g++-arm-linux-gnueabihf</span><br><span class="line"><span class="comment">#ARM/AARCH64运行环境+交叉编译链</span></span><br><span class="line">sudo apt-get install linux-libc-dev-mips-cross libc6-mips-cross libc6-dev-mips-cross binutils-mips-linux-gnu gcc-mips-linux-gnu g++-mips-linux-gnu</span><br><span class="line"><span class="comment">#MIPS运行环境+交叉编译链</span></span><br></pre></td></tr></table></figure>
+<h3 id="v8环境配置">v8环境配置</h3>
+<p>配置<code>git</code>代理.</p>
 <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">git config --global http.proxy http://192.168.235.1:1080</span><br><span class="line"><span class="comment">#关闭代理:git config --global --unset http.proxy</span></span><br></pre></td></tr></table></figure>
 <p>配置环境变量.</p>
 <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">export</span> http_proxy=<span class="string">"http://192.168.235.1:1080"</span></span><br><span class="line"><span class="built_in">export</span> https_proxy=<span class="variable">$http_proxy</span></span><br><span class="line"><span class="comment">#echo 'export http_proxy="http://192.168.235.1:1080"' &gt;&gt; ~/.bashrc</span></span><br><span class="line"><span class="comment">#echo 'export https_proxy=$http_proxy' &gt;&gt; ~/.bashrc</span></span><br></pre></td></tr></table></figure>
@@ -571,8 +586,10 @@
 <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">./out.gn/x64.release/d8</span><br><span class="line"><span class="comment">#启动d8交互shell</span></span><br><span class="line">./out.gn/x64.release/d8 test.js</span><br><span class="line"><span class="comment">#运行test.js</span></span><br><span class="line">./out.gn/x64.debug/d8</span><br><span class="line">./out.gn/x64.debug/shell</span><br><span class="line">./out.gn/x64.debug/d8 test.js</span><br></pre></td></tr></table></figure>
 <p>调试工具.</p>
 <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">echo</span> <span class="string">'source /home/w4rd3n/v8/tools/gdbinit'</span> &gt;&gt; ~/.gdbinit</span><br><span class="line"><span class="built_in">echo</span> <span class="string">'source /home/w4rd3n/v8/tools/gdb-v8-support.py'</span> &gt;&gt; ~/.gdbinit</span><br></pre></td></tr></table></figure>
-<h2 id="crypto环境"><a href="#crypto环境" class="headerlink" title="crypto环境"></a>crypto环境</h2><p><code>python</code>库.</p>
+<h2 id="crypto环境">crypto环境</h2>
+<p><code>python</code>库.</p>
 <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">sudo pip install pycrypto</span><br><span class="line">sudo pip3 install pycrypto</span><br><span class="line"></span><br><span class="line">sudo apt-get install libmpfr-dev libgmp-dev libmpc-dev</span><br><span class="line">sudo pip3 install gmpy2</span><br><span class="line">sudo pip install gmpy2</span><br><span class="line"></span><br><span class="line">sudo pip install rsa</span><br></pre></td></tr></table></figure>
+
       
     </div>
 
@@ -918,7 +935,7 @@
       <i class="fa fa-area-chart"></i>
     </span>
     
-    <span title="站点总字数">710k</span>
+    <span title="站点总字数">720k</span>
   
 
   
@@ -927,7 +944,7 @@
       <i class="fa fa-coffee"></i>
     </span>
     
-    <span title="站点阅读时长">10:46</span>
+    <span title="站点阅读时长">10:54</span>
   
 </div>
 
@@ -1578,5 +1595,5 @@
   
   <script type="text/javascript" src="//cdn.bootcss.com/canvas-nest.js/1.0.0/canvas-nest.min.js"></script>
   
-<script src="/live2dw/lib/L2Dwidget.min.js?0c58a1486de42ac6cc1c59c7d98ae887"></script><script>L2Dwidget.init({"pluginRootPath":"live2dw/","pluginJsPath":"lib/","pluginModelPath":"assets/","tagMode":false,"debug":false,"model":{"jsonPath":"/live2dw/assets/koharu.model.json"},"display":{"position":"right","width":150,"height":300},"mobile":{"show":false},"log":false});</script></body>
+<script src="/live2dw/lib/L2Dwidget.min.js?0c58a1486de42ac6cc1c59c7d98ae887"></script><script>L2Dwidget.init({"pluginRootPath":"live2dw/","pluginJsPath":"lib/","pluginModelPath":"assets/","tagMode":false,"debug":false,"model":{"jsonPath":"/live2dw/assets/koharu.model.json"},"display":{"position":"right","width":150,"height":300},"mobile":{"show":false},"log":false});</script><!-- hexo-inject:begin --><!-- hexo-inject:end --></body>
 </html>

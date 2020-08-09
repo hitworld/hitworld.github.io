@@ -16,7 +16,7 @@
 
 <html class="theme-next mist use-motion" lang="zh-CN">
 <head><meta name="generator" content="Hexo 3.8.0">
-  <meta charset="UTF-8">
+  <!-- hexo-inject:begin --><!-- hexo-inject:end --><meta charset="UTF-8">
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
 <meta name="theme-color" content="#222">
@@ -119,18 +119,18 @@
 
 
 
-  <meta name="description" content="apt换源1234sudo apt-get install leafpadsudo leafpad /etc/apt/sources.listsudo apt-get updatesudo apt-get full-upgrade sources.list. 12deb http://mirrors.ustc.edu.cn/kali kali-rolling main non-free contr">
+  <meta name="description" content="apt换源 1234sudo apt-get install leafpadsudo leafpad /etc/apt/sources.listsudo apt-get updatesudo apt-get full-upgrade sources.list. 12deb http://mirrors.ustc.edu.cn/kali kali-rolling main non-free c">
 <meta name="keywords" content="environment">
 <meta property="og:type" content="article">
 <meta property="og:title" content="w4rd3n-kali虚拟机环境搭建">
 <meta property="og:url" content="https://hitworld.github.io/posts/612b543a/index.html">
 <meta property="og:site_name" content="w4rd3n">
-<meta property="og:description" content="apt换源1234sudo apt-get install leafpadsudo leafpad /etc/apt/sources.listsudo apt-get updatesudo apt-get full-upgrade sources.list. 12deb http://mirrors.ustc.edu.cn/kali kali-rolling main non-free contr">
+<meta property="og:description" content="apt换源 1234sudo apt-get install leafpadsudo leafpad /etc/apt/sources.listsudo apt-get updatesudo apt-get full-upgrade sources.list. 12deb http://mirrors.ustc.edu.cn/kali kali-rolling main non-free c">
 <meta property="og:locale" content="zh-CN">
 <meta property="og:updated_time" content="2020-08-09T06:34:17.844Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="w4rd3n-kali虚拟机环境搭建">
-<meta name="twitter:description" content="apt换源1234sudo apt-get install leafpadsudo leafpad /etc/apt/sources.listsudo apt-get updatesudo apt-get full-upgrade sources.list. 12deb http://mirrors.ustc.edu.cn/kali kali-rolling main non-free contr">
+<meta name="twitter:description" content="apt换源 1234sudo apt-get install leafpadsudo leafpad /etc/apt/sources.listsudo apt-get updatesudo apt-get full-upgrade sources.list. 12deb http://mirrors.ustc.edu.cn/kali kali-rolling main non-free c">
 
 
 
@@ -185,7 +185,7 @@
       .logo-line-after i { right: initial; }
     }
   </style>
-</noscript>
+</noscript><!-- hexo-inject:begin --><!-- hexo-inject:end -->
 
 </head>
 
@@ -196,7 +196,7 @@
     
   
 
-  <div class="container sidebar-position-left page-post-detail">
+  <!-- hexo-inject:begin --><!-- hexo-inject:end --><div class="container sidebar-position-left page-post-detail">
     <div class="headband"></div>
 
     <header id="header" class="header" itemscope="" itemtype="http://schema.org/WPHeader">
@@ -530,17 +530,23 @@
       
 
       
-        <h2 id="apt换源"><a href="#apt换源" class="headerlink" title="apt换源"></a>apt换源</h2><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">sudo apt-get install leafpad</span><br><span class="line">sudo leafpad /etc/apt/sources.list</span><br><span class="line">sudo apt-get update</span><br><span class="line">sudo apt-get full-upgrade</span><br></pre></td></tr></table></figure>
+        <h2 id="apt换源">apt换源</h2>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">sudo apt-get install leafpad</span><br><span class="line">sudo leafpad /etc/apt/sources.list</span><br><span class="line">sudo apt-get update</span><br><span class="line">sudo apt-get full-upgrade</span><br></pre></td></tr></table></figure>
 <p><code>sources.list</code>.</p>
 <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">deb http://mirrors.ustc.edu.cn/kali kali-rolling main non-free contrib</span><br><span class="line">deb-src http://mirrors.ustc.edu.cn/kali kali-rolling main non-free contrib</span><br></pre></td></tr></table></figure>
-<h2 id="docker"><a href="#docker" class="headerlink" title="docker"></a>docker</h2><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">curl -fsSL https://download.docker.com/linux/debian/gpg | apt-key add -</span><br><span class="line"><span class="built_in">echo</span> <span class="string">'deb [arch=amd64] https://download.docker.com/linux/debian buster stable'</span> &gt; /etc/apt/sources.list.d/docker.list</span><br><span class="line"><span class="comment">#需要为root用户</span></span><br><span class="line">sudo apt-get update</span><br><span class="line">sudo apt-get remove docker docker-engine docker.io</span><br><span class="line">sudo apt-get install docker-ce</span><br><span class="line">sudo vim /etc/docker/daemon.json</span><br><span class="line"><span class="comment"># &#123;"registry-mirrors": ["https://docker.mirrors.ustc.edu.cn"]&#125;</span></span><br></pre></td></tr></table></figure>
+<h2 id="docker">docker</h2>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">curl -fsSL https://download.docker.com/linux/debian/gpg | apt-key add -</span><br><span class="line"><span class="built_in">echo</span> <span class="string">'deb [arch=amd64] https://download.docker.com/linux/debian buster stable'</span> &gt; /etc/apt/sources.list.d/docker.list</span><br><span class="line"><span class="comment">#需要为root用户</span></span><br><span class="line">sudo apt-get update</span><br><span class="line">sudo apt-get remove docker docker-engine docker.io</span><br><span class="line">sudo apt-get install docker-ce</span><br><span class="line">sudo vim /etc/docker/daemon.json</span><br><span class="line"><span class="comment"># &#123;"registry-mirrors": ["https://docker.mirrors.ustc.edu.cn"]&#125;</span></span><br></pre></td></tr></table></figure>
 <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">systemctl start docker</span><br><span class="line">systemctl <span class="built_in">enable</span> docker</span><br><span class="line"><span class="comment">#开机自启</span></span><br></pre></td></tr></table></figure>
 <p><code>docker-compose</code>安装.</p>
 <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">curl -L https://github.com/docker/compose/releases/download/1.8.0/docker-compose-`uname -s`-`uname -m` &gt; /usr/<span class="built_in">local</span>/bin/docker-compose</span><br><span class="line">chmod +x /usr/<span class="built_in">local</span>/bin/docker-compose</span><br><span class="line">ln -s /usr/<span class="built_in">local</span>/bin/docker-compose /usr/bin/docker-compose</span><br></pre></td></tr></table></figure>
-<h2 id="dockerfly"><a href="#dockerfly" class="headerlink" title="dockerfly"></a>dockerfly</h2><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">docker pull helyho/dockerfly</span><br><span class="line">docker run --name dockerfly -d -v /var/run/docker.sock:/var/run/docker.sock --restart always -p 28083:28083 helyho/dockerfly</span><br></pre></td></tr></table></figure>
+<h2 id="dockerfly">dockerfly</h2>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">docker pull helyho/dockerfly</span><br><span class="line">docker run --name dockerfly -d -v /var/run/docker.sock:/var/run/docker.sock --restart always -p 28083:28083 helyho/dockerfly</span><br></pre></td></tr></table></figure>
 <p>访问:<code>http://127.0.0.1:28083</code>,使用:<code>admin</code>/<code>1234</code>登录到<code>dockerfly</code>.</p>
-<h2 id="penetration"><a href="#penetration" class="headerlink" title="penetration"></a>penetration</h2><h3 id="vulhub"><a href="#vulhub" class="headerlink" title="vulhub"></a>vulhub</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">cd</span> ~</span><br><span class="line">wget https://github.com/vulhub/vulhub/archive/master.zip -O vulhub-master.zip</span><br><span class="line">unzip vulhub-master.zip</span><br><span class="line"></span><br><span class="line"><span class="built_in">cd</span> vulhub-master</span><br><span class="line"><span class="built_in">cd</span> flask/ssti</span><br><span class="line"><span class="comment">#进入某一个漏洞/环境的目录</span></span><br><span class="line">docker-compose build</span><br><span class="line"><span class="comment">#自动化编译环境</span></span><br><span class="line">docker-compose up -d</span><br><span class="line"><span class="comment">#启动整个环境</span></span><br><span class="line">docker-compose down -v</span><br><span class="line"><span class="comment">#测试完成后,删除整个环境</span></span><br></pre></td></tr></table></figure>
-<h3 id="VulApps"><a href="#VulApps" class="headerlink" title="VulApps"></a>VulApps</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">git <span class="built_in">clone</span> https://github.com/Medicean/VulApps.git</span><br><span class="line">docker pull medicean/vulapps</span><br></pre></td></tr></table></figure>
+<h2 id="penetration">penetration</h2>
+<h3 id="vulhub">vulhub</h3>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">cd</span> ~</span><br><span class="line">wget https://github.com/vulhub/vulhub/archive/master.zip -O vulhub-master.zip</span><br><span class="line">unzip vulhub-master.zip</span><br><span class="line"></span><br><span class="line"><span class="built_in">cd</span> vulhub-master</span><br><span class="line"><span class="built_in">cd</span> flask/ssti</span><br><span class="line"><span class="comment">#进入某一个漏洞/环境的目录</span></span><br><span class="line">docker-compose build</span><br><span class="line"><span class="comment">#自动化编译环境</span></span><br><span class="line">docker-compose up -d</span><br><span class="line"><span class="comment">#启动整个环境</span></span><br><span class="line">docker-compose down -v</span><br><span class="line"><span class="comment">#测试完成后,删除整个环境</span></span><br></pre></td></tr></table></figure>
+<h3 id="vulapps">VulApps</h3>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">git <span class="built_in">clone</span> https://github.com/Medicean/VulApps.git</span><br><span class="line">docker pull medicean/vulapps</span><br></pre></td></tr></table></figure>
 
       
     </div>
@@ -855,7 +861,7 @@
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#apt换源"><span class="nav-number">1.</span> <span class="nav-text">apt换源</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#docker"><span class="nav-number">2.</span> <span class="nav-text">docker</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#dockerfly"><span class="nav-number">3.</span> <span class="nav-text">dockerfly</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#penetration"><span class="nav-number">4.</span> <span class="nav-text">penetration</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#vulhub"><span class="nav-number">4.1.</span> <span class="nav-text">vulhub</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#VulApps"><span class="nav-number">4.2.</span> <span class="nav-text">VulApps</span></a></li></ol></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#apt换源"><span class="nav-number">1.</span> <span class="nav-text">apt换源</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#docker"><span class="nav-number">2.</span> <span class="nav-text">docker</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#dockerfly"><span class="nav-number">3.</span> <span class="nav-text">dockerfly</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#penetration"><span class="nav-number">4.</span> <span class="nav-text">penetration</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#vulhub"><span class="nav-number">4.1.</span> <span class="nav-text">vulhub</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#vulapps"><span class="nav-number">4.2.</span> <span class="nav-text">VulApps</span></a></li></ol></li></ol></div>
             
 
           </div>
@@ -887,7 +893,7 @@
       <i class="fa fa-area-chart"></i>
     </span>
     
-    <span title="站点总字数">710k</span>
+    <span title="站点总字数">720k</span>
   
 
   
@@ -896,7 +902,7 @@
       <i class="fa fa-coffee"></i>
     </span>
     
-    <span title="站点阅读时长">10:46</span>
+    <span title="站点阅读时长">10:54</span>
   
 </div>
 
@@ -1547,5 +1553,5 @@
   
   <script type="text/javascript" src="//cdn.bootcss.com/canvas-nest.js/1.0.0/canvas-nest.min.js"></script>
   
-<script src="/live2dw/lib/L2Dwidget.min.js?0c58a1486de42ac6cc1c59c7d98ae887"></script><script>L2Dwidget.init({"pluginRootPath":"live2dw/","pluginJsPath":"lib/","pluginModelPath":"assets/","tagMode":false,"debug":false,"model":{"jsonPath":"/live2dw/assets/koharu.model.json"},"display":{"position":"right","width":150,"height":300},"mobile":{"show":false},"log":false});</script></body>
+<script src="/live2dw/lib/L2Dwidget.min.js?0c58a1486de42ac6cc1c59c7d98ae887"></script><script>L2Dwidget.init({"pluginRootPath":"live2dw/","pluginJsPath":"lib/","pluginModelPath":"assets/","tagMode":false,"debug":false,"model":{"jsonPath":"/live2dw/assets/koharu.model.json"},"display":{"position":"right","width":150,"height":300},"mobile":{"show":false},"log":false});</script><!-- hexo-inject:begin --><!-- hexo-inject:end --></body>
 </html>

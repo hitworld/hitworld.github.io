@@ -16,7 +16,7 @@
 
 <html class="theme-next mist use-motion" lang="zh-CN">
 <head><meta name="generator" content="Hexo 3.8.0">
-  <meta charset="UTF-8">
+  <!-- hexo-inject:begin --><!-- hexo-inject:end --><meta charset="UTF-8">
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
 <meta name="theme-color" content="#222">
@@ -119,13 +119,13 @@
 
 
 
-  <meta name="description" content="未完成 概览v8是Google的JavaScript与WebAssembly引擎,使用C++编写,被用于Chrome和Node.js等应用程序中,同时也可以独立运行. 早期的v8引擎首先解析源代码构造AST(抽象语法树),JIT编译器(实时编译器)再基于AST将其编译成机器代码执行,运行过程中有选择的进行优化. 而现在AST首先被转化为bytecode执行,再有选择的将字节码与分析数据一起发给优化">
+  <meta name="description" content="未完成 概览 v8是Google的JavaScript与WebAssembly引擎,使用C++编写,被用于Chrome和Node.js等应用程序中,同时也可以独立运行. 早期的v8引擎首先解析源代码构造AST(抽象语法树),JIT编译器(实时编译器)再基于AST将其编译成机器代码执行,运行过程中有选择的进行优化. 而现在AST首先被转化为bytecode执行,再有选择的将字节码与分析数据一">
 <meta name="keywords" content="v8">
 <meta property="og:type" content="article">
 <meta property="og:title" content="CS-RTFSC-v8-概览">
 <meta property="og:url" content="https://hitworld.github.io/posts/2dd13ab1/index.html">
 <meta property="og:site_name" content="w4rd3n">
-<meta property="og:description" content="未完成 概览v8是Google的JavaScript与WebAssembly引擎,使用C++编写,被用于Chrome和Node.js等应用程序中,同时也可以独立运行. 早期的v8引擎首先解析源代码构造AST(抽象语法树),JIT编译器(实时编译器)再基于AST将其编译成机器代码执行,运行过程中有选择的进行优化. 而现在AST首先被转化为bytecode执行,再有选择的将字节码与分析数据一起发给优化">
+<meta property="og:description" content="未完成 概览 v8是Google的JavaScript与WebAssembly引擎,使用C++编写,被用于Chrome和Node.js等应用程序中,同时也可以独立运行. 早期的v8引擎首先解析源代码构造AST(抽象语法树),JIT编译器(实时编译器)再基于AST将其编译成机器代码执行,运行过程中有选择的进行优化. 而现在AST首先被转化为bytecode执行,再有选择的将字节码与分析数据一">
 <meta property="og:locale" content="zh-CN">
 <meta property="og:image" content="https://hitworld.github.io/posts/2dd13ab1/1.png">
 <meta property="og:image" content="https://hitworld.github.io/posts/2dd13ab1/12.png">
@@ -143,7 +143,7 @@
 <meta property="og:updated_time" content="2020-08-09T06:34:17.789Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="CS-RTFSC-v8-概览">
-<meta name="twitter:description" content="未完成 概览v8是Google的JavaScript与WebAssembly引擎,使用C++编写,被用于Chrome和Node.js等应用程序中,同时也可以独立运行. 早期的v8引擎首先解析源代码构造AST(抽象语法树),JIT编译器(实时编译器)再基于AST将其编译成机器代码执行,运行过程中有选择的进行优化. 而现在AST首先被转化为bytecode执行,再有选择的将字节码与分析数据一起发给优化">
+<meta name="twitter:description" content="未完成 概览 v8是Google的JavaScript与WebAssembly引擎,使用C++编写,被用于Chrome和Node.js等应用程序中,同时也可以独立运行. 早期的v8引擎首先解析源代码构造AST(抽象语法树),JIT编译器(实时编译器)再基于AST将其编译成机器代码执行,运行过程中有选择的进行优化. 而现在AST首先被转化为bytecode执行,再有选择的将字节码与分析数据一">
 <meta name="twitter:image" content="https://hitworld.github.io/posts/2dd13ab1/1.png">
 
 
@@ -199,7 +199,7 @@
       .logo-line-after i { right: initial; }
     }
   </style>
-</noscript>
+</noscript><!-- hexo-inject:begin --><!-- hexo-inject:end -->
 
 </head>
 
@@ -210,7 +210,7 @@
     
   
 
-  <div class="container sidebar-position-left page-post-detail">
+  <!-- hexo-inject:begin --><!-- hexo-inject:end --><div class="container sidebar-position-left page-post-detail">
     <div class="headband"></div>
 
     <header id="header" class="header" itemscope="" itemtype="http://schema.org/WPHeader">
@@ -517,7 +517,7 @@
                 
                   <span class="post-meta-item-text">本文字数：</span>
                 
-                <span title="本文字数">9.6k</span>
+                <span title="本文字数">9.9k</span>
               
 
               
@@ -552,7 +552,8 @@
 
       
         <p>未完成</p>
-<h2 id="概览"><a href="#概览" class="headerlink" title="概览"></a>概览</h2><p><code>v8</code>是<code>Google</code>的<code>JavaScript</code>与<code>WebAssembly</code>引擎,使用<code>C++</code>编写,被用于<code>Chrome</code>和<code>Node.js</code>等应用程序中,同时也可以独立运行.</p>
+<h2 id="概览">概览</h2>
+<p><code>v8</code>是<code>Google</code>的<code>JavaScript</code>与<code>WebAssembly</code>引擎,使用<code>C++</code>编写,被用于<code>Chrome</code>和<code>Node.js</code>等应用程序中,同时也可以独立运行.</p>
 <p>早期的<code>v8</code>引擎首先解析源代码构造<code>AST</code>(抽象语法树),<code>JIT</code>编译器(实时编译器)再基于<code>AST</code>将其编译成机器代码执行,运行过程中有选择的进行优化.</p>
 <p>而现在<code>AST</code>首先被转化为<code>bytecode</code>执行,再有选择的将字节码与分析数据一起发给优化编译器<code>TurboFan</code>.如果在某点上一个假设被证明是不正确的,那么优化编译器会去优化并回退至解释器部分.</p>
 <img src="/posts/2dd13ab1/1.png" title="p1">
@@ -580,18 +581,23 @@
 <li><code>ic/</code>:该目录为<code>Inline Caching</code>的源码.</li>
 <li><code>objects-ini.h</code>,<code>objects.h</code>,<code>objects.cc</code>,<code>type.h</code>,<code>type.cc</code>:包含了<code>v8</code>中使用的对象和类型的定义.</li>
 </ul>
-<h2 id="延迟解析"><a href="#延迟解析" class="headerlink" title="延迟解析"></a>延迟解析</h2><p>如果解析的代码没有被执行,这会造成性能浪费,所以<code>v8</code>采用延迟解析,将解析分为两个阶段.</p>
+<h2 id="延迟解析">延迟解析</h2>
+<p>如果解析的代码没有被执行,这会造成性能浪费,所以<code>v8</code>采用延迟解析,将解析分为两个阶段.</p>
 <ul>
 <li>首先预解析所有函数的布局,进行初步的语法错误检查并获取函数的范围.</li>
 <li>在运行过程真正调用函数时才进行解析.</li>
 </ul>
 <p><code>v8</code>还实现了自己的解析器(而不是编译器编译器,比如:<code>yacc</code>,<code>lex</code>),并使用递归下降语法分析进行解析.</p>
-<h2 id="编译器"><a href="#编译器" class="headerlink" title="编译器"></a>编译器</h2><p><code>v8</code>到现在共有过四个编译器:<code>Full-Codegen</code>,<code>Crankshaft</code>,<code>TurboFan</code>,<code>Ignition</code>.</p>
-<h3 id="Full-Codegen"><a href="#Full-Codegen" class="headerlink" title="Full-Codegen"></a>Full-Codegen</h3><p><code>Full-Codegen</code>直接将<code>AST</code>转换为汇编语言,通过它,<code>v8</code>把要执行的<code>JavaScript</code>代码转换为机器语言(尚未优化)并输出到<code>JIT</code>区域(<code>RWX</code>区域),将<code>EIP</code>寄存器移到这个<code>JIT</code>区域并按原样继续执行.</p>
-<h3 id="Ignition"><a href="#Ignition" class="headerlink" title="Ignition"></a>Ignition</h3><p><code>v8</code>通过<code>v8::internal::AstVisitor</code>(使用<code>Vistor</code>模式)这个基类从<code>AST</code>生成<code>bytecode</code>.</p>
+<h2 id="编译器">编译器</h2>
+<p><code>v8</code>到现在共有过四个编译器:<code>Full-Codegen</code>,<code>Crankshaft</code>,<code>TurboFan</code>,<code>Ignition</code>.</p>
+<h3 id="full-codegen">Full-Codegen</h3>
+<p><code>Full-Codegen</code>直接将<code>AST</code>转换为汇编语言,通过它,<code>v8</code>把要执行的<code>JavaScript</code>代码转换为机器语言(尚未优化)并输出到<code>JIT</code>区域(<code>RWX</code>区域),将<code>EIP</code>寄存器移到这个<code>JIT</code>区域并按原样继续执行.</p>
+<h3 id="ignition">Ignition</h3>
+<p><code>v8</code>通过<code>v8::internal::AstVisitor</code>(使用<code>Vistor</code>模式)这个基类从<code>AST</code>生成<code>bytecode</code>.</p>
 <p>生成的<code>bytecode</code>存储在<code>BytecodeArray</code>中,最终生成的字节码是从被称为<code>InterpreterEntryTrampoline</code>的<code>Builtin</code>代码执行的,<code>InterpreterEntryTrampoline</code>被编译成<code>Assembly</code>,并且被当成普通的<code>C</code>函数调用.</p>
 <p><code>Ignition</code>是一种基于寄存器的<code>bytecode</code>解释器,将值分配给<code>CPU</code>的寄存器,并执行它们.<code>Ignition</code>通过预先生成一个名为<code>BytecodeHandler</code>的字节码处理函数,该函数从<code>bytecode</code>中获得一个索引,调用对应的汇编代码,从而执行<code>bytecode</code>数组.</p>
-<h3 id="优化编译器"><a href="#优化编译器" class="headerlink" title="优化编译器"></a>优化编译器</h3><p><code>Crankshaft</code>和<code>TurboFan</code>都属于优化编译器,会在运行过程中对<code>hot-code</code>进行优化.</p>
+<h3 id="优化编译器">优化编译器</h3>
+<p><code>Crankshaft</code>和<code>TurboFan</code>都属于优化编译器,会在运行过程中对<code>hot-code</code>进行优化.</p>
 <p><code>hot-code</code>指被多次调用的函数<code>/</code>循环,被判断为<code>hot-code</code>的代码会在其他线程里被<code>turbofan/crankshar</code>再次编译,通过替换<code>jmp</code>目标地址(在主线程中执行)来执行优化过的代码.</p>
 <p><code>2015 ~ 2017</code>期间有两种优化编译器,根据以下规则运行.</p>
 <ul>
@@ -600,21 +606,25 @@
 <li>其他时候<code>Crankshaft</code>被默认使用.</li>
 </ul>
 <p>之后便只有<code>TurboFan</code>这一个优化编译器了.</p>
-<h2 id="v8内存构成"><a href="#v8内存构成" class="headerlink" title="v8内存构成"></a>v8内存构成</h2><p><code>v8</code>进程的内存通常由以下几个块构成.</p>
-<ol>
+<h2 id="v8内存构成">v8内存构成</h2>
+<p><code>v8</code>进程的内存通常由以下几个块构成.</p>
+<ol type="1">
 <li>新生代内存区(<code>new space</code>):大多数的对象都会被分配在这里,这个区域很小但是垃圾回收比较频繁.</li>
 <li>老生代内存区(<code>old space</code>):属于老生代,这里只保存原始数据对象,这些对象没有指向其他对象的指针.</li>
 <li>大对象区(<code>large object space</code>):存放体积超越其他区大小的对象,每个对象有自己的内存,垃圾回收其不会移动大对象区.</li>
 <li>代码区(<code>code space</code>):代码对象,会被分配在这里,唯一拥有执行权限的内存.</li>
 <li><code>map</code>区(<code>map space</code>):存放<code>Cell</code>和<code>Map</code>,每个区域都是存放相同大小的元素,结构简单.</li>
 </ol>
-<h2 id="v8内存生命周期"><a href="#v8内存生命周期" class="headerlink" title="v8内存生命周期"></a>v8内存生命周期</h2><ol>
+<h2 id="v8内存生命周期">v8内存生命周期</h2>
+<ol type="1">
 <li>新建对象<code>obj</code>被分配到<code>new space</code>.</li>
 <li>随着程序的运行,<code>new space</code>满了,<code>GC</code>开始清理<code>new space</code>里的死对象,如果<code>obj</code>还处于活跃状态,就不会被清理出去.否则结束.</li>
 <li><code>GC</code>清理了两遍<code>new space</code>,发现<code>obj</code>依然还活跃着,就把<code>obj</code>移动到了<code>old space</code>.</li>
 <li>随着程序的运行,<code>old space</code>也满了,<code>GC</code>开始清理<code>old space</code>,这时候如果<code>obj</code>已经没有被引用了,就会把<code>obj</code>给清理出去.否则继续停留.</li>
 </ol>
-<h2 id="v8优化机制"><a href="#v8优化机制" class="headerlink" title="v8优化机制"></a>v8优化机制</h2><h3 id="Hiddern-Class"><a href="#Hiddern-Class" class="headerlink" title="Hiddern Class"></a>Hiddern Class</h3><p>在<code>v8</code>中,每个<code>JavaScript</code>对象都有一个<code>HiddenClass</code>关联.<code>HiddenClass</code>存储有关对象形状的信息,除其他外,还存储从属性名称到索引到属性的映射.</p>
+<h2 id="v8优化机制">v8优化机制</h2>
+<h3 id="hiddern-class">Hiddern Class</h3>
+<p>在<code>v8</code>中,每个<code>JavaScript</code>对象都有一个<code>HiddenClass</code>关联.<code>HiddenClass</code>存储有关对象形状的信息,除其他外,还存储从属性名称到索引到属性的映射.</p>
 <p><code>JavaScript</code>对象数组索引属性存储在单独的元素存储中,命名属性存储在属性存储中,元素和属性可以是数组或字典.</p>
 <img src="/posts/2dd13ab1/12.png" title="p12">
 <p><code>JavaScript</code>对象每个<code>property</code>的值都以<code>array</code>的形式进行存储,通过偏移值访问<code>array</code>里的<code>property</code>值.而偏移值和属性名称的依赖关系保留给另一个类,也就是<code>Hiddern Class</code>.</p>
@@ -628,7 +638,8 @@
 <p>从<code>Hidden Class</code>实现中可以看到,如果是相同类型,那么<code>Hidden Class</code>指针是相同的.如果属性添加顺序不同,会变成不同的<code>Hiddern Class</code>.</p>
 <p>当<code>property</code>增加到<code>11</code>个以上,使用外部的<code>array</code>来管理,也就是<code>Fast property</code>.</p>
 <p>如果再进一步增加<code>property</code>,那么就会用<code>object</code>外的<code>dictory</code>来管理,也就是<code>slow/dict properties</code>.也被称为<code>self-contained</code>,因为没有使用<code>Hiddern Class</code>且使用外部的<code>dictory</code>保存所有的信息.</p>
-<h3 id="Inline-Caching"><a href="#Inline-Caching" class="headerlink" title="Inline Caching"></a>Inline Caching</h3><p><code>Inline Caching</code>通过对于某些<code>action</code>和类型进行缓存来优化,例如缓存之前的访问去加速<code>property</code>访问速度,或者在循环和函数中多次被多次调用的<code>action</code>的<code>code</code>.</p>
+<h3 id="inline-caching">Inline Caching</h3>
+<p><code>Inline Caching</code>通过对于某些<code>action</code>和类型进行缓存来优化,例如缓存之前的访问去加速<code>property</code>访问速度,或者在循环和函数中多次被多次调用的<code>action</code>的<code>code</code>.</p>
 <p>具体则是通过将<code>Hidden Class</code>地址或者其中的偏移替代原来的索引进行优化.具体会通过判断对象类型来决定是否调用缓存,所以实际开发中要保证属性添加顺序以保证<code>Hiddern Class</code>的相同.</p>
 <p><code>ICState</code>.</p>
 <ul>
@@ -640,7 +651,8 @@
 <li><code>GENERIC</code>(<code>G</code>):<code>IC</code>已停止的状态.</li>
 </ul>
 <p><code>Inline Caching</code>可通过<code>-trace-ic</code>进行确认.使用<code>–use-ic</code>启用<code>IC</code>(默认),使用<code>–no-use-ic</code>禁用<code>IC</code>.</p>
-<h3 id="CodeStubAssembler"><a href="#CodeStubAssembler" class="headerlink" title="CodeStubAssembler"></a>CodeStubAssembler</h3><p><code>v8</code>使用<code>CodeStubAssembler</code>,一种可以用来生成汇编语言的汇编器,其使用的表示方式是一种<code>DSL</code>,通过编写<code>DSL</code>伪汇编代码然后生成汇编代码,达到高效率以及跨平台的目的.</p>
+<h3 id="codestubassembler">CodeStubAssembler</h3>
+<p><code>v8</code>使用<code>CodeStubAssembler</code>,一种可以用来生成汇编语言的汇编器,其使用的表示方式是一种<code>DSL</code>,通过编写<code>DSL</code>伪汇编代码然后生成汇编代码,达到高效率以及跨平台的目的.</p>
 <ul>
 <li><code>TF_BUILTIN</code>:创建一个函数.</li>
 <li><code>Label</code>:定义一个标签.</li>
@@ -651,19 +663,21 @@
 <li><code>DebugBreak()</code>:断点.</li>
 <li><code>Print()</code>:输出变量.</li>
 </ul>
-<h3 id="垃圾收集机制"><a href="#垃圾收集机制" class="headerlink" title="垃圾收集机制"></a>垃圾收集机制</h3><p><code>v8</code>使用<code>GC</code>(垃圾收集)机制单独管理<code>JavaScript</code>对象(<code>HeapObject</code>),检测废弃的对象并自动释放它们.</p>
+<h3 id="垃圾收集机制">垃圾收集机制</h3>
+<p><code>v8</code>使用<code>GC</code>(垃圾收集)机制单独管理<code>JavaScript</code>对象(<code>HeapObject</code>),检测废弃的对象并自动释放它们.</p>
 <p><code>GC</code>区域由多个<code>mmap</code>出来的区域组成,<code>v8</code>内部使用的各种<code>HeapObject</code>被保留在这个区域.</p>
 <p>根据区域中<code>object</code>的生存时间,<code>GC</code>区域被分为新生代(<code>Young generation</code>,存活时间较短的对象)和老生代(<code>Old generation</code>,存活时间较长或常驻内存的对象).除此之外,还有一些区域不属于任何一个<code>generation</code>,称为<code>Other</code>.</p>
 <p>对象起初都会被分配到新生代,当新生代中的对象满足某些条件时,会被移动到老生代.</p>
 <p>默认情况下,<code>64</code>位环境下的<code>v8</code>引擎的新生代内存大小<code>32MB</code>,老生代内存大小为<code>1400MB</code>,而<code>32</code>位则减半,分别为<code>16MB</code>和<code>700MB</code>.</p>
 <p><code>v8</code>内存的最大保留空间分别为<code>1464MB</code>(<code>64</code>位)和<code>732MB</code>(<code>32</code>位).具体的计算公式是<code>4 * reserved_semispace_space_ + max_old_generation_size_</code>,新生代由两块<code>reserved_semispace_space_</code>组成.</p>
-<h4 id="新生代"><a href="#新生代" class="headerlink" title="新生代"></a>新生代</h4><p>在新生代分配内存非常容易,只需要保存一个指向内存区的指针,不断根据新对象的大小进行递增即可.当该指针到达了新生代内存区的末尾,就会有一次清理(仅仅是清理新生代).</p>
+<h4 id="新生代">新生代</h4>
+<p>在新生代分配内存非常容易,只需要保存一个指向内存区的指针,不断根据新对象的大小进行递增即可.当该指针到达了新生代内存区的末尾,就会有一次清理(仅仅是清理新生代).</p>
 <p>新生代使用<code>Scavenge</code>算法进行回收,在<code>Scavenge</code>算法的实现中,主要采用了<code>Cheney</code>算法.</p>
 <p><code>Cheney</code>算法算法是一种采用复制的方式实现的垃圾回收算法.它将内存一分为二,每一部分空间称为<code>semispace</code>.</p>
 <p>在这两个<code>semispace</code>中,一个处于使用状态,另一个处于闲置状态.处于使用状态的<code>semispace</code>空间称为<code>From</code>空间,处于闲置状态的空间称为<code>To</code>空间,分配对象时,先是在<code>From</code>空间中进行分配.当开始进行垃圾回收算法时,会检查<code>From</code>空间中的存活对象,这些存活对象将会被复制到<code>To</code>空间中(复制完成后会进行紧缩),而非活跃对象占用的空间将会被释放.</p>
 <p>完成复制后,<code>From</code>空间和<code>To</code>空间的角色发生对换.也就是说,在垃圾回收的过程中,就是通过将存活对象在两个<code>semispace</code>之间进行复制.复制的过程采用的是<code>BFS</code>的思想,从根对象出发,广度优先遍历所有能到达的对象.</p>
 <p>具体的执行过程.</p>
-<ol>
+<ol type="1">
 <li>首先将<code>From</code>空间中所有能从根对象到达的对象复制到<code>To</code>区,然后维护两个<code>To</code>区的指针<code>scanPtr</code>和<code>allocationPtr</code>,分别指向即将扫描的活跃对象和即将为新对象分配内存的地方,开始循环.</li>
 <li>循环的每一轮会查找当前<code>scanPtr</code>所指向的对象,确定对象内部的每个指针指向哪里.如果指向老生代不必考虑,如果指向<code>From</code>区,就需要把这个所指向的对象从<code>From</code>区复制到<code>To</code>区,具体复制的位置就是<code>allocationPtr</code>所指向的位置.</li>
 <li>复制完成后将<code>scanPtr</code>所指对象内的指针修改为新复制对象存放的地址,并移动<code>allocationPtr</code>.如果一个对象内部的所有指针都被处理完,<code>scanPtr</code>就会向前移动,进入下一个循环.</li>
@@ -671,17 +685,18 @@
 </ol>
 <p>如果新生代中的一个对象只有一个指向它的指针,而这个指针在老生代中,为了判断这个新生代的对象是否存活,需要建立一个列表用来记录所有老生代对象指向新生代对象的情况.</p>
 <p>当一个对象经过多次新生代的清理依旧幸存,这说明它的生存周期较长,也就会被移动到老生代,这称为对象的晋升.晋升的标准有两种.</p>
-<ol>
+<ol type="1">
 <li>对象从<code>From</code>空间复制到<code>To</code>空间时,会检查它的内存地址来判断这个对象是否已经经历过一个新生代的清理,如果是,则复制到老生代中,否则复制到<code>To</code>空间中.</li>
 <li>对象从<code>From</code>空间复制到<code>To</code>空间时,如果<code>To</code>空间已经被使用了超过<code>25%</code>,那么这个对象直接被复制到老生代.</li>
 </ol>
-<h4 id="老生代"><a href="#老生代" class="headerlink" title="老生代"></a>老生代</h4><p><code>v8</code>在老生代中的垃圾回收策略采用<code>Mark-Sweep</code>和<code>Mark-Compact</code>相结合.主要采用标记清除算法,如果空间不足以分配从新生代晋升过来的对象时,才使用标记整理.</p>
+<h4 id="老生代">老生代</h4>
+<p><code>v8</code>在老生代中的垃圾回收策略采用<code>Mark-Sweep</code>和<code>Mark-Compact</code>相结合.主要采用标记清除算法,如果空间不足以分配从新生代晋升过来的对象时,才使用标记整理.</p>
 <p><code>Mark-Sweep</code>分为标记和清除两个阶段.</p>
 <p>标记清除有一个问题就是进行一次标记清楚后,内存空间往往是不连续的,会出现很多的内存碎片.如果后续需要分配一个需要内存空间较多的对象时,如果所有的内存碎片都不够用,将会使得<code>v8</code>无法完成这次分配,提前触发垃圾回收.</p>
 <p><code>Mark-Compact</code>正是为了解决标记清除所带来的内存碎片的问题.标记整理在标记清除的基础进行修改,将其的清除阶段变为紧缩极端.在整理的过程中,将活着的对象向内存区的一段移动,移动完成后直接清理掉边界外的内存.紧缩过程涉及对象的移动,所以效率并不是太好,但是能保证不会生成内存碎片.</p>
 <p>标记清除和标记整理都分为两个阶段:标记阶段,清除或紧缩阶段.</p>
 <p>在标记阶段,所有堆上的活跃对象都会被标记.每个内存页有一个用来标记对象的位图,位图中的每一位对应内存页中的一个字.另外有两位用来标记对象的状态,这个状态一共有三种:白,灰,黑.</p>
-<ol>
+<ol type="1">
 <li>如果一个对象为白对象,它还没未被垃圾回收器发现.</li>
 <li>如果一个对象为灰对象,它已经被垃圾回收器发现,但其邻接对象尚未全部处理.</li>
 <li>如果一个对象为黑对象,说明其不仅被垃圾回收器发现,其邻接对象也全部被处理完毕了.</li>
@@ -703,7 +718,8 @@
 <li>由于标记过程中也记录了不同页之间的指针,这些指针在此时也会进行更新.</li>
 <li>如果一个页非常活跃,如其中有过多需要记录的指针,那么地址记录会跳过它,等到下一轮垃圾回收进行处理.</li>
 </ul>
-<h2 id="v8的object"><a href="#v8的object" class="headerlink" title="v8的object"></a>v8的object</h2><p><code>v8</code>自定义了一些类,并针对<code>C++</code>类结构制作了触发器来与<code>GC</code>合作.<code>v8</code>的<code>object</code>没有成员变量,也没有虚函数和构造<code>/</code>析构函数.</p>
+<h2 id="v8的object">v8的object</h2>
+<p><code>v8</code>自定义了一些类,并针对<code>C++</code>类结构制作了触发器来与<code>GC</code>合作.<code>v8</code>的<code>object</code>没有成员变量,也没有虚函数和构造<code>/</code>析构函数.</p>
 <p>继承关系在文件<code>v8/src/objects.h</code>中.</p>
 <figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// v8/src/objects.h</span></span><br><span class="line"><span class="comment">// Most object types in the V8 JavaScript are described in this file.</span></span><br><span class="line"></span><br><span class="line"><span class="comment">// Inheritance hierarchy:</span></span><br><span class="line"><span class="comment">// - Object</span></span><br><span class="line"><span class="comment">//   - Smi          (immediate small integer)</span></span><br><span class="line"><span class="comment">//   - HeapObject   (superclass for everything allocated in the heap)</span></span><br><span class="line"><span class="comment">//     - JSReceiver  (suitable for property access)</span></span><br><span class="line"><span class="comment">//       - JSObject</span></span><br><span class="line"><span class="comment">//         - JSArray</span></span><br><span class="line"><span class="comment">//         - JSArrayBuffer</span></span><br><span class="line"><span class="comment">//         - JSArrayBufferView</span></span><br><span class="line"><span class="comment">//           - JSTypedArray</span></span><br><span class="line"><span class="comment">//           - JSDataView</span></span><br><span class="line"><span class="comment">//         - JSBoundFunction</span></span><br><span class="line"><span class="comment">//...</span></span><br><span class="line"></span><br><span class="line"><span class="comment">// Formats of Object*:</span></span><br><span class="line"><span class="comment">//  Smi:        [31 bit signed int] 0</span></span><br><span class="line"><span class="comment">//  HeapObject: [32 bit direct pointer] (4 byte aligned) | 01</span></span><br></pre></td></tr></table></figure>
 <p><code>v8</code>所有类都继承自<code>Object</code>,它由以下两种类型组成.</p>
@@ -715,28 +731,36 @@
 <img src="/posts/2dd13ab1/5.png" title="p5">
 <p>在最新版中指针都是只有后<code>32</code>位,<code>Smi</code>(包括<code>length</code>等整数值)保存为原来的两倍从而使末尾为<code>0</code>.</p>
 <img src="/posts/2dd13ab1/3.png" title="p3">
-<h3 id="HeapNumber"><a href="#HeapNumber" class="headerlink" title="HeapNumber"></a>HeapNumber</h3><p><code>HeapNumber</code>以<code>double</code>形式(图中标黄)保存浮点数或者不能在<code>Smi</code>范围内表达的整数.</p>
+<h3 id="heapnumber">HeapNumber</h3>
+<p><code>HeapNumber</code>以<code>double</code>形式(图中标黄)保存浮点数或者不能在<code>Smi</code>范围内表达的整数.</p>
 <img src="/posts/2dd13ab1/4.png" title="p4">
-<h3 id="Name"><a href="#Name" class="headerlink" title="Name"></a>Name</h3><p><code>Name</code>只有一个子类:<code>String</code>.</p>
-<h4 id="String"><a href="#String" class="headerlink" title="String"></a>String</h4><p><code>String</code>存储字符串.</p>
+<h3 id="name">Name</h3>
+<p><code>Name</code>只有一个子类:<code>String</code>.</p>
+<h4 id="string">String</h4>
+<p><code>String</code>存储字符串.</p>
 <img src="/posts/2dd13ab1/7.png" title="p7">
 <img src="/posts/2dd13ab1/6.png" title="p6">
-<h3 id="Oddball"><a href="#Oddball" class="headerlink" title="Oddball"></a>Oddball</h3><p><code>Oddball</code>表示特殊值的对象,例如<code>true</code>,<code>false</code>,<code>undefined</code>.</p>
+<h3 id="oddball">Oddball</h3>
+<p><code>Oddball</code>表示特殊值的对象,例如<code>true</code>,<code>false</code>,<code>undefined</code>.</p>
 <img src="/posts/2dd13ab1/8.png" title="p8">
-<h3 id="JSReceiver-gt-JSObject"><a href="#JSReceiver-gt-JSObject" class="headerlink" title="JSReceiver -&gt; JSObject"></a>JSReceiver -&gt; JSObject</h3><p><code>JSObject</code>是表示<code>JavaScript</code>对象的对象.</p>
+<h3 id="jsreceiver---jsobject">JSReceiver -&gt; JSObject</h3>
+<p><code>JSObject</code>是表示<code>JavaScript</code>对象的对象.</p>
 <img src="/posts/2dd13ab1/9.png" title="p9">
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">[ hiddenClass / map ] -&gt; ... ; 指向Map</span><br><span class="line">[ properties        ] -&gt; [empty array]</span><br><span class="line">[ elements          ] -&gt; [empty array]</span><br><span class="line">[ reserved #1       ] -\</span><br><span class="line">[ reserved #2       ]  |</span><br><span class="line">[ reserved #3       ]  &#125;- in object properties,即预分配的内存空间</span><br><span class="line">...............        |</span><br><span class="line">[ reserved #N       ] -/</span><br></pre></td></tr></table></figure>
 <p><code>Map</code>中存储了一个对象的元信息,包括对象上属性的个数,对象的大小以及指向构造函数和原型的指针等等.同时,<code>Map</code>中保存了<code>Js</code>对象的属性信息,也就是各个属性在对象中存储的偏移.然后属性的值将根据不同的类型,放在<code>properties</code>,<code>elements</code>以及预留空间中.</p>
 <p><code>properties</code>:又称为<code>NamedProperties</code>,用于保存通过属性名作为索引的元素值,类似于字典类型,实体是<code>FixedArray</code>.</p>
 <p><code>element</code>:又称为<code>IndexedProperties</code>,用于保存通过整数值作为索引的元素值,类似于常规数组,实体是<code>FixedArray</code>.</p>
 <p><code>reserved #n</code>,为了提高访问速度,<code>v8</code>在对象中预分配了的一段内存区域,用来存放一些<code>properties</code>(称为<code>in-object properties</code>),当向<code>object</code>中添加属性时,会先尝试将新属性放入这些预留的槽位.当<code>in-onject</code>槽位满后,<code>v8</code>才会尝试将新的属性放入<code>properties</code>中.</p>
-<h4 id="JSFunction"><a href="#JSFunction" class="headerlink" title="JSFunction"></a>JSFunction</h4><p><code>JSFunction</code>是表示<code>JavaScript Function</code>的对象.</p>
+<h4 id="jsfunction">JSFunction</h4>
+<p><code>JSFunction</code>是表示<code>JavaScript Function</code>的对象.</p>
 <img src="/posts/2dd13ab1/10.png" title="p10">
 <p><code>kCodeEntryOffset</code>是一个指向<code>JIT</code>代码(<code>RWX</code>区域)的指针,许多实现任意代码执行的策略都是在此编写<code>shell</code>代码.</p>
 <p><code>v8</code>从<code>6.7</code>版本之后,<code>function</code>的<code>code</code>不再可写,也就是不能直接修改<code>JIT</code>代码.</p>
-<h4 id="JSArray"><a href="#JSArray" class="headerlink" title="JSArray"></a>JSArray</h4><p><code>JSArray</code>是表示<code>JavaScript Array</code>的对象.</p>
+<h4 id="jsarray">JSArray</h4>
+<p><code>JSArray</code>是表示<code>JavaScript Array</code>的对象.</p>
 <img src="/posts/2dd13ab1/11.png" title="p11">
-<h4 id="JSArrayBuffer-amp-amp-JSTypedArray"><a href="#JSArrayBuffer-amp-amp-JSTypedArray" class="headerlink" title="JSArrayBuffer &amp;&amp; JSTypedArray"></a>JSArrayBuffer &amp;&amp; JSTypedArray</h4><p><code>JSArrayBuffer</code>对象用来表示通用的,固定长度的原始二进制数据缓冲区.<code>ArrayBuffer</code>不能直接操作,而是要通过视图进行操作.</p>
+<h4 id="jsarraybuffer-jstypedarray">JSArrayBuffer &amp;&amp; JSTypedArray</h4>
+<p><code>JSArrayBuffer</code>对象用来表示通用的,固定长度的原始二进制数据缓冲区.<code>ArrayBuffer</code>不能直接操作,而是要通过视图进行操作.</p>
 <p><code>JSTypedArray</code>用来生成内存的视图,通过<code>9</code>个构造函数可以生成对应的视图,比如<code>Uint8Array</code>,<code>Int16Array</code>,<code>Float64Array</code>等等.</p>
 <p>在<code>v8</code>中,对象通常被存放在由<code>GC</code>管理的<code>mmapped</code>区域,然而<code>BackingStore</code>是一个不被<code>GC</code>管理的区域,并且被存放在<code>heap</code>中.由于它不是由<code>GC</code>管理的<code>HeapObject</code>,因此指向<code>BackingStore</code>的指针末位没有指示作用.</p>
 <img src="/posts/2dd13ab1/2.png" title="p2">
@@ -1055,7 +1079,7 @@
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#概览"><span class="nav-number">1.</span> <span class="nav-text">概览</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#延迟解析"><span class="nav-number">2.</span> <span class="nav-text">延迟解析</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#编译器"><span class="nav-number">3.</span> <span class="nav-text">编译器</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#Full-Codegen"><span class="nav-number">3.1.</span> <span class="nav-text">Full-Codegen</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Ignition"><span class="nav-number">3.2.</span> <span class="nav-text">Ignition</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#优化编译器"><span class="nav-number">3.3.</span> <span class="nav-text">优化编译器</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#v8内存构成"><span class="nav-number">4.</span> <span class="nav-text">v8内存构成</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#v8内存生命周期"><span class="nav-number">5.</span> <span class="nav-text">v8内存生命周期</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#v8优化机制"><span class="nav-number">6.</span> <span class="nav-text">v8优化机制</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#Hiddern-Class"><span class="nav-number">6.1.</span> <span class="nav-text">Hiddern Class</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Inline-Caching"><span class="nav-number">6.2.</span> <span class="nav-text">Inline Caching</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#CodeStubAssembler"><span class="nav-number">6.3.</span> <span class="nav-text">CodeStubAssembler</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#垃圾收集机制"><span class="nav-number">6.4.</span> <span class="nav-text">垃圾收集机制</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#新生代"><span class="nav-number">6.4.1.</span> <span class="nav-text">新生代</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#老生代"><span class="nav-number">6.4.2.</span> <span class="nav-text">老生代</span></a></li></ol></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#v8的object"><span class="nav-number">7.</span> <span class="nav-text">v8的object</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#HeapNumber"><span class="nav-number">7.1.</span> <span class="nav-text">HeapNumber</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Name"><span class="nav-number">7.2.</span> <span class="nav-text">Name</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#String"><span class="nav-number">7.2.1.</span> <span class="nav-text">String</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Oddball"><span class="nav-number">7.3.</span> <span class="nav-text">Oddball</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#JSReceiver-gt-JSObject"><span class="nav-number">7.4.</span> <span class="nav-text">JSReceiver -&gt; JSObject</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#JSFunction"><span class="nav-number">7.4.1.</span> <span class="nav-text">JSFunction</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#JSArray"><span class="nav-number">7.4.2.</span> <span class="nav-text">JSArray</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#JSArrayBuffer-amp-amp-JSTypedArray"><span class="nav-number">7.4.3.</span> <span class="nav-text">JSArrayBuffer &amp;&amp; JSTypedArray</span></a></li></ol></li></ol></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#概览"><span class="nav-number">1.</span> <span class="nav-text">概览</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#延迟解析"><span class="nav-number">2.</span> <span class="nav-text">延迟解析</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#编译器"><span class="nav-number">3.</span> <span class="nav-text">编译器</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#full-codegen"><span class="nav-number">3.1.</span> <span class="nav-text">Full-Codegen</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#ignition"><span class="nav-number">3.2.</span> <span class="nav-text">Ignition</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#优化编译器"><span class="nav-number">3.3.</span> <span class="nav-text">优化编译器</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#v8内存构成"><span class="nav-number">4.</span> <span class="nav-text">v8内存构成</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#v8内存生命周期"><span class="nav-number">5.</span> <span class="nav-text">v8内存生命周期</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#v8优化机制"><span class="nav-number">6.</span> <span class="nav-text">v8优化机制</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#hiddern-class"><span class="nav-number">6.1.</span> <span class="nav-text">Hiddern Class</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#inline-caching"><span class="nav-number">6.2.</span> <span class="nav-text">Inline Caching</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#codestubassembler"><span class="nav-number">6.3.</span> <span class="nav-text">CodeStubAssembler</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#垃圾收集机制"><span class="nav-number">6.4.</span> <span class="nav-text">垃圾收集机制</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#新生代"><span class="nav-number">6.4.1.</span> <span class="nav-text">新生代</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#老生代"><span class="nav-number">6.4.2.</span> <span class="nav-text">老生代</span></a></li></ol></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#v8的object"><span class="nav-number">7.</span> <span class="nav-text">v8的object</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#heapnumber"><span class="nav-number">7.1.</span> <span class="nav-text">HeapNumber</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#name"><span class="nav-number">7.2.</span> <span class="nav-text">Name</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#string"><span class="nav-number">7.2.1.</span> <span class="nav-text">String</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#oddball"><span class="nav-number">7.3.</span> <span class="nav-text">Oddball</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#jsreceiver---jsobject"><span class="nav-number">7.4.</span> <span class="nav-text">JSReceiver -&gt; JSObject</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#jsfunction"><span class="nav-number">7.4.1.</span> <span class="nav-text">JSFunction</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#jsarray"><span class="nav-number">7.4.2.</span> <span class="nav-text">JSArray</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#jsarraybuffer-jstypedarray"><span class="nav-number">7.4.3.</span> <span class="nav-text">JSArrayBuffer &amp;&amp; JSTypedArray</span></a></li></ol></li></ol></li></ol></div>
             
 
           </div>
@@ -1087,7 +1111,7 @@
       <i class="fa fa-area-chart"></i>
     </span>
     
-    <span title="站点总字数">710k</span>
+    <span title="站点总字数">720k</span>
   
 
   
@@ -1096,7 +1120,7 @@
       <i class="fa fa-coffee"></i>
     </span>
     
-    <span title="站点阅读时长">10:46</span>
+    <span title="站点阅读时长">10:54</span>
   
 </div>
 
@@ -1747,5 +1771,5 @@
   
   <script type="text/javascript" src="//cdn.bootcss.com/canvas-nest.js/1.0.0/canvas-nest.min.js"></script>
   
-<script src="/live2dw/lib/L2Dwidget.min.js?0c58a1486de42ac6cc1c59c7d98ae887"></script><script>L2Dwidget.init({"pluginRootPath":"live2dw/","pluginJsPath":"lib/","pluginModelPath":"assets/","tagMode":false,"debug":false,"model":{"jsonPath":"/live2dw/assets/koharu.model.json"},"display":{"position":"right","width":150,"height":300},"mobile":{"show":false},"log":false});</script></body>
+<script src="/live2dw/lib/L2Dwidget.min.js?0c58a1486de42ac6cc1c59c7d98ae887"></script><script>L2Dwidget.init({"pluginRootPath":"live2dw/","pluginJsPath":"lib/","pluginModelPath":"assets/","tagMode":false,"debug":false,"model":{"jsonPath":"/live2dw/assets/koharu.model.json"},"display":{"position":"right","width":150,"height":300},"mobile":{"show":false},"log":false});</script><!-- hexo-inject:begin --><!-- hexo-inject:end --></body>
 </html>

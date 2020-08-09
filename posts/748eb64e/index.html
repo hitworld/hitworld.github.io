@@ -16,7 +16,7 @@
 
 <html class="theme-next mist use-motion" lang="zh-CN">
 <head><meta name="generator" content="Hexo 3.8.0">
-  <meta charset="UTF-8">
+  <!-- hexo-inject:begin --><!-- hexo-inject:end --><meta charset="UTF-8">
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
 <meta name="theme-color" content="#222">
@@ -119,13 +119,13 @@
 
 
 
-  <meta name="description" content="babyshellcode  这里工具对SafeSEH检测出现了问题,实际上是开了的. name的输入存在溢出,后面printf存在泄露,这个溢出不能利用,因为无可利用的地址. Create shellcode对堆的申请使用的是VirtualAlloc,同时参数flprotect值为0x40,表示拥有RWE权限. Run shellcode中存在memcpy导致的栈溢出,触发的同时会修改堆内存的前">
+  <meta name="description" content="babyshellcode   这里工具对SafeSEH检测出现了问题,实际上是开了的. name的输入存在溢出,后面printf存在泄露,这个溢出不能利用,因为无可利用的地址. Create shellcode对堆的申请使用的是VirtualAlloc,同时参数flprotect值为0x40,表示拥有RWE权限. Run shellcode中存在memcpy导致的栈溢出,触发的同时会">
 <meta name="keywords" content="Jeopardy">
 <meta property="og:type" content="article">
 <meta property="og:title" content="writeup-hitb-gsec-2017-winpwn">
 <meta property="og:url" content="https://hitworld.github.io/posts/748eb64e/index.html">
 <meta property="og:site_name" content="w4rd3n">
-<meta property="og:description" content="babyshellcode  这里工具对SafeSEH检测出现了问题,实际上是开了的. name的输入存在溢出,后面printf存在泄露,这个溢出不能利用,因为无可利用的地址. Create shellcode对堆的申请使用的是VirtualAlloc,同时参数flprotect值为0x40,表示拥有RWE权限. Run shellcode中存在memcpy导致的栈溢出,触发的同时会修改堆内存的前">
+<meta property="og:description" content="babyshellcode   这里工具对SafeSEH检测出现了问题,实际上是开了的. name的输入存在溢出,后面printf存在泄露,这个溢出不能利用,因为无可利用的地址. Create shellcode对堆的申请使用的是VirtualAlloc,同时参数flprotect值为0x40,表示拥有RWE权限. Run shellcode中存在memcpy导致的栈溢出,触发的同时会">
 <meta property="og:locale" content="zh-CN">
 <meta property="og:image" content="https://hitworld.github.io/posts/748eb64e/1.png">
 <meta property="og:image" content="https://hitworld.github.io/posts/748eb64e/2.png">
@@ -137,7 +137,7 @@
 <meta property="og:updated_time" content="2020-08-09T06:34:17.853Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="writeup-hitb-gsec-2017-winpwn">
-<meta name="twitter:description" content="babyshellcode  这里工具对SafeSEH检测出现了问题,实际上是开了的. name的输入存在溢出,后面printf存在泄露,这个溢出不能利用,因为无可利用的地址. Create shellcode对堆的申请使用的是VirtualAlloc,同时参数flprotect值为0x40,表示拥有RWE权限. Run shellcode中存在memcpy导致的栈溢出,触发的同时会修改堆内存的前">
+<meta name="twitter:description" content="babyshellcode   这里工具对SafeSEH检测出现了问题,实际上是开了的. name的输入存在溢出,后面printf存在泄露,这个溢出不能利用,因为无可利用的地址. Create shellcode对堆的申请使用的是VirtualAlloc,同时参数flprotect值为0x40,表示拥有RWE权限. Run shellcode中存在memcpy导致的栈溢出,触发的同时会">
 <meta name="twitter:image" content="https://hitworld.github.io/posts/748eb64e/1.png">
 
 
@@ -193,7 +193,7 @@
       .logo-line-after i { right: initial; }
     }
   </style>
-</noscript>
+</noscript><!-- hexo-inject:begin --><!-- hexo-inject:end -->
 
 </head>
 
@@ -204,7 +204,7 @@
     
   
 
-  <div class="container sidebar-position-left page-post-detail">
+  <!-- hexo-inject:begin --><!-- hexo-inject:end --><div class="container sidebar-position-left page-post-detail">
     <div class="headband"></div>
 
     <header id="header" class="header" itemscope="" itemtype="http://schema.org/WPHeader">
@@ -538,7 +538,8 @@
       
 
       
-        <h2 id="babyshellcode"><a href="#babyshellcode" class="headerlink" title="babyshellcode"></a>babyshellcode</h2><img src="/posts/748eb64e/1.png" title="p1">
+        <h2 id="babyshellcode">babyshellcode</h2>
+<img src="/posts/748eb64e/1.png" title="p1">
 <hr>
 <p>这里工具对<code>SafeSEH</code>检测出现了问题,实际上是开了的.</p>
 <p><code>name</code>的输入存在溢出,后面<code>printf</code>存在泄露,这个溢出不能利用,因为无可利用的地址.</p>
@@ -546,7 +547,7 @@
 <p><code>Run shellcode</code>中存在<code>memcpy</code>导致的栈溢出,触发的同时会修改堆内存的前四个字节为<code>0xffffffff</code>,然后调用触发异常处理.</p>
 <p>现在的思路就是绕过<code>SafeSEH</code>执行<code>heap addr + 0x4</code>.</p>
 <p>由于<code>MEM_EXECUTE_OPTION_IMAGE_DISPATCH_ENABLE</code>的<code>check</code>,直接修改<code>SEH Handler</code>为<code>heap addr + 0x4</code>是不行的.</p>
-<p>这里需要使用<code>scmgr.dll</code>,它是一个未开启<code>SafeSEH</code>的模块(使用<code>OllySSEH</code>插件查看)且自带<code>system(&quot;cmd&quot;)</code>.</p>
+<p>这里需要使用<code>scmgr.dll</code>,它是一个未开启<code>SafeSEH</code>的模块(使用<code>OllySSEH</code>插件查看)且自带<code>system("cmd")</code>.</p>
 <p>现在问题就变成怎么获取其基址.(<code>scmgr.dll</code>每次进程重启的时候基址都不变)</p>
 <p>这里利用的是<code>Set ShellcodeGuard</code>中的加密算法,算法初始化的时候,加密的是<code>scmgr!init_scmgr</code>的地址.</p>
 <p>把这个算法<code>dump</code>出来正向爆破去算,如果结果等于最后加密的结果,说明这就是基址.</p>
@@ -556,10 +557,11 @@
 <p>纪念以下第一次复现<code>winpwn</code>.</p>
 <img src="/posts/748eb64e/2.png" title="p2">
 <hr>
-<h2 id="babystack"><a href="#babystack" class="headerlink" title="babystack"></a>babystack</h2><img src="/posts/748eb64e/3.png" title="p3">
+<h2 id="babystack">babystack</h2>
+<img src="/posts/748eb64e/3.png" title="p3">
 <hr>
 <p>这里工具对<code>SafeSEH</code>检测出现了问题,实际上是开了的.</p>
-<p>开局给了栈地址和<code>main</code>函数地址.程序中还有个隐藏的<code>system(&quot;cmd&quot;)</code>.</p>
+<p>开局给了栈地址和<code>main</code>函数地址.程序中还有个隐藏的<code>system("cmd")</code>.</p>
 <img src="/posts/748eb64e/4.png" title="p4">
 <hr>
 <p>由于程序退出使用的是<code>exit(0)</code>,所以劫持<code>eip</code>失效.</p>
@@ -920,7 +922,7 @@
       <i class="fa fa-area-chart"></i>
     </span>
     
-    <span title="站点总字数">710k</span>
+    <span title="站点总字数">720k</span>
   
 
   
@@ -929,7 +931,7 @@
       <i class="fa fa-coffee"></i>
     </span>
     
-    <span title="站点阅读时长">10:46</span>
+    <span title="站点阅读时长">10:54</span>
   
 </div>
 
@@ -1580,5 +1582,5 @@
   
   <script type="text/javascript" src="//cdn.bootcss.com/canvas-nest.js/1.0.0/canvas-nest.min.js"></script>
   
-<script src="/live2dw/lib/L2Dwidget.min.js?0c58a1486de42ac6cc1c59c7d98ae887"></script><script>L2Dwidget.init({"pluginRootPath":"live2dw/","pluginJsPath":"lib/","pluginModelPath":"assets/","tagMode":false,"debug":false,"model":{"jsonPath":"/live2dw/assets/koharu.model.json"},"display":{"position":"right","width":150,"height":300},"mobile":{"show":false},"log":false});</script></body>
+<script src="/live2dw/lib/L2Dwidget.min.js?0c58a1486de42ac6cc1c59c7d98ae887"></script><script>L2Dwidget.init({"pluginRootPath":"live2dw/","pluginJsPath":"lib/","pluginModelPath":"assets/","tagMode":false,"debug":false,"model":{"jsonPath":"/live2dw/assets/koharu.model.json"},"display":{"position":"right","width":150,"height":300},"mobile":{"show":false},"log":false});</script><!-- hexo-inject:begin --><!-- hexo-inject:end --></body>
 </html>

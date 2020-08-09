@@ -16,7 +16,7 @@
 
 <html class="theme-next mist use-motion" lang="zh-CN">
 <head><meta name="generator" content="Hexo 3.8.0">
-  <meta charset="UTF-8">
+  <!-- hexo-inject:begin --><!-- hexo-inject:end --><meta charset="UTF-8">
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
 <meta name="theme-color" content="#222">
@@ -119,18 +119,18 @@
 
 
 
-  <meta name="description" content="未完成 概览URI(Uniform Resource Identifier):统一资源标识符,服务器资源名被称为统一资源标识符. URL(Uniform Resource Locator):统一资源定位符,描述了一台特定服务器上某资源的特定位置. URN(Uniform Resource Name):统一资源名称. URL,URN是URI的子集. Data URI scheme允许使用内联的方式在">
+  <meta name="description" content="未完成 概览 URI(Uniform Resource Identifier):统一资源标识符,服务器资源名被称为统一资源标识符. URL(Uniform Resource Locator):统一资源定位符,描述了一台特定服务器上某资源的特定位置. URN(Uniform Resource Name):统一资源名称. URL,URN是URI的子集. Data URI scheme允许使">
 <meta name="keywords" content="FrontEnd">
 <meta property="og:type" content="article">
 <meta property="og:title" content="CS-develop-FrontEnd-DataURI">
 <meta property="og:url" content="https://hitworld.github.io/posts/ee32b8d7/index.html">
 <meta property="og:site_name" content="w4rd3n">
-<meta property="og:description" content="未完成 概览URI(Uniform Resource Identifier):统一资源标识符,服务器资源名被称为统一资源标识符. URL(Uniform Resource Locator):统一资源定位符,描述了一台特定服务器上某资源的特定位置. URN(Uniform Resource Name):统一资源名称. URL,URN是URI的子集. Data URI scheme允许使用内联的方式在">
+<meta property="og:description" content="未完成 概览 URI(Uniform Resource Identifier):统一资源标识符,服务器资源名被称为统一资源标识符. URL(Uniform Resource Locator):统一资源定位符,描述了一台特定服务器上某资源的特定位置. URN(Uniform Resource Name):统一资源名称. URL,URN是URI的子集. Data URI scheme允许使">
 <meta property="og:locale" content="zh-CN">
 <meta property="og:updated_time" content="2020-08-09T06:34:17.790Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="CS-develop-FrontEnd-DataURI">
-<meta name="twitter:description" content="未完成 概览URI(Uniform Resource Identifier):统一资源标识符,服务器资源名被称为统一资源标识符. URL(Uniform Resource Locator):统一资源定位符,描述了一台特定服务器上某资源的特定位置. URN(Uniform Resource Name):统一资源名称. URL,URN是URI的子集. Data URI scheme允许使用内联的方式在">
+<meta name="twitter:description" content="未完成 概览 URI(Uniform Resource Identifier):统一资源标识符,服务器资源名被称为统一资源标识符. URL(Uniform Resource Locator):统一资源定位符,描述了一台特定服务器上某资源的特定位置. URN(Uniform Resource Name):统一资源名称. URL,URN是URI的子集. Data URI scheme允许使">
 
 
 
@@ -185,7 +185,7 @@
       .logo-line-after i { right: initial; }
     }
   </style>
-</noscript>
+</noscript><!-- hexo-inject:begin --><!-- hexo-inject:end -->
 
 </head>
 
@@ -196,7 +196,7 @@
     
   
 
-  <div class="container sidebar-position-left page-post-detail">
+  <!-- hexo-inject:begin --><!-- hexo-inject:end --><div class="container sidebar-position-left page-post-detail">
     <div class="headband"></div>
 
     <header id="header" class="header" itemscope="" itemtype="http://schema.org/WPHeader">
@@ -538,12 +538,14 @@
 
       
         <p>未完成</p>
-<h2 id="概览"><a href="#概览" class="headerlink" title="概览"></a>概览</h2><p><code>URI</code>(<code>Uniform Resource Identifier</code>):统一资源标识符,服务器资源名被称为统一资源标识符.</p>
+<h2 id="概览">概览</h2>
+<p><code>URI</code>(<code>Uniform Resource Identifier</code>):统一资源标识符,服务器资源名被称为统一资源标识符.</p>
 <p><code>URL</code>(<code>Uniform Resource Locator</code>):统一资源定位符,描述了一台特定服务器上某资源的特定位置.</p>
 <p><code>URN</code>(<code>Uniform Resource Name</code>):统一资源名称.</p>
 <p><code>URL</code>,<code>URN</code>是<code>URI</code>的子集.</p>
 <p><code>Data URI scheme</code>允许使用内联的方式在网页中包含数据,目的是将一些小的数据,直接嵌入到网页中,从而不用再从外部文件载入.</p>
-<h2 id="使用"><a href="#使用" class="headerlink" title="使用"></a>使用</h2><p><code>Data URI scheme</code>支持类型.</p>
+<h2 id="使用">使用</h2>
+<p><code>Data URI scheme</code>支持类型.</p>
 <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line">data:,<span class="comment">#文本数据</span></span><br><span class="line">data:text/plain,<span class="comment">#文本数据</span></span><br><span class="line">data:text/html,<span class="comment">#HTML代码</span></span><br><span class="line">data:text/html;base64,<span class="comment">#base64编码的HTML代码</span></span><br><span class="line">data:text/css,<span class="comment">#CSS代码</span></span><br><span class="line">data:text/css;base64,<span class="comment">#base64编码的CSS代码</span></span><br><span class="line">data:text/javascript,<span class="comment">#Javascript代码</span></span><br><span class="line">data:text/javascript;base64,<span class="comment">#base64编码的Javascript代码</span></span><br><span class="line">data:image/gif;base64,<span class="comment">#base64编码的gif图片数据</span></span><br><span class="line">data:image/png;base64,<span class="comment">#base64编码的png图片数据</span></span><br><span class="line">data:image/jpeg;base64,<span class="comment">#base64编码的jpeg图片数据</span></span><br><span class="line">data:image/x-icon;base64,<span class="comment">#base64编码的icon图片数据</span></span><br></pre></td></tr></table></figure>
 <p>内嵌式.</p>
 <figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">img</span> <span class="attr">src</span>=<span class="string">"data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABcAAAAWCAYAAAArdgcFAAAABGdBTUEAALGPC/xhBQAAACBjSFJNAAB6JgAAgIQAAPoAAACA6AAAdTAAAOpgAAA6mAAAF3CculE8AAAACXBIWXMAAAsTAAALEwEAmpwYAAABSUlEQVQ4Ee1VPUsDQRB9s3dBRCRNQvCjkDQW/hJ/gb9AOwWDoIXFgYXYXGP+hYW1/gIr7WzsE8VGxZBcwt04dznCJWw2twtWutXMmzdvlrd7t4SZVbvi1ZihZuCFqT9A/B7Qd5FI44RpPcQpE1oC1IsEq5jRBeGyc0zXaV8mvhbyOREurIRMZMZhp0VthYB9mXBi4jrUztIev1bNbKg6CMxvIWwg5GWVDOHNZ7lX6l/wrG+Fzbh/ca1bf9QWBhKtHznobgtjKF92ZBL3TUWpRbK7LhiVCY8kY3xK/iTiexNcEywSXxKBrfHvrdBN2JRsp4BoQ3dbtHLT4K+JqxWw8vr4YDaf+vR+SmXRWw99lT9N96VaypIYtwgoyWyJRtiX3T+X7TXxROcxGeAo5chlyNcBVxrb2JVpTUHsz4IQi/DL6wPucENxqvoDx69PXP8OKn4AAAAASUVORK5CYII="</span>/&gt;</span></span><br></pre></td></tr></table></figure>
@@ -897,7 +899,7 @@
       <i class="fa fa-area-chart"></i>
     </span>
     
-    <span title="站点总字数">710k</span>
+    <span title="站点总字数">720k</span>
   
 
   
@@ -906,7 +908,7 @@
       <i class="fa fa-coffee"></i>
     </span>
     
-    <span title="站点阅读时长">10:46</span>
+    <span title="站点阅读时长">10:54</span>
   
 </div>
 
@@ -1557,5 +1559,5 @@
   
   <script type="text/javascript" src="//cdn.bootcss.com/canvas-nest.js/1.0.0/canvas-nest.min.js"></script>
   
-<script src="/live2dw/lib/L2Dwidget.min.js?0c58a1486de42ac6cc1c59c7d98ae887"></script><script>L2Dwidget.init({"pluginRootPath":"live2dw/","pluginJsPath":"lib/","pluginModelPath":"assets/","tagMode":false,"debug":false,"model":{"jsonPath":"/live2dw/assets/koharu.model.json"},"display":{"position":"right","width":150,"height":300},"mobile":{"show":false},"log":false});</script></body>
+<script src="/live2dw/lib/L2Dwidget.min.js?0c58a1486de42ac6cc1c59c7d98ae887"></script><script>L2Dwidget.init({"pluginRootPath":"live2dw/","pluginJsPath":"lib/","pluginModelPath":"assets/","tagMode":false,"debug":false,"model":{"jsonPath":"/live2dw/assets/koharu.model.json"},"display":{"position":"right","width":150,"height":300},"mobile":{"show":false},"log":false});</script><!-- hexo-inject:begin --><!-- hexo-inject:end --></body>
 </html>

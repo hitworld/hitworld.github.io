@@ -16,7 +16,7 @@
 
 <html class="theme-next mist use-motion" lang="zh-CN">
 <head><meta name="generator" content="Hexo 3.8.0">
-  <meta charset="UTF-8">
+  <!-- hexo-inject:begin --><!-- hexo-inject:end --><meta charset="UTF-8">
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
 <meta name="theme-color" content="#222">
@@ -119,18 +119,18 @@
 
 
 
-  <meta name="description" content="漏洞要素覆盖一个堆指针变量,使其指向足够可控的区域,free后系统会错误的将该区域作为堆块放到相应的bin里面,再分配出来. 利用思路关键在于伪造两个fast bin chunk(两个fast bin chunk中间的内容不可控). 然后覆盖一个堆指针变量使其指向第一个fast bin chunk,free后再malloc使两个fast bin chunk间的区域可控. free时的检测. 123">
+  <meta name="description" content="漏洞要素 覆盖一个堆指针变量,使其指向足够可控的区域,free后系统会错误的将该区域作为堆块放到相应的bin里面,再分配出来. 利用思路 关键在于伪造两个fast bin chunk(两个fast bin chunk中间的内容不可控). 然后覆盖一个堆指针变量使其指向第一个fast bin chunk,free后再malloc使两个fast bin chunk间的区域可控. free时的">
 <meta name="keywords" content="Linux">
 <meta property="og:type" content="article">
 <meta property="og:title" content="IS-pwn-Linux-glibc-2.23-house_of_spirit">
 <meta property="og:url" content="https://hitworld.github.io/posts/56261baa/index.html">
 <meta property="og:site_name" content="w4rd3n">
-<meta property="og:description" content="漏洞要素覆盖一个堆指针变量,使其指向足够可控的区域,free后系统会错误的将该区域作为堆块放到相应的bin里面,再分配出来. 利用思路关键在于伪造两个fast bin chunk(两个fast bin chunk中间的内容不可控). 然后覆盖一个堆指针变量使其指向第一个fast bin chunk,free后再malloc使两个fast bin chunk间的区域可控. free时的检测. 123">
+<meta property="og:description" content="漏洞要素 覆盖一个堆指针变量,使其指向足够可控的区域,free后系统会错误的将该区域作为堆块放到相应的bin里面,再分配出来. 利用思路 关键在于伪造两个fast bin chunk(两个fast bin chunk中间的内容不可控). 然后覆盖一个堆指针变量使其指向第一个fast bin chunk,free后再malloc使两个fast bin chunk间的区域可控. free时的">
 <meta property="og:locale" content="zh-CN">
 <meta property="og:updated_time" content="2020-08-09T06:34:17.808Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="IS-pwn-Linux-glibc-2.23-house_of_spirit">
-<meta name="twitter:description" content="漏洞要素覆盖一个堆指针变量,使其指向足够可控的区域,free后系统会错误的将该区域作为堆块放到相应的bin里面,再分配出来. 利用思路关键在于伪造两个fast bin chunk(两个fast bin chunk中间的内容不可控). 然后覆盖一个堆指针变量使其指向第一个fast bin chunk,free后再malloc使两个fast bin chunk间的区域可控. free时的检测. 123">
+<meta name="twitter:description" content="漏洞要素 覆盖一个堆指针变量,使其指向足够可控的区域,free后系统会错误的将该区域作为堆块放到相应的bin里面,再分配出来. 利用思路 关键在于伪造两个fast bin chunk(两个fast bin chunk中间的内容不可控). 然后覆盖一个堆指针变量使其指向第一个fast bin chunk,free后再malloc使两个fast bin chunk间的区域可控. free时的">
 
 
 
@@ -185,7 +185,7 @@
       .logo-line-after i { right: initial; }
     }
   </style>
-</noscript>
+</noscript><!-- hexo-inject:begin --><!-- hexo-inject:end -->
 
 </head>
 
@@ -196,7 +196,7 @@
     
   
 
-  <div class="container sidebar-position-left page-post-detail">
+  <!-- hexo-inject:begin --><!-- hexo-inject:end --><div class="container sidebar-position-left page-post-detail">
     <div class="headband"></div>
 
     <header id="header" class="header" itemscope="" itemtype="http://schema.org/WPHeader">
@@ -537,15 +537,18 @@
       
 
       
-        <h2 id="漏洞要素"><a href="#漏洞要素" class="headerlink" title="漏洞要素"></a>漏洞要素</h2><p>覆盖一个堆指针变量,使其指向足够可控的区域,<code>free</code>后系统会错误的将该区域作为堆块放到相应的<code>bin</code>里面,再分配出来.</p>
-<h2 id="利用思路"><a href="#利用思路" class="headerlink" title="利用思路"></a>利用思路</h2><p>关键在于伪造两个<code>fast bin chunk</code>(两个<code>fast bin chunk</code>中间的内容不可控).</p>
+        <h2 id="漏洞要素">漏洞要素</h2>
+<p>覆盖一个堆指针变量,使其指向足够可控的区域,<code>free</code>后系统会错误的将该区域作为堆块放到相应的<code>bin</code>里面,再分配出来.</p>
+<h2 id="利用思路">利用思路</h2>
+<p>关键在于伪造两个<code>fast bin chunk</code>(两个<code>fast bin chunk</code>中间的内容不可控).</p>
 <p>然后覆盖一个堆指针变量使其指向第一个<code>fast bin chunk</code>,<code>free</code>后再<code>malloc</code>使两个<code>fast bin chunk</code>间的区域可控.</p>
 <p><code>free</code>时的检测.</p>
 <figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">if</span> (chunk_is_mmapped (p)) &#123;</span><br><span class="line"><span class="comment">/* 如果当前free的chunk是通过mmap()分配的,调用munmap_chunk()函数munmap本chunk */</span></span><br><span class="line">    <span class="comment">/* code */</span></span><br><span class="line">    munmap_chunk (p);</span><br><span class="line">    <span class="keyword">return</span>;</span><br><span class="line">&#125;</span><br><span class="line"><span class="comment">/* mmap标志位检测 */</span></span><br><span class="line"></span><br><span class="line">check_inuse_chunk(av, p);</span><br><span class="line"><span class="comment">/* in_use标志位检测 */</span></span><br><span class="line"></span><br><span class="line">(<span class="keyword">unsigned</span> <span class="keyword">long</span>)(size) &lt;= (<span class="keyword">unsigned</span> <span class="keyword">long</span>)(get_max_fast ())</span><br><span class="line"><span class="comment">/* 伪造堆块的size字段不能超过fastbin的最大值 */</span></span><br><span class="line"></span><br><span class="line">__builtin_expect (chunk_at_offset (p, size)-&gt;size &lt;= <span class="number">2</span> * SIZE_SZ, <span class="number">0</span>) || __builtin_expect (chunksize (chunk_at_offset (p, size)) &gt;= av-&gt;system_mem, <span class="number">0</span>)</span><br><span class="line"><span class="comment">/* 这个是不能成立的,所以下一个堆块的大小要大于2 * SIZE_ZE小于system_mem */</span></span><br></pre></td></tr></table></figure>
 <p>所以伪造的两个<code>chunk</code>大致如下所示.</p>
 <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">any | fake_size1: 2 * SIZE_ZE &lt;= fake_size1 &lt;= global_max_fast | padding: len = fake_size1 | any | (2 * SIZE_ZE &lt;= fake_size2 &lt;= system_mem) &amp;&amp; (fake_size2 &amp; 0x1 = 0x1)</span><br></pre></td></tr></table></figure>
 <p>可以看出难点在于堆指针变量的覆盖.</p>
-<h2 id="house-of-spirit-with-tcache"><a href="#house-of-spirit-with-tcache" class="headerlink" title="house_of_spirit with tcache"></a>house_of_spirit with tcache</h2><p><code>glibc_2.26</code>启用了<code>tcache</code>机制.</p>
+<h2 id="house_of_spirit-with-tcache">house_of_spirit with tcache</h2>
+<p><code>glibc_2.26</code>启用了<code>tcache</code>机制.</p>
 <p>因为<code>tcache</code>不检查<code>next chunk</code>的<code>size</code>位所以省去了<code>bypass</code>.</p>
 <figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">malloc</span>(<span class="number">1</span>);</span><br><span class="line"><span class="keyword">unsigned</span>  <span class="keyword">long</span>  <span class="keyword">long</span> * a; <span class="comment">//被覆盖的指针</span></span><br><span class="line"><span class="keyword">unsigned</span>  <span class="keyword">long</span>  <span class="keyword">long</span> fake_chunks[<span class="number">10</span>]; <span class="comment">//fake_chunk</span></span><br><span class="line"></span><br><span class="line">fake_chunks[<span class="number">1</span>] = <span class="number">0x40</span>;                   <span class="comment">//fake_size</span></span><br><span class="line">a = &amp;fake_chunks[<span class="number">2</span>];                     <span class="comment">//覆盖</span></span><br><span class="line"><span class="built_in">free</span>(a);</span><br></pre></td></tr></table></figure>
 
@@ -862,7 +865,7 @@
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#漏洞要素"><span class="nav-number">1.</span> <span class="nav-text">漏洞要素</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#利用思路"><span class="nav-number">2.</span> <span class="nav-text">利用思路</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#house-of-spirit-with-tcache"><span class="nav-number">3.</span> <span class="nav-text">house_of_spirit with tcache</span></a></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#漏洞要素"><span class="nav-number">1.</span> <span class="nav-text">漏洞要素</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#利用思路"><span class="nav-number">2.</span> <span class="nav-text">利用思路</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#house_of_spirit-with-tcache"><span class="nav-number">3.</span> <span class="nav-text">house_of_spirit with tcache</span></a></li></ol></div>
             
 
           </div>
@@ -894,7 +897,7 @@
       <i class="fa fa-area-chart"></i>
     </span>
     
-    <span title="站点总字数">710k</span>
+    <span title="站点总字数">720k</span>
   
 
   
@@ -903,7 +906,7 @@
       <i class="fa fa-coffee"></i>
     </span>
     
-    <span title="站点阅读时长">10:46</span>
+    <span title="站点阅读时长">10:54</span>
   
 </div>
 
@@ -1554,5 +1557,5 @@
   
   <script type="text/javascript" src="//cdn.bootcss.com/canvas-nest.js/1.0.0/canvas-nest.min.js"></script>
   
-<script src="/live2dw/lib/L2Dwidget.min.js?0c58a1486de42ac6cc1c59c7d98ae887"></script><script>L2Dwidget.init({"pluginRootPath":"live2dw/","pluginJsPath":"lib/","pluginModelPath":"assets/","tagMode":false,"debug":false,"model":{"jsonPath":"/live2dw/assets/koharu.model.json"},"display":{"position":"right","width":150,"height":300},"mobile":{"show":false},"log":false});</script></body>
+<script src="/live2dw/lib/L2Dwidget.min.js?0c58a1486de42ac6cc1c59c7d98ae887"></script><script>L2Dwidget.init({"pluginRootPath":"live2dw/","pluginJsPath":"lib/","pluginModelPath":"assets/","tagMode":false,"debug":false,"model":{"jsonPath":"/live2dw/assets/koharu.model.json"},"display":{"position":"right","width":150,"height":300},"mobile":{"show":false},"log":false});</script><!-- hexo-inject:begin --><!-- hexo-inject:end --></body>
 </html>

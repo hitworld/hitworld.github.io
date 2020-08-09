@@ -16,7 +16,7 @@
 
 <html class="theme-next mist use-motion" lang="zh-CN">
 <head><meta name="generator" content="Hexo 3.8.0">
-  <meta charset="UTF-8">
+  <!-- hexo-inject:begin --><!-- hexo-inject:end --><meta charset="UTF-8">
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
 <meta name="theme-color" content="#222">
@@ -119,18 +119,18 @@
 
 
 
-  <meta name="description" content="概念当printf等格式化字符串函数的第一个参数用户可控时,即可任意读写.这就是格式化字符串漏洞. 原理格式化字符串的格式如下. 1%[parameter][flags][width][.precision][length]type parameter:n$,使用第n个参数.flags:在width设置后指定可以用来作为填充的内容之类的内容.width:最小输出长度.precision:最大输出长">
+  <meta name="description" content="概念 当printf等格式化字符串函数的第一个参数用户可控时,即可任意读写.这就是格式化字符串漏洞. 原理 格式化字符串的格式如下. 1%[parameter][flags][width][.precision][length]type parameter:n$,使用第n个参数. flags:在width设置后指定可以用来作为填充的内容之类的内容. width:最小输出长度. preci">
 <meta name="keywords" content="Linux">
 <meta property="og:type" content="article">
 <meta property="og:title" content="IS-pwn-Linux-格式化字符串漏洞">
 <meta property="og:url" content="https://hitworld.github.io/posts/e9037fb1/index.html">
 <meta property="og:site_name" content="w4rd3n">
-<meta property="og:description" content="概念当printf等格式化字符串函数的第一个参数用户可控时,即可任意读写.这就是格式化字符串漏洞. 原理格式化字符串的格式如下. 1%[parameter][flags][width][.precision][length]type parameter:n$,使用第n个参数.flags:在width设置后指定可以用来作为填充的内容之类的内容.width:最小输出长度.precision:最大输出长">
+<meta property="og:description" content="概念 当printf等格式化字符串函数的第一个参数用户可控时,即可任意读写.这就是格式化字符串漏洞. 原理 格式化字符串的格式如下. 1%[parameter][flags][width][.precision][length]type parameter:n$,使用第n个参数. flags:在width设置后指定可以用来作为填充的内容之类的内容. width:最小输出长度. preci">
 <meta property="og:locale" content="zh-CN">
 <meta property="og:updated_time" content="2020-08-09T06:34:17.817Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="IS-pwn-Linux-格式化字符串漏洞">
-<meta name="twitter:description" content="概念当printf等格式化字符串函数的第一个参数用户可控时,即可任意读写.这就是格式化字符串漏洞. 原理格式化字符串的格式如下. 1%[parameter][flags][width][.precision][length]type parameter:n$,使用第n个参数.flags:在width设置后指定可以用来作为填充的内容之类的内容.width:最小输出长度.precision:最大输出长">
+<meta name="twitter:description" content="概念 当printf等格式化字符串函数的第一个参数用户可控时,即可任意读写.这就是格式化字符串漏洞. 原理 格式化字符串的格式如下. 1%[parameter][flags][width][.precision][length]type parameter:n$,使用第n个参数. flags:在width设置后指定可以用来作为填充的内容之类的内容. width:最小输出长度. preci">
 
 
 
@@ -185,7 +185,7 @@
       .logo-line-after i { right: initial; }
     }
   </style>
-</noscript>
+</noscript><!-- hexo-inject:begin --><!-- hexo-inject:end -->
 
 </head>
 
@@ -196,7 +196,7 @@
     
   
 
-  <div class="container sidebar-position-left page-post-detail">
+  <!-- hexo-inject:begin --><!-- hexo-inject:end --><div class="container sidebar-position-left page-post-detail">
     <div class="headband"></div>
 
     <header id="header" class="header" itemscope="" itemtype="http://schema.org/WPHeader">
@@ -503,7 +503,7 @@
                 
                   <span class="post-meta-item-text">本文字数：</span>
                 
-                <span title="本文字数">964</span>
+                <span title="本文字数">990</span>
               
 
               
@@ -537,10 +537,12 @@
       
 
       
-        <h2 id="概念"><a href="#概念" class="headerlink" title="概念"></a>概念</h2><p>当<code>printf</code>等格式化字符串函数的第一个参数用户可控时,即可任意读写.这就是格式化字符串漏洞.</p>
-<h2 id="原理"><a href="#原理" class="headerlink" title="原理"></a>原理</h2><p>格式化字符串的格式如下.</p>
+        <h2 id="概念">概念</h2>
+<p>当<code>printf</code>等格式化字符串函数的第一个参数用户可控时,即可任意读写.这就是格式化字符串漏洞.</p>
+<h2 id="原理">原理</h2>
+<p>格式化字符串的格式如下.</p>
 <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">%[parameter][flags][width][.precision][length]<span class="built_in">type</span></span><br></pre></td></tr></table></figure>
-<p><code>parameter</code>:<code>n$</code>,使用第<code>n</code>个参数.<br><code>flags</code>:在<code>width</code>设置后指定可以用来作为填充的内容之类的内容.<br><code>width</code>:最小输出长度.<br><code>precision</code>:最大输出长度.<br><code>length</code>:参数长度,<code>h</code>,<code>ll</code>.配合<code>type</code>.</p>
+<p><code>parameter</code>:<code>n$</code>,使用第<code>n</code>个参数. <code>flags</code>:在<code>width</code>设置后指定可以用来作为填充的内容之类的内容. <code>width</code>:最小输出长度. <code>precision</code>:最大输出长度. <code>length</code>:参数长度,<code>h</code>,<code>ll</code>.配合<code>type</code>.</p>
 <p>其中<code>type</code>即相应变量的类型.</p>
 <ul>
 <li><code>d/i</code>,有符号整数.</li>
@@ -552,13 +554,14 @@
 <li><code>C</code>,<code>ISO</code>宽字符.</li>
 <li><code>p</code>,<code>void *</code>型,用地址的格式输出对应变量的值.</li>
 <li><code>n</code>,不输出字符,但是把已经成功输出的字符个数写入对应的整型指针参数所指的变量,<code>printf</code>超过<code>0x2000</code>个字节之后<code>%n</code>会写不了值.(格式化字符串漏洞任意写)</li>
-<li><code>%</code>,<code>&#39;%&#39;</code>字面值.</li>
+<li><code>%</code>,<code>'%'</code>字面值.</li>
 <li><code>f</code>,输出十进制记数法<code>float</code>变量.</li>
 <li><code>e/E</code>,输出科学记数法<code>double</code>变量.</li>
 <li><code>a/A</code>,输出十六进制记数法<code>double</code>变量(<code>C99</code>).</li>
 </ul>
 <p>常用<code>%p</code>,<code>%x</code>,<code>%n</code>,<code>%s</code>搭配其他限定符读写数据.</p>
-<h2 id="利用"><a href="#利用" class="headerlink" title="利用"></a>利用</h2><p>这里分两种情况.</p>
+<h2 id="利用">利用</h2>
+<p>这里分两种情况.</p>
 <p>第一种是格式化字符串在调用的格式化字符串函数的栈帧之上(即可以作为格式化控制符解析参数),这种情况基本上可以测出偏移后利用<code>%num$x</code>,<code>%num$n</code>任意读任意写.</p>
 <p>第二种是格式化字符串不可作为解析参数.就只能利用栈上的参数进行读写.</p>
 
@@ -907,7 +910,7 @@
       <i class="fa fa-area-chart"></i>
     </span>
     
-    <span title="站点总字数">710k</span>
+    <span title="站点总字数">720k</span>
   
 
   
@@ -916,7 +919,7 @@
       <i class="fa fa-coffee"></i>
     </span>
     
-    <span title="站点阅读时长">10:46</span>
+    <span title="站点阅读时长">10:54</span>
   
 </div>
 
@@ -1567,5 +1570,5 @@
   
   <script type="text/javascript" src="//cdn.bootcss.com/canvas-nest.js/1.0.0/canvas-nest.min.js"></script>
   
-<script src="/live2dw/lib/L2Dwidget.min.js?0c58a1486de42ac6cc1c59c7d98ae887"></script><script>L2Dwidget.init({"pluginRootPath":"live2dw/","pluginJsPath":"lib/","pluginModelPath":"assets/","tagMode":false,"debug":false,"model":{"jsonPath":"/live2dw/assets/koharu.model.json"},"display":{"position":"right","width":150,"height":300},"mobile":{"show":false},"log":false});</script></body>
+<script src="/live2dw/lib/L2Dwidget.min.js?0c58a1486de42ac6cc1c59c7d98ae887"></script><script>L2Dwidget.init({"pluginRootPath":"live2dw/","pluginJsPath":"lib/","pluginModelPath":"assets/","tagMode":false,"debug":false,"model":{"jsonPath":"/live2dw/assets/koharu.model.json"},"display":{"position":"right","width":150,"height":300},"mobile":{"show":false},"log":false});</script><!-- hexo-inject:begin --><!-- hexo-inject:end --></body>
 </html>

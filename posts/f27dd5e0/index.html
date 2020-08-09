@@ -16,7 +16,7 @@
 
 <html class="theme-next mist use-motion" lang="zh-CN">
 <head><meta name="generator" content="Hexo 3.8.0">
-  <meta charset="UTF-8">
+  <!-- hexo-inject:begin --><!-- hexo-inject:end --><meta charset="UTF-8">
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
 <meta name="theme-color" content="#222">
@@ -119,19 +119,19 @@
 
 
 
-  <meta name="description" content="未完成 同源策略源是host,协议,端口的三元组. 同源策略(SOP)是Web应用程序的一种安全模型,用于控制网页中DOM之间的访问(只是模型,不是标准). 同源策略被广泛地应用在处理Web内容的各种客户端上,比如各大浏览器,Adobe的Flash/Acrobat等.不同的客户端对于同源策略的处理也并非完全一致. 例如在Java6,7中,如果两个域名解析到相同的IP,认为它们同源. 同源策略没有禁">
+  <meta name="description" content="未完成 同源策略 源是host,协议,端口的三元组. 同源策略(SOP)是Web应用程序的一种安全模型,用于控制网页中DOM之间的访问(只是模型,不是标准). 同源策略被广泛地应用在处理Web内容的各种客户端上,比如各大浏览器,Adobe的Flash/Acrobat等.不同的客户端对于同源策略的处理也并非完全一致. 例如在Java6,7中,如果两个域名解析到相同的IP,认为它们同源.">
 <meta name="keywords" content="XSS">
 <meta property="og:type" content="article">
 <meta property="og:title" content="IS-web-XSS-防御">
 <meta property="og:url" content="https://hitworld.github.io/posts/f27dd5e0/index.html">
 <meta property="og:site_name" content="w4rd3n">
-<meta property="og:description" content="未完成 同源策略源是host,协议,端口的三元组. 同源策略(SOP)是Web应用程序的一种安全模型,用于控制网页中DOM之间的访问(只是模型,不是标准). 同源策略被广泛地应用在处理Web内容的各种客户端上,比如各大浏览器,Adobe的Flash/Acrobat等.不同的客户端对于同源策略的处理也并非完全一致. 例如在Java6,7中,如果两个域名解析到相同的IP,认为它们同源. 同源策略没有禁">
+<meta property="og:description" content="未完成 同源策略 源是host,协议,端口的三元组. 同源策略(SOP)是Web应用程序的一种安全模型,用于控制网页中DOM之间的访问(只是模型,不是标准). 同源策略被广泛地应用在处理Web内容的各种客户端上,比如各大浏览器,Adobe的Flash/Acrobat等.不同的客户端对于同源策略的处理也并非完全一致. 例如在Java6,7中,如果两个域名解析到相同的IP,认为它们同源.">
 <meta property="og:locale" content="zh-CN">
 <meta property="og:image" content="https://hitworld.github.io/posts/f27dd5e0/1.png">
 <meta property="og:updated_time" content="2020-08-09T06:34:17.837Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="IS-web-XSS-防御">
-<meta name="twitter:description" content="未完成 同源策略源是host,协议,端口的三元组. 同源策略(SOP)是Web应用程序的一种安全模型,用于控制网页中DOM之间的访问(只是模型,不是标准). 同源策略被广泛地应用在处理Web内容的各种客户端上,比如各大浏览器,Adobe的Flash/Acrobat等.不同的客户端对于同源策略的处理也并非完全一致. 例如在Java6,7中,如果两个域名解析到相同的IP,认为它们同源. 同源策略没有禁">
+<meta name="twitter:description" content="未完成 同源策略 源是host,协议,端口的三元组. 同源策略(SOP)是Web应用程序的一种安全模型,用于控制网页中DOM之间的访问(只是模型,不是标准). 同源策略被广泛地应用在处理Web内容的各种客户端上,比如各大浏览器,Adobe的Flash/Acrobat等.不同的客户端对于同源策略的处理也并非完全一致. 例如在Java6,7中,如果两个域名解析到相同的IP,认为它们同源.">
 <meta name="twitter:image" content="https://hitworld.github.io/posts/f27dd5e0/1.png">
 
 
@@ -187,7 +187,7 @@
       .logo-line-after i { right: initial; }
     }
   </style>
-</noscript>
+</noscript><!-- hexo-inject:begin --><!-- hexo-inject:end -->
 
 </head>
 
@@ -198,7 +198,7 @@
     
   
 
-  <div class="container sidebar-position-left page-post-detail">
+  <!-- hexo-inject:begin --><!-- hexo-inject:end --><div class="container sidebar-position-left page-post-detail">
     <div class="headband"></div>
 
     <header id="header" class="header" itemscope="" itemtype="http://schema.org/WPHeader">
@@ -540,7 +540,8 @@
 
       
         <p>未完成</p>
-<h2 id="同源策略"><a href="#同源策略" class="headerlink" title="同源策略"></a>同源策略</h2><p>源是<code>host</code>,协议,端口的三元组.</p>
+<h2 id="同源策略">同源策略</h2>
+<p>源是<code>host</code>,协议,端口的三元组.</p>
 <p>同源策略(<code>SOP</code>)是<code>Web</code>应用程序的一种安全模型,用于控制网页中<code>DOM</code>之间的访问(只是模型,不是标准).</p>
 <p>同源策略被广泛地应用在处理<code>Web</code>内容的各种客户端上,比如各大浏览器,<code>Adobe</code>的<code>Flash/Acrobat</code>等.不同的客户端对于同源策略的处理也并非完全一致.</p>
 <p>例如在<code>Java6</code>,<code>7</code>中,如果两个域名解析到相同的<code>IP</code>,认为它们同源.</p>
@@ -558,10 +559,12 @@
 <p>禁止跨域读可以通过设置<code>X-Frame-Options</code>头来禁止该页面被嵌入到恶意页面中.</p>
 <p>禁止跨域嵌入需要确保资源本身无法嵌入到各种跨域访问方式中.同时,使用<code>CSRF</code>令牌也可以有效避免被跨域嵌入.</p>
 <p>这与浏览器沙箱的设计理念不谋而合:沙箱是一个受保护的环境,在这个环境中的脚本只能访问指定的资源.</p>
-<h3 id="跨源访问"><a href="#跨源访问" class="headerlink" title="跨源访问"></a>跨源访问</h3><p>最好的方式是使用<code>CORS</code>,或者使用<code>Window.postMessage</code>(<code>HTML5</code>新增),<code>JSONP</code>.</p>
+<h3 id="跨源访问">跨源访问</h3>
+<p>最好的方式是使用<code>CORS</code>,或者使用<code>Window.postMessage</code>(<code>HTML5</code>新增),<code>JSONP</code>.</p>
 <p>相同主域名不同子域名下的页面,可以设置<code>document.domain</code>让它们同域.</p>
-<h2 id="CSP"><a href="#CSP" class="headerlink" title="CSP"></a>CSP</h2><p><code>Content Security Policy</code>(<code>CSP</code>)内容安全策略,是一个附加的安全层,有助于检测并缓解某些类型的攻击,包括跨站脚本和数据注入攻击.CSP是在浏览器层面做的防护,和同源策略同一级别.</p>
-<p>浏览器目前可以通过获取<code>Header</code>头来进行<code>CSP</code>配置,<code>CSP</code>规则举例:<code>header(&quot;Content-Security-Policy: default-src &#39;self&#39;; script-src &#39;self&#39; https://lorexxar.cn;&quot;);</code>.</p>
+<h2 id="csp">CSP</h2>
+<p><code>Content Security Policy</code>(<code>CSP</code>)内容安全策略,是一个附加的安全层,有助于检测并缓解某些类型的攻击,包括跨站脚本和数据注入攻击.CSP是在浏览器层面做的防护,和同源策略同一级别.</p>
+<p>浏览器目前可以通过获取<code>Header</code>头来进行<code>CSP</code>配置,<code>CSP</code>规则举例:<code>header("Content-Security-Policy: default-src 'self'; script-src 'self' https://lorexxar.cn;");</code>.</p>
 <p>指令参考.</p>
 <ul>
 <li><code>default-src</code>:定义资源默认加载策略.</li>
@@ -577,23 +580,28 @@
 <li><code>report-uri</code>:值为<code>/report-uri</code>,提交日志.</li>
 </ul>
 <p>使用在线生成<code>CSP</code>规则的站点来辅助编写:<code>http://cspisawesome.com/</code></p>
-<h2 id="HttpOnly"><a href="#HttpOnly" class="headerlink" title="HttpOnly"></a>HttpOnly</h2><p>浏览器会禁止<code>JavaScript</code>访问带有<code>HttpOnly</code>属性的<code>Cookie</code>.</p>
+<h2 id="httponly">HttpOnly</h2>
+<p>浏览器会禁止<code>JavaScript</code>访问带有<code>HttpOnly</code>属性的<code>Cookie</code>.</p>
 <p>一个<code>Cookie</code>使用过程如下.</p>
-<ol>
+<ol type="1">
 <li>浏览器向服务器发送请求(此时无<code>Cookie</code>).</li>
 <li>服务器返回时发送<code>Set-Cookie</code>头,向客户端写入<code>Cookie</code>.</li>
 <li>浏览器访问时携带<code>Cookie</code>(在<code>Cookie</code>到期之前).</li>
 </ol>
 <p><code>HttpOnly</code>在<code>Set-Cookie</code>时标记.</p>
-<h2 id="XSS-Filter"><a href="#XSS-Filter" class="headerlink" title="XSS Filter"></a>XSS Filter</h2><p>一般采用输入格式限制<code>+</code>黑名单,过于严格的过滤可能会曲解用户原来的意思.</p>
+<h2 id="xss-filter">XSS Filter</h2>
+<p>一般采用输入格式限制<code>+</code>黑名单,过于严格的过滤可能会曲解用户原来的意思.</p>
 <p>格式限制可以包括:限制为输入内容为合法字符,限制输入长度等.</p>
-<h3 id="输入过滤"><a href="#输入过滤" class="headerlink" title="输入过滤"></a>输入过滤</h3><p>在处理输入时,来自用户的<code>UGC</code>信息,来自第三方的链接,<code>URL</code>参数,<code>POST</code>参数,<code>Referer</code>(可能来自不可信的来源),<code>Cookie</code>(可能来自其他子域注入)都不可信.</p>
-<p>对于链接跳转,如<code>&lt;a href=&quot;xxx&quot; 或 location.href=&quot;xxx&quot;</code>,要检验其内容,禁止以<code>javascript:</code>(包括<code>jAvascript:</code>,<code>%20javascript:</code>)开头的链接,和其他非法的<code>scheme</code>.</p>
-<h3 id="输出过滤"><a href="#输出过滤" class="headerlink" title="输出过滤"></a>输出过滤</h3><p>通过编码函数对输出进行编码从而预防<code>XSS</code>.恶意代码被转义,不再被浏览器执行.</p>
+<h3 id="输入过滤">输入过滤</h3>
+<p>在处理输入时,来自用户的<code>UGC</code>信息,来自第三方的链接,<code>URL</code>参数,<code>POST</code>参数,<code>Referer</code>(可能来自不可信的来源),<code>Cookie</code>(可能来自其他子域注入)都不可信.</p>
+<p>对于链接跳转,如<code>&lt;a href="xxx" 或 location.href="xxx"</code>,要检验其内容,禁止以<code>javascript:</code>(包括<code>jAvascript:</code>,<code>%20javascript:</code>)开头的链接,和其他非法的<code>scheme</code>.</p>
+<h3 id="输出过滤">输出过滤</h3>
+<p>通过编码函数对输出进行编码从而预防<code>XSS</code>.恶意代码被转义,不再被浏览器执行.</p>
 <p>针对不同代码有不同的编码方式,针对<code>HTML</code>代码的编码方式是<code>HtmlEncode</code>,对应函数<code>escapeHTML</code>.<code>PHP</code>中的函数实现有<code>htmlentities()</code>和<code>htmlspecialchars()</code>.</p>
-<p>其本质是转换部分特殊字符,例如<code>htmlspecialchars</code>:<code>&amp; -&gt; &amp;amp</code>,<code>&lt; -&gt; &amp;lt</code>,<code>&quot; =&gt; &amp;quot</code>,<code>&#39; =&gt; &amp;#039</code>,<code>&gt; =&gt; &amp;gt</code>.</p>
+<p>其本质是转换部分特殊字符,例如<code>htmlspecialchars</code>:<code>&amp; -&gt; &amp;amp</code>,<code>&lt; -&gt; &amp;lt</code>,<code>" =&gt; &amp;quot</code>,<code>' =&gt; &amp;#039</code>,<code>&gt; =&gt; &amp;gt</code>.</p>
 <p>最后还可以加上黑名单的过滤方法.</p>
-<h2 id="ClickJacking防御"><a href="#ClickJacking防御" class="headerlink" title="ClickJacking防御"></a>ClickJacking防御</h2><p>使用<code>frame busting</code>.</p>
+<h2 id="clickjacking防御">ClickJacking防御</h2>
+<p>使用<code>frame busting</code>.</p>
 <figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">if</span> (top.location != location) &#123;</span><br><span class="line">  top.location = location;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 <p>使用<code>HTTP</code>头<code>X-Frame-Options</code>,有三个值可选.</p>
 <ul>
@@ -601,8 +609,9 @@
 <li><code>SAMEORIGIN</code>:<code>frame</code>页面的地址只能为同源域名下的地址.</li>
 <li><code>ALLOW-FROM</code>:用于定义允许<code>frame</code>加载的地址.</li>
 </ul>
-<h2 id="其他"><a href="#其他" class="headerlink" title="其他"></a>其他</h2><p>输入内容长度控制,使用验证码,避免拼接<code>HTML</code>.</p>
-<p>避免内联事件,尽量不要使用<code>onLoad=&quot;onload(&#39;&#39;)&quot;</code>,<code>onClick=&quot;go(&#39;&#39;)&quot;</code>这种拼接内联事件的写法,而是在<code>JavaScript</code>中通过<code>.addEventlistener()</code>绑定事件.</p>
+<h2 id="其他">其他</h2>
+<p>输入内容长度控制,使用验证码,避免拼接<code>HTML</code>.</p>
+<p>避免内联事件,尽量不要使用<code>onLoad="onload('')"</code>,<code>onClick="go('')"</code>这种拼接内联事件的写法,而是在<code>JavaScript</code>中通过<code>.addEventlistener()</code>绑定事件.</p>
 
       
     </div>
@@ -917,7 +926,7 @@
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#同源策略"><span class="nav-number">1.</span> <span class="nav-text">同源策略</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#跨源访问"><span class="nav-number">1.1.</span> <span class="nav-text">跨源访问</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#CSP"><span class="nav-number">2.</span> <span class="nav-text">CSP</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#HttpOnly"><span class="nav-number">3.</span> <span class="nav-text">HttpOnly</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#XSS-Filter"><span class="nav-number">4.</span> <span class="nav-text">XSS Filter</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#输入过滤"><span class="nav-number">4.1.</span> <span class="nav-text">输入过滤</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#输出过滤"><span class="nav-number">4.2.</span> <span class="nav-text">输出过滤</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#ClickJacking防御"><span class="nav-number">5.</span> <span class="nav-text">ClickJacking防御</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#其他"><span class="nav-number">6.</span> <span class="nav-text">其他</span></a></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#同源策略"><span class="nav-number">1.</span> <span class="nav-text">同源策略</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#跨源访问"><span class="nav-number">1.1.</span> <span class="nav-text">跨源访问</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#csp"><span class="nav-number">2.</span> <span class="nav-text">CSP</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#httponly"><span class="nav-number">3.</span> <span class="nav-text">HttpOnly</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#xss-filter"><span class="nav-number">4.</span> <span class="nav-text">XSS Filter</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#输入过滤"><span class="nav-number">4.1.</span> <span class="nav-text">输入过滤</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#输出过滤"><span class="nav-number">4.2.</span> <span class="nav-text">输出过滤</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#clickjacking防御"><span class="nav-number">5.</span> <span class="nav-text">ClickJacking防御</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#其他"><span class="nav-number">6.</span> <span class="nav-text">其他</span></a></li></ol></div>
             
 
           </div>
@@ -949,7 +958,7 @@
       <i class="fa fa-area-chart"></i>
     </span>
     
-    <span title="站点总字数">710k</span>
+    <span title="站点总字数">720k</span>
   
 
   
@@ -958,7 +967,7 @@
       <i class="fa fa-coffee"></i>
     </span>
     
-    <span title="站点阅读时长">10:46</span>
+    <span title="站点阅读时长">10:54</span>
   
 </div>
 
@@ -1609,5 +1618,5 @@
   
   <script type="text/javascript" src="//cdn.bootcss.com/canvas-nest.js/1.0.0/canvas-nest.min.js"></script>
   
-<script src="/live2dw/lib/L2Dwidget.min.js?0c58a1486de42ac6cc1c59c7d98ae887"></script><script>L2Dwidget.init({"pluginRootPath":"live2dw/","pluginJsPath":"lib/","pluginModelPath":"assets/","tagMode":false,"debug":false,"model":{"jsonPath":"/live2dw/assets/koharu.model.json"},"display":{"position":"right","width":150,"height":300},"mobile":{"show":false},"log":false});</script></body>
+<script src="/live2dw/lib/L2Dwidget.min.js?0c58a1486de42ac6cc1c59c7d98ae887"></script><script>L2Dwidget.init({"pluginRootPath":"live2dw/","pluginJsPath":"lib/","pluginModelPath":"assets/","tagMode":false,"debug":false,"model":{"jsonPath":"/live2dw/assets/koharu.model.json"},"display":{"position":"right","width":150,"height":300},"mobile":{"show":false},"log":false});</script><!-- hexo-inject:begin --><!-- hexo-inject:end --></body>
 </html>

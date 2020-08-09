@@ -16,7 +16,7 @@
 
 <html class="theme-next mist use-motion" lang="zh-CN">
 <head><meta name="generator" content="Hexo 3.8.0">
-  <meta charset="UTF-8">
+  <!-- hexo-inject:begin --><!-- hexo-inject:end --><meta charset="UTF-8">
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
 <meta name="theme-color" content="#222">
@@ -119,18 +119,18 @@
 
 
 
-  <meta name="description" content="概览angr是一个利用python开发的二进制程序分析框架,具有对二进制文件执行动态符号执行和各种静态分析的功能. 符号执行是在运行程序时用符号来替代真实值,由于符号是可变的,可以尽可能的将程序的每一条路径遍历,这样的话,必定存在至少一条能够输出正确结果的分支,每一条分支的结果都可以表示为一个离散关系式,使用约束求解引擎即可分析出正确结果,这就是符号执行的简单阐述. 符号执行的路径选择问题到现在依">
+  <meta name="description" content="概览 angr是一个利用python开发的二进制程序分析框架,具有对二进制文件执行动态符号执行和各种静态分析的功能. 符号执行是在运行程序时用符号来替代真实值,由于符号是可变的,可以尽可能的将程序的每一条路径遍历,这样的话,必定存在至少一条能够输出正确结果的分支,每一条分支的结果都可以表示为一个离散关系式,使用约束求解引擎即可分析出正确结果,这就是符号执行的简单阐述. 符号执行的路径选择问题">
 <meta name="keywords" content="angr">
 <meta property="og:type" content="article">
 <meta property="og:title" content="IS-reverse-angr-基础">
 <meta property="og:url" content="https://hitworld.github.io/posts/318f3199/index.html">
 <meta property="og:site_name" content="w4rd3n">
-<meta property="og:description" content="概览angr是一个利用python开发的二进制程序分析框架,具有对二进制文件执行动态符号执行和各种静态分析的功能. 符号执行是在运行程序时用符号来替代真实值,由于符号是可变的,可以尽可能的将程序的每一条路径遍历,这样的话,必定存在至少一条能够输出正确结果的分支,每一条分支的结果都可以表示为一个离散关系式,使用约束求解引擎即可分析出正确结果,这就是符号执行的简单阐述. 符号执行的路径选择问题到现在依">
+<meta property="og:description" content="概览 angr是一个利用python开发的二进制程序分析框架,具有对二进制文件执行动态符号执行和各种静态分析的功能. 符号执行是在运行程序时用符号来替代真实值,由于符号是可变的,可以尽可能的将程序的每一条路径遍历,这样的话,必定存在至少一条能够输出正确结果的分支,每一条分支的结果都可以表示为一个离散关系式,使用约束求解引擎即可分析出正确结果,这就是符号执行的简单阐述. 符号执行的路径选择问题">
 <meta property="og:locale" content="zh-CN">
 <meta property="og:updated_time" content="2020-08-09T06:34:17.826Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="IS-reverse-angr-基础">
-<meta name="twitter:description" content="概览angr是一个利用python开发的二进制程序分析框架,具有对二进制文件执行动态符号执行和各种静态分析的功能. 符号执行是在运行程序时用符号来替代真实值,由于符号是可变的,可以尽可能的将程序的每一条路径遍历,这样的话,必定存在至少一条能够输出正确结果的分支,每一条分支的结果都可以表示为一个离散关系式,使用约束求解引擎即可分析出正确结果,这就是符号执行的简单阐述. 符号执行的路径选择问题到现在依">
+<meta name="twitter:description" content="概览 angr是一个利用python开发的二进制程序分析框架,具有对二进制文件执行动态符号执行和各种静态分析的功能. 符号执行是在运行程序时用符号来替代真实值,由于符号是可变的,可以尽可能的将程序的每一条路径遍历,这样的话,必定存在至少一条能够输出正确结果的分支,每一条分支的结果都可以表示为一个离散关系式,使用约束求解引擎即可分析出正确结果,这就是符号执行的简单阐述. 符号执行的路径选择问题">
 
 
 
@@ -185,7 +185,7 @@
       .logo-line-after i { right: initial; }
     }
   </style>
-</noscript>
+</noscript><!-- hexo-inject:begin --><!-- hexo-inject:end -->
 
 </head>
 
@@ -196,7 +196,7 @@
     
   
 
-  <div class="container sidebar-position-left page-post-detail">
+  <!-- hexo-inject:begin --><!-- hexo-inject:end --><div class="container sidebar-position-left page-post-detail">
     <div class="headband"></div>
 
     <header id="header" class="header" itemscope="" itemtype="http://schema.org/WPHeader">
@@ -537,11 +537,12 @@
       
 
       
-        <h2 id="概览"><a href="#概览" class="headerlink" title="概览"></a>概览</h2><p><code>angr</code>是一个利用<code>python</code>开发的二进制程序分析框架,具有对二进制文件执行动态符号执行和各种静态分析的功能.</p>
+        <h2 id="概览">概览</h2>
+<p><code>angr</code>是一个利用<code>python</code>开发的二进制程序分析框架,具有对二进制文件执行动态符号执行和各种静态分析的功能.</p>
 <p>符号执行是在运行程序时用符号来替代真实值,由于符号是可变的,可以尽可能的将程序的每一条路径遍历,这样的话,必定存在至少一条能够输出正确结果的分支,每一条分支的结果都可以表示为一个离散关系式,使用约束求解引擎即可分析出正确结果,这就是符号执行的简单阐述.</p>
 <p>符号执行的路径选择问题到现在依旧是一个很大的问题,当程序存在循环时,每次循环之后会形成至少两个分支,当循环的次数足够多时,就会造成路径爆炸.</p>
 <p><code>angr</code>分析程序流程.</p>
-<ol>
+<ol type="1">
 <li>导入二进制文件.</li>
 <li>建立状态.</li>
 <li>定义符号变量并与二进制文件相联系.</li>
@@ -549,10 +550,13 @@
 <li>通过<code>active</code>的变化来筛选.</li>
 <li>获取目标状态的数值.</li>
 </ol>
-<h2 id="状态"><a href="#状态" class="headerlink" title="状态"></a>状态</h2><p>在<code>angr</code>寻找路径时,程序的当前状态有多种表示.</p>
+<h2 id="状态">状态</h2>
+<p>在<code>angr</code>寻找路径时,程序的当前状态有多种表示.</p>
 <figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">step()</span><br><span class="line"><span class="comment">#向下执行一个block,产生active状态,表示该分支在执行中.</span></span><br><span class="line">run()</span><br><span class="line"><span class="comment">#运行到结束,产生deadended状态,表示分支结束.</span></span><br><span class="line">explore()</span><br><span class="line"><span class="comment">#对地址进行限制筛选路径,例如:sm.explore(find = [0x400676], avoid = [0x40073d]).产生found状态,表示探索的结果等等.</span></span><br></pre></td></tr></table></figure>
-<h2 id="约束求解"><a href="#约束求解" class="headerlink" title="约束求解"></a>约束求解</h2><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">print</span> sm.found.solver.eval(arg1, cast_to = str)</span><br><span class="line"><span class="comment">#使用约束求解引擎获取命令行参数</span></span><br><span class="line"></span><br><span class="line">inp = sm.found.posix.files[<span class="number">0</span>].all_bytes()  </span><br><span class="line"><span class="keyword">print</span> sm.found.solver.eval(inp, cast_to = str)</span><br><span class="line"><span class="comment">#使用约束求解引擎获取标准输入</span></span><br></pre></td></tr></table></figure>
-<h2 id="简单使用"><a href="#简单使用" class="headerlink" title="简单使用"></a>简单使用</h2><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> angr</span><br><span class="line"><span class="keyword">import</span> sys</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">main</span><span class="params">(argv)</span>:</span></span><br><span class="line">  project = angr.Project(argv[<span class="number">1</span>])</span><br><span class="line">  initial_state = project.factory.entry_state()</span><br><span class="line">  simulation = project.factory.simgr(initial_state)</span><br><span class="line"></span><br><span class="line">  print_good_address = <span class="number">0x232323</span></span><br><span class="line">  simulation.explore(find = print_good_address)</span><br><span class="line"></span><br><span class="line">  <span class="keyword">if</span> simulation.found:</span><br><span class="line">    solution_state = simulation.found[<span class="number">0</span>]</span><br><span class="line">    <span class="comment">#获取一个筛选出来的状态</span></span><br><span class="line">    <span class="keyword">print</span> solution_state.posix.dumps(sys.stdin.fileno())</span><br><span class="line">    <span class="comment">#打印该状态的标准输入</span></span><br><span class="line">  <span class="keyword">else</span>:</span><br><span class="line">    <span class="keyword">raise</span> Exception(<span class="string">'Could not find the solution'</span>)</span><br><span class="line"></span><br><span class="line"><span class="keyword">if</span> __name__ == <span class="string">'__main__'</span>:</span><br><span class="line">  main(sys.argv)</span><br></pre></td></tr></table></figure>
+<h2 id="约束求解">约束求解</h2>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">print</span> sm.found.solver.eval(arg1, cast_to = str)</span><br><span class="line"><span class="comment">#使用约束求解引擎获取命令行参数</span></span><br><span class="line"></span><br><span class="line">inp = sm.found.posix.files[<span class="number">0</span>].all_bytes()  </span><br><span class="line"><span class="keyword">print</span> sm.found.solver.eval(inp, cast_to = str)</span><br><span class="line"><span class="comment">#使用约束求解引擎获取标准输入</span></span><br></pre></td></tr></table></figure>
+<h2 id="简单使用">简单使用</h2>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> angr</span><br><span class="line"><span class="keyword">import</span> sys</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">main</span><span class="params">(argv)</span>:</span></span><br><span class="line">  project = angr.Project(argv[<span class="number">1</span>])</span><br><span class="line">  initial_state = project.factory.entry_state()</span><br><span class="line">  simulation = project.factory.simgr(initial_state)</span><br><span class="line"></span><br><span class="line">  print_good_address = <span class="number">0x232323</span></span><br><span class="line">  simulation.explore(find = print_good_address)</span><br><span class="line"></span><br><span class="line">  <span class="keyword">if</span> simulation.found:</span><br><span class="line">    solution_state = simulation.found[<span class="number">0</span>]</span><br><span class="line">    <span class="comment">#获取一个筛选出来的状态</span></span><br><span class="line">    <span class="keyword">print</span> solution_state.posix.dumps(sys.stdin.fileno())</span><br><span class="line">    <span class="comment">#打印该状态的标准输入</span></span><br><span class="line">  <span class="keyword">else</span>:</span><br><span class="line">    <span class="keyword">raise</span> Exception(<span class="string">'Could not find the solution'</span>)</span><br><span class="line"></span><br><span class="line"><span class="keyword">if</span> __name__ == <span class="string">'__main__'</span>:</span><br><span class="line">  main(sys.argv)</span><br></pre></td></tr></table></figure>
 
       
     </div>
@@ -899,7 +903,7 @@
       <i class="fa fa-area-chart"></i>
     </span>
     
-    <span title="站点总字数">710k</span>
+    <span title="站点总字数">720k</span>
   
 
   
@@ -908,7 +912,7 @@
       <i class="fa fa-coffee"></i>
     </span>
     
-    <span title="站点阅读时长">10:46</span>
+    <span title="站点阅读时长">10:54</span>
   
 </div>
 
@@ -1559,5 +1563,5 @@
   
   <script type="text/javascript" src="//cdn.bootcss.com/canvas-nest.js/1.0.0/canvas-nest.min.js"></script>
   
-<script src="/live2dw/lib/L2Dwidget.min.js?0c58a1486de42ac6cc1c59c7d98ae887"></script><script>L2Dwidget.init({"pluginRootPath":"live2dw/","pluginJsPath":"lib/","pluginModelPath":"assets/","tagMode":false,"debug":false,"model":{"jsonPath":"/live2dw/assets/koharu.model.json"},"display":{"position":"right","width":150,"height":300},"mobile":{"show":false},"log":false});</script></body>
+<script src="/live2dw/lib/L2Dwidget.min.js?0c58a1486de42ac6cc1c59c7d98ae887"></script><script>L2Dwidget.init({"pluginRootPath":"live2dw/","pluginJsPath":"lib/","pluginModelPath":"assets/","tagMode":false,"debug":false,"model":{"jsonPath":"/live2dw/assets/koharu.model.json"},"display":{"position":"right","width":150,"height":300},"mobile":{"show":false},"log":false});</script><!-- hexo-inject:begin --><!-- hexo-inject:end --></body>
 </html>

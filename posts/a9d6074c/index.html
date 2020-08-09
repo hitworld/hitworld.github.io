@@ -16,7 +16,7 @@
 
 <html class="theme-next mist use-motion" lang="zh-CN">
 <head><meta name="generator" content="Hexo 3.8.0">
-  <meta charset="UTF-8">
+  <!-- hexo-inject:begin --><!-- hexo-inject:end --><meta charset="UTF-8">
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
 <meta name="theme-color" content="#222">
@@ -119,18 +119,18 @@
 
 
 
-  <meta name="description" content="概览free函数在释放堆块时,会判断相邻前,后堆块是否为空闲堆块,是就会进行合并,然后利用unlink机制将该空闲堆块从unsorted bin中取下. unlink漏洞分析触发unlink的几种情况. 1234567891011121314151617181920212223if (!prev_inuse(p)) &amp;#123;/* 如果当前free的chunk的前一个相邻chunk为空闲状态,与">
+  <meta name="description" content="概览 free函数在释放堆块时,会判断相邻前,后堆块是否为空闲堆块,是就会进行合并,然后利用unlink机制将该空闲堆块从unsorted bin中取下. unlink漏洞分析 触发unlink的几种情况. 1234567891011121314151617181920212223if (!prev_inuse(p)) &amp;#123;/* 如果当前free的chunk的前一个相邻chunk为">
 <meta name="keywords" content="Linux">
 <meta property="og:type" content="article">
 <meta property="og:title" content="IS-pwn-Linux-glibc-2.23-unlink">
 <meta property="og:url" content="https://hitworld.github.io/posts/a9d6074c/index.html">
 <meta property="og:site_name" content="w4rd3n">
-<meta property="og:description" content="概览free函数在释放堆块时,会判断相邻前,后堆块是否为空闲堆块,是就会进行合并,然后利用unlink机制将该空闲堆块从unsorted bin中取下. unlink漏洞分析触发unlink的几种情况. 1234567891011121314151617181920212223if (!prev_inuse(p)) &amp;#123;/* 如果当前free的chunk的前一个相邻chunk为空闲状态,与">
+<meta property="og:description" content="概览 free函数在释放堆块时,会判断相邻前,后堆块是否为空闲堆块,是就会进行合并,然后利用unlink机制将该空闲堆块从unsorted bin中取下. unlink漏洞分析 触发unlink的几种情况. 1234567891011121314151617181920212223if (!prev_inuse(p)) &amp;#123;/* 如果当前free的chunk的前一个相邻chunk为">
 <meta property="og:locale" content="zh-CN">
 <meta property="og:updated_time" content="2020-08-09T06:34:17.807Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="IS-pwn-Linux-glibc-2.23-unlink">
-<meta name="twitter:description" content="概览free函数在释放堆块时,会判断相邻前,后堆块是否为空闲堆块,是就会进行合并,然后利用unlink机制将该空闲堆块从unsorted bin中取下. unlink漏洞分析触发unlink的几种情况. 1234567891011121314151617181920212223if (!prev_inuse(p)) &amp;#123;/* 如果当前free的chunk的前一个相邻chunk为空闲状态,与">
+<meta name="twitter:description" content="概览 free函数在释放堆块时,会判断相邻前,后堆块是否为空闲堆块,是就会进行合并,然后利用unlink机制将该空闲堆块从unsorted bin中取下. unlink漏洞分析 触发unlink的几种情况. 1234567891011121314151617181920212223if (!prev_inuse(p)) &amp;#123;/* 如果当前free的chunk的前一个相邻chunk为">
 
 
 
@@ -185,7 +185,7 @@
       .logo-line-after i { right: initial; }
     }
   </style>
-</noscript>
+</noscript><!-- hexo-inject:begin --><!-- hexo-inject:end -->
 
 </head>
 
@@ -196,7 +196,7 @@
     
   
 
-  <div class="container sidebar-position-left page-post-detail">
+  <!-- hexo-inject:begin --><!-- hexo-inject:end --><div class="container sidebar-position-left page-post-detail">
     <div class="headband"></div>
 
     <header id="header" class="header" itemscope="" itemtype="http://schema.org/WPHeader">
@@ -537,15 +537,18 @@
       
 
       
-        <h2 id="概览"><a href="#概览" class="headerlink" title="概览"></a>概览</h2><p><code>free</code>函数在释放堆块时,会判断相邻前,后堆块是否为空闲堆块,是就会进行合并,然后利用<code>unlink</code>机制将该空闲堆块从<code>unsorted bin</code>中取下.</p>
-<h2 id="unlink漏洞分析"><a href="#unlink漏洞分析" class="headerlink" title="unlink漏洞分析"></a>unlink漏洞分析</h2><p>触发<code>unlink</code>的几种情况.</p>
+        <h2 id="概览">概览</h2>
+<p><code>free</code>函数在释放堆块时,会判断相邻前,后堆块是否为空闲堆块,是就会进行合并,然后利用<code>unlink</code>机制将该空闲堆块从<code>unsorted bin</code>中取下.</p>
+<h2 id="unlink漏洞分析">unlink漏洞分析</h2>
+<p>触发<code>unlink</code>的几种情况.</p>
 <figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">if</span> (!prev_inuse(p)) &#123;</span><br><span class="line"><span class="comment">/* 如果当前free的chunk的前一个相邻chunk为空闲状态,与前一个空闲chunk合并 */</span></span><br><span class="line">    prevsize = p-&gt;prev_size;</span><br><span class="line">    size += prevsize;</span><br><span class="line">    p = chunk_at_offset(p, -((<span class="keyword">long</span>) prevsize));</span><br><span class="line">    unlink(av, p, bck, fwd);</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">if</span> (nextchunk != av-&gt;top) &#123;</span><br><span class="line"><span class="comment">/* 与当前free的chunk相邻的下一个chunk不是分配区的top chunk */</span></span><br><span class="line">    nextinuse = inuse_bit_at_offset(nextchunk, nextsize);</span><br><span class="line"></span><br><span class="line">    <span class="keyword">if</span> (!nextinuse) &#123;</span><br><span class="line">    <span class="comment">/* 如果当前free的chunk的下一个相邻chunk为空闲状态,与下一个空闲chunk合并 */</span></span><br><span class="line">        unlink(av, nextchunk, bck, fwd);</span><br><span class="line">        size += nextsize;</span><br><span class="line">    &#125; <span class="keyword">else</span></span><br><span class="line">        <span class="comment">/* code */</span></span><br><span class="line"></span><br><span class="line">    <span class="comment">/* code */</span></span><br><span class="line">&#125; <span class="keyword">else</span> &#123;</span><br><span class="line">    <span class="comment">/* code */</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 <p>可以让一个构造出来的<code>fake chunk</code>被<code>unlink</code>导致一次固定地址写.</p>
 <figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">define</span> unlink(AV, P, BK, FD) &#123;                   \</span></span><br><span class="line">    FD = P-&gt;fd;								      \</span><br><span class="line">    BK = P-&gt;bk;								      \</span><br><span class="line">    <span class="keyword">if</span> (__builtin_expect (FD-&gt;bk != P || BK-&gt;fd != P, <span class="number">0</span>))		                \</span><br><span class="line">        malloc_printerr (check_action, <span class="string">"corrupted double-linked list"</span>, P, AV);  \</span><br><span class="line">    <span class="keyword">else</span> &#123;								              \</span><br><span class="line">        FD-&gt;bk = BK;							      \</span><br><span class="line">        BK-&gt;fd = FD;							      \</span><br><span class="line">        <span class="keyword">if</span> (!in_smallbin_range (P-&gt;size) &amp;&amp; __builtin_expect (P-&gt;fd_nextsize != <span class="literal">NULL</span>, <span class="number">0</span>)) &#123;		                                     \</span><br><span class="line">	        <span class="keyword">if</span> (__builtin_expect (P-&gt;fd_nextsize-&gt;bk_nextsize != P, <span class="number">0</span>) || __builtin_expect (P-&gt;bk_nextsize-&gt;fd_nextsize != P, <span class="number">0</span>))    \</span><br><span class="line">	            malloc_printerr (check_action, <span class="string">"corrupted double-linked list (not small)"</span>, P, AV);					                 \</span><br><span class="line">            <span class="keyword">if</span> (FD-&gt;fd_nextsize == <span class="literal">NULL</span>) &#123;				              \</span><br><span class="line">                <span class="keyword">if</span> (P-&gt;fd_nextsize == P)				              \</span><br><span class="line">                    FD-&gt;fd_nextsize = FD-&gt;bk_nextsize = FD;		      \</span><br><span class="line">                <span class="keyword">else</span> &#123;							                      \</span><br><span class="line">                    FD-&gt;fd_nextsize = P-&gt;fd_nextsize;			      \</span><br><span class="line">                    FD-&gt;bk_nextsize = P-&gt;bk_nextsize;			      \</span><br><span class="line">                    P-&gt;fd_nextsize-&gt;bk_nextsize = FD;			      \</span><br><span class="line">                    P-&gt;bk_nextsize-&gt;fd_nextsize = FD;			      \</span><br><span class="line">                &#125;							                          \</span><br><span class="line">            &#125; <span class="keyword">else</span> &#123;							                      \</span><br><span class="line">                P-&gt;fd_nextsize-&gt;bk_nextsize = P-&gt;bk_nextsize;		  \</span><br><span class="line">                P-&gt;bk_nextsize-&gt;fd_nextsize = P-&gt;fd_nextsize;		  \</span><br><span class="line">            &#125;								                          \</span><br><span class="line">        &#125;								                              \</span><br><span class="line">    &#125;									                              \</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 <p>这里需要绕过检测<code>__builtin_expect (FD-&gt;bk != P || BK-&gt;fd != P, 0)</code>,使<code>P-&gt;fd-&gt;bk == P &amp;&amp; P-&gt;bk-&gt;fd == P</code>为真.</p>
 <p>所以<code>fake chunk</code>可以如下构造.</p>
 <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">fake_pre_size | fake_size | &amp;target - 0x18 | &amp;target - 0x10</span><br></pre></td></tr></table></figure>
-<h2 id="堆溢出-amp-amp-unlink"><a href="#堆溢出-amp-amp-unlink" class="headerlink" title="堆溢出 &amp;&amp; unlink"></a>堆溢出 &amp;&amp; unlink</h2><p>如果程序存在堆溢出漏洞,可以在当前<code>chunk</code>伪造一个小<code>0x10</code>的<code>fake chunk</code>,同时将下一<code>chunk</code>头部的<code>pre_size</code>和<code>size</code>修改,<code>free</code>下一<code>chunk</code>触发<code>unlink</code>.</p>
+<h2 id="堆溢出-unlink">堆溢出 &amp;&amp; unlink</h2>
+<p>如果程序存在堆溢出漏洞,可以在当前<code>chunk</code>伪造一个小<code>0x10</code>的<code>fake chunk</code>,同时将下一<code>chunk</code>头部的<code>pre_size</code>和<code>size</code>修改,<code>free</code>下一<code>chunk</code>触发<code>unlink</code>.</p>
 <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">pre_size1 | size1 | fake_pre_size = pre_size1 ? pre_size1 + 0x10 : 0 | fake_size = size1 - 0x10 | &amp;target - 0x18 | &amp;target - 0x10 | padding | fake_size align | size2 &amp; ~1</span><br></pre></td></tr></table></figure>
 <p>要求<code>target = P</code>.结果<code>target = &amp;target - 0x18</code>.</p>
 
@@ -862,7 +865,7 @@
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#概览"><span class="nav-number">1.</span> <span class="nav-text">概览</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#unlink漏洞分析"><span class="nav-number">2.</span> <span class="nav-text">unlink漏洞分析</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#堆溢出-amp-amp-unlink"><span class="nav-number">3.</span> <span class="nav-text">堆溢出 &amp;&amp; unlink</span></a></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#概览"><span class="nav-number">1.</span> <span class="nav-text">概览</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#unlink漏洞分析"><span class="nav-number">2.</span> <span class="nav-text">unlink漏洞分析</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#堆溢出-unlink"><span class="nav-number">3.</span> <span class="nav-text">堆溢出 &amp;&amp; unlink</span></a></li></ol></div>
             
 
           </div>
@@ -894,7 +897,7 @@
       <i class="fa fa-area-chart"></i>
     </span>
     
-    <span title="站点总字数">710k</span>
+    <span title="站点总字数">720k</span>
   
 
   
@@ -903,7 +906,7 @@
       <i class="fa fa-coffee"></i>
     </span>
     
-    <span title="站点阅读时长">10:46</span>
+    <span title="站点阅读时长">10:54</span>
   
 </div>
 
@@ -1554,5 +1557,5 @@
   
   <script type="text/javascript" src="//cdn.bootcss.com/canvas-nest.js/1.0.0/canvas-nest.min.js"></script>
   
-<script src="/live2dw/lib/L2Dwidget.min.js?0c58a1486de42ac6cc1c59c7d98ae887"></script><script>L2Dwidget.init({"pluginRootPath":"live2dw/","pluginJsPath":"lib/","pluginModelPath":"assets/","tagMode":false,"debug":false,"model":{"jsonPath":"/live2dw/assets/koharu.model.json"},"display":{"position":"right","width":150,"height":300},"mobile":{"show":false},"log":false});</script></body>
+<script src="/live2dw/lib/L2Dwidget.min.js?0c58a1486de42ac6cc1c59c7d98ae887"></script><script>L2Dwidget.init({"pluginRootPath":"live2dw/","pluginJsPath":"lib/","pluginModelPath":"assets/","tagMode":false,"debug":false,"model":{"jsonPath":"/live2dw/assets/koharu.model.json"},"display":{"position":"right","width":150,"height":300},"mobile":{"show":false},"log":false});</script><!-- hexo-inject:begin --><!-- hexo-inject:end --></body>
 </html>

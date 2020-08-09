@@ -16,7 +16,7 @@
 
 <html class="theme-next mist use-motion" lang="zh-CN">
 <head><meta name="generator" content="Hexo 3.8.0">
-  <meta charset="UTF-8">
+  <!-- hexo-inject:begin --><!-- hexo-inject:end --><meta charset="UTF-8">
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
 <meta name="theme-color" content="#222">
@@ -119,18 +119,18 @@
 
 
 
-  <meta name="description" content="未完成 磁盘连接方式个人计算机常见磁盘接口有IDE和SATA,后者是现在主流. 一个IDE扁平电缆可以连接两个IDE设备(区分为主设备和从设备),通常主机会提供两个IDE接口IDE1(primary)和IDE2(secondary). 12345+----------------------------------+|IDE\Jumper  |  Master  |  Slave   ||IDE1">
+  <meta name="description" content="未完成 磁盘连接方式 个人计算机常见磁盘接口有IDE和SATA,后者是现在主流. 一个IDE扁平电缆可以连接两个IDE设备(区分为主设备和从设备),通常主机会提供两个IDE接口IDE1(primary)和IDE2(secondary). 12345+----------------------------------+|IDE\Jumper  |  Master  |  Slave   |">
 <meta name="keywords" content="Linux">
 <meta property="og:type" content="article">
 <meta property="og:title" content="CS-operations-Linux-磁盘分区">
 <meta property="og:url" content="https://hitworld.github.io/posts/bde6bff1/index.html">
 <meta property="og:site_name" content="w4rd3n">
-<meta property="og:description" content="未完成 磁盘连接方式个人计算机常见磁盘接口有IDE和SATA,后者是现在主流. 一个IDE扁平电缆可以连接两个IDE设备(区分为主设备和从设备),通常主机会提供两个IDE接口IDE1(primary)和IDE2(secondary). 12345+----------------------------------+|IDE\Jumper  |  Master  |  Slave   ||IDE1">
+<meta property="og:description" content="未完成 磁盘连接方式 个人计算机常见磁盘接口有IDE和SATA,后者是现在主流. 一个IDE扁平电缆可以连接两个IDE设备(区分为主设备和从设备),通常主机会提供两个IDE接口IDE1(primary)和IDE2(secondary). 12345+----------------------------------+|IDE\Jumper  |  Master  |  Slave   |">
 <meta property="og:locale" content="zh-CN">
 <meta property="og:updated_time" content="2020-08-09T06:34:17.802Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="CS-operations-Linux-磁盘分区">
-<meta name="twitter:description" content="未完成 磁盘连接方式个人计算机常见磁盘接口有IDE和SATA,后者是现在主流. 一个IDE扁平电缆可以连接两个IDE设备(区分为主设备和从设备),通常主机会提供两个IDE接口IDE1(primary)和IDE2(secondary). 12345+----------------------------------+|IDE\Jumper  |  Master  |  Slave   ||IDE1">
+<meta name="twitter:description" content="未完成 磁盘连接方式 个人计算机常见磁盘接口有IDE和SATA,后者是现在主流. 一个IDE扁平电缆可以连接两个IDE设备(区分为主设备和从设备),通常主机会提供两个IDE接口IDE1(primary)和IDE2(secondary). 12345+----------------------------------+|IDE\Jumper  |  Master  |  Slave   |">
 
 
 
@@ -185,7 +185,7 @@
       .logo-line-after i { right: initial; }
     }
   </style>
-</noscript>
+</noscript><!-- hexo-inject:begin --><!-- hexo-inject:end -->
 
 </head>
 
@@ -196,7 +196,7 @@
     
   
 
-  <div class="container sidebar-position-left page-post-detail">
+  <!-- hexo-inject:begin --><!-- hexo-inject:end --><div class="container sidebar-position-left page-post-detail">
     <div class="headband"></div>
 
     <header id="header" class="header" itemscope="" itemtype="http://schema.org/WPHeader">
@@ -503,7 +503,7 @@
                 
                   <span class="post-meta-item-text">本文字数：</span>
                 
-                <span title="本文字数">1.5k</span>
+                <span title="本文字数">1.6k</span>
               
 
               
@@ -538,43 +538,50 @@
 
       
         <p>未完成</p>
-<h2 id="磁盘连接方式"><a href="#磁盘连接方式" class="headerlink" title="磁盘连接方式"></a>磁盘连接方式</h2><p>个人计算机常见磁盘接口有<code>IDE</code>和<code>SATA</code>,后者是现在主流.</p>
+<h2 id="磁盘连接方式">磁盘连接方式</h2>
+<p>个人计算机常见磁盘接口有<code>IDE</code>和<code>SATA</code>,后者是现在主流.</p>
 <p>一个<code>IDE</code>扁平电缆可以连接两个<code>IDE</code>设备(区分为主设备和从设备),通常主机会提供两个<code>IDE</code>接口<code>IDE1</code>(<code>primary</code>)和<code>IDE2</code>(<code>secondary</code>).</p>
 <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">+----------------------------------+</span><br><span class="line">|IDE\Jumper  |  Master  |  Slave   |</span><br><span class="line">|IDE1        | /dev/hda | /dev/hdb |</span><br><span class="line">|IDE2        | /dev/hdc | /dev/hdd |</span><br><span class="line">+----------------------------------+</span><br></pre></td></tr></table></figure>
 <p>由于<code>SATA/USB/SCSI</code>等磁盘接口都是使用<code>SCSI</code>模块来驱动,所以这些接口的磁盘设备文件名都是<code>/dev/sd[a-p]</code>的格式.</p>
 <p>具体磁盘文件名由<code>Linux</code>内核检测到磁盘的顺序.</p>
-<h2 id="主引导分区和分区表"><a href="#主引导分区和分区表" class="headerlink" title="主引导分区和分区表"></a>主引导分区和分区表</h2><p>磁盘数据读写在盘片上,盘片又可以分出扇区与柱面两种单位,其中扇区大小为<code>512bytes</code>.</p>
+<h2 id="主引导分区和分区表">主引导分区和分区表</h2>
+<p>磁盘数据读写在盘片上,盘片又可以分出扇区与柱面两种单位,其中扇区大小为<code>512bytes</code>.</p>
 <p>磁盘的第一个扇区十分重要,因为其记录了两个重要的信息:</p>
 <ul>
 <li>主引导分区(<code>MBR</code>):可以安装引导加载程序的地方,由<code>446bytes</code>.</li>
 <li>分区表(<code>partition table</code>):记录整块硬盘分区的状态,有<code>64bytes</code>.</li>
 <li>标记字节:<code>55</code>,<code>AA</code>.</li>
 </ul>
-<h3 id="磁盘分区表"><a href="#磁盘分区表" class="headerlink" title="磁盘分区表"></a>磁盘分区表</h3><p>分区表分为四组记录区,每组记录区记录了该区段的起始与结束的柱面号码.分区的最小单位就是柱面.</p>
+<h3 id="磁盘分区表">磁盘分区表</h3>
+<p>分区表分为四组记录区,每组记录区记录了该区段的起始与结束的柱面号码.分区的最小单位就是柱面.</p>
 <p>假如当前设备文件名为<code>/dev/hda</code>,那么四个分区的设备文件名为<code>/dev/hda[1-4]</code>,数字与分区位置相关.</p>
 <p>由于分区表只有<code>64bytes</code>,最多容纳四个分区(分为主或扩展分区).</p>
 <p>其中扩展分区的目的是使用额外的扇区记录分区信息.而由扩展分区继续切出来的分区叫做逻辑分区.(逻辑分区数字从<code>5</code>开始)</p>
-<h2 id="开机流程"><a href="#开机流程" class="headerlink" title="开机流程"></a>开机流程</h2><p><code>CMOS</code>是记录各项硬件参数且嵌入在主板上的存储器.而<code>BIOS</code>则是一个写入到主板上的一个韧体(即写入到硬件上的软件程序),同时也是开机时计算机系统会主动执行的第一个程序.</p>
+<h2 id="开机流程">开机流程</h2>
+<p><code>CMOS</code>是记录各项硬件参数且嵌入在主板上的存储器.而<code>BIOS</code>则是一个写入到主板上的一个韧体(即写入到硬件上的软件程序),同时也是开机时计算机系统会主动执行的第一个程序.</p>
 <p><code>BIOS</code>会根据用户设置去获取能开机的硬盘,并到该硬盘去读取第一个扇区的<code>MBR</code>位置,然后运行<code>MBR</code>中的引导加载程序.</p>
 <p>而引导加载程序目的时加载内核文件,之后由内核文件进行工作.</p>
 <p>其中引导加载程序的主要功能有:</p>
-<ol>
+<ol type="1">
 <li>提供开机选项菜单.</li>
 <li>载入内核文件.</li>
 <li>转交其他<code>loader</code>.</li>
 </ol>
 <p>引导加载程序除了可以安装在<code>MBR</code>之外,还可以安装在每个分区的引导扇区,而实际可开机的内核文件是放置到各分区,<code>loader</code>只认识自己系统分区内的可开机文件和其他<code>loader</code>.</p>
 <p>只有第一个可开机设备内的<code>MBR</code>会被系统主动读取.</p>
-<h2 id="磁盘分区选择"><a href="#磁盘分区选择" class="headerlink" title="磁盘分区选择"></a>磁盘分区选择</h2><p><code>Linux</code>所有数据都是以文件形态呈现的,形成一个目录树结构,其中最重要的就是<code>/</code>,也就是根目录.</p>
+<h2 id="磁盘分区选择">磁盘分区选择</h2>
+<p><code>Linux</code>所有数据都是以文件形态呈现的,形成一个目录树结构,其中最重要的就是<code>/</code>,也就是根目录.</p>
 <p><code>mount</code>就是利用一个目录当成进入点,将磁盘分区的数据放置在该目录下.</p>
-<h2 id="Linux支持的文件系统类型"><a href="#Linux支持的文件系统类型" class="headerlink" title="Linux支持的文件系统类型"></a>Linux支持的文件系统类型</h2><ul>
+<h2 id="linux支持的文件系统类型">Linux支持的文件系统类型</h2>
+<ul>
 <li><code>ext2/ext3</code>:是<code>Linux</code>适用的文件系统类型.</li>
 <li><code>physical volume(LVM)</code>:用来弹性调整文件系统大小的一种机制,可以让你的文件系统大小变化而不改变原有的文件数据的内容.</li>
 <li><code>software RAID</code>:利用<code>Linux</code>操作系统特性,用软件仿真出磁盘阵列的功能.</li>
 <li><code>swap</code>:内存交换空间.不需要挂载点.</li>
 <li><code>vfat</code>:同时被<code>Linux</code>和<code>Windows</code>支持的文件系统类型.</li>
 </ul>
-<h2 id="常用分区方案"><a href="#常用分区方案" class="headerlink" title="常用分区方案"></a>常用分区方案</h2><ul>
+<h2 id="常用分区方案">常用分区方案</h2>
+<ul>
 <li><code>/boot</code>:<code>primary - etx3</code>.</li>
 <li><code>/</code>:<code>primary - etx3</code>.</li>
 <li><code>/home</code>:<code>primary - etx3</code>.</li>
@@ -894,7 +901,7 @@
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#磁盘连接方式"><span class="nav-number">1.</span> <span class="nav-text">磁盘连接方式</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#主引导分区和分区表"><span class="nav-number">2.</span> <span class="nav-text">主引导分区和分区表</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#磁盘分区表"><span class="nav-number">2.1.</span> <span class="nav-text">磁盘分区表</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#开机流程"><span class="nav-number">3.</span> <span class="nav-text">开机流程</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#磁盘分区选择"><span class="nav-number">4.</span> <span class="nav-text">磁盘分区选择</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Linux支持的文件系统类型"><span class="nav-number">5.</span> <span class="nav-text">Linux支持的文件系统类型</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#常用分区方案"><span class="nav-number">6.</span> <span class="nav-text">常用分区方案</span></a></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#磁盘连接方式"><span class="nav-number">1.</span> <span class="nav-text">磁盘连接方式</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#主引导分区和分区表"><span class="nav-number">2.</span> <span class="nav-text">主引导分区和分区表</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#磁盘分区表"><span class="nav-number">2.1.</span> <span class="nav-text">磁盘分区表</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#开机流程"><span class="nav-number">3.</span> <span class="nav-text">开机流程</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#磁盘分区选择"><span class="nav-number">4.</span> <span class="nav-text">磁盘分区选择</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#linux支持的文件系统类型"><span class="nav-number">5.</span> <span class="nav-text">Linux支持的文件系统类型</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#常用分区方案"><span class="nav-number">6.</span> <span class="nav-text">常用分区方案</span></a></li></ol></div>
             
 
           </div>
@@ -926,7 +933,7 @@
       <i class="fa fa-area-chart"></i>
     </span>
     
-    <span title="站点总字数">710k</span>
+    <span title="站点总字数">720k</span>
   
 
   
@@ -935,7 +942,7 @@
       <i class="fa fa-coffee"></i>
     </span>
     
-    <span title="站点阅读时长">10:46</span>
+    <span title="站点阅读时长">10:54</span>
   
 </div>
 
@@ -1586,5 +1593,5 @@
   
   <script type="text/javascript" src="//cdn.bootcss.com/canvas-nest.js/1.0.0/canvas-nest.min.js"></script>
   
-<script src="/live2dw/lib/L2Dwidget.min.js?0c58a1486de42ac6cc1c59c7d98ae887"></script><script>L2Dwidget.init({"pluginRootPath":"live2dw/","pluginJsPath":"lib/","pluginModelPath":"assets/","tagMode":false,"debug":false,"model":{"jsonPath":"/live2dw/assets/koharu.model.json"},"display":{"position":"right","width":150,"height":300},"mobile":{"show":false},"log":false});</script></body>
+<script src="/live2dw/lib/L2Dwidget.min.js?0c58a1486de42ac6cc1c59c7d98ae887"></script><script>L2Dwidget.init({"pluginRootPath":"live2dw/","pluginJsPath":"lib/","pluginModelPath":"assets/","tagMode":false,"debug":false,"model":{"jsonPath":"/live2dw/assets/koharu.model.json"},"display":{"position":"right","width":150,"height":300},"mobile":{"show":false},"log":false});</script><!-- hexo-inject:begin --><!-- hexo-inject:end --></body>
 </html>

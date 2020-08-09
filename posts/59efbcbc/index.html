@@ -16,7 +16,7 @@
 
 <html class="theme-next mist use-motion" lang="zh-CN">
 <head><meta name="generator" content="Hexo 3.8.0">
-  <meta charset="UTF-8">
+  <!-- hexo-inject:begin --><!-- hexo-inject:end --><meta charset="UTF-8">
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
 <meta name="theme-color" content="#222">
@@ -119,18 +119,18 @@
 
 
 
-  <meta name="description" content="未完成 概览语法分析是编译过程的核心,它的任务是在词法分析识别出单词符号串的基础上,分析并判断程序的语法结构是否符合语法规则.如果用上下文无关的文法来描述语法的语法结构,则语法分析器的工作本质就是按文法的产生式,识别输入符号串是否是一个句子. 在构造最左推导的过程中,面对当前读入的单词符号和当前被替换的非终结符号两者,应该选择这个非终结符的哪条候选产生式去替换它(推导),这就是自顶向下分析的关键.">
+  <meta name="description" content="未完成 概览 语法分析是编译过程的核心,它的任务是在词法分析识别出单词符号串的基础上,分析并判断程序的语法结构是否符合语法规则.如果用上下文无关的文法来描述语法的语法结构,则语法分析器的工作本质就是按文法的产生式,识别输入符号串是否是一个句子. 在构造最左推导的过程中,面对当前读入的单词符号和当前被替换的非终结符号两者,应该选择这个非终结符的哪条候选产生式去替换它(推导),这就是自顶向下分析">
 <meta name="keywords" content="compiler-principles">
 <meta property="og:type" content="article">
 <meta property="og:title" content="CS-BASIC-compiler-principles-语法分析">
 <meta property="og:url" content="https://hitworld.github.io/posts/59efbcbc/index.html">
 <meta property="og:site_name" content="w4rd3n">
-<meta property="og:description" content="未完成 概览语法分析是编译过程的核心,它的任务是在词法分析识别出单词符号串的基础上,分析并判断程序的语法结构是否符合语法规则.如果用上下文无关的文法来描述语法的语法结构,则语法分析器的工作本质就是按文法的产生式,识别输入符号串是否是一个句子. 在构造最左推导的过程中,面对当前读入的单词符号和当前被替换的非终结符号两者,应该选择这个非终结符的哪条候选产生式去替换它(推导),这就是自顶向下分析的关键.">
+<meta property="og:description" content="未完成 概览 语法分析是编译过程的核心,它的任务是在词法分析识别出单词符号串的基础上,分析并判断程序的语法结构是否符合语法规则.如果用上下文无关的文法来描述语法的语法结构,则语法分析器的工作本质就是按文法的产生式,识别输入符号串是否是一个句子. 在构造最左推导的过程中,面对当前读入的单词符号和当前被替换的非终结符号两者,应该选择这个非终结符的哪条候选产生式去替换它(推导),这就是自顶向下分析">
 <meta property="og:locale" content="zh-CN">
 <meta property="og:updated_time" content="2020-08-09T06:34:17.780Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="CS-BASIC-compiler-principles-语法分析">
-<meta name="twitter:description" content="未完成 概览语法分析是编译过程的核心,它的任务是在词法分析识别出单词符号串的基础上,分析并判断程序的语法结构是否符合语法规则.如果用上下文无关的文法来描述语法的语法结构,则语法分析器的工作本质就是按文法的产生式,识别输入符号串是否是一个句子. 在构造最左推导的过程中,面对当前读入的单词符号和当前被替换的非终结符号两者,应该选择这个非终结符的哪条候选产生式去替换它(推导),这就是自顶向下分析的关键.">
+<meta name="twitter:description" content="未完成 概览 语法分析是编译过程的核心,它的任务是在词法分析识别出单词符号串的基础上,分析并判断程序的语法结构是否符合语法规则.如果用上下文无关的文法来描述语法的语法结构,则语法分析器的工作本质就是按文法的产生式,识别输入符号串是否是一个句子. 在构造最左推导的过程中,面对当前读入的单词符号和当前被替换的非终结符号两者,应该选择这个非终结符的哪条候选产生式去替换它(推导),这就是自顶向下分析">
 
 
 
@@ -185,7 +185,7 @@
       .logo-line-after i { right: initial; }
     }
   </style>
-</noscript>
+</noscript><!-- hexo-inject:begin --><!-- hexo-inject:end -->
 
 </head>
 
@@ -196,7 +196,7 @@
     
   
 
-  <div class="container sidebar-position-left page-post-detail">
+  <!-- hexo-inject:begin --><!-- hexo-inject:end --><div class="container sidebar-position-left page-post-detail">
     <div class="headband"></div>
 
     <header id="header" class="header" itemscope="" itemtype="http://schema.org/WPHeader">
@@ -503,7 +503,7 @@
                 
                   <span class="post-meta-item-text">本文字数：</span>
                 
-                <span title="本文字数">478</span>
+                <span title="本文字数">489</span>
               
 
               
@@ -538,10 +538,12 @@
 
       
         <p>未完成</p>
-<h2 id="概览"><a href="#概览" class="headerlink" title="概览"></a>概览</h2><p>语法分析是编译过程的核心,它的任务是在词法分析识别出单词符号串的基础上,分析并判断程序的语法结构是否符合语法规则.如果用上下文无关的文法来描述语法的语法结构,则语法分析器的工作本质就是按文法的产生式,识别输入符号串是否是一个句子.</p>
+<h2 id="概览">概览</h2>
+<p>语法分析是编译过程的核心,它的任务是在词法分析识别出单词符号串的基础上,分析并判断程序的语法结构是否符合语法规则.如果用上下文无关的文法来描述语法的语法结构,则语法分析器的工作本质就是按文法的产生式,识别输入符号串是否是一个句子.</p>
 <p>在构造最左推导的过程中,面对当前读入的单词符号和当前被替换的非终结符号两者,应该选择这个非终结符的哪条候选产生式去替换它(推导),这就是自顶向下分析的关键.</p>
 <p>在构造最右推导的逆过程中,面对当前读入的单词符号,已分析过的符号串中是否已构成一个产生式的右部(可归约串),即句柄.如果已构成句柄,即用相应的产生式左部(非终结符号)去替换它(归约),寻找句柄就是自下而上分析的核心.</p>
-<h2 id="自上而下"><a href="#自上而下" class="headerlink" title="自上而下"></a>自上而下</h2><p>从推导的角度看,从文法开始符号出发,试图推导出与输入符号串相同的符号串.一般来讲,构造出的推导是最左推导.</p>
+<h2 id="自上而下">自上而下</h2>
+<p>从推导的角度看,从文法开始符号出发,试图推导出与输入符号串相同的符号串.一般来讲,构造出的推导是最左推导.</p>
 <p>从语法树的角度看,从根节点,试图向下构造一颗语法树,其端末节点从左到右连接起来的串正好与输入符号串相同.</p>
 <p>自上而下分析可以用一种带回朔的反复试探过程来实现,但是这种方法使得系统实现时的效率存在极大的问题,甚至不能进行.</p>
 
@@ -890,7 +892,7 @@
       <i class="fa fa-area-chart"></i>
     </span>
     
-    <span title="站点总字数">710k</span>
+    <span title="站点总字数">720k</span>
   
 
   
@@ -899,7 +901,7 @@
       <i class="fa fa-coffee"></i>
     </span>
     
-    <span title="站点阅读时长">10:46</span>
+    <span title="站点阅读时长">10:54</span>
   
 </div>
 
@@ -1550,5 +1552,5 @@
   
   <script type="text/javascript" src="//cdn.bootcss.com/canvas-nest.js/1.0.0/canvas-nest.min.js"></script>
   
-<script src="/live2dw/lib/L2Dwidget.min.js?0c58a1486de42ac6cc1c59c7d98ae887"></script><script>L2Dwidget.init({"pluginRootPath":"live2dw/","pluginJsPath":"lib/","pluginModelPath":"assets/","tagMode":false,"debug":false,"model":{"jsonPath":"/live2dw/assets/koharu.model.json"},"display":{"position":"right","width":150,"height":300},"mobile":{"show":false},"log":false});</script></body>
+<script src="/live2dw/lib/L2Dwidget.min.js?0c58a1486de42ac6cc1c59c7d98ae887"></script><script>L2Dwidget.init({"pluginRootPath":"live2dw/","pluginJsPath":"lib/","pluginModelPath":"assets/","tagMode":false,"debug":false,"model":{"jsonPath":"/live2dw/assets/koharu.model.json"},"display":{"position":"right","width":150,"height":300},"mobile":{"show":false},"log":false});</script><!-- hexo-inject:begin --><!-- hexo-inject:end --></body>
 </html>

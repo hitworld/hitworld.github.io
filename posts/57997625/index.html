@@ -16,7 +16,7 @@
 
 <html class="theme-next mist use-motion" lang="zh-CN">
 <head><meta name="generator" content="Hexo 3.8.0">
-  <meta charset="UTF-8">
+  <!-- hexo-inject:begin --><!-- hexo-inject:end --><meta charset="UTF-8">
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
 <meta name="theme-color" content="#222">
@@ -119,13 +119,13 @@
 
 
 
-  <meta name="description" content="未完成 前言基于glibc-2.23. Linux进程内存布局Linux系统在装载elf格式的程序文件时,会调用loader把可执行文件中的各个段依次载入到从某一地址开始的空间中,载入地址取决link editor(ld)和机器地址位数. 32位进程内存经典布局.  64与之类似.除了载入位置外最大的不同就是Memory Mapping Segment生长的方向不一样.  内核数据结构mm_str">
+  <meta name="description" content="未完成 前言 基于glibc-2.23. Linux进程内存布局 Linux系统在装载elf格式的程序文件时,会调用loader把可执行文件中的各个段依次载入到从某一地址开始的空间中,载入地址取决link editor(ld)和机器地址位数. 32位进程内存经典布局.  64与之类似.除了载入位置外最大的不同就是Memory Mapping Segment生长的方向不一样.  内">
 <meta name="keywords" content="Linux">
 <meta property="og:type" content="article">
 <meta property="og:title" content="CS-RTFSC-Linux-glibc-2.23-概览">
 <meta property="og:url" content="https://hitworld.github.io/posts/57997625/index.html">
 <meta property="og:site_name" content="w4rd3n">
-<meta property="og:description" content="未完成 前言基于glibc-2.23. Linux进程内存布局Linux系统在装载elf格式的程序文件时,会调用loader把可执行文件中的各个段依次载入到从某一地址开始的空间中,载入地址取决link editor(ld)和机器地址位数. 32位进程内存经典布局.  64与之类似.除了载入位置外最大的不同就是Memory Mapping Segment生长的方向不一样.  内核数据结构mm_str">
+<meta property="og:description" content="未完成 前言 基于glibc-2.23. Linux进程内存布局 Linux系统在装载elf格式的程序文件时,会调用loader把可执行文件中的各个段依次载入到从某一地址开始的空间中,载入地址取决link editor(ld)和机器地址位数. 32位进程内存经典布局.  64与之类似.除了载入位置外最大的不同就是Memory Mapping Segment生长的方向不一样.  内">
 <meta property="og:locale" content="zh-CN">
 <meta property="og:image" content="https://hitworld.github.io/posts/57997625/1.png">
 <meta property="og:image" content="https://hitworld.github.io/posts/57997625/2.png">
@@ -135,7 +135,7 @@
 <meta property="og:updated_time" content="2020-08-09T06:34:17.787Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="CS-RTFSC-Linux-glibc-2.23-概览">
-<meta name="twitter:description" content="未完成 前言基于glibc-2.23. Linux进程内存布局Linux系统在装载elf格式的程序文件时,会调用loader把可执行文件中的各个段依次载入到从某一地址开始的空间中,载入地址取决link editor(ld)和机器地址位数. 32位进程内存经典布局.  64与之类似.除了载入位置外最大的不同就是Memory Mapping Segment生长的方向不一样.  内核数据结构mm_str">
+<meta name="twitter:description" content="未完成 前言 基于glibc-2.23. Linux进程内存布局 Linux系统在装载elf格式的程序文件时,会调用loader把可执行文件中的各个段依次载入到从某一地址开始的空间中,载入地址取决link editor(ld)和机器地址位数. 32位进程内存经典布局.  64与之类似.除了载入位置外最大的不同就是Memory Mapping Segment生长的方向不一样.  内">
 <meta name="twitter:image" content="https://hitworld.github.io/posts/57997625/1.png">
 
 
@@ -191,7 +191,7 @@
       .logo-line-after i { right: initial; }
     }
   </style>
-</noscript>
+</noscript><!-- hexo-inject:begin --><!-- hexo-inject:end -->
 
 </head>
 
@@ -202,7 +202,7 @@
     
   
 
-  <div class="container sidebar-position-left page-post-detail">
+  <!-- hexo-inject:begin --><!-- hexo-inject:end --><div class="container sidebar-position-left page-post-detail">
     <div class="headband"></div>
 
     <header id="header" class="header" itemscope="" itemtype="http://schema.org/WPHeader">
@@ -509,7 +509,7 @@
                 
                   <span class="post-meta-item-text">本文字数：</span>
                 
-                <span title="本文字数">9.5k</span>
+                <span title="本文字数">9.6k</span>
               
 
               
@@ -544,14 +544,17 @@
 
       
         <p>未完成</p>
-<h2 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h2><p>基于<code>glibc-2.23</code>.</p>
-<h2 id="Linux进程内存布局"><a href="#Linux进程内存布局" class="headerlink" title="Linux进程内存布局"></a>Linux进程内存布局</h2><p><code>Linux</code>系统在装载<code>elf</code>格式的程序文件时,会调用<code>loader</code>把可执行文件中的各个段依次载入到从某一地址开始的空间中,载入地址取决<code>link editor(ld)</code>和机器地址位数.</p>
+<h2 id="前言">前言</h2>
+<p>基于<code>glibc-2.23</code>.</p>
+<h2 id="linux进程内存布局">Linux进程内存布局</h2>
+<p><code>Linux</code>系统在装载<code>elf</code>格式的程序文件时,会调用<code>loader</code>把可执行文件中的各个段依次载入到从某一地址开始的空间中,载入地址取决<code>link editor(ld)</code>和机器地址位数.</p>
 <p><code>32</code>位进程内存经典布局.</p>
 <img src="/posts/57997625/1.png" title="p1">
 <p><code>64</code>与之类似.除了载入位置外最大的不同就是<code>Memory Mapping Segment</code>生长的方向不一样.</p>
 <img src="/posts/57997625/2.png" title="p2">
 <p>内核数据结构<code>mm_struct</code>的成员变量<code>start_code</code>和<code>end_code</code>是进程代码段的起始和终止地址,<code>start_data</code>和<code>end_data</code>是进程数据段的起始和终止地址,<code>start_stack</code>是进程堆栈段起始地址,<code>start_brk</code>和<code>brk</code>是进程主分配区中<code>heap</code>的起始和终止地址.</p>
-<h2 id="Linux动态内存分配"><a href="#Linux动态内存分配" class="headerlink" title="Linux动态内存分配"></a>Linux动态内存分配</h2><p><code>heap</code>和<code>mmap</code>映射区域是可以运行时分配的内存空间.操作系统提供了相关的系统调用来分配内存给这两个区域.</p>
+<h2 id="linux动态内存分配">Linux动态内存分配</h2>
+<p><code>heap</code>和<code>mmap</code>映射区域是可以运行时分配的内存空间.操作系统提供了相关的系统调用来分配内存给这两个区域.</p>
 <p>对于<code>heap</code>,操作系统提供了<code>brk()</code>系统调用函数,<code>C</code>运行时库提供了<code>sbrk()</code>函数.</p>
 <p>对于<code>mmap</code>,操作系统提供了<code>mmap()</code>和<code>munmap()</code>函数.</p>
 <p>内核对<code>brk</code>的实现可以看作是<code>mmap</code>的一个精简版,<code>brk</code>只是改变<code>mm_struct</code>结构的成员变量<code>brk</code>的值.</p>
@@ -574,15 +577,19 @@
 <li><code>MAP_ANONYMOUS</code>:匿名映射,映射区不与任何文件关联.<code>Ptmalloc</code>每次调用<code>mmap</code>都设置该标志.</li>
 </ul>
 <p><code>munmap</code>执行相反的操作,删除特定地址区域的对象映射.</p>
-<h2 id="内存管理概览"><a href="#内存管理概览" class="headerlink" title="内存管理概览"></a>内存管理概览</h2><p><code>C</code>风格的内存管理:通过调用<code>brk()</code>或<code>mmap()</code>系统调用实现<code>malloc()</code>和<code>free()</code>函数动态分配内存的释放.<code>Doug Lea Malloc</code>,<code>ptmalloc</code>,<code>BSD malloc</code>,<code>Hoard</code>,<code>TCMalloc</code>都属于这一类.</p>
+<h2 id="内存管理概览">内存管理概览</h2>
+<p><code>C</code>风格的内存管理:通过调用<code>brk()</code>或<code>mmap()</code>系统调用实现<code>malloc()</code>和<code>free()</code>函数动态分配内存的释放.<code>Doug Lea Malloc</code>,<code>ptmalloc</code>,<code>BSD malloc</code>,<code>Hoard</code>,<code>TCMalloc</code>都属于这一类.</p>
 <p>池式内存管理:内存池帮助程序进行自动内存管理,这些程序会经历一些特定的阶段,每个阶段都有特定的内存池.每次内存分配都会从指定内存池中分配内存.每个内存池都有不同的生存期限.(<code>Apache</code>)</p>
 <p>引用计数:所有共享的数据结构都有一个域来包含当前结构被引用次数.计数为<code>0</code>则释放内存.(<code>C++</code>智能指针)</p>
 <p>垃圾收集:通常会在当可用内存少于一个具体的阈值时运行垃圾收集器,尝试去追踪通过已知数据连接到每一块数据.收集器找到的都是有用的数据,没找到的就是垃圾,可以被销毁.(<code>Java</code>)</p>
-<h2 id="Ptmalloc内存管理概述"><a href="#Ptmalloc内存管理概述" class="headerlink" title="Ptmalloc内存管理概述"></a>Ptmalloc内存管理概述</h2><p><code>ptmalloc</code>分配器处在用户程序和内核之间,响应用户程序的分配请求,向操作系统申请内存并将其返回给用户程序.分配器会预先分配一块大于用户请求的内存,多余的为空闲空间,用户释放的内存也不会立即就返回给操作系统,分配器会管理这些空闲空间.分配器在空闲空间不足的情况下才分配新的内存.</p>
-<h3 id="分配区"><a href="#分配区" class="headerlink" title="分配区"></a>分配区</h3><p>进程可以有一个主分配区和多个非主分配区,<code>Main_arena</code>(主分配区)与<code>non_main_arena</code>(非主分配区)用环形链表进行管理.分配区利用互斥锁<code>mutex</code>使线程对该分配区的访问互斥.</p>
+<h2 id="ptmalloc内存管理概述">Ptmalloc内存管理概述</h2>
+<p><code>ptmalloc</code>分配器处在用户程序和内核之间,响应用户程序的分配请求,向操作系统申请内存并将其返回给用户程序.分配器会预先分配一块大于用户请求的内存,多余的为空闲空间,用户释放的内存也不会立即就返回给操作系统,分配器会管理这些空闲空间.分配器在空闲空间不足的情况下才分配新的内存.</p>
+<h3 id="分配区">分配区</h3>
+<p>进程可以有一个主分配区和多个非主分配区,<code>Main_arena</code>(主分配区)与<code>non_main_arena</code>(非主分配区)用环形链表进行管理.分配区利用互斥锁<code>mutex</code>使线程对该分配区的访问互斥.</p>
 <p>主分配区可以访问进程的<code>heap</code>区域和<code>mmap</code>映射区域.如果主分配区的内存是通过<code>mmap()</code>向系统分配的,当<code>free</code>该内存时,主分配区会直接调用<code>munmap()</code>将该内存归还给系统.</p>
 <p>而非主分配区只能访问进程的<code>mmap</code>映射区域,非主分配区使用<code>mmap()</code>向操作系统批发内存.</p>
-<h3 id="chunk"><a href="#chunk" class="headerlink" title="chunk"></a>chunk</h3><p>用户请求分配的内存空间在<code>ptmalloc</code>中使用<code>chunk</code>来表示.用户请求释放的内存空间并不会马上归还系统,会先表示为空闲<code>chunk</code>,<code>ptmalloc</code>使用特定的数据结构来管理空闲<code>chunk</code>.</p>
+<h3 id="chunk">chunk</h3>
+<p>用户请求分配的内存空间在<code>ptmalloc</code>中使用<code>chunk</code>来表示.用户请求释放的内存空间并不会马上归还系统,会先表示为空闲<code>chunk</code>,<code>ptmalloc</code>使用特定的数据结构来管理空闲<code>chunk</code>.</p>
 <p><code>ptmalloc</code>在给用户分配的空间前后加上一些控制信息来记录分配的信息.</p>
 <p>使用中的<code>chunk</code>(未<code>free</code>).</p>
 <img src="/posts/57997625/3.png" title="p3">
@@ -595,36 +602,46 @@
 <p>空闲<code>chunk</code>不存在<code>M</code>状态.</p>
 <p>空闲<code>chunk</code>中原本为数据区的地方存储了两个指针,<code>fd</code>指向所在<code>bin</code>(空闲<code>chunk</code>容器,双向链表)的后一空闲<code>chunk</code>,<code>bk</code>指向前一空闲<code>chunk</code>.<code>ptmalloc</code>通过这两个指针将大小相近的<code>chunk</code>连成一个<code>bin</code>.</p>
 <p>对于<code>large bin</code>中的空闲<code>chunk</code>,还有两个指针,<code>fd_nextsize</code>和<code>bk_nextsize</code>,用于加快在<code>large bin</code>中查找最近大小匹配的空闲<code>chunk</code>.</p>
-<h4 id="空间复用"><a href="#空间复用" class="headerlink" title="空间复用"></a>空间复用</h4><p><code>chunk</code>使用中和空闲中的一些域用途不一样,可以被空间复用.</p>
+<h4 id="空间复用">空间复用</h4>
+<p><code>chunk</code>使用中和空闲中的一些域用途不一样,可以被空间复用.</p>
 <p>空闲时,一个<code>chunk</code>至少需要<code>4</code>个<code>size_t</code>大小的空间.并且<code>chunk</code>的大小要对齐到<code>8B</code>(<code>64</code>位<code>16B</code>).</p>
 <p>使用时,其下一<code>chunk</code>的<code>prev_size</code>是无效的,这部分空间可以被当前<code>chunk</code>使用以达到空间复用.所以一个使用中的<code>chunk</code>的大小的计算公式应该是:<code>in_use_size = (user_size + 8 - 4 ) align to 8</code>(<code>64</code>位<code>(user_size + 16 - 8 ) align to 16</code>).向上对齐.</p>
 <p>空闲的<code>chunk</code>和使用中的<code>chunk</code>使用的是同一块空间.所以最终的分配空间<code>chunk_size = max(in_use_size, 16)</code>(<code>64</code>位<code>max(in_use_size, 32)</code>).这就是<code>ptmalloc</code>实际需要分配的内存大小.</p>
-<h3 id="空闲chunk容器"><a href="#空闲chunk容器" class="headerlink" title="空闲chunk容器"></a>空闲chunk容器</h3><p><code>ptmalloc</code>统一管理<code>heap</code>和<code>mmap</code>映射区域中的空闲<code>chunk</code>,当用户进行下一次分配请求时,<code>ptmalloc</code>会首先试图在空闲<code>chunk</code>中寻找.</p>
+<h3 id="空闲chunk容器">空闲chunk容器</h3>
+<p><code>ptmalloc</code>统一管理<code>heap</code>和<code>mmap</code>映射区域中的空闲<code>chunk</code>,当用户进行下一次分配请求时,<code>ptmalloc</code>会首先试图在空闲<code>chunk</code>中寻找.</p>
 <p><code>ptmalloc</code>将相似大小的<code>chunk</code>用双向链表链接起来,这样的一个链表被称为一个<code>bin</code>.<code>ptmalloc</code>一共维护了<code>128</code>个<code>bin</code>,并使用一个数组<code>Bins</code>来存储这些<code>bin</code>.</p>
 <img src="/posts/57997625/5.png" title="p5">
-<h4 id="Bins"><a href="#Bins" class="headerlink" title="Bins"></a>Bins</h4><p><code>bins</code>数组的第一个为<code>unsorted bin</code>.每个<code>bin</code>都是一个双向链表.</p>
+<h4 id="bins">Bins</h4>
+<p><code>bins</code>数组的第一个为<code>unsorted bin</code>.每个<code>bin</code>都是一个双向链表.</p>
 <p><code>2 - 64</code>标号的<code>bin</code>统称为<code>small bins</code>,同一<code>small bin</code>中的<code>chunk</code>大小相同.相邻<code>small bin</code>的<code>chunk</code>大小相差<code>8bytes</code>(<code>64</code>位<code>16B</code>).释放的<code>chunk</code>被插入链表头部,寻找<code>chunk</code>是从链表尾部开始.</p>
 <p><code>small bins</code>后面的被称作<code>large bins</code>.<code>large bins</code>中的<code>bin</code>分别包含给定范围内的<code>chunk</code>,并按大小序排列.相同大小的<code>chunk</code>同<code>small bin</code>按照最近使用顺序排列.<code>ptmalloc</code>使用<code>smallest-first,best-fit</code>原则在<code>large bins</code>中寻找<code>chunk</code>.</p>
 <p><code>ptmalloc</code>将空闲<code>chunk</code>插入<code>bins</code>中时会把该<code>chunk</code>的下一<code>chunk</code>标志<code>P</code>设为<code>0</code>.同时把它和它前后的空闲<code>chunk</code>合并为一个<code>chunk</code>放到<code>unstored bin</code>中.<code>ptmalloc</code>会把一些小的<code>chunk</code>先放到<code>fast bins</code>中.</p>
 <p><code>ptmalloc</code>使用了一组宏根据需要分配内存块大小计算出所需<code>chunk</code>所属<code>bin</code>的<code>index</code>.</p>
 <p><code>bin[0]</code>和<code>bin[127]</code>都不存在,<code>bin[1]</code>为<code>unsorted bin</code>的<code>chunk</code>链表头.</p>
-<h4 id="Fast-Bins"><a href="#Fast-Bins" class="headerlink" title="Fast Bins"></a>Fast Bins</h4><p>不大于<code>global_max_fast</code>的<code>chunk</code>被释放后会被放到<code>fast bins</code>中,<code>ptmalloc</code>并不会把该<code>chunk</code>的下一<code>chunk</code>标志<code>P</code>设为<code>0</code>(不会合并).</p>
+<h4 id="fast-bins">Fast Bins</h4>
+<p>不大于<code>global_max_fast</code>的<code>chunk</code>被释放后会被放到<code>fast bins</code>中,<code>ptmalloc</code>并不会把该<code>chunk</code>的下一<code>chunk</code>标志<code>P</code>设为<code>0</code>(不会合并).</p>
 <p>给用户分配的<code>chunk</code>不大于<code>global_max_fast</code>时,<code>ptmalloc</code>会先在<code>fast bins</code>中查找,然后去查找<code>bins</code>中的空闲<code>chunk</code>.</p>
 <p>在特定的时候,<code>ptmalloc</code>会遍历<code>fast bins</code>中的<code>chunk</code>,将相邻(内存空间)的空闲<code>chunk</code>进行合并,并将合并后的<code>chunk</code>加入<code>unsorted bin</code>中,然后再将<code>unsorted bin</code>里的<code>chunk</code>加入对应<code>small bins</code>和<code>large bins</code>.</p>
 <p><code>Fast bins</code>可以看着是<code>LIFO</code>的栈,其中的<code>bin</code>使用单向链表实现.</p>
-<h4 id="Unsorted-Bin"><a href="#Unsorted-Bin" class="headerlink" title="Unsorted Bin"></a>Unsorted Bin</h4><p>释放的<code>chunk</code>大于<code>global_max_fast</code>,或者<code>fast bins</code>中的空闲<code>chunk</code>合并时,这些<code>chunk</code>会被放到<code>unsorted bin</code>队列.</p>
+<h4 id="unsorted-bin">Unsorted Bin</h4>
+<p>释放的<code>chunk</code>大于<code>global_max_fast</code>,或者<code>fast bins</code>中的空闲<code>chunk</code>合并时,这些<code>chunk</code>会被放到<code>unsorted bin</code>队列.</p>
 <p>在进行<code>malloc</code>操作的时候,如果在<code>fast bins</code>中没有找到合适的<code>chunk</code>,则<code>ptmalloc</code>会在<code>unsorted bin</code>中查找合适的空闲<code>chunk</code>,然后才查找<code>small bins</code>和<code>large bins</code>.如果<code>unsorted bin</code>不能满足分配要求.<code>malloc</code>便会将<code>unsorted bin</code>中的<code>chunk</code>加入对应<code>small bins</code>和<code>large bins</code>中.然后再从<code>small bins</code>和<code>large bins</code>中继续进行查找和分配.</p>
-<h3 id="特殊chunk"><a href="#特殊chunk" class="headerlink" title="特殊chunk"></a>特殊chunk</h3><p>并不是所有的<code>chunk</code>都按照上面的方式来组织,有三种例外情况:<code>Top chunk</code>,<code>Mmaped chunk</code>和<code>Last remainder chunk</code>.</p>
-<h4 id="Top-chunk"><a href="#Top-chunk" class="headerlink" title="Top chunk"></a>Top chunk</h4><p>在空闲内存的最高处必然存在一块空闲<code>chunk</code>,也就是<code>top chunk</code>.主分配区和非主分配区的<code>top chunk</code>初始化与增长方式是不一样的.</p>
+<h3 id="特殊chunk">特殊chunk</h3>
+<p>并不是所有的<code>chunk</code>都按照上面的方式来组织,有三种例外情况:<code>Top chunk</code>,<code>Mmaped chunk</code>和<code>Last remainder chunk</code>.</p>
+<h4 id="top-chunk">Top chunk</h4>
+<p>在空闲内存的最高处必然存在一块空闲<code>chunk</code>,也就是<code>top chunk</code>.主分配区和非主分配区的<code>top chunk</code>初始化与增长方式是不一样的.</p>
 <p>对于主分配区<code>ptmalloc</code>通过<code>sbrk()</code>来增大或是收缩进程<code>heap</code>的大小,初始化时<code>brk</code>的值等于<code>start_brk</code>.主分配区在第一次调用<code>malloc</code>时会分配<code>(chunk_size + 128KB) align 4KB</code>大小的空间作为初始的<code>heap</code>(空闲<code>chunk</code>),也就是初始的<code>top chunk</code>,然后从<code>top chunk</code>分配内存.初始化后如果用户程序请求时<code>top chunk</code>中没有空闲内存,<code>ptmalloc</code>会调用<code>sbrk()</code>将的进程<code>heap</code>的边界<code>brk</code>上移,然后修改<code>top chunk</code>的大小.</p>
 <p>对于非主分配区<code>ptmalloc</code>会预先从<code>mmap</code>区域分配一块空闲内存模拟<code>sub-heap</code>(空闲<code>chunk</code>),也就是初始的<code>top chunk</code>,然后从<code>top chunk</code>分配内存.初始化后如果用户程序请求时<code>top chunk</code>中没有空闲内存,<code>ptmalloc</code>会重新分配一个<code>sub-heap</code>,并将<code>top chunk</code>迁移到新的<code>sub-heap</code>上,新的<code>sub-heap</code>与已有的<code>sub-heap</code>用单向链表连接起来.</p>
 <p>与<code>top chunk</code>相邻的空闲<code>chunk</code>会在被<code>free</code>时与<code>top chunk</code>合并成新的<code>top chunk</code>,当该次空闲<code>chunk</code>大小达到某个阈值且<code>top chunk</code>的大小超过收缩阈值,就会执行内存收缩减小<code>top chunk</code>的大小(内存归还操作系统),至少保留一个页大小的空闲内存.</p>
-<h4 id="Mmaped-chunk"><a href="#Mmaped-chunk" class="headerlink" title="Mmaped chunk"></a>Mmaped chunk</h4><p>若分配的<code>chunk</code>过大,<code>ptmalloc</code>会使用<code>mmap</code>来直接使用内存映射来将页映射到进程空间.这样分配的<code>chunk</code>(<code>M</code>标志为<code>1</code>)在被<code>free</code>时将直接解除映射,将内存归还操作系统.</p>
+<h4 id="mmaped-chunk">Mmaped chunk</h4>
+<p>若分配的<code>chunk</code>过大,<code>ptmalloc</code>会使用<code>mmap</code>来直接使用内存映射来将页映射到进程空间.这样分配的<code>chunk</code>(<code>M</code>标志为<code>1</code>)在被<code>free</code>时将直接解除映射,将内存归还操作系统.</p>
 <p><code>ptmalloc</code>对<code>mmap threshold</code>有一个动态调整机制.当<code>ptmalloc munmap chunk</code>时,如果回收的<code>chunk</code>空间大于<code>mmap threshold</code>的当前值,并且小于<code>DEFAULT_MMAP_THRESHOLD_MAX</code>(<code>HEAP_MAX_SIZE / 2</code>),<code>ptmalloc</code>会把<code>mmap threshold</code>调整为回收的<code>chunk</code>的大小,并将<code>mmap</code>收缩阈值(<code>mmap trim threshold</code>)设置为<code>mmap threshold</code>的<code>2</code>倍.该机制默认开启,可以用<code>mallopt()</code>关闭.</p>
-<h4 id="Last-remainder-chunk"><a href="#Last-remainder-chunk" class="headerlink" title="Last remainder chunk"></a>Last remainder chunk</h4><p>当需要分配<code>small chunk</code>,且在<code>small bins</code>,<code>unsorted bin</code>找不到合适的<code>chunk</code>,则通过<code>binmaps</code>遍历<code>bins</code>查找合适的<code>chunk</code>,如果找到则切割该<code>chunk</code>获取一个<code>chunk_size</code>大小的<code>chunk</code>进行分配并将剩余部分(空闲<code>chunk</code>)加入<code>unsorted bin</code>中并将其变成新的<code>last remainder chunk</code>.</p>
+<h4 id="last-remainder-chunk">Last remainder chunk</h4>
+<p>当需要分配<code>small chunk</code>,且在<code>small bins</code>,<code>unsorted bin</code>找不到合适的<code>chunk</code>,则通过<code>binmaps</code>遍历<code>bins</code>查找合适的<code>chunk</code>,如果找到则切割该<code>chunk</code>获取一个<code>chunk_size</code>大小的<code>chunk</code>进行分配并将剩余部分(空闲<code>chunk</code>)加入<code>unsorted bin</code>中并将其变成新的<code>last remainder chunk</code>.</p>
 <p>当需要分配<code>small chunk</code>,且在<code>small bins</code>中找不到合适的<code>chunk</code>,如果<code>last remainder chunk</code>大于所需<code>small chunk</code>大小,<code>last remainder chunk</code>被分裂成两个<code>chunk</code>,其中一个返回给用户,另一个变成新的<code>last remainder chunk</code>.</p>
-<h3 id="内存分配概述"><a href="#内存分配概述" class="headerlink" title="内存分配概述"></a>内存分配概述</h3><p><code>ptmalloc</code>的响应用户内存分配要求(<code>malloc</code>)的具体步骤如下.</p>
-<ol>
+<h3 id="内存分配概述">内存分配概述</h3>
+<p><code>ptmalloc</code>的响应用户内存分配要求(<code>malloc</code>)的具体步骤如下.</p>
+<ol type="1">
 <li>线程先获取分配区指针(其中涉及加锁和占用),无可用分配区则使用<code>sysmalloc</code>获取内存.</li>
 <li>将请求大小转换为实际需要分配的大小,即<code>chunk_size</code>.</li>
 <li>如果满足<code>chunk_size &lt;= global_max_fast</code>,则尝试在<code>fast bins</code>找一个所需大小的空闲<code>chunk</code>分配.找不到或者不满足则进行下一步.</li>
@@ -634,8 +651,9 @@
 <li>到这里就需要操作<code>top chunk</code>来进行分配了.判断<code>top chunk</code>大小是否小于<code>chunk_size</code>,是则从<code>top chunk</code>中分出一块来.否则进行下一步.</li>
 <li>如果其他线程释放了<code>fast bin</code>(<code>fast bin</code>添加不需要加锁),合并并重新设置当前bin的index,再次循环.否则使用<code>sysmalloc</code>获取内存.</li>
 </ol>
-<h3 id="内存回收概述"><a href="#内存回收概述" class="headerlink" title="内存回收概述"></a>内存回收概述</h3><p><code>free</code>函数接受一个指向分配区域的指针作为参数,释放该指针所指向的<code>chunk</code>.<code>free</code>函数的工作步骤如下.</p>
-<ol>
+<h3 id="内存回收概述">内存回收概述</h3>
+<p><code>free</code>函数接受一个指向分配区域的指针作为参数,释放该指针所指向的<code>chunk</code>.<code>free</code>函数的工作步骤如下.</p>
+<ol type="1">
 <li>判断指针是否为<code>0</code>,为<code>0</code>则直接<code>return</code>.否则进行下一步.</li>
 <li>判断所需释放的<code>chunk</code>是否为<code>mmaped chunk</code>(<code>M</code>标志为<code>1</code>),是则调用<code>munmap_chunk()</code>释放<code>mmaped chunk</code>,释放完成.同时如果开启了<code>mmap threshold</code>的动态调整机制,且回收的<code>chunk</code>大小大于<code>mmap threshold</code>,小于mmap分配阈值的最大值,则设置该<code>chunk</code>的大小为<code>mmap threshold</code>,将<code>mmap</code>收缩阈值设定为<code>mmap threshold</code>的<code>2</code>倍.不是则进行下一步.</li>
 <li>判断<code>chunk</code>的大小和所处的位置,若<code>chunk_size &lt;= global_max_fast</code>,则将<code>chunk</code>放到<code>fast bins</code>中,释放完成.否则进行下一步.</li>
@@ -644,25 +662,32 @@
 <li>判断合并后的<code>chunk</code>大小是否大于<code>FASTBIN_CONSOLIDATION_THRESHOLD</code>,是则遍历<code>fast bins</code>中<code>chunk</code>,与相邻的空闲<code>chunk</code>进行合并.进行下一步.</li>
 <li>对于主分配区,判断<code>top chunk</code>的大小是否大于<code>mmap</code>收缩阈值,则会试图归还<code>top chunk</code>中的一部分给操作系统(<code>sbrk</code>调用).但最先分配的<code>128KB</code>空间不会归还;对于非主分配区,会进行<code>sub-heap</code>收缩,将<code>top chunk</code>的一部分返回给操作系统,如果<code>top chunk</code>为整个<code>sub-heap</code>,会把整个<code>sub-heap</code>还回给操作系统.到此,释放结束.从<code>free()</code>函数退出.</li>
 </ol>
-<h3 id="realloc"><a href="#realloc" class="headerlink" title="realloc"></a>realloc</h3><p><code>realloc</code>分以下几种情况.</p>
+<h3 id="realloc">realloc</h3>
+<p><code>realloc</code>分以下几种情况.</p>
 <ul>
 <li><code>ptr == 0</code>时等同于<code>malloc</code>.</li>
 <li><code>ptr != 0 &amp;&amp; size == 0</code>时等同于<code>free</code>,返回值为<code>0</code>.</li>
 <li><code>malloc_usable_size(ptr) &gt;= size</code>时会尝试缩减,产生部分<code>free chunk</code>.</li>
 <li><code>malloc_usable_size(ptr) &lt; szie</code>时将<code>malloc</code>一块更大的内存,将原来的内容复制过去,再将原来的<code>chunk</code>给<code>free</code>掉.</li>
 </ul>
-<h3 id="配置选项概述"><a href="#配置选项概述" class="headerlink" title="配置选项概述"></a>配置选项概述</h3><p><code>ptmalloc</code>主要提供以下几个配置选项用于调优,通过<a href="http://man7.org/linux/man-pages/man3/mallopt.3.html" target="_blank" rel="noopener"><code>mallopt()</code></a>进行设置.</p>
-<h4 id="M-MXFAST"><a href="#M-MXFAST" class="headerlink" title="M_MXFAST"></a>M_MXFAST</h4><p><code>M_MXFAST</code>用于设置<code>fast bins</code>中保存的<code>chunk</code>的最大大小<code>max_fast</code>,<code>M_MXFAST</code>的最大值为<code>80B</code>,如果设置该选项为<code>0</code>,就会不使用<code>fast bins</code>.</p>
+<h3 id="配置选项概述">配置选项概述</h3>
+<p><code>ptmalloc</code>主要提供以下几个配置选项用于调优,通过<a href="http://man7.org/linux/man-pages/man3/mallopt.3.html" target="_blank" rel="noopener"><code>mallopt()</code></a>进行设置.</p>
+<h4 id="m_mxfast">M_MXFAST</h4>
+<p><code>M_MXFAST</code>用于设置<code>fast bins</code>中保存的<code>chunk</code>的最大大小<code>max_fast</code>,<code>M_MXFAST</code>的最大值为<code>80B</code>,如果设置该选项为<code>0</code>,就会不使用<code>fast bins</code>.</p>
 <figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">if</span> (value &gt;= <span class="number">0</span> &amp;&amp; value &lt;= MAX_FAST_SIZE)</span><br><span class="line">&#123;</span><br><span class="line">  LIBC_PROBE (memory_mallopt_mxfast, <span class="number">2</span>, value, get_max_fast ());</span><br><span class="line">  set_max_fast (value);</span><br><span class="line">&#125;</span><br><span class="line"><span class="keyword">else</span></span><br><span class="line">  res = <span class="number">0</span>;</span><br></pre></td></tr></table></figure>
-<h4 id="M-TRIM-THRESHOLD"><a href="#M-TRIM-THRESHOLD" class="headerlink" title="M_TRIM_THRESHOLD"></a>M_TRIM_THRESHOLD</h4><p><code>M_TRIM_THRESHOLD</code>用于设置<code>mmap</code>收缩阈值,默认值为<code>128KB</code>.一般与<code>M_MMAP_THRESHOLD</code>选项一起使用,<code>M_MMAP_THRESHOLD</code>用于设置<code>mmap threshold</code>.</p>
+<h4 id="m_trim_threshold">M_TRIM_THRESHOLD</h4>
+<p><code>M_TRIM_THRESHOLD</code>用于设置<code>mmap</code>收缩阈值,默认值为<code>128KB</code>.一般与<code>M_MMAP_THRESHOLD</code>选项一起使用,<code>M_MMAP_THRESHOLD</code>用于设置<code>mmap threshold</code>.</p>
 <p><code>M_TRIM_THRESHOLD</code>的值必须设置为页大小对齐,设置为<code>-1</code>会关闭内存收缩设置.</p>
 <figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">LIBC_PROBE (memory_mallopt_trim_threshold, <span class="number">3</span>, value, mp_.trim_threshold, mp_.no_dyn_threshold);</span><br><span class="line">mp_.trim_threshold = value;</span><br><span class="line">mp_.no_dyn_threshold = <span class="number">1</span>;</span><br></pre></td></tr></table></figure>
-<h4 id="M-MMAP-THRESHOLD"><a href="#M-MMAP-THRESHOLD" class="headerlink" title="M_MMAP_THRESHOLD"></a>M_MMAP_THRESHOLD</h4><p><code>M_MMAP_THRESHOLD</code>用于设置<code>mmap threshold</code>,默认值为<code>128KB</code>,<code>ptmalloc</code>默认开启动态调整<code>mmap threshold</code>和<code>mmap</code>收缩阈值.</p>
+<h4 id="m_mmap_threshold">M_MMAP_THRESHOLD</h4>
+<p><code>M_MMAP_THRESHOLD</code>用于设置<code>mmap threshold</code>,默认值为<code>128KB</code>,<code>ptmalloc</code>默认开启动态调整<code>mmap threshold</code>和<code>mmap</code>收缩阈值.</p>
 <p>当内存大于<code>mmap threshold</code>,<code>malloc</code>相当于<code>mmap</code>的简单封装,<code>free</code>相当于<code>munmap</code>的简单封装.</p>
 <figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">if</span> ((<span class="keyword">unsigned</span> <span class="keyword">long</span>) value &gt; HEAP_MAX_SIZE / <span class="number">2</span>)</span><br><span class="line">  res = <span class="number">0</span>;</span><br><span class="line"><span class="keyword">else</span></span><br><span class="line">&#123;</span><br><span class="line">  LIBC_PROBE (memory_mallopt_mmap_threshold, <span class="number">3</span>, value, mp_.mmap_threshold, mp_.no_dyn_threshold);</span><br><span class="line">  mp_.mmap_threshold = value;</span><br><span class="line">  mp_.no_dyn_threshold = <span class="number">1</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<h4 id="M-MMAP-MAX"><a href="#M-MMAP-MAX" class="headerlink" title="M_MMAP_MAX"></a>M_MMAP_MAX</h4><p><code>M_MMAP_MAX</code>用于设置进程中用<code>mmap</code>分配的内存块的最大限制,默认值为<code>64K</code>.如果将<code>M_MMAP_MAX</code>设置为<code>0</code>,<code>ptmalloc</code>将不会使用<code>mmap</code>分配大块内存.</p>
+<h4 id="m_mmap_max">M_MMAP_MAX</h4>
+<p><code>M_MMAP_MAX</code>用于设置进程中用<code>mmap</code>分配的内存块的最大限制,默认值为<code>64K</code>.如果将<code>M_MMAP_MAX</code>设置为<code>0</code>,<code>ptmalloc</code>将不会使用<code>mmap</code>分配大块内存.</p>
 <figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">LIBC_PROBE (memory_mallopt_mmap_max, <span class="number">3</span>, value, mp_.n_mmaps_max, mp_.no_dyn_threshold);</span><br><span class="line">mp_.n_mmaps_max = value;</span><br><span class="line">mp_.no_dyn_threshold = <span class="number">1</span>;</span><br></pre></td></tr></table></figure>
-<h4 id="mallopt"><a href="#mallopt" class="headerlink" title="mallopt"></a>mallopt</h4><p>在<code>mallopt()</code>函数配置前,需要检查主分配区是否初始化了,如果没有初始化,调用<code>ptmalloc_init()</code>函数初始化<code>ptmalloc</code>,然后获得主分配区的锁,调用<code>malloc_consolidate()</code>函数,<code>malloc_consolidate()</code>函数会判断主分配区是否已经初始化,如果没有,则初始化主分配区.对<code>mp_</code>中参数字段的修改,是通过主分配区的锁来同步的.</p>
+<h4 id="mallopt">mallopt</h4>
+<p>在<code>mallopt()</code>函数配置前,需要检查主分配区是否初始化了,如果没有初始化,调用<code>ptmalloc_init()</code>函数初始化<code>ptmalloc</code>,然后获得主分配区的锁,调用<code>malloc_consolidate()</code>函数,<code>malloc_consolidate()</code>函数会判断主分配区是否已经初始化,如果没有,则初始化主分配区.对<code>mp_</code>中参数字段的修改,是通过主分配区的锁来同步的.</p>
 
       
     </div>
@@ -977,7 +1002,7 @@
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#前言"><span class="nav-number">1.</span> <span class="nav-text">前言</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Linux进程内存布局"><span class="nav-number">2.</span> <span class="nav-text">Linux进程内存布局</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Linux动态内存分配"><span class="nav-number">3.</span> <span class="nav-text">Linux动态内存分配</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#内存管理概览"><span class="nav-number">4.</span> <span class="nav-text">内存管理概览</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Ptmalloc内存管理概述"><span class="nav-number">5.</span> <span class="nav-text">Ptmalloc内存管理概述</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#分配区"><span class="nav-number">5.1.</span> <span class="nav-text">分配区</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#chunk"><span class="nav-number">5.2.</span> <span class="nav-text">chunk</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#空间复用"><span class="nav-number">5.2.1.</span> <span class="nav-text">空间复用</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#空闲chunk容器"><span class="nav-number">5.3.</span> <span class="nav-text">空闲chunk容器</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#Bins"><span class="nav-number">5.3.1.</span> <span class="nav-text">Bins</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#Fast-Bins"><span class="nav-number">5.3.2.</span> <span class="nav-text">Fast Bins</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#Unsorted-Bin"><span class="nav-number">5.3.3.</span> <span class="nav-text">Unsorted Bin</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#特殊chunk"><span class="nav-number">5.4.</span> <span class="nav-text">特殊chunk</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#Top-chunk"><span class="nav-number">5.4.1.</span> <span class="nav-text">Top chunk</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#Mmaped-chunk"><span class="nav-number">5.4.2.</span> <span class="nav-text">Mmaped chunk</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#Last-remainder-chunk"><span class="nav-number">5.4.3.</span> <span class="nav-text">Last remainder chunk</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#内存分配概述"><span class="nav-number">5.5.</span> <span class="nav-text">内存分配概述</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#内存回收概述"><span class="nav-number">5.6.</span> <span class="nav-text">内存回收概述</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#realloc"><span class="nav-number">5.7.</span> <span class="nav-text">realloc</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#配置选项概述"><span class="nav-number">5.8.</span> <span class="nav-text">配置选项概述</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#M-MXFAST"><span class="nav-number">5.8.1.</span> <span class="nav-text">M_MXFAST</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#M-TRIM-THRESHOLD"><span class="nav-number">5.8.2.</span> <span class="nav-text">M_TRIM_THRESHOLD</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#M-MMAP-THRESHOLD"><span class="nav-number">5.8.3.</span> <span class="nav-text">M_MMAP_THRESHOLD</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#M-MMAP-MAX"><span class="nav-number">5.8.4.</span> <span class="nav-text">M_MMAP_MAX</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#mallopt"><span class="nav-number">5.8.5.</span> <span class="nav-text">mallopt</span></a></li></ol></li></ol></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#前言"><span class="nav-number">1.</span> <span class="nav-text">前言</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#linux进程内存布局"><span class="nav-number">2.</span> <span class="nav-text">Linux进程内存布局</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#linux动态内存分配"><span class="nav-number">3.</span> <span class="nav-text">Linux动态内存分配</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#内存管理概览"><span class="nav-number">4.</span> <span class="nav-text">内存管理概览</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#ptmalloc内存管理概述"><span class="nav-number">5.</span> <span class="nav-text">Ptmalloc内存管理概述</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#分配区"><span class="nav-number">5.1.</span> <span class="nav-text">分配区</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#chunk"><span class="nav-number">5.2.</span> <span class="nav-text">chunk</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#空间复用"><span class="nav-number">5.2.1.</span> <span class="nav-text">空间复用</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#空闲chunk容器"><span class="nav-number">5.3.</span> <span class="nav-text">空闲chunk容器</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#bins"><span class="nav-number">5.3.1.</span> <span class="nav-text">Bins</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#fast-bins"><span class="nav-number">5.3.2.</span> <span class="nav-text">Fast Bins</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#unsorted-bin"><span class="nav-number">5.3.3.</span> <span class="nav-text">Unsorted Bin</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#特殊chunk"><span class="nav-number">5.4.</span> <span class="nav-text">特殊chunk</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#top-chunk"><span class="nav-number">5.4.1.</span> <span class="nav-text">Top chunk</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#mmaped-chunk"><span class="nav-number">5.4.2.</span> <span class="nav-text">Mmaped chunk</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#last-remainder-chunk"><span class="nav-number">5.4.3.</span> <span class="nav-text">Last remainder chunk</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#内存分配概述"><span class="nav-number">5.5.</span> <span class="nav-text">内存分配概述</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#内存回收概述"><span class="nav-number">5.6.</span> <span class="nav-text">内存回收概述</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#realloc"><span class="nav-number">5.7.</span> <span class="nav-text">realloc</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#配置选项概述"><span class="nav-number">5.8.</span> <span class="nav-text">配置选项概述</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#m_mxfast"><span class="nav-number">5.8.1.</span> <span class="nav-text">M_MXFAST</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#m_trim_threshold"><span class="nav-number">5.8.2.</span> <span class="nav-text">M_TRIM_THRESHOLD</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#m_mmap_threshold"><span class="nav-number">5.8.3.</span> <span class="nav-text">M_MMAP_THRESHOLD</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#m_mmap_max"><span class="nav-number">5.8.4.</span> <span class="nav-text">M_MMAP_MAX</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#mallopt"><span class="nav-number">5.8.5.</span> <span class="nav-text">mallopt</span></a></li></ol></li></ol></li></ol></div>
             
 
           </div>
@@ -1009,7 +1034,7 @@
       <i class="fa fa-area-chart"></i>
     </span>
     
-    <span title="站点总字数">710k</span>
+    <span title="站点总字数">720k</span>
   
 
   
@@ -1018,7 +1043,7 @@
       <i class="fa fa-coffee"></i>
     </span>
     
-    <span title="站点阅读时长">10:46</span>
+    <span title="站点阅读时长">10:54</span>
   
 </div>
 
@@ -1669,5 +1694,5 @@
   
   <script type="text/javascript" src="//cdn.bootcss.com/canvas-nest.js/1.0.0/canvas-nest.min.js"></script>
   
-<script src="/live2dw/lib/L2Dwidget.min.js?0c58a1486de42ac6cc1c59c7d98ae887"></script><script>L2Dwidget.init({"pluginRootPath":"live2dw/","pluginJsPath":"lib/","pluginModelPath":"assets/","tagMode":false,"debug":false,"model":{"jsonPath":"/live2dw/assets/koharu.model.json"},"display":{"position":"right","width":150,"height":300},"mobile":{"show":false},"log":false});</script></body>
+<script src="/live2dw/lib/L2Dwidget.min.js?0c58a1486de42ac6cc1c59c7d98ae887"></script><script>L2Dwidget.init({"pluginRootPath":"live2dw/","pluginJsPath":"lib/","pluginModelPath":"assets/","tagMode":false,"debug":false,"model":{"jsonPath":"/live2dw/assets/koharu.model.json"},"display":{"position":"right","width":150,"height":300},"mobile":{"show":false},"log":false});</script><!-- hexo-inject:begin --><!-- hexo-inject:end --></body>
 </html>

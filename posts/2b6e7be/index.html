@@ -16,7 +16,7 @@
 
 <html class="theme-next mist use-motion" lang="zh-CN">
 <head><meta name="generator" content="Hexo 3.8.0">
-  <meta charset="UTF-8">
+  <!-- hexo-inject:begin --><!-- hexo-inject:end --><meta charset="UTF-8">
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
 <meta name="theme-color" content="#222">
@@ -119,18 +119,18 @@
 
 
 
-  <meta name="description" content="0x00虚拟机是指一种特殊的软件,依靠某种环境(操作系统)运行,同时又作为其他软件的运行环境.简单说虚拟机是计算机系统的仿真器,通过软件模拟具有完整硬件系统功能的,运行在一个完全隔离环境中的完整计算机系统,能提供物理计算机的功能. 对于虚拟机逃逸来说,其实就是要攻击虚拟机管理程序hypervisor.通常把主机环境称为host,虚拟机环境称为guest. 常见的漏洞形式Device在qemu中新实">
+  <meta name="description" content="0x00 虚拟机是指一种特殊的软件,依靠某种环境(操作系统)运行,同时又作为其他软件的运行环境.简单说虚拟机是计算机系统的仿真器,通过软件模拟具有完整硬件系统功能的,运行在一个完全隔离环境中的完整计算机系统,能提供物理计算机的功能. 对于虚拟机逃逸来说,其实就是要攻击虚拟机管理程序hypervisor.通常把主机环境称为host,虚拟机环境称为guest. 常见的漏洞形式 Device">
 <meta name="keywords" content="escape">
 <meta property="og:type" content="article">
 <meta property="og:title" content="IS-pwn-escape-Linux-VM逃逸基础">
 <meta property="og:url" content="https://hitworld.github.io/posts/2b6e7be/index.html">
 <meta property="og:site_name" content="w4rd3n">
-<meta property="og:description" content="0x00虚拟机是指一种特殊的软件,依靠某种环境(操作系统)运行,同时又作为其他软件的运行环境.简单说虚拟机是计算机系统的仿真器,通过软件模拟具有完整硬件系统功能的,运行在一个完全隔离环境中的完整计算机系统,能提供物理计算机的功能. 对于虚拟机逃逸来说,其实就是要攻击虚拟机管理程序hypervisor.通常把主机环境称为host,虚拟机环境称为guest. 常见的漏洞形式Device在qemu中新实">
+<meta property="og:description" content="0x00 虚拟机是指一种特殊的软件,依靠某种环境(操作系统)运行,同时又作为其他软件的运行环境.简单说虚拟机是计算机系统的仿真器,通过软件模拟具有完整硬件系统功能的,运行在一个完全隔离环境中的完整计算机系统,能提供物理计算机的功能. 对于虚拟机逃逸来说,其实就是要攻击虚拟机管理程序hypervisor.通常把主机环境称为host,虚拟机环境称为guest. 常见的漏洞形式 Device">
 <meta property="og:locale" content="zh-CN">
 <meta property="og:updated_time" content="2020-08-09T06:34:17.821Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="IS-pwn-escape-Linux-VM逃逸基础">
-<meta name="twitter:description" content="0x00虚拟机是指一种特殊的软件,依靠某种环境(操作系统)运行,同时又作为其他软件的运行环境.简单说虚拟机是计算机系统的仿真器,通过软件模拟具有完整硬件系统功能的,运行在一个完全隔离环境中的完整计算机系统,能提供物理计算机的功能. 对于虚拟机逃逸来说,其实就是要攻击虚拟机管理程序hypervisor.通常把主机环境称为host,虚拟机环境称为guest. 常见的漏洞形式Device在qemu中新实">
+<meta name="twitter:description" content="0x00 虚拟机是指一种特殊的软件,依靠某种环境(操作系统)运行,同时又作为其他软件的运行环境.简单说虚拟机是计算机系统的仿真器,通过软件模拟具有完整硬件系统功能的,运行在一个完全隔离环境中的完整计算机系统,能提供物理计算机的功能. 对于虚拟机逃逸来说,其实就是要攻击虚拟机管理程序hypervisor.通常把主机环境称为host,虚拟机环境称为guest. 常见的漏洞形式 Device">
 
 
 
@@ -185,7 +185,7 @@
       .logo-line-after i { right: initial; }
     }
   </style>
-</noscript>
+</noscript><!-- hexo-inject:begin --><!-- hexo-inject:end -->
 
 </head>
 
@@ -196,7 +196,7 @@
     
   
 
-  <div class="container sidebar-position-left page-post-detail">
+  <!-- hexo-inject:begin --><!-- hexo-inject:end --><div class="container sidebar-position-left page-post-detail">
     <div class="headband"></div>
 
     <header id="header" class="header" itemscope="" itemtype="http://schema.org/WPHeader">
@@ -503,7 +503,7 @@
                 
                   <span class="post-meta-item-text">本文字数：</span>
                 
-                <span title="本文字数">2.7k</span>
+                <span title="本文字数">2.8k</span>
               
 
               
@@ -517,7 +517,7 @@
                 
                   <span class="post-meta-item-text">阅读时长 &asymp;</span>
                 
-                <span title="阅读时长">2 分钟</span>
+                <span title="阅读时长">3 分钟</span>
               
             </div>
           
@@ -537,17 +537,22 @@
       
 
       
-        <h2 id="0x00"><a href="#0x00" class="headerlink" title="0x00"></a>0x00</h2><p>虚拟机是指一种特殊的软件,依靠某种环境(操作系统)运行,同时又作为其他软件的运行环境.简单说虚拟机是计算机系统的仿真器,通过软件模拟具有完整硬件系统功能的,运行在一个完全隔离环境中的完整计算机系统,能提供物理计算机的功能.</p>
+        <h2 id="x00">0x00</h2>
+<p>虚拟机是指一种特殊的软件,依靠某种环境(操作系统)运行,同时又作为其他软件的运行环境.简单说虚拟机是计算机系统的仿真器,通过软件模拟具有完整硬件系统功能的,运行在一个完全隔离环境中的完整计算机系统,能提供物理计算机的功能.</p>
 <p>对于虚拟机逃逸来说,其实就是要攻击虚拟机管理程序<code>hypervisor</code>.通常把主机环境称为<code>host</code>,虚拟机环境称为<code>guest</code>.</p>
-<h2 id="常见的漏洞形式"><a href="#常见的漏洞形式" class="headerlink" title="常见的漏洞形式"></a>常见的漏洞形式</h2><h3 id="Device"><a href="#Device" class="headerlink" title="Device"></a>Device</h3><p>在<code>qemu</code>中新实现一种设备并引入漏洞,<code>guest</code>通过与设备进行交互进行漏洞利用.在<code>host</code>上使用<code>qemu-system-x86_64 -device help</code>查看<code>qemu</code>支持的设备.也可以<code>boot</code>到<code>guest</code>之后使用<code>lspci -nvv</code>来查看<code>pci</code>设备的具体信息.</p>
+<h2 id="常见的漏洞形式">常见的漏洞形式</h2>
+<h3 id="device">Device</h3>
+<p>在<code>qemu</code>中新实现一种设备并引入漏洞,<code>guest</code>通过与设备进行交互进行漏洞利用.在<code>host</code>上使用<code>qemu-system-x86_64 -device help</code>查看<code>qemu</code>支持的设备.也可以<code>boot</code>到<code>guest</code>之后使用<code>lspci -nvv</code>来查看<code>pci</code>设备的具体信息.</p>
 <p><code>Linux kernel</code>与设备通信有<code>PIO</code>,<code>MMIO</code>,<code>DMA</code>等形式,通常<code>kernel</code>会实现一套<code>driver</code>并在内核态与<code>device</code>交互,再开放<code>API</code>供用户态程序使用.但其实在用户态也是可以直接访问到设备的.</p>
-<h4 id="PIO"><a href="#PIO" class="headerlink" title="PIO"></a>PIO</h4><p><code>CPU</code>执行<code>in/out</code>指令来向<code>I/O</code>端口发送数据.<code>cat /proc/ioports</code>能够看到目前<code>port</code>的一些信息和它们对应的设备.</p>
+<h4 id="pio">PIO</h4>
+<p><code>CPU</code>执行<code>in/out</code>指令来向<code>I/O</code>端口发送数据.<code>cat /proc/ioports</code>能够看到目前<code>port</code>的一些信息和它们对应的设备.</p>
 <p><code>in/out</code>指令是特权指令,一般只有在<code>Ring 0</code>时才能执行,<code>linux</code>内核提供了<code>inb/outb/inw/outw/inl/outl</code>,用于向<code>port</code>发送不同长度的数据.</p>
 <p>在<code>linux</code>中还可以通过<code>iopl</code>,<code>ioperm</code>这两个系统调用对<code>port</code>的权能进行设置.</p>
 <figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;sys/io.h&gt;</span></span></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">ioperm</span><span class="params">(<span class="keyword">unsigned</span> <span class="keyword">long</span> from, <span class="keyword">unsigned</span> <span class="keyword">long</span> num, <span class="keyword">int</span> turn_on)</span></span>;</span><br></pre></td></tr></table></figure>
 <p><code>ioperm</code>可以将<code>from</code>之后的<code>num</code>个<code>port</code>打开供用户态程序使用,当在用户态执行<code>in/out</code>对这些<code>port</code>进行读写时不会触发<code>fault</code>.这个调用需要进程是<code>root</code>权限或者具有<code>CAP_SYS_RAWIO</code>权能.</p>
 <p>另外,还可以通过打开<code>/dev/port</code>这个文件,再<code>lseek</code>到对应<code>port</code>的<code>offset</code>进行读写,同样可以实现<code>PIO</code>.如果没有<code>/dev/port</code>文件,可以使用<code>mknod -m 660 /dev/port c 1 4</code>来创建.</p>
-<h4 id="MMIO"><a href="#MMIO" class="headerlink" title="MMIO"></a>MMIO</h4><p>另一种进行交互的方式是使用<code>MMIO</code>,<code>CPU</code>将一部分设备的寄存器映射到一段特殊的物理内存地址,当进行访存时就相当于对这些寄存器进行操作.</p>
+<h4 id="mmio">MMIO</h4>
+<p>另一种进行交互的方式是使用<code>MMIO</code>,<code>CPU</code>将一部分设备的寄存器映射到一段特殊的物理内存地址,当进行访存时就相当于对这些寄存器进行操作.</p>
 <p><code>cat /proc/iomem</code>能够看到与<code>I/O</code>相关的一些内存地址信息.</p>
 <p>通过<code>kernel</code>提供的<code>sysfs</code>,可以直接映射出设备对应的内存,具体方法是打开类似<code>/sys/devices/pci0000:00/0000:00:04.0/resource0</code>的文件,并用<code>mmap</code>将其映射到进程的地址空间,就可以对其进行读写了.</p>
 <p>这里的设备号<code>0000:00:04.0</code>是需要事先在<code>/proc/iomem</code>中看好的.内存读写会触发到<code>qemu</code>内设备的<code>mmio</code>处理函数(一般会叫<code>xxxx_mmio_read/xxxx_mmio_write</code>),传入的参数是写入的地址偏移和具体的值.</p>
@@ -555,7 +560,8 @@
 <p>另外,还可以通过打开<code>/dev/mem</code>这个文件直接操作物理内存,<code>mmap</code>设备对应的地址进行读写,也是相同的效果.如果没有<code>/dev/mem</code>文件,可以使用<code>mknod -m 660 /dev/mem c 1 1</code>来创建.</p>
 <p>交互模板.</p>
 <figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;assert.h&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;fcntl.h&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;inttypes.h&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;stdio.h&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;stdlib.h&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;string.h&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;sys/mman.h&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;sys/types.h&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;unistd.h&gt;</span></span></span><br><span class="line"></span><br><span class="line"><span class="keyword">unsigned</span> <span class="keyword">char</span>* iomem;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">die</span><span class="params">(<span class="keyword">const</span> <span class="keyword">char</span>* msg)</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">	perror(msg);</span><br><span class="line">	<span class="built_in">exit</span>(<span class="number">-1</span>);</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">iowrite</span><span class="params">(<span class="keyword">uint64_t</span> addr, <span class="keyword">uint64_t</span> value)</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">	*((<span class="keyword">uint64_t</span>*)(iomem + addr)) = value;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">uint64_t</span> ioread(<span class="keyword">uint64_t</span> addr)</span><br><span class="line">&#123;</span><br><span class="line">	<span class="keyword">return</span> *((<span class="keyword">uint64_t</span>*)(iomem + addr));</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">iowrite32</span><span class="params">(<span class="keyword">uint64_t</span> addr, <span class="keyword">uint32_t</span> value)</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">	*((<span class="keyword">uint32_t</span>*)(iomem + addr)) = value;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">uint32_t</span> ioread32(<span class="keyword">uint64_t</span> addr)</span><br><span class="line">&#123;</span><br><span class="line">	<span class="keyword">return</span> *((<span class="keyword">uint32_t</span>*)(iomem + addr));</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">(<span class="keyword">int</span> argc, <span class="keyword">char</span> *argv[])</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">	<span class="keyword">int</span> fd = open(<span class="string">"/sys/devices/pci0000:00/0000:00:04.0/resource0"</span>, O_RDWR | O_SYNC);</span><br><span class="line">	<span class="keyword">if</span> (fd == <span class="number">-1</span>)</span><br><span class="line">		die(<span class="string">"open"</span>);</span><br><span class="line"></span><br><span class="line">	iomem = mmap(<span class="number">0</span>, <span class="number">0x10000</span>, PROT_READ | PROT_WRITE, MAP_SHARED, fd, <span class="number">0</span>);</span><br><span class="line">	<span class="keyword">if</span> (iomem == MAP_FAILED)</span><br><span class="line">		die(<span class="string">"mmap"</span>);</span><br><span class="line"></span><br><span class="line">    <span class="comment">// Do something</span></span><br><span class="line"></span><br><span class="line">	<span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<h3 id="Hypercall"><a href="#Hypercall" class="headerlink" title="Hypercall"></a>Hypercall</h3><p><code>hypercall</code>是<code>guest kernel</code>向<code>hypervisor</code>发出的一种调用形式,广义上说像<code>vmtools</code>的<code>RPCI</code>机制使用特定<code>I/O</code>端口实现的也可以称之为<code>hypercall</code>.还有一种方式是通过一些特权指令,例如<code>vmmcall</code>.</p>
+<h3 id="hypercall">Hypercall</h3>
+<p><code>hypercall</code>是<code>guest kernel</code>向<code>hypervisor</code>发出的一种调用形式,广义上说像<code>vmtools</code>的<code>RPCI</code>机制使用特定<code>I/O</code>端口实现的也可以称之为<code>hypercall</code>.还有一种方式是通过一些特权指令,例如<code>vmmcall</code>.</p>
 <p>即使不在<code>kvm</code>模式,<code>qemu</code>也仍然可以通过<code>TCG</code>实现<code>hypercall</code>,具体来说就是在进行<code>binary translation</code>时,为<code>vmmcall</code>定制<code>helper</code>函数,完成特定的功能就可以了.</p>
 
       
@@ -871,7 +877,7 @@
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#0x00"><span class="nav-number">1.</span> <span class="nav-text">0x00</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#常见的漏洞形式"><span class="nav-number">2.</span> <span class="nav-text">常见的漏洞形式</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#Device"><span class="nav-number">2.1.</span> <span class="nav-text">Device</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#PIO"><span class="nav-number">2.1.1.</span> <span class="nav-text">PIO</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#MMIO"><span class="nav-number">2.1.2.</span> <span class="nav-text">MMIO</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Hypercall"><span class="nav-number">2.2.</span> <span class="nav-text">Hypercall</span></a></li></ol></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#x00"><span class="nav-number">1.</span> <span class="nav-text">0x00</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#常见的漏洞形式"><span class="nav-number">2.</span> <span class="nav-text">常见的漏洞形式</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#device"><span class="nav-number">2.1.</span> <span class="nav-text">Device</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#pio"><span class="nav-number">2.1.1.</span> <span class="nav-text">PIO</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#mmio"><span class="nav-number">2.1.2.</span> <span class="nav-text">MMIO</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#hypercall"><span class="nav-number">2.2.</span> <span class="nav-text">Hypercall</span></a></li></ol></li></ol></div>
             
 
           </div>
@@ -903,7 +909,7 @@
       <i class="fa fa-area-chart"></i>
     </span>
     
-    <span title="站点总字数">710k</span>
+    <span title="站点总字数">720k</span>
   
 
   
@@ -912,7 +918,7 @@
       <i class="fa fa-coffee"></i>
     </span>
     
-    <span title="站点阅读时长">10:46</span>
+    <span title="站点阅读时长">10:54</span>
   
 </div>
 
@@ -1563,5 +1569,5 @@
   
   <script type="text/javascript" src="//cdn.bootcss.com/canvas-nest.js/1.0.0/canvas-nest.min.js"></script>
   
-<script src="/live2dw/lib/L2Dwidget.min.js?0c58a1486de42ac6cc1c59c7d98ae887"></script><script>L2Dwidget.init({"pluginRootPath":"live2dw/","pluginJsPath":"lib/","pluginModelPath":"assets/","tagMode":false,"debug":false,"model":{"jsonPath":"/live2dw/assets/koharu.model.json"},"display":{"position":"right","width":150,"height":300},"mobile":{"show":false},"log":false});</script></body>
+<script src="/live2dw/lib/L2Dwidget.min.js?0c58a1486de42ac6cc1c59c7d98ae887"></script><script>L2Dwidget.init({"pluginRootPath":"live2dw/","pluginJsPath":"lib/","pluginModelPath":"assets/","tagMode":false,"debug":false,"model":{"jsonPath":"/live2dw/assets/koharu.model.json"},"display":{"position":"right","width":150,"height":300},"mobile":{"show":false},"log":false});</script><!-- hexo-inject:begin --><!-- hexo-inject:end --></body>
 </html>

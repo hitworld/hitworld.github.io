@@ -16,7 +16,7 @@
 
 <html class="theme-next mist use-motion" lang="zh-CN">
 <head><meta name="generator" content="Hexo 3.8.0">
-  <meta charset="UTF-8">
+  <!-- hexo-inject:begin --><!-- hexo-inject:end --><meta charset="UTF-8">
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
 <meta name="theme-color" content="#222">
@@ -119,18 +119,18 @@
 
 
 
-  <meta name="description" content="OLLVMOLLVM(Obfuscator-LLVM)旨在提供一套开源的针对LLVM的代码混淆工具,以增加对逆向工程的难度. OLLVM是基于LLVM实现的,LLVM是一个编译器框架,采用经典的三段式设计:前端可以使用不同的编译工具对代码文件做词法分析以形成抽象语法树AST,然后将分析好的代码转换成LLVM的中间表示IR;中间部分的优化器只对中间表示IR操作,通过一系列的Pass对IR做优化;后端">
+  <meta name="description" content="OLLVM OLLVM(Obfuscator-LLVM)旨在提供一套开源的针对LLVM的代码混淆工具,以增加对逆向工程的难度. OLLVM是基于LLVM实现的,LLVM是一个编译器框架,采用经典的三段式设计:前端可以使用不同的编译工具对代码文件做词法分析以形成抽象语法树AST,然后将分析好的代码转换成LLVM的中间表示IR;中间部分的优化器只对中间表示IR操作,通过一系列的Pass对IR做优化">
 <meta name="keywords" content="代码混淆">
 <meta property="og:type" content="article">
 <meta property="og:title" content="IS-reverse-代码混淆-OLLVM">
 <meta property="og:url" content="https://hitworld.github.io/posts/408d63f4/index.html">
 <meta property="og:site_name" content="w4rd3n">
-<meta property="og:description" content="OLLVMOLLVM(Obfuscator-LLVM)旨在提供一套开源的针对LLVM的代码混淆工具,以增加对逆向工程的难度. OLLVM是基于LLVM实现的,LLVM是一个编译器框架,采用经典的三段式设计:前端可以使用不同的编译工具对代码文件做词法分析以形成抽象语法树AST,然后将分析好的代码转换成LLVM的中间表示IR;中间部分的优化器只对中间表示IR操作,通过一系列的Pass对IR做优化;后端">
+<meta property="og:description" content="OLLVM OLLVM(Obfuscator-LLVM)旨在提供一套开源的针对LLVM的代码混淆工具,以增加对逆向工程的难度. OLLVM是基于LLVM实现的,LLVM是一个编译器框架,采用经典的三段式设计:前端可以使用不同的编译工具对代码文件做词法分析以形成抽象语法树AST,然后将分析好的代码转换成LLVM的中间表示IR;中间部分的优化器只对中间表示IR操作,通过一系列的Pass对IR做优化">
 <meta property="og:locale" content="zh-CN">
 <meta property="og:updated_time" content="2020-08-09T06:34:17.830Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="IS-reverse-代码混淆-OLLVM">
-<meta name="twitter:description" content="OLLVMOLLVM(Obfuscator-LLVM)旨在提供一套开源的针对LLVM的代码混淆工具,以增加对逆向工程的难度. OLLVM是基于LLVM实现的,LLVM是一个编译器框架,采用经典的三段式设计:前端可以使用不同的编译工具对代码文件做词法分析以形成抽象语法树AST,然后将分析好的代码转换成LLVM的中间表示IR;中间部分的优化器只对中间表示IR操作,通过一系列的Pass对IR做优化;后端">
+<meta name="twitter:description" content="OLLVM OLLVM(Obfuscator-LLVM)旨在提供一套开源的针对LLVM的代码混淆工具,以增加对逆向工程的难度. OLLVM是基于LLVM实现的,LLVM是一个编译器框架,采用经典的三段式设计:前端可以使用不同的编译工具对代码文件做词法分析以形成抽象语法树AST,然后将分析好的代码转换成LLVM的中间表示IR;中间部分的优化器只对中间表示IR操作,通过一系列的Pass对IR做优化">
 
 
 
@@ -185,7 +185,7 @@
       .logo-line-after i { right: initial; }
     }
   </style>
-</noscript>
+</noscript><!-- hexo-inject:begin --><!-- hexo-inject:end -->
 
 </head>
 
@@ -196,7 +196,7 @@
     
   
 
-  <div class="container sidebar-position-left page-post-detail">
+  <!-- hexo-inject:begin --><!-- hexo-inject:end --><div class="container sidebar-position-left page-post-detail">
     <div class="headband"></div>
 
     <header id="header" class="header" itemscope="" itemtype="http://schema.org/WPHeader">
@@ -537,17 +537,23 @@
       
 
       
-        <h2 id="OLLVM"><a href="#OLLVM" class="headerlink" title="OLLVM"></a>OLLVM</h2><p><code>OLLVM</code>(<code>Obfuscator-LLVM</code>)旨在提供一套开源的针对<code>LLVM</code>的代码混淆工具,以增加对逆向工程的难度.</p>
+        <h2 id="ollvm">OLLVM</h2>
+<p><code>OLLVM</code>(<code>Obfuscator-LLVM</code>)旨在提供一套开源的针对<code>LLVM</code>的代码混淆工具,以增加对逆向工程的难度.</p>
 <p><code>OLLVM</code>是基于<code>LLVM</code>实现的,<code>LLVM</code>是一个编译器框架,采用经典的三段式设计:前端可以使用不同的编译工具对代码文件做词法分析以形成抽象语法树<code>AST</code>,然后将分析好的代码转换成<code>LLVM</code>的中间表示<code>IR</code>;中间部分的优化器只对中间表示<code>IR</code>操作,通过一系列的<code>Pass</code>对<code>IR</code>做优化;后端负责将优化好的<code>IR</code>解释成对应平台的机器码.</p>
 <p><code>OLLVM</code>的混淆操作就是在中间表示<code>IR</code>层,通过编写<code>Pass</code>来混淆<code>IR</code>.<code>OLLVM</code>适用<code>LLVM</code>支持的所有语言和目标平台.</p>
 <p><code>OLLVM</code>默认支持<code>-fla</code>,<code>-sub</code>,<code>-bcf</code>三个混淆参数,可以单独使用,也可以配合使用.<code>-fla</code>参数表示使用控制流平展(<code>Control Flow Flattening</code>)模式,<code>-sub</code>参数表示使用指令替换(<code>Instructions Substitution</code>)模式,<code>-bcf</code>参数表示使用控制流伪造(<code>Bogus Control Flow</code>)模式.</p>
-<h3 id="Instructions-Substitution"><a href="#Instructions-Substitution" class="headerlink" title="Instructions Substitution"></a>Instructions Substitution</h3><p>指令替换是一种比较简单的混淆方式,<code>OLLVM</code>将一些简单的运算复杂化,但这种方式容易被代码优化给去除,目前<code>OLLVM</code>只实现对整数运算的混淆.</p>
-<h3 id="control-flow-flattening"><a href="#control-flow-flattening" class="headerlink" title="control flow flattening"></a>control flow flattening</h3><p><code>control flow flattening</code>通过多个<code>case-swich</code>结构将程序的控制流变成扁平形状,打破原有的逻辑结构,增加逆向的难度.<code>OLLVM</code>将源代码分割为几个基本块,并放在一个<code>while</code>循环结构中无限循环,程序的流程由一个变量控制.</p>
-<h3 id="bogus-control-flow"><a href="#bogus-control-flow" class="headerlink" title="bogus control flow"></a>bogus control flow</h3><p><code>bogus control flow</code>通过在源程序的控制流中添加一些基本块,这些基本块仅仅起了连接作用,并不影响实际的执行逻辑.</p>
-<h3 id="Functions-annotations"><a href="#Functions-annotations" class="headerlink" title="Functions annotations"></a>Functions annotations</h3><p><code>OLLVM</code>的<code>Functions annotations</code>模式支持对单个函数进行混淆.</p>
+<h3 id="instructions-substitution">Instructions Substitution</h3>
+<p>指令替换是一种比较简单的混淆方式,<code>OLLVM</code>将一些简单的运算复杂化,但这种方式容易被代码优化给去除,目前<code>OLLVM</code>只实现对整数运算的混淆.</p>
+<h3 id="control-flow-flattening">control flow flattening</h3>
+<p><code>control flow flattening</code>通过多个<code>case-swich</code>结构将程序的控制流变成扁平形状,打破原有的逻辑结构,增加逆向的难度.<code>OLLVM</code>将源代码分割为几个基本块,并放在一个<code>while</code>循环结构中无限循环,程序的流程由一个变量控制.</p>
+<h3 id="bogus-control-flow">bogus control flow</h3>
+<p><code>bogus control flow</code>通过在源程序的控制流中添加一些基本块,这些基本块仅仅起了连接作用,并不影响实际的执行逻辑.</p>
+<h3 id="functions-annotations">Functions annotations</h3>
+<p><code>OLLVM</code>的<code>Functions annotations</code>模式支持对单个函数进行混淆.</p>
 <figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">func</span><span class="params">()</span> __<span class="title">attribute</span><span class="params">((__annotate__((<span class="string">"bcf"</span>))))</span></span>;</span><br><span class="line"><span class="comment">//对函数func()使用bcf混淆</span></span><br></pre></td></tr></table></figure>
 <p><code>OLLVM</code>的<code>fla</code>,<code>sub</code>和<code>bcf</code>三个属性可以搭配使用,只需要添加对应的编译选项即可.</p>
-<h3 id="下载并编译"><a href="#下载并编译" class="headerlink" title="下载并编译"></a>下载并编译</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">git <span class="built_in">clone</span> -b llvm-4.0 https://github.com/obfuscator-llvm/obfuscator.git</span><br><span class="line">mkdir build</span><br><span class="line"><span class="built_in">cd</span> build</span><br><span class="line">cmake -DCMAKE_BUILD_TYPE=Release ../obfuscator/</span><br><span class="line">make -j7</span><br><span class="line"><span class="built_in">cd</span> ..</span><br><span class="line">build/bin/clang demo.c -o demo -mllvm -fla</span><br></pre></td></tr></table></figure>
+<h3 id="下载并编译">下载并编译</h3>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">git <span class="built_in">clone</span> -b llvm-4.0 https://github.com/obfuscator-llvm/obfuscator.git</span><br><span class="line">mkdir build</span><br><span class="line"><span class="built_in">cd</span> build</span><br><span class="line">cmake -DCMAKE_BUILD_TYPE=Release ../obfuscator/</span><br><span class="line">make -j7</span><br><span class="line"><span class="built_in">cd</span> ..</span><br><span class="line">build/bin/clang demo.c -o demo -mllvm -fla</span><br></pre></td></tr></table></figure>
 
       
     </div>
@@ -862,7 +868,7 @@
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#OLLVM"><span class="nav-number">1.</span> <span class="nav-text">OLLVM</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#Instructions-Substitution"><span class="nav-number">1.1.</span> <span class="nav-text">Instructions Substitution</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#control-flow-flattening"><span class="nav-number">1.2.</span> <span class="nav-text">control flow flattening</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#bogus-control-flow"><span class="nav-number">1.3.</span> <span class="nav-text">bogus control flow</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Functions-annotations"><span class="nav-number">1.4.</span> <span class="nav-text">Functions annotations</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#下载并编译"><span class="nav-number">1.5.</span> <span class="nav-text">下载并编译</span></a></li></ol></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#ollvm"><span class="nav-number">1.</span> <span class="nav-text">OLLVM</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#instructions-substitution"><span class="nav-number">1.1.</span> <span class="nav-text">Instructions Substitution</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#control-flow-flattening"><span class="nav-number">1.2.</span> <span class="nav-text">control flow flattening</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#bogus-control-flow"><span class="nav-number">1.3.</span> <span class="nav-text">bogus control flow</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#functions-annotations"><span class="nav-number">1.4.</span> <span class="nav-text">Functions annotations</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#下载并编译"><span class="nav-number">1.5.</span> <span class="nav-text">下载并编译</span></a></li></ol></li></ol></div>
             
 
           </div>
@@ -894,7 +900,7 @@
       <i class="fa fa-area-chart"></i>
     </span>
     
-    <span title="站点总字数">710k</span>
+    <span title="站点总字数">720k</span>
   
 
   
@@ -903,7 +909,7 @@
       <i class="fa fa-coffee"></i>
     </span>
     
-    <span title="站点阅读时长">10:46</span>
+    <span title="站点阅读时长">10:54</span>
   
 </div>
 
@@ -1554,5 +1560,5 @@
   
   <script type="text/javascript" src="//cdn.bootcss.com/canvas-nest.js/1.0.0/canvas-nest.min.js"></script>
   
-<script src="/live2dw/lib/L2Dwidget.min.js?0c58a1486de42ac6cc1c59c7d98ae887"></script><script>L2Dwidget.init({"pluginRootPath":"live2dw/","pluginJsPath":"lib/","pluginModelPath":"assets/","tagMode":false,"debug":false,"model":{"jsonPath":"/live2dw/assets/koharu.model.json"},"display":{"position":"right","width":150,"height":300},"mobile":{"show":false},"log":false});</script></body>
+<script src="/live2dw/lib/L2Dwidget.min.js?0c58a1486de42ac6cc1c59c7d98ae887"></script><script>L2Dwidget.init({"pluginRootPath":"live2dw/","pluginJsPath":"lib/","pluginModelPath":"assets/","tagMode":false,"debug":false,"model":{"jsonPath":"/live2dw/assets/koharu.model.json"},"display":{"position":"right","width":150,"height":300},"mobile":{"show":false},"log":false});</script><!-- hexo-inject:begin --><!-- hexo-inject:end --></body>
 </html>

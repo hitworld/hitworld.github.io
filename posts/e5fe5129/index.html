@@ -16,7 +16,7 @@
 
 <html class="theme-next mist use-motion" lang="zh-CN">
 <head><meta name="generator" content="Hexo 3.8.0">
-  <meta charset="UTF-8">
+  <!-- hexo-inject:begin --><!-- hexo-inject:end --><meta charset="UTF-8">
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
 <meta name="theme-color" content="#222">
@@ -119,18 +119,18 @@
 
 
 
-  <meta name="description" content="未完成 概览iptables命令是Linux上常用的防火墙软件,属于netfilter项目的一部分.可直接配置,也可以通过前端和图形界面配置. 选项123456789101112131415161718192021222324252627282930313233343536373839404142434445464748-t, --table table#对指定的表table进行操作,table必">
+  <meta name="description" content="未完成 概览 iptables命令是Linux上常用的防火墙软件,属于netfilter项目的一部分.可直接配置,也可以通过前端和图形界面配置. 选项 123456789101112131415161718192021222324252627282930313233343536373839404142434445464748-t, --table table#对指定的表table进行操作,">
 <meta name="keywords" content="Linux">
 <meta property="og:type" content="article">
 <meta property="og:title" content="CS-operations-Linux-iptables">
 <meta property="og:url" content="https://hitworld.github.io/posts/e5fe5129/index.html">
 <meta property="og:site_name" content="w4rd3n">
-<meta property="og:description" content="未完成 概览iptables命令是Linux上常用的防火墙软件,属于netfilter项目的一部分.可直接配置,也可以通过前端和图形界面配置. 选项123456789101112131415161718192021222324252627282930313233343536373839404142434445464748-t, --table table#对指定的表table进行操作,table必">
+<meta property="og:description" content="未完成 概览 iptables命令是Linux上常用的防火墙软件,属于netfilter项目的一部分.可直接配置,也可以通过前端和图形界面配置. 选项 123456789101112131415161718192021222324252627282930313233343536373839404142434445464748-t, --table table#对指定的表table进行操作,">
 <meta property="og:locale" content="zh-CN">
 <meta property="og:updated_time" content="2020-08-09T06:34:17.800Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="CS-operations-Linux-iptables">
-<meta name="twitter:description" content="未完成 概览iptables命令是Linux上常用的防火墙软件,属于netfilter项目的一部分.可直接配置,也可以通过前端和图形界面配置. 选项123456789101112131415161718192021222324252627282930313233343536373839404142434445464748-t, --table table#对指定的表table进行操作,table必">
+<meta name="twitter:description" content="未完成 概览 iptables命令是Linux上常用的防火墙软件,属于netfilter项目的一部分.可直接配置,也可以通过前端和图形界面配置. 选项 123456789101112131415161718192021222324252627282930313233343536373839404142434445464748-t, --table table#对指定的表table进行操作,">
 
 
 
@@ -185,7 +185,7 @@
       .logo-line-after i { right: initial; }
     }
   </style>
-</noscript>
+</noscript><!-- hexo-inject:begin --><!-- hexo-inject:end -->
 
 </head>
 
@@ -196,7 +196,7 @@
     
   
 
-  <div class="container sidebar-position-left page-post-detail">
+  <!-- hexo-inject:begin --><!-- hexo-inject:end --><div class="container sidebar-position-left page-post-detail">
     <div class="headband"></div>
 
     <header id="header" class="header" itemscope="" itemtype="http://schema.org/WPHeader">
@@ -538,10 +538,13 @@
 
       
         <p>未完成</p>
-<h2 id="概览"><a href="#概览" class="headerlink" title="概览"></a>概览</h2><p><code>iptables</code>命令是<code>Linux</code>上常用的防火墙软件,属于<code>netfilter</code>项目的一部分.可直接配置,也可以通过前端和图形界面配置.</p>
-<h2 id="选项"><a href="#选项" class="headerlink" title="选项"></a>选项</h2><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br></pre></td><td class="code"><pre><span class="line">-t, --table table</span><br><span class="line"><span class="comment">#对指定的表table进行操作,table必须是raw,nat,filtermangle中的一个.如果不指定此选项,默认的是filter表.</span></span><br><span class="line"></span><br><span class="line">-p</span><br><span class="line"><span class="comment">#指定要匹配的数据包协议类型</span></span><br><span class="line">-s, --<span class="built_in">source</span> [!] address[/mask]</span><br><span class="line"><span class="comment">#把指定的一个/一组地址作为源地址,按此规则进行过滤.当后面没有mask时,address是一个地址;当mask指定时,可以表示一组范围内的地址,比如:192.168.1.0/255.255.255.0.</span></span><br><span class="line">-d, --destination [!] address[/mask]</span><br><span class="line"><span class="comment">#地址格式同上,但这里是指定地址为目的地址,按此进行过滤.</span></span><br><span class="line">-i, --<span class="keyword">in</span>-interface [!] &lt;网络接口name&gt;</span><br><span class="line"><span class="comment">#指定数据包的来自来自网络接口,比如最常见的eth0.注意:它只对INPUT,FORWARD,PREROUTING这三个链起作用.如果没有指定此选项,说明可以来自任何一个网络接口.同前面类似,"!"表示取反.</span></span><br><span class="line">-o, --out-interface [!] &lt;网络接口name&gt;</span><br><span class="line"><span class="comment">#指定数据包出去的网络接口.只对OUTPUT,FORWARD,POSTROUTING三个链起作用.</span></span><br><span class="line">--dport num</span><br><span class="line"><span class="comment">#匹配目标端口号</span></span><br><span class="line">--sport num</span><br><span class="line"><span class="comment">#匹配来源端口号</span></span><br><span class="line"></span><br><span class="line">-L, --list [chain]</span><br><span class="line"><span class="comment">#列出链chain上面的所有规则,如果没有指定链,列出表上所有链的所有规则.</span></span><br><span class="line"></span><br><span class="line">-A, --append chain rule-specification</span><br><span class="line"><span class="comment">#在指定链chain的末尾插入指定的规则,最后才会被执行.规则是由后面的匹配来指定.</span></span><br><span class="line">-I, --insert chain [rulenum] rule-specification</span><br><span class="line"><span class="comment">#在链chain中的指定位置插入一条或多条规则.如果指定的规则号是1,则在链的头部插入.这也是默认的情况.</span></span><br><span class="line">-D, --delete chain rule-specification -D, --delete chain rulenum</span><br><span class="line"><span class="comment">#在指定的链chain中删除一个或多个指定规则.</span></span><br><span class="line">-R num</span><br><span class="line"><span class="comment">#Replays替换/修改第几条规则.</span></span><br><span class="line"></span><br><span class="line">-P, --policy chain target</span><br><span class="line"><span class="comment">#为指定的链chain设置策略target.注意,只有内置的链才允许有策略,用户自定义的是不允许的.</span></span><br><span class="line">-F, --flush [chain]</span><br><span class="line"><span class="comment">#清空指定链chain上面的所有规则.如果没有指定链,清空该表上所有链的所有规则.</span></span><br><span class="line">-N, --new-chain chain</span><br><span class="line"><span class="comment">#用指定的名字创建一个新的链.</span></span><br><span class="line">-X, --delete-chain [chain]</span><br><span class="line"><span class="comment">#删除指定的链,这个链必须没有被其它任何规则引用,而且这条上必须没有任何规则.如果没有指定链名,则会删除该表中所有非内置的链.</span></span><br><span class="line">-E, --rename-chain old-chain new-chain</span><br><span class="line"><span class="comment">#用指定的新名字去重命名指定的链,这并不会对链内部照成任何影响.</span></span><br><span class="line">-Z, --zero [chain]</span><br><span class="line"><span class="comment">#把指定链,或者表中的所有链上的所有计数器清零.</span></span><br><span class="line"></span><br><span class="line">-j, --jump target &lt;指定目标&gt;</span><br><span class="line"><span class="comment">#即满足某条件时该执行什么样的动作.target可以是内置的目标,比如ACCEPT,也可以是用户自定义的链.</span></span><br><span class="line"></span><br><span class="line">-h</span><br><span class="line"><span class="comment">#显示帮助信息.</span></span><br></pre></td></tr></table></figure>
+<h2 id="概览">概览</h2>
+<p><code>iptables</code>命令是<code>Linux</code>上常用的防火墙软件,属于<code>netfilter</code>项目的一部分.可直接配置,也可以通过前端和图形界面配置.</p>
+<h2 id="选项">选项</h2>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br></pre></td><td class="code"><pre><span class="line">-t, --table table</span><br><span class="line"><span class="comment">#对指定的表table进行操作,table必须是raw,nat,filtermangle中的一个.如果不指定此选项,默认的是filter表.</span></span><br><span class="line"></span><br><span class="line">-p</span><br><span class="line"><span class="comment">#指定要匹配的数据包协议类型</span></span><br><span class="line">-s, --<span class="built_in">source</span> [!] address[/mask]</span><br><span class="line"><span class="comment">#把指定的一个/一组地址作为源地址,按此规则进行过滤.当后面没有mask时,address是一个地址;当mask指定时,可以表示一组范围内的地址,比如:192.168.1.0/255.255.255.0.</span></span><br><span class="line">-d, --destination [!] address[/mask]</span><br><span class="line"><span class="comment">#地址格式同上,但这里是指定地址为目的地址,按此进行过滤.</span></span><br><span class="line">-i, --<span class="keyword">in</span>-interface [!] &lt;网络接口name&gt;</span><br><span class="line"><span class="comment">#指定数据包的来自来自网络接口,比如最常见的eth0.注意:它只对INPUT,FORWARD,PREROUTING这三个链起作用.如果没有指定此选项,说明可以来自任何一个网络接口.同前面类似,"!"表示取反.</span></span><br><span class="line">-o, --out-interface [!] &lt;网络接口name&gt;</span><br><span class="line"><span class="comment">#指定数据包出去的网络接口.只对OUTPUT,FORWARD,POSTROUTING三个链起作用.</span></span><br><span class="line">--dport num</span><br><span class="line"><span class="comment">#匹配目标端口号</span></span><br><span class="line">--sport num</span><br><span class="line"><span class="comment">#匹配来源端口号</span></span><br><span class="line"></span><br><span class="line">-L, --list [chain]</span><br><span class="line"><span class="comment">#列出链chain上面的所有规则,如果没有指定链,列出表上所有链的所有规则.</span></span><br><span class="line"></span><br><span class="line">-A, --append chain rule-specification</span><br><span class="line"><span class="comment">#在指定链chain的末尾插入指定的规则,最后才会被执行.规则是由后面的匹配来指定.</span></span><br><span class="line">-I, --insert chain [rulenum] rule-specification</span><br><span class="line"><span class="comment">#在链chain中的指定位置插入一条或多条规则.如果指定的规则号是1,则在链的头部插入.这也是默认的情况.</span></span><br><span class="line">-D, --delete chain rule-specification -D, --delete chain rulenum</span><br><span class="line"><span class="comment">#在指定的链chain中删除一个或多个指定规则.</span></span><br><span class="line">-R num</span><br><span class="line"><span class="comment">#Replays替换/修改第几条规则.</span></span><br><span class="line"></span><br><span class="line">-P, --policy chain target</span><br><span class="line"><span class="comment">#为指定的链chain设置策略target.注意,只有内置的链才允许有策略,用户自定义的是不允许的.</span></span><br><span class="line">-F, --flush [chain]</span><br><span class="line"><span class="comment">#清空指定链chain上面的所有规则.如果没有指定链,清空该表上所有链的所有规则.</span></span><br><span class="line">-N, --new-chain chain</span><br><span class="line"><span class="comment">#用指定的名字创建一个新的链.</span></span><br><span class="line">-X, --delete-chain [chain]</span><br><span class="line"><span class="comment">#删除指定的链,这个链必须没有被其它任何规则引用,而且这条上必须没有任何规则.如果没有指定链名,则会删除该表中所有非内置的链.</span></span><br><span class="line">-E, --rename-chain old-chain new-chain</span><br><span class="line"><span class="comment">#用指定的新名字去重命名指定的链,这并不会对链内部照成任何影响.</span></span><br><span class="line">-Z, --zero [chain]</span><br><span class="line"><span class="comment">#把指定链,或者表中的所有链上的所有计数器清零.</span></span><br><span class="line"></span><br><span class="line">-j, --jump target &lt;指定目标&gt;</span><br><span class="line"><span class="comment">#即满足某条件时该执行什么样的动作.target可以是内置的目标,比如ACCEPT,也可以是用户自定义的链.</span></span><br><span class="line"></span><br><span class="line">-h</span><br><span class="line"><span class="comment">#显示帮助信息.</span></span><br></pre></td></tr></table></figure>
 <p>命令举例:<code>iptables -t 表名 &lt;-A/I/D/R&gt; 规则链名 [规则号] &lt;-i/o 网卡名&gt; -p 协议名 &lt;-s 源IP/源子网&gt; --sport 源端口 &lt;-d 目标IP/目标子网&gt; --dport 目标端口 -j 动作</code>.</p>
-<h2 id="工作机制"><a href="#工作机制" class="headerlink" title="工作机制"></a>工作机制</h2><p>规则链名包括(也被称为五个钩子函数):</p>
+<h2 id="工作机制">工作机制</h2>
+<p>规则链名包括(也被称为五个钩子函数):</p>
 <ul>
 <li><code>INPUT</code>链:处理输入数据包.</li>
 <li><code>OUTPUT</code>链:处理输出数据包.</li>
@@ -550,7 +553,7 @@
 <li><code>POSTOUTING</code>链:用于源地址转换(<code>SNAT</code>).</li>
 </ul>
 <p>防火墙策略一般分为两种,一种叫通策略,一种叫堵策略.通策略,默认门是关着的,必须要定义谁能进;堵策略则是,大门是洞开的,但是你必须有身份认证,否则不能进.</p>
-<p><code>filter</code>定义允许或者不允许,只能作用在<code>3</code>个链上:<code>INPUT</code>,<code>FORWARD</code>,<code>OUTPUT</code>.<br><code>nat</code>定义地址转换,只能作用在<code>3</code>个链上:<code>PREROUTING</code>,<code>OUTPUT</code>,<code>POSTROUTING</code>.<br><code>mangle</code>修改报文原数据,<code>5</code>个链都可以使用.修改报文原数据就是修改<code>TTL</code>.能够将数据包的元数据拆开,在里面做标记<code>/</code>修改内容.防火墙标记其实就是靠<code>mangle</code>来实现的.</p>
+<p><code>filter</code>定义允许或者不允许,只能作用在<code>3</code>个链上:<code>INPUT</code>,<code>FORWARD</code>,<code>OUTPUT</code>. <code>nat</code>定义地址转换,只能作用在<code>3</code>个链上:<code>PREROUTING</code>,<code>OUTPUT</code>,<code>POSTROUTING</code>. <code>mangle</code>修改报文原数据,<code>5</code>个链都可以使用.修改报文原数据就是修改<code>TTL</code>.能够将数据包的元数据拆开,在里面做标记<code>/</code>修改内容.防火墙标记其实就是靠<code>mangle</code>来实现的.</p>
 <p>表名包括:</p>
 <ul>
 <li><code>raw</code>:高级功能,如:网址过滤.</li>
@@ -568,7 +571,8 @@
 <li><code>MASQUERADE</code>:<code>IP</code>伪装(<code>NAT</code>),用于<code>ADSL</code></li>
 <li><code>LOG</code>:日志记录.</li>
 </ul>
-<h2 id="实例"><a href="#实例" class="headerlink" title="实例"></a>实例</h2><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br></pre></td><td class="code"><pre><span class="line">iptables -F</span><br><span class="line"><span class="comment">#清空所有的防火墙规则.</span></span><br><span class="line">iptables -X</span><br><span class="line"><span class="comment">#删除用户自定义的空链.</span></span><br><span class="line">iptables -Z</span><br><span class="line"><span class="comment">#清空计数.</span></span><br><span class="line">iptables -A INPUT -s 192.168.1.0/24 -p tcp --dport 22 -j ACCEPT</span><br><span class="line"><span class="comment">#22为ssh端口,-s 192.168.1.0/24表示允许这个网段的机器来连接,-j ACCEPT表示接受请求.</span></span><br><span class="line">iptables -P INPUT DROP</span><br><span class="line"><span class="comment">#配置默认的不让进.</span></span><br><span class="line">iptables -P FORWARD DROP</span><br><span class="line"><span class="comment">#默认的不允许转发.</span></span><br><span class="line">iptables -P OUTPUT ACCEPT</span><br><span class="line"><span class="comment">#默认的可以出去.</span></span><br><span class="line">iptables -A INPUT -p icmp --icmp-type 8 -j ACCEPT</span><br><span class="line"><span class="comment">#允许被ping.</span></span><br><span class="line">iptables -A INPUT -m state --state ESTABLISHED,RELATED -j ACCEPT</span><br><span class="line"><span class="comment">#已经建立的连接让它进来.</span></span><br><span class="line">iptables-save &gt; /etc/sysconfig/iptables</span><br><span class="line"><span class="comment">#保存规则到配置文件中.</span></span><br><span class="line">cp /etc/sysconfig/iptables /etc/sysconfig/iptables.bak</span><br><span class="line"><span class="comment">#备份配置文件.</span></span><br></pre></td></tr></table></figure>
+<h2 id="实例">实例</h2>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br></pre></td><td class="code"><pre><span class="line">iptables -F</span><br><span class="line"><span class="comment">#清空所有的防火墙规则.</span></span><br><span class="line">iptables -X</span><br><span class="line"><span class="comment">#删除用户自定义的空链.</span></span><br><span class="line">iptables -Z</span><br><span class="line"><span class="comment">#清空计数.</span></span><br><span class="line">iptables -A INPUT -s 192.168.1.0/24 -p tcp --dport 22 -j ACCEPT</span><br><span class="line"><span class="comment">#22为ssh端口,-s 192.168.1.0/24表示允许这个网段的机器来连接,-j ACCEPT表示接受请求.</span></span><br><span class="line">iptables -P INPUT DROP</span><br><span class="line"><span class="comment">#配置默认的不让进.</span></span><br><span class="line">iptables -P FORWARD DROP</span><br><span class="line"><span class="comment">#默认的不允许转发.</span></span><br><span class="line">iptables -P OUTPUT ACCEPT</span><br><span class="line"><span class="comment">#默认的可以出去.</span></span><br><span class="line">iptables -A INPUT -p icmp --icmp-type 8 -j ACCEPT</span><br><span class="line"><span class="comment">#允许被ping.</span></span><br><span class="line">iptables -A INPUT -m state --state ESTABLISHED,RELATED -j ACCEPT</span><br><span class="line"><span class="comment">#已经建立的连接让它进来.</span></span><br><span class="line">iptables-save &gt; /etc/sysconfig/iptables</span><br><span class="line"><span class="comment">#保存规则到配置文件中.</span></span><br><span class="line">cp /etc/sysconfig/iptables /etc/sysconfig/iptables.bak</span><br><span class="line"><span class="comment">#备份配置文件.</span></span><br></pre></td></tr></table></figure>
 
       
     </div>
@@ -915,7 +919,7 @@
       <i class="fa fa-area-chart"></i>
     </span>
     
-    <span title="站点总字数">710k</span>
+    <span title="站点总字数">720k</span>
   
 
   
@@ -924,7 +928,7 @@
       <i class="fa fa-coffee"></i>
     </span>
     
-    <span title="站点阅读时长">10:46</span>
+    <span title="站点阅读时长">10:54</span>
   
 </div>
 
@@ -1575,5 +1579,5 @@
   
   <script type="text/javascript" src="//cdn.bootcss.com/canvas-nest.js/1.0.0/canvas-nest.min.js"></script>
   
-<script src="/live2dw/lib/L2Dwidget.min.js?0c58a1486de42ac6cc1c59c7d98ae887"></script><script>L2Dwidget.init({"pluginRootPath":"live2dw/","pluginJsPath":"lib/","pluginModelPath":"assets/","tagMode":false,"debug":false,"model":{"jsonPath":"/live2dw/assets/koharu.model.json"},"display":{"position":"right","width":150,"height":300},"mobile":{"show":false},"log":false});</script></body>
+<script src="/live2dw/lib/L2Dwidget.min.js?0c58a1486de42ac6cc1c59c7d98ae887"></script><script>L2Dwidget.init({"pluginRootPath":"live2dw/","pluginJsPath":"lib/","pluginModelPath":"assets/","tagMode":false,"debug":false,"model":{"jsonPath":"/live2dw/assets/koharu.model.json"},"display":{"position":"right","width":150,"height":300},"mobile":{"show":false},"log":false});</script><!-- hexo-inject:begin --><!-- hexo-inject:end --></body>
 </html>

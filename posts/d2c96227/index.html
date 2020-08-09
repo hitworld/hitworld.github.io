@@ -16,7 +16,7 @@
 
 <html class="theme-next mist use-motion" lang="zh-CN">
 <head><meta name="generator" content="Hexo 3.8.0">
-  <meta charset="UTF-8">
+  <!-- hexo-inject:begin --><!-- hexo-inject:end --><meta charset="UTF-8">
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
 <meta name="theme-color" content="#222">
@@ -119,18 +119,18 @@
 
 
 
-  <meta name="description" content="未完成 环境推荐使用NASM加32位Windows 7. 实地址方式实地址方式可以访问8个32位通用寄存器,但EIP,ESP,EFLAGS都只有低16位起作用.实地址方式下处理器的基本执行环境和基本指令集与保护方式是相同的.不过间接寻址中不能使用比例因子. NASM编程NASM大小写敏感. 12345NASM 1.asm -o 1.com#COM程序会从段内偏移100H开始执行,因为COM为纯二进">
+  <meta name="description" content="未完成 环境 推荐使用NASM加32位Windows 7. 实地址方式 实地址方式可以访问8个32位通用寄存器,但EIP,ESP,EFLAGS都只有低16位起作用.实地址方式下处理器的基本执行环境和基本指令集与保护方式是相同的.不过间接寻址中不能使用比例因子. NASM编程 NASM大小写敏感. 12345NASM 1.asm -o 1.com#COM程序会从段内偏移100H开始执行">
 <meta name="keywords" content="assembly">
 <meta property="og:type" content="article">
 <meta property="og:title" content="CS-BASIC-assembly-IA32-实地址方式">
 <meta property="og:url" content="https://hitworld.github.io/posts/d2c96227/index.html">
 <meta property="og:site_name" content="w4rd3n">
-<meta property="og:description" content="未完成 环境推荐使用NASM加32位Windows 7. 实地址方式实地址方式可以访问8个32位通用寄存器,但EIP,ESP,EFLAGS都只有低16位起作用.实地址方式下处理器的基本执行环境和基本指令集与保护方式是相同的.不过间接寻址中不能使用比例因子. NASM编程NASM大小写敏感. 12345NASM 1.asm -o 1.com#COM程序会从段内偏移100H开始执行,因为COM为纯二进">
+<meta property="og:description" content="未完成 环境 推荐使用NASM加32位Windows 7. 实地址方式 实地址方式可以访问8个32位通用寄存器,但EIP,ESP,EFLAGS都只有低16位起作用.实地址方式下处理器的基本执行环境和基本指令集与保护方式是相同的.不过间接寻址中不能使用比例因子. NASM编程 NASM大小写敏感. 12345NASM 1.asm -o 1.com#COM程序会从段内偏移100H开始执行">
 <meta property="og:locale" content="zh-CN">
 <meta property="og:updated_time" content="2020-08-09T06:34:17.772Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="CS-BASIC-assembly-IA32-实地址方式">
-<meta name="twitter:description" content="未完成 环境推荐使用NASM加32位Windows 7. 实地址方式实地址方式可以访问8个32位通用寄存器,但EIP,ESP,EFLAGS都只有低16位起作用.实地址方式下处理器的基本执行环境和基本指令集与保护方式是相同的.不过间接寻址中不能使用比例因子. NASM编程NASM大小写敏感. 12345NASM 1.asm -o 1.com#COM程序会从段内偏移100H开始执行,因为COM为纯二进">
+<meta name="twitter:description" content="未完成 环境 推荐使用NASM加32位Windows 7. 实地址方式 实地址方式可以访问8个32位通用寄存器,但EIP,ESP,EFLAGS都只有低16位起作用.实地址方式下处理器的基本执行环境和基本指令集与保护方式是相同的.不过间接寻址中不能使用比例因子. NASM编程 NASM大小写敏感. 12345NASM 1.asm -o 1.com#COM程序会从段内偏移100H开始执行">
 
 
 
@@ -185,7 +185,7 @@
       .logo-line-after i { right: initial; }
     }
   </style>
-</noscript>
+</noscript><!-- hexo-inject:begin --><!-- hexo-inject:end -->
 
 </head>
 
@@ -196,7 +196,7 @@
     
   
 
-  <div class="container sidebar-position-left page-post-detail">
+  <!-- hexo-inject:begin --><!-- hexo-inject:end --><div class="container sidebar-position-left page-post-detail">
     <div class="headband"></div>
 
     <header id="header" class="header" itemscope="" itemtype="http://schema.org/WPHeader">
@@ -538,16 +538,20 @@
 
       
         <p>未完成</p>
-<h2 id="环境"><a href="#环境" class="headerlink" title="环境"></a>环境</h2><p>推荐使用<code>NASM</code>加<code>32</code>位<code>Windows 7</code>.</p>
-<h2 id="实地址方式"><a href="#实地址方式" class="headerlink" title="实地址方式"></a>实地址方式</h2><p>实地址方式可以访问<code>8</code>个<code>32</code>位通用寄存器,但<code>EIP</code>,<code>ESP</code>,<code>EFLAGS</code>都只有低<code>16</code>位起作用.实地址方式下处理器的基本执行环境和基本指令集与保护方式是相同的.不过间接寻址中不能使用比例因子.</p>
-<h2 id="NASM编程"><a href="#NASM编程" class="headerlink" title="NASM编程"></a>NASM编程</h2><p><code>NASM</code>大小写敏感.</p>
+<h2 id="环境">环境</h2>
+<p>推荐使用<code>NASM</code>加<code>32</code>位<code>Windows 7</code>.</p>
+<h2 id="实地址方式">实地址方式</h2>
+<p>实地址方式可以访问<code>8</code>个<code>32</code>位通用寄存器,但<code>EIP</code>,<code>ESP</code>,<code>EFLAGS</code>都只有低<code>16</code>位起作用.实地址方式下处理器的基本执行环境和基本指令集与保护方式是相同的.不过间接寻址中不能使用比例因子.</p>
+<h2 id="nasm编程">NASM编程</h2>
+<p><code>NASM</code>大小写敏感.</p>
 <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">NASM 1.asm -o 1.com</span><br><span class="line"><span class="comment">#COM程序会从段内偏移100H开始执行,因为COM为纯二进制文件</span></span><br><span class="line">NASM 1.asm -f obj -o 1.obj</span><br><span class="line">LINK 1.obj;</span><br><span class="line"><span class="comment">#生成exe程序,从标号..start开始执行</span></span><br></pre></td></tr></table></figure>
 <p>示例.</p>
 <figure class="highlight x86asm"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">segment</span> code</span><br><span class="line"><span class="symbol">..start:</span></span><br><span class="line"><span class="keyword">MOV</span> <span class="number">AH</span>, <span class="number">1</span></span><br><span class="line"><span class="keyword">INT</span> <span class="number">21H</span></span><br><span class="line"><span class="comment">;调用系统例程读取键盘输入到AL</span></span><br><span class="line"><span class="keyword">MOV</span> <span class="built_in">DL</span>, <span class="built_in">AL</span></span><br><span class="line"><span class="keyword">MOV</span> <span class="number">AH</span>, <span class="number">2</span></span><br><span class="line"><span class="keyword">INT</span> <span class="number">21H</span></span><br><span class="line"><span class="comment">;调用系统例程输出DL</span></span><br><span class="line"></span><br><span class="line"><span class="meta">segment</span> stack stack<span class="comment">;显式定义堆栈段,后一个stack为段类型</span></span><br><span class="line"><span class="built_in">resb</span> <span class="number">1024</span><span class="comment">;定义1024字节作为堆栈</span></span><br><span class="line"><span class="symbol">stacktop:</span><span class="comment">;栈底</span></span><br></pre></td></tr></table></figure>
-<h3 id="汇编语句"><a href="#汇编语句" class="headerlink" title="汇编语句"></a>汇编语句</h3><p>汇编语言有四种语句:指令语句,伪指令语句,宏指令语句,指示语句.</p>
+<h3 id="汇编语句">汇编语句</h3>
+<p>汇编语言有四种语句:指令语句,伪指令语句,宏指令语句,指示语句.</p>
 <p>指令:机器指令的符号化,也就是用助记符来编写机器指令,如<code>MOV</code>.</p>
 <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">[标识符:] [指令助记符] [操作数表] [;注释]</span><br></pre></td></tr></table></figure>
-<p>伪指令:汇编器定义的指令,用于定义变量,预留存储单元,如<code>$a db &#39;H&#39;, &#39;$&#39;</code>.</p>
+<p>伪指令:汇编器定义的指令,用于定义变量,预留存储单元,如<code>$a db 'H', '$'</code>.</p>
 <p>伪指令定义符有<code>DB</code>(字节),<code>DW</code>,<code>DD</code>,<code>DQ</code>(<code>64</code>位),参数表通过<code>,</code>分隔.</p>
 <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">[标识符] [伪指令定义符] [参数表] [;注释]</span><br></pre></td></tr></table></figure>
 <p>指示:汇编器定义的指令,用于指示汇编器如何生成目标代码,如<code>segment a</code>.</p>
@@ -881,7 +885,7 @@
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#环境"><span class="nav-number">1.</span> <span class="nav-text">环境</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#实地址方式"><span class="nav-number">2.</span> <span class="nav-text">实地址方式</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#NASM编程"><span class="nav-number">3.</span> <span class="nav-text">NASM编程</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#汇编语句"><span class="nav-number">3.1.</span> <span class="nav-text">汇编语句</span></a></li></ol></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#环境"><span class="nav-number">1.</span> <span class="nav-text">环境</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#实地址方式"><span class="nav-number">2.</span> <span class="nav-text">实地址方式</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#nasm编程"><span class="nav-number">3.</span> <span class="nav-text">NASM编程</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#汇编语句"><span class="nav-number">3.1.</span> <span class="nav-text">汇编语句</span></a></li></ol></li></ol></div>
             
 
           </div>
@@ -913,7 +917,7 @@
       <i class="fa fa-area-chart"></i>
     </span>
     
-    <span title="站点总字数">710k</span>
+    <span title="站点总字数">720k</span>
   
 
   
@@ -922,7 +926,7 @@
       <i class="fa fa-coffee"></i>
     </span>
     
-    <span title="站点阅读时长">10:46</span>
+    <span title="站点阅读时长">10:54</span>
   
 </div>
 
@@ -1573,5 +1577,5 @@
   
   <script type="text/javascript" src="//cdn.bootcss.com/canvas-nest.js/1.0.0/canvas-nest.min.js"></script>
   
-<script src="/live2dw/lib/L2Dwidget.min.js?0c58a1486de42ac6cc1c59c7d98ae887"></script><script>L2Dwidget.init({"pluginRootPath":"live2dw/","pluginJsPath":"lib/","pluginModelPath":"assets/","tagMode":false,"debug":false,"model":{"jsonPath":"/live2dw/assets/koharu.model.json"},"display":{"position":"right","width":150,"height":300},"mobile":{"show":false},"log":false});</script></body>
+<script src="/live2dw/lib/L2Dwidget.min.js?0c58a1486de42ac6cc1c59c7d98ae887"></script><script>L2Dwidget.init({"pluginRootPath":"live2dw/","pluginJsPath":"lib/","pluginModelPath":"assets/","tagMode":false,"debug":false,"model":{"jsonPath":"/live2dw/assets/koharu.model.json"},"display":{"position":"right","width":150,"height":300},"mobile":{"show":false},"log":false});</script><!-- hexo-inject:begin --><!-- hexo-inject:end --></body>
 </html>

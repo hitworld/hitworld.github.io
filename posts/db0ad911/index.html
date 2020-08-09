@@ -16,7 +16,7 @@
 
 <html class="theme-next mist use-motion" lang="zh-CN">
 <head><meta name="generator" content="Hexo 3.8.0">
-  <meta charset="UTF-8">
+  <!-- hexo-inject:begin --><!-- hexo-inject:end --><meta charset="UTF-8">
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
 <meta name="theme-color" content="#222">
@@ -119,18 +119,18 @@
 
 
 
-  <meta name="description" content="步骤 创建一个用于调试的js环境版本.如果有一个包含漏洞的patch,hit和build它. 分析patch以确定哪个patch适用于哪个进程:Full-Codegen,Crankshaft,TurboFan,Ignition,AST,IC. 编写利用漏洞的js代码段. 创建一个任意地址读/写的原语,主要使用ArrayBuffer和TypedArray. getshell.例如在JIT区域嵌入sh">
+  <meta name="description" content="步骤  创建一个用于调试的js环境版本.如果有一个包含漏洞的patch,hit和build它. 分析patch以确定哪个patch适用于哪个进程:Full-Codegen,Crankshaft,TurboFan,Ignition,AST,IC. 编写利用漏洞的js代码段. 创建一个任意地址读/写的原语,主要使用ArrayBuffer和TypedArray. getshell.例如在JI">
 <meta name="keywords" content="v8">
 <meta property="og:type" content="article">
 <meta property="og:title" content="IS-pwn-v8-exploit">
 <meta property="og:url" content="https://hitworld.github.io/posts/db0ad911/index.html">
 <meta property="og:site_name" content="w4rd3n">
-<meta property="og:description" content="步骤 创建一个用于调试的js环境版本.如果有一个包含漏洞的patch,hit和build它. 分析patch以确定哪个patch适用于哪个进程:Full-Codegen,Crankshaft,TurboFan,Ignition,AST,IC. 编写利用漏洞的js代码段. 创建一个任意地址读/写的原语,主要使用ArrayBuffer和TypedArray. getshell.例如在JIT区域嵌入sh">
+<meta property="og:description" content="步骤  创建一个用于调试的js环境版本.如果有一个包含漏洞的patch,hit和build它. 分析patch以确定哪个patch适用于哪个进程:Full-Codegen,Crankshaft,TurboFan,Ignition,AST,IC. 编写利用漏洞的js代码段. 创建一个任意地址读/写的原语,主要使用ArrayBuffer和TypedArray. getshell.例如在JI">
 <meta property="og:locale" content="zh-CN">
 <meta property="og:updated_time" content="2020-08-09T06:34:17.824Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="IS-pwn-v8-exploit">
-<meta name="twitter:description" content="步骤 创建一个用于调试的js环境版本.如果有一个包含漏洞的patch,hit和build它. 分析patch以确定哪个patch适用于哪个进程:Full-Codegen,Crankshaft,TurboFan,Ignition,AST,IC. 编写利用漏洞的js代码段. 创建一个任意地址读/写的原语,主要使用ArrayBuffer和TypedArray. getshell.例如在JIT区域嵌入sh">
+<meta name="twitter:description" content="步骤  创建一个用于调试的js环境版本.如果有一个包含漏洞的patch,hit和build它. 分析patch以确定哪个patch适用于哪个进程:Full-Codegen,Crankshaft,TurboFan,Ignition,AST,IC. 编写利用漏洞的js代码段. 创建一个任意地址读/写的原语,主要使用ArrayBuffer和TypedArray. getshell.例如在JI">
 
 
 
@@ -185,7 +185,7 @@
       .logo-line-after i { right: initial; }
     }
   </style>
-</noscript>
+</noscript><!-- hexo-inject:begin --><!-- hexo-inject:end -->
 
 </head>
 
@@ -196,7 +196,7 @@
     
   
 
-  <div class="container sidebar-position-left page-post-detail">
+  <!-- hexo-inject:begin --><!-- hexo-inject:end --><div class="container sidebar-position-left page-post-detail">
     <div class="headband"></div>
 
     <header id="header" class="header" itemscope="" itemtype="http://schema.org/WPHeader">
@@ -503,7 +503,7 @@
                 
                   <span class="post-meta-item-text">本文字数：</span>
                 
-                <span title="本文字数">861</span>
+                <span title="本文字数">879</span>
               
 
               
@@ -537,20 +537,24 @@
       
 
       
-        <h2 id="步骤"><a href="#步骤" class="headerlink" title="步骤"></a>步骤</h2><ol>
+        <h2 id="步骤">步骤</h2>
+<ol type="1">
 <li>创建一个用于调试的<code>js</code>环境版本.如果有一个包含漏洞的<code>patch</code>,<code>hit</code>和<code>build</code>它.</li>
 <li>分析<code>patch</code>以确定哪个<code>patch</code>适用于哪个进程:<code>Full-Codegen</code>,<code>Crankshaft</code>,<code>TurboFan</code>,<code>Ignition</code>,<code>AST</code>,<code>IC</code>.</li>
 <li>编写利用漏洞的<code>js</code>代码段.</li>
 <li>创建一个任意地址读<code>/</code>写的原语,主要使用<code>ArrayBuffer</code>和<code>TypedArray</code>.</li>
 <li><code>getshell</code>.例如在<code>JIT</code>区域嵌入<code>shell</code>代码.</li>
 </ol>
-<h2 id="调试技巧"><a href="#调试技巧" class="headerlink" title="调试技巧"></a>调试技巧</h2><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">%DebugPrint()</span><br><span class="line"><span class="comment">#通过该函数打印出对象的详细信息,如内存地址,属性,map等.运行时使用参数--allow-natives-syntax.</span></span><br></pre></td></tr></table></figure>
+<h2 id="调试技巧">调试技巧</h2>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">%DebugPrint()</span><br><span class="line"><span class="comment">#通过该函数打印出对象的详细信息,如内存地址,属性,map等.运行时使用参数--allow-natives-syntax.</span></span><br></pre></td></tr></table></figure>
 <p>当分析<code>v8</code>源码时,遇到<code>CodeStubAssembler</code>编写的代码,可以在其中插入<code>DebugBreak()</code>,这相当于插入了一个断点(类似<code>int 3</code>),重新编译后使用调试器调试时,可以在插入处断下.</p>
-<p>同样,遇到<code>CodeStubAssembler</code>编写的代码时,可以使用<code>Print()</code>来输出一些变量值,例如:<code>Print(&quot;array&quot;, static_cast&lt;Node*&gt;(array.value()));</code>,重新编译即可.</p>
+<p>同样,遇到<code>CodeStubAssembler</code>编写的代码时,可以使用<code>Print()</code>来输出一些变量值,例如:<code>Print("array", static_cast&lt;Node*&gt;(array.value()));</code>,重新编译即可.</p>
 <p>可以在运行的<code>js</code>代码中插入<code>readline()</code>让程序停下来等待输入,方便调试.</p>
 <p>通过引用<code>tools</code>里面的<code>gdb</code>脚本可以使用一些较为方便的指令.</p>
 <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">job(&amp;object)</span><br><span class="line"><span class="comment">#打印出对象的详细信息</span></span><br></pre></td></tr></table></figure>
-<h2 id="漏洞利用"><a href="#漏洞利用" class="headerlink" title="漏洞利用"></a>漏洞利用</h2><h3 id="ArrayBuffer-amp-amp-TypedArray"><a href="#ArrayBuffer-amp-amp-TypedArray" class="headerlink" title="ArrayBuffer &amp;&amp; TypedArray"></a>ArrayBuffer &amp;&amp; TypedArray</h3><p>在<code>ArrayBuffer</code>中存在一个<code>BackingStore</code>指针,这个指针指向的就是<code>ArrayBuffer</code>开辟的内存空间,可以使用<code>TypedArray</code>指定的类型读取和写入该区域,且这片内存区域是位于系统堆中的.</p>
+<h2 id="漏洞利用">漏洞利用</h2>
+<h3 id="arraybuffer-typedarray">ArrayBuffer &amp;&amp; TypedArray</h3>
+<p>在<code>ArrayBuffer</code>中存在一个<code>BackingStore</code>指针,这个指针指向的就是<code>ArrayBuffer</code>开辟的内存空间,可以使用<code>TypedArray</code>指定的类型读取和写入该区域,且这片内存区域是位于系统堆中的.</p>
 <p>利用思路.</p>
 <ul>
 <li>修改<code>ArrayBuffer</code>中的<code>Length</code>造成越界访问.</li>
@@ -871,7 +875,7 @@
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#步骤"><span class="nav-number">1.</span> <span class="nav-text">步骤</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#调试技巧"><span class="nav-number">2.</span> <span class="nav-text">调试技巧</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#漏洞利用"><span class="nav-number">3.</span> <span class="nav-text">漏洞利用</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#ArrayBuffer-amp-amp-TypedArray"><span class="nav-number">3.1.</span> <span class="nav-text">ArrayBuffer &amp;&amp; TypedArray</span></a></li></ol></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#步骤"><span class="nav-number">1.</span> <span class="nav-text">步骤</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#调试技巧"><span class="nav-number">2.</span> <span class="nav-text">调试技巧</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#漏洞利用"><span class="nav-number">3.</span> <span class="nav-text">漏洞利用</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#arraybuffer-typedarray"><span class="nav-number">3.1.</span> <span class="nav-text">ArrayBuffer &amp;&amp; TypedArray</span></a></li></ol></li></ol></div>
             
 
           </div>
@@ -903,7 +907,7 @@
       <i class="fa fa-area-chart"></i>
     </span>
     
-    <span title="站点总字数">710k</span>
+    <span title="站点总字数">720k</span>
   
 
   
@@ -912,7 +916,7 @@
       <i class="fa fa-coffee"></i>
     </span>
     
-    <span title="站点阅读时长">10:46</span>
+    <span title="站点阅读时长">10:54</span>
   
 </div>
 
@@ -1563,5 +1567,5 @@
   
   <script type="text/javascript" src="//cdn.bootcss.com/canvas-nest.js/1.0.0/canvas-nest.min.js"></script>
   
-<script src="/live2dw/lib/L2Dwidget.min.js?0c58a1486de42ac6cc1c59c7d98ae887"></script><script>L2Dwidget.init({"pluginRootPath":"live2dw/","pluginJsPath":"lib/","pluginModelPath":"assets/","tagMode":false,"debug":false,"model":{"jsonPath":"/live2dw/assets/koharu.model.json"},"display":{"position":"right","width":150,"height":300},"mobile":{"show":false},"log":false});</script></body>
+<script src="/live2dw/lib/L2Dwidget.min.js?0c58a1486de42ac6cc1c59c7d98ae887"></script><script>L2Dwidget.init({"pluginRootPath":"live2dw/","pluginJsPath":"lib/","pluginModelPath":"assets/","tagMode":false,"debug":false,"model":{"jsonPath":"/live2dw/assets/koharu.model.json"},"display":{"position":"right","width":150,"height":300},"mobile":{"show":false},"log":false});</script><!-- hexo-inject:begin --><!-- hexo-inject:end --></body>
 </html>

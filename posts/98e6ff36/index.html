@@ -16,7 +16,7 @@
 
 <html class="theme-next mist use-motion" lang="zh-CN">
 <head><meta name="generator" content="Hexo 3.8.0">
-  <meta charset="UTF-8">
+  <!-- hexo-inject:begin --><!-- hexo-inject:end --><meta charset="UTF-8">
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
 <meta name="theme-color" content="#222">
@@ -119,19 +119,19 @@
 
 
 
-  <meta name="description" content="概览 首先使用afl-gcc编译项目代码. 将初始testcase放到in目录下. 执行afl-fuzz -i in -o out &amp;lt;program&amp;gt; @@,path为可执行程序路径,@@表示初始用例从文件中读入. 通过out目录(fuzzing结果)分析.  可参考README.txt. 初始测试用例选择AFL可以有一个或多个包含测试数据的初始文件(testcase).  初始文件大">
+  <meta name="description" content="概览  首先使用afl-gcc编译项目代码. 将初始testcase放到in目录下. 执行afl-fuzz -i in -o out &amp;lt;program&amp;gt; @@,path为可执行程序路径,@@表示初始用例从文件中读入. 通过out目录(fuzzing结果)分析.  可参考README.txt. 初始测试用例选择 AFL可以有一个或多个包含测试数据的初始文件(testca">
 <meta name="keywords" content="fuzz">
 <meta property="og:type" content="article">
 <meta property="og:title" content="IS-pwn-fuzz-AFL-使用">
 <meta property="og:url" content="https://hitworld.github.io/posts/98e6ff36/index.html">
 <meta property="og:site_name" content="w4rd3n">
-<meta property="og:description" content="概览 首先使用afl-gcc编译项目代码. 将初始testcase放到in目录下. 执行afl-fuzz -i in -o out &amp;lt;program&amp;gt; @@,path为可执行程序路径,@@表示初始用例从文件中读入. 通过out目录(fuzzing结果)分析.  可参考README.txt. 初始测试用例选择AFL可以有一个或多个包含测试数据的初始文件(testcase).  初始文件大">
+<meta property="og:description" content="概览  首先使用afl-gcc编译项目代码. 将初始testcase放到in目录下. 执行afl-fuzz -i in -o out &amp;lt;program&amp;gt; @@,path为可执行程序路径,@@表示初始用例从文件中读入. 通过out目录(fuzzing结果)分析.  可参考README.txt. 初始测试用例选择 AFL可以有一个或多个包含测试数据的初始文件(testca">
 <meta property="og:locale" content="zh-CN">
 <meta property="og:image" content="https://hitworld.github.io/posts/98e6ff36/1.png">
 <meta property="og:updated_time" content="2020-08-09T06:34:17.823Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="IS-pwn-fuzz-AFL-使用">
-<meta name="twitter:description" content="概览 首先使用afl-gcc编译项目代码. 将初始testcase放到in目录下. 执行afl-fuzz -i in -o out &amp;lt;program&amp;gt; @@,path为可执行程序路径,@@表示初始用例从文件中读入. 通过out目录(fuzzing结果)分析.  可参考README.txt. 初始测试用例选择AFL可以有一个或多个包含测试数据的初始文件(testcase).  初始文件大">
+<meta name="twitter:description" content="概览  首先使用afl-gcc编译项目代码. 将初始testcase放到in目录下. 执行afl-fuzz -i in -o out &amp;lt;program&amp;gt; @@,path为可执行程序路径,@@表示初始用例从文件中读入. 通过out目录(fuzzing结果)分析.  可参考README.txt. 初始测试用例选择 AFL可以有一个或多个包含测试数据的初始文件(testca">
 <meta name="twitter:image" content="https://hitworld.github.io/posts/98e6ff36/1.png">
 
 
@@ -187,7 +187,7 @@
       .logo-line-after i { right: initial; }
     }
   </style>
-</noscript>
+</noscript><!-- hexo-inject:begin --><!-- hexo-inject:end -->
 
 </head>
 
@@ -198,7 +198,7 @@
     
   
 
-  <div class="container sidebar-position-left page-post-detail">
+  <!-- hexo-inject:begin --><!-- hexo-inject:end --><div class="container sidebar-position-left page-post-detail">
     <div class="headband"></div>
 
     <header id="header" class="header" itemscope="" itemtype="http://schema.org/WPHeader">
@@ -505,7 +505,7 @@
                 
                   <span class="post-meta-item-text">本文字数：</span>
                 
-                <span title="本文字数">3.7k</span>
+                <span title="本文字数">3.8k</span>
               
 
               
@@ -539,23 +539,27 @@
       
 
       
-        <h2 id="概览"><a href="#概览" class="headerlink" title="概览"></a>概览</h2><ol>
+        <h2 id="概览">概览</h2>
+<ol type="1">
 <li>首先使用<code>afl-gcc</code>编译项目代码.</li>
 <li>将初始<code>testcase</code>放到<code>in</code>目录下.</li>
 <li>执行<code>afl-fuzz -i in -o out &lt;program&gt; @@</code>,<code>path</code>为可执行程序路径,<code>@@</code>表示初始用例从文件中读入.</li>
 <li>通过<code>out</code>目录(<code>fuzzing</code>结果)分析.</li>
 </ol>
 <p>可参考<a href="http://lcamtuf.coredump.cx/afl/README.txt" target="_blank" rel="noopener">README.txt</a>.</p>
-<h3 id="初始测试用例选择"><a href="#初始测试用例选择" class="headerlink" title="初始测试用例选择"></a>初始测试用例选择</h3><p><code>AFL</code>可以有一个或多个包含测试数据的初始文件(<code>testcase</code>).</p>
-<ol>
+<h3 id="初始测试用例选择">初始测试用例选择</h3>
+<p><code>AFL</code>可以有一个或多个包含测试数据的初始文件(<code>testcase</code>).</p>
+<ol type="1">
 <li>初始文件大小最好低于<code>1kB</code>.</li>
 <li>每个测试用例应该能驱动程序中的不同功能.</li>
 </ol>
-<h3 id="常见错误"><a href="#常见错误" class="headerlink" title="常见错误"></a>常见错误</h3><p>第一次启动往往会报错,表示某些环境变量没有配置或者配置错误.</p>
+<h3 id="常见错误">常见错误</h3>
+<p>第一次启动往往会报错,表示某些环境变量没有配置或者配置错误.</p>
 <img src="/posts/98e6ff36/1.png" title="p1">
 <p>没有打开错误转储机制,系统配置为将核心转储文件通知发送到外部程序.将导致将崩溃信息发送到<code>Fuzzer</code>之间的延迟增大,进而可能将崩溃被误报为超时.</p>
 <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">sudo su</span><br><span class="line"><span class="built_in">echo</span> core &gt;/proc/sys/kernel/core_pattern</span><br></pre></td></tr></table></figure>
-<h3 id="对代码进行插桩"><a href="#对代码进行插桩" class="headerlink" title="对代码进行插桩"></a>对代码进行插桩</h3><p>在使用<code>AFL</code>编译工具<code>afl-gcc</code>对源码进行编译时,程序会使用<code>afl-as</code>工具对编译并未汇编的<code>c/c++</code>代码(<code>.i</code>文件)进行编译插桩,生成汇编文件(<code>.s</code>文件).</p>
+<h3 id="对代码进行插桩">对代码进行插桩</h3>
+<p>在使用<code>AFL</code>编译工具<code>afl-gcc</code>对源码进行编译时,程序会使用<code>afl-as</code>工具对编译并未汇编的<code>c/c++</code>代码(<code>.i</code>文件)进行编译插桩,生成汇编文件(<code>.s</code>文件).</p>
 <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">afl-gcc -g -o <span class="built_in">test</span> test.c</span><br></pre></td></tr></table></figure>
 <p>对于项目,重新编译目标程序的配置可能会因不同程序而不同.</p>
 <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">make CC=<span class="string">"afl-gcc"</span> CXX=<span class="string">"afl-g++"</span></span><br><span class="line"><span class="comment">#make CC="afl-clang" CXX="afl-clang++"</span></span><br></pre></td></tr></table></figure>
@@ -567,21 +571,13 @@
 <p>因为<code>AFL</code>使用的<code>QEMU</code>版本太旧,<code>util/memfd.c</code>中定义的函数<code>memfd_create()</code>会和<code>glibc</code>中的同名函数冲突.</p>
 <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">sudo apt-get install libini-config-dev libtool-bin automake bison libglib2.0-dev</span><br><span class="line"><span class="built_in">cd</span> qemu_mode</span><br><span class="line">build_qemu_support.sh</span><br><span class="line"><span class="built_in">cd</span> .. &amp;&amp; make install</span><br></pre></td></tr></table></figure>
 <p>此时就可以添加<code>-Q</code>选项使用<code>QEMU</code>模式进行<code>Fuzzing</code>.</p>
-<h3 id="fuzzing"><a href="#fuzzing" class="headerlink" title="fuzzing"></a>fuzzing</h3><p>对直接从<code>stdin</code>中接收输入的目标二进制程序.</p>
+<h3 id="fuzzing">fuzzing</h3>
+<p>对直接从<code>stdin</code>中接收输入的目标二进制程序.</p>
 <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">./afl-fuzz -i <span class="keyword">in</span> -o out &lt;program&gt; [params]</span><br></pre></td></tr></table></figure>
-<p>如果从文件中读取输入,则在指令最后使用<code>@@</code>标记,在实际执行的时候<code>afl-fuzz</code>会把<code>@@</code>替换成测试样本目录<code>in</code>下的测试样本.</p>
-<ul>
-<li><code>-i</code>:指定输入文件夹.</li>
-<li><code>-o</code>:指定输出文件夹.</li>
-<li><code>-f &lt;filename&gt;</code>:将变异过的数据写入指定的文件.</li>
-<li><code>-Q</code>:进入<code>QEMU</code>模式<code>fuzz</code>.</li>
-<li><code>-t &lt;timeout&gt;</code>:设置<code>timeout</code>.</li>
-<li><code>-m &lt;memory limit&gt;</code>:设置<code>memory limit</code>.</li>
-<li><code>-d</code>:使用<code>zzuf</code>和其他传统的模糊测试工具短时间获得较脏的结果.</li>
-</ul>
+<p>如果从文件中读取输入,则在指令最后使用<code>@@</code>标记,在实际执行的时候<code>afl-fuzz</code>会把<code>@@</code>替换成测试样本目录<code>in</code>下的测试样本. - <code>-i</code>:指定输入文件夹. - <code>-o</code>:指定输出文件夹. - <code>-f &lt;filename&gt;</code>:将变异过的数据写入指定的文件. - <code>-Q</code>:进入<code>QEMU</code>模式<code>fuzz</code>. - <code>-t &lt;timeout&gt;</code>:设置<code>timeout</code>. - <code>-m &lt;memory limit&gt;</code>:设置<code>memory limit</code>. - <code>-d</code>:使用<code>zzuf</code>和其他传统的模糊测试工具短时间获得较脏的结果.</p>
 <p>其中<code>params</code>为被测试程序接受的命令行参数.</p>
 <p><code>fuzzing</code>流程.</p>
-<ol>
+<ol type="1">
 <li>读取初始<code>in/testcase</code>,将其放入<code>queue</code>中.</li>
 <li>从<code>queue</code>中读取内容作为程序输入.</li>
 <li>尝试在不影响流程的情况下精简测试用例.</li>
@@ -589,7 +585,8 @@
 <li>如果突变后的输入能够有新的状态转移,将其放入<code>queue</code>中.</li>
 <li>回到<code>2</code>.</li>
 </ol>
-<h3 id="输出解释"><a href="#输出解释" class="headerlink" title="输出解释"></a>输出解释</h3><p>从<a href="http://lcamtuf.coredump.cx/afl/status_screen.txt" target="_blank" rel="noopener">status_screen.txt</a>中可以找到显式界面中各字段的含义,以及监控被测试程序的健康状态.</p>
+<h3 id="输出解释">输出解释</h3>
+<p>从<a href="http://lcamtuf.coredump.cx/afl/status_screen.txt" target="_blank" rel="noopener">status_screen.txt</a>中可以找到显式界面中各字段的含义,以及监控被测试程序的健康状态.</p>
 <p><code>fuzzing</code>进程会一直持续直到按下<code>Ctrl-C</code>.</p>
 <p>在输出目录中有三个子目录.</p>
 <ul>
@@ -599,34 +596,41 @@
 </ul>
 <p><code>crashes</code>和<code>hangs</code>的文件名与父节点以及没出错的队列节点相关.</p>
 <p>其中还有<code>fuzzer_stats</code>文件记录了<code>afl-fuzz</code>的运行状态,<code>plot_data</code>文件用于<code>afl-plot</code>绘图.</p>
-<h3 id="恢复"><a href="#恢复" class="headerlink" title="恢复"></a>恢复</h3><p>任何已经存在的<code>output</code>目录对应的工作能被重新恢复.</p>
+<h3 id="恢复">恢复</h3>
+<p>任何已经存在的<code>output</code>目录对应的工作能被重新恢复.</p>
 <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">./afl-fuzz -i- -o out &lt;program&gt;</span><br></pre></td></tr></table></figure>
-<h3 id="触发crash"><a href="#触发crash" class="headerlink" title="触发crash"></a>触发crash</h3><p>使程序<code>crash</code>的输入保存在<code>out/crashes</code>目录下.</p>
+<h3 id="触发crash">触发crash</h3>
+<p>使程序<code>crash</code>的输入保存在<code>out/crashes</code>目录下.</p>
 <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">xxd out/crashes/id\:000000\,sig\:06\,src\:000000\,op\:havoc\,rep\:16</span><br><span class="line"><span class="comment">#查看文件的二进制内容</span></span><br></pre></td></tr></table></figure>
 <p>将<code>crash</code>文件用作输入可以使程序崩溃产生<code>core</code>文件,然后<code>gdb core path</code>调试即可.</p>
 <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">./<span class="built_in">test</span> out/crashes/id\:000000\,sig\:06\,src\:000000\,op\:havoc\,rep\:16</span><br></pre></td></tr></table></figure>
 <p>当不能使用<code>afl-fuzz</code>重现<code>crash</code>的时候,最有可能的原因是没有设置相同的内存限制.尝试以下命令.</p>
 <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">LIMIT_MB=50</span><br></pre></td></tr></table></figure>
 <p>在以上命令中,更改<code>LIMIT_MB</code>参数与<code>-m</code>参数相匹配.</p>
-<h3 id="结束测试"><a href="#结束测试" class="headerlink" title="结束测试"></a>结束测试</h3><p>状态窗口中<code>cycles done</code>字段颜色变为绿色该字段的颜色可以作为何时停止测试的参考,随着周期数不断增大,其颜色也会由洋红色,逐步变为黄色,蓝色,绿色.</p>
+<h3 id="结束测试">结束测试</h3>
+<p>状态窗口中<code>cycles done</code>字段颜色变为绿色该字段的颜色可以作为何时停止测试的参考,随着周期数不断增大,其颜色也会由洋红色,逐步变为黄色,蓝色,绿色.</p>
 <p>当其变为绿色时,继续<code>Fuzzing</code>下去也很难有新的发现.或者一旦<code>path covera</code>达到<code>99%</code>就可以中止<code>fuzz</code>.</p>
-<h2 id="辅助工具"><a href="#辅助工具" class="headerlink" title="辅助工具"></a>辅助工具</h2><p><code>afl</code>提供了辅助工具帮助更好的进行<code>fuzzing</code>.</p>
-<h3 id="语料库蒸馏"><a href="#语料库蒸馏" class="headerlink" title="语料库蒸馏"></a>语料库蒸馏</h3><p>语料库层面的最小化就比如之前的<code>favored</code>集合,<code>afl-cmin</code>中的思路类似但更复杂且会将冗余的测试用例删除,找到与语料库全集具有相同覆盖范围的最小子集.</p>
+<h2 id="辅助工具">辅助工具</h2>
+<p><code>afl</code>提供了辅助工具帮助更好的进行<code>fuzzing</code>.</p>
+<h3 id="语料库蒸馏">语料库蒸馏</h3>
+<p>语料库层面的最小化就比如之前的<code>favored</code>集合,<code>afl-cmin</code>中的思路类似但更复杂且会将冗余的测试用例删除,找到与语料库全集具有相同覆盖范围的最小子集.</p>
 <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">afl-cmin -i <span class="keyword">in</span> -o new_in -- &lt;program&gt; [params]</span><br></pre></td></tr></table></figure>
 <p>测试用例层面的最小化,其目的是尽可能的移除测试用例中的数据,同时保持目标程序的执行状态不变,对于不产生<code>crash</code>的测试用例可基于前面讨论的插桩技术来判断这些简化操作对目标程序的执行路径是否有影响,<code>afl-tmin.c</code>中所用到的简化操作分为块清零,块移除和字符清零.<code>afl-tmin</code>使用<code>ASCII</code>数字<code>0</code>而不是<code>0x00</code>对块进行归零处理.</p>
 <p><code>afl-tmin</code>有两种工作模式,<code>instrumented mode</code>和<code>crash mode</code>.默认的工作方式是<code>instrumented mode</code>.</p>
 <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">afl-tmin -i <span class="keyword">in</span> -o new_in -- &lt;program&gt; @@</span><br></pre></td></tr></table></figure>
 <p>指定参数<code>-x</code>,即<code>crash mode</code>,会把导致程序非正常退出的文件直接剔除.</p>
 <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">afl-tmin -x -i <span class="keyword">in</span> -o new_in -- &lt;program&gt; @@</span><br></pre></td></tr></table></figure>
-<h3 id="并行fuzzing"><a href="#并行fuzzing" class="headerlink" title="并行fuzzing"></a>并行fuzzing</h3><p><code>AFL</code>支持并行<code>fuzzing</code>,由于每个<code>afl-fuzz</code>例程只占用<code>CPU</code>中的单核,可以同时运行多个<code>fuzzing</code>.</p>
+<h3 id="并行fuzzing">并行fuzzing</h3>
+<p><code>AFL</code>支持并行<code>fuzzing</code>,由于每个<code>afl-fuzz</code>例程只占用<code>CPU</code>中的单核,可以同时运行多个<code>fuzzing</code>.</p>
 <p>可通过<code>afl-gotcpu</code>工具来获取<code>CPU</code>的使用情况,进而决定增加或减少<code>afl-fuzz</code>例程.</p>
 <p>可通过<code>afl-whatsup</code>工具统计各并行例程的结果.</p>
 <p>查看机器的核心数.</p>
 <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">cat /proc/cpuinfo | grep <span class="string">"cpu cores"</span> | uniq</span><br></pre></td></tr></table></figure>
 <p><code>afl-fuzz</code>并行<code>Fuzzing</code>,一般的做法是通过<code>-M</code>参数指定一个主<code>Fuzzer</code>(<code>Master Fuzzer</code>),通过<code>-S</code>参数指定多个从<code>Fuzzer</code>(<code>Slave Fuzzer</code>).</p>
 <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">afl-fuzz -i <span class="keyword">in</span> -o out -M fuzzer1 -- &lt;program&gt;</span><br><span class="line">afl-fuzz -i <span class="keyword">in</span> -o out -S fuzzer2 -- &lt;program&gt;</span><br><span class="line">afl-fuzz -i <span class="keyword">in</span> -o out -S fuzzer3 -- &lt;program&gt;</span><br></pre></td></tr></table></figure>
-<h2 id="fuzz网络程序"><a href="#fuzz网络程序" class="headerlink" title="fuzz网络程序"></a>fuzz网络程序</h2><p><code>afl</code>默认只能<code>fuzz</code>通过<code>stdin</code>和文件获取输入的程序,要<code>fuzz</code>网络相关的程序,需要使用其他库辅助.</p>
-<p>这里推荐使用:<code>https://github.com/zardus/preeny</code>.其利用<code>LD_PRELOAD</code>机制,重写了很多库函数,<code>desock.c</code>文件重写了<code>socket</code>相关的函数,其实现的功能就是当应用从<code>socket</code>获取输入时,其实是从<code>stdin</code>获取输入. </p>
+<h2 id="fuzz网络程序">fuzz网络程序</h2>
+<p><code>afl</code>默认只能<code>fuzz</code>通过<code>stdin</code>和文件获取输入的程序,要<code>fuzz</code>网络相关的程序,需要使用其他库辅助.</p>
+<p>这里推荐使用:<code>https://github.com/zardus/preeny</code>.其利用<code>LD_PRELOAD</code>机制,重写了很多库函数,<code>desock.c</code>文件重写了<code>socket</code>相关的函数,其实现的功能就是当应用从<code>socket</code>获取输入时,其实是从<code>stdin</code>获取输入.</p>
 
       
     </div>
@@ -973,7 +977,7 @@
       <i class="fa fa-area-chart"></i>
     </span>
     
-    <span title="站点总字数">710k</span>
+    <span title="站点总字数">720k</span>
   
 
   
@@ -982,7 +986,7 @@
       <i class="fa fa-coffee"></i>
     </span>
     
-    <span title="站点阅读时长">10:46</span>
+    <span title="站点阅读时长">10:54</span>
   
 </div>
 
@@ -1633,5 +1637,5 @@
   
   <script type="text/javascript" src="//cdn.bootcss.com/canvas-nest.js/1.0.0/canvas-nest.min.js"></script>
   
-<script src="/live2dw/lib/L2Dwidget.min.js?0c58a1486de42ac6cc1c59c7d98ae887"></script><script>L2Dwidget.init({"pluginRootPath":"live2dw/","pluginJsPath":"lib/","pluginModelPath":"assets/","tagMode":false,"debug":false,"model":{"jsonPath":"/live2dw/assets/koharu.model.json"},"display":{"position":"right","width":150,"height":300},"mobile":{"show":false},"log":false});</script></body>
+<script src="/live2dw/lib/L2Dwidget.min.js?0c58a1486de42ac6cc1c59c7d98ae887"></script><script>L2Dwidget.init({"pluginRootPath":"live2dw/","pluginJsPath":"lib/","pluginModelPath":"assets/","tagMode":false,"debug":false,"model":{"jsonPath":"/live2dw/assets/koharu.model.json"},"display":{"position":"right","width":150,"height":300},"mobile":{"show":false},"log":false});</script><!-- hexo-inject:begin --><!-- hexo-inject:end --></body>
 </html>

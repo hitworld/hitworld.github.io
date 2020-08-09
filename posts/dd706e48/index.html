@@ -16,7 +16,7 @@
 
 <html class="theme-next mist use-motion" lang="zh-CN">
 <head><meta name="generator" content="Hexo 3.8.0">
-  <meta charset="UTF-8">
+  <!-- hexo-inject:begin --><!-- hexo-inject:end --><meta charset="UTF-8">
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
 <meta name="theme-color" content="#222">
@@ -119,18 +119,18 @@
 
 
 
-  <meta name="description" content="未完成 概览可加载内核模块(LKM)是Linux内核运行时加载和移除代码的机制.可加载内核模块在运行时加载,不运行在用户空间,本质上是内核的一部分. 编写简单内核模块首先要安装Linux内核头文件. 12apt-cache search linux-headers-$(uname -r)sudo apt-get install linux-headers-$(uname -r) 内核模块不是应用程">
+  <meta name="description" content="未完成 概览 可加载内核模块(LKM)是Linux内核运行时加载和移除代码的机制.可加载内核模块在运行时加载,不运行在用户空间,本质上是内核的一部分. 编写简单内核模块 首先要安装Linux内核头文件. 12apt-cache search linux-headers-$(uname -r)sudo apt-get install linux-headers-$(uname -r) 内">
 <meta name="keywords" content="Linux">
 <meta property="og:type" content="article">
 <meta property="og:title" content="CS-develop-Linux-LKM-入门">
 <meta property="og:url" content="https://hitworld.github.io/posts/dd706e48/index.html">
 <meta property="og:site_name" content="w4rd3n">
-<meta property="og:description" content="未完成 概览可加载内核模块(LKM)是Linux内核运行时加载和移除代码的机制.可加载内核模块在运行时加载,不运行在用户空间,本质上是内核的一部分. 编写简单内核模块首先要安装Linux内核头文件. 12apt-cache search linux-headers-$(uname -r)sudo apt-get install linux-headers-$(uname -r) 内核模块不是应用程">
+<meta property="og:description" content="未完成 概览 可加载内核模块(LKM)是Linux内核运行时加载和移除代码的机制.可加载内核模块在运行时加载,不运行在用户空间,本质上是内核的一部分. 编写简单内核模块 首先要安装Linux内核头文件. 12apt-cache search linux-headers-$(uname -r)sudo apt-get install linux-headers-$(uname -r) 内">
 <meta property="og:locale" content="zh-CN">
 <meta property="og:updated_time" content="2020-08-09T06:34:17.793Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="CS-develop-Linux-LKM-入门">
-<meta name="twitter:description" content="未完成 概览可加载内核模块(LKM)是Linux内核运行时加载和移除代码的机制.可加载内核模块在运行时加载,不运行在用户空间,本质上是内核的一部分. 编写简单内核模块首先要安装Linux内核头文件. 12apt-cache search linux-headers-$(uname -r)sudo apt-get install linux-headers-$(uname -r) 内核模块不是应用程">
+<meta name="twitter:description" content="未完成 概览 可加载内核模块(LKM)是Linux内核运行时加载和移除代码的机制.可加载内核模块在运行时加载,不运行在用户空间,本质上是内核的一部分. 编写简单内核模块 首先要安装Linux内核头文件. 12apt-cache search linux-headers-$(uname -r)sudo apt-get install linux-headers-$(uname -r) 内">
 
 
 
@@ -185,7 +185,7 @@
       .logo-line-after i { right: initial; }
     }
   </style>
-</noscript>
+</noscript><!-- hexo-inject:begin --><!-- hexo-inject:end -->
 
 </head>
 
@@ -196,7 +196,7 @@
     
   
 
-  <div class="container sidebar-position-left page-post-detail">
+  <!-- hexo-inject:begin --><!-- hexo-inject:end --><div class="container sidebar-position-left page-post-detail">
     <div class="headband"></div>
 
     <header id="header" class="header" itemscope="" itemtype="http://schema.org/WPHeader">
@@ -503,7 +503,7 @@
                 
                   <span class="post-meta-item-text">本文字数：</span>
                 
-                <span title="本文字数">7.3k</span>
+                <span title="本文字数">7.4k</span>
               
 
               
@@ -538,8 +538,10 @@
 
       
         <p>未完成</p>
-<h2 id="概览"><a href="#概览" class="headerlink" title="概览"></a>概览</h2><p>可加载内核模块(<code>LKM</code>)是<code>Linux</code>内核运行时加载和移除代码的机制.可加载内核模块在运行时加载,不运行在用户空间,本质上是内核的一部分.</p>
-<h2 id="编写简单内核模块"><a href="#编写简单内核模块" class="headerlink" title="编写简单内核模块"></a>编写简单内核模块</h2><p>首先要安装<code>Linux</code>内核头文件.</p>
+<h2 id="概览">概览</h2>
+<p>可加载内核模块(<code>LKM</code>)是<code>Linux</code>内核运行时加载和移除代码的机制.可加载内核模块在运行时加载,不运行在用户空间,本质上是内核的一部分.</p>
+<h2 id="编写简单内核模块">编写简单内核模块</h2>
+<p>首先要安装<code>Linux</code>内核头文件.</p>
 <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">apt-cache search linux-headers-$(uname -r)</span><br><span class="line">sudo apt-get install linux-headers-$(uname -r)</span><br></pre></td></tr></table></figure>
 <p>内核模块不是应用程序,没有<code>main()</code>函数.其类似于共享库.其有以下特点.</p>
 <ul>
@@ -554,7 +556,8 @@
 <figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//test.c</span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;linux/init.h&gt;             //用于标记函数的宏,如 __init,__exit.</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;linux/module.h&gt;           //加载内核模块到内核使用的核心头文件.</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;linux/kernel.h&gt;           //包含内核使用的类型,宏和函数.</span></span></span><br><span class="line"></span><br><span class="line">MODULE_LICENSE(<span class="string">"GPL"</span>);</span><br><span class="line"><span class="comment">//许可类型,影响运行时行为.</span></span><br><span class="line">MODULE_AUTHOR(<span class="string">"w4rd3n"</span>);</span><br><span class="line">MODULE_DESCRIPTION(<span class="string">"simple module"</span>);</span><br><span class="line">MODULE_VERSION(<span class="string">"0.1"</span>);</span><br><span class="line"></span><br><span class="line"><span class="keyword">static</span> <span class="keyword">char</span> * name = <span class="string">"go go go!!!"</span>;</span><br><span class="line">module_param(name, charp, S_IRUGO);</span><br><span class="line"><span class="comment">//module_param(name, type, permissions).</span></span><br><span class="line"><span class="comment">//type:byte,int,uint,long,ulong,short,ushort,bool,invbool,charp.</span></span><br><span class="line"><span class="comment">//permissions:http://www.gnu.org/software/libc/manual/html_node/Permission-Bits.html</span></span><br><span class="line">MODULE_PARM_DESC(name, <span class="string">"demo"</span>);</span><br><span class="line"></span><br><span class="line"><span class="keyword">static</span> <span class="keyword">int</span> __<span class="function">init <span class="title">go_init</span><span class="params">(<span class="keyword">void</span>)</span> </span>&#123;</span><br><span class="line">   printk(KERN_INFO <span class="string">"init:%s\n"</span>, name);</span><br><span class="line">   <span class="comment">//KERN_INFO指定了消息的优先级</span></span><br><span class="line">   <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">static</span> <span class="keyword">void</span> __<span class="function"><span class="built_in">exit</span> <span class="title">go_exit</span><span class="params">(<span class="keyword">void</span>)</span> </span>&#123;</span><br><span class="line">   printk(KERN_INFO <span class="string">"exit:%s\n"</span>, name);</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">module_init(go_init);</span><br><span class="line">module_exit(go_exit);</span><br><span class="line"><span class="comment">//注册初始化与清理函数.</span></span><br></pre></td></tr></table></figure>
 <p>对应<code>Makefile</code>.</p>
 <figure class="highlight makefile"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">obj-m := test.o</span><br><span class="line"></span><br><span class="line"><span class="section">all:</span></span><br><span class="line">	make -C /lib/modules/<span class="variable">$(<span class="built_in">shell</span> uname -r)</span>/build/ M=<span class="variable">$(PWD)</span> modules</span><br><span class="line"><span class="section">clean:</span></span><br><span class="line">	make -C /lib/modules/<span class="variable">$(<span class="built_in">shell</span> uname -r)</span>/build/ M=<span class="variable">$(PWD)</span> clean</span><br></pre></td></tr></table></figure>
-<h2 id="编写字符设备驱动"><a href="#编写字符设备驱动" class="headerlink" title="编写字符设备驱动"></a>编写字符设备驱动</h2><p>字符设备通常和用户应用程序双向传输数据,类似管道和串行接口,即时从字符流中读写字节数据.</p>
+<h2 id="编写字符设备驱动">编写字符设备驱动</h2>
+<p>字符设备通常和用户应用程序双向传输数据,类似管道和串行接口,即时从字符流中读写字节数据.</p>
 <p>字符设备的一种替代是块设备,块设备的行为类似普通文件,允许程序查看缓存数据中的缓冲队列,或是通过读,写等函数进行操作.两种设备类型都可以通过关联到文件系统树上的设备文件进行访问.</p>
 <p>设备驱动有关联的主设备号和次设备号.主设备号用于内核在设备访问时能够识别正确的设备驱动,次设备号的角色和设备相关,,主要使用在驱动中.</p>
 <p>在<code>/dev</code>目录中执行<code>ls</code>可以看见每个设备的主次设备号.</p>
@@ -913,7 +916,7 @@
       <i class="fa fa-area-chart"></i>
     </span>
     
-    <span title="站点总字数">710k</span>
+    <span title="站点总字数">720k</span>
   
 
   
@@ -922,7 +925,7 @@
       <i class="fa fa-coffee"></i>
     </span>
     
-    <span title="站点阅读时长">10:46</span>
+    <span title="站点阅读时长">10:54</span>
   
 </div>
 
@@ -1573,5 +1576,5 @@
   
   <script type="text/javascript" src="//cdn.bootcss.com/canvas-nest.js/1.0.0/canvas-nest.min.js"></script>
   
-<script src="/live2dw/lib/L2Dwidget.min.js?0c58a1486de42ac6cc1c59c7d98ae887"></script><script>L2Dwidget.init({"pluginRootPath":"live2dw/","pluginJsPath":"lib/","pluginModelPath":"assets/","tagMode":false,"debug":false,"model":{"jsonPath":"/live2dw/assets/koharu.model.json"},"display":{"position":"right","width":150,"height":300},"mobile":{"show":false},"log":false});</script></body>
+<script src="/live2dw/lib/L2Dwidget.min.js?0c58a1486de42ac6cc1c59c7d98ae887"></script><script>L2Dwidget.init({"pluginRootPath":"live2dw/","pluginJsPath":"lib/","pluginModelPath":"assets/","tagMode":false,"debug":false,"model":{"jsonPath":"/live2dw/assets/koharu.model.json"},"display":{"position":"right","width":150,"height":300},"mobile":{"show":false},"log":false});</script><!-- hexo-inject:begin --><!-- hexo-inject:end --></body>
 </html>

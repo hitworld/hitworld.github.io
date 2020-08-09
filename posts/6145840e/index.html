@@ -16,7 +16,7 @@
 
 <html class="theme-next mist use-motion" lang="zh-CN">
 <head><meta name="generator" content="Hexo 3.8.0">
-  <meta charset="UTF-8">
+  <!-- hexo-inject:begin --><!-- hexo-inject:end --><meta charset="UTF-8">
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
 <meta name="theme-color" content="#222">
@@ -119,18 +119,18 @@
 
 
 
-  <meta name="description" content="反汇编IDA是一个反汇编工具,软件开发过程中,程序员使用编译器,汇编器和链接器来创建可执行程序.对应的可以使用反汇编器和反编译器来获得可执行程序的可阅读的代码. 但反编译会面临由于编译过程的损失,编译过程的多对多等问题.(反汇编由于是一对一,处理过程简单很多) 汇编语言源代码主要采用两种语法:AT&amp;amp;T和Intel语法. 反汇编算法首先要确定代码区域,这需要知道对应可执行文件的文件格式从而找">
+  <meta name="description" content="反汇编 IDA是一个反汇编工具,软件开发过程中,程序员使用编译器,汇编器和链接器来创建可执行程序.对应的可以使用反汇编器和反编译器来获得可执行程序的可阅读的代码. 但反编译会面临由于编译过程的损失,编译过程的多对多等问题.(反汇编由于是一对一,处理过程简单很多) 汇编语言源代码主要采用两种语法:AT&amp;amp;T和Intel语法. 反汇编算法 首先要确定代码区域,这需要知道对应可执行文件的">
 <meta name="keywords" content="tool">
 <meta property="og:type" content="article">
 <meta property="og:title" content="IS-reverse-tool-IDA-基础">
 <meta property="og:url" content="https://hitworld.github.io/posts/6145840e/index.html">
 <meta property="og:site_name" content="w4rd3n">
-<meta property="og:description" content="反汇编IDA是一个反汇编工具,软件开发过程中,程序员使用编译器,汇编器和链接器来创建可执行程序.对应的可以使用反汇编器和反编译器来获得可执行程序的可阅读的代码. 但反编译会面临由于编译过程的损失,编译过程的多对多等问题.(反汇编由于是一对一,处理过程简单很多) 汇编语言源代码主要采用两种语法:AT&amp;amp;T和Intel语法. 反汇编算法首先要确定代码区域,这需要知道对应可执行文件的文件格式从而找">
+<meta property="og:description" content="反汇编 IDA是一个反汇编工具,软件开发过程中,程序员使用编译器,汇编器和链接器来创建可执行程序.对应的可以使用反汇编器和反编译器来获得可执行程序的可阅读的代码. 但反编译会面临由于编译过程的损失,编译过程的多对多等问题.(反汇编由于是一对一,处理过程简单很多) 汇编语言源代码主要采用两种语法:AT&amp;amp;T和Intel语法. 反汇编算法 首先要确定代码区域,这需要知道对应可执行文件的">
 <meta property="og:locale" content="zh-CN">
 <meta property="og:updated_time" content="2020-08-09T06:34:17.829Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="IS-reverse-tool-IDA-基础">
-<meta name="twitter:description" content="反汇编IDA是一个反汇编工具,软件开发过程中,程序员使用编译器,汇编器和链接器来创建可执行程序.对应的可以使用反汇编器和反编译器来获得可执行程序的可阅读的代码. 但反编译会面临由于编译过程的损失,编译过程的多对多等问题.(反汇编由于是一对一,处理过程简单很多) 汇编语言源代码主要采用两种语法:AT&amp;amp;T和Intel语法. 反汇编算法首先要确定代码区域,这需要知道对应可执行文件的文件格式从而找">
+<meta name="twitter:description" content="反汇编 IDA是一个反汇编工具,软件开发过程中,程序员使用编译器,汇编器和链接器来创建可执行程序.对应的可以使用反汇编器和反编译器来获得可执行程序的可阅读的代码. 但反编译会面临由于编译过程的损失,编译过程的多对多等问题.(反汇编由于是一对一,处理过程简单很多) 汇编语言源代码主要采用两种语法:AT&amp;amp;T和Intel语法. 反汇编算法 首先要确定代码区域,这需要知道对应可执行文件的">
 
 
 
@@ -185,7 +185,7 @@
       .logo-line-after i { right: initial; }
     }
   </style>
-</noscript>
+</noscript><!-- hexo-inject:begin --><!-- hexo-inject:end -->
 
 </head>
 
@@ -196,7 +196,7 @@
     
   
 
-  <div class="container sidebar-position-left page-post-detail">
+  <!-- hexo-inject:begin --><!-- hexo-inject:end --><div class="container sidebar-position-left page-post-detail">
     <div class="headband"></div>
 
     <header id="header" class="header" itemscope="" itemtype="http://schema.org/WPHeader">
@@ -503,7 +503,7 @@
                 
                   <span class="post-meta-item-text">本文字数：</span>
                 
-                <span title="本文字数">2.9k</span>
+                <span title="本文字数">3k</span>
               
 
               
@@ -537,13 +537,17 @@
       
 
       
-        <h2 id="反汇编"><a href="#反汇编" class="headerlink" title="反汇编"></a>反汇编</h2><p><code>IDA</code>是一个反汇编工具,软件开发过程中,程序员使用编译器,汇编器和链接器来创建可执行程序.对应的可以使用反汇编器和反编译器来获得可执行程序的可阅读的代码.</p>
+        <h2 id="反汇编">反汇编</h2>
+<p><code>IDA</code>是一个反汇编工具,软件开发过程中,程序员使用编译器,汇编器和链接器来创建可执行程序.对应的可以使用反汇编器和反编译器来获得可执行程序的可阅读的代码.</p>
 <p>但反编译会面临由于编译过程的损失,编译过程的多对多等问题.(反汇编由于是一对一,处理过程简单很多)</p>
 <p>汇编语言源代码主要采用两种语法:<code>AT&amp;T</code>和<code>Intel</code>语法.</p>
-<h3 id="反汇编算法"><a href="#反汇编算法" class="headerlink" title="反汇编算法"></a>反汇编算法</h3><p>首先要确定代码区域,这需要知道对应可执行文件的文件格式从而找到代码段的起始地址,找到后读取进行查表找到其汇编语言助记符,这一步需要明晰当前指令集,然后解码后输出汇编代码.反复执行这些即可.</p>
+<h3 id="反汇编算法">反汇编算法</h3>
+<p>首先要确定代码区域,这需要知道对应可执行文件的文件格式从而找到代码段的起始地址,找到后读取进行查表找到其汇编语言助记符,这一步需要明晰当前指令集,然后解码后输出汇编代码.反复执行这些即可.</p>
 <p>而如何选择下一条反汇编的指令,如何区分代码和数据,如何确定最后一条指令就因具体算法而异,其中最主要的有线性扫描和递归下降.<code>IDA</code>采用的是后者.</p>
-<h3 id="反汇编引擎"><a href="#反汇编引擎" class="headerlink" title="反汇编引擎"></a>反汇编引擎</h3><p><code>ODDisasm</code>,<code>BeaEngine</code>,<code>Udis86</code>,<code>Capstone</code>,<code>AsmJit</code>,<code>Keystone</code>等等.</p>
-<h2 id="IDA目录组成"><a href="#IDA目录组成" class="headerlink" title="IDA目录组成"></a>IDA目录组成</h2><ul>
+<h3 id="反汇编引擎">反汇编引擎</h3>
+<p><code>ODDisasm</code>,<code>BeaEngine</code>,<code>Udis86</code>,<code>Capstone</code>,<code>AsmJit</code>,<code>Keystone</code>等等.</p>
+<h2 id="ida目录组成">IDA目录组成</h2>
+<ul>
 <li><code>cfg</code>:各种配置文件,例如基本配置文件<code>ida.cfg</code>,<code>GUI</code>配置文件<code>idagui.cfg</code>等.</li>
 <li><code>dbgsrv</code>:远程<code>debug</code>使用的程序.</li>
 <li><code>idc</code>:包含<code>IDA</code>内置脚本语言<code>IDC</code>所需的核心文件.</li>
@@ -554,11 +558,13 @@
 <li><code>sig</code>:包含<code>IDA</code>在各种模式匹配操作中利用的现有代码的签名.</li>
 <li><code>til</code>:包含一些类型库信息,记录特定于各种编译器库的数据结构的布局.</li>
 </ul>
-<h2 id="使用"><a href="#使用" class="headerlink" title="使用"></a>使用</h2><p><code>IDA</code>通过执行<code>loaders</code>目录中的文件加载器对文件解析,如果<code>IDA</code>没能识别出文件格式,需要自行选择合适的处理器类型,加载段,加载偏移量.核心选项用于配置特定的反汇编分析选项.处理器选项用于配置处理器模块.</p>
+<h2 id="使用">使用</h2>
+<p><code>IDA</code>通过执行<code>loaders</code>目录中的文件加载器对文件解析,如果<code>IDA</code>没能识别出文件格式,需要自行选择合适的处理器类型,加载段,加载偏移量.核心选项用于配置特定的反汇编分析选项.处理器选项用于配置处理器模块.</p>
 <p><code>IDA</code>会将文件加载到内存,并对相关部分进行解析,同时<code>IDA</code>会创建一个数据库保存这些信息,数据库组件分别保存在四个文件中,分别为<code>filename.id0</code>,<code>filename.id1</code>,<code>filename.nam</code>,<code>filename.til</code>.关闭项目时这四个文件会被归档为一个<code>IDB</code>文件.</p>
 <p>分析完成后就可以在<code>IDA</code>桌面环境对文件进行分析.</p>
 <p><code>IDA</code>主要窗口有反汇编窗口,<code>Names</code>窗口,消息窗口,<code>Strings</code>窗口,另外还有<code>hex</code>窗口,导出窗口,导入窗口,函数窗口和结构体窗口等.</p>
-<h3 id="常用快捷键"><a href="#常用快捷键" class="headerlink" title="常用快捷键"></a>常用快捷键</h3><ul>
+<h3 id="常用快捷键">常用快捷键</h3>
+<ul>
 <li><code>f5</code>:反汇编.</li>
 <li><code>f12</code>:函数流程图.</li>
 <li><code>esc</code>:在反汇编窗口会倒回上一部操作的视图,在其他窗口会关闭该窗口.</li>
@@ -584,29 +590,38 @@
 <li><code>*</code>:进行数组定义.</li>
 <li>双击:跳转到地址.</li>
 </ul>
-<h3 id="数据设置"><a href="#数据设置" class="headerlink" title="数据设置"></a>数据设置</h3><ul>
+<h3 id="数据设置">数据设置</h3>
+<ul>
 <li><code>Options-&gt;Setup Data Types</code>可以设置数据类型,同时右侧复选框可以设置数据转盘(<code>d</code>键循环数据转盘).</li>
 <li><code>Edit-&gt;Strings</code>可以选择字符串类型,即以对应字符解析规则解析当前地址开始的字节.</li>
 <li><code>Edit-&gt;Array</code>可以创建数组,创建的数组类型以选择创建处的变量类型决定.</li>
 </ul>
-<h3 id="识别与切换指令集"><a href="#识别与切换指令集" class="headerlink" title="识别与切换指令集"></a>识别与切换指令集</h3><p><code>Edit-&gt;Segments-&gt;Change segment register value</code>(快捷键<code>alt + g</code>).</p>
-<h3 id="函数操作"><a href="#函数操作" class="headerlink" title="函数操作"></a>函数操作</h3><p><code>IDA</code>支持新建,删除函数和函数块(指定义),<code>Edit-&gt;Functions</code>种有其支持的操作.</p>
+<h3 id="识别与切换指令集">识别与切换指令集</h3>
+<p><code>Edit-&gt;Segments-&gt;Change segment register value</code>(快捷键<code>alt + g</code>).</p>
+<h3 id="函数操作">函数操作</h3>
+<p><code>IDA</code>支持新建,删除函数和函数块(指定义),<code>Edit-&gt;Functions</code>种有其支持的操作.</p>
 <p>同时还支持编辑函数的属性:函数名,函数起始和结束地址,局部变量,保存的寄存器,已删除字节和栈指针增量等.</p>
-<h3 id="FLIRT"><a href="#FLIRT" class="headerlink" title="FLIRT"></a>FLIRT</h3><p><code>Fast Library Identification and Recognition Technology</code>(库文件快速识别与鉴定技术).</p>
+<h3 id="flirt">FLIRT</h3>
+<p><code>Fast Library Identification and Recognition Technology</code>(库文件快速识别与鉴定技术).</p>
 <p><code>IDA</code>可以通过导入签名文件(<code>Shift + F5</code>,右键导入)进一步识别库函数.还可以利用<code>FLIRT</code>解析器(存放在<code>bin</code>目录)创建签名文件,具体可查阅文档.</p>
-<p>可以通过<a href="`https://github.com/maroueneboubakri/lscan`"><code>lscan</code></a>找到对应的签名库,首先<code>python lscan.py -S amd64/sig -f ./demo</code>,然后将对应签名库拷贝到<code>IDA</code>的<code>sig/pc</code>文件夹导入即可.</p>
-<h3 id="调试器"><a href="#调试器" class="headerlink" title="调试器"></a>调试器</h3><p><code>IDA</code>支持本地调试,<code>Attach</code>已有进程和远程调试等多种方式(支持<code>IDC</code>脚本自动化调试).</p>
+<p>可以通过<a href="%60https://github.com/maroueneboubakri/lscan%60"><code>lscan</code></a>找到对应的签名库,首先<code>python lscan.py -S amd64/sig -f ./demo</code>,然后将对应签名库拷贝到<code>IDA</code>的<code>sig/pc</code>文件夹导入即可.</p>
+<h3 id="调试器">调试器</h3>
+<p><code>IDA</code>支持本地调试,<code>Attach</code>已有进程和远程调试等多种方式(支持<code>IDC</code>脚本自动化调试).</p>
 <p>远程调试只需要利用<code>dbgsrv</code>下对应目标主机版本的程序,在目标主机运行该程序即可.程序支持<code>-p &lt;port&gt;</code>,默认<code>23496</code>;<code>-P &lt;password&gt;</code>,设置连接调试密码;<code>-v</code>设置为详细模式.</p>
-<h3 id="Patch"><a href="#Patch" class="headerlink" title="Patch"></a>Patch</h3><p><code>Edit -&gt; Patch program</code>,然后选择修改方式即可,修改完成后<code>Edit -&gt; Patch program -&gt; Apply ...</code>保存到本地.</p>
-<h3 id="中文支持"><a href="#中文支持" class="headerlink" title="中文支持"></a>中文支持</h3><p>修改<code>cfg/ida.cfg</code>.</p>
+<h3 id="patch">Patch</h3>
+<p><code>Edit -&gt; Patch program</code>,然后选择修改方式即可,修改完成后<code>Edit -&gt; Patch program -&gt; Apply ...</code>保存到本地.</p>
+<h3 id="中文支持">中文支持</h3>
+<p>修改<code>cfg/ida.cfg</code>.</p>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">// CULTURE=&quot;all&quot;;</span><br><span class="line">CULTURE=&quot;all&quot;</span><br><span class="line">NameChars =</span><br><span class="line">        &quot;$?@&quot;</span><br><span class="line">        &quot;_0123456789&quot;</span><br><span class="line">        &quot;ABCDEFGHIJKLMNOPQRSTUVWXYZ&quot;</span><br><span class="line">        &quot;abcdefghijklmnopqrstuvwxyz&quot;,</span><br><span class="line">        Culture_CJK_Unified_Ideographs,</span><br><span class="line">        CURRENT_CULTURE;</span><br></pre></td></tr></table></figure>
-<h3 id="常用插件"><a href="#常用插件" class="headerlink" title="常用插件"></a>常用插件</h3><ul>
+<h3 id="常用插件">常用插件</h3>
+<ul>
 <li><a href="https://github.com/keystone-engine/keypatch" target="_blank" rel="noopener"><code>keypatch</code></a>:用于<code>patch</code>二进制程序.</li>
 <li><a href="https://github.com/fireeye/idawasm" target="_blank" rel="noopener"><code>idawasm</code></a>:用于逆向<code>webassembly</code>代码.</li>
 <li><a href="https://github.com/devttys0/ida/tree/master/plugins/rizzo" target="_blank" rel="noopener"><code>rizzo</code></a>:通过签名识别函数.</li>
 <li>插件仓库:<code>https://github.com/devttys0/ida</code>.</li>
 </ul>
-<h2 id="常见错误"><a href="#常见错误" class="headerlink" title="常见错误"></a>常见错误</h2><ul>
+<h2 id="常见错误">常见错误</h2>
+<ul>
 <li><code>sp-analysis failed</code>:<code>IDA</code>解析的时候认为<code>ESP</code>的值是错误的.修正:<code>Options-&gt;General-&gt;Stack pointer</code>勾选,在<code>leave</code>这一行按快捷键<code>ALT + K</code>,修改其值为<code>leave</code>前方标志的其<code>ESP</code>偏移值.</li>
 </ul>
 
@@ -923,7 +938,7 @@
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#反汇编"><span class="nav-number">1.</span> <span class="nav-text">反汇编</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#反汇编算法"><span class="nav-number">1.1.</span> <span class="nav-text">反汇编算法</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#反汇编引擎"><span class="nav-number">1.2.</span> <span class="nav-text">反汇编引擎</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#IDA目录组成"><span class="nav-number">2.</span> <span class="nav-text">IDA目录组成</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#使用"><span class="nav-number">3.</span> <span class="nav-text">使用</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#常用快捷键"><span class="nav-number">3.1.</span> <span class="nav-text">常用快捷键</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#数据设置"><span class="nav-number">3.2.</span> <span class="nav-text">数据设置</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#识别与切换指令集"><span class="nav-number">3.3.</span> <span class="nav-text">识别与切换指令集</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#函数操作"><span class="nav-number">3.4.</span> <span class="nav-text">函数操作</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#FLIRT"><span class="nav-number">3.5.</span> <span class="nav-text">FLIRT</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#调试器"><span class="nav-number">3.6.</span> <span class="nav-text">调试器</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Patch"><span class="nav-number">3.7.</span> <span class="nav-text">Patch</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#中文支持"><span class="nav-number">3.8.</span> <span class="nav-text">中文支持</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#常用插件"><span class="nav-number">3.9.</span> <span class="nav-text">常用插件</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#常见错误"><span class="nav-number">4.</span> <span class="nav-text">常见错误</span></a></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#反汇编"><span class="nav-number">1.</span> <span class="nav-text">反汇编</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#反汇编算法"><span class="nav-number">1.1.</span> <span class="nav-text">反汇编算法</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#反汇编引擎"><span class="nav-number">1.2.</span> <span class="nav-text">反汇编引擎</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#ida目录组成"><span class="nav-number">2.</span> <span class="nav-text">IDA目录组成</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#使用"><span class="nav-number">3.</span> <span class="nav-text">使用</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#常用快捷键"><span class="nav-number">3.1.</span> <span class="nav-text">常用快捷键</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#数据设置"><span class="nav-number">3.2.</span> <span class="nav-text">数据设置</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#识别与切换指令集"><span class="nav-number">3.3.</span> <span class="nav-text">识别与切换指令集</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#函数操作"><span class="nav-number">3.4.</span> <span class="nav-text">函数操作</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#flirt"><span class="nav-number">3.5.</span> <span class="nav-text">FLIRT</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#调试器"><span class="nav-number">3.6.</span> <span class="nav-text">调试器</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#patch"><span class="nav-number">3.7.</span> <span class="nav-text">Patch</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#中文支持"><span class="nav-number">3.8.</span> <span class="nav-text">中文支持</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#常用插件"><span class="nav-number">3.9.</span> <span class="nav-text">常用插件</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#常见错误"><span class="nav-number">4.</span> <span class="nav-text">常见错误</span></a></li></ol></div>
             
 
           </div>
@@ -955,7 +970,7 @@
       <i class="fa fa-area-chart"></i>
     </span>
     
-    <span title="站点总字数">710k</span>
+    <span title="站点总字数">720k</span>
   
 
   
@@ -964,7 +979,7 @@
       <i class="fa fa-coffee"></i>
     </span>
     
-    <span title="站点阅读时长">10:46</span>
+    <span title="站点阅读时长">10:54</span>
   
 </div>
 
@@ -1615,5 +1630,5 @@
   
   <script type="text/javascript" src="//cdn.bootcss.com/canvas-nest.js/1.0.0/canvas-nest.min.js"></script>
   
-<script src="/live2dw/lib/L2Dwidget.min.js?0c58a1486de42ac6cc1c59c7d98ae887"></script><script>L2Dwidget.init({"pluginRootPath":"live2dw/","pluginJsPath":"lib/","pluginModelPath":"assets/","tagMode":false,"debug":false,"model":{"jsonPath":"/live2dw/assets/koharu.model.json"},"display":{"position":"right","width":150,"height":300},"mobile":{"show":false},"log":false});</script></body>
+<script src="/live2dw/lib/L2Dwidget.min.js?0c58a1486de42ac6cc1c59c7d98ae887"></script><script>L2Dwidget.init({"pluginRootPath":"live2dw/","pluginJsPath":"lib/","pluginModelPath":"assets/","tagMode":false,"debug":false,"model":{"jsonPath":"/live2dw/assets/koharu.model.json"},"display":{"position":"right","width":150,"height":300},"mobile":{"show":false},"log":false});</script><!-- hexo-inject:begin --><!-- hexo-inject:end --></body>
 </html>

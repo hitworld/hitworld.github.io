@@ -16,7 +16,7 @@
 
 <html class="theme-next mist use-motion" lang="zh-CN">
 <head><meta name="generator" content="Hexo 3.8.0">
-  <meta charset="UTF-8">
+  <!-- hexo-inject:begin --><!-- hexo-inject:end --><meta charset="UTF-8">
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
 <meta name="theme-color" content="#222">
@@ -119,18 +119,18 @@
 
 
 
-  <meta name="description" content="逆向Exeinfo PE检测:Microsoft Visual C++ v14 - 2017 - ( x64 ) www.microsoft.com (exe 4883ec 28-48) [ Win Vista ],未加壳. IDA打开分析,从字符串(shift + f12)开始查找应用,找到加密逻辑. 加密逻辑很简单,先将输入进行标准的base64编码,接着进行翻转,将a[i]与i分别异或,最后">
+  <meta name="description" content="逆向 Exeinfo PE检测:Microsoft Visual C++ v14 - 2017 - ( x64 ) www.microsoft.com (exe 4883ec 28-48) [ Win Vista ],未加壳. IDA打开分析,从字符串(shift + f12)开始查找应用,找到加密逻辑. 加密逻辑很简单,先将输入进行标准的base64编码,接着进行翻转,将a[i]与i分别异">
 <meta name="keywords" content="Jeopardy">
 <meta property="og:type" content="article">
 <meta property="og:title" content="writeup-hackergame-2018-confused-flxg">
 <meta property="og:url" content="https://hitworld.github.io/posts/a5fee3d1/index.html">
 <meta property="og:site_name" content="w4rd3n">
-<meta property="og:description" content="逆向Exeinfo PE检测:Microsoft Visual C++ v14 - 2017 - ( x64 ) www.microsoft.com (exe 4883ec 28-48) [ Win Vista ],未加壳. IDA打开分析,从字符串(shift + f12)开始查找应用,找到加密逻辑. 加密逻辑很简单,先将输入进行标准的base64编码,接着进行翻转,将a[i]与i分别异或,最后">
+<meta property="og:description" content="逆向 Exeinfo PE检测:Microsoft Visual C++ v14 - 2017 - ( x64 ) www.microsoft.com (exe 4883ec 28-48) [ Win Vista ],未加壳. IDA打开分析,从字符串(shift + f12)开始查找应用,找到加密逻辑. 加密逻辑很简单,先将输入进行标准的base64编码,接着进行翻转,将a[i]与i分别异">
 <meta property="og:locale" content="zh-CN">
 <meta property="og:updated_time" content="2020-08-09T06:34:17.852Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="writeup-hackergame-2018-confused-flxg">
-<meta name="twitter:description" content="逆向Exeinfo PE检测:Microsoft Visual C++ v14 - 2017 - ( x64 ) www.microsoft.com (exe 4883ec 28-48) [ Win Vista ],未加壳. IDA打开分析,从字符串(shift + f12)开始查找应用,找到加密逻辑. 加密逻辑很简单,先将输入进行标准的base64编码,接着进行翻转,将a[i]与i分别异或,最后">
+<meta name="twitter:description" content="逆向 Exeinfo PE检测:Microsoft Visual C++ v14 - 2017 - ( x64 ) www.microsoft.com (exe 4883ec 28-48) [ Win Vista ],未加壳. IDA打开分析,从字符串(shift + f12)开始查找应用,找到加密逻辑. 加密逻辑很简单,先将输入进行标准的base64编码,接着进行翻转,将a[i]与i分别异">
 
 
 
@@ -185,7 +185,7 @@
       .logo-line-after i { right: initial; }
     }
   </style>
-</noscript>
+</noscript><!-- hexo-inject:begin --><!-- hexo-inject:end -->
 
 </head>
 
@@ -196,7 +196,7 @@
     
   
 
-  <div class="container sidebar-position-left page-post-detail">
+  <!-- hexo-inject:begin --><!-- hexo-inject:end --><div class="container sidebar-position-left page-post-detail">
     <div class="headband"></div>
 
     <header id="header" class="header" itemscope="" itemtype="http://schema.org/WPHeader">
@@ -496,7 +496,7 @@
                 
                   <span class="post-meta-item-text">本文字数：</span>
                 
-                <span title="本文字数">726</span>
+                <span title="本文字数">735</span>
               
 
               
@@ -530,11 +530,13 @@
       
 
       
-        <h2 id="逆向"><a href="#逆向" class="headerlink" title="逆向"></a>逆向</h2><p><code>Exeinfo PE</code>检测:<code>Microsoft Visual C++ v14 - 2017 - ( x64 ) www.microsoft.com (exe 4883ec 28-48) [ Win Vista ]</code>,未加壳.</p>
+        <h2 id="逆向">逆向</h2>
+<p><code>Exeinfo PE</code>检测:<code>Microsoft Visual C++ v14 - 2017 - ( x64 ) www.microsoft.com (exe 4883ec 28-48) [ Win Vista ]</code>,未加壳.</p>
 <p><code>IDA</code>打开分析,从字符串(<code>shift + f12</code>)开始查找应用,找到加密逻辑.</p>
 <p>加密逻辑很简单,先将输入进行标准的<code>base64</code>编码,接着进行翻转,将<code>a[i]</code>与<code>i</code>分别异或,最后与内存中的<code>flag</code>进行比较看是否一致.</p>
 <p>双击字符串数组,接着<code>shift + e</code>导出加密后的<code>flag</code>.得到之后,用脚本解密即可.</p>
-<h2 id="脚本"><a href="#脚本" class="headerlink" title="脚本"></a>脚本</h2><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> base64</span><br><span class="line"></span><br><span class="line">enc = [<span class="number">0x39</span>, <span class="number">0x65</span>, <span class="number">0x45</span>, <span class="number">0x54</span>, <span class="number">0x77</span>, <span class="number">0x5F</span>, <span class="number">0x34</span>, <span class="number">0x5F</span>, <span class="number">0x64</span>, <span class="number">0x5F</span>, <span class="number">0x66</span>, <span class="number">0x68</span>, <span class="number">0x3C</span>, <span class="number">0x34</span>, <span class="number">0x58</span>, <span class="number">0x55</span>, <span class="number">0x7F</span>, <span class="number">0x43</span>, <span class="number">0x21</span>, <span class="number">0x4B</span>, <span class="number">0x7F</span>, <span class="number">0x20</span>, <span class="number">0x43</span>, <span class="number">0x76</span>, <span class="number">0x5F</span>, <span class="number">0x20</span>, <span class="number">0x4C</span>, <span class="number">0x4D</span>, <span class="number">0x7A</span>, <span class="number">0x53</span>, <span class="number">0x70</span>, <span class="number">0x7D</span>, <span class="number">0x56</span>, <span class="number">0x4D</span>, <span class="number">0x65</span>, <span class="number">0x47</span>, <span class="number">0x4C</span>, <span class="number">0x5D</span>, <span class="number">0x71</span>, <span class="number">0x43</span>, <span class="number">0x18</span>, <span class="number">0x6F</span>, <span class="number">0x47</span>, <span class="number">0x48</span>, <span class="number">0x42</span>, <span class="number">0x18</span>, <span class="number">0x1C</span>, <span class="number">0x4D</span>, <span class="number">0x74</span>, <span class="number">0x45</span>, <span class="number">0x01</span>, <span class="number">0x69</span>, <span class="number">0x00</span>, <span class="number">0x4D</span>, <span class="number">0x5B</span>, <span class="number">0x6D</span>]</span><br><span class="line">x = <span class="string">''</span></span><br><span class="line">flag = <span class="string">''</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">for</span> i <span class="keyword">in</span> range(len(enc)):</span><br><span class="line">  x += chr(enc[i] ^ i)</span><br><span class="line"></span><br><span class="line"><span class="keyword">print</span> base64.b64decode(x[::<span class="number">-1</span>])</span><br></pre></td></tr></table></figure>
+<h2 id="脚本">脚本</h2>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> base64</span><br><span class="line"></span><br><span class="line">enc = [<span class="number">0x39</span>, <span class="number">0x65</span>, <span class="number">0x45</span>, <span class="number">0x54</span>, <span class="number">0x77</span>, <span class="number">0x5F</span>, <span class="number">0x34</span>, <span class="number">0x5F</span>, <span class="number">0x64</span>, <span class="number">0x5F</span>, <span class="number">0x66</span>, <span class="number">0x68</span>, <span class="number">0x3C</span>, <span class="number">0x34</span>, <span class="number">0x58</span>, <span class="number">0x55</span>, <span class="number">0x7F</span>, <span class="number">0x43</span>, <span class="number">0x21</span>, <span class="number">0x4B</span>, <span class="number">0x7F</span>, <span class="number">0x20</span>, <span class="number">0x43</span>, <span class="number">0x76</span>, <span class="number">0x5F</span>, <span class="number">0x20</span>, <span class="number">0x4C</span>, <span class="number">0x4D</span>, <span class="number">0x7A</span>, <span class="number">0x53</span>, <span class="number">0x70</span>, <span class="number">0x7D</span>, <span class="number">0x56</span>, <span class="number">0x4D</span>, <span class="number">0x65</span>, <span class="number">0x47</span>, <span class="number">0x4C</span>, <span class="number">0x5D</span>, <span class="number">0x71</span>, <span class="number">0x43</span>, <span class="number">0x18</span>, <span class="number">0x6F</span>, <span class="number">0x47</span>, <span class="number">0x48</span>, <span class="number">0x42</span>, <span class="number">0x18</span>, <span class="number">0x1C</span>, <span class="number">0x4D</span>, <span class="number">0x74</span>, <span class="number">0x45</span>, <span class="number">0x01</span>, <span class="number">0x69</span>, <span class="number">0x00</span>, <span class="number">0x4D</span>, <span class="number">0x5B</span>, <span class="number">0x6D</span>]</span><br><span class="line">x = <span class="string">''</span></span><br><span class="line">flag = <span class="string">''</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">for</span> i <span class="keyword">in</span> range(len(enc)):</span><br><span class="line">  x += chr(enc[i] ^ i)</span><br><span class="line"></span><br><span class="line"><span class="keyword">print</span> base64.b64decode(x[::<span class="number">-1</span>])</span><br></pre></td></tr></table></figure>
 
       
     </div>
@@ -881,7 +883,7 @@
       <i class="fa fa-area-chart"></i>
     </span>
     
-    <span title="站点总字数">710k</span>
+    <span title="站点总字数">720k</span>
   
 
   
@@ -890,7 +892,7 @@
       <i class="fa fa-coffee"></i>
     </span>
     
-    <span title="站点阅读时长">10:46</span>
+    <span title="站点阅读时长">10:54</span>
   
 </div>
 
@@ -1541,5 +1543,5 @@
   
   <script type="text/javascript" src="//cdn.bootcss.com/canvas-nest.js/1.0.0/canvas-nest.min.js"></script>
   
-<script src="/live2dw/lib/L2Dwidget.min.js?0c58a1486de42ac6cc1c59c7d98ae887"></script><script>L2Dwidget.init({"pluginRootPath":"live2dw/","pluginJsPath":"lib/","pluginModelPath":"assets/","tagMode":false,"debug":false,"model":{"jsonPath":"/live2dw/assets/koharu.model.json"},"display":{"position":"right","width":150,"height":300},"mobile":{"show":false},"log":false});</script></body>
+<script src="/live2dw/lib/L2Dwidget.min.js?0c58a1486de42ac6cc1c59c7d98ae887"></script><script>L2Dwidget.init({"pluginRootPath":"live2dw/","pluginJsPath":"lib/","pluginModelPath":"assets/","tagMode":false,"debug":false,"model":{"jsonPath":"/live2dw/assets/koharu.model.json"},"display":{"position":"right","width":150,"height":300},"mobile":{"show":false},"log":false});</script><!-- hexo-inject:begin --><!-- hexo-inject:end --></body>
 </html>

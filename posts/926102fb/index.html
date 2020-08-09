@@ -16,7 +16,7 @@
 
 <html class="theme-next mist use-motion" lang="zh-CN">
 <head><meta name="generator" content="Hexo 3.8.0">
-  <meta charset="UTF-8">
+  <!-- hexo-inject:begin --><!-- hexo-inject:end --><meta charset="UTF-8">
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
 <meta name="theme-color" content="#222">
@@ -119,18 +119,18 @@
 
 
 
-  <meta name="description" content="未完成 功能可以查看动态和静态库中的符号.列出.o,.a,.so中的符号信息,包括符号的值,类型及名称等. 使用最好先用file查看对象文件所属处理器架构,然后再用相应交叉版本的nm工具. 1nm [option(s)] [file(s)] 有用的options.  –help:显示nm的选项. -a或–debug-syms:显示所有的符号,包括debugger-only symbols; -A:">
+  <meta name="description" content="未完成 功能 可以查看动态和静态库中的符号.列出.o,.a,.so中的符号信息,包括符号的值,类型及名称等. 使用 最好先用file查看对象文件所属处理器架构,然后再用相应交叉版本的nm工具. 1nm [option(s)] [file(s)] 有用的options.  –help:显示nm的选项. -a或–debug-syms:显示所有的符号,包括debugger-only s">
 <meta name="keywords" content="tool">
 <meta property="og:type" content="article">
 <meta property="og:title" content="IS-reverse-tool-nm">
 <meta property="og:url" content="https://hitworld.github.io/posts/926102fb/index.html">
 <meta property="og:site_name" content="w4rd3n">
-<meta property="og:description" content="未完成 功能可以查看动态和静态库中的符号.列出.o,.a,.so中的符号信息,包括符号的值,类型及名称等. 使用最好先用file查看对象文件所属处理器架构,然后再用相应交叉版本的nm工具. 1nm [option(s)] [file(s)] 有用的options.  –help:显示nm的选项. -a或–debug-syms:显示所有的符号,包括debugger-only symbols; -A:">
+<meta property="og:description" content="未完成 功能 可以查看动态和静态库中的符号.列出.o,.a,.so中的符号信息,包括符号的值,类型及名称等. 使用 最好先用file查看对象文件所属处理器架构,然后再用相应交叉版本的nm工具. 1nm [option(s)] [file(s)] 有用的options.  –help:显示nm的选项. -a或–debug-syms:显示所有的符号,包括debugger-only s">
 <meta property="og:locale" content="zh-CN">
 <meta property="og:updated_time" content="2020-08-09T06:34:17.830Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="IS-reverse-tool-nm">
-<meta name="twitter:description" content="未完成 功能可以查看动态和静态库中的符号.列出.o,.a,.so中的符号信息,包括符号的值,类型及名称等. 使用最好先用file查看对象文件所属处理器架构,然后再用相应交叉版本的nm工具. 1nm [option(s)] [file(s)] 有用的options.  –help:显示nm的选项. -a或–debug-syms:显示所有的符号,包括debugger-only symbols; -A:">
+<meta name="twitter:description" content="未完成 功能 可以查看动态和静态库中的符号.列出.o,.a,.so中的符号信息,包括符号的值,类型及名称等. 使用 最好先用file查看对象文件所属处理器架构,然后再用相应交叉版本的nm工具. 1nm [option(s)] [file(s)] 有用的options.  –help:显示nm的选项. -a或–debug-syms:显示所有的符号,包括debugger-only s">
 
 
 
@@ -185,7 +185,7 @@
       .logo-line-after i { right: initial; }
     }
   </style>
-</noscript>
+</noscript><!-- hexo-inject:begin --><!-- hexo-inject:end -->
 
 </head>
 
@@ -196,7 +196,7 @@
     
   
 
-  <div class="container sidebar-position-left page-post-detail">
+  <!-- hexo-inject:begin --><!-- hexo-inject:end --><div class="container sidebar-position-left page-post-detail">
     <div class="headband"></div>
 
     <header id="header" class="header" itemscope="" itemtype="http://schema.org/WPHeader">
@@ -538,8 +538,10 @@
 
       
         <p>未完成</p>
-<h2 id="功能"><a href="#功能" class="headerlink" title="功能"></a>功能</h2><p>可以查看动态和静态库中的符号.列出<code>.o</code>,<code>.a</code>,<code>.so</code>中的符号信息,包括符号的值,类型及名称等.</p>
-<h2 id="使用"><a href="#使用" class="headerlink" title="使用"></a>使用</h2><p>最好先用<code>file</code>查看对象文件所属处理器架构,然后再用相应交叉版本的<code>nm</code>工具.</p>
+<h2 id="功能">功能</h2>
+<p>可以查看动态和静态库中的符号.列出<code>.o</code>,<code>.a</code>,<code>.so</code>中的符号信息,包括符号的值,类型及名称等.</p>
+<h2 id="使用">使用</h2>
+<p>最好先用<code>file</code>查看对象文件所属处理器架构,然后再用相应交叉版本的<code>nm</code>工具.</p>
 <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">nm [option(s)] [file(s)]</span><br></pre></td></tr></table></figure>
 <p>有用的<code>options</code>.</p>
 <ul>
@@ -567,7 +569,8 @@
 <li><code>-X64</code>:显示所有<code>64</code>位对象符号,忽略所有<code>32</code>位对象符号;</li>
 <li><code>–defined-only</code>:仅显示定义的符号;</li>
 </ul>
-<h2 id="符号类型"><a href="#符号类型" class="headerlink" title="符号类型"></a>符号类型</h2><p>对于每一个符号来说,其类型如果是小写的,则表明该符号是<code>local</code>的;大写则表明该符号是<code>global(external)</code>的.</p>
+<h2 id="符号类型">符号类型</h2>
+<p>对于每一个符号来说,其类型如果是小写的,则表明该符号是<code>local</code>的;大写则表明该符号是<code>global(external)</code>的.</p>
 <ul>
 <li><code>A</code>:该符号的值在今后的链接中将不再改变,常常出现在中断向量表中,例如用符号来表示各个中断向量函数在中断向量表中的位置;</li>
 <li><code>B</code>:该符号放在<code>BSS</code>段中,通常是那些未初始化的全局变量;</li>
@@ -929,7 +932,7 @@
       <i class="fa fa-area-chart"></i>
     </span>
     
-    <span title="站点总字数">710k</span>
+    <span title="站点总字数">720k</span>
   
 
   
@@ -938,7 +941,7 @@
       <i class="fa fa-coffee"></i>
     </span>
     
-    <span title="站点阅读时长">10:46</span>
+    <span title="站点阅读时长">10:54</span>
   
 </div>
 
@@ -1589,5 +1592,5 @@
   
   <script type="text/javascript" src="//cdn.bootcss.com/canvas-nest.js/1.0.0/canvas-nest.min.js"></script>
   
-<script src="/live2dw/lib/L2Dwidget.min.js?0c58a1486de42ac6cc1c59c7d98ae887"></script><script>L2Dwidget.init({"pluginRootPath":"live2dw/","pluginJsPath":"lib/","pluginModelPath":"assets/","tagMode":false,"debug":false,"model":{"jsonPath":"/live2dw/assets/koharu.model.json"},"display":{"position":"right","width":150,"height":300},"mobile":{"show":false},"log":false});</script></body>
+<script src="/live2dw/lib/L2Dwidget.min.js?0c58a1486de42ac6cc1c59c7d98ae887"></script><script>L2Dwidget.init({"pluginRootPath":"live2dw/","pluginJsPath":"lib/","pluginModelPath":"assets/","tagMode":false,"debug":false,"model":{"jsonPath":"/live2dw/assets/koharu.model.json"},"display":{"position":"right","width":150,"height":300},"mobile":{"show":false},"log":false});</script><!-- hexo-inject:begin --><!-- hexo-inject:end --></body>
 </html>

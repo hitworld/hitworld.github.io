@@ -127,16 +127,16 @@
 <meta property="og:site_name" content="w4rd3n">
 <meta property="og:description" content="Code_Interpreter程序逻辑为读取code文件里的数据流,然后根据关键函数操作.   跟踪数据流得出表达式.   获得flag. SteakIDA分析,有两个漏洞点.     delete函数存在uaf,edit存在overlop.直接unlink使buf = buf - 0x18. 利用copy函数任意读写将stdout置于可控区域,修改stdout的_IO_write_base指针">
 <meta property="og:locale" content="zh-CN">
-<meta property="og:image" content="https://hitworld.github.io/posts/undefined/2.png">
-<meta property="og:image" content="https://hitworld.github.io/posts/undefined/1.png">
-<meta property="og:image" content="https://hitworld.github.io/posts/undefined/3.png">
-<meta property="og:image" content="https://hitworld.github.io/posts/undefined/4.png">
-<meta property="og:image" content="https://hitworld.github.io/posts/undefined/5.png">
-<meta property="og:updated_time" content="2020-08-09T06:33:51.848Z">
+<meta property="og:image" content="https://hitworld.github.io/posts/659cbaf1/2.png">
+<meta property="og:image" content="https://hitworld.github.io/posts/659cbaf1/1.png">
+<meta property="og:image" content="https://hitworld.github.io/posts/659cbaf1/3.png">
+<meta property="og:image" content="https://hitworld.github.io/posts/659cbaf1/4.png">
+<meta property="og:image" content="https://hitworld.github.io/posts/659cbaf1/5.png">
+<meta property="og:updated_time" content="2020-08-09T06:34:17.861Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="writeup-xnuca-2018-quals">
 <meta name="twitter:description" content="Code_Interpreter程序逻辑为读取code文件里的数据流,然后根据关键函数操作.   跟踪数据流得出表达式.   获得flag. SteakIDA分析,有两个漏洞点.     delete函数存在uaf,edit存在overlop.直接unlink使buf = buf - 0x18. 利用copy函数任意读写将stdout置于可控区域,修改stdout的_IO_write_base指针">
-<meta name="twitter:image" content="https://hitworld.github.io/posts/undefined/2.png">
+<meta name="twitter:image" content="https://hitworld.github.io/posts/659cbaf1/2.png">
 
 
 
@@ -537,20 +537,20 @@
 
       
         <h2 id="Code-Interpreter"><a href="#Code-Interpreter" class="headerlink" title="Code_Interpreter"></a>Code_Interpreter</h2><p>程序逻辑为读取<code>code</code>文件里的数据流,然后根据关键函数操作.</p>
-<img src="/posts/undefined/2.png" title="关键函数">
+<img src="/posts/659cbaf1/2.png" title="关键函数">
 <hr>
 <p>跟踪数据流得出表达式.</p>
-<img src="/posts/undefined/1.png" title="表达式">
+<img src="/posts/659cbaf1/1.png" title="表达式">
 <hr>
 <p>获得<code>flag</code>.</p>
 <h2 id="Steak"><a href="#Steak" class="headerlink" title="Steak"></a>Steak</h2><p><code>IDA</code>分析,有两个漏洞点.</p>
-<img src="/posts/undefined/3.png" title="delete函数">
+<img src="/posts/659cbaf1/3.png" title="delete函数">
 <hr>
-<img src="/posts/undefined/4.png" title="edit函数">
+<img src="/posts/659cbaf1/4.png" title="edit函数">
 <hr>
 <p><code>delete</code>函数存在<code>uaf</code>,<code>edit</code>存在<code>overlop</code>.直接<code>unlink</code>使<code>buf = buf - 0x18</code>.</p>
 <p>利用<code>copy</code>函数任意读写将<code>stdout</code>置于可控区域,修改<code>stdout</code>的<code>_IO_write_base</code>指针到想泄露的内存区域.</p>
-<img src="/posts/undefined/5.png" title="copy函数">
+<img src="/posts/659cbaf1/5.png" title="copy函数">
 <hr>
 <p>开始使用的是劫持<code>__malloc_hook</code>到<code>one_gadget</code>,条件不足.</p>
 <p>然后泄露<code>environ</code>并根据偏移算出<code>main</code>函数返回地址所在的栈地址,使用<code>ROP</code>调用<code>mprotect</code>修改<code>bss</code>的页属性写<code>shellcode</code>,<code>getshell</code>失败.最后复现使用<code>open</code>读取<code>flag</code>文件.</p>
@@ -679,7 +679,7 @@
                 
                   <a href="/archives/">
                 
-                    <span class="site-state-item-count">174</span>
+                    <span class="site-state-item-count">175</span>
                     <span class="site-state-item-name">日志</span>
                   </a>
                 </div>
@@ -1467,6 +1467,13 @@
   
 
   
+  
+
+  
+  
+
+  
+
 
   
   

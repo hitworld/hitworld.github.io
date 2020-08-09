@@ -127,7 +127,7 @@
 <meta property="og:site_name" content="w4rd3n">
 <meta property="og:description" content="0x00house_of_orange利用环境.  没有free. 存在堆溢出或者其他可改写top_chunk大小的漏洞.  利用思路首先修改top_chunk的大小,如果malloc申请的堆块大小超过了top_chunk的大小,将调用sysmalloc来进行分配. sysmalloc针对这种情况有两种处理,如果申请大小大于等于mp_.mmap_threshold就直接调用mmap,否则就扩展to">
 <meta property="og:locale" content="zh-CN">
-<meta property="og:updated_time" content="2020-08-09T06:33:51.772Z">
+<meta property="og:updated_time" content="2020-08-09T06:34:17.806Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="IS-pwn-Linux-glibc-2.23-house_of_orange">
 <meta name="twitter:description" content="0x00house_of_orange利用环境.  没有free. 存在堆溢出或者其他可改写top_chunk大小的漏洞.  利用思路首先修改top_chunk的大小,如果malloc申请的堆块大小超过了top_chunk的大小,将调用sysmalloc来进行分配. sysmalloc针对这种情况有两种处理,如果申请大小大于等于mp_.mmap_threshold就直接调用mmap,否则就扩展to">
@@ -682,7 +682,7 @@
                 
                   <a href="/archives/">
                 
-                    <span class="site-state-item-count">174</span>
+                    <span class="site-state-item-count">175</span>
                     <span class="site-state-item-name">日志</span>
                   </a>
                 </div>
@@ -1470,6 +1470,13 @@
   
 
   
+  
+
+  
+  
+
+  
+
 
   
   

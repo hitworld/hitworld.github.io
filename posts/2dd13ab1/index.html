@@ -127,24 +127,24 @@
 <meta property="og:site_name" content="w4rd3n">
 <meta property="og:description" content="未完成 概览v8是Google的JavaScript与WebAssembly引擎,使用C++编写,被用于Chrome和Node.js等应用程序中,同时也可以独立运行. 早期的v8引擎首先解析源代码构造AST(抽象语法树),JIT编译器(实时编译器)再基于AST将其编译成机器代码执行,运行过程中有选择的进行优化. 而现在AST首先被转化为bytecode执行,再有选择的将字节码与分析数据一起发给优化">
 <meta property="og:locale" content="zh-CN">
-<meta property="og:image" content="https://hitworld.github.io/posts/undefined/1.png">
-<meta property="og:image" content="https://hitworld.github.io/posts/undefined/12.png">
-<meta property="og:image" content="https://hitworld.github.io/posts/undefined/13.png">
-<meta property="og:image" content="https://hitworld.github.io/posts/undefined/5.png">
-<meta property="og:image" content="https://hitworld.github.io/posts/undefined/3.png">
-<meta property="og:image" content="https://hitworld.github.io/posts/undefined/4.png">
-<meta property="og:image" content="https://hitworld.github.io/posts/undefined/7.png">
-<meta property="og:image" content="https://hitworld.github.io/posts/undefined/6.png">
-<meta property="og:image" content="https://hitworld.github.io/posts/undefined/8.png">
-<meta property="og:image" content="https://hitworld.github.io/posts/undefined/9.png">
-<meta property="og:image" content="https://hitworld.github.io/posts/undefined/10.png">
-<meta property="og:image" content="https://hitworld.github.io/posts/undefined/11.png">
-<meta property="og:image" content="https://hitworld.github.io/posts/undefined/2.png">
-<meta property="og:updated_time" content="2020-08-09T06:33:51.765Z">
+<meta property="og:image" content="https://hitworld.github.io/posts/2dd13ab1/1.png">
+<meta property="og:image" content="https://hitworld.github.io/posts/2dd13ab1/12.png">
+<meta property="og:image" content="https://hitworld.github.io/posts/2dd13ab1/13.png">
+<meta property="og:image" content="https://hitworld.github.io/posts/2dd13ab1/5.png">
+<meta property="og:image" content="https://hitworld.github.io/posts/2dd13ab1/3.png">
+<meta property="og:image" content="https://hitworld.github.io/posts/2dd13ab1/4.png">
+<meta property="og:image" content="https://hitworld.github.io/posts/2dd13ab1/7.png">
+<meta property="og:image" content="https://hitworld.github.io/posts/2dd13ab1/6.png">
+<meta property="og:image" content="https://hitworld.github.io/posts/2dd13ab1/8.png">
+<meta property="og:image" content="https://hitworld.github.io/posts/2dd13ab1/9.png">
+<meta property="og:image" content="https://hitworld.github.io/posts/2dd13ab1/10.png">
+<meta property="og:image" content="https://hitworld.github.io/posts/2dd13ab1/11.png">
+<meta property="og:image" content="https://hitworld.github.io/posts/2dd13ab1/2.png">
+<meta property="og:updated_time" content="2020-08-09T06:34:17.789Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="CS-RTFSC-v8-概览">
 <meta name="twitter:description" content="未完成 概览v8是Google的JavaScript与WebAssembly引擎,使用C++编写,被用于Chrome和Node.js等应用程序中,同时也可以独立运行. 早期的v8引擎首先解析源代码构造AST(抽象语法树),JIT编译器(实时编译器)再基于AST将其编译成机器代码执行,运行过程中有选择的进行优化. 而现在AST首先被转化为bytecode执行,再有选择的将字节码与分析数据一起发给优化">
-<meta name="twitter:image" content="https://hitworld.github.io/posts/undefined/1.png">
+<meta name="twitter:image" content="https://hitworld.github.io/posts/2dd13ab1/1.png">
 
 
 
@@ -555,7 +555,7 @@
 <h2 id="概览"><a href="#概览" class="headerlink" title="概览"></a>概览</h2><p><code>v8</code>是<code>Google</code>的<code>JavaScript</code>与<code>WebAssembly</code>引擎,使用<code>C++</code>编写,被用于<code>Chrome</code>和<code>Node.js</code>等应用程序中,同时也可以独立运行.</p>
 <p>早期的<code>v8</code>引擎首先解析源代码构造<code>AST</code>(抽象语法树),<code>JIT</code>编译器(实时编译器)再基于<code>AST</code>将其编译成机器代码执行,运行过程中有选择的进行优化.</p>
 <p>而现在<code>AST</code>首先被转化为<code>bytecode</code>执行,再有选择的将字节码与分析数据一起发给优化编译器<code>TurboFan</code>.如果在某点上一个假设被证明是不正确的,那么优化编译器会去优化并回退至解释器部分.</p>
-<img src="/posts/undefined/1.png" title="p1">
+<img src="/posts/2dd13ab1/1.png" title="p1">
 <p><code>v8</code>引擎使用了多线程处理.</p>
 <ul>
 <li>主线程获取源代码并对其进行编译后执行(<code>v8</code>的机器代码处于<code>RWX</code>段).</li>
@@ -616,10 +616,10 @@
 </ol>
 <h2 id="v8优化机制"><a href="#v8优化机制" class="headerlink" title="v8优化机制"></a>v8优化机制</h2><h3 id="Hiddern-Class"><a href="#Hiddern-Class" class="headerlink" title="Hiddern Class"></a>Hiddern Class</h3><p>在<code>v8</code>中,每个<code>JavaScript</code>对象都有一个<code>HiddenClass</code>关联.<code>HiddenClass</code>存储有关对象形状的信息,除其他外,还存储从属性名称到索引到属性的映射.</p>
 <p><code>JavaScript</code>对象数组索引属性存储在单独的元素存储中,命名属性存储在属性存储中,元素和属性可以是数组或字典.</p>
-<img src="/posts/undefined/12.png" title="p12">
+<img src="/posts/2dd13ab1/12.png" title="p12">
 <p><code>JavaScript</code>对象每个<code>property</code>的值都以<code>array</code>的形式进行存储,通过偏移值访问<code>array</code>里的<code>property</code>值.而偏移值和属性名称的依赖关系保留给另一个类,也就是<code>Hiddern Class</code>.</p>
 <p>在<code>v8</code>中,<code>JavaScript</code>对象的第一个字段指向<code>HiddenClass</code>(对于<code>v8</code>堆上并由垃圾回收器管理的任何对象都是这种情况).<code>HiddenClass</code>第三位字段,用于存储属性的数量和指针到描述符数组.描述符数组包含有关命名属性的信息,例如名称本身和值的存储位置.</p>
-<img src="/posts/undefined/13.png" title="p13">
+<img src="/posts/2dd13ab1/13.png" title="p13">
 <p><code>Hiddern Class</code>随着对象的创建与属性的添加而产生.</p>
 <p>创建一个对象<code>o</code>时会产生一个没有<code>property</code>的<code>Hiddern Class</code>,假设叫做<code>Map1</code>,<code>o</code>内部指向<code>Map1</code>(对象的前<code>8</code>个字节是一个指向<code>Hiddern Class</code>的指针).</p>
 <p>向<code>o</code>添加属性<code>x</code>时会在<code>Map1</code>基础上产生一个添加<code>x</code>的<code>type</code>与<code>offset</code>信息对的<code>Hiddern Class</code>,称为<code>Map2</code>,<code>o</code>内部指向<code>Map2</code>,同时在<code>Map1</code>中添加转换条件:当<code>x</code>加入时转移到<code>Map2</code>.</p>
@@ -712,34 +712,34 @@
 <li><code>HeapObject</code>:指针类型,除能在<code>Smi</code>范围表达的整数值之外的其他数据,始终有一个指向<code>Map</code>的指针,由于<code>HeapObject</code>基本上由<code>GC</code>管理,因此它位于<code>GC</code>区域(而不是堆区域).</li>
 </ul>
 <p><code>Smi</code>与<code>HeapObject</code>不一样,<code>HeapObject</code>以指针的形式保存对象的内存中,而<code>Smi</code>直接保存在对象的内存中.<code>v8</code>使用最低位来区分两者.</p>
-<img src="/posts/undefined/5.png" title="p5">
+<img src="/posts/2dd13ab1/5.png" title="p5">
 <p>在最新版中指针都是只有后<code>32</code>位,<code>Smi</code>(包括<code>length</code>等整数值)保存为原来的两倍从而使末尾为<code>0</code>.</p>
-<img src="/posts/undefined/3.png" title="p3">
+<img src="/posts/2dd13ab1/3.png" title="p3">
 <h3 id="HeapNumber"><a href="#HeapNumber" class="headerlink" title="HeapNumber"></a>HeapNumber</h3><p><code>HeapNumber</code>以<code>double</code>形式(图中标黄)保存浮点数或者不能在<code>Smi</code>范围内表达的整数.</p>
-<img src="/posts/undefined/4.png" title="p4">
+<img src="/posts/2dd13ab1/4.png" title="p4">
 <h3 id="Name"><a href="#Name" class="headerlink" title="Name"></a>Name</h3><p><code>Name</code>只有一个子类:<code>String</code>.</p>
 <h4 id="String"><a href="#String" class="headerlink" title="String"></a>String</h4><p><code>String</code>存储字符串.</p>
-<img src="/posts/undefined/7.png" title="p7">
-<img src="/posts/undefined/6.png" title="p6">
+<img src="/posts/2dd13ab1/7.png" title="p7">
+<img src="/posts/2dd13ab1/6.png" title="p6">
 <h3 id="Oddball"><a href="#Oddball" class="headerlink" title="Oddball"></a>Oddball</h3><p><code>Oddball</code>表示特殊值的对象,例如<code>true</code>,<code>false</code>,<code>undefined</code>.</p>
-<img src="/posts/undefined/8.png" title="p8">
+<img src="/posts/2dd13ab1/8.png" title="p8">
 <h3 id="JSReceiver-gt-JSObject"><a href="#JSReceiver-gt-JSObject" class="headerlink" title="JSReceiver -&gt; JSObject"></a>JSReceiver -&gt; JSObject</h3><p><code>JSObject</code>是表示<code>JavaScript</code>对象的对象.</p>
-<img src="/posts/undefined/9.png" title="p9">
+<img src="/posts/2dd13ab1/9.png" title="p9">
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">[ hiddenClass / map ] -&gt; ... ; 指向Map</span><br><span class="line">[ properties        ] -&gt; [empty array]</span><br><span class="line">[ elements          ] -&gt; [empty array]</span><br><span class="line">[ reserved #1       ] -\</span><br><span class="line">[ reserved #2       ]  |</span><br><span class="line">[ reserved #3       ]  &#125;- in object properties,即预分配的内存空间</span><br><span class="line">...............        |</span><br><span class="line">[ reserved #N       ] -/</span><br></pre></td></tr></table></figure>
 <p><code>Map</code>中存储了一个对象的元信息,包括对象上属性的个数,对象的大小以及指向构造函数和原型的指针等等.同时,<code>Map</code>中保存了<code>Js</code>对象的属性信息,也就是各个属性在对象中存储的偏移.然后属性的值将根据不同的类型,放在<code>properties</code>,<code>elements</code>以及预留空间中.</p>
 <p><code>properties</code>:又称为<code>NamedProperties</code>,用于保存通过属性名作为索引的元素值,类似于字典类型,实体是<code>FixedArray</code>.</p>
 <p><code>element</code>:又称为<code>IndexedProperties</code>,用于保存通过整数值作为索引的元素值,类似于常规数组,实体是<code>FixedArray</code>.</p>
 <p><code>reserved #n</code>,为了提高访问速度,<code>v8</code>在对象中预分配了的一段内存区域,用来存放一些<code>properties</code>(称为<code>in-object properties</code>),当向<code>object</code>中添加属性时,会先尝试将新属性放入这些预留的槽位.当<code>in-onject</code>槽位满后,<code>v8</code>才会尝试将新的属性放入<code>properties</code>中.</p>
 <h4 id="JSFunction"><a href="#JSFunction" class="headerlink" title="JSFunction"></a>JSFunction</h4><p><code>JSFunction</code>是表示<code>JavaScript Function</code>的对象.</p>
-<img src="/posts/undefined/10.png" title="p10">
+<img src="/posts/2dd13ab1/10.png" title="p10">
 <p><code>kCodeEntryOffset</code>是一个指向<code>JIT</code>代码(<code>RWX</code>区域)的指针,许多实现任意代码执行的策略都是在此编写<code>shell</code>代码.</p>
 <p><code>v8</code>从<code>6.7</code>版本之后,<code>function</code>的<code>code</code>不再可写,也就是不能直接修改<code>JIT</code>代码.</p>
 <h4 id="JSArray"><a href="#JSArray" class="headerlink" title="JSArray"></a>JSArray</h4><p><code>JSArray</code>是表示<code>JavaScript Array</code>的对象.</p>
-<img src="/posts/undefined/11.png" title="p11">
+<img src="/posts/2dd13ab1/11.png" title="p11">
 <h4 id="JSArrayBuffer-amp-amp-JSTypedArray"><a href="#JSArrayBuffer-amp-amp-JSTypedArray" class="headerlink" title="JSArrayBuffer &amp;&amp; JSTypedArray"></a>JSArrayBuffer &amp;&amp; JSTypedArray</h4><p><code>JSArrayBuffer</code>对象用来表示通用的,固定长度的原始二进制数据缓冲区.<code>ArrayBuffer</code>不能直接操作,而是要通过视图进行操作.</p>
 <p><code>JSTypedArray</code>用来生成内存的视图,通过<code>9</code>个构造函数可以生成对应的视图,比如<code>Uint8Array</code>,<code>Int16Array</code>,<code>Float64Array</code>等等.</p>
 <p>在<code>v8</code>中,对象通常被存放在由<code>GC</code>管理的<code>mmapped</code>区域,然而<code>BackingStore</code>是一个不被<code>GC</code>管理的区域,并且被存放在<code>heap</code>中.由于它不是由<code>GC</code>管理的<code>HeapObject</code>,因此指向<code>BackingStore</code>的指针末位没有指示作用.</p>
-<img src="/posts/undefined/2.png" title="p2">
+<img src="/posts/2dd13ab1/2.png" title="p2">
 <p><code>ArrayBuffer</code>就代表一段原始的二进制数据,而<code>TypedArray</code>代表了一个确定的数据类型,当<code>TypedArray</code>与<code>ArrayBuffer</code>关联,就可以通过特定的数据类型格式来访问内存空间.</p>
 
       
@@ -863,7 +863,7 @@
                 
                   <a href="/archives/">
                 
-                    <span class="site-state-item-count">174</span>
+                    <span class="site-state-item-count">175</span>
                     <span class="site-state-item-name">日志</span>
                   </a>
                 </div>
@@ -1651,6 +1651,13 @@
   
 
   
+  
+
+  
+  
+
+  
+
 
   
   

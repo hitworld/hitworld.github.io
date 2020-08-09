@@ -127,12 +127,12 @@
 <meta property="og:site_name" content="w4rd3n">
 <meta property="og:description" content="概览 首先使用afl-gcc编译项目代码. 将初始testcase放到in目录下. 执行afl-fuzz -i in -o out &amp;lt;program&amp;gt; @@,path为可执行程序路径,@@表示初始用例从文件中读入. 通过out目录(fuzzing结果)分析.  可参考README.txt. 初始测试用例选择AFL可以有一个或多个包含测试数据的初始文件(testcase).  初始文件大">
 <meta property="og:locale" content="zh-CN">
-<meta property="og:image" content="https://hitworld.github.io/posts/undefined/1.png">
-<meta property="og:updated_time" content="2020-08-09T06:33:51.770Z">
+<meta property="og:image" content="https://hitworld.github.io/posts/98e6ff36/1.png">
+<meta property="og:updated_time" content="2020-08-09T06:34:17.823Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="IS-pwn-fuzz-AFL-使用">
 <meta name="twitter:description" content="概览 首先使用afl-gcc编译项目代码. 将初始testcase放到in目录下. 执行afl-fuzz -i in -o out &amp;lt;program&amp;gt; @@,path为可执行程序路径,@@表示初始用例从文件中读入. 通过out目录(fuzzing结果)分析.  可参考README.txt. 初始测试用例选择AFL可以有一个或多个包含测试数据的初始文件(testcase).  初始文件大">
-<meta name="twitter:image" content="https://hitworld.github.io/posts/undefined/1.png">
+<meta name="twitter:image" content="https://hitworld.github.io/posts/98e6ff36/1.png">
 
 
 
@@ -552,7 +552,7 @@
 <li>每个测试用例应该能驱动程序中的不同功能.</li>
 </ol>
 <h3 id="常见错误"><a href="#常见错误" class="headerlink" title="常见错误"></a>常见错误</h3><p>第一次启动往往会报错,表示某些环境变量没有配置或者配置错误.</p>
-<img src="/posts/undefined/1.png" title="p1">
+<img src="/posts/98e6ff36/1.png" title="p1">
 <p>没有打开错误转储机制,系统配置为将核心转储文件通知发送到外部程序.将导致将崩溃信息发送到<code>Fuzzer</code>之间的延迟增大,进而可能将崩溃被误报为超时.</p>
 <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">sudo su</span><br><span class="line"><span class="built_in">echo</span> core &gt;/proc/sys/kernel/core_pattern</span><br></pre></td></tr></table></figure>
 <h3 id="对代码进行插桩"><a href="#对代码进行插桩" class="headerlink" title="对代码进行插桩"></a>对代码进行插桩</h3><p>在使用<code>AFL</code>编译工具<code>afl-gcc</code>对源码进行编译时,程序会使用<code>afl-as</code>工具对编译并未汇编的<code>c/c++</code>代码(<code>.i</code>文件)进行编译插桩,生成汇编文件(<code>.s</code>文件).</p>
@@ -749,7 +749,7 @@
                 
                   <a href="/archives/">
                 
-                    <span class="site-state-item-count">174</span>
+                    <span class="site-state-item-count">175</span>
                     <span class="site-state-item-name">日志</span>
                   </a>
                 </div>
@@ -1537,6 +1537,13 @@
   
 
   
+  
+
+  
+  
+
+  
+
 
   
   

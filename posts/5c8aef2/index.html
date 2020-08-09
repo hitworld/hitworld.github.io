@@ -127,13 +127,13 @@
 <meta property="og:site_name" content="w4rd3n">
 <meta property="og:description" content="概览(ELF)[https://paper.seebug.org/papers/Archive/refs/elf/Understanding_ELF.pdf],即`Executable and Linking Format(可执行可连接格式),具有这种格式的文件称为ELF`文件. ELF文件主要分为以下三种类型.  可重定位文件(relocatable file):用于与其它目标文件进行连接以构建">
 <meta property="og:locale" content="zh-CN">
-<meta property="og:image" content="https://hitworld.github.io/posts/undefined/1.png">
-<meta property="og:image" content="https://hitworld.github.io/posts/undefined/2.png">
-<meta property="og:updated_time" content="2020-08-09T06:33:51.792Z">
+<meta property="og:image" content="https://hitworld.github.io/posts/5c8aef2/1.png">
+<meta property="og:image" content="https://hitworld.github.io/posts/5c8aef2/2.png">
+<meta property="og:updated_time" content="2020-08-09T06:34:17.825Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="IS-reverse-Linux-ELF">
 <meta name="twitter:description" content="概览(ELF)[https://paper.seebug.org/papers/Archive/refs/elf/Understanding_ELF.pdf],即`Executable and Linking Format(可执行可连接格式),具有这种格式的文件称为ELF`文件. ELF文件主要分为以下三种类型.  可重定位文件(relocatable file):用于与其它目标文件进行连接以构建">
-<meta name="twitter:image" content="https://hitworld.github.io/posts/undefined/1.png">
+<meta name="twitter:image" content="https://hitworld.github.io/posts/5c8aef2/1.png">
 
 
 
@@ -548,7 +548,7 @@
 <li>可执行文件(<code>executable file</code>):经过连接的,可以执行的程序文件.</li>
 </ul>
 <h2 id="文件格式"><a href="#文件格式" class="headerlink" title="文件格式"></a>文件格式</h2><p>从连接的角度和运行的角度,可以分别把目标文件的组成部分做以下的划分.</p>
-<img src="/posts/undefined/1.png" title="p1">
+<img src="/posts/5c8aef2/1.png" title="p1">
 <p><code>ELF</code>文件头位于文件的最开始处,包含有整个文件的结构信息.</p>
 <p>节(<code>section</code>)是专用于连接过程而言的,在每个节中包含有指令数据,符号数据,重定位数据等等.</p>
 <p>程序头表(<code>program header table</code>)在运行过程中是必须的,在连接过程中是可选的,因为它的作用是告诉系统如何创建进程的镜像.</p>
@@ -593,7 +593,7 @@
 <p>如果本节的内容需要映射到进程空间中去,<code>sh_addr</code>指定映射的起始地址,不需要映射则为<code>0</code>.</p>
 <p><code>sh_offset</code>指明本节位置,该值是节的第一个字节在文件中的位置.<code>sh_size</code>指明节的大小.<code>sh_addralign</code>指明本节对齐字节,该值为<code>0</code>或<code>1</code>表明没有对齐约束,否则应该为<code>2</code>的正整数倍.</p>
 <p><code>sh_link</code>和<code>sh_info</code>根据节的类型不同表示不同的意义.</p>
-<img src="/posts/undefined/2.png" title="p2">
+<img src="/posts/5c8aef2/2.png" title="p2">
 <p>可以使用<code>readelf -S</code>解析数据.</p>
 <h3 id="段"><a href="#段" class="headerlink" title="段"></a>段</h3><p>可执行文件或共享目标文件的程序头表(<code>program header table</code>)是一个数组,数组中的每一个元素称为程序头(<code>program header</code>),每一个程序头描述了一个段(<code>segment</code>)或者一块用于准备执行程序的信息.程序头只对可执行文件或共享目标文件有意义.</p>
 <figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">typedef</span> <span class="class"><span class="keyword">struct</span> &#123;</span></span><br><span class="line">  Elf32_Word p_type;</span><br><span class="line">  Elf32_Off p_offset;</span><br><span class="line">  Elf32_Addr p_vaddr;</span><br><span class="line">  Elf32_Addr p_paddr;</span><br><span class="line">  Elf32_Word p_filesz;</span><br><span class="line">  Elf32_Word p_memsz;</span><br><span class="line">  Elf32_Word p_flags;</span><br><span class="line">  Elf32_Word p_align;</span><br><span class="line">&#125; Elf32_Phdr;</span><br></pre></td></tr></table></figure>
@@ -734,7 +734,7 @@
                 
                   <a href="/archives/">
                 
-                    <span class="site-state-item-count">174</span>
+                    <span class="site-state-item-count">175</span>
                     <span class="site-state-item-name">日志</span>
                   </a>
                 </div>
@@ -1522,6 +1522,13 @@
   
 
   
+  
+
+  
+  
+
+  
+
 
   
   

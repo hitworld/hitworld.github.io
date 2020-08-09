@@ -127,7 +127,7 @@
 <meta property="og:site_name" content="w4rd3n">
 <meta property="og:description" content="漏洞要素能溢出下一个堆块第一个字节. poison_null_bytemalloc合适大小的三个chunk,首先free掉chunk2(chunk2的大小需大于global_max_fast,使其进入unsorted bin). 通过溢出chunk1修改chunk2的size域(变小),此时chunk2的大小变为fake_size(因为其处于unsorted bin). 这里要求chunk1大小为">
 <meta property="og:locale" content="zh-CN">
-<meta property="og:updated_time" content="2020-08-09T06:33:51.774Z">
+<meta property="og:updated_time" content="2020-08-09T06:34:17.807Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="IS-pwn-Linux-glibc-2.23-off_by_one">
 <meta name="twitter:description" content="漏洞要素能溢出下一个堆块第一个字节. poison_null_bytemalloc合适大小的三个chunk,首先free掉chunk2(chunk2的大小需大于global_max_fast,使其进入unsorted bin). 通过溢出chunk1修改chunk2的size域(变小),此时chunk2的大小变为fake_size(因为其处于unsorted bin). 这里要求chunk1大小为">
@@ -670,7 +670,7 @@
                 
                   <a href="/archives/">
                 
-                    <span class="site-state-item-count">174</span>
+                    <span class="site-state-item-count">175</span>
                     <span class="site-state-item-name">日志</span>
                   </a>
                 </div>
@@ -1458,6 +1458,13 @@
   
 
   
+  
+
+  
+  
+
+  
+
 
   
   

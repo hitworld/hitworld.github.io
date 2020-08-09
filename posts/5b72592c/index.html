@@ -127,7 +127,7 @@
 <meta property="og:site_name" content="w4rd3n">
 <meta property="og:description" content="分析解包分析init,发现只是加载驱动等正常套路. 分析驱动发现由于存放指针的变量是全局变量,存在一个伪条件竞争引发的UAF漏洞. 利用思路打开两次设备,通过ioctl更改其大小为cred结构体的大小,释放其中一个,fork一个新进程,那么这个新进程的cred的空间就会和之前释放的空间重叠,此时就可以通过另一个文件描述符对cred空间写.需要确定cred结构体的大小,计算一下是0xa8(注意使用相">
 <meta property="og:locale" content="zh-CN">
-<meta property="og:updated_time" content="2020-08-09T06:33:51.825Z">
+<meta property="og:updated_time" content="2020-08-09T06:34:17.850Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="writeup-ciscn-2017-babydriver">
 <meta name="twitter:description" content="分析解包分析init,发现只是加载驱动等正常套路. 分析驱动发现由于存放指针的变量是全局变量,存在一个伪条件竞争引发的UAF漏洞. 利用思路打开两次设备,通过ioctl更改其大小为cred结构体的大小,释放其中一个,fork一个新进程,那么这个新进程的cred的空间就会和之前释放的空间重叠,此时就可以通过另一个文件描述符对cred空间写.需要确定cred结构体的大小,计算一下是0xa8(注意使用相">
@@ -657,7 +657,7 @@
                 
                   <a href="/archives/">
                 
-                    <span class="site-state-item-count">174</span>
+                    <span class="site-state-item-count">175</span>
                     <span class="site-state-item-name">日志</span>
                   </a>
                 </div>
@@ -1445,6 +1445,13 @@
   
 
   
+  
+
+  
+  
+
+  
+
 
   
   

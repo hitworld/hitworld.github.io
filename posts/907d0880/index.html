@@ -127,18 +127,18 @@
 <meta property="og:site_name" content="w4rd3n">
 <meta property="og:description" content="未完成 0x00RSA加密算法是一种非对称加密算法,RSA算法的可靠性由极大整数因数分解的难度决定. 基础首先选取两个素数p,q. 接下来将p和q相乘获得模m = p * q.同时也就知道了:ϕ(m) = ϕ(p) * ϕ(q) = (p − 1)(q − 1). 选取与ϕ(m)互素的整数k,即gcd(k, ϕ(m)) = 1. 此时可以将m和k作为公钥告诉别人,别人可以利用m和k加密信息,收到密">
 <meta property="og:locale" content="zh-CN">
-<meta property="og:image" content="https://hitworld.github.io/posts/undefined/6.png">
-<meta property="og:image" content="https://hitworld.github.io/posts/undefined/4.png">
-<meta property="og:image" content="https://hitworld.github.io/posts/undefined/1.png">
-<meta property="og:image" content="https://hitworld.github.io/posts/undefined/5.png">
-<meta property="og:image" content="https://hitworld.github.io/posts/undefined/7.png">
-<meta property="og:image" content="https://hitworld.github.io/posts/undefined/2.png">
-<meta property="og:image" content="https://hitworld.github.io/posts/undefined/3.png">
-<meta property="og:updated_time" content="2020-08-09T06:33:51.768Z">
+<meta property="og:image" content="https://hitworld.github.io/posts/907d0880/6.png">
+<meta property="og:image" content="https://hitworld.github.io/posts/907d0880/4.png">
+<meta property="og:image" content="https://hitworld.github.io/posts/907d0880/1.png">
+<meta property="og:image" content="https://hitworld.github.io/posts/907d0880/5.png">
+<meta property="og:image" content="https://hitworld.github.io/posts/907d0880/7.png">
+<meta property="og:image" content="https://hitworld.github.io/posts/907d0880/2.png">
+<meta property="og:image" content="https://hitworld.github.io/posts/907d0880/3.png">
+<meta property="og:updated_time" content="2020-08-09T06:34:17.803Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="IS-crypto-非对称加密-RSA">
 <meta name="twitter:description" content="未完成 0x00RSA加密算法是一种非对称加密算法,RSA算法的可靠性由极大整数因数分解的难度决定. 基础首先选取两个素数p,q. 接下来将p和q相乘获得模m = p * q.同时也就知道了:ϕ(m) = ϕ(p) * ϕ(q) = (p − 1)(q − 1). 选取与ϕ(m)互素的整数k,即gcd(k, ϕ(m)) = 1. 此时可以将m和k作为公钥告诉别人,别人可以利用m和k加密信息,收到密">
-<meta name="twitter:image" content="https://hitworld.github.io/posts/undefined/6.png">
+<meta name="twitter:image" content="https://hitworld.github.io/posts/907d0880/6.png">
 
 
 
@@ -577,12 +577,12 @@
 <h3 id="常用术语"><a href="#常用术语" class="headerlink" title="常用术语"></a>常用术语</h3><p>在实际应用中.常把公钥对(<code>m</code>,<code>k</code>)称为(<code>N</code>,<code>e</code>),私钥对(<code>m</code>,<code>u</code>)称为(<code>N</code>,<code>d</code>).<code>ϕ(m)</code>用于计算<code>d</code>,<code>p</code>和<code>q</code>生成<code>N</code>和<code>ϕ(m)</code>.</p>
 <h3 id="python代码实现"><a href="#python代码实现" class="headerlink" title="python代码实现"></a>python代码实现</h3><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">from</span> Crypto.Util <span class="keyword">import</span> number</span><br><span class="line"></span><br><span class="line">n_length = <span class="number">1024</span></span><br><span class="line">p = number.getPrime(n_length)</span><br><span class="line">q = number.getPrime(n_length)</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">egcd</span><span class="params">(a, b)</span>:</span></span><br><span class="line">    r_0 = a</span><br><span class="line">    r_1 = b</span><br><span class="line">    r_2 = r_0 % r_1</span><br><span class="line">    q = r_0 // r_1</span><br><span class="line">    u_0 = <span class="number">0</span></span><br><span class="line">    u_1 = <span class="number">1</span></span><br><span class="line">    u_2 = u_0 - q * u_1</span><br><span class="line">    <span class="keyword">while</span> r_2:</span><br><span class="line">        r_0 = r_1</span><br><span class="line">        r_1 = r_2</span><br><span class="line">        r_2 = r_0 % r_1</span><br><span class="line">        q = r_0 // r_1</span><br><span class="line">        u_0 = u_1</span><br><span class="line">        u_1 = u_2</span><br><span class="line">        u_2 = u_0 - q * u_1</span><br><span class="line">    u_0 = u_1</span><br><span class="line">    u_1 = u_2</span><br><span class="line">    u_2 = u_0 - q * u_1</span><br><span class="line">    <span class="keyword">return</span> u_2</span><br><span class="line"></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">myRSA</span><span class="params">(object)</span>:</span></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">__init__</span><span class="params">(self, p, q, e)</span>:</span></span><br><span class="line">        self.N = p * q</span><br><span class="line">        print(<span class="string">"N: "</span> + str(self.N))</span><br><span class="line">        self.phiN = (p - <span class="number">1</span>) * (q - <span class="number">1</span>)</span><br><span class="line">        self.e = e</span><br><span class="line">        <span class="comment"># undo:check e</span></span><br><span class="line">        self.d = egcd(self.phiN, self.e)</span><br><span class="line">        <span class="keyword">while</span> self.d &lt; <span class="number">0</span>:</span><br><span class="line">            self.d = self.d + self.phiN</span><br><span class="line">        print(<span class="string">"d: "</span> + str(self.d))</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">encode</span><span class="params">(self, m)</span>:</span></span><br><span class="line">        c = pow(m, self.e, self.N)</span><br><span class="line">        <span class="keyword">return</span> c</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">decode</span><span class="params">(self, c)</span>:</span></span><br><span class="line">        m = pow(c, self.d, self.N)</span><br><span class="line">        <span class="keyword">return</span> m</span><br></pre></td></tr></table></figure>
 <h2 id="RSA衍生算法-Rabin算法"><a href="#RSA衍生算法-Rabin算法" class="headerlink" title="RSA衍生算法-Rabin算法"></a>RSA衍生算法-Rabin算法</h2><p><code>Rabin</code>算法的特征在于<code>e = 2</code>.</p>
-<img src="/posts/undefined/6.png" title="p6">
+<img src="/posts/907d0880/6.png" title="p6">
 <p>待证明.</p>
 <h2 id="常见攻击方式"><a href="#常见攻击方式" class="headerlink" title="常见攻击方式"></a>常见攻击方式</h2><h3 id="暴力分解"><a href="#暴力分解" class="headerlink" title="暴力分解"></a>暴力分解</h3><p>在<code>N</code>的比特位数小于<code>512</code>的时候,可以采用大整数分解的策略获取<code>p</code>和<code>q</code>.<a href="http://factordb.com/index.php" target="_blank" rel="noopener">网站分解</a>.</p>
 <h3 id="p-amp-q不当分解N"><a href="#p-amp-q不当分解N" class="headerlink" title="p&amp;q不当分解N"></a>p&amp;q不当分解N</h3><p>当<code>|p-q|</code>很大时,一定存在某一个参数较小,可以通过穷举的方法对模数进行试除.</p>
 <p>当<code>|p-q|</code>很小时,如下.</p>
-<img src="/posts/undefined/4.png" title="p4">
+<img src="/posts/907d0880/4.png" title="p4">
 <p>当<code>p</code>是<code>N</code>的因数,并且<code>p - 1</code>是光滑的时候,可能可以使用<code>Pollard&#39;s p − 1</code>算法或者<code>Williams&#39;s p + 1</code>算法来分解<code>N</code>,但是可能不会成功.</p>
 <h3 id="模不互素"><a href="#模不互素" class="headerlink" title="模不互素"></a>模不互素</h3><p>当存在两个公钥的<code>N</code>不互素时,显然可以直接对这两个数求最大公因数(最大公因数为其中一个的<code>p</code>或者<code>q</code>),然后直接获得两对<code>p</code>,<code>q</code>,进而获得相应的私钥.</p>
 <h3 id="共模攻击"><a href="#共模攻击" class="headerlink" title="共模攻击"></a>共模攻击</h3><p>不同的<code>e</code>和<code>d</code>共用一个模数<code>N</code>,会导致不用分解<code>N</code>就能恢复明文.</p>
@@ -590,12 +590,12 @@
 <figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">c1 = pow(m, e1, n)</span><br><span class="line">c2 = pow(m, e2, n)</span><br></pre></td></tr></table></figure>
 <p>此时<code>e1</code>,<code>e2</code>,<code>c1</code>,<code>c2</code>,<code>N</code>都是公开的.</p>
 <p>用扩展欧几里得算法求出满足<code>re1 + se2 = 1</code>的两个整数<code>r</code>和<code>s</code>.</p>
-<img src="/posts/undefined/1.png" title="p1">
+<img src="/posts/907d0880/1.png" title="p1">
 <p>假如其中有一个为负数(最多一个为负数),则需要进行处理.</p>
 <figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line">rs = egcd(e1, e2)</span><br><span class="line">r = rs[<span class="number">0</span>]</span><br><span class="line">s = rs[<span class="number">1</span>]</span><br><span class="line"></span><br><span class="line"><span class="comment"># 求模反元素</span></span><br><span class="line"><span class="keyword">if</span> r &lt; <span class="number">0</span>:</span><br><span class="line">    r = -r</span><br><span class="line">    c1 = invert(c1, n)</span><br><span class="line"><span class="keyword">elif</span> s &lt; <span class="number">0</span>:</span><br><span class="line">    s = -s</span><br><span class="line">    c2 = invert(c2, n)</span><br><span class="line">m = pow(c1, s1, NN) * pow(c2, s2, N) % N</span><br></pre></td></tr></table></figure>
-<h3 id="小公钥指数攻击"><a href="#小公钥指数攻击" class="headerlink" title="小公钥指数攻击"></a>小公钥指数攻击</h3><img src="/posts/undefined/5.png" title="p5">
+<h3 id="小公钥指数攻击"><a href="#小公钥指数攻击" class="headerlink" title="小公钥指数攻击"></a>小公钥指数攻击</h3><img src="/posts/907d0880/5.png" title="p5">
 <h3 id="d泄露攻击"><a href="#d泄露攻击" class="headerlink" title="d泄露攻击"></a>d泄露攻击</h3><p>当获得了一次加密中的<code>d</code>,不仅可以解密本次加密的数据,还可以对模数<code>N</code>进行分解.</p>
-<img src="/posts/undefined/7.png" title="p7">
+<img src="/posts/907d0880/7.png" title="p7">
 <p>利用以下工具可以直接进行计算.</p>
 <ul>
 <li><code>https://github.com/ius/rsatool</code>.</li>
@@ -617,10 +617,10 @@
 <h2 id="例题"><a href="#例题" class="headerlink" title="例题"></a>例题</h2><h3 id="2018-CodeGate-CTF-Rsababy"><a href="#2018-CodeGate-CTF-Rsababy" class="headerlink" title="2018 CodeGate CTF Rsababy"></a>2018 CodeGate CTF Rsababy</h3><p>题目就是正常的<code>RSA</code>加密,但是生成了两个额外的数<code>h</code>,<code>g</code>并打印.</p>
 <figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">GenerateKeys</span><span class="params">(p, q)</span>:</span></span><br><span class="line">    e = <span class="number">65537</span></span><br><span class="line">    n = p * q</span><br><span class="line">    pi_n = (p - <span class="number">1</span>) * (q - <span class="number">1</span>)</span><br><span class="line">    d = mulinv(e, pi_n)</span><br><span class="line">    h = (d + p)^(d - p)</span><br><span class="line">    g = d * (p - <span class="number">0xdeadbeef</span>)</span><br><span class="line"></span><br><span class="line">    <span class="keyword">return</span> [e, n, h, g]</span><br><span class="line"></span><br><span class="line">    <span class="comment"># print("[*] Encrypted Data : %d\n" % EncryptedData)</span></span><br><span class="line">    <span class="comment"># print("[*] N : %d\n" % N)</span></span><br><span class="line">    <span class="comment"># print("[*] h : %d\n" % hint)</span></span><br><span class="line">    <span class="comment"># print("[*] g : %d\n" % gint)</span></span><br></pre></td></tr></table></figure>
 <p>密文,<code>n</code>,<code>h</code>,<code>g</code>是给出的,<code>e</code>是固定的,令<code>const = 0xdeadbeef</code>.</p>
-<img src="/posts/undefined/2.png" title="p2">
+<img src="/posts/907d0880/2.png" title="p2">
 <figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">tmp = gmpy2.powmod(<span class="number">2</span>,e*g+const<span class="number">-1</span>,n)<span class="number">-1</span></span><br><span class="line">p = gmpy2.gcd(tmp,n)</span><br><span class="line">q = n/p</span><br><span class="line">phin = (p<span class="number">-1</span>)*(q<span class="number">-1</span>)</span><br><span class="line">d =gmpy2.invert(e,phin)</span><br><span class="line">plain = gmpy2.powmod(data,d,n)</span><br><span class="line"><span class="keyword">print</span> hex(plain)[<span class="number">2</span>:].decode(<span class="string">'hex'</span>)</span><br></pre></td></tr></table></figure>
 <h3 id="2018-国家安全周-pure-math"><a href="#2018-国家安全周-pure-math" class="headerlink" title="2018 国家安全周 pure math"></a>2018 国家安全周 pure math</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">1) p ** p % q = 1137973316343089029387365135250835133803975869258714714790597743585251681751361684698632609164883988455302237641489036138661596754239799122081528662395492</span><br><span class="line">2) q ** q % p = 6901383184477756324584651464895743132603115552606852729050186289748558760692261058141015199261946483809004373728135568483701274908717004197776113227815323</span><br><span class="line">3) (p ** q + q ** p) % (p*q) = 16791287391494893024031688699360885996180880807427715700800644759680986120242383930558410147341340225420991368114858791447699399702390358184412301644459406</span><br><span class="line">4) (p+q) ** (p+q) % (p*q) = 63112211860889153729003401381621068190906433969243079543438386686621389392583849748240273643614258173423474299387234175508649197780206757067354426424570586101908571600743792328163163458500138799976944702155779196849585083397395750018148652864158388247163109077215394538930498877175474225571393901460434679279</span><br><span class="line">5) FLAG ** 31337 % (p*q) = 6931243291746179589612148118911670244427928875888377273917973305632621316868302667641610838193899081089153471883271406133321321416064760200919958612671379845738048938060512995550639898688604592620908415248701721672948126507753670027043162669545932921683579001870526727737212722417683610956855529996310258030</span><br><span class="line">Now, what’s the FLAG???</span><br></pre></td></tr></table></figure>
-<img src="/posts/undefined/3.png" title="p3">
+<img src="/posts/907d0880/3.png" title="p3">
 <figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">q = (x4 - x1 * x3) / (x2 - x1)</span><br><span class="line">p = x3 - q</span><br><span class="line"></span><br><span class="line">phin = (p - <span class="number">1</span>) * (q - <span class="number">1</span>)</span><br><span class="line">d = gmpy2.invert(<span class="number">31337</span>, phin)</span><br><span class="line">flag = gmpy2.powmod(c, d, p * q)</span><br><span class="line">flag = hex(flag)[<span class="number">2</span>:]</span><br><span class="line"><span class="keyword">print</span> flag.decode(<span class="string">'hex'</span>)</span><br></pre></td></tr></table></figure>
 <h3 id="2018-Pwnhub-LHY"><a href="#2018-Pwnhub-LHY" class="headerlink" title="2018 Pwnhub LHY"></a>2018 Pwnhub LHY</h3><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="number">1</span> + <span class="number">1</span> + <span class="number">2</span> ** <span class="number">2018</span> == <span class="number">30097557298197417800049182668952226601954645169633891463401117760245367082644152355564014438095421962150109895432272944128252155287648477680131934943095113263121691874508742328500559321036238322775864636883202538152031804102118831278605474474352011895348919417742923873371980983336517409056008233804190890418285814476821890492630167665485823056526646050928460488168341721716361299816947722947465808004305806687049198633489997459201469227952552870291934919760829984421958853221330987033580524592596407485826446284220272614663464267135596497185086055090126893989371261962903295313304735911034185619611156742146</span></span><br></pre></td></tr></table></figure>
 <p>所以<code>x + 1</code>和<code>y</code>都是质数,<code>(x ** 2 - 1) ** 2</code>整除<code>2 * x * y - 1</code>.</p>
@@ -690,8 +690,8 @@
 
           <div class="post-nav-prev post-nav-item">
             
-              <a href="/posts/36159cdd/" rel="prev" title="w4rd3n-朝花夕拾">
-                w4rd3n-朝花夕拾 <i class="fa fa-chevron-right"></i>
+              <a href="/posts/ebac7ece/" rel="prev" title="Math-number-theory-数论概论读书笔记">
+                Math-number-theory-数论概论读书笔记 <i class="fa fa-chevron-right"></i>
               </a>
             
           </div>
@@ -766,7 +766,7 @@
                 
                   <a href="/archives/">
                 
-                    <span class="site-state-item-count">174</span>
+                    <span class="site-state-item-count">175</span>
                     <span class="site-state-item-name">日志</span>
                   </a>
                 </div>
@@ -1554,6 +1554,13 @@
   
 
   
+  
+
+  
+  
+
+  
+
 
   
   

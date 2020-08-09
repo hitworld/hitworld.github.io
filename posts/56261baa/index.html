@@ -127,7 +127,7 @@
 <meta property="og:site_name" content="w4rd3n">
 <meta property="og:description" content="漏洞要素覆盖一个堆指针变量,使其指向足够可控的区域,free后系统会错误的将该区域作为堆块放到相应的bin里面,再分配出来. 利用思路关键在于伪造两个fast bin chunk(两个fast bin chunk中间的内容不可控). 然后覆盖一个堆指针变量使其指向第一个fast bin chunk,free后再malloc使两个fast bin chunk间的区域可控. free时的检测. 123">
 <meta property="og:locale" content="zh-CN">
-<meta property="og:updated_time" content="2020-08-09T06:33:51.773Z">
+<meta property="og:updated_time" content="2020-08-09T06:34:17.808Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="IS-pwn-Linux-glibc-2.23-house_of_spirit">
 <meta name="twitter:description" content="漏洞要素覆盖一个堆指针变量,使其指向足够可控的区域,free后系统会错误的将该区域作为堆块放到相应的bin里面,再分配出来. 利用思路关键在于伪造两个fast bin chunk(两个fast bin chunk中间的内容不可控). 然后覆盖一个堆指针变量使其指向第一个fast bin chunk,free后再malloc使两个fast bin chunk间的区域可控. free时的检测. 123">
@@ -670,7 +670,7 @@
                 
                   <a href="/archives/">
                 
-                    <span class="site-state-item-count">174</span>
+                    <span class="site-state-item-count">175</span>
                     <span class="site-state-item-name">日志</span>
                   </a>
                 </div>
@@ -1458,6 +1458,13 @@
   
 
   
+  
+
+  
+  
+
+  
+
 
   
   

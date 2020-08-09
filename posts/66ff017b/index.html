@@ -127,13 +127,13 @@
 <meta property="og:site_name" content="w4rd3n">
 <meta property="og:description" content="概念glibc利用_IO_FILE结构实现了文件流,是基本文件描述符的高级接口,支持流缓冲. 通过fopen打开文件获得,fopen首先在堆中分配一片区域存放文件结构体,然后对结构体初始化并链接到以一个_IO_FILE_plus链表中,最后打开文件. 可以通过攻击原有的stdout等_IO_FILE结构体或者覆盖_IO_FILE指针指向伪造的_IO_FILE从而利用结构中一个叫做vtable的指针">
 <meta property="og:locale" content="zh-CN">
-<meta property="og:image" content="https://hitworld.github.io/posts/undefined/1.png">
-<meta property="og:image" content="https://hitworld.github.io/posts/undefined/2.png">
-<meta property="og:updated_time" content="2020-08-09T06:33:51.778Z">
+<meta property="og:image" content="https://hitworld.github.io/posts/66ff017b/1.png">
+<meta property="og:image" content="https://hitworld.github.io/posts/66ff017b/2.png">
+<meta property="og:updated_time" content="2020-08-09T06:34:17.804Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="IS-pwn-Linux-IO_FILE分析与利用">
 <meta name="twitter:description" content="概念glibc利用_IO_FILE结构实现了文件流,是基本文件描述符的高级接口,支持流缓冲. 通过fopen打开文件获得,fopen首先在堆中分配一片区域存放文件结构体,然后对结构体初始化并链接到以一个_IO_FILE_plus链表中,最后打开文件. 可以通过攻击原有的stdout等_IO_FILE结构体或者覆盖_IO_FILE指针指向伪造的_IO_FILE从而利用结构中一个叫做vtable的指针">
-<meta name="twitter:image" content="https://hitworld.github.io/posts/undefined/1.png">
+<meta name="twitter:image" content="https://hitworld.github.io/posts/66ff017b/1.png">
 
 
 
@@ -577,9 +577,9 @@
 <figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">char</span>* _IO_read_ptr;</span><br><span class="line"><span class="keyword">char</span>* _IO_read_end;</span><br><span class="line"><span class="keyword">char</span>* _IO_read_base;</span><br><span class="line"><span class="comment">//read</span></span><br><span class="line"><span class="keyword">char</span>* _IO_write_base;</span><br><span class="line"><span class="keyword">char</span>* _IO_write_ptr;</span><br><span class="line"><span class="keyword">char</span>* _IO_write_end;</span><br><span class="line"><span class="comment">//write</span></span><br><span class="line"><span class="keyword">char</span>* _IO_buf_base;</span><br><span class="line"><span class="keyword">char</span>* _IO_buf_end;</span><br><span class="line"><span class="comment">//buf</span></span><br></pre></td></tr></table></figure>
 <p><code>scanf</code>读取输入会先放到<code>_IO_buf_base</code>缓冲区中,劫持该指针可以任意写,其他<code>IO</code>函数同理.</p>
 <p>以下是任意地址读的条件.</p>
-<img src="/posts/undefined/1.png" title="p1">
+<img src="/posts/66ff017b/1.png" title="p1">
 <p>以下是任意地址写的条件.</p>
-<img src="/posts/undefined/2.png" title="p2">
+<img src="/posts/66ff017b/2.png" title="p2">
 
       
     </div>
@@ -702,7 +702,7 @@
                 
                   <a href="/archives/">
                 
-                    <span class="site-state-item-count">174</span>
+                    <span class="site-state-item-count">175</span>
                     <span class="site-state-item-name">日志</span>
                   </a>
                 </div>
@@ -1490,6 +1490,13 @@
   
 
   
+  
+
+  
+  
+
+  
+
 
   
   

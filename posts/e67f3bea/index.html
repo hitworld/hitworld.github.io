@@ -127,16 +127,16 @@
 <meta property="og:site_name" content="w4rd3n">
 <meta property="og:description" content="checkin检测子字符串sh. 执行s\h绕过检测. pwn_collection里外都有uaf,里面的note大小可控(小于0x5f). 利用double free进行fastbin attack,找到合适的偏移成功泄露libc,然后又找到个偏移写free@plt. 1234567891011121314151617181920212223242526272829303132333435363">
 <meta property="og:locale" content="zh-CN">
-<meta property="og:image" content="https://hitworld.github.io/posts/e67f3bea/3.png">
-<meta property="og:image" content="https://hitworld.github.io/posts/e67f3bea/1.png">
-<meta property="og:image" content="https://hitworld.github.io/posts/e67f3bea/2.png">
-<meta property="og:image" content="https://hitworld.github.io/posts/e67f3bea/4.png">
-<meta property="og:image" content="https://hitworld.github.io/posts/e67f3bea/5.png">
-<meta property="og:updated_time" content="2020-08-02T07:36:56.501Z">
+<meta property="og:image" content="https://hitworld.github.io/posts/undefined/3.png">
+<meta property="og:image" content="https://hitworld.github.io/posts/undefined/1.png">
+<meta property="og:image" content="https://hitworld.github.io/posts/undefined/2.png">
+<meta property="og:image" content="https://hitworld.github.io/posts/undefined/4.png">
+<meta property="og:image" content="https://hitworld.github.io/posts/undefined/5.png">
+<meta property="og:updated_time" content="2020-08-09T06:33:51.847Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="writeup-susctf-2019">
 <meta name="twitter:description" content="checkin检测子字符串sh. 执行s\h绕过检测. pwn_collection里外都有uaf,里面的note大小可控(小于0x5f). 利用double free进行fastbin attack,找到合适的偏移成功泄露libc,然后又找到个偏移写free@plt. 1234567891011121314151617181920212223242526272829303132333435363">
-<meta name="twitter:image" content="https://hitworld.github.io/posts/e67f3bea/3.png">
+<meta name="twitter:image" content="https://hitworld.github.io/posts/undefined/3.png">
 
 
 
@@ -545,20 +545,20 @@
 <h2 id="tcache-pwn"><a href="#tcache-pwn" class="headerlink" title="tcache_pwn"></a>tcache_pwn</h2><p>简单的<code>tcache</code>攻击,<code>double free</code>后修改<code>fd</code>,再次<code>malloc</code>修改目标地址.</p>
 <p>先泄露<code>libc</code>然后劫持<code>free@plt</code>即可.</p>
 <h2 id="testFile"><a href="#testFile" class="headerlink" title="testFile"></a>testFile</h2><p>程序主逻辑.</p>
-<img src="/posts/e67f3bea/3.png" title="testFile">
+<img src="/posts/undefined/3.png" title="testFile">
 <hr>
 <p>即不断把输入字符和其在字符串中的偏移是否与<code>5</code>个<code>int</code>共<code>20</code>个字节一一相等.</p>
 <h2 id="真假校徽"><a href="#真假校徽" class="headerlink" title="真假校徽"></a>真假校徽</h2><p><code>Linux</code>下<code>compare</code>一下.</p>
-<img src="/posts/e67f3bea/1.png" title="真假校徽">
+<img src="/posts/undefined/1.png" title="真假校徽">
 <hr>
 <h2 id="minBash"><a href="#minBash" class="headerlink" title="minBash"></a>minBash</h2><p>利用已知<code>bash</code>漏洞:<code>BASH_CMDS[a]=/bin/sh;a</code>.</p>
-<img src="/posts/e67f3bea/2.png" title="minBash">
+<img src="/posts/undefined/2.png" title="minBash">
 <hr>
 <h2 id="PCAP"><a href="#PCAP" class="headerlink" title="PCAP"></a>PCAP</h2><p>打开浏览,发现有价值的就这一段,明显是<code>base64</code>.</p>
-<img src="/posts/e67f3bea/4.png" title="PCAP1">
+<img src="/posts/undefined/4.png" title="PCAP1">
 <hr>
 <p>解码,明显是<code>zip</code>文件,利用文件内的密码解压即得到<code>flag</code>.</p>
-<img src="/posts/e67f3bea/5.png" title="PCAP2">
+<img src="/posts/undefined/5.png" title="PCAP2">
 
       
     </div>
@@ -595,8 +595,8 @@
         <div class="post-nav">
           <div class="post-nav-next post-nav-item">
             
-              <a href="/posts/2359ad51/" rel="next" title="binary-逆向分析-tool-nm">
-                <i class="fa fa-chevron-left"></i> binary-逆向分析-tool-nm
+              <a href="/posts/926102fb/" rel="next" title="IS-reverse-tool-nm">
+                <i class="fa fa-chevron-left"></i> IS-reverse-tool-nm
               </a>
             
           </div>
@@ -681,7 +681,7 @@
                 
                   <a href="/archives/">
                 
-                    <span class="site-state-item-count">185</span>
+                    <span class="site-state-item-count">174</span>
                     <span class="site-state-item-name">日志</span>
                   </a>
                 </div>
@@ -724,27 +724,7 @@
                     
                       
                     
-                      
-                    
-                      
-                    
-                      
-                    
-                      
-                    
-                      
-                    
-                      
-                    
-                      
-                    
-                      
-                    
-                      
-                    
-                      
-                    
-                    <span class="site-state-item-count">25</span>
+                    <span class="site-state-item-count">15</span>
                     <span class="site-state-item-name">分类</span>
                   </a>
                 </div>
@@ -843,29 +823,7 @@
                     
                       
                     
-                      
-                    
-                      
-                    
-                      
-                    
-                      
-                    
-                      
-                    
-                      
-                    
-                      
-                    
-                      
-                    
-                      
-                    
-                      
-                    
-                      
-                    
-                    <span class="site-state-item-count">54</span>
+                    <span class="site-state-item-count">43</span>
                     <span class="site-state-item-name">标签</span>
                   </a>
                 </div>
@@ -947,7 +905,7 @@
       <i class="fa fa-area-chart"></i>
     </span>
     
-    <span title="站点总字数">717k</span>
+    <span title="站点总字数">710k</span>
   
 
   
@@ -956,7 +914,7 @@
       <i class="fa fa-coffee"></i>
     </span>
     
-    <span title="站点阅读时长">10:52</span>
+    <span title="站点阅读时长">10:46</span>
   
 </div>
 

@@ -1,0 +1,1647 @@
+<!DOCTYPE html>
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+
+<html class="theme-next mist use-motion" lang="zh-CN">
+<head><meta name="generator" content="Hexo 3.8.0">
+  <meta charset="UTF-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+
+
+
+
+
+
+  
+  
+    
+    
+  <script src="/lib/pace/pace.min.js?v=1.0.2"></script>
+  <link href="/lib/pace/pace-theme-minimal.min.css?v=1.0.2" rel="stylesheet">
+
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform">
+<meta http-equiv="Cache-Control" content="no-siteapp">
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css">
+
+<link href="/css/main.css?v=6.5.0" rel="stylesheet" type="text/css">
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon.png?v=6.5.0">
+
+
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32.png?v=6.5.0">
+
+
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16.png?v=6.5.0">
+
+
+  <link rel="mask-icon" href="/images/safari_pinned_tab.svg?v=6.5.0" color="#222">
+
+
+  <link rel="manifest" href="/images/manifest.json">
+
+
+  <meta name="msapplication-config" content="/images/browserconfig.xml">
+
+
+
+
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Mist',
+    version: '6.5.0',
+    sidebar: {"position":"left","display":"post","offset":12,"b2t":false,"scrollpercent":true,"onmobile":true},
+    fancybox: false,
+    fastclick: false,
+    lazyload: false,
+    tabs: true,
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+  
+
+
+
+
+  <meta name="description" content="简介AFL是一种Fuzzing测试工具.通过对源码进行编译时插桩(通过注入探针代码来实现程序分析)的方式监测边界(代码)覆盖率,通过算法自动变异新的测试用例来探索二进制程序内部新的执行路径.AFL也支持直接对没有源码的二进制程序进行测试,但需要QEMU的支持. 原理AFL的一个特点就是基于边界覆盖率的反馈机制,边界覆盖率的统计工作通过插桩完成,然后通过边界覆盖率来进行状态分析.记录输入样本的代码覆">
+<meta name="keywords" content="fuzz">
+<meta property="og:type" content="article">
+<meta property="og:title" content="IS-pwn-fuzz-AFL-基础">
+<meta property="og:url" content="https://hitworld.github.io/posts/48e1ca89/index.html">
+<meta property="og:site_name" content="w4rd3n">
+<meta property="og:description" content="简介AFL是一种Fuzzing测试工具.通过对源码进行编译时插桩(通过注入探针代码来实现程序分析)的方式监测边界(代码)覆盖率,通过算法自动变异新的测试用例来探索二进制程序内部新的执行路径.AFL也支持直接对没有源码的二进制程序进行测试,但需要QEMU的支持. 原理AFL的一个特点就是基于边界覆盖率的反馈机制,边界覆盖率的统计工作通过插桩完成,然后通过边界覆盖率来进行状态分析.记录输入样本的代码覆">
+<meta property="og:locale" content="zh-CN">
+<meta property="og:image" content="https://hitworld.github.io/posts/undefined/2.png">
+<meta property="og:image" content="https://hitworld.github.io/posts/undefined/3.png">
+<meta property="og:image" content="https://hitworld.github.io/posts/undefined/4.png">
+<meta property="og:updated_time" content="2020-08-09T06:33:51.771Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="IS-pwn-fuzz-AFL-基础">
+<meta name="twitter:description" content="简介AFL是一种Fuzzing测试工具.通过对源码进行编译时插桩(通过注入探针代码来实现程序分析)的方式监测边界(代码)覆盖率,通过算法自动变异新的测试用例来探索二进制程序内部新的执行路径.AFL也支持直接对没有源码的二进制程序进行测试,但需要QEMU的支持. 原理AFL的一个特点就是基于边界覆盖率的反馈机制,边界覆盖率的统计工作通过插桩完成,然后通过边界覆盖率来进行状态分析.记录输入样本的代码覆">
+<meta name="twitter:image" content="https://hitworld.github.io/posts/undefined/2.png">
+
+
+
+
+
+
+  <link rel="canonical" href="https://hitworld.github.io/posts/48e1ca89/">
+
+
+
+<script type="text/javascript" id="page.configurations">
+  CONFIG.page = {
+    sidebar: "",
+  };
+</script>
+
+  <title>IS-pwn-fuzz-AFL-基础 | w4rd3n</title>
+  
+
+
+
+
+
+
+
+
+
+
+
+  <noscript>
+  <style type="text/css">
+    .use-motion .motion-element,
+    .use-motion .brand,
+    .use-motion .menu-item,
+    .sidebar-inner,
+    .use-motion .post-block,
+    .use-motion .pagination,
+    .use-motion .comments,
+    .use-motion .post-header,
+    .use-motion .post-body,
+    .use-motion .collection-title { opacity: initial; }
+
+    .use-motion .logo,
+    .use-motion .site-title,
+    .use-motion .site-subtitle {
+      opacity: initial;
+      top: initial;
+    }
+
+    .use-motion {
+      .logo-line-before i { left: initial; }
+      .logo-line-after i { right: initial; }
+    }
+  </style>
+</noscript>
+
+</head>
+
+<body itemscope="" itemtype="http://schema.org/WebPage" lang="zh-CN">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope="" itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/" class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">w4rd3n</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+    
+      
+        <p class="site-subtitle">混吃等死</p>
+      
+    
+  </div>
+
+  <div class="site-nav-toggle">
+    <button aria-label="切换导航栏">
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+
+
+<nav class="site-nav">
+  
+    <ul id="menu" class="menu">
+      
+        
+        
+        
+          
+          <li class="menu-item menu-item-home">
+
+    
+    
+    
+      
+    
+
+    
+
+    <a href="/" rel="section"><i class="menu-item-icon fa fa-fw fa-home"></i> <br>首页</a>
+
+  </li>
+        
+        
+        
+          
+          <li class="menu-item menu-item-about">
+
+    
+    
+    
+      
+    
+
+    
+
+    <a href="/about/" rel="section"><i class="menu-item-icon fa fa-fw fa-user"></i> <br>友链</a>
+
+  </li>
+        
+        
+        
+          
+          <li class="menu-item menu-item-tags">
+
+    
+    
+    
+      
+    
+
+    
+
+    <a href="/tags/" rel="section"><i class="menu-item-icon fa fa-fw fa-tags"></i> <br>标签</a>
+
+  </li>
+        
+        
+        
+          
+          <li class="menu-item menu-item-categories">
+
+    
+    
+    
+      
+    
+
+    
+
+    <a href="/categories/" rel="section"><i class="menu-item-icon fa fa-fw fa-th"></i> <br>分类</a>
+
+  </li>
+        
+        
+        
+          
+          <li class="menu-item menu-item-archives">
+
+    
+    
+    
+      
+    
+
+    
+
+    <a href="/archives/" rel="section"><i class="menu-item-icon fa fa-fw fa-archive"></i> <br>归档</a>
+
+  </li>
+
+      
+      
+        <li class="menu-item menu-item-search">
+          
+            <a href="javascript:;" class="popup-trigger">
+          
+            
+              <i class="menu-item-icon fa fa-search fa-fw"></i> <br>搜索</a>
+        </li>
+      
+    </ul>
+  
+
+  
+    
+
+  
+
+  
+    <div class="site-search">
+      
+  <div class="popup search-popup local-search-popup">
+  <div class="local-search-header clearfix">
+    <span class="search-icon">
+      <i class="fa fa-search"></i>
+    </span>
+    <span class="popup-btn-close">
+      <i class="fa fa-times-circle"></i>
+    </span>
+    <div class="local-search-input-wrapper">
+      <input autocomplete="off" placeholder="搜索..." spellcheck="false" type="text" id="local-search-input">
+    </div>
+  </div>
+  <div id="local-search-result"></div>
+</div>
+
+
+
+    </div>
+  
+</nav>
+
+
+
+  
+
+
+
+</div>
+    </header>
+
+    
+
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  
+
+  <article class="post post-type-normal" itemscope="" itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="https://hitworld.github.io/posts/48e1ca89/">
+
+    <span hidden itemprop="author" itemscope="" itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="w4rd3n">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/apple-touch-icon.png">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope="" itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="w4rd3n">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">IS-pwn-fuzz-AFL-基础
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+
+            
+            
+            
+
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+
+              
+                
+              
+
+              <time title="创建时间：2019-06-04 05:21:14" itemprop="dateCreated datePublished" datetime="2019-06-04T05:21:14+08:00">2019-06-04</time>
+            
+
+            
+          </span>
+
+          
+            <span class="post-category">
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope="" itemtype="http://schema.org/Thing"><a href="/categories/IS/" itemprop="url" rel="index"><span itemprop="name">IS</span></a></span>
+
+                
+                
+                  ，
+                
+              
+                <span itemprop="about" itemscope="" itemtype="http://schema.org/Thing"><a href="/categories/IS/pwn/" itemprop="url" rel="index"><span itemprop="name">pwn</span></a></span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+             <span id="/posts/48e1ca89/" class="leancloud_visitors" data-flag-title="IS-pwn-fuzz-AFL-基础">
+               <span class="post-meta-divider">|</span>
+               <span class="post-meta-item-icon">
+                 <i class="fa fa-eye"></i>
+               </span>
+               
+                 <span class="post-meta-item-text">热度：</span>
+               
+                 <span class="leancloud-visitors-count"></span>
+                 <span>℃</span>
+             </span>
+          
+
+          
+
+          
+            <div class="post-symbolscount">
+              
+
+              
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-file-word-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">本文字数：</span>
+                
+                <span title="本文字数">6.4k</span>
+              
+
+              
+                <span class="post-meta-divider">|</span>
+              
+
+              
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-clock-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">阅读时长 &asymp;</span>
+                
+                <span title="阅读时长">6 分钟</span>
+              
+            </div>
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <h2 id="简介"><a href="#简介" class="headerlink" title="简介"></a>简介</h2><p><code>AFL</code>是一种<code>Fuzzing</code>测试工具.通过对源码进行编译时插桩(通过注入探针代码来实现程序分析)的方式监测边界(代码)覆盖率,通过算法自动变异新的测试用例来探索二进制程序内部新的执行路径.<code>AFL</code>也支持直接对没有源码的二进制程序进行测试,但需要<code>QEMU</code>的支持.</p>
+<h2 id="原理"><a href="#原理" class="headerlink" title="原理"></a>原理</h2><p><code>AFL</code>的一个特点就是基于边界覆盖率的反馈机制,边界覆盖率的统计工作通过插桩完成,然后通过边界覆盖率来进行状态分析.记录输入样本的代码覆盖率,从而调整输入样本以提高覆盖率,增加发现漏洞的概率.</p>
+<p><code>fuzz</code>过程中<code>AFL</code>会维护一个语料库队列<code>queue</code>,包含了初始测试用例及变异后有新状态产生的测试用例,变异策略分为确定性策略和随机性策略.</p>
+<p><code>AFL</code>通过跳转指令将程序分为一个个基本块,将源基本块和目的基本块的配对组合称为<code>tuple</code>(元组).通过记录<code>tuple</code>统计边界覆盖率,<code>AFL</code>通过<code>bitmap</code>(以<code>byte</code>为单位从而记录<code>tuple</code>的命中数)来记录这些信息.<br>出现新<code>tuple</code>或已有<code>tuple</code>中出现的新命中组视为产生新状态(也意味着更新覆盖范围),相应的测试用例将被归入到语料库队列<code>queue</code>中.</p>
+<p>上述过程会一直循环进行,期间触发了<code>crash</code>的文件会被记录下来.</p>
+<h2 id="插桩模块"><a href="#插桩模块" class="headerlink" title="插桩模块"></a>插桩模块</h2><p><code>AFL</code>有三种不同模式的插桩操作.</p>
+<p>其中普通模式和<code>llvm</code>模式是针对目标程序提供源码的情况,相较汇编级的普通模式插桩,编译级的<code>llvm</code>模式插桩包含更多优化.对仅提供二进制文件的目标程序则需借助<code>qemu</code>模式,其性能最低.</p>
+<p>这三种模式所插入的代码从用途上都包括:</p>
+<ol>
+<li>记录目标程序执行过程中的<code>tuple</code>信息,在每个基本块上都有插入.</li>
+<li>必要的初始操作以及维护一个<code>forkserver</code>循环启动进程.</li>
+</ol>
+<img src="/posts/undefined/2.png" title="p2">
+<h3 id="普通模式"><a href="#普通模式" class="headerlink" title="普通模式"></a>普通模式</h3><p><code>gcc</code>的<code>-B prefix</code>用于指定各阶段执行文件的优先查找目录.普通模式下<code>AFL</code>采用的插桩思路是先对<code>gcc</code>做一层简单封装,有一项是设定<code>-B prefix</code>选项并指向封装后的<code>as</code>汇编器所在目录.</p>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//afl-gcc.c,edit_params.</span></span><br><span class="line">cc_params[cc_par_cnt++] = <span class="string">"-B"</span>;</span><br><span class="line">cc_params[cc_par_cnt++] = as_path;</span><br></pre></td></tr></table></figure>
+<p>由封装后的<code>as</code>汇编器来处理前面生成的汇编文件,实际操作为查找汇编文件中的<code>.text</code>节区并在各控制转移指令处插入跳板<code>trampoline_fmt_32／trampoline_fmt_64</code>后再交由真正的<code>as</code>汇编器处理.<br>分析可知跳板的作用是跳转到具体的实现部分<code>main_payload_32／main_payload_64</code>,此部分指令只会插入一次.</p>
+<p>其中一个分支是用于记录目标程序执行过程中的<code>tuple</code>信息.</p>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">cur_location = &lt;COMPILE_TIME_RANDOM&gt;;</span><br><span class="line"><span class="comment">//目的基本快位置,随机化生成.</span></span><br><span class="line">shared_mem[cur_location ^ prev_location]++;</span><br><span class="line"><span class="comment">//记录tuple信息的bitmap.</span></span><br><span class="line">prev_location = cur_location &gt;&gt; <span class="number">1</span>;</span><br><span class="line"><span class="comment">//新的源基本块位置,移位操作是为了保留元组的方向性.</span></span><br></pre></td></tr></table></figure>
+<p>另一分支进行初始操作并维护<code>forkserver</code>,它会将已经初始化好的目标进程暂停在某个地方(例如<code>main</code>函数入口).按需再<code>fork</code>出一个子进程交予<code>fuzzer</code>进行测试.<code>forkserver</code>和<code>fuzzer</code>间是通过<code>pipe</code>管道进行通信的,除了控制命令,<code>fork</code>成功后的<code>PID</code>以及<code>waitpid</code>返回状态都是借由此方式传递.</p>
+<h3 id="llvm模式"><a href="#llvm模式" class="headerlink" title="llvm模式"></a>llvm模式</h3><p><code>LLVM</code>中代码首先由编译器前端<code>clang</code>处理后得到中间代码<code>IR</code>,再经过各<code>pass</code>工作节点的优化和转换,最终交给编译器后端生成机器码.</p>
+<img src="/posts/undefined/3.png" title="p3">
+<p><code>AFL</code>的插桩思路是通过编写<code>pass</code>来实现<code>tuple</code>信息的记录,在此过程中会对每一基本块都插入探针,具体代码在<code>afl-llvm-pass.so.cc</code>文件.而初始化和<code>forkserver</code>操作则通过链接完成,<code>afl-llvm-rt.o.c</code>文件实现了<code>afl-as.h</code>中<code>main_payload</code>的这部分功能.</p>
+<h3 id="qemu模式"><a href="#qemu模式" class="headerlink" title="qemu模式"></a>qemu模式</h3><p>对于该模式下的插桩,<code>AFL</code>的思路是直接利用<code>QEMU</code>内置的跟踪功能,并通过<code>patch</code>源码的方式来实现<code>afl-as.h</code>中的操作.</p>
+<h2 id="fuzzer模块"><a href="#fuzzer模块" class="headerlink" title="fuzzer模块"></a>fuzzer模块</h2><p>主要作用是通过不断改变测试用例来影响目标程序的执行路径,相关代码在<code>afl-fuzz.c</code>文件.</p>
+<p>起始阶段<code>fuzzer</code>会进行一系列的准备工作,例如初始化<code>bitmap</code>,<code>forkserver</code>上线,与子进程的交互准备,目录处理与前期检测等.</p>
+<h3 id="fuzzing策略"><a href="#fuzzing策略" class="headerlink" title="fuzzing策略"></a>fuzzing策略</h3><p><code>AFL</code>中用到的变异策略分为确定性策略和随机性策略.</p>
+<p>对于各变异操作,基本的处理流程如下.</p>
+<img src="/posts/undefined/4.png" title="p4">
+<p>如果一个测试用例在执行完随机性策略后仍未产生新状态,则会将其与另一测试用例随机拼接后再次交由随机性策略处理.而在确定性策略<code>fuzzing</code>过程中,如果发现后续的变异操作已经在前面进行过了,为避免重复将会跳过该操作,如果没有重复则由<code>common_fuzz_stuff</code>函数将变异后的内容写入测试文件并运行目标程序.</p>
+<p>变异的主要类型如下.</p>
+<ul>
+<li><code>bitflip</code>,按位翻转,<code>1</code>变为<code>0</code>,<code>0</code>变为<code>1</code>.</li>
+<li><code>arithmetic</code>,整数加减算术运算.</li>
+<li><code>interest</code>,把一些特殊内容替换到原文件中.</li>
+<li><code>dictionary</code>,把自动生成或用户提供的<code>token</code>替换<code>/</code>插入到原文件中.</li>
+<li><code>havoc</code>,此阶段会对原文件进行大量变异.</li>
+<li><code>splice</code>,此阶段会将两个文件拼接起来得到一个新的文件.</li>
+</ul>
+<p>其中,前四项是非<code>dumb mode</code>(<code>-d</code>)和主<code>fuzzer</code>(<code>-M</code>)会进行的操作,由于其变异方式没有随机性,所以也称为<code>deterministic fuzzing</code>;<code>havoc</code>和<code>splice</code>则存在随机性,是所有状况的<code>fuzzer</code>都会执行的变异.</p>
+<h4 id="bitflip"><a href="#bitflip" class="headerlink" title="bitflip"></a>bitflip</h4><p>最先使用的变异策略就是<code>bitflip</code>,根据翻转量<code>/</code>步长会进行多种不同的翻转,按照顺序依次为.</p>
+<ul>
+<li><code>bitflip 1/1</code>,每次翻转<code>1</code>个bit,按照每<code>1</code>个bit的步长从头开始.</li>
+<li><code>bitflip 2/1</code>,每次翻转相邻的<code>2</code>个<code>bit</code>,按照每1个bit的步长从头开始.</li>
+<li><code>bitflip 4/1</code>,每次翻转相邻的<code>4</code>个<code>bit</code>,按照每<code>1</code>个bit的步长从头开始.</li>
+<li><code>bitflip 8/8</code>,每次翻转相邻的<code>8</code>个<code>bit</code>,按照每<code>8</code>个<code>bit</code>的步长从头开始,即依次对每个<code>byte</code>做翻转.</li>
+<li><code>bitflip 16/8</code>,每次翻转相邻的<code>16</code>个<code>bit</code>,按照每<code>8</code>个<code>bit</code>的步长从头开始,即依次对每个<code>word</code>做翻转.</li>
+<li><code>bitflip 32/8</code>,每次翻转相邻的<code>32</code>个<code>bit</code>,按照每<code>8</code>个<code>bit</code>的步长从头开始,即依次对每个<code>dword</code>做翻转.</li>
+</ul>
+<p>在上述过程中<code>AFL</code>巧妙地嵌入了一些对文件格式的启发式判断.</p>
+<p>自动检测<code>token</code>:在进行<code>bitflip 1/1</code>变异时,对于每个<code>byte</code>的最低位翻转还进行了额外的处理:如果连续多个<code>bytes</code>的最低位被翻转后.程序的执行路径都未变化.而且与原始执行路径不一致,那么就把这一段连续的<code>bytes</code>判断是一条<code>token</code>.<br>为了控制这样自动生成的<code>token</code>的大小和数量,<code>AFL</code>在<code>config.h</code>中通过宏定义限制.</p>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">define</span> MIN_AUTO_EXTRA      3</span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">define</span> MAX_AUTO_EXTRA      32</span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">define</span> USE_AUTO_EXTRAS     10</span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">define</span> MAX_AUTO_EXTRAS     (USE_AUTO_EXTRAS * 10)</span></span><br></pre></td></tr></table></figure>
+<p>生成<code>effector map</code>:在进行<code>bitflip 8/8</code>变异时,<code>AFL</code>还生成了一个非常重要的信息:<code>effector map</code>.具体地,在对每个<code>byte</code>进行翻转时,如果其造成执行路径与原始路径不一致,就将该<code>byte</code>在<code>effector map</code>中标记为<code>1</code>,即有效的,否则标记为<code>0</code>.</p>
+<p>如果一个<code>byte</code>完全翻转,都无法带来执行路径的变化,那么这个<code>byte</code>很有可能是属于<code>data</code>而非<code>metadata</code>,对整个<code>fuzzing</code>的意义不大.</p>
+<h4 id="arithmetic"><a href="#arithmetic" class="headerlink" title="arithmetic"></a>arithmetic</h4><p>在<code>bitflip</code>变异全部进行完成后,便进入<code>arithmetic</code>.<code>arithmetic</code>根据目标大小的不同,也分为了多个子阶段.</p>
+<ul>
+<li><code>arith 8/8</code>,每次对<code>8</code>个<code>bit</code>进行加减运算,按照每<code>8</code>个<code>bit</code>的步长从头开始,即对文件的每个<code>byte</code>进行整数加减变异.</li>
+<li><code>arith 16/8</code>,每次对<code>16</code>个<code>bit</code>进行加减运算,按照每<code>8</code>个<code>bit</code>的步长从头开始,即对文件的每个<code>word</code>进行整数加减变异.</li>
+<li><code>arith 32/8</code>,每次对<code>32</code>个<code>bit</code>进行加减运算,按照每<code>8</code>个<code>bit</code>的步长从头开始,即对文件的每个<code>dword</code>进行整数加减变异.</li>
+</ul>
+<p>加减变异的上限,在<code>config.h</code>中的宏<code>ARITH_MAX</code>定义,默认为<code>35</code>.所以,对目标整数会进行<code>+1</code>,<code>...</code>,<code>+35</code>,<code>-1</code>,<code>...</code>,<code>-35</code>的变异.由于多个字节的整数存在大端序和小端序两种表示方式,<code>AFL</code>对这两种整数表示方式都进行变异.</p>
+<p><code>AFL</code>还会智能地跳过某些<code>arithmetic</code>变异.第一种情况就是前面提到的<code>effector map</code>:如果一个整数的所有<code>bytes</code>都被判断为无效,那么就跳过对整数的变异.第二种情况是之前<code>bitflip</code>已经生成过的变异此次便不会再执行.</p>
+<h4 id="interest"><a href="#interest" class="headerlink" title="interest"></a>interest</h4><p>下一个阶段是<code>interest</code>,也分为了多个子阶段.</p>
+<ul>
+<li><code>interest 8/8</code>,每次对<code>8</code>个<code>bit</code>替换,按照每<code>8</code>个<code>bit</code>的步长从头开始,即对文件的每个<code>byte</code>进行替换.</li>
+<li><code>interest 16/8</code>,每次对<code>16</code>个<code>bit</code>进替换,按照每<code>8</code>个<code>bit</code>的步长从头开始,即对文件的每个<code>word</code>进行替换.</li>
+<li><code>interest 32/8</code>,每次对<code>32</code>个<code>bit</code>进替换,按照每<code>8</code>个<code>bit</code>的步长从头开始,即对文件的每个<code>dword</code>进行替换.</li>
+</ul>
+<p>用于替换的<code>interesting values</code>是<code>AFL</code>预设的一些比较特殊的数.</p>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">static</span> s8  interesting_8[]  = &#123; INTERESTING_8 &#125;;</span><br><span class="line"><span class="keyword">static</span> s16 interesting_16[] = &#123; INTERESTING_8, INTERESTING_16 &#125;;</span><br><span class="line"><span class="keyword">static</span> s32 interesting_32[] = &#123; INTERESTING_8, INTERESTING_16, INTERESTING_32 &#125;;</span><br></pre></td></tr></table></figure>
+<p>这些数的定义在<code>config.h</code>文件中.基本都是可能会造成溢出的数.与之前类似,<code>effector map</code>仍然会用于判断是否需要变异;此外重复性变异也是会跳过的.</p>
+<h4 id="dictionary"><a href="#dictionary" class="headerlink" title="dictionary"></a>dictionary</h4><p>进入到这个阶段,就接近<code>deterministic fuzzing</code>的尾声了,具体有以下子阶段.</p>
+<ul>
+<li><code>user extras (over)</code>,从头开始,将用户提供的<code>tokens</code>依次替换到原文件中.</li>
+<li><code>user extras (insert)</code>,从头开始,将用户提供的<code>tokens</code>依次插入到原文件中.</li>
+<li><code>auto extras (over)</code>,从头开始,将自动检测的<code>tokens</code>依次替换到原文件中.</li>
+</ul>
+<p>用户提供的<code>tokens</code>是在词典文件中设置并通过<code>-x</code>选项指定的,如果没有则跳过相应的子阶段.</p>
+<h4 id="havoc"><a href="#havoc" class="headerlink" title="havoc"></a>havoc</h4><p><code>havoc</code>包含了对原文件的多轮变异,每一轮都是将多种方式组合<code>stacked</code>而成.</p>
+<ul>
+<li>随机选取某个<code>bit</code>进行翻转.</li>
+<li>随机选取某个<code>byte</code>/<code>word</code>/<code>dword</code>,将其设置为随机的<code>interesting value</code>.</li>
+<li>随机选取某个<code>byte</code>/<code>word</code>/<code>dword</code>,并随机选取大<code>/</code>小端序,对其加<code>/</code>减去一个随机数.</li>
+<li>随机选取某个<code>byte</code>,将其设置为随机数.</li>
+<li>随机删除一段<code>bytes</code>.</li>
+<li>随机选取一个位置,插入<code>/</code>替换一段随机长度的内容,其中<code>75%</code>的概率是插入原文中随机位置的内容,<code>25%</code>的概率是插入一段随机选取的数.</li>
+<li>随机选取一个位置,用随机选取的<code>token</code>(用户提供的或自动生成的)替换<code>/</code>插入.</li>
+</ul>
+<p><code>AFL</code>会生成一个随机数,作为变异组合的数量,并根据这个数量,每次从上面那些方式中随机选取一个,依次作用到文件上.</p>
+<h4 id="splice"><a href="#splice" class="headerlink" title="splice"></a>splice</h4><p><code>splice</code>是将两个<code>seed</code>文件拼接得到新的文件,并对这个新文件继续执行<code>havoc</code>变异.</p>
+<p>具体地,<code>AFL</code>在<code>seed</code>文件队列中随机选取一个,与当前的<code>seed</code>文件做对比.如果两者差别不大,就再重新随机选一个;如果两者相差比较明显,那么就随机选取一个位置,将两者都分割为头部和尾部.最后,将当前文件的头部与随机文件的尾部拼接起来,就得到了新的文件.在这里,<code>AFL</code>还会过滤掉拼接文件未发生变化的情况.</p>
+<h4 id="cycle"><a href="#cycle" class="headerlink" title="cycle"></a>cycle</h4><p>上面的变异完成后,<code>AFL</code>会对文件队列的下一个进行变异处理.当队列中的全部文件都变异测试后,就完成了一个<code>cycle</code>,整个队列又会从第一个文件开始,再次进行变异,不过与第一次变异不同的是,这一次就不需要再进行<code>deterministic fuzzing</code>了.如果用户不停止<code>AFL</code>,那么<code>seed</code>文件将会一遍遍的变异下去.</p>
+<h3 id="语料库更迭"><a href="#语料库更迭" class="headerlink" title="语料库更迭"></a>语料库更迭</h3><p>随着<code>fuzzing</code>的深入,目标程序会产生越来越多的执行路径,相应测试用例能否加入语料库<code>queue</code>队列取决于<code>trace_bits</code>(位于共享内存上,记录当前的<code>tuple</code>信息)是否出现新状态.</p>
+<p><code>fuzzer</code>会通过<code>virgin_bits</code>来记录目标程序的总<code>tuple</code>信息,每个<code>tuple</code>对应一个字节,初始值为<code>0xFF</code>.</p>
+<p>每个<code>tuple</code>都分为<code>8</code>个命中组,每个比特位可对应一个命中组,若无此类新状态出现其值仍为<code>1</code>,若出现其值则置<code>0</code>.执行完目标程序后要调用<code>classify_counts</code>函数对此次记录的各<code>tuple</code>命中数进行归组.</p>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">static</span> <span class="keyword">const</span> u8 count_class_lookup8[<span class="number">256</span>] = &#123;</span><br><span class="line">  [<span class="number">0</span>]           = <span class="number">0</span>,</span><br><span class="line">  [<span class="number">1</span>]           = <span class="number">1</span>,</span><br><span class="line">  [<span class="number">2</span>]           = <span class="number">2</span>,</span><br><span class="line">  [<span class="number">3</span>]           = <span class="number">4</span>,</span><br><span class="line">  [<span class="number">4</span> ... <span class="number">7</span>]     = <span class="number">8</span>,</span><br><span class="line">  [<span class="number">8</span> ... <span class="number">15</span>]    = <span class="number">16</span>,</span><br><span class="line">  [<span class="number">16</span> ... <span class="number">31</span>]   = <span class="number">32</span>,</span><br><span class="line">  [<span class="number">32</span> ... <span class="number">127</span>]  = <span class="number">64</span>,</span><br><span class="line">  [<span class="number">128</span> ... <span class="number">255</span>] = <span class="number">128</span></span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
+<p>只需将执行完归组操作后的<code>trace_bits</code>和<code>virgin_bits</code>做个比对就能判断出是否有新状态产生,同时,采用位运算也是为了提高代码执行的速率.</p>
+<p>后续合成的一些测试用例的边覆盖可能是之前测试用例的代码覆盖的超集.为了优化<code>fuzzing</code>,<code>AFL</code>周期性的重新评估队列.使用一种快速算法选择仍然能覆盖每一个元组,但有更小的测试用例的子集.</p>
+<p>算法通过指定每一个队列入口,根据执行延迟和文件大小分配一个分值比例.然后为每一个元组选择最低分值作为候选构造最小覆盖集.生成的<code>favored entries</code>的语料与初始数据集相比,在体积上通常要小<code>5-10x</code>倍.<code>Non-favored entries</code>将不会被丢弃,但当在队列中遇到的时候,它们会被不同的概率跳过.</p>
+<ol>
+<li>如果在队列中有新的<code>favored entries</code>,<code>99%</code>的<code>non-favored entries</code>将被跳过.</li>
+<li>如果没有新的<code>favored entries</code>,且当前<code>non-favored entry</code>是之前被<code>fuzzed</code>过得,它将被以<code>95%</code>的概率跳过.</li>
+<li>如果没有新的<code>favored entries</code>,且当前<code>non-favored entry</code>没有通过任何<code>fuzzing rounds</code>,它将被以<code>75%</code>的概率跳过.</li>
+</ol>
+
+      
+    </div>
+
+    
+
+    
+    
+    
+
+    
+
+    
+       
+    
+    
+
+    
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/fuzz/" rel="tag"><i class="fa fa-tag"></i> fuzz</a>
+          
+        </div>
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/posts/ceda23ac/" rel="next" title="CS-develop-java-继承">
+                <i class="fa fa-chevron-left"></i> CS-develop-java-继承
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/posts/42405b40/" rel="prev" title="IS-reverse-tool-OllyDbg">
+                IS-reverse-tool-OllyDbg <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+  </div>
+
+
+          </div>
+          
+
+  
+
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    
+      <div id="sidebar-dimmer"></div>
+    
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview-wrap sidebar-panel">
+        <div class="site-overview">
+          <div class="site-author motion-element" itemprop="author" itemscope="" itemtype="http://schema.org/Person">
+            
+              <img class="site-author-image" itemprop="image" src="/images/apple-touch-icon.png" alt="w4rd3n">
+            
+              <p class="site-author-name" itemprop="name">w4rd3n</p>
+              <p class="site-description motion-element" itemprop="description"></p>
+          </div>
+
+          
+            <nav class="site-state motion-element">
+              
+                <div class="site-state-item site-state-posts">
+                
+                  <a href="/archives/">
+                
+                    <span class="site-state-item-count">174</span>
+                    <span class="site-state-item-name">日志</span>
+                  </a>
+                </div>
+              
+
+              
+                
+                
+                <div class="site-state-item site-state-categories">
+                  <a href="/categories/index.html">
+                    
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                    <span class="site-state-item-count">15</span>
+                    <span class="site-state-item-name">分类</span>
+                  </a>
+                </div>
+              
+
+              
+                
+                
+                <div class="site-state-item site-state-tags">
+                  <a href="/tags/index.html">
+                    
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                    <span class="site-state-item-count">43</span>
+                    <span class="site-state-item-name">标签</span>
+                  </a>
+                </div>
+              
+            </nav>
+          
+
+          
+
+          
+            <div class="links-of-author motion-element">
+              
+                <span class="links-of-author-item">
+                  
+                  
+                    
+                  
+                  
+                    
+                  
+                  <a href="https://github.com/hitworld" title="GitHub &rarr; https://github.com/hitworld" rel="noopener" target="_blank"><i class="fa fa-fw fa-github"></i>GitHub</a>
+                </span>
+              
+            </div>
+          
+
+          
+
+          
+          
+
+          
+            
+          
+          
+
+        </div>
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#简介"><span class="nav-number">1.</span> <span class="nav-text">简介</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#原理"><span class="nav-number">2.</span> <span class="nav-text">原理</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#插桩模块"><span class="nav-number">3.</span> <span class="nav-text">插桩模块</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#普通模式"><span class="nav-number">3.1.</span> <span class="nav-text">普通模式</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#llvm模式"><span class="nav-number">3.2.</span> <span class="nav-text">llvm模式</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#qemu模式"><span class="nav-number">3.3.</span> <span class="nav-text">qemu模式</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#fuzzer模块"><span class="nav-number">4.</span> <span class="nav-text">fuzzer模块</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#fuzzing策略"><span class="nav-number">4.1.</span> <span class="nav-text">fuzzing策略</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#bitflip"><span class="nav-number">4.1.1.</span> <span class="nav-text">bitflip</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#arithmetic"><span class="nav-number">4.1.2.</span> <span class="nav-text">arithmetic</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#interest"><span class="nav-number">4.1.3.</span> <span class="nav-text">interest</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#dictionary"><span class="nav-number">4.1.4.</span> <span class="nav-text">dictionary</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#havoc"><span class="nav-number">4.1.5.</span> <span class="nav-text">havoc</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#splice"><span class="nav-number">4.1.6.</span> <span class="nav-text">splice</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#cycle"><span class="nav-number">4.1.7.</span> <span class="nav-text">cycle</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#语料库更迭"><span class="nav-number">4.2.</span> <span class="nav-text">语料库更迭</span></a></li></ol></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright">&copy; <span itemprop="copyrightYear">2020</span>
+  <span class="with-love" id="animate">
+    <i class="fa fa-gg-circle"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">w4rd3n</span>
+
+  
+    <span class="post-meta-divider">|</span>
+    <span class="post-meta-item-icon">
+      <i class="fa fa-area-chart"></i>
+    </span>
+    
+    <span title="站点总字数">710k</span>
+  
+
+  
+    <span class="post-meta-divider">|</span>
+    <span class="post-meta-item-icon">
+      <i class="fa fa-coffee"></i>
+    </span>
+    
+    <span title="站点阅读时长">10:46</span>
+  
+</div>
+
+
+
+
+
+
+
+
+
+        
+<div class="busuanzi-count">
+  <script async src="https://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+  
+    <span class="site-uv" title="总访客量">
+      <i class="fa fa-user"></i>
+      <span class="busuanzi-value" id="busuanzi_value_site_uv"></span>
+    </span>
+  
+
+  
+    <span class="site-pv" title="总访问量">
+      <i class="fa fa-eye"></i>
+      <span class="busuanzi-value" id="busuanzi_value_site_pv"></span>
+    </span>
+  
+</div>
+
+
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+          <span id="scrollpercent"><span>0</span>%</span>
+        
+      </div>
+    
+
+    
+	
+    
+
+    
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+    
+      
+  
+  <script type="text/javascript" color="0,0,255" opacity="0.5" zindex="-1" count="99" src="/lib/canvas-nest/canvas-nest.min.js"></script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+  
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=6.5.0"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=6.5.0"></script>
+
+
+
+  
+  
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=6.5.0"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=6.5.0"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=6.5.0"></script>
+
+
+
+  
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+  
+
+  <script type="text/javascript">
+    // Popup Window;
+    var isfetched = false;
+    var isXml = true;
+    // Search DB path;
+    var search_path = "search.xml";
+    if (search_path.length === 0) {
+      search_path = "search.xml";
+    } else if (/json$/i.test(search_path)) {
+      isXml = false;
+    }
+    var path = "/" + search_path;
+    // monitor main search box;
+
+    var onPopupClose = function (e) {
+      $('.popup').hide();
+      $('#local-search-input').val('');
+      $('.search-result-list').remove();
+      $('#no-result').remove();
+      $(".local-search-pop-overlay").remove();
+      $('body').css('overflow', '');
+    }
+
+    function proceedsearch() {
+      $("body")
+        .append('<div class="search-popup-overlay local-search-pop-overlay"></div>')
+        .css('overflow', 'hidden');
+      $('.search-popup-overlay').click(onPopupClose);
+      $('.popup').toggle();
+      var $localSearchInput = $('#local-search-input');
+      $localSearchInput.attr("autocapitalize", "none");
+      $localSearchInput.attr("autocorrect", "off");
+      $localSearchInput.focus();
+    }
+
+    // search function;
+    var searchFunc = function(path, search_id, content_id) {
+      'use strict';
+
+      // start loading animation
+      $("body")
+        .append('<div class="search-popup-overlay local-search-pop-overlay">' +
+          '<div id="search-loading-icon">' +
+          '<i class="fa fa-spinner fa-pulse fa-5x fa-fw"></i>' +
+          '</div>' +
+          '</div>')
+        .css('overflow', 'hidden');
+      $("#search-loading-icon").css('margin', '20% auto 0 auto').css('text-align', 'center');
+
+      
+
+      $.ajax({
+        url: path,
+        dataType: isXml ? "xml" : "json",
+        async: true,
+        success: function(res) {
+          // get the contents from search data
+          isfetched = true;
+          $('.popup').detach().appendTo('.header-inner');
+          var datas = isXml ? $("entry", res).map(function() {
+            return {
+              title: $("title", this).text(),
+              content: $("content",this).text(),
+              url: $("url" , this).text()
+            };
+          }).get() : res;
+          var input = document.getElementById(search_id);
+          var resultContent = document.getElementById(content_id);
+          var inputEventFunction = function() {
+            var searchText = input.value.trim().toLowerCase();
+            var keywords = searchText.split(/[\s\-]+/);
+            if (keywords.length > 1) {
+              keywords.push(searchText);
+            }
+            var resultItems = [];
+            if (searchText.length > 0) {
+              // perform local searching
+              datas.forEach(function(data) {
+                var isMatch = false;
+                var hitCount = 0;
+                var searchTextCount = 0;
+                var title = data.title.trim();
+                var titleInLowerCase = title.toLowerCase();
+                var content = data.content.trim().replace(/<[^>]+>/g,"");
+                
+                var contentInLowerCase = content.toLowerCase();
+                var articleUrl = decodeURIComponent(data.url);
+                var indexOfTitle = [];
+                var indexOfContent = [];
+                // only match articles with not empty titles
+                if(title != '') {
+                  keywords.forEach(function(keyword) {
+                    function getIndexByWord(word, text, caseSensitive) {
+                      var wordLen = word.length;
+                      if (wordLen === 0) {
+                        return [];
+                      }
+                      var startPosition = 0, position = [], index = [];
+                      if (!caseSensitive) {
+                        text = text.toLowerCase();
+                        word = word.toLowerCase();
+                      }
+                      while ((position = text.indexOf(word, startPosition)) > -1) {
+                        index.push({position: position, word: word});
+                        startPosition = position + wordLen;
+                      }
+                      return index;
+                    }
+
+                    indexOfTitle = indexOfTitle.concat(getIndexByWord(keyword, titleInLowerCase, false));
+                    indexOfContent = indexOfContent.concat(getIndexByWord(keyword, contentInLowerCase, false));
+                  });
+                  if (indexOfTitle.length > 0 || indexOfContent.length > 0) {
+                    isMatch = true;
+                    hitCount = indexOfTitle.length + indexOfContent.length;
+                  }
+                }
+
+                // show search results
+
+                if (isMatch) {
+                  // sort index by position of keyword
+
+                  [indexOfTitle, indexOfContent].forEach(function (index) {
+                    index.sort(function (itemLeft, itemRight) {
+                      if (itemRight.position !== itemLeft.position) {
+                        return itemRight.position - itemLeft.position;
+                      } else {
+                        return itemLeft.word.length - itemRight.word.length;
+                      }
+                    });
+                  });
+
+                  // merge hits into slices
+
+                  function mergeIntoSlice(text, start, end, index) {
+                    var item = index[index.length - 1];
+                    var position = item.position;
+                    var word = item.word;
+                    var hits = [];
+                    var searchTextCountInSlice = 0;
+                    while (position + word.length <= end && index.length != 0) {
+                      if (word === searchText) {
+                        searchTextCountInSlice++;
+                      }
+                      hits.push({position: position, length: word.length});
+                      var wordEnd = position + word.length;
+
+                      // move to next position of hit
+
+                      index.pop();
+                      while (index.length != 0) {
+                        item = index[index.length - 1];
+                        position = item.position;
+                        word = item.word;
+                        if (wordEnd > position) {
+                          index.pop();
+                        } else {
+                          break;
+                        }
+                      }
+                    }
+                    searchTextCount += searchTextCountInSlice;
+                    return {
+                      hits: hits,
+                      start: start,
+                      end: end,
+                      searchTextCount: searchTextCountInSlice
+                    };
+                  }
+
+                  var slicesOfTitle = [];
+                  if (indexOfTitle.length != 0) {
+                    slicesOfTitle.push(mergeIntoSlice(title, 0, title.length, indexOfTitle));
+                  }
+
+                  var slicesOfContent = [];
+                  while (indexOfContent.length != 0) {
+                    var item = indexOfContent[indexOfContent.length - 1];
+                    var position = item.position;
+                    var word = item.word;
+                    // cut out 100 characters
+                    var start = position - 20;
+                    var end = position + 80;
+                    if(start < 0){
+                      start = 0;
+                    }
+                    if (end < position + word.length) {
+                      end = position + word.length;
+                    }
+                    if(end > content.length){
+                      end = content.length;
+                    }
+                    slicesOfContent.push(mergeIntoSlice(content, start, end, indexOfContent));
+                  }
+
+                  // sort slices in content by search text's count and hits' count
+
+                  slicesOfContent.sort(function (sliceLeft, sliceRight) {
+                    if (sliceLeft.searchTextCount !== sliceRight.searchTextCount) {
+                      return sliceRight.searchTextCount - sliceLeft.searchTextCount;
+                    } else if (sliceLeft.hits.length !== sliceRight.hits.length) {
+                      return sliceRight.hits.length - sliceLeft.hits.length;
+                    } else {
+                      return sliceLeft.start - sliceRight.start;
+                    }
+                  });
+
+                  // select top N slices in content
+
+                  var upperBound = parseInt('1');
+                  if (upperBound >= 0) {
+                    slicesOfContent = slicesOfContent.slice(0, upperBound);
+                  }
+
+                  // highlight title and content
+
+                  function highlightKeyword(text, slice) {
+                    var result = '';
+                    var prevEnd = slice.start;
+                    slice.hits.forEach(function (hit) {
+                      result += text.substring(prevEnd, hit.position);
+                      var end = hit.position + hit.length;
+                      result += '<b class="search-keyword">' + text.substring(hit.position, end) + '</b>';
+                      prevEnd = end;
+                    });
+                    result += text.substring(prevEnd, slice.end);
+                    return result;
+                  }
+
+                  var resultItem = '';
+
+                  if (slicesOfTitle.length != 0) {
+                    resultItem += "<li><a href='" + articleUrl + "' class='search-result-title'>" + highlightKeyword(title, slicesOfTitle[0]) + "</a>";
+                  } else {
+                    resultItem += "<li><a href='" + articleUrl + "' class='search-result-title'>" + title + "</a>";
+                  }
+
+                  slicesOfContent.forEach(function (slice) {
+                    resultItem += "<a href='" + articleUrl + "'>" +
+                      "<p class=\"search-result\">" + highlightKeyword(content, slice) +
+                      "...</p>" + "</a>";
+                  });
+
+                  resultItem += "</li>";
+                  resultItems.push({
+                    item: resultItem,
+                    searchTextCount: searchTextCount,
+                    hitCount: hitCount,
+                    id: resultItems.length
+                  });
+                }
+              })
+            };
+            if (keywords.length === 1 && keywords[0] === "") {
+              resultContent.innerHTML = '<div id="no-result"><i class="fa fa-search fa-5x" /></div>'
+            } else if (resultItems.length === 0) {
+              resultContent.innerHTML = '<div id="no-result"><i class="fa fa-frown-o fa-5x" /></div>'
+            } else {
+              resultItems.sort(function (resultLeft, resultRight) {
+                if (resultLeft.searchTextCount !== resultRight.searchTextCount) {
+                  return resultRight.searchTextCount - resultLeft.searchTextCount;
+                } else if (resultLeft.hitCount !== resultRight.hitCount) {
+                  return resultRight.hitCount - resultLeft.hitCount;
+                } else {
+                  return resultRight.id - resultLeft.id;
+                }
+              });
+              var searchResultList = '<ul class=\"search-result-list\">';
+              resultItems.forEach(function (result) {
+                searchResultList += result.item;
+              })
+              searchResultList += "</ul>";
+              resultContent.innerHTML = searchResultList;
+            }
+          }
+
+          if ('auto' === 'auto') {
+            input.addEventListener('input', inputEventFunction);
+          } else {
+            $('.search-icon').click(inputEventFunction);
+            input.addEventListener('keypress', function (event) {
+              if (event.keyCode === 13) {
+                inputEventFunction();
+              }
+            });
+          }
+
+          // remove loading animation
+          $(".local-search-pop-overlay").remove();
+          $('body').css('overflow', '');
+
+          proceedsearch();
+        }
+      });
+    }
+
+    // handle and trigger popup window;
+    $('.popup-trigger').click(function(e) {
+      e.stopPropagation();
+      if (isfetched === false) {
+        searchFunc(path, 'local-search-input', 'local-search-result');
+      } else {
+        proceedsearch();
+      };
+    });
+
+    $('.popup-btn-close').click(onPopupClose);
+    $('.popup').click(function(e){
+      e.stopPropagation();
+    });
+    $(document).on('keyup', function (event) {
+      var shouldDismissSearchPopup = event.which === 27 &&
+        $('.search-popup').is(':visible');
+      if (shouldDismissSearchPopup) {
+        onPopupClose();
+      }
+    });
+  </script>
+
+
+
+
+
+  
+
+  
+  <script>
+    
+    function addCount(Counter) {
+      var $visitors = $(".leancloud_visitors");
+      var url = $visitors.attr('id').trim();
+      var title = $visitors.attr('data-flag-title').trim();
+
+      Counter('get', '/classes/Counter', { where: JSON.stringify({ url }) })
+        .done(function ({ results }) {
+          if (results.length > 0) {
+            var counter = results[0];
+            
+            Counter('put', `/classes/Counter/${counter.objectId}`, JSON.stringify({ time: { "__op":"Increment", "amount":1 } }))
+            
+            .done(function () {
+                  var $element = $(document.getElementById(url));
+                  $element.find('.leancloud-visitors-count').text(counter.time + 1);
+            })
+            
+            .fail(function ({ responseJSON }) {
+                console.log('Failed to save Visitor num, with error message: ' + responseJSON.error);
+            })
+          } else {
+            
+              Counter('post', '/classes/Counter', JSON.stringify({ title: title, url: url, time: 1}))
+                .done(function () {
+                  var $element = $(document.getElementById(url));
+                  $element.find('.leancloud-visitors-count').text(1);
+                })
+                .fail(function () {
+                  console.log('Failed to create');
+                });
+            
+          }
+        })
+      .fail(function ({ responseJSON }) {
+        console.log('LeanCloud Counter Error:' + responseJSON.code + " " + responseJSON.error);
+      });
+    }
+    
+
+    $(function() {
+      $.get('https://app-router.leancloud.cn/2/route?appId=' + "no3Ip4mNLc3JyF1AeTy8LrAm-gzGzoHsz")
+        .done(function ({ api_server }) {
+          var Counter = function (method, url, data) {
+            return $.ajax({
+              method: method,
+              url: `https://${api_server}/1.1${url}`,
+              headers: {
+                'X-LC-Id': "no3Ip4mNLc3JyF1AeTy8LrAm-gzGzoHsz",
+                'X-LC-Key': "UvlYMzpJKw0Jrw61V5BA5ifU",
+                'Content-Type': 'application/json',
+              },
+              data: data,
+            });
+          };
+          
+          addCount(Counter);
+          
+        })
+    });
+  </script>
+
+
+
+  
+
+  
+
+  
+
+  
+
+  
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+  <style>
+    .copy-btn {
+      display: inline-block;
+      padding: 6px 12px;
+      font-size: 13px;
+      font-weight: 700;
+      line-height: 20px;
+      color: #333;
+      white-space: nowrap;
+      vertical-align: middle;
+      cursor: pointer;
+      background-color: #eee;
+      background-image: linear-gradient(#fcfcfc, #eee);
+      border: 1px solid #d5d5d5;
+      border-radius: 3px;
+      user-select: none;
+      outline: 0;
+    }
+
+    .highlight-wrap .copy-btn {
+      transition: opacity .3s ease-in-out;
+      opacity: 0;
+      padding: 2px 6px;
+      position: absolute;
+      right: 4px;
+      top: 8px;
+    }
+
+    .highlight-wrap:hover .copy-btn,
+    .highlight-wrap .copy-btn:focus {
+      opacity: 1
+    }
+
+    .highlight-wrap {
+      position: relative;
+    }
+  </style>
+  <script>
+    $('.highlight').each(function (i, e) {
+      var $wrap = $('<div>').addClass('highlight-wrap')
+      $(e).after($wrap)
+      $wrap.append($('<button>').addClass('copy-btn').append('复制').on('click', function (e) {
+        var code = $(this).parent().find('.code').find('.line').map(function (i, e) {
+          return $(e).text()
+        }).toArray().join('\n')
+        var ta = document.createElement('textarea')
+        document.body.appendChild(ta)
+        ta.style.position = 'absolute'
+        ta.style.top = '0px'
+        ta.style.left = '0px'
+        ta.value = code
+        ta.select()
+        ta.focus()
+        var result = document.execCommand('copy')
+        document.body.removeChild(ta)
+        
+        $(this).blur()
+      })).on('mouseleave', function (e) {
+        var $b = $(this).find('.copy-btn')
+        setTimeout(function () {
+          $b.text('复制')
+        }, 300)
+      }).append(e)
+    })
+  </script>
+
+
+  
+
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-backstretch/2.0.4/jquery.backstretch.min.js"></script>;
+  <script>
+  //$("body").backstretch("/images/background.jpg");
+  </script>
+  
+  <script type="text/javascript" src="//cdn.bootcss.com/canvas-nest.js/1.0.0/canvas-nest.min.js"></script>
+  
+<script src="/live2dw/lib/L2Dwidget.min.js?0c58a1486de42ac6cc1c59c7d98ae887"></script><script>L2Dwidget.init({"pluginRootPath":"live2dw/","pluginJsPath":"lib/","pluginModelPath":"assets/","tagMode":false,"debug":false,"model":{"jsonPath":"/live2dw/assets/koharu.model.json"},"display":{"position":"right","width":150,"height":300},"mobile":{"show":false},"log":false});</script></body>
+</html>

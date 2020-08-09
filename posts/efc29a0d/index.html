@@ -1,0 +1,1746 @@
+<!DOCTYPE html>
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+
+<html class="theme-next mist use-motion" lang="zh-CN">
+<head><meta name="generator" content="Hexo 3.8.0">
+  <meta charset="UTF-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+
+
+
+
+
+
+  
+  
+    
+    
+  <script src="/lib/pace/pace.min.js?v=1.0.2"></script>
+  <link href="/lib/pace/pace-theme-minimal.min.css?v=1.0.2" rel="stylesheet">
+
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform">
+<meta http-equiv="Cache-Control" content="no-siteapp">
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css">
+
+<link href="/css/main.css?v=6.5.0" rel="stylesheet" type="text/css">
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon.png?v=6.5.0">
+
+
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32.png?v=6.5.0">
+
+
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16.png?v=6.5.0">
+
+
+  <link rel="mask-icon" href="/images/safari_pinned_tab.svg?v=6.5.0" color="#222">
+
+
+  <link rel="manifest" href="/images/manifest.json">
+
+
+  <meta name="msapplication-config" content="/images/browserconfig.xml">
+
+
+
+
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Mist',
+    version: '6.5.0',
+    sidebar: {"position":"left","display":"post","offset":12,"b2t":false,"scrollpercent":true,"onmobile":true},
+    fancybox: false,
+    fastclick: false,
+    lazyload: false,
+    tabs: true,
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+  
+
+
+
+
+  <meta name="description" content="未完成 WinDbgWinDbg是Windows平台上的用户态和内核态调试工具支持x86,IA64,AMD64平台.官网下载即可. 调试符号WinDbg允许指定一个或多个目录来存放符号文件,并使用环境变量_NT_SYMBOL_PATH来指向这些目录.对于操作系统内部模块的符号文件,可以根据使用的模块版本访问微软提供的符号服务器.  也可以设置好符号服务器自动获取,前面设置的下载文件的储存目录为C:">
+<meta name="keywords" content="tool">
+<meta property="og:type" content="article">
+<meta property="og:title" content="IS-reverse-tool-WinDbg">
+<meta property="og:url" content="https://hitworld.github.io/posts/efc29a0d/index.html">
+<meta property="og:site_name" content="w4rd3n">
+<meta property="og:description" content="未完成 WinDbgWinDbg是Windows平台上的用户态和内核态调试工具支持x86,IA64,AMD64平台.官网下载即可. 调试符号WinDbg允许指定一个或多个目录来存放符号文件,并使用环境变量_NT_SYMBOL_PATH来指向这些目录.对于操作系统内部模块的符号文件,可以根据使用的模块版本访问微软提供的符号服务器.  也可以设置好符号服务器自动获取,前面设置的下载文件的储存目录为C:">
+<meta property="og:locale" content="zh-CN">
+<meta property="og:image" content="https://hitworld.github.io/posts/undefined/1.png">
+<meta property="og:updated_time" content="2020-08-09T06:33:51.795Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="IS-reverse-tool-WinDbg">
+<meta name="twitter:description" content="未完成 WinDbgWinDbg是Windows平台上的用户态和内核态调试工具支持x86,IA64,AMD64平台.官网下载即可. 调试符号WinDbg允许指定一个或多个目录来存放符号文件,并使用环境变量_NT_SYMBOL_PATH来指向这些目录.对于操作系统内部模块的符号文件,可以根据使用的模块版本访问微软提供的符号服务器.  也可以设置好符号服务器自动获取,前面设置的下载文件的储存目录为C:">
+<meta name="twitter:image" content="https://hitworld.github.io/posts/undefined/1.png">
+
+
+
+
+
+
+  <link rel="canonical" href="https://hitworld.github.io/posts/efc29a0d/">
+
+
+
+<script type="text/javascript" id="page.configurations">
+  CONFIG.page = {
+    sidebar: "",
+  };
+</script>
+
+  <title>IS-reverse-tool-WinDbg | w4rd3n</title>
+  
+
+
+
+
+
+
+
+
+
+
+
+  <noscript>
+  <style type="text/css">
+    .use-motion .motion-element,
+    .use-motion .brand,
+    .use-motion .menu-item,
+    .sidebar-inner,
+    .use-motion .post-block,
+    .use-motion .pagination,
+    .use-motion .comments,
+    .use-motion .post-header,
+    .use-motion .post-body,
+    .use-motion .collection-title { opacity: initial; }
+
+    .use-motion .logo,
+    .use-motion .site-title,
+    .use-motion .site-subtitle {
+      opacity: initial;
+      top: initial;
+    }
+
+    .use-motion {
+      .logo-line-before i { left: initial; }
+      .logo-line-after i { right: initial; }
+    }
+  </style>
+</noscript>
+
+</head>
+
+<body itemscope="" itemtype="http://schema.org/WebPage" lang="zh-CN">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope="" itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/" class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">w4rd3n</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+    
+      
+        <p class="site-subtitle">混吃等死</p>
+      
+    
+  </div>
+
+  <div class="site-nav-toggle">
+    <button aria-label="切换导航栏">
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+
+
+<nav class="site-nav">
+  
+    <ul id="menu" class="menu">
+      
+        
+        
+        
+          
+          <li class="menu-item menu-item-home">
+
+    
+    
+    
+      
+    
+
+    
+
+    <a href="/" rel="section"><i class="menu-item-icon fa fa-fw fa-home"></i> <br>首页</a>
+
+  </li>
+        
+        
+        
+          
+          <li class="menu-item menu-item-about">
+
+    
+    
+    
+      
+    
+
+    
+
+    <a href="/about/" rel="section"><i class="menu-item-icon fa fa-fw fa-user"></i> <br>友链</a>
+
+  </li>
+        
+        
+        
+          
+          <li class="menu-item menu-item-tags">
+
+    
+    
+    
+      
+    
+
+    
+
+    <a href="/tags/" rel="section"><i class="menu-item-icon fa fa-fw fa-tags"></i> <br>标签</a>
+
+  </li>
+        
+        
+        
+          
+          <li class="menu-item menu-item-categories">
+
+    
+    
+    
+      
+    
+
+    
+
+    <a href="/categories/" rel="section"><i class="menu-item-icon fa fa-fw fa-th"></i> <br>分类</a>
+
+  </li>
+        
+        
+        
+          
+          <li class="menu-item menu-item-archives">
+
+    
+    
+    
+      
+    
+
+    
+
+    <a href="/archives/" rel="section"><i class="menu-item-icon fa fa-fw fa-archive"></i> <br>归档</a>
+
+  </li>
+
+      
+      
+        <li class="menu-item menu-item-search">
+          
+            <a href="javascript:;" class="popup-trigger">
+          
+            
+              <i class="menu-item-icon fa fa-search fa-fw"></i> <br>搜索</a>
+        </li>
+      
+    </ul>
+  
+
+  
+    
+
+  
+
+  
+    <div class="site-search">
+      
+  <div class="popup search-popup local-search-popup">
+  <div class="local-search-header clearfix">
+    <span class="search-icon">
+      <i class="fa fa-search"></i>
+    </span>
+    <span class="popup-btn-close">
+      <i class="fa fa-times-circle"></i>
+    </span>
+    <div class="local-search-input-wrapper">
+      <input autocomplete="off" placeholder="搜索..." spellcheck="false" type="text" id="local-search-input">
+    </div>
+  </div>
+  <div id="local-search-result"></div>
+</div>
+
+
+
+    </div>
+  
+</nav>
+
+
+
+  
+
+
+
+</div>
+    </header>
+
+    
+
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  
+
+  <article class="post post-type-normal" itemscope="" itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="https://hitworld.github.io/posts/efc29a0d/">
+
+    <span hidden itemprop="author" itemscope="" itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="w4rd3n">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/apple-touch-icon.png">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope="" itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="w4rd3n">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">IS-reverse-tool-WinDbg
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+
+            
+            
+            
+
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+
+              
+                
+              
+
+              <time title="创建时间：2019-09-03 14:09:42" itemprop="dateCreated datePublished" datetime="2019-09-03T14:09:42+08:00">2019-09-03</time>
+            
+
+            
+          </span>
+
+          
+            <span class="post-category">
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope="" itemtype="http://schema.org/Thing"><a href="/categories/IS/" itemprop="url" rel="index"><span itemprop="name">IS</span></a></span>
+
+                
+                
+                  ，
+                
+              
+                <span itemprop="about" itemscope="" itemtype="http://schema.org/Thing"><a href="/categories/IS/reverse/" itemprop="url" rel="index"><span itemprop="name">reverse</span></a></span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+             <span id="/posts/efc29a0d/" class="leancloud_visitors" data-flag-title="IS-reverse-tool-WinDbg">
+               <span class="post-meta-divider">|</span>
+               <span class="post-meta-item-icon">
+                 <i class="fa fa-eye"></i>
+               </span>
+               
+                 <span class="post-meta-item-text">热度：</span>
+               
+                 <span class="leancloud-visitors-count"></span>
+                 <span>℃</span>
+             </span>
+          
+
+          
+
+          
+            <div class="post-symbolscount">
+              
+
+              
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-file-word-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">本文字数：</span>
+                
+                <span title="本文字数">6.7k</span>
+              
+
+              
+                <span class="post-meta-divider">|</span>
+              
+
+              
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-clock-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">阅读时长 &asymp;</span>
+                
+                <span title="阅读时长">6 分钟</span>
+              
+            </div>
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <p>未完成</p>
+<h2 id="WinDbg"><a href="#WinDbg" class="headerlink" title="WinDbg"></a>WinDbg</h2><p><code>WinDbg</code>是<code>Windows</code>平台上的用户态和内核态调试工具支持<code>x86</code>,<code>IA64</code>,<code>AMD64</code>平台.官网下载即可.</p>
+<h2 id="调试符号"><a href="#调试符号" class="headerlink" title="调试符号"></a>调试符号</h2><p><code>WinDbg</code>允许指定一个或多个目录来存放符号文件,并使用环境变量<code>_NT_SYMBOL_PATH</code>来指向这些目录.对于操作系统内部模块的符号文件,可以根据使用的模块版本访问微软提供的<a href="http://msdl.microsoft.com/download/symbols" target="_blank" rel="noopener">符号服务器</a>.</p>
+<img src="/posts/undefined/1.png" title="p1">
+<p>也可以设置好符号服务器自动获取,前面设置的下载文件的储存目录为<code>C:\Symbols</code>,后面设置访问的<code>url</code>(等同于命令<code>!symfix C:\Symbols</code>).</p>
+<p>调式时可以使用<code>ld</code>命令从符号文件目录或符号服务器加载符号,使用<code>lm</code>命令或<code>Debug-&gt;Modules</code>显示模块列表.</p>
+<p><code>WinDbg</code>中对符号的表示方式为<code>Module!Symbol</code>,如<code>kernel32!OpenProcess</code>,但操作系统的内核模块是例外,统一使用<code>nt</code>这个模块名表示,如<code>nt!NtOpenProcess</code>.</p>
+<p><code>WinDbg</code>提供了符号检索功能,命令格式:<code>x [Options] Module!Symbol</code>,检索时可以使用<code>*</code>,<code>?</code>,<code>[]</code>,<code>#</code>,<code>+</code>等字符进行模糊匹配.</p>
+<p>在有符号文件支持的情况下,<code>WinDbg</code>支持源代码调试.<code>Ctrl + P</code>指定源代码文件路径即可(可以指定多个路径).</p>
+<h2 id="调式过程"><a href="#调式过程" class="headerlink" title="调式过程"></a>调式过程</h2><p><code>WinDbg</code>支持多种调式模式.</p>
+<ul>
+<li>以打开/附加的方式调试本地应用程序.</li>
+<li>分析<code>Dump</code>文件.</li>
+<li>远程调试.</li>
+<li>内核调试分五种:<code>NET</code>,<code>USB</code>,<code>1394</code>,<code>COM</code>和本地.前四种都是双机调试模式.</li>
+</ul>
+<p>附加进程时的非入侵模式,<code>Dump</code>文件分析和本地内核调试都属于非实时调试模式,不能直接控制被调试目标的中断和运行,一般用来观察/修改内存数据和分析数据结构.</p>
+<p><code>WinDbg</code>调试程序默认停在<code>ntdll.dll</code>中的系统断点处,可以在命令窗口(<code>Alt + 1</code>)输入<code>:g@$exentry</code>转到程序入口处.</p>
+<p><code>WinDbg</code>控制进程功能在<code>Debug</code>选项卡中.下为对应的命令与快捷键.</p>
+<table>
+<thead>
+<tr>
+<th style="text-align:left">选项卡命令</th>
+<th style="text-align:left">命令行命令</th>
+<th style="text-align:left">快捷键</th>
+<th style="text-align:left">功能</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:left"><code>Go</code></td>
+<td style="text-align:left"><code>g</code></td>
+<td style="text-align:left"><code>F5</code></td>
+<td style="text-align:left">运行程序</td>
+</tr>
+<tr>
+<td style="text-align:left"><code>Step Into</code></td>
+<td style="text-align:left"><code>t</code></td>
+<td style="text-align:left"><code>F8</code>或<code>F11</code></td>
+<td style="text-align:left">单步追踪执行,进入<code>call</code></td>
+</tr>
+<tr>
+<td style="text-align:left"><code>Step Over</code></td>
+<td style="text-align:left"><code>p</code></td>
+<td style="text-align:left"><code>F10</code></td>
+<td style="text-align:left">单步执行,不进入<code>call</code></td>
+</tr>
+<tr>
+<td style="text-align:left"></td>
+<td style="text-align:left"><code>pa addr</code></td>
+<td style="text-align:left"></td>
+<td style="text-align:left">单步到指定地址,不进入<code>call</code></td>
+</tr>
+<tr>
+<td style="text-align:left"></td>
+<td style="text-align:left"><code>ta addr</code></td>
+<td style="text-align:left"></td>
+<td style="text-align:left">追踪到指定地址,进入<code>call</code></td>
+</tr>
+<tr>
+<td style="text-align:left"></td>
+<td style="text-align:left"><code>pc [count]</code></td>
+<td style="text-align:left"></td>
+<td style="text-align:left">单步执行到下<code>count</code>个<code>call</code>指令调用</td>
+</tr>
+<tr>
+<td style="text-align:left"></td>
+<td style="text-align:left"><code>tc [count]</code></td>
+<td style="text-align:left"></td>
+<td style="text-align:left">追踪执行到下<code>count</code>个<code>call</code>指令调用,遇到<code>call</code>进入</td>
+</tr>
+<tr>
+<td style="text-align:left"></td>
+<td style="text-align:left"><code>tb [count]</code></td>
+<td style="text-align:left"></td>
+<td style="text-align:left">追踪执行到下<code>count</code>条分支指令,遇到<code>call</code>进入,只适用于内核调试</td>
+</tr>
+<tr>
+<td style="text-align:left"></td>
+<td style="text-align:left"><code>pt</code></td>
+<td style="text-align:left"></td>
+<td style="text-align:left">单步执行到下一个<code>call</code>返回指令</td>
+</tr>
+<tr>
+<td style="text-align:left"></td>
+<td style="text-align:left"><code>tt</code></td>
+<td style="text-align:left"></td>
+<td style="text-align:left">追踪执行到下一个<code>call</code>返回指令,遇到<code>call</code>进入</td>
+</tr>
+<tr>
+<td style="text-align:left"></td>
+<td style="text-align:left"><code>ph</code></td>
+<td style="text-align:left"></td>
+<td style="text-align:left">单步执行到下一条分支指令</td>
+</tr>
+<tr>
+<td style="text-align:left"></td>
+<td style="text-align:left"><code>th</code></td>
+<td style="text-align:left"></td>
+<td style="text-align:left">追踪执行到下一条分支指令,遇到<code>call</code>进入</td>
+</tr>
+<tr>
+<td style="text-align:left"></td>
+<td style="text-align:left"><code>wt</code></td>
+<td style="text-align:left"></td>
+<td style="text-align:left">自动追踪函数执行过程</td>
+</tr>
+</tbody>
+</table>
+<h3 id="断点命令"><a href="#断点命令" class="headerlink" title="断点命令"></a>断点命令</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">bp[ID] [Options] Address [Passes] [<span class="string">"CommandString"</span>]</span><br><span class="line"><span class="comment">#设置软件断点(INT 3).</span></span><br><span class="line"><span class="comment">#ID:指定断点ID.内核调试限32个断点,用户模式不限.</span></span><br><span class="line"><span class="comment">#Options:"/1"-&gt;一次性断点."/c"-&gt;指定最大调用深度,大于这个深度断点不工作."/C"-&gt;指定最小调用深度.</span></span><br><span class="line"><span class="comment">#Address:地址或符号.</span></span><br><span class="line"><span class="comment">#Passes:忽略中断的次数.</span></span><br><span class="line"><span class="comment">#CommandString:用于指定一组命令,当断点中断执行这组命令,""包围,;分割命令.</span></span><br></pre></td></tr></table></figure>
+<p><code>bp</code>所设断点与地址关联;<code>bu</code>功能与<code>bp</code>基本相同,但所设断点与符号关联,且所设断点会保存在工作空间中,供下次使用;<code>bm</code>功能与<code>bp</code>基本相同,但支持设置含通配符的断点,可以一次创建一个或多个<code>bu/p</code>断点.</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">ba[ID] Access Size [Options] Address [Passes] [<span class="string">"CommandString"</span>]</span><br><span class="line"><span class="comment">#Access:指定触发断点的方式."e"-&gt;在读取或执行指令时触发断点,"r"-&gt;在读取数据时触发断点,"w"-&gt;在写入数据时触发断点,"i"-&gt;在执行输入/输出访问时触发断点.</span></span><br><span class="line"><span class="comment">#Size:访问的长度.单位为byte,最大为系统字长.</span></span><br><span class="line"><span class="comment">#Address:断点地址,需要按Size对齐.</span></span><br></pre></td></tr></table></figure>
+<p>硬件断点最大数量取决于处理器,<code>x86</code>系统支持<code>4</code>个断点.可以通过<code>CommandString</code>设置条件断点.</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">bp/u/m/a Address <span class="string">".if(@eax=0x12ffc4)&#123;&#125;.else&#123;gc&#125;"</span></span><br><span class="line"><span class="comment">#gc表示继续执行</span></span><br></pre></td></tr></table></figure>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">bl</span><br><span class="line"><span class="comment">#列出当前断点</span></span><br><span class="line">bc 1-3,4</span><br><span class="line"><span class="comment">#删除1,2,3,4号断点</span></span><br><span class="line">bd *</span><br><span class="line"><span class="comment">#禁止所有断点</span></span><br><span class="line">be 5</span><br><span class="line"><span class="comment">#启用5号断点</span></span><br></pre></td></tr></table></figure>
+<h3 id="栈命令"><a href="#栈命令" class="headerlink" title="栈命令"></a>栈命令</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br></pre></td><td class="code"><pre><span class="line">k</span><br><span class="line"> <span class="comment"># ChildEBP RetAddr</span></span><br><span class="line">00 0061fa4c 77309126 ntdll!LdrpDoDebuggerBreak+0x2b</span><br><span class="line">01 0061fcac 772b1d11 ntdll!LdrpInitializeProcess+0x1ba6</span><br><span class="line">02 0061fd04 772b1c01 ntdll!_LdrpInitialize+0xba</span><br><span class="line">03 0061fd10 00000000 ntdll!LdrInitializeThunk+0x1</span><br><span class="line"><span class="comment">#ChildEBP记录栈帧的基地址,即EBP.</span></span><br><span class="line">kp</span><br><span class="line"><span class="comment">#把参数和参数值以函数原型的形式显示出来,包括参数类型,名字,取值(要求符号完整)</span></span><br><span class="line">kb</span><br><span class="line"> <span class="comment"># ChildEBP RetAddr  Args to Child</span></span><br><span class="line">00 0061fa4c 77309126 2d4a7416 0037b000 00000000 ntdll!LdrpDoDebuggerBreak+0x2b</span><br><span class="line">01 0061fcac 772b1d11 2d4a75be 00000000 00000000 ntdll!LdrpInitializeProcess+0x1ba6</span><br><span class="line">02 0061fd04 772b1c01 00000000 00000000 00000000 ntdll!_LdrpInitialize+0xba</span><br><span class="line">03 0061fd10 00000000 0061fd24 77260000 00000000 ntdll!LdrInitializeThunk+0x11</span><br><span class="line"><span class="comment">#Args to Child是栈上的前三个参数.即ebp+8h,ebp+ch,ebp+10h.</span></span><br><span class="line">kv</span><br><span class="line"> <span class="comment"># ChildEBP RetAddr  Args to Child              </span></span><br><span class="line">00 0061fa4c 77309126 2d4a7416 0037b000 00000000 ntdll!LdrpDoDebuggerBreak+0x2b (FPO: [Non-Fpo])</span><br><span class="line">01 0061fcac 772b1d11 2d4a75be 00000000 00000000 ntdll!LdrpInitializeProcess+0x1ba6 (FPO: [Non-Fpo])</span><br><span class="line">02 0061fd04 772b1c01 00000000 00000000 00000000 ntdll!_LdrpInitialize+0xba (FPO: [Non-Fpo])</span><br><span class="line">03 0061fd10 00000000 0061fd24 77260000 00000000 ntdll!LdrInitializeThunk+0x11 (FPO: [Non-Fpo])</span><br><span class="line"><span class="comment">#kv比kb增加了帧指针省略信息(FPO)和调用约定的显示  </span></span><br><span class="line">kd</span><br><span class="line">0061fa4c  0061fcac</span><br><span class="line">0061fa50  77309126 ntdll!LdrpInitializeProcess+0x1ba6</span><br><span class="line">0061fa54  2d4a7416</span><br><span class="line">0061fa58  0037b000</span><br><span class="line">0061fa5c  00000000</span><br><span class="line"><span class="comment">#...</span></span><br><span class="line"><span class="comment">#展示栈中数据.</span></span><br></pre></td></tr></table></figure>
+<h3 id="内存命令"><a href="#内存命令" class="headerlink" title="内存命令"></a>内存命令</h3><p>查看内存.</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">d? address [L(l)n]</span><br><span class="line"><span class="comment">#dw:双字节WORD格式,dd:4字节DWORD,dq:8字节格式,df:4字节单精度浮点数格式,dD:8字节双精度浮点数格式,dp:指针大小格式.</span></span><br><span class="line"><span class="comment">#da:ASCII字符串,db:字节和ASCII字符串,dc:DWORD和ASCII字符串,du:Unicode字符串,dW:双字节WORD和ASCII字符串,ds:ANSI_STRING类型的字符串格式,dS:UNICODE_STRING类型的字符串格式.</span></span><br><span class="line"><span class="comment">#dyb:显示二进制和字节,dyd:显示二进制和DWORD值.dds,dps,dqs显示地址及相关符号.</span></span><br><span class="line"><span class="comment">#dt [moduleName!]classname:显示数据类型和数据结构.例如:dt ntdll!*列出NTDLL模块中所有结构.</span></span><br><span class="line"><span class="comment">#地址范围可以使用L(l)参数设置,L4表示显示前4个数据.</span></span><br></pre></td></tr></table></figure>
+<p>搜索内存.</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">s -[<span class="built_in">type</span>] range pattern</span><br><span class="line"><span class="comment">#type表示搜索内容的数据类型.b-&gt;BYTE,w-&gt;WORD,d-&gt;DWORD,a-&gt;ASCII,u-&gt;Unicode.默认为b</span></span><br><span class="line"><span class="comment">#range表示地址范围,可以是起始地址加终止地址,或者起始地址加L(长度),如果长度超过256M,使用"L?length"</span></span><br><span class="line"><span class="comment">#pattern用于指定要搜索的内容,可以用空格分隔要搜索的数值</span></span><br></pre></td></tr></table></figure>
+<p>修改内存.</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">e&#123;a|u|za|zu&#125; address <span class="string">"String"</span></span><br><span class="line"><span class="comment">#za/zu表示写入内容为以零结尾的ASCII和Unicode字符串,a/u表示不以零结尾.</span></span><br><span class="line">e&#123;a|b|d|D|f|q|u|w&#125; address [values]</span><br><span class="line"><span class="comment">#a-&gt;ASCII,b-&gt;BYTE,d-&gt;DWORD,D-&gt;DOUBLE,f-&gt;FLOAT,q-&gt;8字节,u-&gt;Unicode,w-&gt;WORD.</span></span><br></pre></td></tr></table></figure>
+<p>显示内存属性.</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">!address [Address]</span><br></pre></td></tr></table></figure>
+<h3 id="其他常用命令"><a href="#其他常用命令" class="headerlink" title="其他常用命令"></a>其他常用命令</h3><p><code>!</code>开头的为扩展命令.</p>
+<ul>
+<li><code>!wow64exts.sw</code>:<code>32/64</code>位互相切换.</li>
+<li><code>!dh &lt;module&gt;</code>:获取模块映像头信息.</li>
+<li><code>!teb</code>:查看当前线程环境块.</li>
+<li><code>!peb</code>:查看进程环境块.</li>
+<li><code>!exchain</code>:查看当前异常处理链与处理函数.</li>
+<li><code>!vadump</code>:查看内存分页信息列表.</li>
+<li><code>!heap</code>:查看已有堆.</li>
+<li><code>!heap -x [Chunk Address]</code>:检查块是否属于<code>LFH</code>.</li>
+<li><code>dt &lt;struct name&gt;</code>:查看数据结构.</li>
+<li><code>dt &lt;struct name&gt; &lt;addr&gt;</code>:将指定地址处的数据作为指定的数据结构来解析.</li>
+<li><code>.printf &quot;%? %? %?&quot;, arg1, arg2, ...</code>:格式化输出(<code>?</code>代表<code>type</code>,参考<code>as</code>指令支持的<code>type</code>).</li>
+<li><code>.sympath+ &lt;path&gt;</code>:添加符号路径,配合<code>.reload</code>(重新载入符号)命令使用.</li>
+<li><code>.server tcp:port=&lt;port&gt;</code>:监听端口,等待远程调试.</li>
+<li><code>.formats &lt;expr&gt;</code>:以不同的形式显示表达式的值.</li>
+<li><code>.echo str</code>:打印字符串.</li>
+<li><code>.hh</code>:帮助.</li>
+<li><code>lmf/lm</code>:列举出已加载的模块.</li>
+<li><code>poi</code>:相当于<code>C</code>语言中对指针的操作符<code>*</code>.</li>
+<li><code>r &lt;@eax, ...&gt;&lt;=value&gt;</code>:查看<code>/</code>赋值寄存器组,单纯的<code>r</code>打印所以寄存器.</li>
+<li><code>rdmsr/wrmsr</code>:读写<code>MSR</code>寄存器.</li>
+<li><code>u addr L(n)</code>:对目标地址进行反汇编,<code>L(n)</code>指定行数.</li>
+</ul>
+<h2 id="脚本编写"><a href="#脚本编写" class="headerlink" title="脚本编写"></a>脚本编写</h2><p><code>WinDbg</code>支持脚本.<code>$$&gt;&lt;c:\text.txt</code>将把<code>c:\text.txt</code>当作脚本运行其中的指令并回显.等同于输入命令.</p>
+<h3 id="伪寄存器"><a href="#伪寄存器" class="headerlink" title="伪寄存器"></a>伪寄存器</h3><p>在表达式中使用伪寄存器必须使用转义字符<code>@</code>.</p>
+<ul>
+<li><code>$exentry</code>:当前进程入口地址.</li>
+<li><code>$ip</code>指令指针寄存器.</li>
+<li><code>$ra</code>:当前函数返回地址.</li>
+<li><code>$retreg</code>:函数返回值.</li>
+<li><code>$csp</code>:当前栈指针.</li>
+<li><code>$tpid</code>:当前进程的<code>PID</code>.</li>
+<li><code>$tid</code>:当前线程的标识.</li>
+<li><code>$ea</code>:最后一条被执行指令的有效地址.</li>
+<li><code>$p</code>:最后一条<code>d</code>命令打印的值.</li>
+<li><code>$bpNumber</code>:对应断点的地址.</li>
+<li><code>$t0~$t19</code>:自定义伪寄存器.</li>
+<li><code>$teb</code>:<code>TEB</code>的地址.</li>
+<li><code>$peb</code>:<code>PEB</code>的地址.</li>
+<li><code>$thread</code>:<code>PETHREAD</code>地址.</li>
+<li><code>$proc</code>:<code>PEPROCESS</code>地址.</li>
+</ul>
+<h3 id="别名"><a href="#别名" class="headerlink" title="别名"></a>别名</h3><p>别名类似<code>define</code>宏,在执行时直接用内容替换.别名有两种,固定别名和自定义别名.</p>
+<p>固定别名有<code>$u0~$u9</code>.定义语法为<code>r $.u* = &quot;hello&quot;</code>.<code>r</code>表示赋值.</p>
+<p>用于自定义别名的命令有<code>as</code>,<code>ad</code>,<code>al</code>.<code>as</code>位内存中的一些字符串定义别名(<code>as /type name addr</code>,例如<code>as /ma error 04040dc</code>);<code>ad</code>用于删除别名(<code>ad Name</code>,<code>ad *</code>);<code>al</code>用于列出别名.</p>
+<p><code>as</code>支持的<code>type</code>:<code>/ma-&gt;ASCII</code>.<code>/mu-&gt;Unicode</code>,<code>/msa-&gt;ANSI_STRING</code>,<code>/msu-&gt;UNICODE_STRING</code>,<code>/e-&gt;Environment variable specified</code>,<code>/f-&gt;Specifies the contents of the file</code>,<code>/x-&gt;expr</code>,<code>/c-&gt;result of command</code>.</p>
+<p><code>WinDbg</code>预设宏如下.</p>
+<ul>
+<li><code>$ntnsym</code>:<code>ntoskrnl</code>基址.</li>
+<li><code>$ntwsym</code>:<code>ntdll</code>基址.</li>
+<li><code>$ntsym</code>:根据用户态<code>/</code>内核态自动选择.</li>
+</ul>
+<h3 id="表达式"><a href="#表达式" class="headerlink" title="表达式"></a>表达式</h3><p><code>WinDbg</code>能识别<code>MASM</code>和<code>C++</code>表达式,默认使用<code>MASM</code>表达式(使用<code>.expr</code>查看默认使用的表达式语法).使用<code>@@c++(expr)</code>(或<code>??expr</code>),<code>@@masm(expr)</code>(或<code>?expr</code>)指定表达式求值器.</p>
+<p><code>MASM</code>表达式可以使用<code>+</code>,<code>-</code>,<code>*</code>,<code>/</code>算术运算符和一些类似转型运算符.</p>
+<ul>
+<li>使用<code>hi/low</code>获得一个<code>32</code>位数的高/低<code>16</code>位.</li>
+<li>使用<code>by/wo</code>获得指定地址处的<code>BYTE/WORD</code>.</li>
+<li>使用<code>dwo/pwo</code>获得指定地址处的<code>DWORD/QWORD</code>.</li>
+<li>使用<code>poi</code>可以获得指定地址处的指针长度的数据.</li>
+</ul>
+<p>同时<code>WinDbg</code>还定义了一些特殊的运算符,以<code>$</code>开头.</p>
+<ul>
+<li><code>$fnsucc(FnAddress, RetVal, Flag)</code>:将<code>RetVal</code>作为位于<code>FnAddress</code>处函数的返回值.如果返回值位成功码则<code>$fnsucc</code>返回<code>TRUE</code>.</li>
+<li><code>$iment(Address)</code>:返回加载模块列表中的映像入口点地址.</li>
+<li><code>$scmp(str1, str2)</code>:字符串比较,同<code>strcmp</code>.</li>
+<li><code>$sicmp(str1, str2)</code>:同<code>stricmp</code>.</li>
+<li><code>$spat(str1, Pattern)</code>:匹配.</li>
+<li><code>$vvalid(Address, Length)</code>:判断起始地址位<code>Address</code>,长度为<code>Length</code>的内存是否有效.有效返回<code>1</code>.</li>
+</ul>
+<p>在<code>C++</code>表达式中可以使用<code>C++</code>的各种操作符,且表达式中数值默认作为十进制解析,使用<code>0x</code>前缀指定十六进制解析.</p>
+<p><code>WinDbg</code>支持两种加入注释的方法:<code>*</code>后所有内容被当成注释;<code>$$</code>后的注释以分号结束.</p>
+<h3 id="流程控制语句"><a href="#流程控制语句" class="headerlink" title="流程控制语句"></a>流程控制语句</h3><p><code>.if</code>,<code>.else</code>,<code>.elif</code>,<code>.do</code>,<code>.while</code>,<code>.for</code>,<code>.continue</code>,<code>.break</code>,<code>.block</code>(用于定义代码块).</p>
+<h2 id="扩展模块"><a href="#扩展模块" class="headerlink" title="扩展模块"></a>扩展模块</h2><p><code>WinDbg</code>自带一部分扩展模块,其位于<code>WinDbg</code>的安装目录下,并在<code>WinDbg</code>启动时默认加载.</p>
+<p>可以加载一些其他的扩展模块,首先使用<code>_NT_DEBUGGER_EXTENSION_PATH</code>环境变量或者<code>.extpath ExtensionPath</code>来设置搜索路径.</p>
+<ul>
+<li><code>.load(DLL)</code>:加载扩展模块.等同于<code>! module.extension</code>.</li>
+<li><code>.unload(DLL)</code>:卸载扩展模块.</li>
+<li><code>.chain(List Debugger Extensions)</code>:显示已加载的调试扩展及搜索顺序.</li>
+</ul>
+
+      
+    </div>
+
+    
+
+    
+    
+    
+
+    
+
+    
+       
+    
+    
+
+    
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/tool/" rel="tag"><i class="fa fa-tag"></i> tool</a>
+          
+        </div>
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/posts/903016ad/" rel="next" title="CS-operations-Linux-文件属性与权限">
+                <i class="fa fa-chevron-left"></i> CS-operations-Linux-文件属性与权限
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/posts/80651f79/" rel="prev" title="CS-BASIC-assembly-IA32-基础">
+                CS-BASIC-assembly-IA32-基础 <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+  </div>
+
+
+          </div>
+          
+
+  
+
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    
+      <div id="sidebar-dimmer"></div>
+    
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview-wrap sidebar-panel">
+        <div class="site-overview">
+          <div class="site-author motion-element" itemprop="author" itemscope="" itemtype="http://schema.org/Person">
+            
+              <img class="site-author-image" itemprop="image" src="/images/apple-touch-icon.png" alt="w4rd3n">
+            
+              <p class="site-author-name" itemprop="name">w4rd3n</p>
+              <p class="site-description motion-element" itemprop="description"></p>
+          </div>
+
+          
+            <nav class="site-state motion-element">
+              
+                <div class="site-state-item site-state-posts">
+                
+                  <a href="/archives/">
+                
+                    <span class="site-state-item-count">174</span>
+                    <span class="site-state-item-name">日志</span>
+                  </a>
+                </div>
+              
+
+              
+                
+                
+                <div class="site-state-item site-state-categories">
+                  <a href="/categories/index.html">
+                    
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                    <span class="site-state-item-count">15</span>
+                    <span class="site-state-item-name">分类</span>
+                  </a>
+                </div>
+              
+
+              
+                
+                
+                <div class="site-state-item site-state-tags">
+                  <a href="/tags/index.html">
+                    
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                    <span class="site-state-item-count">43</span>
+                    <span class="site-state-item-name">标签</span>
+                  </a>
+                </div>
+              
+            </nav>
+          
+
+          
+
+          
+            <div class="links-of-author motion-element">
+              
+                <span class="links-of-author-item">
+                  
+                  
+                    
+                  
+                  
+                    
+                  
+                  <a href="https://github.com/hitworld" title="GitHub &rarr; https://github.com/hitworld" rel="noopener" target="_blank"><i class="fa fa-fw fa-github"></i>GitHub</a>
+                </span>
+              
+            </div>
+          
+
+          
+
+          
+          
+
+          
+            
+          
+          
+
+        </div>
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#WinDbg"><span class="nav-number">1.</span> <span class="nav-text">WinDbg</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#调试符号"><span class="nav-number">2.</span> <span class="nav-text">调试符号</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#调式过程"><span class="nav-number">3.</span> <span class="nav-text">调式过程</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#断点命令"><span class="nav-number">3.1.</span> <span class="nav-text">断点命令</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#栈命令"><span class="nav-number">3.2.</span> <span class="nav-text">栈命令</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#内存命令"><span class="nav-number">3.3.</span> <span class="nav-text">内存命令</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#其他常用命令"><span class="nav-number">3.4.</span> <span class="nav-text">其他常用命令</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#脚本编写"><span class="nav-number">4.</span> <span class="nav-text">脚本编写</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#伪寄存器"><span class="nav-number">4.1.</span> <span class="nav-text">伪寄存器</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#别名"><span class="nav-number">4.2.</span> <span class="nav-text">别名</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#表达式"><span class="nav-number">4.3.</span> <span class="nav-text">表达式</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#流程控制语句"><span class="nav-number">4.4.</span> <span class="nav-text">流程控制语句</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#扩展模块"><span class="nav-number">5.</span> <span class="nav-text">扩展模块</span></a></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright">&copy; <span itemprop="copyrightYear">2020</span>
+  <span class="with-love" id="animate">
+    <i class="fa fa-gg-circle"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">w4rd3n</span>
+
+  
+    <span class="post-meta-divider">|</span>
+    <span class="post-meta-item-icon">
+      <i class="fa fa-area-chart"></i>
+    </span>
+    
+    <span title="站点总字数">710k</span>
+  
+
+  
+    <span class="post-meta-divider">|</span>
+    <span class="post-meta-item-icon">
+      <i class="fa fa-coffee"></i>
+    </span>
+    
+    <span title="站点阅读时长">10:46</span>
+  
+</div>
+
+
+
+
+
+
+
+
+
+        
+<div class="busuanzi-count">
+  <script async src="https://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+  
+    <span class="site-uv" title="总访客量">
+      <i class="fa fa-user"></i>
+      <span class="busuanzi-value" id="busuanzi_value_site_uv"></span>
+    </span>
+  
+
+  
+    <span class="site-pv" title="总访问量">
+      <i class="fa fa-eye"></i>
+      <span class="busuanzi-value" id="busuanzi_value_site_pv"></span>
+    </span>
+  
+</div>
+
+
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+          <span id="scrollpercent"><span>0</span>%</span>
+        
+      </div>
+    
+
+    
+	
+    
+
+    
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+    
+      
+  
+  <script type="text/javascript" color="0,0,255" opacity="0.5" zindex="-1" count="99" src="/lib/canvas-nest/canvas-nest.min.js"></script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+  
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=6.5.0"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=6.5.0"></script>
+
+
+
+  
+  
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=6.5.0"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=6.5.0"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=6.5.0"></script>
+
+
+
+  
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+  
+
+  <script type="text/javascript">
+    // Popup Window;
+    var isfetched = false;
+    var isXml = true;
+    // Search DB path;
+    var search_path = "search.xml";
+    if (search_path.length === 0) {
+      search_path = "search.xml";
+    } else if (/json$/i.test(search_path)) {
+      isXml = false;
+    }
+    var path = "/" + search_path;
+    // monitor main search box;
+
+    var onPopupClose = function (e) {
+      $('.popup').hide();
+      $('#local-search-input').val('');
+      $('.search-result-list').remove();
+      $('#no-result').remove();
+      $(".local-search-pop-overlay").remove();
+      $('body').css('overflow', '');
+    }
+
+    function proceedsearch() {
+      $("body")
+        .append('<div class="search-popup-overlay local-search-pop-overlay"></div>')
+        .css('overflow', 'hidden');
+      $('.search-popup-overlay').click(onPopupClose);
+      $('.popup').toggle();
+      var $localSearchInput = $('#local-search-input');
+      $localSearchInput.attr("autocapitalize", "none");
+      $localSearchInput.attr("autocorrect", "off");
+      $localSearchInput.focus();
+    }
+
+    // search function;
+    var searchFunc = function(path, search_id, content_id) {
+      'use strict';
+
+      // start loading animation
+      $("body")
+        .append('<div class="search-popup-overlay local-search-pop-overlay">' +
+          '<div id="search-loading-icon">' +
+          '<i class="fa fa-spinner fa-pulse fa-5x fa-fw"></i>' +
+          '</div>' +
+          '</div>')
+        .css('overflow', 'hidden');
+      $("#search-loading-icon").css('margin', '20% auto 0 auto').css('text-align', 'center');
+
+      
+
+      $.ajax({
+        url: path,
+        dataType: isXml ? "xml" : "json",
+        async: true,
+        success: function(res) {
+          // get the contents from search data
+          isfetched = true;
+          $('.popup').detach().appendTo('.header-inner');
+          var datas = isXml ? $("entry", res).map(function() {
+            return {
+              title: $("title", this).text(),
+              content: $("content",this).text(),
+              url: $("url" , this).text()
+            };
+          }).get() : res;
+          var input = document.getElementById(search_id);
+          var resultContent = document.getElementById(content_id);
+          var inputEventFunction = function() {
+            var searchText = input.value.trim().toLowerCase();
+            var keywords = searchText.split(/[\s\-]+/);
+            if (keywords.length > 1) {
+              keywords.push(searchText);
+            }
+            var resultItems = [];
+            if (searchText.length > 0) {
+              // perform local searching
+              datas.forEach(function(data) {
+                var isMatch = false;
+                var hitCount = 0;
+                var searchTextCount = 0;
+                var title = data.title.trim();
+                var titleInLowerCase = title.toLowerCase();
+                var content = data.content.trim().replace(/<[^>]+>/g,"");
+                
+                var contentInLowerCase = content.toLowerCase();
+                var articleUrl = decodeURIComponent(data.url);
+                var indexOfTitle = [];
+                var indexOfContent = [];
+                // only match articles with not empty titles
+                if(title != '') {
+                  keywords.forEach(function(keyword) {
+                    function getIndexByWord(word, text, caseSensitive) {
+                      var wordLen = word.length;
+                      if (wordLen === 0) {
+                        return [];
+                      }
+                      var startPosition = 0, position = [], index = [];
+                      if (!caseSensitive) {
+                        text = text.toLowerCase();
+                        word = word.toLowerCase();
+                      }
+                      while ((position = text.indexOf(word, startPosition)) > -1) {
+                        index.push({position: position, word: word});
+                        startPosition = position + wordLen;
+                      }
+                      return index;
+                    }
+
+                    indexOfTitle = indexOfTitle.concat(getIndexByWord(keyword, titleInLowerCase, false));
+                    indexOfContent = indexOfContent.concat(getIndexByWord(keyword, contentInLowerCase, false));
+                  });
+                  if (indexOfTitle.length > 0 || indexOfContent.length > 0) {
+                    isMatch = true;
+                    hitCount = indexOfTitle.length + indexOfContent.length;
+                  }
+                }
+
+                // show search results
+
+                if (isMatch) {
+                  // sort index by position of keyword
+
+                  [indexOfTitle, indexOfContent].forEach(function (index) {
+                    index.sort(function (itemLeft, itemRight) {
+                      if (itemRight.position !== itemLeft.position) {
+                        return itemRight.position - itemLeft.position;
+                      } else {
+                        return itemLeft.word.length - itemRight.word.length;
+                      }
+                    });
+                  });
+
+                  // merge hits into slices
+
+                  function mergeIntoSlice(text, start, end, index) {
+                    var item = index[index.length - 1];
+                    var position = item.position;
+                    var word = item.word;
+                    var hits = [];
+                    var searchTextCountInSlice = 0;
+                    while (position + word.length <= end && index.length != 0) {
+                      if (word === searchText) {
+                        searchTextCountInSlice++;
+                      }
+                      hits.push({position: position, length: word.length});
+                      var wordEnd = position + word.length;
+
+                      // move to next position of hit
+
+                      index.pop();
+                      while (index.length != 0) {
+                        item = index[index.length - 1];
+                        position = item.position;
+                        word = item.word;
+                        if (wordEnd > position) {
+                          index.pop();
+                        } else {
+                          break;
+                        }
+                      }
+                    }
+                    searchTextCount += searchTextCountInSlice;
+                    return {
+                      hits: hits,
+                      start: start,
+                      end: end,
+                      searchTextCount: searchTextCountInSlice
+                    };
+                  }
+
+                  var slicesOfTitle = [];
+                  if (indexOfTitle.length != 0) {
+                    slicesOfTitle.push(mergeIntoSlice(title, 0, title.length, indexOfTitle));
+                  }
+
+                  var slicesOfContent = [];
+                  while (indexOfContent.length != 0) {
+                    var item = indexOfContent[indexOfContent.length - 1];
+                    var position = item.position;
+                    var word = item.word;
+                    // cut out 100 characters
+                    var start = position - 20;
+                    var end = position + 80;
+                    if(start < 0){
+                      start = 0;
+                    }
+                    if (end < position + word.length) {
+                      end = position + word.length;
+                    }
+                    if(end > content.length){
+                      end = content.length;
+                    }
+                    slicesOfContent.push(mergeIntoSlice(content, start, end, indexOfContent));
+                  }
+
+                  // sort slices in content by search text's count and hits' count
+
+                  slicesOfContent.sort(function (sliceLeft, sliceRight) {
+                    if (sliceLeft.searchTextCount !== sliceRight.searchTextCount) {
+                      return sliceRight.searchTextCount - sliceLeft.searchTextCount;
+                    } else if (sliceLeft.hits.length !== sliceRight.hits.length) {
+                      return sliceRight.hits.length - sliceLeft.hits.length;
+                    } else {
+                      return sliceLeft.start - sliceRight.start;
+                    }
+                  });
+
+                  // select top N slices in content
+
+                  var upperBound = parseInt('1');
+                  if (upperBound >= 0) {
+                    slicesOfContent = slicesOfContent.slice(0, upperBound);
+                  }
+
+                  // highlight title and content
+
+                  function highlightKeyword(text, slice) {
+                    var result = '';
+                    var prevEnd = slice.start;
+                    slice.hits.forEach(function (hit) {
+                      result += text.substring(prevEnd, hit.position);
+                      var end = hit.position + hit.length;
+                      result += '<b class="search-keyword">' + text.substring(hit.position, end) + '</b>';
+                      prevEnd = end;
+                    });
+                    result += text.substring(prevEnd, slice.end);
+                    return result;
+                  }
+
+                  var resultItem = '';
+
+                  if (slicesOfTitle.length != 0) {
+                    resultItem += "<li><a href='" + articleUrl + "' class='search-result-title'>" + highlightKeyword(title, slicesOfTitle[0]) + "</a>";
+                  } else {
+                    resultItem += "<li><a href='" + articleUrl + "' class='search-result-title'>" + title + "</a>";
+                  }
+
+                  slicesOfContent.forEach(function (slice) {
+                    resultItem += "<a href='" + articleUrl + "'>" +
+                      "<p class=\"search-result\">" + highlightKeyword(content, slice) +
+                      "...</p>" + "</a>";
+                  });
+
+                  resultItem += "</li>";
+                  resultItems.push({
+                    item: resultItem,
+                    searchTextCount: searchTextCount,
+                    hitCount: hitCount,
+                    id: resultItems.length
+                  });
+                }
+              })
+            };
+            if (keywords.length === 1 && keywords[0] === "") {
+              resultContent.innerHTML = '<div id="no-result"><i class="fa fa-search fa-5x" /></div>'
+            } else if (resultItems.length === 0) {
+              resultContent.innerHTML = '<div id="no-result"><i class="fa fa-frown-o fa-5x" /></div>'
+            } else {
+              resultItems.sort(function (resultLeft, resultRight) {
+                if (resultLeft.searchTextCount !== resultRight.searchTextCount) {
+                  return resultRight.searchTextCount - resultLeft.searchTextCount;
+                } else if (resultLeft.hitCount !== resultRight.hitCount) {
+                  return resultRight.hitCount - resultLeft.hitCount;
+                } else {
+                  return resultRight.id - resultLeft.id;
+                }
+              });
+              var searchResultList = '<ul class=\"search-result-list\">';
+              resultItems.forEach(function (result) {
+                searchResultList += result.item;
+              })
+              searchResultList += "</ul>";
+              resultContent.innerHTML = searchResultList;
+            }
+          }
+
+          if ('auto' === 'auto') {
+            input.addEventListener('input', inputEventFunction);
+          } else {
+            $('.search-icon').click(inputEventFunction);
+            input.addEventListener('keypress', function (event) {
+              if (event.keyCode === 13) {
+                inputEventFunction();
+              }
+            });
+          }
+
+          // remove loading animation
+          $(".local-search-pop-overlay").remove();
+          $('body').css('overflow', '');
+
+          proceedsearch();
+        }
+      });
+    }
+
+    // handle and trigger popup window;
+    $('.popup-trigger').click(function(e) {
+      e.stopPropagation();
+      if (isfetched === false) {
+        searchFunc(path, 'local-search-input', 'local-search-result');
+      } else {
+        proceedsearch();
+      };
+    });
+
+    $('.popup-btn-close').click(onPopupClose);
+    $('.popup').click(function(e){
+      e.stopPropagation();
+    });
+    $(document).on('keyup', function (event) {
+      var shouldDismissSearchPopup = event.which === 27 &&
+        $('.search-popup').is(':visible');
+      if (shouldDismissSearchPopup) {
+        onPopupClose();
+      }
+    });
+  </script>
+
+
+
+
+
+  
+
+  
+  <script>
+    
+    function addCount(Counter) {
+      var $visitors = $(".leancloud_visitors");
+      var url = $visitors.attr('id').trim();
+      var title = $visitors.attr('data-flag-title').trim();
+
+      Counter('get', '/classes/Counter', { where: JSON.stringify({ url }) })
+        .done(function ({ results }) {
+          if (results.length > 0) {
+            var counter = results[0];
+            
+            Counter('put', `/classes/Counter/${counter.objectId}`, JSON.stringify({ time: { "__op":"Increment", "amount":1 } }))
+            
+            .done(function () {
+                  var $element = $(document.getElementById(url));
+                  $element.find('.leancloud-visitors-count').text(counter.time + 1);
+            })
+            
+            .fail(function ({ responseJSON }) {
+                console.log('Failed to save Visitor num, with error message: ' + responseJSON.error);
+            })
+          } else {
+            
+              Counter('post', '/classes/Counter', JSON.stringify({ title: title, url: url, time: 1}))
+                .done(function () {
+                  var $element = $(document.getElementById(url));
+                  $element.find('.leancloud-visitors-count').text(1);
+                })
+                .fail(function () {
+                  console.log('Failed to create');
+                });
+            
+          }
+        })
+      .fail(function ({ responseJSON }) {
+        console.log('LeanCloud Counter Error:' + responseJSON.code + " " + responseJSON.error);
+      });
+    }
+    
+
+    $(function() {
+      $.get('https://app-router.leancloud.cn/2/route?appId=' + "no3Ip4mNLc3JyF1AeTy8LrAm-gzGzoHsz")
+        .done(function ({ api_server }) {
+          var Counter = function (method, url, data) {
+            return $.ajax({
+              method: method,
+              url: `https://${api_server}/1.1${url}`,
+              headers: {
+                'X-LC-Id': "no3Ip4mNLc3JyF1AeTy8LrAm-gzGzoHsz",
+                'X-LC-Key': "UvlYMzpJKw0Jrw61V5BA5ifU",
+                'Content-Type': 'application/json',
+              },
+              data: data,
+            });
+          };
+          
+          addCount(Counter);
+          
+        })
+    });
+  </script>
+
+
+
+  
+
+  
+
+  
+
+  
+
+  
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+  <style>
+    .copy-btn {
+      display: inline-block;
+      padding: 6px 12px;
+      font-size: 13px;
+      font-weight: 700;
+      line-height: 20px;
+      color: #333;
+      white-space: nowrap;
+      vertical-align: middle;
+      cursor: pointer;
+      background-color: #eee;
+      background-image: linear-gradient(#fcfcfc, #eee);
+      border: 1px solid #d5d5d5;
+      border-radius: 3px;
+      user-select: none;
+      outline: 0;
+    }
+
+    .highlight-wrap .copy-btn {
+      transition: opacity .3s ease-in-out;
+      opacity: 0;
+      padding: 2px 6px;
+      position: absolute;
+      right: 4px;
+      top: 8px;
+    }
+
+    .highlight-wrap:hover .copy-btn,
+    .highlight-wrap .copy-btn:focus {
+      opacity: 1
+    }
+
+    .highlight-wrap {
+      position: relative;
+    }
+  </style>
+  <script>
+    $('.highlight').each(function (i, e) {
+      var $wrap = $('<div>').addClass('highlight-wrap')
+      $(e).after($wrap)
+      $wrap.append($('<button>').addClass('copy-btn').append('复制').on('click', function (e) {
+        var code = $(this).parent().find('.code').find('.line').map(function (i, e) {
+          return $(e).text()
+        }).toArray().join('\n')
+        var ta = document.createElement('textarea')
+        document.body.appendChild(ta)
+        ta.style.position = 'absolute'
+        ta.style.top = '0px'
+        ta.style.left = '0px'
+        ta.value = code
+        ta.select()
+        ta.focus()
+        var result = document.execCommand('copy')
+        document.body.removeChild(ta)
+        
+        $(this).blur()
+      })).on('mouseleave', function (e) {
+        var $b = $(this).find('.copy-btn')
+        setTimeout(function () {
+          $b.text('复制')
+        }, 300)
+      }).append(e)
+    })
+  </script>
+
+
+  
+
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-backstretch/2.0.4/jquery.backstretch.min.js"></script>;
+  <script>
+  //$("body").backstretch("/images/background.jpg");
+  </script>
+  
+  <script type="text/javascript" src="//cdn.bootcss.com/canvas-nest.js/1.0.0/canvas-nest.min.js"></script>
+  
+<script src="/live2dw/lib/L2Dwidget.min.js?0c58a1486de42ac6cc1c59c7d98ae887"></script><script>L2Dwidget.init({"pluginRootPath":"live2dw/","pluginJsPath":"lib/","pluginModelPath":"assets/","tagMode":false,"debug":false,"model":{"jsonPath":"/live2dw/assets/koharu.model.json"},"display":{"position":"right","width":150,"height":300},"mobile":{"show":false},"log":false});</script></body>
+</html>

@@ -119,18 +119,18 @@
 
 
 
-  <meta name="description" content="0x00 整数的可除性 整除与因数 设\(a\),\(b\)是任意两个整数,其中\(b \neq 0\).如果存在一个整数\(q\)使得等式\(a = q * b\)成立,就称\(b\)整除\(a\)或者\(a\)被\(b\)整除,记作\(b | a\),并把\(b\)叫做\(a\)的因数.把\(a\)叫做\(b\)的倍数. 整除关系的传递性:\(c | b\),\(b | a\),则\(">
+  <meta name="description" content="0x00 整数的可除性 整除与因数 设\(a\),\(b\)是任意两个整数,其中\(b \neq 0\).如果存在一个整数\(q\)使得等式\(a = q \cdot b\)成立,就称\(b\)整除\(a\)或者\(a\)被\(b\)整除,记作\(b | a\),并把\(b\)叫做\(a\)的因数.把\(a\)叫做\(b\)的倍数. 整除关系的传递性:\(c | b\),\(b | a\)">
 <meta name="keywords" content="number-theory">
 <meta property="og:type" content="article">
 <meta property="og:title" content="Math-number-theory-基础">
 <meta property="og:url" content="https://hitworld.github.io/posts/e862dbfb/index.html">
 <meta property="og:site_name" content="w4rd3n">
-<meta property="og:description" content="0x00 整数的可除性 整除与因数 设\(a\),\(b\)是任意两个整数,其中\(b \neq 0\).如果存在一个整数\(q\)使得等式\(a = q * b\)成立,就称\(b\)整除\(a\)或者\(a\)被\(b\)整除,记作\(b | a\),并把\(b\)叫做\(a\)的因数.把\(a\)叫做\(b\)的倍数. 整除关系的传递性:\(c | b\),\(b | a\),则\(">
+<meta property="og:description" content="0x00 整数的可除性 整除与因数 设\(a\),\(b\)是任意两个整数,其中\(b \neq 0\).如果存在一个整数\(q\)使得等式\(a = q \cdot b\)成立,就称\(b\)整除\(a\)或者\(a\)被\(b\)整除,记作\(b | a\),并把\(b\)叫做\(a\)的因数.把\(a\)叫做\(b\)的倍数. 整除关系的传递性:\(c | b\),\(b | a\)">
 <meta property="og:locale" content="zh-CN">
-<meta property="og:updated_time" content="2020-08-11T03:16:59.383Z">
+<meta property="og:updated_time" content="2020-08-11T03:31:40.507Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Math-number-theory-基础">
-<meta name="twitter:description" content="0x00 整数的可除性 整除与因数 设\(a\),\(b\)是任意两个整数,其中\(b \neq 0\).如果存在一个整数\(q\)使得等式\(a = q * b\)成立,就称\(b\)整除\(a\)或者\(a\)被\(b\)整除,记作\(b | a\),并把\(b\)叫做\(a\)的因数.把\(a\)叫做\(b\)的倍数. 整除关系的传递性:\(c | b\),\(b | a\),则\(">
+<meta name="twitter:description" content="0x00 整数的可除性 整除与因数 设\(a\),\(b\)是任意两个整数,其中\(b \neq 0\).如果存在一个整数\(q\)使得等式\(a = q \cdot b\)成立,就称\(b\)整除\(a\)或者\(a\)被\(b\)整除,记作\(b | a\),并把\(b\)叫做\(a\)的因数.把\(a\)叫做\(b\)的倍数. 整除关系的传递性:\(c | b\),\(b | a\)">
 
 
 
@@ -496,7 +496,7 @@
                 
                   <span class="post-meta-item-text">本文字数：</span>
                 
-                <span title="本文字数">375</span>
+                <span title="本文字数">503</span>
               
 
               
@@ -533,9 +533,11 @@
         <h2 id="x00">0x00</h2>
 <h2 id="整数的可除性">整数的可除性</h2>
 <h3 id="整除与因数">整除与因数</h3>
-<p>设<span class="math inline">\(a\)</span>,<span class="math inline">\(b\)</span>是任意两个整数,其中<span class="math inline">\(b \neq 0\)</span>.如果存在一个整数<span class="math inline">\(q\)</span>使得等式<span class="math inline">\(a = q * b\)</span>成立,就称<span class="math inline">\(b\)</span>整除<span class="math inline">\(a\)</span>或者<span class="math inline">\(a\)</span>被<span class="math inline">\(b\)</span>整除,记作<span class="math inline">\(b | a\)</span>,并把<span class="math inline">\(b\)</span>叫做<span class="math inline">\(a\)</span>的因数.把<span class="math inline">\(a\)</span>叫做<span class="math inline">\(b\)</span>的倍数.</p>
+<p>设<span class="math inline">\(a\)</span>,<span class="math inline">\(b\)</span>是任意两个整数,其中<span class="math inline">\(b \neq 0\)</span>.如果存在一个整数<span class="math inline">\(q\)</span>使得等式<span class="math inline">\(a = q \cdot b\)</span>成立,就称<span class="math inline">\(b\)</span>整除<span class="math inline">\(a\)</span>或者<span class="math inline">\(a\)</span>被<span class="math inline">\(b\)</span>整除,记作<span class="math inline">\(b | a\)</span>,并把<span class="math inline">\(b\)</span>叫做<span class="math inline">\(a\)</span>的因数.把<span class="math inline">\(a\)</span>叫做<span class="math inline">\(b\)</span>的倍数.</p>
 <p>整除关系的传递性:<span class="math inline">\(c | b\)</span>,<span class="math inline">\(b | a\)</span>,则<span class="math inline">\(c | a\)</span>.因为<span class="math inline">\(a = q_1b = q_1q_2c\)</span>,<span class="math inline">\(q_1q_2\)</span>也是整数,满足整除定义.</p>
 <p>加法运算:<span class="math inline">\(c | b\)</span>,<span class="math inline">\(c | a\)</span>,则<span class="math inline">\(c | a \pm b\)</span>.因为<span class="math inline">\(a \pm b = q_1c \pm q_2c = (q_1 \pm q_2)c\)</span>,<span class="math inline">\(q_1 \pm q_2\)</span>也是整数,满足整除定义.</p>
+<p>整系数线性组合:<span class="math inline">\(c | b\)</span>,<span class="math inline">\(c | a\)</span>,对于任意整数<span class="math inline">\(s\)</span>,<span class="math inline">\(t\)</span>,则<span class="math inline">\(c | s \cdot a \pm t \cdot b\)</span>.</p>
+<p>整除与相等:<span class="math inline">\(a | b\)</span>,<span class="math inline">\(b | a\)</span>,则<span class="math inline">\(a = \pm b\)</span>.</p>
 
       
     </div>
@@ -882,7 +884,7 @@
       <i class="fa fa-area-chart"></i>
     </span>
     
-    <span title="站点总字数">720k</span>
+    <span title="站点总字数">721k</span>
   
 
   

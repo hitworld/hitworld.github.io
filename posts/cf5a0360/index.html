@@ -154,7 +154,7 @@
 <meta property="og:image" content="https://hitworld.github.io/posts/cf5a0360/20.png">
 <meta property="og:image" content="https://hitworld.github.io/posts/cf5a0360/22.png">
 <meta property="og:image" content="https://hitworld.github.io/posts/cf5a0360/23.png">
-<meta property="og:updated_time" content="2020-08-15T02:27:42.310Z">
+<meta property="og:updated_time" content="2020-08-15T02:36:29.961Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Math-probability-theory-随机变量及其分布">
 <meta name="twitter:description" content="前言 随机试验的结果未必是数量的,为了数学处理的方便以及理论研究的需要,将随机试验的结果与实数对应起来,引入随机变量的概念. 随机变量作一个从样本空间到实数集的映射(函数),使样本从语言描述变成实数变量,从而将实验结果数量化. 针对实践中人们关心随机变量落入某个区间的概率,定义了分布函数的概念. 由分布函数的连续积分表达式定义出连续型随机变量的概率密度,使概率的求解转化为概率密度的定积分的">
@@ -524,7 +524,7 @@
                 
                   <span class="post-meta-item-text">本文字数：</span>
                 
-                <span title="本文字数">2.4k</span>
+                <span title="本文字数">2.6k</span>
               
 
               
@@ -600,14 +600,23 @@
 <h3 id="退化分布">退化分布</h3>
 <p><span class="math inline">\(X\)</span>服从退化分布:若<span class="math inline">\(P(X = c) = 1\)</span>.</p>
 <h3 id="分布">0-1分布</h3>
-<p>设随机试验<span class="math inline">\(E\)</span>有两种可能的结果:<span class="math inline">\(S = {e_1, e_2}\)</span>,设随机变量<span class="math inline">\(X\)</span>:</p>
-$ X = X(e) = {
-<span class="math display">\[\begin{aligned}
-x &amp; = &amp; \cos(t) \\
-y &amp; = &amp; \sin(t) \\
-z &amp; = &amp; \frac xy
-\end{aligned}\]</span>
-<p>. $</p>
+<p>设随机试验<span class="math inline">\(E\)</span>有两种可能的结果:<span class="math inline">\(S = \{e_1, e_2\}\)</span>,设随机变量<span class="math inline">\(X\)</span>:</p>
+<p><span class="math display">\[
+X = X(e) = \left\{
+\begin{aligned}
+&amp;1, 当e = e_1\\
+&amp;0, 当e = e_2\\
+\end{aligned}
+\right
+\]</span></p>
+<p><span class="math display">\[
+X = X(e) = 
+\begin{cases}
+&amp;1, 当e = e_1\\
+&amp;0, 当e = e_2\\
+\end{cases}
+\]</span></p>
+<p>分布律为<span class="math inline">\(P{x = k} = p^k(1 - p)^{1-k}, k = 0, 1\)</span>.称<span class="math inline">\(X\)</span>服从<span class="math inline">\(0-1\)</span>分布.记为<span class="math inline">\(X ~ 0-1(p)\)</span>或<span class="math inline">\(X ~ B(1, p)\)</span>.</p>
 <h3 id="二项分布">二项分布</h3>
 <img src="/posts/cf5a0360/3.png" title="p3">
 <p>当<span class="math inline">\(n\)</span>较大,<span class="math inline">\(p\)</span>又较小时,二项分布的计算比较困难,可以用<span class="math inline">\(Poisson\)</span>分布近似计算.</p>

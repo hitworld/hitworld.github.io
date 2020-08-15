@@ -127,8 +127,6 @@
 <meta property="og:site_name" content="w4rd3n">
 <meta property="og:description" content="前言 随机试验的结果未必是数量的,为了数学处理的方便以及理论研究的需要,将随机试验的结果与实数对应起来,引入随机变量的概念. 随机变量作一个从样本空间到实数集的映射(函数),使样本从语言描述变成实数变量,从而将实验结果数量化. 针对实践中人们关心随机变量落入某个区间的概率,定义了分布函数的概念. 由分布函数的连续积分表达式定义出连续型随机变量的概率密度,使概率的求解转化为概率密度的定积分的">
 <meta property="og:locale" content="zh-CN">
-<meta property="og:image" content="https://hitworld.github.io/posts/cf5a0360/7.png">
-<meta property="og:image" content="https://hitworld.github.io/posts/cf5a0360/8.png">
 <meta property="og:image" content="https://hitworld.github.io/posts/cf5a0360/9.png">
 <meta property="og:image" content="https://hitworld.github.io/posts/cf5a0360/10.png">
 <meta property="og:image" content="https://hitworld.github.io/posts/cf5a0360/11.png">
@@ -147,11 +145,11 @@
 <meta property="og:image" content="https://hitworld.github.io/posts/cf5a0360/20.png">
 <meta property="og:image" content="https://hitworld.github.io/posts/cf5a0360/22.png">
 <meta property="og:image" content="https://hitworld.github.io/posts/cf5a0360/23.png">
-<meta property="og:updated_time" content="2020-08-15T04:31:08.257Z">
+<meta property="og:updated_time" content="2020-08-15T05:02:51.083Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Math-probability-theory-随机变量及其分布">
 <meta name="twitter:description" content="前言 随机试验的结果未必是数量的,为了数学处理的方便以及理论研究的需要,将随机试验的结果与实数对应起来,引入随机变量的概念. 随机变量作一个从样本空间到实数集的映射(函数),使样本从语言描述变成实数变量,从而将实验结果数量化. 针对实践中人们关心随机变量落入某个区间的概率,定义了分布函数的概念. 由分布函数的连续积分表达式定义出连续型随机变量的概率密度,使概率的求解转化为概率密度的定积分的">
-<meta name="twitter:image" content="https://hitworld.github.io/posts/cf5a0360/7.png">
+<meta name="twitter:image" content="https://hitworld.github.io/posts/cf5a0360/9.png">
 
 
 
@@ -517,7 +515,7 @@
                 
                   <span class="post-meta-item-text">本文字数：</span>
                 
-                <span title="本文字数">3.8k</span>
+                <span title="本文字数">4.5k</span>
               
 
               
@@ -531,7 +529,7 @@
                 
                   <span class="post-meta-item-text">阅读时长 &asymp;</span>
                 
-                <span title="阅读时长">3 分钟</span>
+                <span title="阅读时长">4 分钟</span>
               
             </div>
           
@@ -601,21 +599,21 @@ X = X(e) =
 &amp;0, 当e = e_2\\
 \end{cases}
 \]</span></p>
-<p>分布律为<span class="math inline">\(P\{x = k\} = p^k(1 - p)^{1-k}, k = 0, 1\)</span>.称<span class="math inline">\(X\)</span>服从<span class="math inline">\(0-1\)</span>分布.记为<span class="math inline">\(X\)</span> ~ <span class="math inline">\(0-1(p)\)</span>或<span class="math inline">\(X\)</span> ~ <span class="math inline">\(B(1, p)\)</span>.</p>
+<p>分布律为<span class="math inline">\(P\{x = k\} = p^k(1 - p)^{1-k}, k = 0, 1\)</span>.称<span class="math inline">\(X\)</span>服从<span class="math inline">\(0-1\)</span>分布.记为<span class="math inline">\(X \sim 0-1(p)\)</span>或<span class="math inline">\(X \sim B(1, p)\)</span>.</p>
 <h3 id="二项分布">二项分布</h3>
 <p>设试验<span class="math inline">\(E\)</span>只有两个可能结果<span class="math inline">\(A\)</span>与<span class="math inline">\(\overline{A}\)</span>,则称<span class="math inline">\(E\)</span>为伯努利试验.</p>
 <p>设<span class="math inline">\(P(A) = p(0 &lt; p &lt; 1)\)</span>,将试验<span class="math inline">\(E\)</span>独立重复地进行<span class="math inline">\(n\)</span>次,这样的试验称为<span class="math inline">\(n\)</span>重伯努利实验.</p>
 <p>一般地有<span class="math inline">\(P\{X = k\} = C^k_np^k(1-p)^{n-k},k=0,1,...,n\)</span>.</p>
-<p>称<span class="math inline">\(X\)</span>服从参数为<span class="math inline">\(n,p\)</span>的二项分布,记为$X <span class="math inline">\(~\)</span> b(n,p)$.</p>
+<p>称<span class="math inline">\(X\)</span>服从参数为<span class="math inline">\(n,p\)</span>的二项分布,记为<span class="math inline">\(X \sim b(n,p)\)</span>.</p>
 <p>当<span class="math inline">\(n=1\)</span>时,<span class="math inline">\(P\{X=k\}=p^k(1-p)^{1-k},k=0,1,\)</span>即为<span class="math inline">\(0-1\)</span>分布.</p>
 <p>当<span class="math inline">\(n\)</span>较大,<span class="math inline">\(p\)</span>又较小时,二项分布的计算比较困难,可以用<span class="math inline">\(Poisson\)</span>分布近似计算.</p>
 <h3 id="泊松分布">泊松分布</h3>
 <p>若<span class="math inline">\(X\)</span>的分布为<span class="math inline">\(P\{X=k\}=\frac{\lambda^ke^{-\lambda}}{k!},k=0,1,...\)</span>.</p>
-<p>其中<span class="math inline">\(\lambda&gt;0\)</span>是常数,则称<span class="math inline">\(X\)</span>服从参数为<span class="math inline">\(\lambda\)</span>的泊松分布.记为<span class="math inline">\(X\)</span>~<span class="math inline">\(\pi(\lambda)\)</span>.</p>
+<p>其中<span class="math inline">\(\lambda&gt;0\)</span>是常数,则称<span class="math inline">\(X\)</span>服从参数为<span class="math inline">\(\lambda\)</span>的泊松分布.记为<span class="math inline">\(X \sim \pi(\lambda)\)</span>.</p>
 <p><span class="math inline">\(\sum_{k=0}^\infty P\{X=k\} = \sum_{k=0}^\infty \frac{\lambda^ke^{-\lambda}}{k!} = e^{-\lambda}\sum_{k=0}^\infty\frac{\lambda^k}{k!} = e^{-\lambda}e^{\lambda} = 1\)</span>.</p>
 <p>如果某事件以固定强度<span class="math inline">\(\lambda\)</span>,随机且独立地出现,该事件在单位时间出现的次数可以看成是服从泊松分布.</p>
 <p>泊松(<span class="math inline">\(Poisson\)</span>)定理.</p>
-<p>设随机变量序列<span class="math inline">\(\{X_n\}\)</span>,$X_n <span class="math inline">\(~\)</span> b(n,p_n)$,则</p>
+<p>设随机变量序列<span class="math inline">\(\{X_n\}\)</span>,<span class="math inline">\(X_n \sim b(n,p_n)\)</span>,则</p>
 <p><span class="math inline">\(\lim_{n \to \infty}P\{X_n = k\}=\lim_{n \to \infty}\left( n \choose k \right)p^k_n(1-p_n)^{n-k}=\frac{\lambda^ke^{-\lambda}}{k!}\)</span>.</p>
 <p>其中<span class="math inline">\(np_n = \lambda &gt; 0\)</span>,<span class="math inline">\(k\)</span>为任一非固定的非负整数.</p>
 <p>在定理的条件下,二项分布的极限分布是泊松分布.可以利用泊松分布近似计算二项分布.</p>
@@ -625,23 +623,23 @@ X = X(e) =
 <p>将试验进行到出现一次成功为止,以<span class="math inline">\(X\)</span>表示所需的试验次数,则<span class="math inline">\(X\)</span>的分布律为:<span class="math inline">\(P\{X = k\} = q^{k - 1}p\)</span>,<span class="math inline">\(k = 1, 2, ...\)</span>.称为<span class="math inline">\(X\)</span>服从参数为<span class="math inline">\(p\)</span>的几何分布.</p>
 <p>若<span class="math inline">\(X\)</span>的概率分布律为</p>
 <p><span class="math inline">\(P(X=k)=p(1-p)^{k-1},k=1,2,3,...\)</span>.</p>
-<p>其中<span class="math inline">\(0 &lt; p &lt; 1\)</span>,称<span class="math inline">\(X\)</span>服从参数为<span class="math inline">\(p\)</span>的几何分布,记为<span class="math inline">\(X\)</span>~<span class="math inline">\(Geom(p)\)</span>.</p>
+<p>其中<span class="math inline">\(0 &lt; p &lt; 1\)</span>,称<span class="math inline">\(X\)</span>服从参数为<span class="math inline">\(p\)</span>的几何分布,记为<span class="math inline">\(X \sim Geom(p)\)</span>.</p>
 <h2 id="随机变量的分布函数">随机变量的分布函数</h2>
 <p>对于非离散型<span class="math inline">\(r.v.\)</span>,不能用分布律来描述它,需要考虑<span class="math inline">\(r.v.\)</span>的取值落入一个区间的概率.如:<span class="math inline">\(P\{X &lt;= x\}\)</span>,<span class="math inline">\(P\{x1 &lt;= X &lt;= x2\}\)</span>.为此引入随机变量的分布函数.</p>
 <p>定义:设随机变量<span class="math inline">\(X\)</span>,<span class="math inline">\(x\)</span>为任意实数,则<span class="math inline">\(F(x) = P\{X &lt;= x\}\)</span>称为<span class="math inline">\(X\)</span>的分布函数.</p>
 <p>分布函数可以给出随机变量落入任意一个范围的可能性.</p>
 <p><span class="math inline">\(X\)</span>的分布函数<span class="math inline">\(F(x)\)</span>,<span class="math inline">\(a,b\)</span>为两个实数,<span class="math inline">\(a &lt; b\)</span>,则</p>
 <p><span class="math display">\[
-P(a &lt; X \le b) = P(X \le b) - P(X \le a) = F(b) - F(a)\\
-P(a &lt; X &lt; b) = F(b-0) - F(a)\\
-P(X = b) = P(X \le b) - P(X &lt; b) = F(b) - F(b-0)\\
-P(a &lt; X &lt; b) = P(a &lt; X \le b) - P(X = b)\\
+&amp;P(a &lt; X \le b) = P(X \le b) - P(X \le a) = F(b) - F(a)\\
+&amp;P(a &lt; X &lt; b) = F(b-0) - F(a)\\
+&amp;P(X = b) = P(X \le b) - P(X &lt; b) = F(b) - F(b-0)\\
+&amp;P(a &lt; X &lt; b) = P(a &lt; X \le b) - P(X = b)\\
 \]</span></p>
 <p>无论是离散型<span class="math inline">\(r.v.\)</span>还是非离散型<span class="math inline">\(r.v.\)</span>,分布函数都可以描述其统计规律性.</p>
 <p>随机变量的分布函数性质.</p>
 <ul>
 <li>单调不减性:<span class="math inline">\(F(x)\)</span>是单调不减函数.</li>
-<li>规范性:<span class="math inline">\(0 &lt;= F(x) &lt;= 1\)</span>,<span class="math inline">\(F(负无穷大) = 0\)</span>,<span class="math inline">\(F(正无穷大) = 1\)</span>.</li>
+<li>规范性:<span class="math inline">\(0 &lt;= F(x) &lt;= 1\)</span>,<span class="math inline">\(F(-\infty) = 0\)</span>,<span class="math inline">\(F(+\infty) = 1\)</span>.</li>
 <li>右连续性:<span class="math inline">\(F(x)\)</span>至多有可列个间断点,而在其间断点上也是右连续的,<span class="math inline">\(F(x + 0) = F(x)\)</span>.</li>
 </ul>
 <p>重要公式.</p>
@@ -652,8 +650,21 @@ P(a &lt; X &lt; b) = P(a &lt; X \le b) - P(X = b)\\
 </ul>
 <p>易知离散型随机变量的分布函数是阶梯函数.</p>
 <h2 id="连续型随机变量及其概率密度">连续型随机变量及其概率密度</h2>
-<img src="/posts/cf5a0360/7.png" title="p7">
-<img src="/posts/cf5a0360/8.png" title="p8">
+<p>对于随机变量<span class="math inline">\(X\)</span>的分布函数<span class="math inline">\(F(x)\)</span>,存在非负函数<span class="math inline">\(f(x)\)</span>,使得对于任意的实数<span class="math inline">\(x\)</span>,有</p>
+<p><span class="math inline">\(F(x) = \int_{-\infty}^{x}f(t)\mathrm{d}t\)</span>.</p>
+<p>则称<span class="math inline">\(X\)</span>为连续型<span class="math inline">\(r.v.\)</span>,<span class="math inline">\(f(x)\)</span>称为<span class="math inline">\(X\)</span>的概率密度函数,简称概率密度.连续型随机变量的分布函数是连续函数.</p>
+<h3 id="概率密度函数性质">概率密度函数性质</h3>
+<ol type="1">
+<li><p><span class="math inline">\(f(x) \ge 0\)</span>.</p></li>
+<li><p><span class="math inline">\(\int_{-\infty}^{+\infty}f(x)\mathrm{d}x = 1\)</span>.</p></li>
+<li><p><span class="math inline">\(P\{x_1 \le X \le x_2\} = F(x_2) - F(x_1) = \int_{x_1}^{x_2}f(x)\mathrm{d}x,(x_1 \le x_2)\)</span>.</p></li>
+<li><p>若<span class="math inline">\(f(x)\)</span>在点<span class="math inline">\(x\)</span>处连续,则有<span class="math inline">\(F\prime(x) = f(x)\)</span>.</p></li>
+</ol>
+<p><span class="math display">\[
+f(x) &amp;= \lim_{\Delta x \to 0^+\frac{F(x + \Delta x) - F(x)}{\Delta x}}\\
+&amp;= \lim_{\Delta x \to 0^+\frac{P\{x &lt; X \le x + \Delta x\}}{\Delta x}}\\
+\]</span></p>
+<p>上式可知当<span class="math inline">\(\Delta x\)</span>很小时,有<span class="math inline">\(P\{x &lt; X &lt; x + \Delta x\} \approx f(x)\Delta x\)</span>.</p>
 <h3 id="关于连续型r.v.的几个重要结论">关于连续型r.v.的几个重要结论</h3>
 <ol type="1">
 <li>设<span class="math inline">\(X\)</span>为连续型<span class="math inline">\(r.v.\)</span>,<span class="math inline">\(X\)</span>取任一指定的实数值<span class="math inline">\(a\)</span>的概率均为<span class="math inline">\(0\)</span>.即<span class="math inline">\(P\{X = a\} = 0\)</span>.</li>
@@ -1004,7 +1015,7 @@ P(a &lt; X &lt; b) = P(a &lt; X \le b) - P(X = b)\\
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#前言"><span class="nav-number">1.</span> <span class="nav-text">前言</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#随机变量"><span class="nav-number">2.</span> <span class="nav-text">随机变量</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#离散型随机变量及其分布律"><span class="nav-number">3.</span> <span class="nav-text">离散型随机变量及其分布律</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#退化分布"><span class="nav-number">3.1.</span> <span class="nav-text">退化分布</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#分布"><span class="nav-number">3.2.</span> <span class="nav-text">0-1分布</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#二项分布"><span class="nav-number">3.3.</span> <span class="nav-text">二项分布</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#泊松分布"><span class="nav-number">3.4.</span> <span class="nav-text">泊松分布</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#几何分布"><span class="nav-number">3.5.</span> <span class="nav-text">几何分布</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#随机变量的分布函数"><span class="nav-number">4.</span> <span class="nav-text">随机变量的分布函数</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#连续型随机变量及其概率密度"><span class="nav-number">5.</span> <span class="nav-text">连续型随机变量及其概率密度</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#关于连续型r.v.的几个重要结论"><span class="nav-number">5.1.</span> <span class="nav-text">关于连续型r.v.的几个重要结论</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#几个常用的连续型r.v.分布"><span class="nav-number">5.2.</span> <span class="nav-text">几个常用的连续型r.v.分布</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#均匀分布"><span class="nav-number">5.2.1.</span> <span class="nav-text">均匀分布</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#指数分布"><span class="nav-number">5.2.2.</span> <span class="nav-text">指数分布</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#伽玛分布"><span class="nav-number">5.2.3.</span> <span class="nav-text">伽玛分布</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#正态分布"><span class="nav-number">5.2.4.</span> <span class="nav-text">正态分布</span></a></li></ol></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#随机变量的函数的分布"><span class="nav-number">6.</span> <span class="nav-text">随机变量的函数的分布</span></a></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#前言"><span class="nav-number">1.</span> <span class="nav-text">前言</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#随机变量"><span class="nav-number">2.</span> <span class="nav-text">随机变量</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#离散型随机变量及其分布律"><span class="nav-number">3.</span> <span class="nav-text">离散型随机变量及其分布律</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#退化分布"><span class="nav-number">3.1.</span> <span class="nav-text">退化分布</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#分布"><span class="nav-number">3.2.</span> <span class="nav-text">0-1分布</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#二项分布"><span class="nav-number">3.3.</span> <span class="nav-text">二项分布</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#泊松分布"><span class="nav-number">3.4.</span> <span class="nav-text">泊松分布</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#几何分布"><span class="nav-number">3.5.</span> <span class="nav-text">几何分布</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#随机变量的分布函数"><span class="nav-number">4.</span> <span class="nav-text">随机变量的分布函数</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#连续型随机变量及其概率密度"><span class="nav-number">5.</span> <span class="nav-text">连续型随机变量及其概率密度</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#概率密度函数性质"><span class="nav-number">5.1.</span> <span class="nav-text">概率密度函数性质</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#关于连续型r.v.的几个重要结论"><span class="nav-number">5.2.</span> <span class="nav-text">关于连续型r.v.的几个重要结论</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#几个常用的连续型r.v.分布"><span class="nav-number">5.3.</span> <span class="nav-text">几个常用的连续型r.v.分布</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#均匀分布"><span class="nav-number">5.3.1.</span> <span class="nav-text">均匀分布</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#指数分布"><span class="nav-number">5.3.2.</span> <span class="nav-text">指数分布</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#伽玛分布"><span class="nav-number">5.3.3.</span> <span class="nav-text">伽玛分布</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#正态分布"><span class="nav-number">5.3.4.</span> <span class="nav-text">正态分布</span></a></li></ol></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#随机变量的函数的分布"><span class="nav-number">6.</span> <span class="nav-text">随机变量的函数的分布</span></a></li></ol></div>
             
 
           </div>
@@ -1036,7 +1047,7 @@ P(a &lt; X &lt; b) = P(a &lt; X \le b) - P(X = b)\\
       <i class="fa fa-area-chart"></i>
     </span>
     
-    <span title="站点总字数">725k</span>
+    <span title="站点总字数">726k</span>
   
 
   
@@ -1045,7 +1056,7 @@ P(a &lt; X &lt; b) = P(a &lt; X \le b) - P(X = b)\\
       <i class="fa fa-coffee"></i>
     </span>
     
-    <span title="站点阅读时长">10:59</span>
+    <span title="站点阅读时长">11:01</span>
   
 </div>
 

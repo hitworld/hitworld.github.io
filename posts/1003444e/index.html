@@ -119,25 +119,25 @@
 
 
 
-  <meta name="description" content="0x00 基于glibc-2.23,对其采用的堆管理机制与利用方式进行全面解析. malloc 首先来看malloc函数的实现,ptmalloc中malloc函数实现为__libc_malloc. 1234567891011121314151617181920212223242526272829typedef struct malloc_state * mstate;//...void *">
+  <meta name="description" content="前言 基于glibc-2.23. malloc 首先来看malloc函数的实现,ptmalloc中malloc函数实现为__libc_malloc. 1234567891011121314151617181920212223242526272829typedef struct malloc_state * mstate;//...void * __libc_malloc (size_t b">
 <meta name="keywords" content="Linux">
 <meta property="og:type" content="article">
-<meta property="og:title" content="IS-pwn-Linux-glibc-2.23-全面解析">
-<meta property="og:url" content="https://hitworld.github.io/posts/2c2902d4/index.html">
+<meta property="og:title" content="CS-RTFSC-Linux-glibc-2.23-malloc与free">
+<meta property="og:url" content="https://hitworld.github.io/posts/1003444e/index.html">
 <meta property="og:site_name" content="w4rd3n">
-<meta property="og:description" content="0x00 基于glibc-2.23,对其采用的堆管理机制与利用方式进行全面解析. malloc 首先来看malloc函数的实现,ptmalloc中malloc函数实现为__libc_malloc. 1234567891011121314151617181920212223242526272829typedef struct malloc_state * mstate;//...void *">
+<meta property="og:description" content="前言 基于glibc-2.23. malloc 首先来看malloc函数的实现,ptmalloc中malloc函数实现为__libc_malloc. 1234567891011121314151617181920212223242526272829typedef struct malloc_state * mstate;//...void * __libc_malloc (size_t b">
 <meta property="og:locale" content="zh-CN">
-<meta property="og:updated_time" content="2020-08-09T06:34:17.811Z">
+<meta property="og:updated_time" content="2020-08-25T15:13:30.076Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="IS-pwn-Linux-glibc-2.23-全面解析">
-<meta name="twitter:description" content="0x00 基于glibc-2.23,对其采用的堆管理机制与利用方式进行全面解析. malloc 首先来看malloc函数的实现,ptmalloc中malloc函数实现为__libc_malloc. 1234567891011121314151617181920212223242526272829typedef struct malloc_state * mstate;//...void *">
+<meta name="twitter:title" content="CS-RTFSC-Linux-glibc-2.23-malloc与free">
+<meta name="twitter:description" content="前言 基于glibc-2.23. malloc 首先来看malloc函数的实现,ptmalloc中malloc函数实现为__libc_malloc. 1234567891011121314151617181920212223242526272829typedef struct malloc_state * mstate;//...void * __libc_malloc (size_t b">
 
 
 
 
 
 
-  <link rel="canonical" href="https://hitworld.github.io/posts/2c2902d4/">
+  <link rel="canonical" href="https://hitworld.github.io/posts/1003444e/">
 
 
 
@@ -147,7 +147,7 @@
   };
 </script>
 
-  <title>IS-pwn-Linux-glibc-2.23-全面解析 | w4rd3n</title>
+  <title>CS-RTFSC-Linux-glibc-2.23-malloc与free | w4rd3n</title>
   
 
 
@@ -396,7 +396,7 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="https://hitworld.github.io/posts/2c2902d4/">
+    <link itemprop="mainEntityOfPage" href="https://hitworld.github.io/posts/1003444e/">
 
     <span hidden itemprop="author" itemscope="" itemtype="http://schema.org/Person">
       <meta itemprop="name" content="w4rd3n">
@@ -413,7 +413,7 @@
 
         
         
-          <h1 class="post-title" itemprop="name headline">IS-pwn-Linux-glibc-2.23-全面解析
+          <h1 class="post-title" itemprop="name headline">CS-RTFSC-Linux-glibc-2.23-malloc与free
               
             
           </h1>
@@ -438,7 +438,7 @@
                 
               
 
-              <time title="创建时间：2020-06-11 18:34:16" itemprop="dateCreated datePublished" datetime="2020-06-11T18:34:16+08:00">2020-06-11</time>
+              <time title="创建时间：2020-08-25 23:11:36" itemprop="dateCreated datePublished" datetime="2020-08-25T23:11:36+08:00">2020-08-25</time>
             
 
             
@@ -456,14 +456,14 @@
                 <span class="post-meta-item-text">分类于</span>
               
               
-                <span itemprop="about" itemscope="" itemtype="http://schema.org/Thing"><a href="/categories/IS/" itemprop="url" rel="index"><span itemprop="name">IS</span></a></span>
+                <span itemprop="about" itemscope="" itemtype="http://schema.org/Thing"><a href="/categories/CS/" itemprop="url" rel="index"><span itemprop="name">CS</span></a></span>
 
                 
                 
                   ，
                 
               
-                <span itemprop="about" itemscope="" itemtype="http://schema.org/Thing"><a href="/categories/IS/pwn/" itemprop="url" rel="index"><span itemprop="name">pwn</span></a></span>
+                <span itemprop="about" itemscope="" itemtype="http://schema.org/Thing"><a href="/categories/CS/RTFSC/" itemprop="url" rel="index"><span itemprop="name">RTFSC</span></a></span>
 
                 
                 
@@ -477,7 +477,7 @@
 
           
           
-             <span id="/posts/2c2902d4/" class="leancloud_visitors" data-flag-title="IS-pwn-Linux-glibc-2.23-全面解析">
+             <span id="/posts/1003444e/" class="leancloud_visitors" data-flag-title="CS-RTFSC-Linux-glibc-2.23-malloc与free">
                <span class="post-meta-divider">|</span>
                <span class="post-meta-item-icon">
                  <i class="fa fa-eye"></i>
@@ -503,7 +503,7 @@
                 
                   <span class="post-meta-item-text">本文字数：</span>
                 
-                <span title="本文字数">34k</span>
+                <span title="本文字数">33k</span>
               
 
               
@@ -537,8 +537,8 @@
       
 
       
-        <h2 id="x00">0x00</h2>
-<p>基于<code>glibc-2.23</code>,对其采用的堆管理机制与利用方式进行全面解析.</p>
+        <h2 id="前言">前言</h2>
+<p>基于<code>glibc-2.23</code>.</p>
 <h2 id="malloc">malloc</h2>
 <p>首先来看<code>malloc</code>函数的实现,<code>ptmalloc</code>中<code>malloc</code>函数实现为<code>__libc_malloc</code>.</p>
 <figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">typedef</span> <span class="class"><span class="keyword">struct</span> <span class="title">malloc_state</span> * <span class="title">mstate</span>;</span></span><br><span class="line"><span class="comment">//...</span></span><br><span class="line"><span class="keyword">void</span> * __libc_malloc (<span class="keyword">size_t</span> bytes) &#123;</span><br><span class="line">  mstate ar_ptr;</span><br><span class="line">  <span class="comment">//用于保存指向分配区的指针</span></span><br><span class="line">  <span class="keyword">void</span> * victim;</span><br><span class="line">  <span class="comment">//用于保存获得的mem指针(chunk_addr+0x10)</span></span><br><span class="line">  <span class="keyword">void</span> *(*hook) (<span class="keyword">size_t</span>, <span class="keyword">const</span> <span class="keyword">void</span> *) = atomic_forced_read (__malloc_hook);</span><br><span class="line">  <span class="keyword">if</span> (__builtin_expect (hook != <span class="literal">NULL</span>, <span class="number">0</span>))</span><br><span class="line">    <span class="keyword">return</span> (*hook)(bytes, RETURN_ADDRESS (<span class="number">0</span>));</span><br><span class="line">  <span class="comment">//用于支持程序员对malloc函数进行hook或者用于进程在创建新线程过程中分配内存.</span></span><br><span class="line">  arena_get (ar_ptr, bytes);</span><br><span class="line">  <span class="comment">//获取分配区.</span></span><br><span class="line">  victim = _int_malloc (ar_ptr, bytes);</span><br><span class="line">  <span class="comment">//_int_malloc执行真正的分配逻辑.</span></span><br><span class="line">  <span class="keyword">if</span> (!victim &amp;&amp; ar_ptr != <span class="literal">NULL</span>) &#123;</span><br><span class="line">    LIBC_PROBE (memory_malloc_retry, <span class="number">1</span>, bytes);</span><br><span class="line">    ar_ptr = arena_get_retry (ar_ptr, bytes);</span><br><span class="line">    victim = _int_malloc (ar_ptr, bytes);</span><br><span class="line">  &#125;</span><br><span class="line">  <span class="comment">//如果分配失败且获取到了分配区,说明该分配区内存空间不足,获取下一个分配区,再次调用_int_malloc.知道无分配区可以分配.</span></span><br><span class="line">  <span class="keyword">if</span> (ar_ptr != <span class="literal">NULL</span>)</span><br><span class="line">    (<span class="keyword">void</span>) mutex_unlock (&amp;ar_ptr-&gt;mutex);</span><br><span class="line">  <span class="comment">//如果此时分配区指针不为空,释放分配区,这里分配已经结束了.</span></span><br><span class="line">  assert (!victim || chunk_is_mmapped (mem2chunk (victim)) || ar_ptr == arena_for_chunk (mem2chunk (victim)));</span><br><span class="line">  <span class="comment">//如果指针不为NULL,指针对应的分配区不对应同时该chunk不是mmap分配的,则报错,因为正常情况不可能出现.</span></span><br><span class="line">  <span class="keyword">return</span> victim;</span><br><span class="line">  <span class="comment">//返回mem指针.</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
@@ -555,24 +555,6 @@
 <figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">static</span> <span class="keyword">int</span> <span class="title">systrim</span> <span class="params">(<span class="keyword">size_t</span> pad, mstate av)</span> </span>&#123;</span><br><span class="line">  <span class="keyword">long</span> top_size;         <span class="comment">/* Amount of top-most memory */</span></span><br><span class="line">  <span class="keyword">long</span> extra;            <span class="comment">/* Amount to release */</span></span><br><span class="line">  <span class="keyword">long</span> released;         <span class="comment">/* Amount actually released */</span></span><br><span class="line">  <span class="keyword">char</span> *current_brk;     <span class="comment">/* address returned by pre-check sbrk call */</span></span><br><span class="line">  <span class="keyword">char</span> *new_brk;         <span class="comment">/* address returned by post-check sbrk call */</span></span><br><span class="line">  <span class="keyword">size_t</span> pagesize;</span><br><span class="line">  <span class="keyword">long</span> top_area;</span><br><span class="line"></span><br><span class="line">  pagesize = GLRO (dl_pagesize);</span><br><span class="line">  top_size = chunksize (av-&gt;top);</span><br><span class="line"></span><br><span class="line">  top_area = top_size - MINSIZE - <span class="number">1</span>;</span><br><span class="line">  <span class="keyword">if</span> (top_area &lt;= pad)</span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line"></span><br><span class="line">  extra = ALIGN_DOWN(top_area - pad, pagesize);</span><br><span class="line">  <span class="comment">/* 计算top chunk中最大可释放的整数页大小,top chunk中至少需要MINSIZE的内存保存fencepost */</span></span><br><span class="line"></span><br><span class="line">  <span class="keyword">if</span> (extra == <span class="number">0</span>)</span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line"></span><br><span class="line">  current_brk = (<span class="keyword">char</span> *) (MORECORE (<span class="number">0</span>));</span><br><span class="line"></span><br><span class="line">  <span class="keyword">if</span> (current_brk == (<span class="keyword">char</span> *) (av-&gt;top) + top_size) &#123;</span><br><span class="line">  <span class="comment">/* 如果当前top chunk的结束地址与当前的brk值相等,执行heap收缩。 */</span></span><br><span class="line">    MORECORE (-extra);</span><br><span class="line">    <span class="comment">/* 调用sbrk()释放指定大小的内存 */</span></span><br><span class="line">    <span class="keyword">void</span> (*hook) (<span class="keyword">void</span>) = atomic_forced_read (__after_morecore_hook);</span><br><span class="line">    <span class="keyword">if</span> (__builtin_expect (hook != <span class="literal">NULL</span>, <span class="number">0</span>))</span><br><span class="line">      (*hook)();</span><br><span class="line">    new_brk = (<span class="keyword">char</span> *) (MORECORE (<span class="number">0</span>));</span><br><span class="line">    LIBC_PROBE (memory_sbrk_less, <span class="number">2</span>, new_brk, extra);</span><br><span class="line">    <span class="keyword">if</span> (new_brk != (<span class="keyword">char</span> *) MORECORE_FAILURE) &#123;</span><br><span class="line">    <span class="comment">/* 计算释放的内存大小,更新当前分配区所分配的内存总量,更新top chunk的大小 */</span></span><br><span class="line">      released = (<span class="keyword">long</span>) (current_brk - new_brk);</span><br><span class="line">      <span class="keyword">if</span> (released != <span class="number">0</span>) &#123;</span><br><span class="line">        av-&gt;system_mem -= released;</span><br><span class="line">        set_head (av-&gt;top, (top_size - released) | PREV_INUSE);</span><br><span class="line">        check_malloc_state (av);</span><br><span class="line">        <span class="keyword">return</span> <span class="number">1</span>;</span><br><span class="line">      &#125;</span><br><span class="line">    &#125;</span><br><span class="line">  &#125;</span><br><span class="line">  <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 <h3 id="munmap_chunk">munmap_chunk</h3>
 <figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">static</span> <span class="keyword">void</span> internal_function <span class="title">munmap_chunk</span> <span class="params">(mchunkptr p)</span> </span>&#123;</span><br><span class="line">  INTERNAL_SIZE_T size = chunksize (p);</span><br><span class="line">  assert (chunk_is_mmapped (p));</span><br><span class="line"></span><br><span class="line">  <span class="keyword">uintptr_t</span> block = (<span class="keyword">uintptr_t</span>) p - p-&gt;prev_size;</span><br><span class="line">  <span class="keyword">size_t</span> total_size = p-&gt;prev_size + size;</span><br><span class="line"></span><br><span class="line">  <span class="keyword">if</span> (__builtin_expect (((block | total_size) &amp; (GLRO (dl_pagesize) - <span class="number">1</span>)) != <span class="number">0</span>, <span class="number">0</span>)) &#123;</span><br><span class="line">  <span class="comment">/* 校验内存块的起始地址是否是对齐的 */</span></span><br><span class="line">    malloc_printerr (check_action, <span class="string">"munmap_chunk(): invalid pointer"</span>, chunk2mem (p), <span class="literal">NULL</span>);</span><br><span class="line">    <span class="keyword">return</span>;</span><br><span class="line">  &#125;</span><br><span class="line">  atomic_decrement (&amp;mp_.n_mmaps);</span><br><span class="line">  atomic_add (&amp;mp_.mmapped_mem, -total_size);</span><br><span class="line">  <span class="comment">/* 更新分配区的mmap统计信息 */</span></span><br><span class="line"></span><br><span class="line">  __munmap ((<span class="keyword">char</span> *) block, total_size);</span><br><span class="line">  <span class="comment">/* 调用munmap()函数释放chunk */</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<h2 id="house_of_force">house_of_force</h2>
-<p><code>house_of_force</code>利用过程就是改写<code>top chunk</code>为一个很大的值,然后通过<code>malloc</code>一个计算后的值进行任意地址分配.</p>
-<h2 id="利用思路">利用思路</h2>
-<p>只需要<code>malloc</code>一个<code>chunk</code>,使得这个<code>chunk</code>分配到需要控制的区域为止,然后就可以<code>malloc</code>出需要控制的区域.</p>
-<p>例如:想要改写的变量位置在<code>target</code>,<code>top chunk</code>的位置在<code>top</code>,再算上<code>head</code>的大小,只需要<code>malloc</code>出<code>target - top - 0x10</code>个字节(可以为负数,溢出运算).</p>
-<h2 id="house_of_lore">house_of_lore</h2>
-<p><code>house_of_lore</code>通过改写<code>small bin chunk</code>的<code>bk</code>指针,同时构造一个<code>fake small bin</code>链表,从而分配一个<code>fake chunk</code>出来.</p>
-<h2 id="利用思路-1">利用思路</h2>
-<p>首先分配一个<code>small bin chunk</code>,然后<code>free</code>(<code>free</code>前再<code>malloc</code>一次避免该<code>chunk</code>和<code>top chunk</code>合并).</p>
-<p>此时该<code>chunk</code>在<code>unsorted bin</code>中,所以需要再次<code>malloc</code>一个比该<code>chunk</code>大的<code>chunk</code>使其进入<code>small bin</code>.</p>
-<p>现在就可以伪造了,由于空闲<code>chunk</code>取出时要过<code>fd</code>,<code>bk</code>的<code>pass</code>.所以链表要够长.</p>
-<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">chunk-&gt;bk = buf1</span><br><span class="line">buf1-&gt;fd = chunk_ptr</span><br><span class="line">buf1-&gt;bk = buf2</span><br><span class="line">buf2-&gt;fd = buf1</span><br></pre></td></tr></table></figure>
-<p>伪造后<code>malloc</code>同大小<code>chunk</code>,由于<code>chunk_ptr-&gt;fd</code>被插入<code>small bin</code>时被设置为了对应<code>small bin head</code>,<code>bk</code>和<code>fd</code>成功<code>pass</code>.</p>
-<p>此时<code>small bin</code>链表如下.</p>
-<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">buf1-&gt;fd = small_bin_head</span><br><span class="line">buf1-&gt;bk = buf2</span><br><span class="line">buf2-&gt;fd = buf1</span><br></pre></td></tr></table></figure>
-<p>再次<code>malloc</code>成功获取伪造区域的指针.注意,此后再<code>malloc</code>该大小的<code>chunk</code>就会失败.</p>
-<p>此时<code>small bin</code>链表如下.</p>
-<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">buf2-&gt;fd = small_bin_head</span><br></pre></td></tr></table></figure>
 
       
     </div>
@@ -609,8 +591,8 @@
         <div class="post-nav">
           <div class="post-nav-next post-nav-item">
             
-              <a href="/posts/20c63326/" rel="next" title="Math-probability-theory-大数定律及中心极限定理">
-                <i class="fa fa-chevron-left"></i> Math-probability-theory-大数定律及中心极限定理
+              <a href="/posts/6d6e1fc1/" rel="next" title="writeup-crypto-collection">
+                <i class="fa fa-chevron-left"></i> writeup-crypto-collection
               </a>
             
           </div>
@@ -619,8 +601,8 @@
 
           <div class="post-nav-prev post-nav-item">
             
-              <a href="/posts/78d1a8e0/" rel="prev" title="CS-develop-BackEnd-Spring-Boot-基础">
-                CS-develop-BackEnd-Spring-Boot-基础 <i class="fa fa-chevron-right"></i>
+              <a href="/posts/36159cdd/" rel="prev" title="w4rd3n-朝花夕拾">
+                w4rd3n-朝花夕拾 <i class="fa fa-chevron-right"></i>
               </a>
             
           </div>
@@ -695,7 +677,7 @@
                 
                   <a href="/archives/">
                 
-                    <span class="site-state-item-count">178</span>
+                    <span class="site-state-item-count">172</span>
                     <span class="site-state-item-name">日志</span>
                   </a>
                 </div>
@@ -887,7 +869,7 @@
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#x00"><span class="nav-number">1.</span> <span class="nav-text">0x00</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#malloc"><span class="nav-number">2.</span> <span class="nav-text">malloc</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#int_malloc"><span class="nav-number">2.1.</span> <span class="nav-text">_int_malloc</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#malloc_consolidate"><span class="nav-number">2.2.</span> <span class="nav-text">malloc_consolidate</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#free"><span class="nav-number">3.</span> <span class="nav-text">free</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#int_free"><span class="nav-number">3.1.</span> <span class="nav-text">_int_free</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#systrim"><span class="nav-number">3.2.</span> <span class="nav-text">systrim</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#munmap_chunk"><span class="nav-number">3.3.</span> <span class="nav-text">munmap_chunk</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#house_of_force"><span class="nav-number">4.</span> <span class="nav-text">house_of_force</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#利用思路"><span class="nav-number">5.</span> <span class="nav-text">利用思路</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#house_of_lore"><span class="nav-number">6.</span> <span class="nav-text">house_of_lore</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#利用思路-1"><span class="nav-number">7.</span> <span class="nav-text">利用思路</span></a></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#前言"><span class="nav-number">1.</span> <span class="nav-text">前言</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#malloc"><span class="nav-number">2.</span> <span class="nav-text">malloc</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#int_malloc"><span class="nav-number">2.1.</span> <span class="nav-text">_int_malloc</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#malloc_consolidate"><span class="nav-number">2.2.</span> <span class="nav-text">malloc_consolidate</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#free"><span class="nav-number">3.</span> <span class="nav-text">free</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#int_free"><span class="nav-number">3.1.</span> <span class="nav-text">_int_free</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#systrim"><span class="nav-number">3.2.</span> <span class="nav-text">systrim</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#munmap_chunk"><span class="nav-number">3.3.</span> <span class="nav-text">munmap_chunk</span></a></li></ol></li></ol></div>
             
 
           </div>
@@ -919,7 +901,7 @@
       <i class="fa fa-area-chart"></i>
     </span>
     
-    <span title="站点总字数">730k</span>
+    <span title="站点总字数">727k</span>
   
 
   
@@ -928,7 +910,7 @@
       <i class="fa fa-coffee"></i>
     </span>
     
-    <span title="站点阅读时长">11:04</span>
+    <span title="站点阅读时长">11:01</span>
   
 </div>
 

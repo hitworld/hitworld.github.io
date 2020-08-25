@@ -119,18 +119,18 @@
 
 
 
-  <meta name="description" content="未完成 概览 BIOS支持基本的键盘,鼠标等输入设备,也支持基本的显示输出和打印操作,还有读写外部存储设备. 键位与扫描码 键盘上的键可以分为五类:字符键(字母,数字,标点等),功能键(如F1,PgUp等),控制键(Ctrl,Alt和左右Shift),双态键(如Num Lock和Caps Lock等),特殊请求键(如Print Screen等). 其中字符键有对应的ASCII码,其他的键">
+  <meta name="description" content="概览 BIOS支持基本的键盘,鼠标等输入设备,也支持基本的显示输出和打印操作,还有读写外部存储设备. 键位与扫描码 键盘上的键可以分为五类:字符键(字母,数字,标点等),功能键(如F1,PgUp等),控制键(Ctrl,Alt和左右Shift),双态键(如Num Lock和Caps Lock等),特殊请求键(如Print Screen等).其中字符键有对应的ASCII码,其他的键没有.每个键都">
 <meta name="keywords" content="assembly">
 <meta property="og:type" content="article">
 <meta property="og:title" content="CS-BASIC-assembly-IA32-BIOS编程">
 <meta property="og:url" content="https://hitworld.github.io/posts/ff138e1/index.html">
 <meta property="og:site_name" content="w4rd3n">
-<meta property="og:description" content="未完成 概览 BIOS支持基本的键盘,鼠标等输入设备,也支持基本的显示输出和打印操作,还有读写外部存储设备. 键位与扫描码 键盘上的键可以分为五类:字符键(字母,数字,标点等),功能键(如F1,PgUp等),控制键(Ctrl,Alt和左右Shift),双态键(如Num Lock和Caps Lock等),特殊请求键(如Print Screen等). 其中字符键有对应的ASCII码,其他的键">
+<meta property="og:description" content="概览 BIOS支持基本的键盘,鼠标等输入设备,也支持基本的显示输出和打印操作,还有读写外部存储设备. 键位与扫描码 键盘上的键可以分为五类:字符键(字母,数字,标点等),功能键(如F1,PgUp等),控制键(Ctrl,Alt和左右Shift),双态键(如Num Lock和Caps Lock等),特殊请求键(如Print Screen等).其中字符键有对应的ASCII码,其他的键没有.每个键都">
 <meta property="og:locale" content="zh-CN">
-<meta property="og:updated_time" content="2020-08-09T06:34:17.770Z">
+<meta property="og:updated_time" content="2020-08-25T13:25:11.531Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="CS-BASIC-assembly-IA32-BIOS编程">
-<meta name="twitter:description" content="未完成 概览 BIOS支持基本的键盘,鼠标等输入设备,也支持基本的显示输出和打印操作,还有读写外部存储设备. 键位与扫描码 键盘上的键可以分为五类:字符键(字母,数字,标点等),功能键(如F1,PgUp等),控制键(Ctrl,Alt和左右Shift),双态键(如Num Lock和Caps Lock等),特殊请求键(如Print Screen等). 其中字符键有对应的ASCII码,其他的键">
+<meta name="twitter:description" content="概览 BIOS支持基本的键盘,鼠标等输入设备,也支持基本的显示输出和打印操作,还有读写外部存储设备. 键位与扫描码 键盘上的键可以分为五类:字符键(字母,数字,标点等),功能键(如F1,PgUp等),控制键(Ctrl,Alt和左右Shift),双态键(如Num Lock和Caps Lock等),特殊请求键(如Print Screen等).其中字符键有对应的ASCII码,其他的键没有.每个键都">
 
 
 
@@ -537,12 +537,10 @@
       
 
       
-        <p>未完成</p>
-<h2 id="概览">概览</h2>
+        <h2 id="概览">概览</h2>
 <p><code>BIOS</code>支持基本的键盘,鼠标等输入设备,也支持基本的显示输出和打印操作,还有读写外部存储设备.</p>
 <h2 id="键位与扫描码">键位与扫描码</h2>
-<p>键盘上的键可以分为五类:字符键(字母,数字,标点等),功能键(如<code>F1</code>,<code>PgUp</code>等),控制键(<code>Ctrl</code>,<code>Alt</code>和左右<code>Shift</code>),双态键(如<code>Num Lock</code>和<code>Caps Lock</code>等),特殊请求键(如<code>Print Screen</code>等).</p>
-<p>其中字符键有对应的<code>ASCII</code>码,其他的键没有.每个键都有一个代表键位置的扫描码.当按键操作发送,键盘会发送扫描码到主机.</p>
+<p>键盘上的键可以分为五类:字符键(字母,数字,标点等),功能键(如<code>F1</code>,<code>PgUp</code>等),控制键(<code>Ctrl</code>,<code>Alt</code>和左右<code>Shift</code>),双态键(如<code>Num Lock</code>和<code>Caps Lock</code>等),特殊请求键(如<code>Print Screen</code>等).其中字符键有对应的<code>ASCII</code>码,其他的键没有.每个键都有一个代表键位置的扫描码.当按键操作发送,键盘会发送扫描码到主机.</p>
 <p>键盘中断程序根据扫描码进行处理:对于字符键会把扫描码与<code>ASCII</code>码存到键盘缓冲区,对于功能键会把扫描码存到键盘缓冲区,对于控制键和双态键仅会记住状态,而对于特殊请求键会直接处理.</p>
 <h2 id="键盘io程序">键盘I/O程序</h2>
 <p><code>BIOS</code>中提供键盘输入功能的程序叫做键盘<code>I/O</code>程序,通过编号(置于<code>AH</code>寄存器)调用程序(<code>INT 16H</code>)不同的功能,调用返回后,从有关寄存器获取出口参数(返回值).</p>
@@ -706,7 +704,7 @@
                 
                   <a href="/archives/">
                 
-                    <span class="site-state-item-count">178</span>
+                    <span class="site-state-item-count">172</span>
                     <span class="site-state-item-name">日志</span>
                   </a>
                 </div>
@@ -930,7 +928,7 @@
       <i class="fa fa-area-chart"></i>
     </span>
     
-    <span title="站点总字数">730k</span>
+    <span title="站点总字数">727k</span>
   
 
   
@@ -939,7 +937,7 @@
       <i class="fa fa-coffee"></i>
     </span>
     
-    <span title="站点阅读时长">11:04</span>
+    <span title="站点阅读时长">11:01</span>
   
 </div>
 

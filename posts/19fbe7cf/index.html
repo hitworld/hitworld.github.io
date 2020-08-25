@@ -119,18 +119,18 @@
 
 
 
-  <meta name="description" content="未完成 前言 基于glibc-2.27. 对应结构体 tcache_entry.类似于fastbin,tcache也是以单向链表连接. 12345/* We overlay this structure on the user-data portion of a chunk when   the chunk is stored in the per-thread cache.  */ty">
+  <meta name="description" content="前言 基于glibc-2.27. 对应结构体 tcache_entry.类似于fastbin,tcache也是以单向链表连接. 123typedef struct tcache_entry &amp;#123;  struct tcache_entry *next;&amp;#125; tcache_entry; tcache_perthread_struct.每个线程使用一个tcache_perthr">
 <meta name="keywords" content="Linux">
 <meta property="og:type" content="article">
 <meta property="og:title" content="CS-RTFSC-Linux-glibc-2.27-tcache">
 <meta property="og:url" content="https://hitworld.github.io/posts/19fbe7cf/index.html">
 <meta property="og:site_name" content="w4rd3n">
-<meta property="og:description" content="未完成 前言 基于glibc-2.27. 对应结构体 tcache_entry.类似于fastbin,tcache也是以单向链表连接. 12345/* We overlay this structure on the user-data portion of a chunk when   the chunk is stored in the per-thread cache.  */ty">
+<meta property="og:description" content="前言 基于glibc-2.27. 对应结构体 tcache_entry.类似于fastbin,tcache也是以单向链表连接. 123typedef struct tcache_entry &amp;#123;  struct tcache_entry *next;&amp;#125; tcache_entry; tcache_perthread_struct.每个线程使用一个tcache_perthr">
 <meta property="og:locale" content="zh-CN">
-<meta property="og:updated_time" content="2020-08-09T06:34:17.789Z">
+<meta property="og:updated_time" content="2020-08-25T15:24:16.404Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="CS-RTFSC-Linux-glibc-2.27-tcache">
-<meta name="twitter:description" content="未完成 前言 基于glibc-2.27. 对应结构体 tcache_entry.类似于fastbin,tcache也是以单向链表连接. 12345/* We overlay this structure on the user-data portion of a chunk when   the chunk is stored in the per-thread cache.  */ty">
+<meta name="twitter:description" content="前言 基于glibc-2.27. 对应结构体 tcache_entry.类似于fastbin,tcache也是以单向链表连接. 123typedef struct tcache_entry &amp;#123;  struct tcache_entry *next;&amp;#125; tcache_entry; tcache_perthread_struct.每个线程使用一个tcache_perthr">
 
 
 
@@ -503,7 +503,7 @@
                 
                   <span class="post-meta-item-text">本文字数：</span>
                 
-                <span title="本文字数">3.3k</span>
+                <span title="本文字数">3.2k</span>
               
 
               
@@ -537,16 +537,15 @@
       
 
       
-        <p>未完成</p>
-<h2 id="前言">前言</h2>
+        <h2 id="前言">前言</h2>
 <p>基于<code>glibc-2.27</code>.</p>
 <h2 id="对应结构体">对应结构体</h2>
 <p><code>tcache_entry</code>.类似于<code>fastbin</code>,<code>tcache</code>也是以单向链表连接.</p>
-<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">/* We overlay this structure on the user-data portion of a chunk when</span></span><br><span class="line"><span class="comment">   the chunk is stored in the per-thread cache.  */</span></span><br><span class="line"><span class="keyword">typedef</span> <span class="class"><span class="keyword">struct</span> <span class="title">tcache_entry</span> &#123;</span></span><br><span class="line">  <span class="class"><span class="keyword">struct</span> <span class="title">tcache_entry</span> *<span class="title">next</span>;</span></span><br><span class="line">&#125; tcache_entry;</span><br></pre></td></tr></table></figure>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">typedef</span> <span class="class"><span class="keyword">struct</span> <span class="title">tcache_entry</span> &#123;</span></span><br><span class="line">  <span class="class"><span class="keyword">struct</span> <span class="title">tcache_entry</span> *<span class="title">next</span>;</span></span><br><span class="line">&#125; tcache_entry;</span><br></pre></td></tr></table></figure>
 <p><code>tcache_perthread_struct</code>.每个线程使用一个<code>tcache_perthread_struct</code>管理当前线程的<code>tcache</code>.</p>
-<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">typedef</span> <span class="class"><span class="keyword">struct</span> <span class="title">tcache_perthread_struct</span> &#123;</span></span><br><span class="line">  <span class="keyword">char</span> counts[TCACHE_MAX_BINS];</span><br><span class="line">  <span class="comment">//记录对应单向链表保存的tcache的数量,默认最大值为7</span></span><br><span class="line">  tcache_entry *entries[TCACHE_MAX_BINS];</span><br><span class="line">  <span class="comment">//对应的单向链表</span></span><br><span class="line">&#125; tcache_perthread_struct;</span><br></pre></td></tr></table></figure>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">typedef</span> <span class="class"><span class="keyword">struct</span> <span class="title">tcache_perthread_struct</span> &#123;</span></span><br><span class="line">  <span class="keyword">char</span> counts[TCACHE_MAX_BINS];<span class="comment">//记录对应单向链表保存的tcache的数量,默认最大值为7</span></span><br><span class="line">  tcache_entry *entries[TCACHE_MAX_BINS];<span class="comment">//对应的单向链表</span></span><br><span class="line">&#125; tcache_perthread_struct;</span><br></pre></td></tr></table></figure>
 <p>与<code>fastbin</code>不同的是<code>tcache</code>的<code>next</code>指向<code>user data</code>的地方,即<code>chunk header</code>之后.</p>
-<h2 id="tcache的分配与释放概览">tcache的分配与释放概览</h2>
+<h2 id="tcache的分配与释放简述">tcache的分配与释放简述</h2>
 <p><code>free</code>内存时,如果<code>size</code>小于<code>small bin size</code>时,<code>chunk</code>会先放到对应的<code>tcache</code>中,直到<code>tcache</code>被填满.<code>tcache</code>中的<code>chunk</code>不会合并(不取消<code>inuse bit</code>).</p>
 <p><code>malloc</code>内存时,如果<code>size</code>在<code>tcache</code>范围内,先从<code>tcache</code>取<code>chunk</code>,直到<code>tcache</code>为空后从<code>bin</code>中找.</p>
 <p><code>tcache</code>为空时,如果<code>fastbin/smallbin/unsorted bin</code>中有<code>size</code>符合的<code>chunk</code>,会先把<code>fastbin/smallbin/unsorted bin</code>中的<code>chunk</code>放到<code>tcache</code>中,直到填满.之后再从<code>tcache</code>中取.</p>
@@ -690,7 +689,7 @@
                 
                   <a href="/archives/">
                 
-                    <span class="site-state-item-count">178</span>
+                    <span class="site-state-item-count">172</span>
                     <span class="site-state-item-name">日志</span>
                   </a>
                 </div>
@@ -882,7 +881,7 @@
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#前言"><span class="nav-number">1.</span> <span class="nav-text">前言</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#对应结构体"><span class="nav-number">2.</span> <span class="nav-text">对应结构体</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#tcache的分配与释放概览"><span class="nav-number">3.</span> <span class="nav-text">tcache的分配与释放概览</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#source-code"><span class="nav-number">4.</span> <span class="nav-text">source code</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#libc_malloc"><span class="nav-number">4.1.</span> <span class="nav-text">__libc_malloc</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#libc_free"><span class="nav-number">4.2.</span> <span class="nav-text">__libc_free</span></a></li></ol></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#前言"><span class="nav-number">1.</span> <span class="nav-text">前言</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#对应结构体"><span class="nav-number">2.</span> <span class="nav-text">对应结构体</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#tcache的分配与释放简述"><span class="nav-number">3.</span> <span class="nav-text">tcache的分配与释放简述</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#source-code"><span class="nav-number">4.</span> <span class="nav-text">source code</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#libc_malloc"><span class="nav-number">4.1.</span> <span class="nav-text">__libc_malloc</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#libc_free"><span class="nav-number">4.2.</span> <span class="nav-text">__libc_free</span></a></li></ol></li></ol></div>
             
 
           </div>
@@ -914,7 +913,7 @@
       <i class="fa fa-area-chart"></i>
     </span>
     
-    <span title="站点总字数">730k</span>
+    <span title="站点总字数">727k</span>
   
 
   
@@ -923,7 +922,7 @@
       <i class="fa fa-coffee"></i>
     </span>
     
-    <span title="站点阅读时长">11:04</span>
+    <span title="站点阅读时长">11:01</span>
   
 </div>
 

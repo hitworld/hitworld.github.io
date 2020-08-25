@@ -119,21 +119,21 @@
 
 
 
-  <meta name="description" content="未完成 ARM简介 ARM是一个RISC处理器,拥有一套精简的指令集以及比CISC处理器更多的通用寄存器.与Intel处理器不同,ARM指令只处理寄存器中的数据,只有load/store指令可以读/写存储器.这种架构的优势是指令可以被更快的执行,同时RISC处理器通过引入流水线机制,减少每个指令的占用的CPU的时钟周期来缩短执行时间. ARM官方信息中心:ARM Information Ce">
+  <meta name="description" content="简介 ARM架构是一个精简指令集处理器架构家族,拥有一套精简的指令集以及比CISC处理器更多的通用寄存器.ARM指令只处理寄存器中的数据,只有load/store指令可以读/写存储器. 这种架构的优势是指令可以被更快的执行,同时RISC处理器通过引入流水线机制,减少每个指令的占用的CPU的时钟周期来缩短执行时间. ARM官方信息中心:ARM Information Center. 工作状态">
 <meta name="keywords" content="assembly">
 <meta property="og:type" content="article">
 <meta property="og:title" content="CS-BASIC-assembly-ARM-基础">
 <meta property="og:url" content="https://hitworld.github.io/posts/f6dfed73/index.html">
 <meta property="og:site_name" content="w4rd3n">
-<meta property="og:description" content="未完成 ARM简介 ARM是一个RISC处理器,拥有一套精简的指令集以及比CISC处理器更多的通用寄存器.与Intel处理器不同,ARM指令只处理寄存器中的数据,只有load/store指令可以读/写存储器.这种架构的优势是指令可以被更快的执行,同时RISC处理器通过引入流水线机制,减少每个指令的占用的CPU的时钟周期来缩短执行时间. ARM官方信息中心:ARM Information Ce">
+<meta property="og:description" content="简介 ARM架构是一个精简指令集处理器架构家族,拥有一套精简的指令集以及比CISC处理器更多的通用寄存器.ARM指令只处理寄存器中的数据,只有load/store指令可以读/写存储器. 这种架构的优势是指令可以被更快的执行,同时RISC处理器通过引入流水线机制,减少每个指令的占用的CPU的时钟周期来缩短执行时间. ARM官方信息中心:ARM Information Center. 工作状态">
 <meta property="og:locale" content="zh-CN">
 <meta property="og:image" content="https://hitworld.github.io/posts/f6dfed73/1.png">
 <meta property="og:image" content="https://hitworld.github.io/posts/f6dfed73/2.png">
 <meta property="og:image" content="https://hitworld.github.io/posts/f6dfed73/3.png">
-<meta property="og:updated_time" content="2020-08-09T08:49:30.112Z">
+<meta property="og:updated_time" content="2020-08-25T12:48:34.048Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="CS-BASIC-assembly-ARM-基础">
-<meta name="twitter:description" content="未完成 ARM简介 ARM是一个RISC处理器,拥有一套精简的指令集以及比CISC处理器更多的通用寄存器.与Intel处理器不同,ARM指令只处理寄存器中的数据,只有load/store指令可以读/写存储器.这种架构的优势是指令可以被更快的执行,同时RISC处理器通过引入流水线机制,减少每个指令的占用的CPU的时钟周期来缩短执行时间. ARM官方信息中心:ARM Information Ce">
+<meta name="twitter:description" content="简介 ARM架构是一个精简指令集处理器架构家族,拥有一套精简的指令集以及比CISC处理器更多的通用寄存器.ARM指令只处理寄存器中的数据,只有load/store指令可以读/写存储器. 这种架构的优势是指令可以被更快的执行,同时RISC处理器通过引入流水线机制,减少每个指令的占用的CPU的时钟周期来缩短执行时间. ARM官方信息中心:ARM Information Center. 工作状态">
 <meta name="twitter:image" content="https://hitworld.github.io/posts/f6dfed73/1.png">
 
 
@@ -507,7 +507,7 @@
                 
                   <span class="post-meta-item-text">本文字数：</span>
                 
-                <span title="本文字数">7.3k</span>
+                <span title="本文字数">6.9k</span>
               
 
               
@@ -521,7 +521,7 @@
                 
                   <span class="post-meta-item-text">阅读时长 &asymp;</span>
                 
-                <span title="阅读时长">7 分钟</span>
+                <span title="阅读时长">6 分钟</span>
               
             </div>
           
@@ -541,13 +541,12 @@
       
 
       
-        <p>未完成</p>
-<h2 id="arm简介">ARM简介</h2>
-<p><code>ARM</code>是一个<code>RISC</code>处理器,拥有一套精简的指令集以及比<code>CISC</code>处理器更多的通用寄存器.与<code>Intel</code>处理器不同,<code>ARM</code>指令只处理寄存器中的数据,只有<code>load/store</code>指令可以读<code>/</code>写存储器.这种架构的优势是指令可以被更快的执行,同时<code>RISC</code>处理器通过引入流水线机制,减少每个指令的占用的<code>CPU</code>的时钟周期来缩短执行时间.</p>
-<p><code>ARM</code>官方信息中心:<a href="http://infocenter.arm.com/help/index.jsp" target="_blank" rel="noopener"><code>ARM Information Center</code></a>.</p>
+        <h2 id="简介">简介</h2>
+<p><code>ARM</code>架构是一个精简指令集处理器架构家族,拥有一套精简的指令集以及比<code>CISC</code>处理器更多的通用寄存器.<code>ARM</code>指令只处理寄存器中的数据,只有<code>load/store</code>指令可以读<code>/</code>写存储器.</p>
+<p>这种架构的优势是指令可以被更快的执行,同时<code>RISC</code>处理器通过引入流水线机制,减少每个指令的占用的<code>CPU</code>的时钟周期来缩短执行时间.</p>
+<p><code>ARM</code>官方信息中心:<a href="http://infocenter.arm.com" target="_blank" rel="noopener"><code>ARM Information Center</code></a>.</p>
 <h2 id="工作状态">工作状态</h2>
-<p><code>ARM</code>处理器有两种工作状态(并非运行模式)<code>ARM</code>和<code>Thumb</code>.两种工作状态之间最大的差异是指令集,<code>ARM</code>状态的指令长度为<code>32</code>位且字对齐,<code>Thumb</code>状态的指令长度一般为<code>16</code>位且半字对齐,也可能为<code>32</code>位.</p>
-<p><code>ARM</code>中的字为四字节,半字为两字节.</p>
+<p><code>ARM</code>处理器有两种工作状态<code>ARM</code>和<code>Thumb</code>.两种工作状态之间最大的差异是指令集,<code>ARM</code>状态的指令长度为<code>32</code>位且字对齐,<code>Thumb</code>状态的指令长度一般为<code>16</code>位且半字对齐,也可能为<code>32</code>位(<code>ARM</code>中的字为四字节,半字为两字节).</p>
 <p>编写<code>ARM</code>的<code>shellcode</code>时,使用<code>Thumb</code>指令代替<code>ARM</code>指令可以避免在指令中出现<code>\0</code>截断.</p>
 <h3 id="thumb">Thumb</h3>
 <p>不同的<code>ARM</code>版本,支持的<code>Thumb</code>指令集并不相同.</p>
@@ -558,7 +557,7 @@
 </ul>
 <p>不同的命名只是为了区分不同的版本.处理器只知道它运行在<code>Thumb</code>工作状态.</p>
 <h3 id="arm">ARM</h3>
-<p>这里主要列举<code>ARM</code>和<code>Thumb</code>的区别.</p>
+<p><code>ARM</code>和<code>Thumb</code>的区别.</p>
 <ul>
 <li><code>ARM</code>工作状态下的所有指令都支持条件执行,而<code>Thumb</code>只有某些<code>ARM</code>处理器版本允许使用<code>IT</code>指令进行条件执行.</li>
 <li><code>32</code>位<code>ARM</code>和<code>Thumb</code>指令的区别为<code>32</code>位<code>Thumb</code>指令具有<code>.w</code>后缀.</li>
@@ -575,13 +574,12 @@
 <li><code>sys</code>(系统模式):运行具有特权的操作系统任务.</li>
 <li><code>und</code>(未定义指令中止模式):当执行未定义的指令时进入该模式,可用于支持硬件协处理器的软件仿真.</li>
 </ul>
-<p><code>ARM</code>处理器的运行模式可以通过软件改变,也可以通过外部中断或异常处理改变.</p>
-<p>大多数的应用程序运行在用户模式下,当处理器运行在用户模式下时,某些被保护的系统资源是不能被访问的.</p>
-<p>除用户模式以外的所有<code>6</code>种模式称之为非用户模式,或特权模式(<code>Privileged Modes</code>);除用户模式和系统模式以外的<code>5</code>种又称为异常模式(<code>Exception Modes</code>),常用于处理中断或异常,以及需要访问受保护的系统资源等情况.</p>
-<p><code>ARM</code>处理器在每一种处理器模式下均有一组相应的寄存器与之对应.即在任意一种处理器模式下,可访问的寄存器包括<code>15</code>个通用寄存器(<code>R0~R14</code>),一至二个状态寄存器和程序计数器.在所有的寄存器中,有些是在<code>7</code>种处理器模式下共用的同一个物理寄存器,而有些寄存器则是在不同的处理器模式下有不同的物理寄存器.</p>
-<h2 id="arm寄存器">ARM寄存器</h2>
+<p><code>ARM</code>处理器的运行模式可以通过软件改变,也可以通过外部中断或异常处理改变.除用户模式以外的所有<code>6</code>种模式称之为非用户模式,或特权模式(<code>Privileged Modes</code>);除用户模式和系统模式以外的<code>5</code>种又称为异常模式(<code>Exception Modes</code>),常用于处理中断或异常,以及需要访问受保护的系统资源等情况.</p>
+<p><code>ARM</code>处理器在每一种处理器模式下均有一组相应的寄存器与之对应.即在任意一种处理器模式下,可访问的寄存器包括<code>15</code>个通用寄存器(<code>R0~R14</code>),一至二个状态寄存器和程序计数器.</p>
+<p>在所有的寄存器中,有些是在<code>7</code>种处理器模式下共用的同一个物理寄存器,而有些寄存器则是在不同的处理器模式下有不同的物理寄存器.</p>
+<h2 id="寄存器">寄存器</h2>
 <p>ARM微处理器共有<code>37</code>个<code>32</code>位寄存器,其中<code>31</code>个为通用寄存器,<code>6</code>个为状态寄存器.这些寄存器不是随时都能访问的,取决于此时<code>ARM</code>处理器的工作状态及具体的运行模式.任何时候通用寄存器<code>R0 ~ R14</code>,程序计数器<code>PC</code>(<code>R15</code>)和<code>CPSR</code>状态寄存器都是可访问的.</p>
-<p>通用寄存器:<code>R0~R15</code>,<code>R13_svc</code>,<code>R14_svc</code>,<code>R13_abt</code>,<code>R14_abt</code>,<code>R13_und</code>,<code>R14_und</code>,<code>R13_irq</code>,<code>R14_irq</code>,<code>R8_fiq~R14_fiq</code>.通用寄存器(<code>R0~R15</code>)可分成不分组寄存器<code>R0~R7</code>,分组寄存器<code>R8~R14</code>和程序计数器<code>R15</code>.</p>
+<p>通用寄存器(<code>R0~R15</code>)可分成不分组寄存器<code>R0~R7</code>,分组寄存器<code>R8~R14</code>和程序计数器<code>R15</code>.</p>
 <p>不分组寄存器是真正的通用寄存器,在所有处理器模式下访问的都是同一个物理寄存器.分组寄存器取决于当前的处理器模式,每种模式有专用的分组寄存器用于快速异常处理.</p>
 <img src="/posts/f6dfed73/1.png" title="p1">
 <p>寄存器<code>R13</code>通常用做堆栈指针<code>SP</code>;寄存器<code>R14</code>用作子程序链接寄存器,也称为<code>LR</code>,指向函数的返回地址;寄存器<code>R15</code>被用作程序计数器(<code>PC</code>),其值等于当前正在执行的指令的地址加<code>8</code>.</p>
@@ -589,20 +587,18 @@
 <p><code>CPSR</code>包含条件码标志,中断禁止位,当前处理器模式以及其它状态和控制信息.<code>CPSR</code>在每种异常模式下都有一个对应的程序状态保存寄存器<code>SPSR</code>.当异常出现时,<code>SPSR</code>用于保存<code>CPSR</code>的值,以便异常返回后恢复工作状态.</p>
 <img src="/posts/f6dfed73/2.png" title="p2">
 <img src="/posts/f6dfed73/3.png" title="p3">
-<h2 id="arm指令集">ARM指令集</h2>
+<h2 id="指令集">指令集</h2>
 <p><code>ARM</code>在不同工作状态下有不同的指令集,但助记符不变.</p>
 <h3 id="数据处理指令">数据处理指令</h3>
-<p>数据处理指令可分为数据传送指令,算术逻辑运算指令和比较指令等.</p>
 <p>指令标识符中的<code>S</code>决定指令的操作是否影响<code>CPSR</code>中条件标志位的值,没有<code>S</code>时指令不更新<code>CPSR</code>中的条件标志位.</p>
-<figure class="highlight armasm"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">;数据传送指令传送数据并可以更新CPSR中的相应条件标志位.</span></span><br><span class="line"><span class="keyword">MOV&lt;condition&gt;&lt;S&gt; </span>DEST, OP1</span><br><span class="line"><span class="comment">;DEST=OP1,DEST是寄存器,OP1可以是寄存器,被移位的寄存器,或立即数.</span></span><br><span class="line"><span class="comment">;DEST为R15时将修改程序计数器或标志.MOV PC, R14 =&gt; 退出到调用者;MOVS PC, R14 =&gt; 退出到调用者并恢复标志位.</span></span><br><span class="line"><span class="keyword">MVN&lt;condition&gt;&lt;S&gt; </span>DEST, OP1</span><br><span class="line"><span class="comment">;DEST=~OP1,DEST是寄存器,OP1可以是寄存器,被移位的寄存器,或立即数.</span></span><br><span class="line"></span><br><span class="line"><span class="comment">;算术逻辑运算指令保存运算结果并可以更新CPSR中的相应条件标志位.</span></span><br><span class="line"><span class="keyword">ADD&lt;condition&gt;&lt;S&gt; </span>DEST, OP1, OP2</span><br><span class="line"><span class="comment">;DEST=OP1+OP2,DEST是寄存器,OP1是寄存器,OP2可以是寄存器,被移位的寄存器,或立即数.</span></span><br><span class="line"><span class="keyword">ADC&lt;condition&gt;&lt;S&gt; </span>DEST, OP1, OP2</span><br><span class="line"><span class="comment">;DEST=OP1+OP2+CPSR.C,DEST是寄存器,OP1是寄存器,OP2可以是寄存器,被移位的寄存器,或立即数.</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">SUB&lt;condition&gt;&lt;S&gt; </span>DEST, OP1, OP2</span><br><span class="line"><span class="comment">;DEST=OP1-OP2,DEST是寄存器,OP1是寄存器,OP2可以是寄存器,被移位的寄存器,或立即数.</span></span><br><span class="line"><span class="keyword">SBC&lt;condition&gt;&lt;S&gt; </span>DEST, OP1, OP2</span><br><span class="line"><span class="comment">;DEST=OP1+OP2-~CPSR.C,DEST是寄存器,OP1是寄存器,OP2可以是寄存器,被移位的寄存器,或立即数.</span></span><br><span class="line"><span class="keyword">RSB&lt;condition&gt;&lt;S&gt; </span>DEST, OP1, OP2</span><br><span class="line"><span class="comment">;DEST=OP2-OP1,DEST是寄存器,OP1是寄存器,OP2可以是寄存器,被移位的寄存器,或立即数.</span></span><br><span class="line"><span class="keyword">RSC&lt;condition&gt;&lt;S&gt; </span>DEST, OP1, OP2</span><br><span class="line"><span class="comment">;DEST=OP2-OP1-~CPSR,DEST是寄存器,OP1是寄存器,OP2可以是寄存器,被移位的寄存器,或立即数.</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">AND&lt;condition&gt;&lt;S&gt; </span>DEST, OP1, OP2</span><br><span class="line"><span class="comment">;DEST=OP1&amp;OP2,DEST是寄存器,OP1是寄存器,OP2可以是寄存器,被移位的寄存器,或立即数.</span></span><br><span class="line"><span class="keyword">ORR&lt;condition&gt;&lt;S&gt; </span>DEST, OP1, OP2</span><br><span class="line"><span class="comment">;DEST=OP1|OP2,DEST是寄存器,OP1是寄存器,OP2可以是寄存器,被移位的寄存器,或立即数.</span></span><br><span class="line"><span class="keyword">EOR&lt;condition&gt;&lt;S&gt; </span>DEST, OP1, OP2</span><br><span class="line"><span class="comment">;DEST=OP1^OP2,DEST是寄存器,OP1是寄存器,OP2可以是寄存器,被移位的寄存器,或立即数.</span></span><br><span class="line"><span class="keyword">BIC&lt;condition&gt;&lt;S&gt; </span>DEST, OP1, OP2</span><br><span class="line"><span class="comment">;DEST=OP1&amp;(~OP2),DEST是寄存器,OP1是寄存器,OP2是32位掩码.</span></span><br><span class="line"><span class="comment">;BIC R0, R0, #%1011;清除R0中的位0,1,和3,其余的位保持不变.</span></span><br><span class="line"></span><br><span class="line"><span class="comment">;比较指令不保存运算结果,只更新CPSR中相应的条件标志位.</span></span><br><span class="line"><span class="keyword">CMP&lt;condition&gt; </span>OP1, OP2</span><br><span class="line"><span class="comment">;同SUB,不存储结果,只更改条件标志位.</span></span><br><span class="line"><span class="keyword">CMN&lt;condition&gt; </span>OP1, OP2</span><br><span class="line"><span class="comment">;同SUB,但OP2改为~OP2,不存储结果,只更改条件标志位.</span></span><br><span class="line"><span class="keyword">TST&lt;condition&gt; </span>OP1, OP2</span><br><span class="line"><span class="comment">;同AND,不存储结果,只更改条件标志位.</span></span><br><span class="line"><span class="keyword">TEQ&lt;condition&gt; </span>OP1, OP2</span><br><span class="line"><span class="comment">;同EOR,不存储结果,只更改条件标志位.</span></span><br></pre></td></tr></table></figure>
-<h3 id="加载存储指令">加载/存储指令</h3>
-<figure class="highlight armasm"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">LDR&lt;condition&gt;(B/H) </span>Rd, <span class="keyword">ADDR</span></span><br><span class="line"><span class="keyword">;用于从存储器中将一个32(8/16)位的字数据传送到目的寄存器中.</span></span><br><span class="line"><span class="keyword">STR&lt;condition&gt;(B/H) </span>Rd, <span class="keyword">ADDR</span></span><br><span class="line"><span class="keyword">;用于从源寄存器中将一个32(8/16)位的字数据传送到存储器中.</span></span><br><span class="line"><span class="keyword"></span></span><br><span class="line"><span class="keyword">;批量数据加载/存储指令指令</span></span><br><span class="line"><span class="keyword">LDM/STM&lt;condition&gt;&lt;type&gt; </span>Rd!, &#123;Rd2, ...&#125;</span><br><span class="line"><span class="comment">;type:IA,每次传送后地址加1;IB,每次传送前地址加1;DA,每次传送后地址减1;DB,每次传送前地址减1;FD,满递减堆栈;ED,空递减堆栈;FA,满递增堆栈;EA,空递增堆栈;</span></span><br></pre></td></tr></table></figure>
+<figure class="highlight armasm"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">MOV&lt;condition&gt;&lt;S&gt; </span>DEST, OP1</span><br><span class="line"><span class="comment">;DEST=OP1,DEST是寄存器,OP1可以是寄存器,被移位的寄存器,或立即数.</span></span><br><span class="line"><span class="comment">;DEST为R15时将修改程序计数器或标志.MOV PC, R14 =&gt; 退出到调用者;MOVS PC, R14 =&gt; 退出到调用者并恢复标志位.</span></span><br><span class="line"><span class="keyword">MVN&lt;condition&gt;&lt;S&gt; </span>DEST, OP1</span><br><span class="line"><span class="comment">;DEST=~OP1,DEST是寄存器,OP1可以是寄存器,被移位的寄存器,或立即数.</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">ADD&lt;condition&gt;&lt;S&gt; </span>DEST, OP1, OP2</span><br><span class="line"><span class="comment">;DEST=OP1+OP2,DEST是寄存器,OP1是寄存器,OP2可以是寄存器,被移位的寄存器,或立即数.</span></span><br><span class="line"><span class="keyword">ADC&lt;condition&gt;&lt;S&gt; </span>DEST, OP1, OP2</span><br><span class="line"><span class="comment">;DEST=OP1+OP2+CPSR.C,DEST是寄存器,OP1是寄存器,OP2可以是寄存器,被移位的寄存器,或立即数.</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">SUB&lt;condition&gt;&lt;S&gt; </span>DEST, OP1, OP2</span><br><span class="line"><span class="comment">;DEST=OP1-OP2,DEST是寄存器,OP1是寄存器,OP2可以是寄存器,被移位的寄存器,或立即数.</span></span><br><span class="line"><span class="keyword">SBC&lt;condition&gt;&lt;S&gt; </span>DEST, OP1, OP2</span><br><span class="line"><span class="comment">;DEST=OP1+OP2-~CPSR.C,DEST是寄存器,OP1是寄存器,OP2可以是寄存器,被移位的寄存器,或立即数.</span></span><br><span class="line"><span class="keyword">RSB&lt;condition&gt;&lt;S&gt; </span>DEST, OP1, OP2</span><br><span class="line"><span class="comment">;DEST=OP2-OP1,DEST是寄存器,OP1是寄存器,OP2可以是寄存器,被移位的寄存器,或立即数.</span></span><br><span class="line"><span class="keyword">RSC&lt;condition&gt;&lt;S&gt; </span>DEST, OP1, OP2</span><br><span class="line"><span class="comment">;DEST=OP2-OP1-~CPSR,DEST是寄存器,OP1是寄存器,OP2可以是寄存器,被移位的寄存器,或立即数.</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">AND&lt;condition&gt;&lt;S&gt; </span>DEST, OP1, OP2</span><br><span class="line"><span class="comment">;DEST=OP1&amp;OP2,DEST是寄存器,OP1是寄存器,OP2可以是寄存器,被移位的寄存器,或立即数.</span></span><br><span class="line"><span class="keyword">ORR&lt;condition&gt;&lt;S&gt; </span>DEST, OP1, OP2</span><br><span class="line"><span class="comment">;DEST=OP1|OP2,DEST是寄存器,OP1是寄存器,OP2可以是寄存器,被移位的寄存器,或立即数.</span></span><br><span class="line"><span class="keyword">EOR&lt;condition&gt;&lt;S&gt; </span>DEST, OP1, OP2</span><br><span class="line"><span class="comment">;DEST=OP1^OP2,DEST是寄存器,OP1是寄存器,OP2可以是寄存器,被移位的寄存器,或立即数.</span></span><br><span class="line"><span class="keyword">BIC&lt;condition&gt;&lt;S&gt; </span>DEST, OP1, OP2</span><br><span class="line"><span class="comment">;DEST=OP1&amp;(~OP2),DEST是寄存器,OP1是寄存器,OP2是32位掩码.</span></span><br><span class="line"><span class="comment">;BIC R0, R0, #%1011;清除R0中的位0,1,和3,其余的位保持不变.</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">CMP&lt;condition&gt; </span>OP1, OP2</span><br><span class="line"><span class="comment">;同SUB,不存储结果,只更改条件标志位.</span></span><br><span class="line"><span class="keyword">CMN&lt;condition&gt; </span>OP1, OP2</span><br><span class="line"><span class="comment">;同SUB,但OP2改为~OP2,不存储结果,只更改条件标志位.</span></span><br><span class="line"><span class="keyword">TST&lt;condition&gt; </span>OP1, OP2</span><br><span class="line"><span class="comment">;同AND,不存储结果,只更改条件标志位.</span></span><br><span class="line"><span class="keyword">TEQ&lt;condition&gt; </span>OP1, OP2</span><br><span class="line"><span class="comment">;同EOR,不存储结果,只更改条件标志位.</span></span><br></pre></td></tr></table></figure>
 <h3 id="移位指令">移位指令</h3>
-<p><code>ARM</code>处理器设置与数据处理指令一起使用的桶式移位器(<code>barrel shifter</code>),也可以使用桶式移位器影响<code>LDR/STR</code>操作中的变址值.</p>
-<p>移位操作在<code>ARM</code>指令集中不作为单独的指令使用,如果数据处理指令的第二个操作数或者单一数据传送指令中的变址是寄存器,则可以对它进行各种移位操作.</p>
+<p><code>ARM</code>处理器设置与数据处理指令一起使用的桶式移位器(<code>barrel shifter</code>),也可以使用桶式移位器影响<code>LDR/STR</code>操作中的变址值.移位操作在<code>ARM</code>指令集中不作为单独的指令使用,如果数据处理指令的第二个操作数或者单一数据传送指令中的变址是寄存器,则可以对它进行各种移位操作.</p>
 <p><code>LSL</code>,逻辑左移;<code>ASL</code>,算术左移;<code>LSR</code>,逻辑右移;<code>ASR</code>,算术右移;<code>ROR</code>,循环右移;<code>RRX</code>,带扩展的循环右移.可以用一个立即值(<code>0 ~ 31</code>)指定移位数量,或用包含<code>0 ~ 31</code>值的寄存器指定移位数量.</p>
 <p>指令标识符中的<code>S</code>决定指令的移出位是否设为进位标志的值,有则设置,否则移出位抛弃.</p>
 <figure class="highlight armasm"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"><span class="symbol">Rn</span>, <span class="keyword">LSL </span><span class="symbol">#n</span><span class="comment">;Rn=Rn&lt;&lt;n.最低有效位用零来填充.</span></span><br><span class="line"><span class="symbol">Rn</span>, ASL <span class="symbol">#n</span><span class="comment">;同上.</span></span><br><span class="line"><span class="symbol">Rn</span>, <span class="keyword">LSL </span>Rx<span class="comment">;Rn=Rn&lt;&lt;Rx.最低有效位用零来填充.</span></span><br><span class="line"><span class="symbol">Rn</span>, ASL Rx<span class="comment">;同上.</span></span><br><span class="line"></span><br><span class="line"><span class="symbol">Rn</span>, <span class="keyword">LSR </span><span class="symbol">#n</span><span class="comment">;Rn=Rn&gt;&gt;n.最高有效位用零来填充.</span></span><br><span class="line"><span class="symbol">Rn</span>, <span class="keyword">LSR </span>Rx<span class="comment">;Rn=Rn&gt;&gt;Rx.最高有效位用零来填充.</span></span><br><span class="line"><span class="symbol">Rn</span>, <span class="keyword">ASR </span><span class="symbol">#n</span><span class="comment">;Rn=Rn&gt;&gt;n.最高有效位用第31位的值来填充.</span></span><br><span class="line"><span class="symbol">Rn</span>, <span class="keyword">ASR </span>Rx<span class="comment">;Rn=Rn&gt;&gt;Rx.最高有效位用第31位的值来填充.</span></span><br><span class="line"></span><br><span class="line"><span class="symbol">Rn</span>, <span class="keyword">ROR </span><span class="symbol">#n</span><span class="comment">;循环右移类似于逻辑右移,但是最高有效位用移出位填充.</span></span><br><span class="line"><span class="symbol">Rn</span>, <span class="keyword">ROR </span>Rx<span class="comment">;同上,移位量为32的操作将导致输出与输入完全一致.</span></span><br><span class="line"></span><br><span class="line"><span class="symbol">Rx</span>, <span class="keyword">RRX;Rx的位向右移动一个位置,移动时会使用处理器的进位标志来提供一个要被移位的数量,也就是参与移位的有33个位.</span></span><br></pre></td></tr></table></figure>
+<h3 id="加载存储指令">加载/存储指令</h3>
+<figure class="highlight armasm"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">LDR&lt;condition&gt;(B/H) </span>Rd, <span class="keyword">ADDR</span></span><br><span class="line"><span class="keyword">;用于从存储器中将一个32(8/16)位的字数据传送到目的寄存器中.</span></span><br><span class="line"><span class="keyword">STR&lt;condition&gt;(B/H) </span>Rd, <span class="keyword">ADDR</span></span><br><span class="line"><span class="keyword">;用于从源寄存器中将一个32(8/16)位的字数据传送到存储器中.</span></span><br><span class="line"><span class="keyword"></span></span><br><span class="line"><span class="keyword">;批量数据加载/存储指令指令</span></span><br><span class="line"><span class="keyword">LDM/STM&lt;condition&gt;&lt;type&gt; </span>Rd!, &#123;Rd2, ...&#125;</span><br><span class="line"><span class="comment">;type:IA,每次传送后地址加1;IB,每次传送前地址加1;DA,每次传送后地址减1;DB,每次传送前地址减1;FD,满递减堆栈;ED,空递减堆栈;FA,满递增堆栈;EA,空递增堆栈;</span></span><br></pre></td></tr></table></figure>
 <h3 id="乘法指令">乘法指令</h3>
 <figure class="highlight armasm"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">MUL&lt;condition&gt;&lt;S&gt; </span>DEST, OP1, OP2</span><br><span class="line"><span class="comment">;DEST=OP1*OP2.DEST为R15之外的简单寄存器,DEST和OP1必须是不同的寄存器,所有OP必须为简单寄存器.</span></span><br><span class="line"><span class="keyword">MLA&lt;condition&gt;&lt;S&gt; </span>DEST, OP1, OP2, OP3</span><br><span class="line"><span class="comment">;DEST=(OP1*OP2)+OP3.DEST为R15之外的简单寄存器,DEST和OP1必须是不同的寄存器,所有OP必须为简单寄存器.</span></span><br></pre></td></tr></table></figure>
 <h3 id="跳转指令">跳转指令</h3>
@@ -613,9 +609,8 @@
 <h3 id="状态寄存器访问指令">状态寄存器访问指令</h3>
 <figure class="highlight armasm"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">MRS&lt;condition&gt; </span>Rd, <span class="keyword">CPSR/SPSR</span></span><br><span class="line"><span class="keyword">;用于将程序状态寄存器的内容传送到通用寄存器中.</span></span><br><span class="line"><span class="keyword"></span></span><br><span class="line"><span class="keyword">MSR&lt;condition&gt; </span><span class="keyword">CPSR/SPSR(_f/s/x/c), </span>Rd/num</span><br><span class="line"><span class="comment">;用于将操作数的内容传送到程序状态寄存器的特定域/整个.</span></span><br><span class="line"><span class="comment">;32位的程序状态寄存器可分为4个域:位[31:24]为条件标志位域,用f表示;位[23:16]为状态位域,用s表示;位[15:8]为扩展位域,用x表示;位[7:0]为控制位域,用c表示;</span></span><br></pre></td></tr></table></figure>
 <h3 id="异常产生指令">异常产生指令</h3>
-<figure class="highlight armasm"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">SWI&lt;condition&gt; </span>num<span class="comment">;24bit num</span></span><br><span class="line"><span class="comment">;用于产生软件中断,访问操作系统例程或第三方生产的模块,num表示SWI编号.相关参数通过通用寄存器传递.当指令中24位的立即数被忽略时,SWI编号由通用寄存器R0的内容决定.</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">BKPT </span>num<span class="comment">;16bit num</span></span><br><span class="line"><span class="comment">;ARMv5T之后加入的中断指令,用于产生软件断点中断,可用于程序的调试.</span></span><br></pre></td></tr></table></figure>
-<p><code>ARM</code>通过<code>SWI</code>让程序陷入内核进行系统调用.<code>SWI</code>指令用于产生软件中断,从而切换到管理模式,<code>CPSR</code>保存到管理模式的<code>SPSR</code>,跳转到<code>SWI</code>向量.在其他模式下也可使用<code>SWI</code>指令切换到管理模式.</p>
-<p>调用号:<code>https://elixir.bootlin.com/linux/v2.6.32/source/arch/arm/include/asm/unistd.h</code>.</p>
+<figure class="highlight armasm"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">SWI&lt;condition&gt; </span>num</span><br><span class="line"><span class="comment">;用于产生软件中断,访问操作系统例程或第三方生产的模块,num表示SWI编号(24bit).相关参数通过通用寄存器传递.当指令中24位的立即数被忽略时,SWI编号由通用寄存器R0的内容决定.</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">BKPT </span>num</span><br><span class="line"><span class="comment">;ARMv5T之后加入的中断指令,用于产生软件断点中断,可用于程序的调试,16bit num.</span></span><br></pre></td></tr></table></figure>
+<p><code>ARM</code>通过<code>SWI</code>让程序陷入内核进行系统调用.<code>SWI</code>指令用于产生软件中断,从而切换到管理模式,<code>CPSR</code>保存到管理模式的<code>SPSR</code>,跳转到<code>SWI</code>向量.在其他模式下也可使用<code>SWI</code>指令切换到管理模式.调用号:<code>https://elixir.bootlin.com/linux/v2.6.32/source/arch/arm/include/asm/unistd.h</code>.</p>
 <p>异常处理函数(<code>SWI</code>向量)使用下面指令获取<code>24</code>位调用号:<code>LDR R0, [LR, #-4]; BIC R0, R0, #0xFF000000</code>.通过对<code>SPSR</code>访问确定软中断的<code>SWI</code>指令是<code>ARM</code>指令还是<code>Thumb</code>指令.</p>
 <h3 id="条件代码">条件代码</h3>
 <p><code>ARM</code>对所有指令提供了条件执行,条件代码如下.</p>
@@ -637,9 +632,9 @@
 <li><code>AL</code>:总是.</li>
 <li><code>NV</code>:从不.</li>
 </ul>
-<h3 id="伪代码">伪代码</h3>
+<h2 id="伪代码">伪代码</h2>
 <p><code>AREA</code>伪指令用于定义一个代码段或数据段:<code>AREA</code> 段名 属性<code>1</code>, 属性<code>2</code>, ...;段名若以数字开头,则该段名需用<code>|</code>括起来,如<code>|1_test|</code>.</p>
-<p>常用的属性:<code>CODE</code>,用于定义代码段,默认为<code>READONLY</code>;<code>DATA</code>,用于定义数据段,默认为<code>READWRITE</code>;<code>READONLY</code>,指定本段为只读;<code>READWRITE</code>,指定本段为可读可写;<code>ALIGN=n</code>,以<code>2^n</code>对齐,默认是按字对齐的;</p>
+<p>常用的属性:<code>CODE</code>,用于定义代码段,默认为<code>READONLY</code>;<code>DATA</code>,用于定义数据段,默认为<code>READWRITE</code>;<code>ALIGN=n</code>,以<code>2^n</code>对齐,默认是按字对齐的;</p>
 <p><code>CODE16/CODE32</code>.<code>CODE16</code>伪指令通知编译器,其后的指令序列为<code>16</code>位的<code>Thumb</code>指令;<code>CODE32</code>伪指令通知编译器,其后的指令序列为<code>32</code>位的<code>ARM</code>指令.</p>
 <p><code>ENTRY</code>伪指令用于指定汇编程序的入口点.<code>END</code>伪指令用于通知编译器已经到了源程序的结尾.</p>
 <h2 id="函数调用">函数调用</h2>
@@ -768,7 +763,7 @@
                 
                   <a href="/archives/">
                 
-                    <span class="site-state-item-count">178</span>
+                    <span class="site-state-item-count">172</span>
                     <span class="site-state-item-name">日志</span>
                   </a>
                 </div>
@@ -960,7 +955,7 @@
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#arm简介"><span class="nav-number">1.</span> <span class="nav-text">ARM简介</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#工作状态"><span class="nav-number">2.</span> <span class="nav-text">工作状态</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#thumb"><span class="nav-number">2.1.</span> <span class="nav-text">Thumb</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#arm"><span class="nav-number">2.2.</span> <span class="nav-text">ARM</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#运行模式"><span class="nav-number">3.</span> <span class="nav-text">运行模式</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#arm寄存器"><span class="nav-number">4.</span> <span class="nav-text">ARM寄存器</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#arm指令集"><span class="nav-number">5.</span> <span class="nav-text">ARM指令集</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#数据处理指令"><span class="nav-number">5.1.</span> <span class="nav-text">数据处理指令</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#加载存储指令"><span class="nav-number">5.2.</span> <span class="nav-text">加载/存储指令</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#移位指令"><span class="nav-number">5.3.</span> <span class="nav-text">移位指令</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#乘法指令"><span class="nav-number">5.4.</span> <span class="nav-text">乘法指令</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#跳转指令"><span class="nav-number">5.5.</span> <span class="nav-text">跳转指令</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#状态寄存器访问指令"><span class="nav-number">5.6.</span> <span class="nav-text">状态寄存器访问指令</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#异常产生指令"><span class="nav-number">5.7.</span> <span class="nav-text">异常产生指令</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#条件代码"><span class="nav-number">5.8.</span> <span class="nav-text">条件代码</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#伪代码"><span class="nav-number">5.9.</span> <span class="nav-text">伪代码</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#函数调用"><span class="nav-number">6.</span> <span class="nav-text">函数调用</span></a></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#简介"><span class="nav-number">1.</span> <span class="nav-text">简介</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#工作状态"><span class="nav-number">2.</span> <span class="nav-text">工作状态</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#thumb"><span class="nav-number">2.1.</span> <span class="nav-text">Thumb</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#arm"><span class="nav-number">2.2.</span> <span class="nav-text">ARM</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#运行模式"><span class="nav-number">3.</span> <span class="nav-text">运行模式</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#寄存器"><span class="nav-number">4.</span> <span class="nav-text">寄存器</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#指令集"><span class="nav-number">5.</span> <span class="nav-text">指令集</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#数据处理指令"><span class="nav-number">5.1.</span> <span class="nav-text">数据处理指令</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#移位指令"><span class="nav-number">5.2.</span> <span class="nav-text">移位指令</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#加载存储指令"><span class="nav-number">5.3.</span> <span class="nav-text">加载/存储指令</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#乘法指令"><span class="nav-number">5.4.</span> <span class="nav-text">乘法指令</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#跳转指令"><span class="nav-number">5.5.</span> <span class="nav-text">跳转指令</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#状态寄存器访问指令"><span class="nav-number">5.6.</span> <span class="nav-text">状态寄存器访问指令</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#异常产生指令"><span class="nav-number">5.7.</span> <span class="nav-text">异常产生指令</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#条件代码"><span class="nav-number">5.8.</span> <span class="nav-text">条件代码</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#伪代码"><span class="nav-number">6.</span> <span class="nav-text">伪代码</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#函数调用"><span class="nav-number">7.</span> <span class="nav-text">函数调用</span></a></li></ol></div>
             
 
           </div>
@@ -992,7 +987,7 @@
       <i class="fa fa-area-chart"></i>
     </span>
     
-    <span title="站点总字数">730k</span>
+    <span title="站点总字数">727k</span>
   
 
   
@@ -1001,7 +996,7 @@
       <i class="fa fa-coffee"></i>
     </span>
     
-    <span title="站点阅读时长">11:04</span>
+    <span title="站点阅读时长">11:01</span>
   
 </div>
 

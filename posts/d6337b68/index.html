@@ -119,18 +119,18 @@
 
 
 
-  <meta name="description" content="0x00 一个集合可以被一种等价关系分为多个等价类,比如两个点的相连关系可以将一个点集分为多个连通分量,将这种判断是否连通并更新对应连通分量的问题称为动态连通性问题. 可以给每一个连通分量选择一个不同的标识符,通过检索标识符并判断是否相等来判断连通性. 第一种解决方案:如果对所有同一连通分量中的点都保存标识符,检索过程只需要一次即可,但是合并连通分量时就要遍历点集. 第二种解决方案:如果一">
+  <meta name="description" content="union-find 一个集合可以被一种等价关系分为多个等价类,比如两个点的相连关系可以将一个点集分为多个连通分量,将这种判断是否连通并更新对应连通分量的问题称为动态连通性问题. 动态连通性问题解决思路:可以给每一个连通分量选择一个不同的标识符,通过检索标识符并判断是否相等来判断连通性. 第一种解决方案:如果对所有同一连通分量中的点都保存标识符,检索过程只需要一次即可,但是合并连通分量时就要">
 <meta name="keywords" content="algorithm">
 <meta property="og:type" content="article">
 <meta property="og:title" content="CS-BASIC-algorithm-union-find">
 <meta property="og:url" content="https://hitworld.github.io/posts/d6337b68/index.html">
 <meta property="og:site_name" content="w4rd3n">
-<meta property="og:description" content="0x00 一个集合可以被一种等价关系分为多个等价类,比如两个点的相连关系可以将一个点集分为多个连通分量,将这种判断是否连通并更新对应连通分量的问题称为动态连通性问题. 可以给每一个连通分量选择一个不同的标识符,通过检索标识符并判断是否相等来判断连通性. 第一种解决方案:如果对所有同一连通分量中的点都保存标识符,检索过程只需要一次即可,但是合并连通分量时就要遍历点集. 第二种解决方案:如果一">
+<meta property="og:description" content="union-find 一个集合可以被一种等价关系分为多个等价类,比如两个点的相连关系可以将一个点集分为多个连通分量,将这种判断是否连通并更新对应连通分量的问题称为动态连通性问题. 动态连通性问题解决思路:可以给每一个连通分量选择一个不同的标识符,通过检索标识符并判断是否相等来判断连通性. 第一种解决方案:如果对所有同一连通分量中的点都保存标识符,检索过程只需要一次即可,但是合并连通分量时就要">
 <meta property="og:locale" content="zh-CN">
-<meta property="og:updated_time" content="2020-08-09T08:49:03.278Z">
+<meta property="og:updated_time" content="2020-08-25T11:46:27.804Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="CS-BASIC-algorithm-union-find">
-<meta name="twitter:description" content="0x00 一个集合可以被一种等价关系分为多个等价类,比如两个点的相连关系可以将一个点集分为多个连通分量,将这种判断是否连通并更新对应连通分量的问题称为动态连通性问题. 可以给每一个连通分量选择一个不同的标识符,通过检索标识符并判断是否相等来判断连通性. 第一种解决方案:如果对所有同一连通分量中的点都保存标识符,检索过程只需要一次即可,但是合并连通分量时就要遍历点集. 第二种解决方案:如果一">
+<meta name="twitter:description" content="union-find 一个集合可以被一种等价关系分为多个等价类,比如两个点的相连关系可以将一个点集分为多个连通分量,将这种判断是否连通并更新对应连通分量的问题称为动态连通性问题. 动态连通性问题解决思路:可以给每一个连通分量选择一个不同的标识符,通过检索标识符并判断是否相等来判断连通性. 第一种解决方案:如果对所有同一连通分量中的点都保存标识符,检索过程只需要一次即可,但是合并连通分量时就要">
 
 
 
@@ -537,9 +537,9 @@
       
 
       
-        <h2 id="x00">0x00</h2>
+        <h2 id="union-find">union-find</h2>
 <p>一个集合可以被一种等价关系分为多个等价类,比如两个点的相连关系可以将一个点集分为多个连通分量,将这种判断是否连通并更新对应连通分量的问题称为动态连通性问题.</p>
-<p>可以给每一个连通分量选择一个不同的标识符,通过检索标识符并判断是否相等来判断连通性.</p>
+<p>动态连通性问题解决思路:可以给每一个连通分量选择一个不同的标识符,通过检索标识符并判断是否相等来判断连通性.</p>
 <p>第一种解决方案:如果对所有同一连通分量中的点都保存标识符,检索过程只需要一次即可,但是合并连通分量时就要遍历点集.</p>
 <p>第二种解决方案:如果一个点只保存自己链接的点,初始链接自己,合并只改变一个点的链接,而检索过程需要沿链接向上找到根链接点(链接自己).</p>
 <p>在第二种方法中实际上将关系变成了森林,而且第二种情况可以优化,对于合并时谁作为父节点,通过比较前连通分量的结点数实现加权算法.</p>
@@ -667,7 +667,7 @@
                 
                   <a href="/archives/">
                 
-                    <span class="site-state-item-count">178</span>
+                    <span class="site-state-item-count">172</span>
                     <span class="site-state-item-name">日志</span>
                   </a>
                 </div>
@@ -859,7 +859,7 @@
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#x00"><span class="nav-number">1.</span> <span class="nav-text">0x00</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#java实现"><span class="nav-number">2.</span> <span class="nav-text">Java实现</span></a></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#union-find"><span class="nav-number">1.</span> <span class="nav-text">union-find</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#java实现"><span class="nav-number">2.</span> <span class="nav-text">Java实现</span></a></li></ol></div>
             
 
           </div>
@@ -891,7 +891,7 @@
       <i class="fa fa-area-chart"></i>
     </span>
     
-    <span title="站点总字数">730k</span>
+    <span title="站点总字数">727k</span>
   
 
   
@@ -900,7 +900,7 @@
       <i class="fa fa-coffee"></i>
     </span>
     
-    <span title="站点阅读时长">11:04</span>
+    <span title="站点阅读时长">11:01</span>
   
 </div>
 

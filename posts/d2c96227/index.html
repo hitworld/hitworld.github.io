@@ -119,18 +119,18 @@
 
 
 
-  <meta name="description" content="未完成 环境 推荐使用NASM加32位Windows 7. 实地址方式 实地址方式可以访问8个32位通用寄存器,但EIP,ESP,EFLAGS都只有低16位起作用.实地址方式下处理器的基本执行环境和基本指令集与保护方式是相同的.不过间接寻址中不能使用比例因子. NASM编程 NASM大小写敏感. 12345NASM 1.asm -o 1.com#COM程序会从段内偏移100H开始执行">
+  <meta name="description" content="环境 推荐使用NASM加32位Windows 7. 实地址方式 实地址方式可以访问8个32位通用寄存器,但EIP,ESP,EFLAGS都只有低16位起作用.实地址方式下处理器的基本执行环境和基本指令集与保护方式是相同的.不过间接寻址中不能使用比例因子. NASM编程 NASM大小写敏感. 12345NASM 1.asm -o 1.com#COM程序会从段内偏移100H开始执行,因为CO">
 <meta name="keywords" content="assembly">
 <meta property="og:type" content="article">
 <meta property="og:title" content="CS-BASIC-assembly-IA32-实地址方式">
 <meta property="og:url" content="https://hitworld.github.io/posts/d2c96227/index.html">
 <meta property="og:site_name" content="w4rd3n">
-<meta property="og:description" content="未完成 环境 推荐使用NASM加32位Windows 7. 实地址方式 实地址方式可以访问8个32位通用寄存器,但EIP,ESP,EFLAGS都只有低16位起作用.实地址方式下处理器的基本执行环境和基本指令集与保护方式是相同的.不过间接寻址中不能使用比例因子. NASM编程 NASM大小写敏感. 12345NASM 1.asm -o 1.com#COM程序会从段内偏移100H开始执行">
+<meta property="og:description" content="环境 推荐使用NASM加32位Windows 7. 实地址方式 实地址方式可以访问8个32位通用寄存器,但EIP,ESP,EFLAGS都只有低16位起作用.实地址方式下处理器的基本执行环境和基本指令集与保护方式是相同的.不过间接寻址中不能使用比例因子. NASM编程 NASM大小写敏感. 12345NASM 1.asm -o 1.com#COM程序会从段内偏移100H开始执行,因为CO">
 <meta property="og:locale" content="zh-CN">
-<meta property="og:updated_time" content="2020-08-09T06:34:17.772Z">
+<meta property="og:updated_time" content="2020-08-25T13:24:38.388Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="CS-BASIC-assembly-IA32-实地址方式">
-<meta name="twitter:description" content="未完成 环境 推荐使用NASM加32位Windows 7. 实地址方式 实地址方式可以访问8个32位通用寄存器,但EIP,ESP,EFLAGS都只有低16位起作用.实地址方式下处理器的基本执行环境和基本指令集与保护方式是相同的.不过间接寻址中不能使用比例因子. NASM编程 NASM大小写敏感. 12345NASM 1.asm -o 1.com#COM程序会从段内偏移100H开始执行">
+<meta name="twitter:description" content="环境 推荐使用NASM加32位Windows 7. 实地址方式 实地址方式可以访问8个32位通用寄存器,但EIP,ESP,EFLAGS都只有低16位起作用.实地址方式下处理器的基本执行环境和基本指令集与保护方式是相同的.不过间接寻址中不能使用比例因子. NASM编程 NASM大小写敏感. 12345NASM 1.asm -o 1.com#COM程序会从段内偏移100H开始执行,因为CO">
 
 
 
@@ -537,8 +537,7 @@
       
 
       
-        <p>未完成</p>
-<h2 id="环境">环境</h2>
+        <h2 id="环境">环境</h2>
 <p>推荐使用<code>NASM</code>加<code>32</code>位<code>Windows 7</code>.</p>
 <h2 id="实地址方式">实地址方式</h2>
 <p>实地址方式可以访问<code>8</code>个<code>32</code>位通用寄存器,但<code>EIP</code>,<code>ESP</code>,<code>EFLAGS</code>都只有低<code>16</code>位起作用.实地址方式下处理器的基本执行环境和基本指令集与保护方式是相同的.不过间接寻址中不能使用比例因子.</p>
@@ -567,7 +566,7 @@
 <p><code>NASM</code>同时支持表达式中使用运算符,如:<code>|</code>,<code>^</code>,<code>&amp;</code>,<code>&gt;&gt;</code>,<code>&lt;&lt;</code>,<code>+</code>,<code>-</code>,<code>*</code>,<code>/</code>(无符号除),<code>//</code>(有符号除),<code>%</code>(无符号模),<code>%%</code>(有符号模),<code>!</code>,<code>~</code>,<code>seg</code>(获取段值).</p>
 <p>段声明语句:<code>section/segment code [type] [;comment]</code>.</p>
 <p>段间跳转:<code>JMP code:seg1</code>.由于实方式下指令地址实际为<code>CS:IP</code>,所以段间跳转需要指明段名,或者使用<code>FAR</code>类型符,<code>JMP FAR seg1</code>.</p>
-<p>对应的过程调用与返回指令格式:<code>CALL code:seg1</code>(<code>CALL FAR seg1</code>),<code>RETF</code>(调用时会将段值和偏移都压栈),<code>RETF count</code>(返回同时使<code>SP</code>加<code>count</code>).</p>
+<p>对应的过程调用与返回指令格式:<code>CALL code:seg1</code>(<code>CALL FAR seg1</code>),<code>RETF</code>(调用时会将段值和偏移都压栈),<code>RETF count</code>(<code>RETF</code>同时使<code>SP</code>加<code>count</code>).</p>
 <p>段模式声明语句:<code>BITS 32</code>,<code>BITS 16</code>.用于切换<code>NASM</code>当前汇编的段模式.</p>
 <p>宏指令:与高级语言的宏意义相同.在宏中可以使用<code>%%</code>前缀声明局部标号.</p>
 <figure class="highlight x86asm"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br></pre></td><td class="code"><pre><span class="line">%macro getChar <span class="number">0</span></span><br><span class="line">  <span class="keyword">MOV</span> <span class="number">AH</span>, <span class="number">1</span></span><br><span class="line">  <span class="keyword">INT</span> <span class="number">21H</span></span><br><span class="line">%endmacro</span><br><span class="line"></span><br><span class="line"><span class="meta">%define</span> move <span class="keyword">MOV</span></span><br><span class="line"></span><br><span class="line">%idefine i <span class="number">200</span></span><br><span class="line"><span class="comment">;大小写不敏感</span></span><br><span class="line"></span><br><span class="line">%macro dbmess <span class="number">2</span></span><br><span class="line">  mess<span class="subst">%1</span> <span class="built_in">db</span> <span class="subst">%2</span>, <span class="number">0DH</span>, <span class="number">0AH</span>, <span class="string">'$'</span></span><br><span class="line">%endmacro</span><br><span class="line"><span class="comment">;使用参数拼接获得新的符号</span></span><br><span class="line"></span><br><span class="line">%macro d2mess <span class="number">2</span></span><br><span class="line">  mess%&#123;<span class="number">1</span>&#125;<span class="number">1</span> <span class="built_in">db</span> <span class="subst">%2</span>, <span class="string">'$'</span></span><br><span class="line">%endmacro</span><br><span class="line"></span><br><span class="line">%macro CMOV <span class="number">3</span></span><br><span class="line">  J%-<span class="number">1</span> %%SKIP</span><br><span class="line">  <span class="keyword">MOV</span> <span class="subst">%2</span>, <span class="subst">%3</span></span><br><span class="line">%%SKIP</span><br><span class="line">%endmacro</span><br><span class="line"><span class="comment">;%+1表示参数为条件码,%-1表示参数为条件码,且拼接使用相反的条件码.</span></span><br></pre></td></tr></table></figure>
@@ -693,7 +692,7 @@
                 
                   <a href="/archives/">
                 
-                    <span class="site-state-item-count">178</span>
+                    <span class="site-state-item-count">172</span>
                     <span class="site-state-item-name">日志</span>
                   </a>
                 </div>
@@ -917,7 +916,7 @@
       <i class="fa fa-area-chart"></i>
     </span>
     
-    <span title="站点总字数">730k</span>
+    <span title="站点总字数">727k</span>
   
 
   
@@ -926,7 +925,7 @@
       <i class="fa fa-coffee"></i>
     </span>
     
-    <span title="站点阅读时长">11:04</span>
+    <span title="站点阅读时长">11:01</span>
   
 </div>
 

@@ -119,25 +119,29 @@
 
 
 
-  <meta name="description" content="漏洞要素 能溢出下一个堆块第一个字节. poison_null_byte malloc合适大小的三个chunk,首先free掉chunk2(chunk2的大小需大于global_max_fast,使其进入unsorted bin). 通过溢出chunk1修改chunk2的size域(变小),此时chunk2的大小变为fake_size(因为其处于unsorted bin). 这里要求ch">
+  <meta name="description" content="Linux动态内存分配 heap和mmap映射区域是可以运行时分配的内存空间.操作系统提供了相关的系统调用来分配内存给这两个区域. 对于heap,操作系统提供了brk()系统调用函数,C运行时库提供了sbrk()函数.对于mmap,操作系统提供了mmap()和munmap()函数. 内核对brk的实现可以看作是mmap的一个精简版,brk只是改变mm_struct结构的成员变量brk的值.">
 <meta name="keywords" content="Linux">
 <meta property="og:type" content="article">
-<meta property="og:title" content="IS-pwn-Linux-glibc-2.23-off_by_one">
-<meta property="og:url" content="https://hitworld.github.io/posts/27272cde/index.html">
+<meta property="og:title" content="IS-pwn-Linux-glibc-2.23-基础">
+<meta property="og:url" content="https://hitworld.github.io/posts/52ca485c/index.html">
 <meta property="og:site_name" content="w4rd3n">
-<meta property="og:description" content="漏洞要素 能溢出下一个堆块第一个字节. poison_null_byte malloc合适大小的三个chunk,首先free掉chunk2(chunk2的大小需大于global_max_fast,使其进入unsorted bin). 通过溢出chunk1修改chunk2的size域(变小),此时chunk2的大小变为fake_size(因为其处于unsorted bin). 这里要求ch">
+<meta property="og:description" content="Linux动态内存分配 heap和mmap映射区域是可以运行时分配的内存空间.操作系统提供了相关的系统调用来分配内存给这两个区域. 对于heap,操作系统提供了brk()系统调用函数,C运行时库提供了sbrk()函数.对于mmap,操作系统提供了mmap()和munmap()函数. 内核对brk的实现可以看作是mmap的一个精简版,brk只是改变mm_struct结构的成员变量brk的值.">
 <meta property="og:locale" content="zh-CN">
-<meta property="og:updated_time" content="2020-08-09T06:34:17.807Z">
+<meta property="og:image" content="https://hitworld.github.io/posts/undefined/3.png">
+<meta property="og:image" content="https://hitworld.github.io/posts/undefined/4.png">
+<meta property="og:image" content="https://hitworld.github.io/posts/undefined/5.png">
+<meta property="og:updated_time" content="2020-08-25T15:14:57.387Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="IS-pwn-Linux-glibc-2.23-off_by_one">
-<meta name="twitter:description" content="漏洞要素 能溢出下一个堆块第一个字节. poison_null_byte malloc合适大小的三个chunk,首先free掉chunk2(chunk2的大小需大于global_max_fast,使其进入unsorted bin). 通过溢出chunk1修改chunk2的size域(变小),此时chunk2的大小变为fake_size(因为其处于unsorted bin). 这里要求ch">
+<meta name="twitter:title" content="IS-pwn-Linux-glibc-2.23-基础">
+<meta name="twitter:description" content="Linux动态内存分配 heap和mmap映射区域是可以运行时分配的内存空间.操作系统提供了相关的系统调用来分配内存给这两个区域. 对于heap,操作系统提供了brk()系统调用函数,C运行时库提供了sbrk()函数.对于mmap,操作系统提供了mmap()和munmap()函数. 内核对brk的实现可以看作是mmap的一个精简版,brk只是改变mm_struct结构的成员变量brk的值.">
+<meta name="twitter:image" content="https://hitworld.github.io/posts/undefined/3.png">
 
 
 
 
 
 
-  <link rel="canonical" href="https://hitworld.github.io/posts/27272cde/">
+  <link rel="canonical" href="https://hitworld.github.io/posts/52ca485c/">
 
 
 
@@ -147,7 +151,7 @@
   };
 </script>
 
-  <title>IS-pwn-Linux-glibc-2.23-off_by_one | w4rd3n</title>
+  <title>IS-pwn-Linux-glibc-2.23-基础 | w4rd3n</title>
   
 
 
@@ -396,7 +400,7 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="https://hitworld.github.io/posts/27272cde/">
+    <link itemprop="mainEntityOfPage" href="https://hitworld.github.io/posts/52ca485c/">
 
     <span hidden itemprop="author" itemscope="" itemtype="http://schema.org/Person">
       <meta itemprop="name" content="w4rd3n">
@@ -413,7 +417,7 @@
 
         
         
-          <h1 class="post-title" itemprop="name headline">IS-pwn-Linux-glibc-2.23-off_by_one
+          <h1 class="post-title" itemprop="name headline">IS-pwn-Linux-glibc-2.23-基础
               
             
           </h1>
@@ -438,7 +442,7 @@
                 
               
 
-              <time title="创建时间：2019-07-25 14:31:37" itemprop="dateCreated datePublished" datetime="2019-07-25T14:31:37+08:00">2019-07-25</time>
+              <time title="创建时间：2019-06-05 16:26:25" itemprop="dateCreated datePublished" datetime="2019-06-05T16:26:25+08:00">2019-06-05</time>
             
 
             
@@ -477,7 +481,7 @@
 
           
           
-             <span id="/posts/27272cde/" class="leancloud_visitors" data-flag-title="IS-pwn-Linux-glibc-2.23-off_by_one">
+             <span id="/posts/52ca485c/" class="leancloud_visitors" data-flag-title="IS-pwn-Linux-glibc-2.23-基础">
                <span class="post-meta-divider">|</span>
                <span class="post-meta-item-icon">
                  <i class="fa fa-eye"></i>
@@ -503,7 +507,7 @@
                 
                   <span class="post-meta-item-text">本文字数：</span>
                 
-                <span title="本文字数">1.1k</span>
+                <span title="本文字数">9.2k</span>
               
 
               
@@ -517,7 +521,7 @@
                 
                   <span class="post-meta-item-text">阅读时长 &asymp;</span>
                 
-                <span title="阅读时长">1 分钟</span>
+                <span title="阅读时长">8 分钟</span>
               
             </div>
           
@@ -537,20 +541,135 @@
       
 
       
-        <h2 id="漏洞要素">漏洞要素</h2>
-<p>能溢出下一个堆块第一个字节.</p>
-<h2 id="poison_null_byte">poison_null_byte</h2>
-<p><code>malloc</code>合适大小的三个<code>chunk</code>,首先<code>free</code>掉<code>chunk2</code>(<code>chunk2</code>的大小需大于<code>global_max_fast</code>,使其进入<code>unsorted bin</code>).</p>
-<p>通过溢出<code>chunk1</code>修改<code>chunk2</code>的<code>size</code>域(变小),此时<code>chunk2</code>的大小变为<code>fake_size</code>(因为其处于<code>unsorted bin</code>).</p>
-<p>这里要求<code>chunk1</code>大小为膜<code>16</code>余<code>8</code>,<code>32</code>位膜<code>8</code>余<code>4</code>.同时为了绕过检测需要在<code>free</code>前在<code>chunk2</code>的内部伪造一个<code>prev_size</code>.</p>
-<p><code>malloc</code>两个新的<code>chunk</code>使其充满<code>chunk2</code>的<code>fake_size</code>大小.</p>
-<p>先后<code>free</code>掉<code>chunk21</code>和<code>chunk3</code>.<code>chunk21</code>就会被当作<code>chunk2</code>与<code>chunk3</code>合并.再次<code>malloc</code>一个<code>chunk2</code>与<code>chunk3</code>合并大小的<code>chunk4</code>.</p>
-<p>此时<code>chunk4</code>与<code>chunk22</code>内存区域重叠.</p>
-<p>示例程序如下.</p>
-<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;stdio.h&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;stdlib.h&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;string.h&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;stdint.h&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;malloc.h&gt;</span></span></span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">()</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">  <span class="keyword">uint8_t</span>* a;</span><br><span class="line">  <span class="keyword">uint8_t</span>* b;</span><br><span class="line">  <span class="keyword">uint8_t</span>* c;</span><br><span class="line">  <span class="keyword">uint8_t</span>* b1;</span><br><span class="line">  <span class="keyword">uint8_t</span>* b2;</span><br><span class="line">  <span class="keyword">uint8_t</span>* d;</span><br><span class="line"></span><br><span class="line">	a = (<span class="keyword">uint8_t</span>*) <span class="built_in">malloc</span>(<span class="number">0x108</span>);</span><br><span class="line">	b = (<span class="keyword">uint8_t</span>*) <span class="built_in">malloc</span>(<span class="number">0x200</span>);</span><br><span class="line">  c = (<span class="keyword">uint8_t</span>*) <span class="built_in">malloc</span>(<span class="number">0x100</span>);</span><br><span class="line"></span><br><span class="line">  *(<span class="keyword">size_t</span>*)(b + <span class="number">0x1f0</span>) = <span class="number">0x200</span>;</span><br><span class="line">  <span class="built_in">free</span>(b);</span><br><span class="line"></span><br><span class="line">  a[<span class="number">0x108</span>] = <span class="number">0</span>; <span class="comment">// &lt;--- THIS IS THE "EXPLOITED BUG"</span></span><br><span class="line"></span><br><span class="line">  b1 = <span class="built_in">malloc</span>(<span class="number">0x100</span>);</span><br><span class="line">  b2 = <span class="built_in">malloc</span>(<span class="number">0x80</span>);</span><br><span class="line"></span><br><span class="line">  <span class="built_in">free</span>(b1);</span><br><span class="line">  <span class="built_in">free</span>(c);</span><br><span class="line">  d = <span class="built_in">malloc</span>(<span class="number">0x300</span>);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<p>注意,<code>delete</code>时会向下检测两个<code>chunk</code>的正确性,需要提前构造.</p>
-<h2 id="off_by_one-with-unlink">off_by_one with unlink</h2>
-<p>通过<code>off_by_one</code>修改下一个<code>chunk</code>的<code>size</code>成员<code>P</code>标志位,从而实现<code>unlink</code>漏洞利用.</p>
+        <h2 id="linux动态内存分配">Linux动态内存分配</h2>
+<p><code>heap</code>和<code>mmap</code>映射区域是可以运行时分配的内存空间.操作系统提供了相关的系统调用来分配内存给这两个区域.</p>
+<p>对于<code>heap</code>,操作系统提供了<code>brk()</code>系统调用函数,<code>C</code>运行时库提供了<code>sbrk()</code>函数.对于<code>mmap</code>,操作系统提供了<code>mmap()</code>和<code>munmap()</code>函数.</p>
+<p>内核对<code>brk</code>的实现可以看作是<code>mmap</code>的一个精简版,<code>brk</code>只是改变<code>mm_struct</code>结构的成员变量<code>brk</code>的值.</p>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;unistd.h&gt;</span></span></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">brk</span><span class="params">(<span class="keyword">void</span> * addr)</span></span>;</span><br><span class="line"><span class="function"><span class="keyword">void</span> *<span class="title">sbrk</span><span class="params">(<span class="keyword">intptr_t</span> increment)</span></span>;</span><br></pre></td></tr></table></figure>
+<p><code>sbrk()</code>的参数为<code>0</code>时,<code>sbrk()</code>返回的是进程的当前<code>brk</code>值,为正数时扩展<code>brk</code>值,为负值时收缩<code>brk</code>值.</p>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;sys/mman.h&gt;</span></span></span><br><span class="line"><span class="function"><span class="keyword">void</span> * <span class="title">mmap</span><span class="params">(<span class="keyword">void</span> * addr, <span class="keyword">size_t</span> length, <span class="keyword">int</span> prot, <span class="keyword">int</span> flags, <span class="keyword">int</span> fd, <span class="keyword">off_t</span> offset)</span></span>;</span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">munmap</span><span class="params">(<span class="keyword">void</span> * addr, <span class="keyword">size_t</span> length)</span></span>;</span><br></pre></td></tr></table></figure>
+<p><code>mmap()</code>将一个文件或者其它对象映射进内存的整数页,最后一页不使用的空间清零.</p>
+<ul>
+<li><code>addr</code>:映射区的起始地址.</li>
+<li><code>length</code>:映射区的长度.</li>
+<li><code>prot</code>:期望的内存保护标志,不能与文件的打开模式冲突.常用的有:<code>PROT_EXEC</code>,<code>PROT_READ</code>,<code>PROT_WRITE</code>,<code>PROT_NONE</code>(页不可访问,向系统批发一块内存进行管理时设置).</li>
+<li><code>fd</code>:文件描述符.如果<code>MAP_ANONYMOUS</code>被设置,其值应为<code>-1</code>.</li>
+<li><code>offset</code>:被映射对象内容的起点.</li>
+</ul>
+<p><code>flags</code>用于指定映射选项,映射对象的类型和映射页是否可以共享.</p>
+<ul>
+<li><code>MAP_NORESERVE</code>:不为这个映射保留交换空间.如果交换空间不被保留且内存不足,对映射区的修改会引起段违例信号.<code>Ptmalloc</code>向系统批发内存时设置.</li>
+<li><code>MAP_FIXED</code>:如果指定的内存区重叠于现存的映射空间,重叠部分将会被丢弃.如果指定的起始地址不可用,操作将会失败.起始地址必须落在页的边界上.<code>Ptmalloc</code>回收系统批发的内存时设置.</li>
+<li><code>MAP_PRIVATE</code>:建立一个写入时拷贝的私有映射.内存区域的写入不会影响到原文件.和<code>MAP_FIXED</code>互斥.<code>Ptmalloc</code>每次调用<code>mmap</code>都设置.</li>
+<li><code>MAP_ANONYMOUS</code>:匿名映射,映射区不与任何文件关联.<code>Ptmalloc</code>每次调用<code>mmap</code>都设置该标志.</li>
+</ul>
+<p><code>munmap</code>执行相反的操作,删除特定地址区域的对象映射.</p>
+<h2 id="内存管理方式">内存管理方式</h2>
+<p><code>C</code>风格的内存管理:通过调用<code>brk()</code>或<code>mmap()</code>系统调用实现<code>malloc()</code>和<code>free()</code>函数动态分配内存的释放.<code>Doug Lea Malloc</code>,<code>ptmalloc</code>,<code>BSD malloc</code>,<code>Hoard</code>,<code>TCMalloc</code>都属于这一类.</p>
+<p>池式内存管理:内存池帮助程序进行自动内存管理,这些程序会经历一些特定的阶段,每个阶段都有特定的内存池.每次内存分配都会从指定内存池中分配内存.每个内存池都有不同的生存期限.(<code>Apache</code>)</p>
+<p>引用计数:所有共享的数据结构都有一个域来包含当前结构被引用次数.计数为<code>0</code>则释放内存.(<code>C++</code>智能指针)</p>
+<p>垃圾收集:通常会在当可用内存少于一个具体的阈值时运行垃圾收集器,尝试去追踪通过已知数据连接到每一块数据.收集器找到的都是有用的数据,没找到的就是垃圾,可以被销毁.(<code>Java</code>)</p>
+<h2 id="ptmalloc内存管理概述">Ptmalloc内存管理概述</h2>
+<p><code>ptmalloc</code>分配器处在用户程序和内核之间,响应用户程序的分配请求,向操作系统申请内存并将其返回给用户程序.分配器会预先分配一块大于用户请求的内存,多余的为空闲空间,用户释放的内存也不会立即就返回给操作系统,分配器会管理这些空闲空间.分配器在空闲空间不足的情况下才分配新的内存.</p>
+<h3 id="分配区">分配区</h3>
+<p>进程可以有一个主分配区和多个非主分配区,<code>Main_arena</code>(主分配区)与<code>non_main_arena</code>(非主分配区)用环形链表进行管理.分配区利用互斥锁<code>mutex</code>使线程对该分配区的访问互斥.</p>
+<p>主分配区可以访问进程的<code>heap</code>区域和<code>mmap</code>映射区域.如果主分配区的内存是通过<code>mmap()</code>向系统分配的,当<code>free</code>该内存时,主分配区会直接调用<code>munmap()</code>将该内存归还给系统.</p>
+<p>而非主分配区只能访问进程的<code>mmap</code>映射区域,非主分配区使用<code>mmap()</code>向操作系统批发内存.</p>
+<h3 id="chunk">chunk</h3>
+<p>用户请求分配的内存空间在<code>ptmalloc</code>中使用<code>chunk</code>来表示.用户请求释放的内存空间并不会马上归还系统,会先表示为空闲<code>chunk</code>,<code>ptmalloc</code>使用特定的数据结构来管理空闲<code>chunk</code>.</p>
+<p><code>ptmalloc</code>在给用户分配的空间前后加上一些控制信息来记录分配的信息.</p>
+<p>使用中的<code>chunk</code>(未<code>free</code>).</p>
+<img src="/posts/undefined/3.png" title="p3">
+<p><code>chunk</code>指针指向一个<code>chunk</code>的开始.<code>mem</code>指针才是真正返回给用户的指针.</p>
+<p><code>chunk</code>的第二个域的最低一位为<code>P</code>,标识前一<code>chunk</code>是否在使用,为<code>0</code>表示前一<code>chunk</code>空闲,此时此<code>chunk</code>的<code>prev_size</code>有效(前一<code>chunk</code>的<code>size</code>).为<code>1</code>则<code>prev_size</code>无效.<code>ptmalloc</code>分配的第一个<code>chunk</code>总是将<code>P</code>设为<code>1</code>.</p>
+<p><code>chunk</code>的第二个域的倒数第二个位为<code>M</code>,表示此<code>chunk</code>是从哪个内存区域获得的虚拟内存.为<code>1</code>表示是从<code>mmap</code>映射区域分配的,为<code>0</code>则是从<code>heap</code>区域分配的.</p>
+<p><code>chunk</code>的第二个域的倒数第三个位为<code>A</code>,表示此<code>chunk</code>属于主分配区或者非主分配区,为<code>1</code>表示属于非主分配区,为<code>0</code>则是非主分配区.</p>
+<p>空闲<code>chunk</code>.</p>
+<img src="/posts/undefined/4.png" title="p4">
+<p>空闲<code>chunk</code>不存在<code>M</code>状态.</p>
+<p>空闲<code>chunk</code>中原本为数据区的地方存储了两个指针,<code>fd</code>指向所在<code>bin</code>(空闲<code>chunk</code>容器,双向链表)的后一空闲<code>chunk</code>,<code>bk</code>指向前一空闲<code>chunk</code>.<code>ptmalloc</code>通过这两个指针将大小相近的<code>chunk</code>连成一个<code>bin</code>.</p>
+<p>对于<code>large bin</code>中的空闲<code>chunk</code>,还有两个指针,<code>fd_nextsize</code>和<code>bk_nextsize</code>,用于加快在<code>large bin</code>中查找最近大小匹配的空闲<code>chunk</code>.</p>
+<h4 id="空间复用">空间复用</h4>
+<p>空闲时,一个<code>chunk</code>至少需要<code>4</code>个<code>size_t</code>大小的空间.并且<code>chunk</code>的大小要对齐到<code>8B</code>(<code>64</code>位<code>16B</code>).使用时,其下一<code>chunk</code>的<code>prev_size</code>是无效的,这部分空间可以被当前<code>chunk</code>使用以达到空间复用.所以一个使用中的<code>chunk</code>的大小的计算公式应该是:<code>in_use_size = (user_size + 8 - 4 ) align to 8</code>(<code>64</code>位<code>(user_size + 16 - 8 ) align to 16</code>).向上对齐.</p>
+<p>空闲的<code>chunk</code>和使用中的<code>chunk</code>使用的是同一块空间.所以最终的分配空间<code>chunk_size = max(in_use_size, 16)</code>(<code>64</code>位<code>max(in_use_size, 32)</code>).这就是<code>ptmalloc</code>实际需要分配的内存大小.</p>
+<h3 id="空闲chunk容器">空闲chunk容器</h3>
+<p><code>ptmalloc</code>统一管理<code>heap</code>和<code>mmap</code>映射区域中的空闲<code>chunk</code>,当用户进行下一次分配请求时,<code>ptmalloc</code>会首先试图在空闲<code>chunk</code>中寻找.</p>
+<p><code>ptmalloc</code>将相似大小的<code>chunk</code>用双向链表链接起来,这样的一个链表被称为一个<code>bin</code>.<code>ptmalloc</code>一共维护了<code>128</code>个<code>bin</code>,并使用一个数组<code>Bins</code>来存储这些<code>bin</code>.</p>
+<img src="/posts/undefined/5.png" title="p5">
+<h4 id="bins">Bins</h4>
+<p><code>bins</code>数组的第一个为<code>unsorted bin</code>.每个<code>bin</code>都是一个双向链表.</p>
+<p><code>2 - 65</code>标号的<code>bin</code>统称为<code>small bins</code>,同一<code>small bin</code>中的<code>chunk</code>大小相同.相邻<code>small bin</code>的<code>chunk</code>大小相差<code>8bytes</code>(<code>64</code>位<code>16B</code>).释放的<code>chunk</code>被插入链表头部,寻找<code>chunk</code>是从链表尾部开始.</p>
+<p>之后的就是<code>large bins</code>.<code>large bins</code>中的<code>bin</code>分别包含给定范围内的<code>chunk</code>,并按大小序排列.相同大小的<code>chunk</code>同<code>small bin</code>按照最近使用顺序排列.<code>ptmalloc</code>使用<code>smallest-first,best-fit</code>原则在<code>large bins</code>中寻找<code>chunk</code>.</p>
+<p><code>ptmalloc</code>将空闲<code>chunk</code>插入<code>bins</code>中时会把该<code>chunk</code>的下一<code>chunk</code>标志<code>P</code>设为<code>0</code>.同时把它和它前后的空闲<code>chunk</code>合并为一个<code>chunk</code>放到<code>unstored bin</code>中.<code>ptmalloc</code>会把一些小的<code>chunk</code>先放到<code>fast bins</code>中.</p>
+<p><code>bin[0]</code>和<code>bin[127]</code>都不存在,<code>bin[1]</code>为<code>unsorted bin</code>的<code>chunk</code>链表头.</p>
+<h4 id="fast-bins">Fast Bins</h4>
+<p>不大于<code>global_max_fast</code>的<code>chunk</code>被释放后会被放到<code>fast bins</code>中,<code>ptmalloc</code>不会把该<code>chunk</code>的下一<code>chunk</code>标志<code>P</code>设为<code>0</code>.要分配的<code>chunk</code>不大于<code>global_max_fast</code>时,<code>ptmalloc</code>会先在<code>fast bins</code>中查找,然后去查找<code>bins</code>中的空闲<code>chunk</code>.</p>
+<p>在特定的时候,<code>ptmalloc</code>会遍历<code>fast bins</code>中的<code>chunk</code>,将相邻(内存空间)的空闲<code>chunk</code>进行合并,并将合并后的<code>chunk</code>加入<code>unsorted bin</code>中,然后再将<code>unsorted bin</code>里的<code>chunk</code>加入对应<code>small bins</code>和<code>large bins</code>.</p>
+<p><code>Fast bins</code>可以看着是<code>LIFO</code>的栈,其中的<code>bin</code>使用单向链表实现.</p>
+<h4 id="unsorted-bin">Unsorted Bin</h4>
+<p>释放的<code>chunk</code>大于<code>global_max_fast</code>,或者<code>fast bins</code>中的空闲<code>chunk</code>合并时,这些<code>chunk</code>会被放到<code>unsorted bin</code>队列.</p>
+<p>在进行<code>malloc</code>操作的时候,如果在<code>fast bins</code>中没有找到合适的<code>chunk</code>,则<code>ptmalloc</code>会在<code>unsorted bin</code>中查找合适的空闲<code>chunk</code>,然后才查找<code>small bins</code>和<code>large bins</code>.如果<code>unsorted bin</code>不能满足分配要求.<code>malloc</code>便会将<code>unsorted bin</code>中的<code>chunk</code>加入对应<code>small bins</code>和<code>large bins</code>中.然后再从<code>small bins</code>和<code>large bins</code>中继续进行查找和分配.</p>
+<h3 id="特殊chunk">特殊chunk</h3>
+<p>并不是所有的<code>chunk</code>都按照上面的方式来组织,有三种例外情况:<code>Top chunk</code>,<code>Mmaped chunk</code>和<code>Last remainder chunk</code>.</p>
+<h4 id="top-chunk">Top chunk</h4>
+<p>在空闲内存的最高处必然存在一块空闲<code>chunk</code>,也就是<code>top chunk</code>.主分配区和非主分配区的<code>top chunk</code>初始化与增长方式是不一样的.</p>
+<p>对于主分配区<code>ptmalloc</code>通过<code>sbrk()</code>来增大或是收缩进程<code>heap</code>的大小,初始化时<code>brk</code>的值等于<code>start_brk</code>.主分配区在第一次调用<code>malloc</code>时会分配<code>(chunk_size + 128KB) align 4KB</code>大小的空间作为初始的<code>heap</code>(空闲<code>chunk</code>),也就是初始的<code>top chunk</code>,然后从<code>top chunk</code>分配内存.初始化后如果用户程序请求时<code>top chunk</code>中没有空闲内存,<code>ptmalloc</code>会调用<code>sbrk()</code>将的进程<code>heap</code>的边界<code>brk</code>上移,然后修改<code>top chunk</code>的大小.</p>
+<p>对于非主分配区<code>ptmalloc</code>会预先从<code>mmap</code>区域分配一块空闲内存模拟<code>sub-heap</code>(空闲<code>chunk</code>),也就是初始的<code>top chunk</code>,然后从<code>top chunk</code>分配内存.初始化后如果用户程序请求时<code>top chunk</code>中没有空闲内存,<code>ptmalloc</code>会重新分配一个<code>sub-heap</code>,并将<code>top chunk</code>迁移到新的<code>sub-heap</code>上,新的<code>sub-heap</code>与已有的<code>sub-heap</code>用单向链表连接起来.</p>
+<p>与<code>top chunk</code>相邻的空闲<code>chunk</code>会在被<code>free</code>时与<code>top chunk</code>合并成新的<code>top chunk</code>,当该次空闲<code>chunk</code>大小达到某个阈值且<code>top chunk</code>的大小超过收缩阈值,就会执行内存收缩减小<code>top chunk</code>的大小(内存归还操作系统),至少保留一个页大小的空闲内存.</p>
+<h4 id="mmaped-chunk">Mmaped chunk</h4>
+<p>若分配的<code>chunk</code>过大,<code>ptmalloc</code>会使用<code>mmap</code>来直接使用内存映射来将页映射到进程空间.这样分配的<code>chunk</code>(<code>M</code>标志为<code>1</code>)在被<code>free</code>时将直接解除映射,将内存归还操作系统.</p>
+<p><code>ptmalloc</code>对<code>mmap threshold</code>有一个动态调整机制.当<code>ptmalloc munmap chunk</code>时,如果回收的<code>chunk</code>空间大于<code>mmap threshold</code>的当前值,并且小于<code>DEFAULT_MMAP_THRESHOLD_MAX</code>(<code>HEAP_MAX_SIZE / 2</code>),<code>ptmalloc</code>会把<code>mmap threshold</code>调整为回收的<code>chunk</code>的大小,并将<code>mmap</code>收缩阈值(<code>mmap trim threshold</code>)设置为<code>mmap threshold</code>的<code>2</code>倍.该机制默认开启,可以用<code>mallopt()</code>关闭.</p>
+<h4 id="last-remainder-chunk">Last remainder chunk</h4>
+<p>当需要分配<code>small chunk</code>,且在<code>small bins</code>,<code>unsorted bin</code>找不到合适的<code>chunk</code>,则通过<code>binmaps</code>遍历<code>bins</code>查找合适的<code>chunk</code>,如果找到则切割该<code>chunk</code>获取一个<code>chunk_size</code>大小的<code>chunk</code>进行分配并将剩余部分(空闲<code>chunk</code>)加入<code>unsorted bin</code>中并将其变成新的<code>last remainder chunk</code>.</p>
+<p>当需要分配<code>small chunk</code>,且在<code>small bins</code>中找不到合适的<code>chunk</code>,如果<code>last remainder chunk</code>大于所需<code>small chunk</code>大小,<code>last remainder chunk</code>被分裂成两个<code>chunk</code>,其中一个返回给用户,另一个变成新的<code>last remainder chunk</code>.</p>
+<h3 id="malloc概述">malloc概述</h3>
+<p><code>ptmalloc</code>的响应用户内存分配要求(<code>malloc</code>)的具体步骤如下.</p>
+<ol type="1">
+<li>线程先获取分配区指针(其中涉及加锁和占用),无可用分配区则使用<code>sysmalloc</code>获取内存.</li>
+<li>将请求大小转换为实际需要分配的大小,即<code>chunk_size</code>.</li>
+<li>如果满足<code>chunk_size &lt;= global_max_fast</code>,则尝试在<code>fast bins</code>找一个所需大小的空闲<code>chunk</code>分配.找不到或者不满足则进行下一步.</li>
+<li>如果所需的<code>chunk</code>大小属于<code>small bins</code>,则根据<code>chunk_size</code>找到所在<code>small bin</code>,尝试从其尾部获取一个空闲<code>chunk</code>分配.找不到或者大小不属于<code>small bins</code>则调用<code>malloc_consolidate</code>合并<code>fast bin</code>并链接到<code>unsorted bin</code>后进行下一步.</li>
+<li>遍历<code>unsorted bin</code>,如果<code>unsorted bin</code>只有一个<code>chunk</code>(也就是<code>last remainder chunk</code>),而且同时满足<code>chunk_size &lt; 512B</code>和该<code>chunk</code>大小大于等于<code>chunk_size</code>,则直接将该<code>chunk</code>切割并分配.否则根据<code>unsorted bin</code>中<code>chunk</code>的大小将其放入<code>small bins</code>或是<code>large bins</code>中,进行下一步.</li>
+<li>到这里<code>fast bins</code>和<code>unsorted bin</code>中所有的<code>chunk</code>都清除干净了.从<code>large bins</code>中按照<code>smallest-first,best-fit</code>原则,找一个合适的<code>chunk</code>,切割出所需大小的<code>chunk</code>进行分配并将剩余部分(空闲<code>chunk</code>)加入<code>unsorted bin</code>并将其变成新的<code>last remainder chunk</code>.没找到则进行下一步.</li>
+<li>到这里就需要操作<code>top chunk</code>来进行分配了.判断<code>top chunk</code>大小是否小于<code>chunk_size</code>,是则从<code>top chunk</code>中分出一块来.否则进行下一步.</li>
+<li>如果其他线程释放了<code>fast bin</code>(<code>fast bin</code>添加不需要加锁),合并并重新设置当前bin的index,再次循环.否则使用<code>sysmalloc</code>获取内存.</li>
+</ol>
+<h3 id="free概述">free概述</h3>
+<p><code>free</code>函数接受一个指向分配区域的指针作为参数,释放该指针所指向的<code>chunk</code>.<code>free</code>函数的工作步骤如下.</p>
+<ol type="1">
+<li>判断指针是否为<code>0</code>,为<code>0</code>则直接<code>return</code>.否则进行下一步.</li>
+<li>判断所需释放的<code>chunk</code>是否为<code>mmaped chunk</code>(<code>M</code>标志为<code>1</code>),是则调用<code>munmap_chunk()</code>释放<code>mmaped chunk</code>,释放完成.同时如果开启了<code>mmap threshold</code>的动态调整机制,且回收的<code>chunk</code>大小大于<code>mmap threshold</code>,小于mmap分配阈值的最大值,则设置该<code>chunk</code>的大小为<code>mmap threshold</code>,将<code>mmap</code>收缩阈值设定为<code>mmap threshold</code>的<code>2</code>倍.不是则进行下一步.</li>
+<li>判断<code>chunk</code>的大小和所处的位置,若<code>chunk_size &lt;= global_max_fast</code>,则将<code>chunk</code>放到<code>fast bins</code>中,释放完成.否则进行下一步.</li>
+<li>获取分配区的锁,判断前一<code>chunk</code>是否是空闲块,是则合并.是或不是都进行下一步.</li>
+<li>判断下一<code>chunk</code>是否为<code>top chunk</code>,如果不是,则判断下一<code>chunk</code>是否是空闲块,是则合并.下一<code>chunk</code>不是<code>top chunk</code>的情况下都要放到<code>unsorted bin</code>中.如果下一<code>chunk</code>是<code>top chunk</code>,则将其与<code>top chunk</code>合并.然后进行下一步(所有情况).</li>
+<li>判断合并后的<code>chunk</code>大小是否大于<code>FASTBIN_CONSOLIDATION_THRESHOLD</code>,是则遍历<code>fast bins</code>中<code>chunk</code>,与相邻的空闲<code>chunk</code>进行合并.进行下一步.</li>
+<li>对于主分配区,判断<code>top chunk</code>的大小是否大于<code>mmap</code>收缩阈值,则会试图归还<code>top chunk</code>中的一部分给操作系统(<code>sbrk</code>调用).但最先分配的<code>128KB</code>空间不会归还;对于非主分配区,会进行<code>sub-heap</code>收缩,将<code>top chunk</code>的一部分返回给操作系统,如果<code>top chunk</code>为整个<code>sub-heap</code>,会把整个<code>sub-heap</code>还回给操作系统.到此,释放结束.从<code>free()</code>函数退出.</li>
+</ol>
+<h3 id="realloc概述">realloc概述</h3>
+<p><code>realloc</code>分以下几种情况.</p>
+<ul>
+<li><code>ptr == 0</code>时等同于<code>malloc</code>.</li>
+<li><code>ptr != 0 &amp;&amp; size == 0</code>时等同于<code>free</code>,返回值为<code>0</code>.</li>
+<li><code>malloc_usable_size(ptr) &gt;= size</code>时会尝试缩减,产生部分<code>free chunk</code>.</li>
+<li><code>malloc_usable_size(ptr) &lt; szie</code>时将<code>malloc</code>一块更大的内存,将原来的内容复制过去,再将原来的<code>chunk</code>给<code>free</code>掉.</li>
+</ul>
+<h3 id="mallopt">mallopt</h3>
+<p><code>ptmalloc</code>主要提供以下几个配置选项用于调优,通过<a href="http://man7.org/linux/man-pages/man3/mallopt.3.html" target="_blank" rel="noopener"><code>mallopt()</code></a>进行设置.</p>
+<p><code>mallopt()</code>函数配置前,需要检查主分配区是否初始化了,如果没有初始化,调用<code>ptmalloc_init()</code>函数初始化<code>ptmalloc</code>,然后获得主分配区的锁,调用<code>malloc_consolidate()</code>函数,<code>malloc_consolidate()</code>函数会判断主分配区是否已经初始化,如果没有,则初始化主分配区.对<code>mp_</code>中参数字段的修改,是通过主分配区的锁来同步的.</p>
+<h4 id="m_mxfast">M_MXFAST</h4>
+<p><code>M_MXFAST</code>用于设置<code>fast bins</code>中保存的<code>chunk</code>的最大大小<code>max_fast</code>,<code>M_MXFAST</code>的最大值为<code>80B</code>,如果设置该选项为<code>0</code>,就会不使用<code>fast bins</code>.</p>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">if</span> (value &gt;= <span class="number">0</span> &amp;&amp; value &lt;= MAX_FAST_SIZE)</span><br><span class="line">&#123;</span><br><span class="line">  LIBC_PROBE (memory_mallopt_mxfast, <span class="number">2</span>, value, get_max_fast ());</span><br><span class="line">  set_max_fast (value);</span><br><span class="line">&#125;</span><br><span class="line"><span class="keyword">else</span></span><br><span class="line">  res = <span class="number">0</span>;</span><br></pre></td></tr></table></figure>
+<h4 id="m_trim_threshold">M_TRIM_THRESHOLD</h4>
+<p><code>M_TRIM_THRESHOLD</code>用于设置<code>mmap</code>收缩阈值,默认值为<code>128KB</code>.一般与<code>M_MMAP_THRESHOLD</code>选项一起使用,<code>M_MMAP_THRESHOLD</code>用于设置<code>mmap threshold</code>.</p>
+<p><code>M_TRIM_THRESHOLD</code>的值必须设置为页大小对齐,设置为<code>-1</code>会关闭内存收缩设置.</p>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">LIBC_PROBE (memory_mallopt_trim_threshold, <span class="number">3</span>, value, mp_.trim_threshold, mp_.no_dyn_threshold);</span><br><span class="line">mp_.trim_threshold = value;</span><br><span class="line">mp_.no_dyn_threshold = <span class="number">1</span>;</span><br></pre></td></tr></table></figure>
+<h4 id="m_mmap_threshold">M_MMAP_THRESHOLD</h4>
+<p><code>M_MMAP_THRESHOLD</code>用于设置<code>mmap threshold</code>,默认值为<code>128KB</code>,<code>ptmalloc</code>默认开启动态调整<code>mmap threshold</code>和<code>mmap</code>收缩阈值.</p>
+<p>当内存大于<code>mmap threshold</code>,<code>malloc</code>相当于<code>mmap</code>的简单封装,<code>free</code>相当于<code>munmap</code>的简单封装.</p>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">if</span> ((<span class="keyword">unsigned</span> <span class="keyword">long</span>) value &gt; HEAP_MAX_SIZE / <span class="number">2</span>)</span><br><span class="line">  res = <span class="number">0</span>;</span><br><span class="line"><span class="keyword">else</span></span><br><span class="line">&#123;</span><br><span class="line">  LIBC_PROBE (memory_mallopt_mmap_threshold, <span class="number">3</span>, value, mp_.mmap_threshold, mp_.no_dyn_threshold);</span><br><span class="line">  mp_.mmap_threshold = value;</span><br><span class="line">  mp_.no_dyn_threshold = <span class="number">1</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h4 id="m_mmap_max">M_MMAP_MAX</h4>
+<p><code>M_MMAP_MAX</code>用于设置进程中用<code>mmap</code>分配的内存块的最大限制,默认值为<code>64K</code>.如果将<code>M_MMAP_MAX</code>设置为<code>0</code>,<code>ptmalloc</code>将不会使用<code>mmap</code>分配大块内存.</p>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">LIBC_PROBE (memory_mallopt_mmap_max, <span class="number">3</span>, value, mp_.n_mmaps_max, mp_.no_dyn_threshold);</span><br><span class="line">mp_.n_mmaps_max = value;</span><br><span class="line">mp_.no_dyn_threshold = <span class="number">1</span>;</span><br></pre></td></tr></table></figure>
 
       
     </div>
@@ -587,8 +706,8 @@
         <div class="post-nav">
           <div class="post-nav-next post-nav-item">
             
-              <a href="/posts/56261baa/" rel="next" title="IS-pwn-Linux-glibc-2.23-house_of_spirit">
-                <i class="fa fa-chevron-left"></i> IS-pwn-Linux-glibc-2.23-house_of_spirit
+              <a href="/posts/42405b40/" rel="next" title="IS-reverse-tool-OllyDbg">
+                <i class="fa fa-chevron-left"></i> IS-reverse-tool-OllyDbg
               </a>
             
           </div>
@@ -597,8 +716,8 @@
 
           <div class="post-nav-prev post-nav-item">
             
-              <a href="/posts/4d6daae6/" rel="prev" title="IS-pwn-Linux-glibc-2.23-unsorted_bin_attack">
-                IS-pwn-Linux-glibc-2.23-unsorted_bin_attack <i class="fa fa-chevron-right"></i>
+              <a href="/posts/7ddf229f/" rel="prev" title="CS-NOTES-CSAPP-链接">
+                CS-NOTES-CSAPP-链接 <i class="fa fa-chevron-right"></i>
               </a>
             
           </div>
@@ -673,7 +792,7 @@
                 
                   <a href="/archives/">
                 
-                    <span class="site-state-item-count">178</span>
+                    <span class="site-state-item-count">172</span>
                     <span class="site-state-item-name">日志</span>
                   </a>
                 </div>
@@ -865,7 +984,7 @@
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#漏洞要素"><span class="nav-number">1.</span> <span class="nav-text">漏洞要素</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#poison_null_byte"><span class="nav-number">2.</span> <span class="nav-text">poison_null_byte</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#off_by_one-with-unlink"><span class="nav-number">3.</span> <span class="nav-text">off_by_one with unlink</span></a></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#linux动态内存分配"><span class="nav-number">1.</span> <span class="nav-text">Linux动态内存分配</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#内存管理方式"><span class="nav-number">2.</span> <span class="nav-text">内存管理方式</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#ptmalloc内存管理概述"><span class="nav-number">3.</span> <span class="nav-text">Ptmalloc内存管理概述</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#分配区"><span class="nav-number">3.1.</span> <span class="nav-text">分配区</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#chunk"><span class="nav-number">3.2.</span> <span class="nav-text">chunk</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#空间复用"><span class="nav-number">3.2.1.</span> <span class="nav-text">空间复用</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#空闲chunk容器"><span class="nav-number">3.3.</span> <span class="nav-text">空闲chunk容器</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#bins"><span class="nav-number">3.3.1.</span> <span class="nav-text">Bins</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#fast-bins"><span class="nav-number">3.3.2.</span> <span class="nav-text">Fast Bins</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#unsorted-bin"><span class="nav-number">3.3.3.</span> <span class="nav-text">Unsorted Bin</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#特殊chunk"><span class="nav-number">3.4.</span> <span class="nav-text">特殊chunk</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#top-chunk"><span class="nav-number">3.4.1.</span> <span class="nav-text">Top chunk</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#mmaped-chunk"><span class="nav-number">3.4.2.</span> <span class="nav-text">Mmaped chunk</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#last-remainder-chunk"><span class="nav-number">3.4.3.</span> <span class="nav-text">Last remainder chunk</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#malloc概述"><span class="nav-number">3.5.</span> <span class="nav-text">malloc概述</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#free概述"><span class="nav-number">3.6.</span> <span class="nav-text">free概述</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#realloc概述"><span class="nav-number">3.7.</span> <span class="nav-text">realloc概述</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#mallopt"><span class="nav-number">3.8.</span> <span class="nav-text">mallopt</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#m_mxfast"><span class="nav-number">3.8.1.</span> <span class="nav-text">M_MXFAST</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#m_trim_threshold"><span class="nav-number">3.8.2.</span> <span class="nav-text">M_TRIM_THRESHOLD</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#m_mmap_threshold"><span class="nav-number">3.8.3.</span> <span class="nav-text">M_MMAP_THRESHOLD</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#m_mmap_max"><span class="nav-number">3.8.4.</span> <span class="nav-text">M_MMAP_MAX</span></a></li></ol></li></ol></li></ol></div>
             
 
           </div>
@@ -897,7 +1016,7 @@
       <i class="fa fa-area-chart"></i>
     </span>
     
-    <span title="站点总字数">730k</span>
+    <span title="站点总字数">727k</span>
   
 
   
@@ -906,7 +1025,7 @@
       <i class="fa fa-coffee"></i>
     </span>
     
-    <span title="站点阅读时长">11:04</span>
+    <span title="站点阅读时长">11:01</span>
   
 </div>
 

@@ -127,7 +127,7 @@
 <meta property="og:site_name" content="w4rd3n">
 <meta property="og:description" content="基础环境 apt换源 修改配置文件. 123sudo gedit /etc/apt/sources.listsudo apt-get update#sudo apt-get upgrade sources.list. 123456789101112131415161718#ubuntu16deb http://mirrors.ustc.edu.cn/ubuntu/ xenial main">
 <meta property="og:locale" content="zh-CN">
-<meta property="og:updated_time" content="2020-08-13T06:08:57.947Z">
+<meta property="og:updated_time" content="2020-08-20T12:37:13.407Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="w4rd3n-ubuntu虚拟机环境搭建">
 <meta name="twitter:description" content="基础环境 apt换源 修改配置文件. 123sudo gedit /etc/apt/sources.listsudo apt-get update#sudo apt-get upgrade sources.list. 123456789101112131415161718#ubuntu16deb http://mirrors.ustc.edu.cn/ubuntu/ xenial main">
@@ -496,7 +496,7 @@
                 
                   <span class="post-meta-item-text">本文字数：</span>
                 
-                <span title="本文字数">6.2k</span>
+                <span title="本文字数">6.4k</span>
               
 
               
@@ -588,7 +588,9 @@
 <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">echo</span> <span class="string">'source /home/w4rd3n/v8/tools/gdbinit'</span> &gt;&gt; ~/.gdbinit</span><br><span class="line"><span class="built_in">echo</span> <span class="string">'source /home/w4rd3n/v8/tools/gdb-v8-support.py'</span> &gt;&gt; ~/.gdbinit</span><br></pre></td></tr></table></figure>
 <h2 id="crypto环境">crypto环境</h2>
 <p><code>python</code>库.</p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">sudo pip install pycrypto</span><br><span class="line">sudo pip3 install pycrypto</span><br><span class="line"></span><br><span class="line">sudo apt-get install libmpfr-dev libgmp-dev libmpc-dev</span><br><span class="line">sudo pip3 install gmpy2</span><br><span class="line">sudo pip install gmpy2</span><br><span class="line"></span><br><span class="line">sudo pip install rsa sympy z3-solver</span><br></pre></td></tr></table></figure>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">sudo apt-get install libmpfr-dev libgmp-dev libmpc-dev</span><br><span class="line"></span><br><span class="line">sudo pip install pycrypto rsa sympy z3-solver pyDes libnum gmpy2</span><br><span class="line">sudo pip3 install pycrypto rsa sympy z3-solver pyDes libnum gmpy2</span><br></pre></td></tr></table></figure>
+<p><code>sage</code>.</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">sudo apt-get install m4</span><br><span class="line"></span><br><span class="line">tar xvf sage-x.y.tar.gz</span><br><span class="line"><span class="built_in">cd</span> sage-x.y</span><br><span class="line">./configure --prefix=/home/w4rd3n/Desktop/sage-9.1</span><br><span class="line">make -j8</span><br><span class="line">ln -s /path/to/sage-x.y/sage /usr/<span class="built_in">local</span>/bin/sage</span><br></pre></td></tr></table></figure>
 
       
     </div>
@@ -711,7 +713,7 @@
                 
                   <a href="/archives/">
                 
-                    <span class="site-state-item-count">177</span>
+                    <span class="site-state-item-count">178</span>
                     <span class="site-state-item-name">日志</span>
                   </a>
                 </div>
@@ -935,7 +937,7 @@
       <i class="fa fa-area-chart"></i>
     </span>
     
-    <span title="站点总字数">726k</span>
+    <span title="站点总字数">730k</span>
   
 
   
@@ -944,7 +946,7 @@
       <i class="fa fa-coffee"></i>
     </span>
     
-    <span title="站点阅读时长">11:01</span>
+    <span title="站点阅读时长">11:04</span>
   
 </div>
 

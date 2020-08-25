@@ -119,22 +119,20 @@
 
 
 
-  <meta name="description" content="未完成 奇奇怪怪的编码 列举一下常见的编码方式. ASCII  Base64/32/16 Base64,Base32,Base16可以分别编码转化8位字节为6位,5位,4位.16,32,64分别表示用多少个字符来编码. Base64编码要求把3个8位字节转化为4个6位的字节,之后在6位的前面补两个0.6位2进制能表示64个字符.下面是映射表.Base32,Base16类似.  1">
+  <meta name="description" content="ASCII 12print(ord(&apos;A&apos;))print(chr(0x41)) 简单替换密码 以每个明文字母被与之唯一对应且不同的字母替换的方式实现的,是混乱的,可以利用词频分析解密. Base64/32/16 Base64,Base32,Base16可以分别编码转化8位字节为6位,5位,4位.16,32,64分别表示用多少个字符来编码. Base64编码要求把3个8位字节转化为4个6">
 <meta name="keywords" content="古典密码">
 <meta property="og:type" content="article">
 <meta property="og:title" content="IS-crypto-古典密码-总览">
 <meta property="og:url" content="https://hitworld.github.io/posts/38cee585/index.html">
 <meta property="og:site_name" content="w4rd3n">
-<meta property="og:description" content="未完成 奇奇怪怪的编码 列举一下常见的编码方式. ASCII  Base64/32/16 Base64,Base32,Base16可以分别编码转化8位字节为6位,5位,4位.16,32,64分别表示用多少个字符来编码. Base64编码要求把3个8位字节转化为4个6位的字节,之后在6位的前面补两个0.6位2进制能表示64个字符.下面是映射表.Base32,Base16类似.  1">
+<meta property="og:description" content="ASCII 12print(ord(&apos;A&apos;))print(chr(0x41)) 简单替换密码 以每个明文字母被与之唯一对应且不同的字母替换的方式实现的,是混乱的,可以利用词频分析解密. Base64/32/16 Base64,Base32,Base16可以分别编码转化8位字节为6位,5位,4位.16,32,64分别表示用多少个字符来编码. Base64编码要求把3个8位字节转化为4个6">
 <meta property="og:locale" content="zh-CN">
-<meta property="og:image" content="https://hitworld.github.io/posts/38cee585/1.png">
-<meta property="og:image" content="https://hitworld.github.io/posts/38cee585/2.png">
 <meta property="og:image" content="https://hitworld.github.io/posts/38cee585/3.png">
-<meta property="og:updated_time" content="2020-08-09T06:34:17.804Z">
+<meta property="og:updated_time" content="2020-08-18T04:17:53.251Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="IS-crypto-古典密码-总览">
-<meta name="twitter:description" content="未完成 奇奇怪怪的编码 列举一下常见的编码方式. ASCII  Base64/32/16 Base64,Base32,Base16可以分别编码转化8位字节为6位,5位,4位.16,32,64分别表示用多少个字符来编码. Base64编码要求把3个8位字节转化为4个6位的字节,之后在6位的前面补两个0.6位2进制能表示64个字符.下面是映射表.Base32,Base16类似.  1">
-<meta name="twitter:image" content="https://hitworld.github.io/posts/38cee585/1.png">
+<meta name="twitter:description" content="ASCII 12print(ord(&apos;A&apos;))print(chr(0x41)) 简单替换密码 以每个明文字母被与之唯一对应且不同的字母替换的方式实现的,是混乱的,可以利用词频分析解密. Base64/32/16 Base64,Base32,Base16可以分别编码转化8位字节为6位,5位,4位.16,32,64分别表示用多少个字符来编码. Base64编码要求把3个8位字节转化为4个6">
+<meta name="twitter:image" content="https://hitworld.github.io/posts/38cee585/3.png">
 
 
 
@@ -507,7 +505,7 @@
                 
                   <span class="post-meta-item-text">本文字数：</span>
                 
-                <span title="本文字数">4.1k</span>
+                <span title="本文字数">5.8k</span>
               
 
               
@@ -521,7 +519,7 @@
                 
                   <span class="post-meta-item-text">阅读时长 &asymp;</span>
                 
-                <span title="阅读时长">4 分钟</span>
+                <span title="阅读时长">5 分钟</span>
               
             </div>
           
@@ -541,102 +539,112 @@
       
 
       
-        <p>未完成</p>
-<h2 id="奇奇怪怪的编码">奇奇怪怪的编码</h2>
-<p>列举一下常见的编码方式.</p>
-<h3 id="ascii">ASCII</h3>
-<img src="/posts/38cee585/1.png" title="p1">
-<h3 id="base643216">Base64/32/16</h3>
+        <h2 id="ascii">ASCII</h2>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">print(ord(<span class="string">'A'</span>))</span><br><span class="line">print(chr(<span class="number">0x41</span>))</span><br></pre></td></tr></table></figure>
+<h2 id="简单替换密码">简单替换密码</h2>
+<p>以每个明文字母被与之唯一对应且不同的字母替换的方式实现的,是混乱的,可以利用<a href="http://quipqiup.com/index.php" target="_blank" rel="noopener">词频分析</a>解密.</p>
+<h2 id="base643216">Base64/32/16</h2>
 <p><code>Base64</code>,<code>Base32</code>,<code>Base16</code>可以分别编码转化<code>8</code>位字节为<code>6</code>位,<code>5</code>位,<code>4</code>位.<code>16</code>,<code>32</code>,<code>64</code>分别表示用多少个字符来编码.</p>
-<p><code>Base64</code>编码要求把<code>3</code>个<code>8</code>位字节转化为<code>4</code>个<code>6</code>位的字节,之后在<code>6</code>位的前面补两个<code>0</code>.<code>6</code>位<code>2</code>进制能表示<code>64</code>个字符.下面是映射表.<code>Base32</code>,<code>Base16</code>类似.</p>
-<img src="/posts/38cee585/2.png" title="p2">
+<p><code>Base64</code>编码要求把<code>3</code>个<code>8</code>位字节转化为<code>4</code>个<code>6</code>位的字节,之后在<code>6</code>位的前面补两个<code>0</code>.<code>6</code>位<code>2</code>进制能表示<code>64</code>个字符.<code>Base32</code>,<code>Base16</code>类似.</p>
 <figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> base64</span><br><span class="line">base64.b64encode(str)</span><br><span class="line">base64.b64decode(str)</span><br><span class="line">base64.b32encode(str)</span><br><span class="line">base64.b32decode(str)</span><br><span class="line">base64.b16encode(str)</span><br><span class="line">base64.b16decode(str)</span><br></pre></td></tr></table></figure>
-<h3 id="base91">base91</h3>
+<h2 id="base91">base91</h2>
 <p><a href="http://ctf.ssleye.com/base91.html" target="_blank" rel="noopener">在线加密</a>.</p>
-<h3 id="quoted-printable">Quoted-printable</h3>
+<h2 id="xxencode-uuencode">XXencode &amp;&amp; UUencode</h2>
+<p><code>XXencode</code>以每三个字节为单位进行编码,不够的用零补齐.三个字节共<code>24</code>个<code>Bit</code>以<code>6bit</code>为单位分为<code>4</code>个组.同<code>Base64</code>基本一致,只是映射表不一样.<code>UUencode</code>也是一样.</p>
+<p><a href="http://ctf.ssleye.com/" target="_blank" rel="noopener">XXencode, UUencode在线加解密</a>.</p>
+<h2 id="quoted-printable">Quoted-printable</h2>
 <p>任何一个<code>8</code>位的字节值可编码为<code>3</code>个字符,一个<code>=</code>后跟随两个十六进制数字表示该字节的数值.例如:<code>ASCII</code>码换页符(<code>12</code>)可以表示为<code>=0C</code>,等号(<code>61</code>)必须表示为<code>=3D</code>(避免歧义).除了可打印<code>ASCII</code>字符与换行符以外,所有字符必须表示为这种格式.</p>
 <p><code>Quoted-printable</code>编码的数据的每行长度不能超过<code>76</code>个字符.为满足此要求又不改变被编码文本,在<code>QP</code>编码结果的每行末尾加上软换行(<code>soft line break</code>).即在每行末尾加上一个<code>=</code>.</p>
 <p><a href="http://ctf.ssleye.com/quoted.html" target="_blank" rel="noopener">Quoted-printable在线加解密</a>.</p>
-<h3 id="xxencode-uuencode">XXencode &amp;&amp; UUencode</h3>
-<p><code>XXencode</code>以每三个字节为单位进行编码,不够的用零补齐.三个字节共<code>24</code>个<code>Bit</code>以<code>6bit</code>为单位分为<code>4</code>个组.同<code>Base64</code>基本一致,只是映射表不一样.<code>UUencode</code>也是一样.</p>
-<p><a href="http://ctf.ssleye.com/" target="_blank" rel="noopener">XXencode,UUencode在线加解密</a>.</p>
-<h3 id="aaencode">aaencode</h3>
+<h2 id="aaencode">aaencode</h2>
 <p>一种颜文字加密,直接在浏览器<code>console</code>中运行即可.</p>
-<h3 id="ppencode">ppencode</h3>
+<p><a href="https://utf-8.jp/public/aaencode.html" target="_blank" rel="noopener">在线加密</a>.</p>
+<h2 id="ppencode">ppencode</h2>
 <p><code>perl</code>语言的一种加密,<code>perl</code>运行即可.</p>
 <p><a href="http://namazu.org/~takesako/ppencode/demo.html" target="_blank" rel="noopener">在线加密</a>.</p>
-<h3 id="jsfuck">JSFuck</h3>
+<h2 id="jsfuck">JSFuck</h2>
 <p>利用<code>js</code>特性的一种加密,浏览器控制台运行即可.</p>
-<h3 id="brainfuckook">Brainfuck/Ook!</h3>
+<p><a href="https://www.bugku.com/tools/jsfuck/" target="_blank" rel="noopener">在线加密</a>.</p>
+<h2 id="brainfuckook">Brainfuck/Ook!</h2>
 <p>两种奇奇怪怪的编程语言,<a href="https://www.splitbrain.org/services/ook" target="_blank" rel="noopener">在线加解密</a>.</p>
-<h3 id="url编码">URL编码</h3>
+<h2 id="url编码">URL编码</h2>
 <p>又叫百分号编码,是统一资源定位(<code>URL</code>)编码方式.编码方法即在该字节<code>ascii</code>码的的<code>16</code>进制字符前面加<code>%</code>.</p>
 <p><a href="http://ctf.ssleye.com/url.html" target="_blank" rel="noopener">URL编码在线加解密</a>.</p>
-<h3 id="unicode编码">Unicode编码</h3>
+<h2 id="unicode编码">Unicode编码</h2>
 <p><code>Unicode</code>编码有四种编码方式.<code>&amp;#x[Hex];</code>,<code>&amp;#[Decimal];</code>,<code>\U[Hex]</code>,<code>\U+[Hex]</code>.</p>
 <p><a href="http://ctf.ssleye.com/cencode.html" target="_blank" rel="noopener">Unicode编码在线加解密</a>.</p>
-<h3 id="escape编码">Escape编码</h3>
+<h2 id="escape编码">Escape编码</h2>
 <p>又叫<code>%u</code>编码,采用<code>UTF-16BE</code>模式,<code>Escape</code>编码就是字符对应<code>UTF-16</code>的<code>16</code>进制表示方式前面加<code>%u</code>.</p>
 <p><a href="http://ctf.ssleye.com/escape.html" target="_blank" rel="noopener">Escape编码在线加解密</a>.</p>
-<h3 id="html实体编码">HTML实体编码</h3>
+<h2 id="html实体编码">HTML实体编码</h2>
 <p><a href="https://www.w3school.com.cn/tags/html_ref_entities.html" target="_blank" rel="noopener">手册</a>.</p>
-<h3 id="敲击码">敲击码</h3>
+<h2 id="敲击码">敲击码</h2>
 <p>敲击码(<code>Tap code</code>)通过使用一系列的点击声音来编码.基于<code>5 × 5</code>方格波利比奥斯方阵来实现的.</p>
 <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">  1  2  3  4  5</span><br><span class="line">1 A  B C/K D  E</span><br><span class="line">2 F  G  H  I  J </span><br><span class="line">3 L  M  N  O  P</span><br><span class="line">4 Q  R  S  T  U</span><br><span class="line">5 V  W  X  Y  Z</span><br></pre></td></tr></table></figure>
-<h3 id="莫尔斯电码">莫尔斯电码</h3>
+<h2 id="莫尔斯电码">莫尔斯电码</h2>
 <p>莫尔斯电码(<code>Morse Code</code>)通过通和断不同的排列顺序来表达不同英文字母,数字和标点符号的信号代码,莫尔斯电码主要由<code>5</code>种代码组成:<code>.</code>,<code>-</code>,空格表示停顿,<code>/</code>划分中等的停顿,句子之间长的停顿.</p>
-<p><a href="http://ctf.ssleye.com/morse.html" target="_blank" rel="noopener">莫尔斯电码在线加解密</a></p>
-<h3 id="section">01248</h3>
+<p><a href="http://ctf.ssleye.com/morse.html" target="_blank" rel="noopener">莫尔斯电码在线加解密</a>.</p>
+<h2 id="培根密码">培根密码</h2>
+<p><a href="http://rumkin.com/tools/cipher/baconian.php" target="_blank" rel="noopener">在线加解密</a>.</p>
+<h2 id="section">01248</h2>
 <p>该密码又称为云影密码,使用<code>0</code>,<code>1</code>,<code>2</code>,<code>4</code>,<code>8</code>四个数字,其中<code>0</code>用来表示间隔,其他数字以加法可以表示出如:<code>28 = 10</code>,<code>124 = 7</code>,<code>18 = 9</code>,再用<code>1 -&gt; 26</code>表示<code>A -&gt; Z</code>.</p>
-<h2 id="各种文本加密">各种文本加密</h2>
-<p>列举一下常见的文本加密方式,<a href="http://www.practicalcryptography.com/" target="_blank" rel="noopener">参考网站</a>.</p>
-<h3 id="换位加密">换位加密</h3>
-<p>不改变文本本身,只改变排列顺序的加密.</p>
-<h4 id="栅栏密码">栅栏密码</h4>
+<h2 id="栅栏密码">栅栏密码</h2>
 <p>栅栏密码(<code>Rail-fence Cipher</code>)把要加密的明文分成<code>N</code>个一组,然后把每组的第<code>1</code>个字符组合,每组第<code>2</code>个字符组合...每组的第<code>N</code>(最后一个分组可能不足<code>N</code>个)个字符组合,全部连接起来就是密文.</p>
-<p><a href="http://www.practicalcryptography.com/ciphers/classical-era/rail-fence/" target="_blank" rel="noopener">栅栏密码在线加解密</a></p>
-<h4 id="曲路密码">曲路密码</h4>
+<p><a href="http://www.practicalcryptography.com/ciphers/classical-era/rail-fence/" target="_blank" rel="noopener">栅栏密码在线加解密</a>.</p>
+<h2 id="曲路密码">曲路密码</h2>
 <img src="/posts/38cee585/3.png" title="p3">
-<h3 id="替换加密">替换加密</h3>
-<p>字符与字符之间的映射.</p>
-<h4 id="埃特巴什码">埃特巴什码</h4>
+<h2 id="移位密码">移位密码</h2>
+<p>字符串长度为<code>24</code>,将字符串分成<code>4</code>组,每六个一组.</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">216534</span><br><span class="line">lf5&#123;ag</span><br><span class="line">024c48</span><br><span class="line">3549d7</span><br><span class="line">fd@@1&#125;</span><br><span class="line"></span><br><span class="line">123456</span><br><span class="line">flag&#123;5</span><br><span class="line">2048c4</span><br><span class="line">53d794</span><br><span class="line">df1&#125;@@</span><br></pre></td></tr></table></figure>
+<h2 id="埃特巴什码">埃特巴什码</h2>
 <p>以字母倒序排列作为特殊密钥的替换加密.</p>
 <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">ABCDEFGHIJKLMNOPQRSTUVWXYZ</span><br><span class="line">ZYXWVUTSRQPONMLKJIHGFEDCBA</span><br></pre></td></tr></table></figure>
-<h4 id="凯撒密码">凯撒密码</h4>
+<h2 id="凯撒密码">凯撒密码</h2>
 <p>凯撒密码(<code>Caesar Cipher</code>或称恺撒加密,恺撒变换,变换加密,位移加密)是一种替换加密,明文中的所有字母都在字母表上向后(或向前)按照一个固定数目进行偏移后被替换成密文.</p>
 <p><a href="http://planetcalc.com/1434/" target="_blank" rel="noopener">加密解密链接</a>.</p>
 <p>还有一种基于密钥的凯撒密码,其基本原理是将密钥的每一位转换为数字(一般转化为字母表对应顺序的数字),分别以这一数字为密钥加密明文的每一位字母.</p>
-<h4 id="rot5131847">ROT5/13/18/47</h4>
+<h2 id="rot5131847">ROT5/13/18/47</h2>
 <p><a href="http://www.qqxiuzi.cn/bianma/ROT5-13-18-47.php" target="_blank" rel="noopener">传送门</a>.</p>
-<h4 id="简单替换密码">简单替换密码</h4>
-<p>以每个明文字母被与之唯一对应且不同的字母替换的方式实现的,是混乱的,可以利用<a href="http://quipqiup.com/index.php" target="_blank" rel="noopener">词频分析</a>解密.</p>
-<h4 id="仿射密码">仿射密码</h4>
+<h2 id="仿射密码">仿射密码</h2>
 <p>仿射密码(<code>Affine Cipher</code>)是一种单表代换密码,字母表中的每个字母相应的值使用一个简单的数学函数映射到对应的数值,再把对应数值转换成字母.</p>
-<p>每一个字母都是通过函数<code>(ax + b) mod m</code>加密,其中<code>B</code>是位移量,为了保证仿射密码的可逆性,<code>a</code>和<code>m</code>需要满足<code>gcd(a , m) = 1</code>,一般<code>m</code>为设置为<code>26</code>.</p>
+<p>每一个字母都是通过函数<code>(ax + b) mod m</code>加密,其中<code>B</code>是位移量,为了保证仿射密码的可逆性,<code>a</code>和<code>m</code>需要满足<code>gcd(a, m) = 1</code>,一般<code>m</code>为设置为<code>26</code>.</p>
 <p>只需要根据给出的<code>a</code>获取其关于模<code>m</code>计算的逆元<code>a'</code>,然后<code>(x - b) * a' mod m</code>即可解密.</p>
-<h4 id="双密码bifid-cipher">双密码(Bifid Cipher)</h4>
-<p>双密码用<code>2</code>个密钥进行加密,由法国<code>Felix Delastelle</code>发明.</p>
-<p>示例密阵.</p>
+<h2 id="双密码bifid-cipher">双密码(Bifid Cipher)</h2>
+<p>双密码用<code>2</code>个密钥进行加密,由法国<code>Felix Delastelle</code>发明.示例密阵.</p>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">   1 2 3 4 5</span><br><span class="line">1| p h q g m</span><br><span class="line">2| e a y l n</span><br><span class="line">3| o f d x k</span><br><span class="line">4| r c v s z</span><br><span class="line">5| w b u t i/j</span><br></pre></td></tr></table></figure>
 <p>设<code>Period</code>为<code>5</code>,明文<code>THEQUICKBROWNFOX</code>经过密阵转换.</p>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">51215 54354 352333</span><br><span class="line">42133 52521 115214</span><br><span class="line">5121542133 5435452521 3523311521 34</span><br><span class="line">WETEDTKZNEKYOMEX</span><br></pre></td></tr></table></figure>
 <p><a href="http://ctf.ssleye.com/bifid.html" target="_blank" rel="noopener">传送门</a>.</p>
-<h4 id="four-square-cipher">Four-Square Cipher</h4>
+<h2 id="four-square-cipher">Four-Square Cipher</h2>
 <p><a href="http://practicalcryptography.com/ciphers/four-square-cipher/" target="_blank" rel="noopener">传送门</a>.</p>
-<h4 id="电脑键盘qwe">电脑键盘QWE</h4>
-<p>电脑键盘<code>QWE</code>加密法,就是用字母表替换键盘上面的排列顺序.</p>
-<h4 id="手机键盘密码">手机键盘密码</h4>
+<h2 id="电脑键盘qwe">电脑键盘QWE</h2>
+<p>电脑键盘<code>QWE</code>加密法,就是用字母表替换键盘上面的排列顺序,<code>Q -&gt; A</code>.</p>
+<h2 id="手机键盘密码">手机键盘密码</h2>
 <p>两位数字来表示字母,例如:<code>ru</code>用手机键盘表示就是:<code>7382</code>.</p>
-<h4 id="电脑键盘棋盘">电脑键盘棋盘</h4>
+<h2 id="电脑键盘棋盘">电脑键盘棋盘</h2>
 <p><code>https://ctf-wiki.github.io/ctf-wiki/crypto/classical/others-zh/#_25</code>.</p>
-<h4 id="文本加密">文本加密</h4>
+<h2 id="文本加密汉字加密">文本加密/汉字加密</h2>
 <p><a href="https://www.qqxiuzi.cn/bianma/wenbenjiami.php" target="_blank" rel="noopener">传送门</a>.</p>
-<h4 id="希尔密码">希尔密码</h4>
-<h4 id="猪圈密码">猪圈密码</h4>
+<h2 id="中文电码">中文电码</h2>
+<p><a href="http://code.mcdvisa.com/" target="_blank" rel="noopener">传送门</a>.</p>
+<h2 id="希尔密码">希尔密码</h2>
+<p>希尔密码是运用基本矩阵论原理的替换密码,每个字母当作<code>26</code>进制数字:<code>A = 0, B = 1, C = 2, ...</code>.</p>
+<p>一串字母当成<code>n</code>维向量,跟一个<code>n x n</code>的矩阵相乘,再将得出的结果模<code>26</code>.</p>
+<p>用作加密的矩阵必须是可逆的,否则就不可能解码.只有矩阵的行列式和<code>26</code>互质,才是可逆的.</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br></pre></td><td class="code"><pre><span class="line">Dic = &#123;chr(i + <span class="number">97</span>):i <span class="keyword">for</span> i <span class="keyword">in</span> range(<span class="number">26</span>)&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">encode</span><span class="params">(pwd, org)</span>:</span></span><br><span class="line">    <span class="comment">#decode</span></span><br><span class="line">    temp = []</span><br><span class="line">    result = []</span><br><span class="line">    <span class="keyword">while</span> <span class="keyword">True</span>:</span><br><span class="line">        <span class="keyword">if</span> len(pwd) % <span class="number">3</span> != <span class="number">0</span>:</span><br><span class="line">            pwd.append(pwd[<span class="number">-1</span>])</span><br><span class="line">        <span class="keyword">else</span>:</span><br><span class="line">            <span class="keyword">break</span></span><br><span class="line">    <span class="keyword">for</span> i <span class="keyword">in</span> pwd:</span><br><span class="line">        temp.append(Dic.get(i))</span><br><span class="line">    temp = array(temp)</span><br><span class="line">    temp = temp.reshape(len(pwd) / <span class="number">3</span>, <span class="number">3</span>)</span><br><span class="line">    xx = matrix(temp) * org</span><br><span class="line">    <span class="keyword">for</span> j <span class="keyword">in</span> range(len(pwd) / <span class="number">3</span>):</span><br><span class="line">        <span class="keyword">for</span> i <span class="keyword">in</span> range(<span class="number">3</span>):</span><br><span class="line">            <span class="keyword">if</span> (int(xx[j, i]) &gt;= <span class="number">26</span>):</span><br><span class="line">                result.append(chr(xx[j, i] % <span class="number">26</span> + <span class="number">97</span>))</span><br><span class="line">            <span class="keyword">else</span>:</span><br><span class="line">                result.append(chr(xx[j, i] + <span class="number">97</span>))</span><br><span class="line">    <span class="keyword">return</span> result</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">get_vmatrix</span><span class="params">(org)</span>:</span></span><br><span class="line">    org_adjoin = org.I * linalg.det(org)</span><br><span class="line">    org_det = int(str(abs(linalg.det(org))).split(<span class="string">'.'</span>)[<span class="number">0</span>])</span><br><span class="line">    <span class="keyword">for</span> i <span class="keyword">in</span> range(<span class="number">1</span>, <span class="number">26</span>):</span><br><span class="line">        <span class="keyword">if</span> i * org_det % <span class="number">26</span> == <span class="number">1</span>:</span><br><span class="line">            <span class="keyword">break</span></span><br><span class="line">    org_mod = -org_adjoin * i % <span class="number">26</span></span><br><span class="line">    org_mod = matrix(org_mod)</span><br><span class="line">    temp = []</span><br><span class="line">    <span class="keyword">for</span> i <span class="keyword">in</span> range(org_mod.shape[<span class="number">0</span>]):</span><br><span class="line">        <span class="keyword">for</span> j <span class="keyword">in</span> range(org_mod.shape[<span class="number">1</span>]):</span><br><span class="line">            temp.append(int(str(org_mod[i, j]).split(<span class="string">'.'</span>)[<span class="number">0</span>]))</span><br><span class="line">    org_final = matrix(temp).reshape(org_mod.shape[<span class="number">0</span>], org_mod.shape[<span class="number">1</span>])</span><br><span class="line">    <span class="keyword">return</span> org_final</span><br><span class="line">    </span><br><span class="line"><span class="keyword">if</span> __name__ == <span class="string">'__main__'</span>:</span><br><span class="line">    pwd = <span class="string">"wjamdbkdeibr"</span></span><br><span class="line">    org = get_vmatrix(matrix(array([[<span class="number">1</span>,<span class="number">2</span>,<span class="number">3</span>],[<span class="number">4</span>,<span class="number">5</span>,<span class="number">6</span>],[<span class="number">7</span>,<span class="number">8</span>,<span class="number">10</span>]])))</span><br><span class="line">    <span class="keyword">print</span> <span class="string">"Your flag is :"</span> + <span class="string">""</span>.join(decode(list(pwd), org))</span><br></pre></td></tr></table></figure>
+<h2 id="猪圈密码">猪圈密码</h2>
 <p>以格子为基础的简单替代式密码.<a href="http://www.simonsingh.net/The_Black_Chamber/pigpen.html" target="_blank" rel="noopener">传送门</a>.</p>
-<h4 id="维吉尼亚密码">维吉尼亚密码</h4>
+<p>解密:<code>http://ctf.ssleye.com/pigpen.html</code>.</p>
+<h2 id="rabbit">Rabbit</h2>
+<p><a href="https://www.sojson.com/encrypt_rabbit.html" target="_blank" rel="noopener">加密解密链接</a>.</p>
+<h2 id="playfair密码">playfair密码</h2>
+<p><a href="http://rumkin.com/tools/cipher/playfair.php" target="_blank" rel="noopener">加密解密链接</a>.</p>
+<h2 id="维吉尼亚密码">维吉尼亚密码</h2>
 <p>维吉尼亚密码是在单一恺撒密码的基础上扩展出多表代换密码,根据密钥(当密钥长度小于明文长度时可以循环使用)来决定用哪一行的密表来进行替换,以此来对抗字频统计.</p>
-<h4 id="porta密码">Porta密码</h4>
+<p><a href="https://www.qqxiuzi.cn/bianma/weijiniyamima.php" target="_blank" rel="noopener">加密解密链接</a>.</p>
+<p><a href="https://guballa.de/vigenere-solver" target="_blank" rel="noopener">基于频率分析的维吉尼亚无密破解</a>.</p>
+<p><a href="http://www.practicalcryptography.com/cryptanalysis/stochastic-searching/cryptanalysis-vigenere-cipher/" target="_blank" rel="noopener">使用重合指数算法确定为维吉尼亚密钥长度</a>.</p>
+<h2 id="porta密码">Porta密码</h2>
 <p><code>Porta</code>密码(<code>Porta Cipher</code>)是一个多表代换密码,具有加密解密过程的是相同的特点.</p>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line">#!shell</span><br><span class="line">KEYS| A B C D E F G H I J K L M N O P Q R S T U V W X Y Z</span><br><span class="line">----|----------------------------------------------------</span><br><span class="line">A,B | N O P Q R S T U V W X Y Z A B C D E F G H I J K L M</span><br><span class="line">C,D | O P Q R S T U V W X Y Z N M A B C D E F G H I J K L</span><br><span class="line">E,F | P Q R S T U V W X Y Z N O L M A B C D E F G H I J K</span><br><span class="line">G,H | Q R S T U V W X Y Z N O P K L M A B C D E F G H I J</span><br><span class="line">I,J | R S T U V W X Y Z N O P Q J K L M A B C D E F G H I</span><br><span class="line">K,L | S T U V W X Y Z N O P Q R I J K L M A B C D E F G H</span><br><span class="line">M,N | T U V W X Y Z N O P Q R S H I J K L M A B C D E F G</span><br><span class="line">O,P | U V W X Y Z N O P Q R S T G H I J K L M A B C D E F</span><br><span class="line">Q,R | V W X Y Z N O P Q R S T U F G H I J K L M A B C D E</span><br><span class="line">S,T | W X Y Z N O P Q R S T U V E F G H I J K L M A B C D</span><br><span class="line">U,V | X Y Z N O P Q R S T U V W D E F G H I J K L M A B C</span><br><span class="line">W,X | Y Z N O P Q R S T U V W X C D E F G H I J K L M A B</span><br><span class="line">Y,Z | Z N O P Q R S T U V W X Y B C D E F G H I J K L M A</span><br></pre></td></tr></table></figure>
 <p>明文:<code>THE QUICK BROWN FOX JUMPS OVER THE LAZY DOG</code>.</p>
@@ -644,7 +652,7 @@
 <p>加密过程:明文字母<code>T</code>列与密钥字母<code>C</code>行交点就是密文字母<code>F</code>,以此类推.</p>
 <p>密文:<code>FRW HKQRY YMFMF UAA OLWHD ALWI JPT ZXHC NGV</code>.</p>
 <p><a href="http://www.practicalcryptography.com/ciphers/classical-era/porta/" target="_blank" rel="noopener">已知密钥在线加解密</a></p>
-<p>破解:<code>Porta</code>密码可以被和维吉尼亚密码破解相类似方式进行自动攻破,破解<code>Porta</code>密码第一步是先确定密钥长度,<a href="http://www.practicalcryptography.com/cryptanalysis/stochastic-searching/cryptanalysis-vigenere-cipher/" target="_blank" rel="noopener">使用重合指数算法确定为维吉尼亚密钥长度</a>.</p>
+<p>破解:<code>Porta</code>密码可以被和维吉尼亚密码破解相类似方式进行自动攻破.</p>
 
       
     </div>
@@ -767,7 +775,7 @@
                 
                   <a href="/archives/">
                 
-                    <span class="site-state-item-count">177</span>
+                    <span class="site-state-item-count">178</span>
                     <span class="site-state-item-name">日志</span>
                   </a>
                 </div>
@@ -959,7 +967,7 @@
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#奇奇怪怪的编码"><span class="nav-number">1.</span> <span class="nav-text">奇奇怪怪的编码</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#ascii"><span class="nav-number">1.1.</span> <span class="nav-text">ASCII</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#base643216"><span class="nav-number">1.2.</span> <span class="nav-text">Base64/32/16</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#base91"><span class="nav-number">1.3.</span> <span class="nav-text">base91</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#quoted-printable"><span class="nav-number">1.4.</span> <span class="nav-text">Quoted-printable</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#xxencode-uuencode"><span class="nav-number">1.5.</span> <span class="nav-text">XXencode &amp;&amp; UUencode</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#aaencode"><span class="nav-number">1.6.</span> <span class="nav-text">aaencode</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#ppencode"><span class="nav-number">1.7.</span> <span class="nav-text">ppencode</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#jsfuck"><span class="nav-number">1.8.</span> <span class="nav-text">JSFuck</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#brainfuckook"><span class="nav-number">1.9.</span> <span class="nav-text">Brainfuck/Ook!</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#url编码"><span class="nav-number">1.10.</span> <span class="nav-text">URL编码</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#unicode编码"><span class="nav-number">1.11.</span> <span class="nav-text">Unicode编码</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#escape编码"><span class="nav-number">1.12.</span> <span class="nav-text">Escape编码</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#html实体编码"><span class="nav-number">1.13.</span> <span class="nav-text">HTML实体编码</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#敲击码"><span class="nav-number">1.14.</span> <span class="nav-text">敲击码</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#莫尔斯电码"><span class="nav-number">1.15.</span> <span class="nav-text">莫尔斯电码</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#section"><span class="nav-number">1.16.</span> <span class="nav-text">01248</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#各种文本加密"><span class="nav-number">2.</span> <span class="nav-text">各种文本加密</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#换位加密"><span class="nav-number">2.1.</span> <span class="nav-text">换位加密</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#栅栏密码"><span class="nav-number">2.1.1.</span> <span class="nav-text">栅栏密码</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#曲路密码"><span class="nav-number">2.1.2.</span> <span class="nav-text">曲路密码</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#替换加密"><span class="nav-number">2.2.</span> <span class="nav-text">替换加密</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#埃特巴什码"><span class="nav-number">2.2.1.</span> <span class="nav-text">埃特巴什码</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#凯撒密码"><span class="nav-number">2.2.2.</span> <span class="nav-text">凯撒密码</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#rot5131847"><span class="nav-number">2.2.3.</span> <span class="nav-text">ROT5/13/18/47</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#简单替换密码"><span class="nav-number">2.2.4.</span> <span class="nav-text">简单替换密码</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#仿射密码"><span class="nav-number">2.2.5.</span> <span class="nav-text">仿射密码</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#双密码bifid-cipher"><span class="nav-number">2.2.6.</span> <span class="nav-text">双密码(Bifid Cipher)</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#four-square-cipher"><span class="nav-number">2.2.7.</span> <span class="nav-text">Four-Square Cipher</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#电脑键盘qwe"><span class="nav-number">2.2.8.</span> <span class="nav-text">电脑键盘QWE</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#手机键盘密码"><span class="nav-number">2.2.9.</span> <span class="nav-text">手机键盘密码</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#电脑键盘棋盘"><span class="nav-number">2.2.10.</span> <span class="nav-text">电脑键盘棋盘</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#文本加密"><span class="nav-number">2.2.11.</span> <span class="nav-text">文本加密</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#希尔密码"><span class="nav-number">2.2.12.</span> <span class="nav-text">希尔密码</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#猪圈密码"><span class="nav-number">2.2.13.</span> <span class="nav-text">猪圈密码</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#维吉尼亚密码"><span class="nav-number">2.2.14.</span> <span class="nav-text">维吉尼亚密码</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#porta密码"><span class="nav-number">2.2.15.</span> <span class="nav-text">Porta密码</span></a></li></ol></li></ol></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#ascii"><span class="nav-number">1.</span> <span class="nav-text">ASCII</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#简单替换密码"><span class="nav-number">2.</span> <span class="nav-text">简单替换密码</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#base643216"><span class="nav-number">3.</span> <span class="nav-text">Base64/32/16</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#base91"><span class="nav-number">4.</span> <span class="nav-text">base91</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#xxencode-uuencode"><span class="nav-number">5.</span> <span class="nav-text">XXencode &amp;&amp; UUencode</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#quoted-printable"><span class="nav-number">6.</span> <span class="nav-text">Quoted-printable</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#aaencode"><span class="nav-number">7.</span> <span class="nav-text">aaencode</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#ppencode"><span class="nav-number">8.</span> <span class="nav-text">ppencode</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#jsfuck"><span class="nav-number">9.</span> <span class="nav-text">JSFuck</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#brainfuckook"><span class="nav-number">10.</span> <span class="nav-text">Brainfuck/Ook!</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#url编码"><span class="nav-number">11.</span> <span class="nav-text">URL编码</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#unicode编码"><span class="nav-number">12.</span> <span class="nav-text">Unicode编码</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#escape编码"><span class="nav-number">13.</span> <span class="nav-text">Escape编码</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#html实体编码"><span class="nav-number">14.</span> <span class="nav-text">HTML实体编码</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#敲击码"><span class="nav-number">15.</span> <span class="nav-text">敲击码</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#莫尔斯电码"><span class="nav-number">16.</span> <span class="nav-text">莫尔斯电码</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#培根密码"><span class="nav-number">17.</span> <span class="nav-text">培根密码</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#section"><span class="nav-number">18.</span> <span class="nav-text">01248</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#栅栏密码"><span class="nav-number">19.</span> <span class="nav-text">栅栏密码</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#曲路密码"><span class="nav-number">20.</span> <span class="nav-text">曲路密码</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#移位密码"><span class="nav-number">21.</span> <span class="nav-text">移位密码</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#埃特巴什码"><span class="nav-number">22.</span> <span class="nav-text">埃特巴什码</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#凯撒密码"><span class="nav-number">23.</span> <span class="nav-text">凯撒密码</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#rot5131847"><span class="nav-number">24.</span> <span class="nav-text">ROT5/13/18/47</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#仿射密码"><span class="nav-number">25.</span> <span class="nav-text">仿射密码</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#双密码bifid-cipher"><span class="nav-number">26.</span> <span class="nav-text">双密码(Bifid Cipher)</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#four-square-cipher"><span class="nav-number">27.</span> <span class="nav-text">Four-Square Cipher</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#电脑键盘qwe"><span class="nav-number">28.</span> <span class="nav-text">电脑键盘QWE</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#手机键盘密码"><span class="nav-number">29.</span> <span class="nav-text">手机键盘密码</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#电脑键盘棋盘"><span class="nav-number">30.</span> <span class="nav-text">电脑键盘棋盘</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#文本加密汉字加密"><span class="nav-number">31.</span> <span class="nav-text">文本加密/汉字加密</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#中文电码"><span class="nav-number">32.</span> <span class="nav-text">中文电码</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#希尔密码"><span class="nav-number">33.</span> <span class="nav-text">希尔密码</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#猪圈密码"><span class="nav-number">34.</span> <span class="nav-text">猪圈密码</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#rabbit"><span class="nav-number">35.</span> <span class="nav-text">Rabbit</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#playfair密码"><span class="nav-number">36.</span> <span class="nav-text">playfair密码</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#维吉尼亚密码"><span class="nav-number">37.</span> <span class="nav-text">维吉尼亚密码</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#porta密码"><span class="nav-number">38.</span> <span class="nav-text">Porta密码</span></a></li></ol></div>
             
 
           </div>
@@ -991,7 +999,7 @@
       <i class="fa fa-area-chart"></i>
     </span>
     
-    <span title="站点总字数">726k</span>
+    <span title="站点总字数">730k</span>
   
 
   
@@ -1000,7 +1008,7 @@
       <i class="fa fa-coffee"></i>
     </span>
     
-    <span title="站点阅读时长">11:01</span>
+    <span title="站点阅读时长">11:04</span>
   
 </div>
 

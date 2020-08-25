@@ -127,7 +127,7 @@
 <meta property="og:site_name" content="w4rd3n">
 <meta property="og:description" content="OLLVM OLLVM(Obfuscator-LLVM)旨在提供一套开源的针对LLVM的代码混淆工具,以增加对逆向工程的难度. OLLVM是基于LLVM实现的,LLVM是一个编译器框架,采用经典的三段式设计:前端可以使用不同的编译工具对代码文件做词法分析以形成抽象语法树AST,然后将分析好的代码转换成LLVM的中间表示IR;中间部分的优化器只对中间表示IR操作,通过一系列的Pass对IR做优化">
 <meta property="og:locale" content="zh-CN">
-<meta property="og:updated_time" content="2020-08-09T06:34:17.830Z">
+<meta property="og:updated_time" content="2020-08-15T09:12:59.989Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="IS-reverse-代码混淆-OLLVM">
 <meta name="twitter:description" content="OLLVM OLLVM(Obfuscator-LLVM)旨在提供一套开源的针对LLVM的代码混淆工具,以增加对逆向工程的难度. OLLVM是基于LLVM实现的,LLVM是一个编译器框架,采用经典的三段式设计:前端可以使用不同的编译工具对代码文件做词法分析以形成抽象语法树AST,然后将分析好的代码转换成LLVM的中间表示IR;中间部分的优化器只对中间表示IR操作,通过一系列的Pass对IR做优化">
@@ -503,7 +503,7 @@
                 
                   <span class="post-meta-item-text">本文字数：</span>
                 
-                <span title="本文字数">1.2k</span>
+                <span title="本文字数">1.3k</span>
               
 
               
@@ -553,7 +553,7 @@
 <figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">func</span><span class="params">()</span> __<span class="title">attribute</span><span class="params">((__annotate__((<span class="string">"bcf"</span>))))</span></span>;</span><br><span class="line"><span class="comment">//对函数func()使用bcf混淆</span></span><br></pre></td></tr></table></figure>
 <p><code>OLLVM</code>的<code>fla</code>,<code>sub</code>和<code>bcf</code>三个属性可以搭配使用,只需要添加对应的编译选项即可.</p>
 <h3 id="下载并编译">下载并编译</h3>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">git <span class="built_in">clone</span> -b llvm-4.0 https://github.com/obfuscator-llvm/obfuscator.git</span><br><span class="line">mkdir build</span><br><span class="line"><span class="built_in">cd</span> build</span><br><span class="line">cmake -DCMAKE_BUILD_TYPE=Release ../obfuscator/</span><br><span class="line">make -j7</span><br><span class="line"><span class="built_in">cd</span> ..</span><br><span class="line">build/bin/clang demo.c -o demo -mllvm -fla</span><br></pre></td></tr></table></figure>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># git clone -b llvm-4.0 https://github.com/obfuscator-llvm/obfuscator.git</span></span><br><span class="line">git <span class="built_in">clone</span> -b llvm-4.0 https://gitee.com/hitworld/obfuscator.git</span><br><span class="line">mkdir build</span><br><span class="line"><span class="built_in">cd</span> build</span><br><span class="line"><span class="comment">#cmake -DCMAKE_BUILD_TYPE=Release ../obfuscator/</span></span><br><span class="line">cmake -DCMAKE_BUILD_TYPE=Release -DLLVM_INCLUDE_TESTS=OFF ../fuscator/</span><br><span class="line">make -j7</span><br><span class="line"><span class="built_in">cd</span> ..</span><br><span class="line">build/bin/clang demo.c -o demo -mllvm -sub -mllvm -bcf -mllvm -fla</span><br></pre></td></tr></table></figure>
 
       
     </div>
@@ -676,7 +676,7 @@
                 
                   <a href="/archives/">
                 
-                    <span class="site-state-item-count">177</span>
+                    <span class="site-state-item-count">178</span>
                     <span class="site-state-item-name">日志</span>
                   </a>
                 </div>
@@ -900,7 +900,7 @@
       <i class="fa fa-area-chart"></i>
     </span>
     
-    <span title="站点总字数">726k</span>
+    <span title="站点总字数">730k</span>
   
 
   
@@ -909,7 +909,7 @@
       <i class="fa fa-coffee"></i>
     </span>
     
-    <span title="站点阅读时长">11:01</span>
+    <span title="站点阅读时长">11:04</span>
   
 </div>
 

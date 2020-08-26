@@ -127,16 +127,16 @@
 <meta property="og:site_name" content="w4rd3n">
 <meta property="og:description" content="前言 引用代码基于linux-2.6.25. 简介 slab/slub是内核对象的管理机制.slab/slub暂时保留已经释放的内核对象空间以供重用,不同之处在于slab机制对内核对象的类型十分挑剔,只有类型和大小都完全一致的对象才能重用其空间.而slub只要大小差不多就可以重用同一块内存.slub机制和glibc堆分配机制是比较相像的. slab分配器 在内核中会为有限的对象集(例如文">
 <meta property="og:locale" content="zh-CN">
-<meta property="og:image" content="https://hitworld.github.io/posts/undefined/1.png">
-<meta property="og:image" content="https://hitworld.github.io/posts/undefined/4.png">
-<meta property="og:image" content="https://hitworld.github.io/posts/undefined/2.png">
-<meta property="og:image" content="https://hitworld.github.io/posts/undefined/5.png">
-<meta property="og:image" content="https://hitworld.github.io/posts/undefined/3.png">
-<meta property="og:updated_time" content="2020-08-26T08:16:53.800Z">
+<meta property="og:image" content="https://hitworld.github.io/posts/4878e6aa/1.png">
+<meta property="og:image" content="https://hitworld.github.io/posts/4878e6aa/4.png">
+<meta property="og:image" content="https://hitworld.github.io/posts/4878e6aa/2.png">
+<meta property="og:image" content="https://hitworld.github.io/posts/4878e6aa/5.png">
+<meta property="og:image" content="https://hitworld.github.io/posts/4878e6aa/3.png">
+<meta property="og:updated_time" content="2020-08-26T08:49:16.640Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="CS-RTFSC-Linux-kernel-内存管理机制">
 <meta name="twitter:description" content="前言 引用代码基于linux-2.6.25. 简介 slab/slub是内核对象的管理机制.slab/slub暂时保留已经释放的内核对象空间以供重用,不同之处在于slab机制对内核对象的类型十分挑剔,只有类型和大小都完全一致的对象才能重用其空间.而slub只要大小差不多就可以重用同一块内存.slub机制和glibc堆分配机制是比较相像的. slab分配器 在内核中会为有限的对象集(例如文">
-<meta name="twitter:image" content="https://hitworld.github.io/posts/undefined/1.png">
+<meta name="twitter:image" content="https://hitworld.github.io/posts/4878e6aa/1.png">
 
 
 
@@ -553,7 +553,7 @@
 <p><code>slab</code>就是一个使用了这种思想和其他一些思想来构建的内存分配器.</p>
 <h3 id="slab解析">slab解析</h3>
 <p><code>slab</code>分配器是基于对象类型进行管理的,每种对象对应一种<code>slab</code>.<code>slab</code>分配器并不丢弃释放的对象,而是对其进行管理,分配对象时会使用最近释放的对象的内存块.</p>
-<img src="/posts/undefined/1.png" title="p1">
+<img src="/posts/4878e6aa/1.png" title="p1">
 <p><code>cache_chain</code>是<code>kmem_cache</code>指针链表的表头,用来遍历查找对应对象的<code>kmem_cache</code>.</p>
 <figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">static</span> <span class="class"><span class="keyword">struct</span> <span class="title">list_head</span> <span class="title">cache_chain</span>;</span></span><br></pre></td></tr></table></figure>
 <p><code>slab</code>分配器使用一个<code>kmem_cache</code>结构来描述一种<code>slab</code>.</p>
@@ -564,7 +564,7 @@
 <figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">struct</span> <span class="title">kmem_list3</span> &#123;</span></span><br><span class="line">	<span class="class"><span class="keyword">struct</span> <span class="title">list_head</span> <span class="title">slabs_partial</span>;</span></span><br><span class="line">	<span class="class"><span class="keyword">struct</span> <span class="title">list_head</span> <span class="title">slabs_full</span>;</span></span><br><span class="line">	<span class="class"><span class="keyword">struct</span> <span class="title">list_head</span> <span class="title">slabs_free</span>;</span></span><br><span class="line"></span><br><span class="line">	<span class="keyword">unsigned</span> <span class="keyword">long</span> free_objects;<span class="comment">//空闲对象的个数</span></span><br><span class="line">	<span class="keyword">unsigned</span> <span class="keyword">int</span> free_limit;<span class="comment">//空闲对象的上限</span></span><br><span class="line">	<span class="keyword">unsigned</span> <span class="keyword">int</span> colour_next;<span class="comment">//即将要着色的下一个</span></span><br><span class="line">	<span class="keyword">spinlock_t</span> list_lock;<span class="comment">//自旋锁</span></span><br><span class="line">	<span class="class"><span class="keyword">struct</span> <span class="title">array_cache</span> * <span class="title">shared</span>;</span></span><br><span class="line">	<span class="class"><span class="keyword">struct</span> <span class="title">array_cache</span> * * <span class="title">alien</span>;</span></span><br><span class="line">	<span class="keyword">unsigned</span> <span class="keyword">long</span> next_reap;</span><br><span class="line">	<span class="keyword">int</span> free_touched;</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
 <figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">struct</span> <span class="title">slab</span> &#123;</span></span><br><span class="line">    <span class="class"><span class="keyword">struct</span> <span class="title">list_head</span> <span class="title">list</span>;</span><span class="comment">//用于将slab连入keme_list3的链表</span></span><br><span class="line">    <span class="keyword">unsigned</span> <span class="keyword">long</span> colouroff;<span class="comment">//该slab的着色偏移</span></span><br><span class="line">    <span class="keyword">void</span> * s_mem;<span class="comment">//指向slab中的第一个对象</span></span><br><span class="line">    <span class="keyword">unsigned</span> <span class="keyword">int</span> inuse;<span class="comment">//已经分配出去的对象数量</span></span><br><span class="line">    <span class="keyword">kmem_bufctl_t</span> <span class="built_in">free</span>;<span class="comment">//下一个空闲对象的下标</span></span><br><span class="line">    <span class="keyword">unsigned</span> <span class="keyword">short</span> nodeid;<span class="comment">//节点标识符</span></span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
 <p><code>slab</code>分配器的<code>slab</code>缓冲区结构如下.</p>
-<img src="/posts/undefined/4.png" title="slab缓冲区">
+<img src="/posts/4878e6aa/4.png" title="slab缓冲区">
 <p>每个<code>slab</code>为一个或多个连续的内存页,被划分成一个个对象.对象是从<code>slab</code>中进行分配和释放的基本元素.</p>
 <ul>
 <li>当一个<code>slab</code>中的所有对象都被使用完时,就从<code>Partial</code>列表中移动到<code>Full</code>列表中.</li>
@@ -573,7 +573,7 @@
 </ul>
 <p><code>Empty</code>列表中的<code>slab</code>是进行回收的主要备选对象,通过此过程<code>slab</code>所使用的内存被返回给操作系统供其他用户使用.</p>
 <p><code>slab</code>分配器还可以支持硬件缓存对齐和着色,这允许不同<code>kmem_cache</code>中的对象占用相同的缓存行,从而提高缓存的利用率并获得更好的性能.</p>
-<img src="/posts/undefined/2.png" title="p2">
+<img src="/posts/4878e6aa/2.png" title="p2">
 <h3 id="api函数">api函数</h3>
 <p>静态定义<code>kmem_cache</code>结构.</p>
 <figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">struct</span> <span class="title">struct</span> <span class="title">kmem_cache</span> * <span class="title">my_cachep</span>;</span></span><br></pre></td></tr></table></figure>
@@ -633,11 +633,11 @@
 <p>虽然对象分配和释放的操作只针对处理器本地的活动<code>slab</code>,但是在某些特殊的情况下会为当前处理器创建新的活动<code>slab</code>并把原先未用完的活动<code>slab</code>加到<code>NUMA</code>节点的<code>Partial</code>队列中(例如,在处理器<code>A</code>上运行的某内核执行绪申请对象,但是<code>A</code>的活动<code>slab</code>中已经没有空闲对象,因此必须创建新的<code>slab</code>.但是创建<code>slab</code>的操作可能导致睡眠,所以当创建操作完成后该执行绪可能被调度到处理器<code>B</code>上,这将停止使用<code>B</code>原有的活动<code>slab</code>,并将其加入<code>B</code>所在节点的<code>Partial</code>队列中).</p>
 <p>内核执行绪申请对象时,直接从所在处理器的<code>kmem_cache_cpu</code>结构的<code>freelist</code>字段获得第一个空闲对象的地址,然后更新<code>freelist</code>字段,使其指向下一个空闲对象.释放对象时,如果对象属于所在处理器的活动<code>slab</code> 中,直接将其添加到空闲对象队列的队首,并更新<code>freelist</code>字段.否则的话,对象一定属于某<code>Partial</code>中.如果释放操作使得该<code>slab</code>从<code>Partial</code>转变成<code>Empty</code>状态,则释放该<code>slab</code>.</p>
 <p><code>slub</code>分配器的<code>slab</code>缓冲区结构中没有对象描述符数组,没有额外的空闲对象队列,而是重用了空闲对象自身的空间.每个空闲对象有一个指向下一个空闲对象的指针.</p>
-<img src="/posts/undefined/5.png" title="slab缓冲区">
+<img src="/posts/4878e6aa/5.png" title="slab缓冲区">
 <p><code>slub</code>的调试代码总是可用,一旦激活<code>slab_debug</code>选项,用户就可以很方便地选择单个或一组指定的缓冲区进行动态调试.</p>
 <p>内核函数常常需要临时分配一块任意大小的物理地址连续的内存空间,如果请求不频繁的话,则没有必要创建单独的缓冲区.<code>Linux</code>内核为这种请求准备了一组特定大小的通用对象缓冲区.调用<code>kmalloc</code>函数就可以得到符合请求大小的内存空间,调用<code>kfree</code>则释放该内存空间.</p>
 <p><code>kmalloc</code>工作于<code>slub</code>分配器之上.内核初始化时,创建一组共<code>13</code>个通用对象的缓冲区.<code>kmalloc_caches</code>数组存放了这些缓冲区的<code>kmem_cache</code>数据结构.由于<code>kmem_cache</code>数据结构是通过<code>kmalloc</code>来分配的,故而只能用静态分配的<code>kmem_cache</code>结构数组来描述通用对象的缓冲区.其中<code>kmalloc_caches[0]</code>代表的缓冲区专门分配<code>kmem_cache_node</code>结构.<code>kmalloc_caches[1]</code>缓冲区对象大小为<code>64</code>,<code>kmalloc_caches[2]</code>缓冲区对象大小为<code>192</code>,其余第<code>i</code>(<code>3 ~ 12</code>)号缓冲区对象大小为<code>2 ^ i</code>.如果请求分配超过物理页面大小的对象,直接调用页框分配器.为了满足老式<code>ISA</code>设备的需要,内核还使用<code>DMA</code>内存创建了<code>13</code>个通用对象的缓冲区,用<code>kmalloc_caches_dma</code>数组存放相应的<code>kmem_cache</code>结构.</p>
-<img src="/posts/undefined/3.png" title="slub结构">
+<img src="/posts/4878e6aa/3.png" title="slub结构">
 <h3 id="api函数-1">api函数</h3>
 <p>为了保证内核其它模块能够无缝迁移到<code>slab</code>分配器,<code>slab</code>还保留了原有<code>slab</code>分配器所有的接口<code>api</code>函数.</p>
 <ul>
@@ -1006,7 +1006,7 @@
       <i class="fa fa-area-chart"></i>
     </span>
     
-    <span title="站点总字数">704k</span>
+    <span title="站点总字数">706k</span>
   
 
   
@@ -1015,7 +1015,7 @@
       <i class="fa fa-coffee"></i>
     </span>
     
-    <span title="站点阅读时长">10:40</span>
+    <span title="站点阅读时长">10:42</span>
   
 </div>
 
@@ -1664,7 +1664,7 @@
   //$("body").backstretch("/images/background.jpg");
   </script>
   
-  <script type="text/javascript" src="//cdn.bootcss.com/canvas-nest.js/1.0.0/canvas-nest.min.js"></script>
+  <script type="text/javascript" src="//cdn.bootcss.com/canvas-nest.js/1.0.0/canvas-nest.min.js"></script><!-- hexo-inject:begin --><!-- hexo-inject:end -->
   
-<script src="/live2dw/lib/L2Dwidget.min.js?0c58a1486de42ac6cc1c59c7d98ae887"></script><script>L2Dwidget.init({"pluginRootPath":"live2dw/","pluginJsPath":"lib/","pluginModelPath":"assets/","tagMode":false,"debug":false,"model":{"jsonPath":"/live2dw/assets/koharu.model.json"},"display":{"position":"right","width":150,"height":300},"mobile":{"show":false},"log":false});</script><!-- hexo-inject:begin --><!-- hexo-inject:end --></body>
+<script src="/live2dw/lib/L2Dwidget.min.js?0c58a1486de42ac6cc1c59c7d98ae887"></script><script>L2Dwidget.init({"pluginRootPath":"live2dw/","pluginJsPath":"lib/","pluginModelPath":"assets/","tagMode":false,"debug":false,"model":{"jsonPath":"/live2dw/assets/koharu.model.json"},"display":{"position":"right","width":150,"height":300},"mobile":{"show":false},"log":false});</script></body>
 </html>

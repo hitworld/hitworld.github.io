@@ -119,22 +119,25 @@
 
 
 
-  <meta name="keywords" content="hack">
+  <meta name="description" content="strlen 可以被\x00截断,导致程序员意料之外的返回值,从而绕过长度检测等. sleep 在多线程处理函数中如果存在sleep,则可能存在竞争漏洞. abs abs函数经典漏洞:abs(0x800000000) = 0x800000000. scanf +\n会使scanf(&quot;%d&quot;, &amp;amp;v)正常执行同时不改变v的值.">
+<meta name="keywords" content="Linux">
 <meta property="og:type" content="article">
-<meta property="og:title" content="writeup-rctf-2019-pwn">
-<meta property="og:url" content="https://hitworld.github.io/posts/8802535a/index.html">
+<meta property="og:title" content="IS-pwn-Linux-常见漏洞函数">
+<meta property="og:url" content="https://hitworld.github.io/posts/226dc672/index.html">
 <meta property="og:site_name" content="w4rd3n">
+<meta property="og:description" content="strlen 可以被\x00截断,导致程序员意料之外的返回值,从而绕过长度检测等. sleep 在多线程处理函数中如果存在sleep,则可能存在竞争漏洞. abs abs函数经典漏洞:abs(0x800000000) = 0x800000000. scanf +\n会使scanf(&quot;%d&quot;, &amp;amp;v)正常执行同时不改变v的值.">
 <meta property="og:locale" content="zh-CN">
-<meta property="og:updated_time" content="2020-08-25T11:40:29.684Z">
+<meta property="og:updated_time" content="2020-08-26T04:48:04.791Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="writeup-rctf-2019-pwn">
+<meta name="twitter:title" content="IS-pwn-Linux-常见漏洞函数">
+<meta name="twitter:description" content="strlen 可以被\x00截断,导致程序员意料之外的返回值,从而绕过长度检测等. sleep 在多线程处理函数中如果存在sleep,则可能存在竞争漏洞. abs abs函数经典漏洞:abs(0x800000000) = 0x800000000. scanf +\n会使scanf(&quot;%d&quot;, &amp;amp;v)正常执行同时不改变v的值.">
 
 
 
 
 
 
-  <link rel="canonical" href="https://hitworld.github.io/posts/8802535a/">
+  <link rel="canonical" href="https://hitworld.github.io/posts/226dc672/">
 
 
 
@@ -144,7 +147,7 @@
   };
 </script>
 
-  <title>writeup-rctf-2019-pwn | w4rd3n</title>
+  <title>IS-pwn-Linux-常见漏洞函数 | w4rd3n</title>
   
 
 
@@ -393,7 +396,7 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="https://hitworld.github.io/posts/8802535a/">
+    <link itemprop="mainEntityOfPage" href="https://hitworld.github.io/posts/226dc672/">
 
     <span hidden itemprop="author" itemscope="" itemtype="http://schema.org/Person">
       <meta itemprop="name" content="w4rd3n">
@@ -410,7 +413,7 @@
 
         
         
-          <h1 class="post-title" itemprop="name headline">writeup-rctf-2019-pwn
+          <h1 class="post-title" itemprop="name headline">IS-pwn-Linux-常见漏洞函数
               
             
           </h1>
@@ -435,13 +438,38 @@
                 
               
 
-              <time title="创建时间：2020-03-07 12:01:46" itemprop="dateCreated datePublished" datetime="2020-03-07T12:01:46+08:00">2020-03-07</time>
+              <time title="创建时间：2020-08-26 11:19:51" itemprop="dateCreated datePublished" datetime="2020-08-26T11:19:51+08:00">2020-08-26</time>
             
 
             
           </span>
 
           
+            <span class="post-category">
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope="" itemtype="http://schema.org/Thing"><a href="/categories/IS/" itemprop="url" rel="index"><span itemprop="name">IS</span></a></span>
+
+                
+                
+                  ，
+                
+              
+                <span itemprop="about" itemscope="" itemtype="http://schema.org/Thing"><a href="/categories/IS/pwn/" itemprop="url" rel="index"><span itemprop="name">pwn</span></a></span>
+
+                
+                
+              
+            </span>
+          
 
           
             
@@ -449,7 +477,7 @@
 
           
           
-             <span id="/posts/8802535a/" class="leancloud_visitors" data-flag-title="writeup-rctf-2019-pwn">
+             <span id="/posts/226dc672/" class="leancloud_visitors" data-flag-title="IS-pwn-Linux-常见漏洞函数">
                <span class="post-meta-divider">|</span>
                <span class="post-meta-item-icon">
                  <i class="fa fa-eye"></i>
@@ -475,7 +503,7 @@
                 
                   <span class="post-meta-item-text">本文字数：</span>
                 
-                <span title="本文字数">2</span>
+                <span title="本文字数">176</span>
               
 
               
@@ -509,7 +537,14 @@
       
 
       
-        
+        <h2 id="strlen">strlen</h2>
+<p>可以被<code>\x00</code>截断,导致程序员意料之外的返回值,从而绕过长度检测等.</p>
+<h2 id="sleep">sleep</h2>
+<p>在多线程处理函数中如果存在<code>sleep</code>,则可能存在竞争漏洞.</p>
+<h2 id="abs">abs</h2>
+<p><code>abs</code>函数经典漏洞:<code>abs(0x800000000) = 0x800000000</code>.</p>
+<h2 id="scanf">scanf</h2>
+<p><code>+\n</code>会使<code>scanf("%d", &amp;v)</code>正常执行同时不改变<code>v</code>的值.</p>
 
       
     </div>
@@ -531,6 +566,12 @@
 
     <footer class="post-footer">
       
+        <div class="post-tags">
+          
+            <a href="/tags/Linux/" rel="tag"><i class="fa fa-tag"></i> Linux</a>
+          
+        </div>
+      
 
       
       
@@ -540,8 +581,8 @@
         <div class="post-nav">
           <div class="post-nav-next post-nav-item">
             
-              <a href="/posts/c5ff560c/" rel="next" title="CS-BASIC-computer-network-物理层">
-                <i class="fa fa-chevron-left"></i> CS-BASIC-computer-network-物理层
+              <a href="/posts/1003444e/" rel="next" title="CS-RTFSC-Linux-glibc-2.23-malloc与free">
+                <i class="fa fa-chevron-left"></i> CS-RTFSC-Linux-glibc-2.23-malloc与free
               </a>
             
           </div>
@@ -550,8 +591,8 @@
 
           <div class="post-nav-prev post-nav-item">
             
-              <a href="/posts/cf5a0360/" rel="prev" title="Math-probability-theory-随机变量及其分布">
-                Math-probability-theory-随机变量及其分布 <i class="fa fa-chevron-right"></i>
+              <a href="/posts/36159cdd/" rel="prev" title="w4rd3n-朝花夕拾">
+                w4rd3n-朝花夕拾 <i class="fa fa-chevron-right"></i>
               </a>
             
           </div>
@@ -599,8 +640,17 @@
       
 
       
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            站点概览
+          </li>
+        </ul>
+      
 
-      <section class="site-overview-wrap sidebar-panel sidebar-panel-active">
+      <section class="site-overview-wrap sidebar-panel">
         <div class="site-overview">
           <div class="site-author motion-element" itemprop="author" itemscope="" itemtype="http://schema.org/Person">
             
@@ -617,7 +667,7 @@
                 
                   <a href="/archives/">
                 
-                    <span class="site-state-item-count">172</span>
+                    <span class="site-state-item-count">171</span>
                     <span class="site-state-item-name">日志</span>
                   </a>
                 </div>
@@ -800,6 +850,22 @@
       </section>
 
       
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#strlen"><span class="nav-number">1.</span> <span class="nav-text">strlen</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#sleep"><span class="nav-number">2.</span> <span class="nav-text">sleep</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#abs"><span class="nav-number">3.</span> <span class="nav-text">abs</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#scanf"><span class="nav-number">4.</span> <span class="nav-text">scanf</span></a></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
 
       
 
@@ -825,7 +891,7 @@
       <i class="fa fa-area-chart"></i>
     </span>
     
-    <span title="站点总字数">727k</span>
+    <span title="站点总字数">705k</span>
   
 
   
@@ -834,7 +900,7 @@
       <i class="fa fa-coffee"></i>
     </span>
     
-    <span title="站点阅读时长">11:01</span>
+    <span title="站点阅读时长">10:41</span>
   
 </div>
 

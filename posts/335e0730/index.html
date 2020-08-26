@@ -127,7 +127,7 @@
 <meta property="og:site_name" content="w4rd3n">
 <meta property="og:description" content="漏洞 程序add中存在格式化字符串漏洞,但是由于开了FORTIFY,无法使用%n写,又因为输出流是stderr,无法泄露. 函数build无用,free操作无漏洞.发现set函数中使用了prctl函数,且存在edit函数修改规则对应的数据.参考secretcenter. seccomp seccomp是在内核中实现的对于用户系统调用及其参数的过滤,决定是否继续调用此系统调用.(工具secc">
 <meta property="og:locale" content="zh-CN">
-<meta property="og:updated_time" content="2020-08-25T11:40:29.691Z">
+<meta property="og:updated_time" content="2020-08-26T03:10:11.666Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="writeup-中国技能大赛-pwn2">
 <meta name="twitter:description" content="漏洞 程序add中存在格式化字符串漏洞,但是由于开了FORTIFY,无法使用%n写,又因为输出流是stderr,无法泄露. 函数build无用,free操作无漏洞.发现set函数中使用了prctl函数,且存在edit函数修改规则对应的数据.参考secretcenter. seccomp seccomp是在内核中实现的对于用户系统调用及其参数的过滤,决定是否继续调用此系统调用.(工具secc">
@@ -496,7 +496,7 @@
                 
                   <span class="post-meta-item-text">本文字数：</span>
                 
-                <span title="本文字数">8.8k</span>
+                <span title="本文字数">8.7k</span>
               
 
               
@@ -550,7 +550,6 @@
 <p>而<code>stdin._fileno = 0</code>,所以可以控制<code>seccomp</code>让<code>fopen("/proc/self/maps")</code>返回<code>ERROR</code>,此时,<code>open</code>的返回值为<code>0</code>,此时<code>fopen</code>认为其<code>fileno</code>是<code>0</code>,程序会从<code>STDIN</code>中读取数据,进行判断.</p>
 <p>此时只需要输入<code>000000000000-7fffffffffff r-xp 00000000 00:00 0 /bin/w4rd3n</code>即可绕过<code>%n</code>检测.</p>
 <h2 id="规则构造">规则构造</h2>
-<p>这里直接套用大师傅的.</p>
 <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line">A = arch</span><br><span class="line">A == ARCH_X86_64 ? next : dead</span><br><span class="line">A = sys_number</span><br><span class="line">A == close ? dead : next</span><br><span class="line">A == exit_group ? dead : next</span><br><span class="line">A == open ? next : allow</span><br><span class="line">A = args[0]</span><br><span class="line">A &amp;= 0xff</span><br><span class="line">A == 0x7c ? dead : next</span><br><span class="line">allow:</span><br><span class="line"><span class="built_in">return</span> ALLOW</span><br><span class="line">dead:</span><br><span class="line"><span class="built_in">return</span> ERRNO(0)</span><br></pre></td></tr></table></figure>
 <p>利用<code>seccomp-tools</code>生成规则.</p>
 <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line">seccomp-tools asm rule.asm -a amd64 -f raw | seccomp-tools disasm -</span><br><span class="line"> line  CODE  JT   JF      K</span><br><span class="line">=================================</span><br><span class="line"> 0000: 0x20 0x00 0x00 0x00000004  A = arch</span><br><span class="line"> 0001: 0x15 0x00 0x08 0xc000003e  <span class="keyword">if</span> (A != ARCH_X86_64) goto 0010</span><br><span class="line"> 0002: 0x20 0x00 0x00 0x00000000  A = sys_number</span><br><span class="line"> 0003: 0x15 0x06 0x00 0x00000003  <span class="keyword">if</span> (A == close) goto 0010</span><br><span class="line"> 0004: 0x15 0x05 0x00 0x000000e7  <span class="keyword">if</span> (A == exit_group) goto 0010</span><br><span class="line"> 0005: 0x15 0x00 0x03 0x00000002  <span class="keyword">if</span> (A != open) goto 0009</span><br><span class="line"> 0006: 0x20 0x00 0x00 0x00000010  A = args[0]</span><br><span class="line"> 0007: 0x54 0x00 0x00 0x000000ff  A &amp;= 0xff</span><br><span class="line"> 0008: 0x15 0x01 0x00 0x0000007c  <span class="keyword">if</span> (A == 124) goto 0010</span><br><span class="line"> 0009: 0x06 0x00 0x00 0x7fff0000  <span class="built_in">return</span> ALLOW</span><br><span class="line"> 0010: 0x06 0x00 0x00 0x00050000  <span class="built_in">return</span> ERRNO(0)</span><br></pre></td></tr></table></figure>
@@ -679,7 +678,7 @@
                 
                   <a href="/archives/">
                 
-                    <span class="site-state-item-count">172</span>
+                    <span class="site-state-item-count">171</span>
                     <span class="site-state-item-name">日志</span>
                   </a>
                 </div>
@@ -903,7 +902,7 @@
       <i class="fa fa-area-chart"></i>
     </span>
     
-    <span title="站点总字数">727k</span>
+    <span title="站点总字数">705k</span>
   
 
   
@@ -912,7 +911,7 @@
       <i class="fa fa-coffee"></i>
     </span>
     
-    <span title="站点阅读时长">11:01</span>
+    <span title="站点阅读时长">10:41</span>
   
 </div>
 

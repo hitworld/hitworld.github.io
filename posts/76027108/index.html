@@ -129,7 +129,7 @@
 <meta property="og:locale" content="zh-CN">
 <meta property="og:image" content="https://hitworld.github.io/posts/76027108/1.png">
 <meta property="og:image" content="https://hitworld.github.io/posts/76027108/2.png">
-<meta property="og:updated_time" content="2020-08-25T11:40:29.679Z">
+<meta property="og:updated_time" content="2020-08-26T05:57:03.990Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="writeup-plaidctf-2018-roll-a-d8">
 <meta name="twitter:description" content="准备 找到包含漏洞的版本的hash值和poc文件,通过parent的hash值回退到漏洞版本,并编译debug模式. 1234git reset --hard 1dab065bb4025bdd663ba12e2e976c34c3fa6599gclient synctools/dev/v8gen.py x64.debug ninja -C out.gn/x64.debug d8 漏洞分析 P">
@@ -546,8 +546,7 @@
 <p>然后将<code>function() { return oobArray }</code>作为<code>this</code>参数传入<code>Array.from.call</code>.</p>
 <figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br></pre></td><td class="code"><pre><span class="line">define(<span class="built_in">Array</span>, <span class="string">'from'</span>,</span><br><span class="line">  <span class="function"><span class="keyword">function</span> <span class="title">from</span>(<span class="params">items</span>) </span>&#123;</span><br><span class="line">    <span class="keyword">var</span> mapfn = <span class="built_in">arguments</span>[<span class="number">1</span>];</span><br><span class="line">    <span class="keyword">var</span> thisArg = <span class="built_in">arguments</span>[<span class="number">2</span>];</span><br><span class="line">    <span class="keyword">var</span> c = strict(<span class="keyword">this</span>);</span><br><span class="line">    <span class="comment">//code</span></span><br><span class="line">    <span class="keyword">var</span> usingIterator = GetMethod(items, $$iterator);</span><br><span class="line">    <span class="keyword">if</span> (usingIterator !== <span class="literal">undefined</span>) &#123;</span><br><span class="line">      <span class="keyword">if</span> (IsConstructor(c)) &#123;</span><br><span class="line">        <span class="keyword">var</span> a = <span class="keyword">new</span> c();</span><br><span class="line">      &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">        a = <span class="keyword">new</span> <span class="built_in">Array</span>(<span class="number">0</span>);</span><br><span class="line">      &#125;</span><br><span class="line">      <span class="keyword">var</span> iterator = GetIterator(items, usingIterator);</span><br><span class="line">      <span class="keyword">var</span> k = <span class="number">0</span>;</span><br><span class="line">      <span class="keyword">while</span> (<span class="literal">true</span>) &#123;</span><br><span class="line">        <span class="keyword">var</span> next = IteratorStep(iterator);</span><br><span class="line">        <span class="keyword">if</span> (next === <span class="literal">false</span>) &#123;</span><br><span class="line">          a.length = k;</span><br><span class="line">          <span class="keyword">return</span> a;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">var</span> nextValue = IteratorValue(next);</span><br><span class="line">        <span class="keyword">if</span> (mapping)</span><br><span class="line">          <span class="keyword">var</span> mappedValue = mapfn.call(t, nextValue);</span><br><span class="line">        <span class="keyword">else</span></span><br><span class="line">          mappedValue = nextValue;</span><br><span class="line">        a[k] = mappedValue;</span><br><span class="line">        k += <span class="number">1</span>;</span><br><span class="line">      &#125;</span><br><span class="line">    &#125;</span><br><span class="line"><span class="comment">//code</span></span><br></pre></td></tr></table></figure>
 <p>查看<code>polyfill</code>实现可知:<code>Array.from.call</code>的<code>this</code>参数是一个函数,所以会调用<code>var a = new c()</code>.</p>
-<p>当使用<code>new</code>关键字调用一个函数时,若函数返回一个非原始变量(如<code>object</code>,<code>array</code>或<code>function</code>),那么这些返回值将取代原本应该返回的<code>this</code>实例.</p>
-<p>所以此时<code>a = oobArray</code>,此后的操作都将直接修改<code>oobArray</code>.</p>
+<p>当使用<code>new</code>关键字调用一个函数时,若函数返回一个非原始变量(如<code>object</code>,<code>array</code>或<code>function</code>),那么这些返回值将取代原本应该返回的<code>this</code>实例.所以此时<code>a = oobArray</code>,此后的操作都将直接修改<code>oobArray</code>.</p>
 <p>最后的赋值语句触发<code>crash</code>,可能是最后一次迭代时对<code>oobArray.length</code>的赋值时出现了<code>bug</code>,导致最后<code>oobArray</code>实际长度与<code>length</code>的值的不同,造成越界访问.</p>
 <h3 id="漏洞解析">漏洞解析</h3>
 <figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">GenerateSetLength</span><span class="params">(TNode&lt;Context&gt; context, TNode&lt;Object&gt; <span class="built_in">array</span>, TNode&lt;Number&gt; length)</span> </span>&#123;</span><br><span class="line">  Label fast(this), runtime(this), done(this);</span><br><span class="line">  BranchIfFastJSArray(<span class="built_in">array</span>, context, &amp;fast, &amp;runtime);</span><br><span class="line"></span><br><span class="line">  BIND(&amp;fast);</span><br><span class="line">  &#123;</span><br><span class="line">    TNode&lt;JSArray&gt; fast_array = CAST(<span class="built_in">array</span>);</span><br><span class="line">    TNode&lt;Smi&gt; length_smi = CAST(length);</span><br><span class="line">    TNode&lt;Smi&gt; old_length = LoadFastJSArrayLength(fast_array);</span><br><span class="line">    CSA_ASSERT(<span class="keyword">this</span>, TaggedIsPositiveSmi(old_length));</span><br><span class="line">    EnsureArrayLengthWritable(LoadMap(fast_array), &amp;runtime);</span><br><span class="line">    GotoIf(SmiLessThan(length_smi, old_length), &amp;runtime);</span><br><span class="line">    StoreObjectFieldNoWriteBarrier(fast_array, JSArray::kLengthOffset, length_smi);</span><br><span class="line">    Goto(&amp;done);</span><br><span class="line">  &#125;</span><br><span class="line"></span><br><span class="line">  BIND(&amp;runtime);</span><br><span class="line">  &#123;</span><br><span class="line">    CallRuntime(Runtime::kSetProperty, context, <span class="keyword">static_cast</span>&lt;Node*&gt;(<span class="built_in">array</span>), CodeStubAssembler::LengthStringConstant(), length, SmiConstant(LanguageMode::kStrict));</span><br><span class="line">    Goto(&amp;done);</span><br><span class="line">  &#125;</span><br><span class="line"></span><br><span class="line">  BIND(&amp;done);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
@@ -687,7 +686,7 @@
                 
                   <a href="/archives/">
                 
-                    <span class="site-state-item-count">172</span>
+                    <span class="site-state-item-count">171</span>
                     <span class="site-state-item-name">日志</span>
                   </a>
                 </div>
@@ -911,7 +910,7 @@
       <i class="fa fa-area-chart"></i>
     </span>
     
-    <span title="站点总字数">727k</span>
+    <span title="站点总字数">705k</span>
   
 
   
@@ -920,7 +919,7 @@
       <i class="fa fa-coffee"></i>
     </span>
     
-    <span title="站点阅读时长">11:01</span>
+    <span title="站点阅读时长">10:41</span>
   
 </div>
 

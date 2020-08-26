@@ -119,18 +119,18 @@
 
 
 
-  <meta name="description" content="漏洞 程序使用了线程处理2对应的操作,start_routine是处理函数. 逆向发现在获取堆指针的值之后处理函数会休眠一段时间,这里出现了条件竞争漏洞,只需要在此时改变堆指针布局就可以劫持控制流. 利用思路 payload. 123456789101112131415161718192021222324252627282930313233343536373839404142434445">
+  <meta name="description" content="漏洞 程序使用了多线程处理2对应的操作,start_routine是处理函数. 逆向发现在获取堆指针的值之后处理函数会休眠一段时间,这里出现了条件竞争漏洞,只需要在此时改变堆指针布局就可以劫持控制流. 利用思路 payload. 12345678910111213141516171819202122232425262728293031323334353637383940414243444">
 <meta name="keywords" content="Jeopardy">
 <meta property="og:type" content="article">
 <meta property="og:title" content="writeup-bytectf-2019-finals-unknow">
 <meta property="og:url" content="https://hitworld.github.io/posts/cff0c71b/index.html">
 <meta property="og:site_name" content="w4rd3n">
-<meta property="og:description" content="漏洞 程序使用了线程处理2对应的操作,start_routine是处理函数. 逆向发现在获取堆指针的值之后处理函数会休眠一段时间,这里出现了条件竞争漏洞,只需要在此时改变堆指针布局就可以劫持控制流. 利用思路 payload. 123456789101112131415161718192021222324252627282930313233343536373839404142434445">
+<meta property="og:description" content="漏洞 程序使用了多线程处理2对应的操作,start_routine是处理函数. 逆向发现在获取堆指针的值之后处理函数会休眠一段时间,这里出现了条件竞争漏洞,只需要在此时改变堆指针布局就可以劫持控制流. 利用思路 payload. 12345678910111213141516171819202122232425262728293031323334353637383940414243444">
 <meta property="og:locale" content="zh-CN">
-<meta property="og:updated_time" content="2020-08-25T11:40:29.664Z">
+<meta property="og:updated_time" content="2020-08-26T03:23:32.717Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="writeup-bytectf-2019-finals-unknow">
-<meta name="twitter:description" content="漏洞 程序使用了线程处理2对应的操作,start_routine是处理函数. 逆向发现在获取堆指针的值之后处理函数会休眠一段时间,这里出现了条件竞争漏洞,只需要在此时改变堆指针布局就可以劫持控制流. 利用思路 payload. 123456789101112131415161718192021222324252627282930313233343536373839404142434445">
+<meta name="twitter:description" content="漏洞 程序使用了多线程处理2对应的操作,start_routine是处理函数. 逆向发现在获取堆指针的值之后处理函数会休眠一段时间,这里出现了条件竞争漏洞,只需要在此时改变堆指针布局就可以劫持控制流. 利用思路 payload. 12345678910111213141516171819202122232425262728293031323334353637383940414243444">
 
 
 
@@ -531,7 +531,7 @@
 
       
         <h2 id="漏洞">漏洞</h2>
-<p>程序使用了线程处理<code>2</code>对应的操作,<code>start_routine</code>是处理函数.</p>
+<p>程序使用了多线程处理<code>2</code>对应的操作,<code>start_routine</code>是处理函数.</p>
 <p>逆向发现在获取堆指针的值之后处理函数会休眠一段时间,这里出现了条件竞争漏洞,只需要在此时改变堆指针布局就可以劫持控制流.</p>
 <h2 id="利用思路">利用思路</h2>
 <p><code>payload</code>.</p>
@@ -658,7 +658,7 @@
                 
                   <a href="/archives/">
                 
-                    <span class="site-state-item-count">172</span>
+                    <span class="site-state-item-count">171</span>
                     <span class="site-state-item-name">日志</span>
                   </a>
                 </div>
@@ -882,7 +882,7 @@
       <i class="fa fa-area-chart"></i>
     </span>
     
-    <span title="站点总字数">727k</span>
+    <span title="站点总字数">705k</span>
   
 
   
@@ -891,7 +891,7 @@
       <i class="fa fa-coffee"></i>
     </span>
     
-    <span title="站点阅读时长">11:01</span>
+    <span title="站点阅读时长">10:41</span>
   
 </div>
 

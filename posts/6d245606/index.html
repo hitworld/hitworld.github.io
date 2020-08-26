@@ -127,7 +127,7 @@
 <meta property="og:site_name" content="w4rd3n">
 <meta property="og:description" content="分析 当ioctl中cmd参数为0x6666时,驱动将输出flag的加载地址. 当ioctl中cmd参数为0x1337时,首先进行三个校验,接着对用户输入的内容与硬编码的flag进行逐字节比较,一致则将flag输出. 三个校验为:输入的数据指针是否为用户态数据;数据指针内flag_str是否指向用户态;数据指针内flag_len是否等于硬编码flag的长度. 当用户输入数据通过验证后,再将">
 <meta property="og:locale" content="zh-CN">
-<meta property="og:updated_time" content="2020-08-25T15:51:23.113Z">
+<meta property="og:updated_time" content="2020-08-26T02:54:50.128Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="writeup-0ctf-2018-finals-babykernel">
 <meta name="twitter:description" content="分析 当ioctl中cmd参数为0x6666时,驱动将输出flag的加载地址. 当ioctl中cmd参数为0x1337时,首先进行三个校验,接着对用户输入的内容与硬编码的flag进行逐字节比较,一致则将flag输出. 三个校验为:输入的数据指针是否为用户态数据;数据指针内flag_str是否指向用户态;数据指针内flag_len是否等于硬编码flag的长度. 当用户输入数据通过验证后,再将">
@@ -536,7 +536,6 @@
 <p>三个校验为:输入的数据指针是否为用户态数据;数据指针内<code>flag_str</code>是否指向用户态;数据指针内<code>flag_len</code>是否等于硬编码<code>flag</code>的长度.</p>
 <p>当用户输入数据通过验证后,再将<code>flag_str</code>所指向的地址改为<code>flag</code>硬编码地址后,就会输出<code>flag</code>.</p>
 <h2 id="环境问题">环境问题</h2>
-<p>此题在环境配置时,有几点需要注意.</p>
 <ul>
 <li>在启动脚本中加入<code>echo 0 &gt; /proc/sys/kernel/dmesg_restrict</code>关闭<code>dmesg_restrict</code>,否则无法查看<code>printk</code>信息.</li>
 <li>配置<code>QEMU</code>启动参数时,不要开启<code>SMAP</code>保护,否则在内核中直接访问用户态数据会引起<code>kernel panic</code>.</li>
@@ -673,7 +672,7 @@
                 
                   <a href="/archives/">
                 
-                    <span class="site-state-item-count">172</span>
+                    <span class="site-state-item-count">171</span>
                     <span class="site-state-item-name">日志</span>
                   </a>
                 </div>
@@ -897,7 +896,7 @@
       <i class="fa fa-area-chart"></i>
     </span>
     
-    <span title="站点总字数">727k</span>
+    <span title="站点总字数">705k</span>
   
 
   
@@ -906,7 +905,7 @@
       <i class="fa fa-coffee"></i>
     </span>
     
-    <span title="站点阅读时长">11:01</span>
+    <span title="站点阅读时长">10:41</span>
   
 </div>
 

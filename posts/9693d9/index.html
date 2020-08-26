@@ -119,18 +119,18 @@
 
 
 
-  <meta name="description" content="未完成 机器代码 计算机硬件只能识别和运行机器语言程序,通常都是先将高级语言源程序通过编译器转换为汇编语言目标程序,然后将汇编语言源程序通过汇编器转换为机器语言目标程序. 一条机器代码由若干字段组成,典型的是操作码字段加操作数字段,这些机器代码是不等长的比特序列,为了方便编程便有了对应的汇编代码. 汇编代码是机器代码的文本表示.而机器代码是与机器(具体来说是cpu)相关的,为了编程的效率就">
+  <meta name="description" content="机器代码 计算机硬件只能识别和运行机器语言程序,通常都是先将高级语言源程序通过编译器转换为汇编语言目标程序,然后将汇编语言源程序通过汇编器转换为机器语言目标程序. 一条机器代码由若干字段组成,典型的是操作码字段加操作数字段,这些机器代码是不等长的比特序列,为了方便编程便有了对应的汇编代码. 汇编代码是机器代码的文本表示.而机器代码是与机器(具体来说是cpu)相关的,为了编程的效率就有了具有可">
 <meta name="keywords" content="CSAPP">
 <meta property="og:type" content="article">
 <meta property="og:title" content="CS-NOTES-CSAPP-程序的机器级表示">
 <meta property="og:url" content="https://hitworld.github.io/posts/9693d9/index.html">
 <meta property="og:site_name" content="w4rd3n">
-<meta property="og:description" content="未完成 机器代码 计算机硬件只能识别和运行机器语言程序,通常都是先将高级语言源程序通过编译器转换为汇编语言目标程序,然后将汇编语言源程序通过汇编器转换为机器语言目标程序. 一条机器代码由若干字段组成,典型的是操作码字段加操作数字段,这些机器代码是不等长的比特序列,为了方便编程便有了对应的汇编代码. 汇编代码是机器代码的文本表示.而机器代码是与机器(具体来说是cpu)相关的,为了编程的效率就">
+<meta property="og:description" content="机器代码 计算机硬件只能识别和运行机器语言程序,通常都是先将高级语言源程序通过编译器转换为汇编语言目标程序,然后将汇编语言源程序通过汇编器转换为机器语言目标程序. 一条机器代码由若干字段组成,典型的是操作码字段加操作数字段,这些机器代码是不等长的比特序列,为了方便编程便有了对应的汇编代码. 汇编代码是机器代码的文本表示.而机器代码是与机器(具体来说是cpu)相关的,为了编程的效率就有了具有可">
 <meta property="og:locale" content="zh-CN">
-<meta property="og:updated_time" content="2020-08-25T11:40:29.599Z">
+<meta property="og:updated_time" content="2020-08-26T08:16:53.793Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="CS-NOTES-CSAPP-程序的机器级表示">
-<meta name="twitter:description" content="未完成 机器代码 计算机硬件只能识别和运行机器语言程序,通常都是先将高级语言源程序通过编译器转换为汇编语言目标程序,然后将汇编语言源程序通过汇编器转换为机器语言目标程序. 一条机器代码由若干字段组成,典型的是操作码字段加操作数字段,这些机器代码是不等长的比特序列,为了方便编程便有了对应的汇编代码. 汇编代码是机器代码的文本表示.而机器代码是与机器(具体来说是cpu)相关的,为了编程的效率就">
+<meta name="twitter:description" content="机器代码 计算机硬件只能识别和运行机器语言程序,通常都是先将高级语言源程序通过编译器转换为汇编语言目标程序,然后将汇编语言源程序通过汇编器转换为机器语言目标程序. 一条机器代码由若干字段组成,典型的是操作码字段加操作数字段,这些机器代码是不等长的比特序列,为了方便编程便有了对应的汇编代码. 汇编代码是机器代码的文本表示.而机器代码是与机器(具体来说是cpu)相关的,为了编程的效率就有了具有可">
 
 
 
@@ -537,8 +537,7 @@
       
 
       
-        <p>未完成</p>
-<h2 id="机器代码">机器代码</h2>
+        <h2 id="机器代码">机器代码</h2>
 <p>计算机硬件只能识别和运行机器语言程序,通常都是先将高级语言源程序通过编译器转换为汇编语言目标程序,然后将汇编语言源程序通过汇编器转换为机器语言目标程序.</p>
 <p>一条机器代码由若干字段组成,典型的是操作码字段加操作数字段,这些机器代码是不等长的比特序列,为了方便编程便有了对应的汇编代码.</p>
 <p>汇编代码是机器代码的文本表示.而机器代码是与机器(具体来说是<code>cpu</code>)相关的,为了编程的效率就有了具有可移植性的高级语言.</p>
@@ -561,8 +560,6 @@
 <p>一个<code>C</code>源程序到可执行文件要经过预处理,编译获得汇编语言源程序,汇编获得机器语言目标代码文件,链接获得可执行文件.</p>
 <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line">&gt; gcc -Og -E test.c</span><br><span class="line"><span class="comment">#-O&lt;n&gt;指示优化等级,-Og告诉编译器使用生成符合原始C代码结构的优化等级.</span></span><br><span class="line"><span class="comment">#-E产生预处理后的文件.</span></span><br><span class="line">&gt; gcc -Og -S -masm=intel test.c</span><br><span class="line"><span class="comment">#-S要求产生汇编代码,汇编代码也是文本,可读.</span></span><br><span class="line"><span class="comment">#-masm=intel指定产生Intel格式汇编代码.</span></span><br><span class="line">&gt; gcc -Og -c test.c</span><br><span class="line"><span class="comment">#-c产生目标代码文件,机器代码不是文本.</span></span><br><span class="line">&gt; file test.o</span><br><span class="line"><span class="comment">#判断文件类型,输出:test.o: ELF 64-bit LSB relocatable, x86-64, version 1 (SYSV), not stripped.</span></span><br><span class="line">&gt; gcc -Og -o <span class="built_in">test</span> test.c</span><br><span class="line"><span class="comment">#-o指定输出文件的文件名.</span></span><br><span class="line"><span class="comment">#不加其他参数情况下产生可执行文件.</span></span><br><span class="line">&gt; objdump -d test.o</span><br><span class="line"><span class="comment">#-d反汇编其text段,反汇编器得出的汇编代码为AT&amp;T格式,是GCC,OBJDUMP等工具的默认格式,另一常见的是Intel格式.</span></span><br><span class="line"><span class="comment">#两者最大的区别为源操作数与目的操作数位置相反.例如Intel中mov目的在左,源在右.而ATT中正好相反.</span></span><br></pre></td></tr></table></figure>
 <p><code>tips</code>:<code>b</code>表示字节,<code>w</code>表示字,<code>l</code>表示双字,<code>q</code>表示四字.</p>
-<h2 id="扩展阅读">扩展阅读</h2>
-<p><code>pl-assembly-IA32-基础</code>.</p>
 
       
     </div>
@@ -685,7 +682,7 @@
                 
                   <a href="/archives/">
                 
-                    <span class="site-state-item-count">171</span>
+                    <span class="site-state-item-count">169</span>
                     <span class="site-state-item-name">日志</span>
                   </a>
                 </div>
@@ -827,7 +824,9 @@
                     
                       
                     
-                    <span class="site-state-item-count">43</span>
+                      
+                    
+                    <span class="site-state-item-count">44</span>
                     <span class="site-state-item-name">标签</span>
                   </a>
                 </div>
@@ -877,7 +876,7 @@
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#机器代码"><span class="nav-number">1.</span> <span class="nav-text">机器代码</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#intel处理器的演变"><span class="nav-number">1.1.</span> <span class="nav-text">Intel处理器的演变</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#两个重要的抽象"><span class="nav-number">1.2.</span> <span class="nav-text">两个重要的抽象</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#生成机器代码"><span class="nav-number">1.3.</span> <span class="nav-text">生成机器代码</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#扩展阅读"><span class="nav-number">2.</span> <span class="nav-text">扩展阅读</span></a></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#机器代码"><span class="nav-number">1.</span> <span class="nav-text">机器代码</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#intel处理器的演变"><span class="nav-number">1.1.</span> <span class="nav-text">Intel处理器的演变</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#两个重要的抽象"><span class="nav-number">1.2.</span> <span class="nav-text">两个重要的抽象</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#生成机器代码"><span class="nav-number">1.3.</span> <span class="nav-text">生成机器代码</span></a></li></ol></li></ol></div>
             
 
           </div>
@@ -909,7 +908,7 @@
       <i class="fa fa-area-chart"></i>
     </span>
     
-    <span title="站点总字数">705k</span>
+    <span title="站点总字数">704k</span>
   
 
   
@@ -918,7 +917,7 @@
       <i class="fa fa-coffee"></i>
     </span>
     
-    <span title="站点阅读时长">10:41</span>
+    <span title="站点阅读时长">10:40</span>
   
 </div>
 

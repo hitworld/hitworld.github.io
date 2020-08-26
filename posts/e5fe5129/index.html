@@ -119,18 +119,18 @@
 
 
 
-  <meta name="description" content="未完成 概览 iptables命令是Linux上常用的防火墙软件,属于netfilter项目的一部分.可直接配置,也可以通过前端和图形界面配置. 选项 123456789101112131415161718192021222324252627282930313233343536373839404142434445464748-t, --table table#对指定的表table进行操作,">
+  <meta name="description" content="概览 iptables命令是Linux上常用的防火墙软件,属于netfilter项目的一部分.可直接配置,也可以通过前端和图形界面配置. 选项 123456789101112131415161718192021222324252627282930313233343536373839404142434445464748-t, --table table#对指定的表table进行操作,table">
 <meta name="keywords" content="Linux">
 <meta property="og:type" content="article">
 <meta property="og:title" content="CS-operations-Linux-iptables">
 <meta property="og:url" content="https://hitworld.github.io/posts/e5fe5129/index.html">
 <meta property="og:site_name" content="w4rd3n">
-<meta property="og:description" content="未完成 概览 iptables命令是Linux上常用的防火墙软件,属于netfilter项目的一部分.可直接配置,也可以通过前端和图形界面配置. 选项 123456789101112131415161718192021222324252627282930313233343536373839404142434445464748-t, --table table#对指定的表table进行操作,">
+<meta property="og:description" content="概览 iptables命令是Linux上常用的防火墙软件,属于netfilter项目的一部分.可直接配置,也可以通过前端和图形界面配置. 选项 123456789101112131415161718192021222324252627282930313233343536373839404142434445464748-t, --table table#对指定的表table进行操作,table">
 <meta property="og:locale" content="zh-CN">
-<meta property="og:updated_time" content="2020-08-25T11:40:29.601Z">
+<meta property="og:updated_time" content="2020-08-26T08:16:53.795Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="CS-operations-Linux-iptables">
-<meta name="twitter:description" content="未完成 概览 iptables命令是Linux上常用的防火墙软件,属于netfilter项目的一部分.可直接配置,也可以通过前端和图形界面配置. 选项 123456789101112131415161718192021222324252627282930313233343536373839404142434445464748-t, --table table#对指定的表table进行操作,">
+<meta name="twitter:description" content="概览 iptables命令是Linux上常用的防火墙软件,属于netfilter项目的一部分.可直接配置,也可以通过前端和图形界面配置. 选项 123456789101112131415161718192021222324252627282930313233343536373839404142434445464748-t, --table table#对指定的表table进行操作,table">
 
 
 
@@ -537,8 +537,7 @@
       
 
       
-        <p>未完成</p>
-<h2 id="概览">概览</h2>
+        <h2 id="概览">概览</h2>
 <p><code>iptables</code>命令是<code>Linux</code>上常用的防火墙软件,属于<code>netfilter</code>项目的一部分.可直接配置,也可以通过前端和图形界面配置.</p>
 <h2 id="选项">选项</h2>
 <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br></pre></td><td class="code"><pre><span class="line">-t, --table table</span><br><span class="line"><span class="comment">#对指定的表table进行操作,table必须是raw,nat,filtermangle中的一个.如果不指定此选项,默认的是filter表.</span></span><br><span class="line"></span><br><span class="line">-p</span><br><span class="line"><span class="comment">#指定要匹配的数据包协议类型</span></span><br><span class="line">-s, --<span class="built_in">source</span> [!] address[/mask]</span><br><span class="line"><span class="comment">#把指定的一个/一组地址作为源地址,按此规则进行过滤.当后面没有mask时,address是一个地址;当mask指定时,可以表示一组范围内的地址,比如:192.168.1.0/255.255.255.0.</span></span><br><span class="line">-d, --destination [!] address[/mask]</span><br><span class="line"><span class="comment">#地址格式同上,但这里是指定地址为目的地址,按此进行过滤.</span></span><br><span class="line">-i, --<span class="keyword">in</span>-interface [!] &lt;网络接口name&gt;</span><br><span class="line"><span class="comment">#指定数据包的来自来自网络接口,比如最常见的eth0.注意:它只对INPUT,FORWARD,PREROUTING这三个链起作用.如果没有指定此选项,说明可以来自任何一个网络接口.同前面类似,"!"表示取反.</span></span><br><span class="line">-o, --out-interface [!] &lt;网络接口name&gt;</span><br><span class="line"><span class="comment">#指定数据包出去的网络接口.只对OUTPUT,FORWARD,POSTROUTING三个链起作用.</span></span><br><span class="line">--dport num</span><br><span class="line"><span class="comment">#匹配目标端口号</span></span><br><span class="line">--sport num</span><br><span class="line"><span class="comment">#匹配来源端口号</span></span><br><span class="line"></span><br><span class="line">-L, --list [chain]</span><br><span class="line"><span class="comment">#列出链chain上面的所有规则,如果没有指定链,列出表上所有链的所有规则.</span></span><br><span class="line"></span><br><span class="line">-A, --append chain rule-specification</span><br><span class="line"><span class="comment">#在指定链chain的末尾插入指定的规则,最后才会被执行.规则是由后面的匹配来指定.</span></span><br><span class="line">-I, --insert chain [rulenum] rule-specification</span><br><span class="line"><span class="comment">#在链chain中的指定位置插入一条或多条规则.如果指定的规则号是1,则在链的头部插入.这也是默认的情况.</span></span><br><span class="line">-D, --delete chain rule-specification -D, --delete chain rulenum</span><br><span class="line"><span class="comment">#在指定的链chain中删除一个或多个指定规则.</span></span><br><span class="line">-R num</span><br><span class="line"><span class="comment">#Replays替换/修改第几条规则.</span></span><br><span class="line"></span><br><span class="line">-P, --policy chain target</span><br><span class="line"><span class="comment">#为指定的链chain设置策略target.注意,只有内置的链才允许有策略,用户自定义的是不允许的.</span></span><br><span class="line">-F, --flush [chain]</span><br><span class="line"><span class="comment">#清空指定链chain上面的所有规则.如果没有指定链,清空该表上所有链的所有规则.</span></span><br><span class="line">-N, --new-chain chain</span><br><span class="line"><span class="comment">#用指定的名字创建一个新的链.</span></span><br><span class="line">-X, --delete-chain [chain]</span><br><span class="line"><span class="comment">#删除指定的链,这个链必须没有被其它任何规则引用,而且这条上必须没有任何规则.如果没有指定链名,则会删除该表中所有非内置的链.</span></span><br><span class="line">-E, --rename-chain old-chain new-chain</span><br><span class="line"><span class="comment">#用指定的新名字去重命名指定的链,这并不会对链内部照成任何影响.</span></span><br><span class="line">-Z, --zero [chain]</span><br><span class="line"><span class="comment">#把指定链,或者表中的所有链上的所有计数器清零.</span></span><br><span class="line"></span><br><span class="line">-j, --jump target &lt;指定目标&gt;</span><br><span class="line"><span class="comment">#即满足某条件时该执行什么样的动作.target可以是内置的目标,比如ACCEPT,也可以是用户自定义的链.</span></span><br><span class="line"></span><br><span class="line">-h</span><br><span class="line"><span class="comment">#显示帮助信息.</span></span><br></pre></td></tr></table></figure>
@@ -695,7 +694,7 @@
                 
                   <a href="/archives/">
                 
-                    <span class="site-state-item-count">171</span>
+                    <span class="site-state-item-count">169</span>
                     <span class="site-state-item-name">日志</span>
                   </a>
                 </div>
@@ -837,7 +836,9 @@
                     
                       
                     
-                    <span class="site-state-item-count">43</span>
+                      
+                    
+                    <span class="site-state-item-count">44</span>
                     <span class="site-state-item-name">标签</span>
                   </a>
                 </div>
@@ -919,7 +920,7 @@
       <i class="fa fa-area-chart"></i>
     </span>
     
-    <span title="站点总字数">705k</span>
+    <span title="站点总字数">704k</span>
   
 
   
@@ -928,7 +929,7 @@
       <i class="fa fa-coffee"></i>
     </span>
     
-    <span title="站点阅读时长">10:41</span>
+    <span title="站点阅读时长">10:40</span>
   
 </div>
 

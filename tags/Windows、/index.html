@@ -119,25 +119,21 @@
 
 
 
-  <meta name="description" content="前言 针对Nt Heap的Back-End的攻击方式,同样是利用释放堆块时触发合并之后的unlink. 漏洞使用 通过构造fake chunk并使其被unlink导致一次固定地址写. 由于Nt Heap有SmallTagindex的检测,所以一定要构造好头部,另外Flink和Blink指针指向的是User Data部分. 12345//检测语句Q-&amp;gt;Blink-&amp;gt;Flink">
-<meta name="keywords" content="Windows">
-<meta property="og:type" content="article">
-<meta property="og:title" content="IS-pwn-Windows-NtHeap-unlink">
-<meta property="og:url" content="https://hitworld.github.io/posts/1c8de385/index.html">
+  <meta name="keywords" content="hack">
+<meta property="og:type" content="website">
+<meta property="og:title" content="w4rd3n">
+<meta property="og:url" content="https://hitworld.github.io/tags/Windows、/index.html">
 <meta property="og:site_name" content="w4rd3n">
-<meta property="og:description" content="前言 针对Nt Heap的Back-End的攻击方式,同样是利用释放堆块时触发合并之后的unlink. 漏洞使用 通过构造fake chunk并使其被unlink导致一次固定地址写. 由于Nt Heap有SmallTagindex的检测,所以一定要构造好头部,另外Flink和Blink指针指向的是User Data部分. 12345//检测语句Q-&amp;gt;Blink-&amp;gt;Flink">
 <meta property="og:locale" content="zh-CN">
-<meta property="og:updated_time" content="2020-08-25T11:40:29.631Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="IS-pwn-Windows-NtHeap-unlink">
-<meta name="twitter:description" content="前言 针对Nt Heap的Back-End的攻击方式,同样是利用释放堆块时触发合并之后的unlink. 漏洞使用 通过构造fake chunk并使其被unlink导致一次固定地址写. 由于Nt Heap有SmallTagindex的检测,所以一定要构造好头部,另外Flink和Blink指针指向的是User Data部分. 12345//检测语句Q-&amp;gt;Blink-&amp;gt;Flink">
+<meta name="twitter:title" content="w4rd3n">
 
 
 
 
 
 
-  <link rel="canonical" href="https://hitworld.github.io/posts/1c8de385/">
+  <link rel="canonical" href="https://hitworld.github.io/tags/Windows、/">
 
 
 
@@ -147,7 +143,7 @@
   };
 </script>
 
-  <title>IS-pwn-Windows-NtHeap-unlink | w4rd3n</title>
+  <title>标签: Windows、 | w4rd3n</title>
   
 
 
@@ -196,7 +192,7 @@
     
   
 
-  <!-- hexo-inject:begin --><!-- hexo-inject:end --><div class="container sidebar-position-left page-post-detail">
+  <!-- hexo-inject:begin --><!-- hexo-inject:end --><div class="container sidebar-position-left ">
     <div class="headband"></div>
 
     <header id="header" class="header" itemscope="" itemtype="http://schema.org/WPHeader">
@@ -271,7 +267,7 @@
         
         
           
-          <li class="menu-item menu-item-tags">
+          <li class="menu-item menu-item-tags menu-item-active">
 
     
     
@@ -335,6 +331,28 @@
   
     
 
+    
+    
+      
+      
+    
+      
+      
+    
+      
+      
+    
+      
+      
+    
+      
+      
+    
+    
+
+  
+
+
   
 
   
@@ -380,245 +398,56 @@
           <div id="content" class="content">
             
 
-  <div id="posts" class="posts-expand">
-    
+  
+  
+  
+  <div class="post-block tag">
 
-  
+    <div id="posts" class="posts-collapse">
+      <div class="collection-title">
+        <h1>Windows、<small>标签</small>
+        </h1>
+      </div>
 
-  
-  
-  
-
-  
+      
+        
 
   <article class="post post-type-normal" itemscope="" itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="https://hitworld.github.io/posts/1c8de385/">
+    <header class="post-header">
 
-    <span hidden itemprop="author" itemscope="" itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="w4rd3n">
-      <meta itemprop="description" content="">
-      <meta itemprop="image" content="/images/apple-touch-icon.png">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope="" itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="w4rd3n">
-    </span>
-
-    
-      <header class="post-header">
-
+      <h2 class="post-title">
         
+            <a class="post-title-link" href="/posts/8466de24/" itemprop="url">
+              
+                <span itemprop="name">IS-pwn-Windows-NtHeap-攻击方式</span>
+              
+            </a>
         
-          <h1 class="post-title" itemprop="name headline">IS-pwn-Windows-NtHeap-unlink
-              
-            
-          </h1>
-        
+      </h2>
 
-        <div class="post-meta">
-          <span class="post-time">
+      <div class="post-meta">
+        <time class="post-time" itemprop="dateCreated" datetime="2019-10-18T21:42:32+08:00" content="2019-10-18">
+          10-18
+        </time>
+      </div>
 
-            
-            
-            
+    </header>
+  </article>
 
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">发表于</span>
-              
-
-              
-                
-              
-
-              <time title="创建时间：2019-10-18 21:42:32" itemprop="dateCreated datePublished" datetime="2019-10-18T21:42:32+08:00">2019-10-18</time>
-            
-
-            
-          </span>
-
-          
-            <span class="post-category">
-            
-              <span class="post-meta-divider">|</span>
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">分类于</span>
-              
-              
-                <span itemprop="about" itemscope="" itemtype="http://schema.org/Thing"><a href="/categories/IS/" itemprop="url" rel="index"><span itemprop="name">IS</span></a></span>
-
-                
-                
-                  ，
-                
-              
-                <span itemprop="about" itemscope="" itemtype="http://schema.org/Thing"><a href="/categories/IS/pwn/" itemprop="url" rel="index"><span itemprop="name">pwn</span></a></span>
-
-                
-                
-              
-            </span>
-          
-
-          
-            
-          
-
-          
-          
-             <span id="/posts/1c8de385/" class="leancloud_visitors" data-flag-title="IS-pwn-Windows-NtHeap-unlink">
-               <span class="post-meta-divider">|</span>
-               <span class="post-meta-item-icon">
-                 <i class="fa fa-eye"></i>
-               </span>
-               
-                 <span class="post-meta-item-text">热度：</span>
-               
-                 <span class="leancloud-visitors-count"></span>
-                 <span>℃</span>
-             </span>
-          
-
-          
-
-          
-            <div class="post-symbolscount">
-              
-
-              
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-file-word-o"></i>
-                </span>
-                
-                  <span class="post-meta-item-text">本文字数：</span>
-                
-                <span title="本文字数">455</span>
-              
-
-              
-                <span class="post-meta-divider">|</span>
-              
-
-              
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-clock-o"></i>
-                </span>
-                
-                  <span class="post-meta-item-text">阅读时长 &asymp;</span>
-                
-                <span title="阅读时长">1 分钟</span>
-              
-            </div>
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        <h2 id="前言">前言</h2>
-<p>针对<code>Nt Heap</code>的<code>Back-End</code>的攻击方式,同样是利用释放堆块时触发合并之后的<code>unlink</code>.</p>
-<h2 id="漏洞使用">漏洞使用</h2>
-<p>通过构造<code>fake chunk</code>并使其被<code>unlink</code>导致一次固定地址写.</p>
-<p>由于<code>Nt Heap</code>有<code>SmallTagindex</code>的检测,所以一定要构造好头部,另外<code>Flink</code>和<code>Blink</code>指针指向的是<code>User Data</code>部分.</p>
-<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//检测语句</span></span><br><span class="line">Q-&gt;Blink-&gt;Flink == Q &amp;&amp; Q-&gt;Flink-&gt;Blink == Q;</span><br><span class="line"><span class="comment">//unlink关键语句</span></span><br><span class="line">Q-&gt;Blink-&gt;Flink = Q-&gt;Flink;</span><br><span class="line">Q-&gt;Flink-&gt;Blink = Q-&gt;Blink;</span><br></pre></td></tr></table></figure>
-<p>绕过方式,找到指向该<code>chunk</code>数据区域的指针<code>Q</code>即可,要防止<code>Q</code>指向的<code>chunk</code>是<code>ListHints</code>的表头,否则会导致<code>check</code>失败.</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">| chunk header | &amp;Q - 8 | &amp;Q |</span><br></pre></td></tr></table></figure>
-<p>导致结果:<code>Q = &amp;Q</code>.</p>
 
       
     </div>
 
-    
-
-    
-    
-    
-
-    
-
-    
-       
-    
-    
-
-    
-
-    <footer class="post-footer">
-      
-        <div class="post-tags">
-          
-            <a href="/tags/Windows/" rel="tag"><i class="fa fa-tag"></i> Windows</a>
-          
-        </div>
-      
-
-      
-      
-      
-
-      
-        <div class="post-nav">
-          <div class="post-nav-next post-nav-item">
-            
-              <a href="/posts/e791ac95/" rel="next" title="IS-pwn-Windows-NtHeap-基础">
-                <i class="fa fa-chevron-left"></i> IS-pwn-Windows-NtHeap-基础
-              </a>
-            
-          </div>
-
-          <span class="post-nav-divider"></span>
-
-          <div class="post-nav-prev post-nav-item">
-            
-              <a href="/posts/6b700116/" rel="prev" title="writeup-ogeek-2019-babyheap">
-                writeup-ogeek-2019-babyheap <i class="fa fa-chevron-right"></i>
-              </a>
-            
-          </div>
-        </div>
-      
-
-      
-      
-    </footer>
   </div>
   
   
   
-  </article>
-
-
-  </div>
-
-
-          </div>
-          
 
   
 
 
+          </div>
+          
 
         </div>
         
@@ -641,17 +470,8 @@
       
 
       
-        <ul class="sidebar-nav motion-element">
-          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
-            文章目录
-          </li>
-          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
-            站点概览
-          </li>
-        </ul>
-      
 
-      <section class="site-overview-wrap sidebar-panel">
+      <section class="site-overview-wrap sidebar-panel sidebar-panel-active">
         <div class="site-overview">
           <div class="site-author motion-element" itemprop="author" itemscope="" itemtype="http://schema.org/Person">
             
@@ -668,7 +488,7 @@
                 
                   <a href="/archives/">
                 
-                    <span class="site-state-item-count">171</span>
+                    <span class="site-state-item-count">169</span>
                     <span class="site-state-item-name">日志</span>
                   </a>
                 </div>
@@ -810,7 +630,9 @@
                     
                       
                     
-                    <span class="site-state-item-count">43</span>
+                      
+                    
+                    <span class="site-state-item-count">44</span>
                     <span class="site-state-item-name">标签</span>
                   </a>
                 </div>
@@ -851,22 +673,6 @@
       </section>
 
       
-      <!--noindex-->
-        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
-          <div class="post-toc">
-
-            
-              
-            
-
-            
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#前言"><span class="nav-number">1.</span> <span class="nav-text">前言</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#漏洞使用"><span class="nav-number">2.</span> <span class="nav-text">漏洞使用</span></a></li></ol></div>
-            
-
-          </div>
-        </section>
-      <!--/noindex-->
-      
 
       
 
@@ -892,7 +698,7 @@
       <i class="fa fa-area-chart"></i>
     </span>
     
-    <span title="站点总字数">705k</span>
+    <span title="站点总字数">704k</span>
   
 
   
@@ -901,7 +707,7 @@
       <i class="fa fa-coffee"></i>
     </span>
     
-    <span title="站点阅读时长">10:41</span>
+    <span title="站点阅读时长">10:40</span>
   
 </div>
 
@@ -1028,10 +834,6 @@
   
 
   
-  <script type="text/javascript" src="/js/src/scrollspy.js?v=6.5.0"></script>
-<script type="text/javascript" src="/js/src/post-details.js?v=6.5.0"></script>
-
-
 
   
 
@@ -1386,42 +1188,43 @@
   
   <script>
     
-    function addCount(Counter) {
+    function showTime(Counter) {
+      var entries = [];
       var $visitors = $(".leancloud_visitors");
-      var url = $visitors.attr('id').trim();
-      var title = $visitors.attr('data-flag-title').trim();
 
-      Counter('get', '/classes/Counter', { where: JSON.stringify({ url }) })
+      $visitors.each(function () {
+        entries.push( $(this).attr("id").trim() );
+      });
+
+      Counter('get', '/classes/Counter', { where: JSON.stringify({ url: { "$in": entries } }) })
         .done(function ({ results }) {
-          if (results.length > 0) {
-            var counter = results[0];
-            
-            Counter('put', `/classes/Counter/${counter.objectId}`, JSON.stringify({ time: { "__op":"Increment", "amount":1 } }))
-            
-            .done(function () {
-                  var $element = $(document.getElementById(url));
-                  $element.find('.leancloud-visitors-count').text(counter.time + 1);
-            })
-            
-            .fail(function ({ responseJSON }) {
-                console.log('Failed to save Visitor num, with error message: ' + responseJSON.error);
-            })
-          } else {
-            
-              Counter('post', '/classes/Counter', JSON.stringify({ title: title, url: url, time: 1}))
-                .done(function () {
-                  var $element = $(document.getElementById(url));
-                  $element.find('.leancloud-visitors-count').text(1);
-                })
-                .fail(function () {
-                  console.log('Failed to create');
-                });
-            
+          var COUNT_CONTAINER_REF = '.leancloud-visitors-count';
+
+          if (results.length === 0) {
+            $visitors.find(COUNT_CONTAINER_REF).text(0);
+            return;
+          }
+
+          for (var i = 0; i < results.length; i++) {
+            var item = results[i];
+            var url = item.url;
+            var time = item.time;
+            var element = document.getElementById(url);
+
+            $(element).find(COUNT_CONTAINER_REF).text(time);
+          }
+          for(var i = 0; i < entries.length; i++) {
+            var url = entries[i];
+            var element = document.getElementById(url);
+            var countSpan = $(element).find(COUNT_CONTAINER_REF);
+            if( countSpan.text() == '') {
+              countSpan.text(0);
+            }
           }
         })
-      .fail(function ({ responseJSON }) {
-        console.log('LeanCloud Counter Error:' + responseJSON.code + " " + responseJSON.error);
-      });
+        .fail(function ({ responseJSON }) {
+          console.log("LeanCloud Counter Error: " + responseJSON.code + " " + responseJSON.error);
+        });
     }
     
 
@@ -1441,7 +1244,9 @@
             });
           };
           
-          addCount(Counter);
+          if ($('.post-title-link').length >= 1) {
+            showTime(Counter);
+          }
           
         })
     });

@@ -119,20 +119,18 @@
 
 
 
-  <meta name="description" content="未完成 概述 逆向分析有静态分析与动态分析. 静态分析是指根据反汇编得到的程序清单进行分析,最常用的是从交互处入手,常用的静态分析工具有IDA等. 动态分析是指利用OllyDbg或WinDbg等调试工具跟踪分析,这样就能分析软件在执行过程中的中间结果(而且部分软件会对程序大部分代码加密). 而高效的动态分析应该注意以下两点:  粗跟踪,指在调试时避过不需要的地方(CALL,REP,L">
+  <meta name="description" content="概述 逆向分析有静态分析与动态分析. 静态分析是指根据反汇编得到的程序清单进行分析,最常用的是从交互处入手,常用的静态分析工具有IDA等. 动态分析是指利用OllyDbg或WinDbg等调试工具跟踪分析,这样就能分析软件在执行过程中的中间结果(而且部分软件会对程序大部分代码加密). 而高效的动态分析应该注意以下两点:  粗跟踪,指在调试时避过不需要的地方(CALL,REP,LOOP等)">
 <meta name="keywords" content="Windows">
 <meta property="og:type" content="article">
 <meta property="og:title" content="IS-reverse-Windows-基础">
 <meta property="og:url" content="https://hitworld.github.io/posts/f92e4c21/index.html">
 <meta property="og:site_name" content="w4rd3n">
-<meta property="og:description" content="未完成 概述 逆向分析有静态分析与动态分析. 静态分析是指根据反汇编得到的程序清单进行分析,最常用的是从交互处入手,常用的静态分析工具有IDA等. 动态分析是指利用OllyDbg或WinDbg等调试工具跟踪分析,这样就能分析软件在执行过程中的中间结果(而且部分软件会对程序大部分代码加密). 而高效的动态分析应该注意以下两点:  粗跟踪,指在调试时避过不需要的地方(CALL,REP,L">
+<meta property="og:description" content="概述 逆向分析有静态分析与动态分析. 静态分析是指根据反汇编得到的程序清单进行分析,最常用的是从交互处入手,常用的静态分析工具有IDA等. 动态分析是指利用OllyDbg或WinDbg等调试工具跟踪分析,这样就能分析软件在执行过程中的中间结果(而且部分软件会对程序大部分代码加密). 而高效的动态分析应该注意以下两点:  粗跟踪,指在调试时避过不需要的地方(CALL,REP,LOOP等)">
 <meta property="og:locale" content="zh-CN">
-<meta property="og:image" content="https://hitworld.github.io/posts/f92e4c21/1.png">
-<meta property="og:updated_time" content="2020-08-25T11:40:29.642Z">
+<meta property="og:updated_time" content="2020-08-26T08:16:53.822Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="IS-reverse-Windows-基础">
-<meta name="twitter:description" content="未完成 概述 逆向分析有静态分析与动态分析. 静态分析是指根据反汇编得到的程序清单进行分析,最常用的是从交互处入手,常用的静态分析工具有IDA等. 动态分析是指利用OllyDbg或WinDbg等调试工具跟踪分析,这样就能分析软件在执行过程中的中间结果(而且部分软件会对程序大部分代码加密). 而高效的动态分析应该注意以下两点:  粗跟踪,指在调试时避过不需要的地方(CALL,REP,L">
-<meta name="twitter:image" content="https://hitworld.github.io/posts/f92e4c21/1.png">
+<meta name="twitter:description" content="概述 逆向分析有静态分析与动态分析. 静态分析是指根据反汇编得到的程序清单进行分析,最常用的是从交互处入手,常用的静态分析工具有IDA等. 动态分析是指利用OllyDbg或WinDbg等调试工具跟踪分析,这样就能分析软件在执行过程中的中间结果(而且部分软件会对程序大部分代码加密). 而高效的动态分析应该注意以下两点:  粗跟踪,指在调试时避过不需要的地方(CALL,REP,LOOP等)">
 
 
 
@@ -505,7 +503,7 @@
                 
                   <span class="post-meta-item-text">本文字数：</span>
                 
-                <span title="本文字数">5.4k</span>
+                <span title="本文字数">1.9k</span>
               
 
               
@@ -519,7 +517,7 @@
                 
                   <span class="post-meta-item-text">阅读时长 &asymp;</span>
                 
-                <span title="阅读时长">5 分钟</span>
+                <span title="阅读时长">2 分钟</span>
               
             </div>
           
@@ -539,8 +537,7 @@
       
 
       
-        <p>未完成</p>
-<h2 id="概述">概述</h2>
+        <h2 id="概述">概述</h2>
 <p>逆向分析有静态分析与动态分析.</p>
 <p>静态分析是指根据反汇编得到的程序清单进行分析,最常用的是从交互处入手,常用的静态分析工具有<code>IDA</code>等.</p>
 <p>动态分析是指利用<code>OllyDbg</code>或<code>WinDbg</code>等调试工具跟踪分析,这样就能分析软件在执行过程中的中间结果(而且部分软件会对程序大部分代码加密).</p>
@@ -589,29 +586,6 @@
 <h2 id="逆向分析基础">逆向分析基础</h2>
 <h3 id="pe格式">PE格式</h3>
 <p><code>PE</code>是<code>Portable Executable File Format</code>简写,它是目前<code>Windows</code>平台上的主流可执行文件格式.<code>Microsoft Visual C++</code>提供的<code>WINNT.H</code>里有<code>PE</code>数据结构的完整定义.</p>
-<h3 id="seh">SEH</h3>
-<p><code>SEH</code>(<code>Structured Exception Handling</code>)是<code>windows</code>异常处理机制之一,是基于线程的异常处理,在程序源代码中使用<code>__try</code>,<code>__except</code>,<code>__finally</code>来实现<code>SEH</code>异常处理.</p>
-<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">__try&#123;</span><br><span class="line">    guarded body of code</span><br><span class="line">&#125;</span><br><span class="line">__except(Condition)&#123;</span><br><span class="line">    identifies an exception</span><br><span class="line">&#125;</span><br><span class="line">__finally&#123;</span><br><span class="line">    identifies a termmination handle</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<p><code>Windows</code>下有多种异常处理:<code>VEH</code>,<code>VCH</code>,<code>SEH</code>,<code>UEF</code>.处理异常的优先级为:调试器,<code>VEH</code>,<code>SEH</code>,<code>UEF</code>,<code>VCH</code>.</p>
-<p>常见的异常有:企图读写一个不可访问的地址;触发断点;企图执行一个无效的指令;除<code>0</code>;标志寄存器的<code>TF</code>位为<code>1</code>(单步调试);</p>
-<p>当异常发生的时候程序会抛出异常,系统检测到异常就会进行异常处理,首先保存当前进程的基本信息,然后会去寻找异常句柄(<code>Exception Handling</code>)来处理异常.当前上下文的信息会被存储在一个叫做<code>CONTEXT</code>的结构体中,这些信息用于再完成异常处理后继续进程.异常的信息都被存储在一个叫做<code>EXCEPTION_RECORD</code>的结构体中.</p>
-<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">void</span> WINAPI <span class="title">RaiseException</span><span class="params">(</span></span></span><br><span class="line"><span class="function"><span class="params">  _In_       DWORD     dwExceptionCode,<span class="comment">//表示当前线程的发生异常的原因(例如读写保护地址,数组越界并且能够被检查到等等).</span></span></span></span><br><span class="line"><span class="function"><span class="params">  _In_       DWORD     dwExceptionFlags,<span class="comment">//表示当前的异常发生后,是否进行执行.</span></span></span></span><br><span class="line"><span class="function"><span class="params">  _In_       DWORD     nNumberOfArguments,<span class="comment">//lpArguments数组中的参数个数</span></span></span></span><br><span class="line"><span class="function"><span class="params">  _In_ <span class="keyword">const</span> ULONG_PTR *lpArguments</span></span></span><br><span class="line"><span class="function"><span class="params">)</span></span>;</span><br></pre></td></tr></table></figure>
-<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">typedef</span> <span class="class"><span class="keyword">struct</span> _<span class="title">EXCEPTION_POINTERS</span> &#123;</span></span><br><span class="line">  PEXCEPTION_RECORD ExceptionRecord;<span class="comment">//指向ExceptionRecord的指针,里面记载了一个独立于机器的异常行为</span></span><br><span class="line">  PCONTEXT          ContextRecord;<span class="comment">//指向记录了异常上下文结构体的指针</span></span><br><span class="line">&#125; EXCEPTION_POINTERS, *PEXCEPTION_POINTERS;</span><br></pre></td></tr></table></figure>
-<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">typedef</span> <span class="class"><span class="keyword">struct</span> _<span class="title">CONTEXT</span> &#123;</span></span><br><span class="line">    DWORD ContextFlags;</span><br><span class="line">    DWORD   Dr0;</span><br><span class="line">    DWORD   Dr1;</span><br><span class="line">    DWORD   Dr2;</span><br><span class="line">    DWORD   Dr3;</span><br><span class="line">    DWORD   Dr6;</span><br><span class="line">    DWORD   Dr7;</span><br><span class="line">    FLOATING_SAVE_AREA FloatSave;</span><br><span class="line">    DWORD   SegGs;</span><br><span class="line">    DWORD   SegFs;</span><br><span class="line">    DWORD   SegEs;</span><br><span class="line">    DWORD   SegDs;</span><br><span class="line">    DWORD   Edi;</span><br><span class="line">    DWORD   Esi;</span><br><span class="line">    DWORD   Ebx;</span><br><span class="line">    DWORD   Edx;</span><br><span class="line">    DWORD   Ecx;</span><br><span class="line">    DWORD   Eax;</span><br><span class="line">    DWORD   Ebp;</span><br><span class="line">    DWORD   Eip;</span><br><span class="line">    DWORD   SegCs;<span class="comment">//MUST BE SANITIZED</span></span><br><span class="line">    DWORD   EFlags;<span class="comment">//MUST BE SANITIZED</span></span><br><span class="line">    DWORD   Esp;</span><br><span class="line">    DWORD   SegSs;</span><br><span class="line">    BYTE    ExtendedRegisters[MAXIMUM_SUPPORTED_EXTENSION];</span><br><span class="line">&#125; CONTEXT;</span><br></pre></td></tr></table></figure>
-<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">typedef</span> <span class="class"><span class="keyword">struct</span> _<span class="title">EXCEPTION_RECORD</span> &#123;</span></span><br><span class="line">    DWORD ExceptionCode;<span class="comment">//异常码:以STATUS_或EXCEPTION_开头,可自定义.</span></span><br><span class="line">    DWORD ExceptionFlags;<span class="comment">//异常标志:0可修复;1不可修复;2正在展开,不要试图修复.</span></span><br><span class="line">    <span class="class"><span class="keyword">struct</span> _<span class="title">EXCEPTION_RECORD</span> *<span class="title">ExceptionRecord</span>;</span><span class="comment">//指向嵌套的异常结构,通常是异常中又引发异常.</span></span><br><span class="line">    PVOID ExceptionAddress;<span class="comment">//异常发生地址</span></span><br><span class="line">    DWORD NumberParameters;<span class="comment">//下面ExceptionInformation所含有的dword数目</span></span><br><span class="line">    ULONG_PTR ExceptionInformation[EXCEPTION_MAXIMUM_PARAMETERS];<span class="comment">//附加消息</span></span><br><span class="line">&#125; EXCEPTION_RECORD;</span><br></pre></td></tr></table></figure>
-<p><code>SEH</code>是由<code>_EXCEPTION_REGISTRATION_RECORD</code>结构体组成的链表,第一个异常处理中未处理相关异常,它就会被传递到下一个异常处理器,直到得到处理.</p>
-<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">typedef</span> <span class="class"><span class="keyword">struct</span> _<span class="title">EXCEPTION_REGISTRATION_RECORD</span> &#123;</span></span><br><span class="line">    <span class="class"><span class="keyword">struct</span> _<span class="title">EXCEPTION_REGISTRATION_RECORD</span> *<span class="title">Next</span>;</span></span><br><span class="line">    <span class="comment">//指向下一个节点的指针,直到遇到0xFFFFFFFF结束</span></span><br><span class="line">    PEXCEPTION_ROUTINE Handler;</span><br><span class="line">    <span class="comment">//异常处理函数指针</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<p>异常处理函数定义,是一个由系统调用的回调函数.</p>
-<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">typedef</span> _IRQL_requires_same_ _Function_class_(EXCEPTION_ROUTINE) <span class="function">EXCEPTION_DISPOSITION NTAPI <span class="title">EXCEPTION_ROUTINE</span> <span class="params">(</span></span></span><br><span class="line"><span class="function"><span class="params">    _Inout_ struct _EXCEPTION_RECORD *ExceptionRecord,</span></span></span><br><span class="line"><span class="function"><span class="params">    _In_ PVOID EstablisherFrame,<span class="comment">//当前SEH栈的起始位置</span></span></span></span><br><span class="line"><span class="function"><span class="params">    _Inout_ struct _CONTEXT *ContextRecord,</span></span></span><br><span class="line"><span class="function"><span class="params">    _In_ PVOID DispatcherContext</span></span></span><br><span class="line"><span class="function"><span class="params">)</span></span>;</span><br></pre></td></tr></table></figure>
-<p><code>SEH</code>链表是结构体<code>NT_TIB</code>的第一个结构体成员,结构体<code>NT_TIB</code>是<code>TEB</code>的第一个结构体成员,所以<code>SEH</code>链表指针位于<code>FS:[0]</code>的位置.</p>
-<img src="/posts/f92e4c21/1.png" title="p1">
-<p><code>SEH</code>异常处理过程.</p>
-<p>还可以扩展异常处理帧结构,也就是<code>scope table</code>域.其会在栈中保存一个<code>GSCookie</code>用于防御栈溢出,然后异常处理函数<code>_except_handler4</code>会调用<code>HandlerFunc</code>函数,这里是没有检测的.</p>
-<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">struct</span> _<span class="title">EH4_SCOPETABLE</span> &#123;</span></span><br><span class="line">    DWORD GSCookieOffset;</span><br><span class="line">    DWORD GSCookieXOROffset;</span><br><span class="line">    DWORD EHCookieOffset;</span><br><span class="line">    DWORD EHCookieXOROffset;</span><br><span class="line">    _EH4_SCOPETABLE_RECORD ScopeRecord[<span class="number">1</span>];</span><br><span class="line">&#125;;</span><br><span class="line"></span><br><span class="line"><span class="class"><span class="keyword">struct</span> _<span class="title">EH4_SCOPETABLE_RECORD</span> &#123;</span></span><br><span class="line">    DWORD EnclosingLevel;</span><br><span class="line">    <span class="keyword">long</span> (*FilterFunc)();</span><br><span class="line">    <span class="keyword">void</span> (*HandlerFunc)();<span class="comment">//处理函数</span></span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
-<p><code>SEH</code>安装.</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">push @_except_handler     ;异常处理器</span><br><span class="line">push dword ptr fs:[0]     ;取出SEH链表头</span><br><span class="line">mov dword ptr fs:[0],esp  ;添加链表</span><br></pre></td></tr></table></figure>
-<p><code>SEH</code>卸载.</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">pop dword ptr fs:[0]    ;还原链表头</span><br><span class="line">add esp,4               ;删除异常处理器</span><br></pre></td></tr></table></figure>
 
       
     </div>
@@ -734,7 +708,7 @@
                 
                   <a href="/archives/">
                 
-                    <span class="site-state-item-count">171</span>
+                    <span class="site-state-item-count">169</span>
                     <span class="site-state-item-name">日志</span>
                   </a>
                 </div>
@@ -876,7 +850,9 @@
                     
                       
                     
-                    <span class="site-state-item-count">43</span>
+                      
+                    
+                    <span class="site-state-item-count">44</span>
                     <span class="site-state-item-name">标签</span>
                   </a>
                 </div>
@@ -926,7 +902,7 @@
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#概述"><span class="nav-number">1.</span> <span class="nav-text">概述</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#windows操作系统"><span class="nav-number">2.</span> <span class="nav-text">Windows操作系统</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#win32-api简述"><span class="nav-number">2.1.</span> <span class="nav-text">Win32 API简述</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#消息机制"><span class="nav-number">2.2.</span> <span class="nav-text">消息机制</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#虚拟内存"><span class="nav-number">2.3.</span> <span class="nav-text">虚拟内存</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#调试符号"><span class="nav-number">2.4.</span> <span class="nav-text">调试符号</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#动态分析"><span class="nav-number">3.</span> <span class="nav-text">动态分析</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#硬件断点原理"><span class="nav-number">3.1.</span> <span class="nav-text">硬件断点原理</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#反调试"><span class="nav-number">3.2.</span> <span class="nav-text">反调试</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#逆向分析基础"><span class="nav-number">4.</span> <span class="nav-text">逆向分析基础</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#pe格式"><span class="nav-number">4.1.</span> <span class="nav-text">PE格式</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#seh"><span class="nav-number">4.2.</span> <span class="nav-text">SEH</span></a></li></ol></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#概述"><span class="nav-number">1.</span> <span class="nav-text">概述</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#windows操作系统"><span class="nav-number">2.</span> <span class="nav-text">Windows操作系统</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#win32-api简述"><span class="nav-number">2.1.</span> <span class="nav-text">Win32 API简述</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#消息机制"><span class="nav-number">2.2.</span> <span class="nav-text">消息机制</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#虚拟内存"><span class="nav-number">2.3.</span> <span class="nav-text">虚拟内存</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#调试符号"><span class="nav-number">2.4.</span> <span class="nav-text">调试符号</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#动态分析"><span class="nav-number">3.</span> <span class="nav-text">动态分析</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#硬件断点原理"><span class="nav-number">3.1.</span> <span class="nav-text">硬件断点原理</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#反调试"><span class="nav-number">3.2.</span> <span class="nav-text">反调试</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#逆向分析基础"><span class="nav-number">4.</span> <span class="nav-text">逆向分析基础</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#pe格式"><span class="nav-number">4.1.</span> <span class="nav-text">PE格式</span></a></li></ol></li></ol></div>
             
 
           </div>
@@ -958,7 +934,7 @@
       <i class="fa fa-area-chart"></i>
     </span>
     
-    <span title="站点总字数">705k</span>
+    <span title="站点总字数">704k</span>
   
 
   
@@ -967,7 +943,7 @@
       <i class="fa fa-coffee"></i>
     </span>
     
-    <span title="站点阅读时长">10:41</span>
+    <span title="站点阅读时长">10:40</span>
   
 </div>
 

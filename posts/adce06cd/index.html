@@ -119,18 +119,18 @@
 
 
 
-  <meta name="description" content="未完成 概览 PHP反序列化漏洞又称对象注入,可能会导致远程代码执行(RCE). 漏洞为执行unserialize函数,调用某一类并执行魔术方法(magic method),之后可以执行类中函数,产生安全问题. 漏洞的前提:unserialize函数的参数可控;PHP文件中存在可利用的类,类中有魔术方法; unserialize unserialize. unserialize以一个被序">
+  <meta name="description" content="概览 PHP反序列化漏洞又称对象注入,可能会导致远程代码执行(RCE).漏洞为执行unserialize函数,调用某一类并执行魔术方法(magic method),之后可以执行类中函数,产生安全问题. 漏洞的前提:unserialize函数的参数可控;PHP文件中存在可利用的类,类中有魔术方法; unserialize unserialize. unserialize以一个被序列化的变量(">
 <meta name="keywords" content="PHP">
 <meta property="og:type" content="article">
 <meta property="og:title" content="IS-web-PHP-反序列化漏洞">
 <meta property="og:url" content="https://hitworld.github.io/posts/adce06cd/index.html">
 <meta property="og:site_name" content="w4rd3n">
-<meta property="og:description" content="未完成 概览 PHP反序列化漏洞又称对象注入,可能会导致远程代码执行(RCE). 漏洞为执行unserialize函数,调用某一类并执行魔术方法(magic method),之后可以执行类中函数,产生安全问题. 漏洞的前提:unserialize函数的参数可控;PHP文件中存在可利用的类,类中有魔术方法; unserialize unserialize. unserialize以一个被序">
+<meta property="og:description" content="概览 PHP反序列化漏洞又称对象注入,可能会导致远程代码执行(RCE).漏洞为执行unserialize函数,调用某一类并执行魔术方法(magic method),之后可以执行类中函数,产生安全问题. 漏洞的前提:unserialize函数的参数可控;PHP文件中存在可利用的类,类中有魔术方法; unserialize unserialize. unserialize以一个被序列化的变量(">
 <meta property="og:locale" content="zh-CN">
-<meta property="og:updated_time" content="2020-08-25T11:40:29.645Z">
+<meta property="og:updated_time" content="2020-08-26T08:16:53.825Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="IS-web-PHP-反序列化漏洞">
-<meta name="twitter:description" content="未完成 概览 PHP反序列化漏洞又称对象注入,可能会导致远程代码执行(RCE). 漏洞为执行unserialize函数,调用某一类并执行魔术方法(magic method),之后可以执行类中函数,产生安全问题. 漏洞的前提:unserialize函数的参数可控;PHP文件中存在可利用的类,类中有魔术方法; unserialize unserialize. unserialize以一个被序">
+<meta name="twitter:description" content="概览 PHP反序列化漏洞又称对象注入,可能会导致远程代码执行(RCE).漏洞为执行unserialize函数,调用某一类并执行魔术方法(magic method),之后可以执行类中函数,产生安全问题. 漏洞的前提:unserialize函数的参数可控;PHP文件中存在可利用的类,类中有魔术方法; unserialize unserialize. unserialize以一个被序列化的变量(">
 
 
 
@@ -503,7 +503,7 @@
                 
                   <span class="post-meta-item-text">本文字数：</span>
                 
-                <span title="本文字数">843</span>
+                <span title="本文字数">837</span>
               
 
               
@@ -537,9 +537,8 @@
       
 
       
-        <p>未完成</p>
-<h2 id="概览">概览</h2>
-<p><code>PHP</code>反序列化漏洞又称对象注入,可能会导致远程代码执行(<code>RCE</code>). 漏洞为执行<code>unserialize</code>函数,调用某一类并执行魔术方法(<code>magic method</code>),之后可以执行类中函数,产生安全问题.</p>
+        <h2 id="概览">概览</h2>
+<p><code>PHP</code>反序列化漏洞又称对象注入,可能会导致远程代码执行(<code>RCE</code>).漏洞为执行<code>unserialize</code>函数,调用某一类并执行魔术方法(<code>magic method</code>),之后可以执行类中函数,产生安全问题.</p>
 <p>漏洞的前提:<code>unserialize</code>函数的参数可控;<code>PHP</code>文件中存在可利用的类,类中有魔术方法;</p>
 <h2 id="unserialize">unserialize</h2>
 <p><a href="https://www.php.net/manual/zh/function.unserialize.php" target="_blank" rel="noopener">unserialize</a>. <code>unserialize</code>以一个被序列化的变量(即字符串)为参数,将其转换回序列化之前的值.</p>
@@ -670,7 +669,7 @@
                 
                   <a href="/archives/">
                 
-                    <span class="site-state-item-count">171</span>
+                    <span class="site-state-item-count">169</span>
                     <span class="site-state-item-name">日志</span>
                   </a>
                 </div>
@@ -812,7 +811,9 @@
                     
                       
                     
-                    <span class="site-state-item-count">43</span>
+                      
+                    
+                    <span class="site-state-item-count">44</span>
                     <span class="site-state-item-name">标签</span>
                   </a>
                 </div>
@@ -894,7 +895,7 @@
       <i class="fa fa-area-chart"></i>
     </span>
     
-    <span title="站点总字数">705k</span>
+    <span title="站点总字数">704k</span>
   
 
   
@@ -903,7 +904,7 @@
       <i class="fa fa-coffee"></i>
     </span>
     
-    <span title="站点阅读时长">10:41</span>
+    <span title="站点阅读时长">10:40</span>
   
 </div>
 

@@ -119,18 +119,18 @@
 
 
 
-  <meta name="description" content="0x00 记录通过任意地址读写进行提权的各种操作. 搜索cred结构体 可以通过prctl函数中的PR_SET_NAME功能设置task_struct里的char comm[TASK_COMM_LEN]成员为一个特殊值,再利用内存任意读找到task_structure结构体,从而找到cred结构体. 由于task_structure是kmem_cache_alloc_node,因此task">
+  <meta name="description" content="搜索cred结构体 可以通过prctl函数中的PR_SET_NAME功能设置task_struct里的char comm[TASK_COMM_LEN]成员为一个特殊值,再利用内存任意读找到task_structure结构体,从而找到cred结构体. 由于task_structure是kmem_cache_alloc_node,因此task_struct应该存在内核的动态分配区域,爆破范围应该在">
 <meta name="keywords" content="Linux-kernel">
 <meta property="og:type" content="article">
 <meta property="og:title" content="IS-pwn-Linux-kernel-任意地址读写到权限提升">
 <meta property="og:url" content="https://hitworld.github.io/posts/b98e2401/index.html">
 <meta property="og:site_name" content="w4rd3n">
-<meta property="og:description" content="0x00 记录通过任意地址读写进行提权的各种操作. 搜索cred结构体 可以通过prctl函数中的PR_SET_NAME功能设置task_struct里的char comm[TASK_COMM_LEN]成员为一个特殊值,再利用内存任意读找到task_structure结构体,从而找到cred结构体. 由于task_structure是kmem_cache_alloc_node,因此task">
+<meta property="og:description" content="搜索cred结构体 可以通过prctl函数中的PR_SET_NAME功能设置task_struct里的char comm[TASK_COMM_LEN]成员为一个特殊值,再利用内存任意读找到task_structure结构体,从而找到cred结构体. 由于task_structure是kmem_cache_alloc_node,因此task_struct应该存在内核的动态分配区域,爆破范围应该在">
 <meta property="og:locale" content="zh-CN">
-<meta property="og:updated_time" content="2020-08-25T11:40:29.623Z">
+<meta property="og:updated_time" content="2020-08-26T08:16:53.809Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="IS-pwn-Linux-kernel-任意地址读写到权限提升">
-<meta name="twitter:description" content="0x00 记录通过任意地址读写进行提权的各种操作. 搜索cred结构体 可以通过prctl函数中的PR_SET_NAME功能设置task_struct里的char comm[TASK_COMM_LEN]成员为一个特殊值,再利用内存任意读找到task_structure结构体,从而找到cred结构体. 由于task_structure是kmem_cache_alloc_node,因此task">
+<meta name="twitter:description" content="搜索cred结构体 可以通过prctl函数中的PR_SET_NAME功能设置task_struct里的char comm[TASK_COMM_LEN]成员为一个特殊值,再利用内存任意读找到task_structure结构体,从而找到cred结构体. 由于task_structure是kmem_cache_alloc_node,因此task_struct应该存在内核的动态分配区域,爆破范围应该在">
 
 
 
@@ -537,9 +537,7 @@
       
 
       
-        <h2 id="x00">0x00</h2>
-<p>记录通过任意地址读写进行提权的各种操作.</p>
-<h2 id="搜索cred结构体">搜索cred结构体</h2>
+        <h2 id="搜索cred结构体">搜索cred结构体</h2>
 <p>可以通过<code>prctl</code>函数中的<code>PR_SET_NAME</code>功能设置<code>task_struct</code>里的<code>char comm[TASK_COMM_LEN]</code>成员为一个特殊值,再利用内存任意读找到<code>task_structure</code>结构体,从而找到<code>cred</code>结构体.</p>
 <p>由于<code>task_structure</code>是<code>kmem_cache_alloc_node</code>,因此<code>task_struct</code>应该存在内核的动态分配区域,爆破范围应该在<code>0xffff880000000000 ~ 0xffffc80000000000</code>.</p>
 <p>例子:<code>https://github.com/mncoppola/StringIPC/blob/master/solution/solution.c</code>.</p>
@@ -700,7 +698,7 @@
                 
                   <a href="/archives/">
                 
-                    <span class="site-state-item-count">171</span>
+                    <span class="site-state-item-count">169</span>
                     <span class="site-state-item-name">日志</span>
                   </a>
                 </div>
@@ -842,7 +840,9 @@
                     
                       
                     
-                    <span class="site-state-item-count">43</span>
+                      
+                    
+                    <span class="site-state-item-count">44</span>
                     <span class="site-state-item-name">标签</span>
                   </a>
                 </div>
@@ -892,7 +892,7 @@
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#x00"><span class="nav-number">1.</span> <span class="nav-text">0x00</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#搜索cred结构体"><span class="nav-number">2.</span> <span class="nav-text">搜索cred结构体</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#vdso重写"><span class="nav-number">3.</span> <span class="nav-text">vDSO重写</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#hijackprctl"><span class="nav-number">4.</span> <span class="nav-text">HijackPrctl</span></a></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#搜索cred结构体"><span class="nav-number">1.</span> <span class="nav-text">搜索cred结构体</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#vdso重写"><span class="nav-number">2.</span> <span class="nav-text">vDSO重写</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#hijackprctl"><span class="nav-number">3.</span> <span class="nav-text">HijackPrctl</span></a></li></ol></div>
             
 
           </div>
@@ -924,7 +924,7 @@
       <i class="fa fa-area-chart"></i>
     </span>
     
-    <span title="站点总字数">705k</span>
+    <span title="站点总字数">704k</span>
   
 
   
@@ -933,7 +933,7 @@
       <i class="fa fa-coffee"></i>
     </span>
     
-    <span title="站点阅读时长">10:41</span>
+    <span title="站点阅读时长">10:40</span>
   
 </div>
 

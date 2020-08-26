@@ -119,18 +119,18 @@
 
 
 
-  <meta name="description" content="0x00 python沙箱,即以一定的方法模拟python终端.而沙箱逃逸就是绕过python沙箱得限制实现命令执行. python基础 模块导入 1234567import pwnfrom pwn import *#该方法不能永久导入__import__(&apos;pwn&apos;).p64(1111)#导入的模块a中的另一个模块b可以用a.b或者a.__dict__[&quot;b&quot;]间接访问模块b__impo">
+  <meta name="description" content="简介 python沙箱,即以一定的方法模拟python终端.而沙箱逃逸就是绕过python沙箱得限制实现命令执行. python基础 模块导入 1234567import pwnfrom pwn import *#该方法不能永久导入__import__(&apos;pwn&apos;).p64(1111)#导入的模块a中的另一个模块b可以用a.b或者a.__dict__[&quot;b&quot;]间接访问模块b__import">
 <meta name="keywords" content="escape">
 <meta property="og:type" content="article">
 <meta property="og:title" content="IS-pwn-escape-python沙箱逃逸">
 <meta property="og:url" content="https://hitworld.github.io/posts/8722019b/index.html">
 <meta property="og:site_name" content="w4rd3n">
-<meta property="og:description" content="0x00 python沙箱,即以一定的方法模拟python终端.而沙箱逃逸就是绕过python沙箱得限制实现命令执行. python基础 模块导入 1234567import pwnfrom pwn import *#该方法不能永久导入__import__(&apos;pwn&apos;).p64(1111)#导入的模块a中的另一个模块b可以用a.b或者a.__dict__[&quot;b&quot;]间接访问模块b__impo">
+<meta property="og:description" content="简介 python沙箱,即以一定的方法模拟python终端.而沙箱逃逸就是绕过python沙箱得限制实现命令执行. python基础 模块导入 1234567import pwnfrom pwn import *#该方法不能永久导入__import__(&apos;pwn&apos;).p64(1111)#导入的模块a中的另一个模块b可以用a.b或者a.__dict__[&quot;b&quot;]间接访问模块b__import">
 <meta property="og:locale" content="zh-CN">
-<meta property="og:updated_time" content="2020-08-25T11:40:29.613Z">
+<meta property="og:updated_time" content="2020-08-26T08:16:53.804Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="IS-pwn-escape-python沙箱逃逸">
-<meta name="twitter:description" content="0x00 python沙箱,即以一定的方法模拟python终端.而沙箱逃逸就是绕过python沙箱得限制实现命令执行. python基础 模块导入 1234567import pwnfrom pwn import *#该方法不能永久导入__import__(&apos;pwn&apos;).p64(1111)#导入的模块a中的另一个模块b可以用a.b或者a.__dict__[&quot;b&quot;]间接访问模块b__impo">
+<meta name="twitter:description" content="简介 python沙箱,即以一定的方法模拟python终端.而沙箱逃逸就是绕过python沙箱得限制实现命令执行. python基础 模块导入 1234567import pwnfrom pwn import *#该方法不能永久导入__import__(&apos;pwn&apos;).p64(1111)#导入的模块a中的另一个模块b可以用a.b或者a.__dict__[&quot;b&quot;]间接访问模块b__import">
 
 
 
@@ -537,7 +537,7 @@
       
 
       
-        <h2 id="x00">0x00</h2>
+        <h2 id="简介">简介</h2>
 <p><code>python</code>沙箱,即以一定的方法模拟<code>python</code>终端.而沙箱逃逸就是绕过<code>python</code>沙箱得限制实现命令执行.</p>
 <h2 id="python基础">python基础</h2>
 <h3 id="模块导入">模块导入</h3>
@@ -703,7 +703,7 @@
                 
                   <a href="/archives/">
                 
-                    <span class="site-state-item-count">171</span>
+                    <span class="site-state-item-count">169</span>
                     <span class="site-state-item-name">日志</span>
                   </a>
                 </div>
@@ -845,7 +845,9 @@
                     
                       
                     
-                    <span class="site-state-item-count">43</span>
+                      
+                    
+                    <span class="site-state-item-count">44</span>
                     <span class="site-state-item-name">标签</span>
                   </a>
                 </div>
@@ -895,7 +897,7 @@
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#x00"><span class="nav-number">1.</span> <span class="nav-text">0x00</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#python基础"><span class="nav-number">2.</span> <span class="nav-text">python基础</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#模块导入"><span class="nav-number">2.1.</span> <span class="nav-text">模块导入</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#命令执行"><span class="nav-number">2.2.</span> <span class="nav-text">命令执行</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#内置函数"><span class="nav-number">2.3.</span> <span class="nav-text">内置函数</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#object类基础函数"><span class="nav-number">2.4.</span> <span class="nav-text">object类基础函数</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#f修饰符"><span class="nav-number">2.5.</span> <span class="nav-text">f修饰符</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#绕过思路"><span class="nav-number">3.</span> <span class="nav-text">绕过思路</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#修改got表"><span class="nav-number">3.1.</span> <span class="nav-text">修改got表</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#间接引用"><span class="nav-number">3.2.</span> <span class="nav-text">间接引用</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#通过code构造函数"><span class="nav-number">3.3.</span> <span class="nav-text">通过code构造函数</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#字符编码或替换"><span class="nav-number">3.4.</span> <span class="nav-text">字符编码或替换</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#python沙盒模板"><span class="nav-number">4.</span> <span class="nav-text">python沙盒模板</span></a></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#简介"><span class="nav-number">1.</span> <span class="nav-text">简介</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#python基础"><span class="nav-number">2.</span> <span class="nav-text">python基础</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#模块导入"><span class="nav-number">2.1.</span> <span class="nav-text">模块导入</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#命令执行"><span class="nav-number">2.2.</span> <span class="nav-text">命令执行</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#内置函数"><span class="nav-number">2.3.</span> <span class="nav-text">内置函数</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#object类基础函数"><span class="nav-number">2.4.</span> <span class="nav-text">object类基础函数</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#f修饰符"><span class="nav-number">2.5.</span> <span class="nav-text">f修饰符</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#绕过思路"><span class="nav-number">3.</span> <span class="nav-text">绕过思路</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#修改got表"><span class="nav-number">3.1.</span> <span class="nav-text">修改got表</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#间接引用"><span class="nav-number">3.2.</span> <span class="nav-text">间接引用</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#通过code构造函数"><span class="nav-number">3.3.</span> <span class="nav-text">通过code构造函数</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#字符编码或替换"><span class="nav-number">3.4.</span> <span class="nav-text">字符编码或替换</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#python沙盒模板"><span class="nav-number">4.</span> <span class="nav-text">python沙盒模板</span></a></li></ol></div>
             
 
           </div>
@@ -927,7 +929,7 @@
       <i class="fa fa-area-chart"></i>
     </span>
     
-    <span title="站点总字数">705k</span>
+    <span title="站点总字数">704k</span>
   
 
   
@@ -936,7 +938,7 @@
       <i class="fa fa-coffee"></i>
     </span>
     
-    <span title="站点阅读时长">10:41</span>
+    <span title="站点阅读时长">10:40</span>
   
 </div>
 

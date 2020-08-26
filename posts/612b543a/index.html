@@ -127,7 +127,7 @@
 <meta property="og:site_name" content="w4rd3n">
 <meta property="og:description" content="apt换源 1234sudo apt-get install leafpadsudo leafpad /etc/apt/sources.listsudo apt-get updatesudo apt-get full-upgrade sources.list. 12deb http://mirrors.ustc.edu.cn/kali kali-rolling main non-free c">
 <meta property="og:locale" content="zh-CN">
-<meta property="og:updated_time" content="2020-08-25T11:40:29.660Z">
+<meta property="og:updated_time" content="2020-08-26T08:16:53.836Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="w4rd3n-kali虚拟机环境搭建">
 <meta name="twitter:description" content="apt换源 1234sudo apt-get install leafpadsudo leafpad /etc/apt/sources.listsudo apt-get updatesudo apt-get full-upgrade sources.list. 12deb http://mirrors.ustc.edu.cn/kali kali-rolling main non-free c">
@@ -539,7 +539,7 @@
 <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">systemctl start docker</span><br><span class="line">systemctl <span class="built_in">enable</span> docker</span><br><span class="line"><span class="comment">#开机自启</span></span><br></pre></td></tr></table></figure>
 <p><code>docker-compose</code>安装.</p>
 <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">curl -L https://github.com/docker/compose/releases/download/1.8.0/docker-compose-`uname -s`-`uname -m` &gt; /usr/<span class="built_in">local</span>/bin/docker-compose</span><br><span class="line">chmod +x /usr/<span class="built_in">local</span>/bin/docker-compose</span><br><span class="line">ln -s /usr/<span class="built_in">local</span>/bin/docker-compose /usr/bin/docker-compose</span><br></pre></td></tr></table></figure>
-<h2 id="dockerfly">dockerfly</h2>
+<p>使用<code>dockerfly</code>管理<code>docker</code>.</p>
 <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">docker pull helyho/dockerfly</span><br><span class="line">docker run --name dockerfly -d -v /var/run/docker.sock:/var/run/docker.sock --restart always -p 28083:28083 helyho/dockerfly</span><br></pre></td></tr></table></figure>
 <p>访问:<code>http://127.0.0.1:28083</code>,使用:<code>admin</code>/<code>1234</code>登录到<code>dockerfly</code>.</p>
 <h2 id="penetration">penetration</h2>
@@ -669,7 +669,7 @@
                 
                   <a href="/archives/">
                 
-                    <span class="site-state-item-count">171</span>
+                    <span class="site-state-item-count">169</span>
                     <span class="site-state-item-name">日志</span>
                   </a>
                 </div>
@@ -811,7 +811,9 @@
                     
                       
                     
-                    <span class="site-state-item-count">43</span>
+                      
+                    
+                    <span class="site-state-item-count">44</span>
                     <span class="site-state-item-name">标签</span>
                   </a>
                 </div>
@@ -861,7 +863,7 @@
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#apt换源"><span class="nav-number">1.</span> <span class="nav-text">apt换源</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#docker"><span class="nav-number">2.</span> <span class="nav-text">docker</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#dockerfly"><span class="nav-number">3.</span> <span class="nav-text">dockerfly</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#penetration"><span class="nav-number">4.</span> <span class="nav-text">penetration</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#vulhub"><span class="nav-number">4.1.</span> <span class="nav-text">vulhub</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#vulapps"><span class="nav-number">4.2.</span> <span class="nav-text">VulApps</span></a></li></ol></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#apt换源"><span class="nav-number">1.</span> <span class="nav-text">apt换源</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#docker"><span class="nav-number">2.</span> <span class="nav-text">docker</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#penetration"><span class="nav-number">3.</span> <span class="nav-text">penetration</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#vulhub"><span class="nav-number">3.1.</span> <span class="nav-text">vulhub</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#vulapps"><span class="nav-number">3.2.</span> <span class="nav-text">VulApps</span></a></li></ol></li></ol></div>
             
 
           </div>
@@ -893,7 +895,7 @@
       <i class="fa fa-area-chart"></i>
     </span>
     
-    <span title="站点总字数">705k</span>
+    <span title="站点总字数">704k</span>
   
 
   
@@ -902,7 +904,7 @@
       <i class="fa fa-coffee"></i>
     </span>
     
-    <span title="站点阅读时长">10:41</span>
+    <span title="站点阅读时长">10:40</span>
   
 </div>
 

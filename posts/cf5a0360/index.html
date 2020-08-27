@@ -127,22 +127,10 @@
 <meta property="og:site_name" content="w4rd3n">
 <meta property="og:description" content="前言 随机试验的结果未必是数量的,为了数学处理的方便以及理论研究的需要,将随机试验的结果与实数对应起来,引入随机变量的概念. 随机变量作一个从样本空间到实数集的映射(函数),使样本从语言描述变成实数变量,从而将实验结果数量化. 针对实践中人们关心随机变量落入某个区间的概率,定义了分布函数的概念. 由分布函数的连续积分表达式定义出连续型随机变量的概率密度,使概率的求解转化为概率密度的定积分的">
 <meta property="og:locale" content="zh-CN">
-<meta property="og:image" content="https://hitworld.github.io/posts/cf5a0360/14.png">
-<meta property="og:image" content="https://hitworld.github.io/posts/cf5a0360/33.png">
-<meta property="og:image" content="https://hitworld.github.io/posts/cf5a0360/17.png">
-<meta property="og:image" content="https://hitworld.github.io/posts/cf5a0360/15.png">
-<meta property="og:image" content="https://hitworld.github.io/posts/cf5a0360/16.png">
-<meta property="og:image" content="https://hitworld.github.io/posts/cf5a0360/18.png">
-<meta property="og:image" content="https://hitworld.github.io/posts/cf5a0360/21.png">
-<meta property="og:image" content="https://hitworld.github.io/posts/cf5a0360/19.png">
-<meta property="og:image" content="https://hitworld.github.io/posts/cf5a0360/20.png">
-<meta property="og:image" content="https://hitworld.github.io/posts/cf5a0360/22.png">
-<meta property="og:image" content="https://hitworld.github.io/posts/cf5a0360/23.png">
-<meta property="og:updated_time" content="2020-08-27T05:16:44.032Z">
+<meta property="og:updated_time" content="2020-08-27T06:32:03.538Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Math-probability-theory-随机变量及其分布">
 <meta name="twitter:description" content="前言 随机试验的结果未必是数量的,为了数学处理的方便以及理论研究的需要,将随机试验的结果与实数对应起来,引入随机变量的概念. 随机变量作一个从样本空间到实数集的映射(函数),使样本从语言描述变成实数变量,从而将实验结果数量化. 针对实践中人们关心随机变量落入某个区间的概率,定义了分布函数的概念. 由分布函数的连续积分表达式定义出连续型随机变量的概率密度,使概率的求解转化为概率密度的定积分的">
-<meta name="twitter:image" content="https://hitworld.github.io/posts/cf5a0360/14.png">
 
 
 
@@ -508,7 +496,7 @@
                 
                   <span class="post-meta-item-text">本文字数：</span>
                 
-                <span title="本文字数">6k</span>
+                <span title="本文字数">8.5k</span>
               
 
               
@@ -522,7 +510,7 @@
                 
                   <span class="post-meta-item-text">阅读时长 &asymp;</span>
                 
-                <span title="阅读时长">5 分钟</span>
+                <span title="阅读时长">8 分钟</span>
               
             </div>
           
@@ -727,7 +715,7 @@ f(x) =
 0, x \le 0,\\
 \end{cases}
 \]</span></p>
-<p>其中,<span class="math inline">\(\beta &gt; 0,\alpha &gt; 0\)</span>为参数,伽玛函数为:<span class="math inline">\(\Gamma(\alpha) = \int_{0}{+\infty}x^{\alpha-1}e^{-x}{d}x\)</span>.</p>
+<p>其中,<span class="math inline">\(\beta &gt; 0,\alpha &gt; 0\)</span>为参数,伽玛函数为:<span class="math inline">\(\Gamma(\alpha) = \int_{0}^{+\infty}x^{\alpha-1}e^{-x}{d}x\)</span>.</p>
 <p>则称<span class="math inline">\(X\)</span>服从伽玛分布,简记<span class="math inline">\(X \sim \Gamma(\alpha, \beta)\)</span>.特别的:<span class="math inline">\(\Gamma(1, \beta)\)</span>是参数为<span class="math inline">\(\beta\)</span>的指数分布.</p>
 <p>伽玛函数性质:</p>
 <ol type="1">
@@ -736,23 +724,48 @@ f(x) =
 <li><span class="math inline">\(\Gamma(\frac{1}{2}) = \sqrt{\pi}\)</span>.</li>
 </ol>
 <h4 id="正态分布">正态分布</h4>
-<img src="/posts/cf5a0360/14.png" title="p14">
-<img src="/posts/cf5a0360/33.png" title="p33">
-<p>标准正态分布.</p>
-<img src="/posts/cf5a0360/17.png" title="p17">
+<p>若随机变量<span class="math inline">\(X\)</span>概率密度为:</p>
+<p><span class="math inline">\(f(x) = \frac{1}{\sqrt{2\pi}\sigma}e^{-\frac{(x-\mu)^2}{2\sigma^2}},-\infty &lt; x &lt; + \infty\)</span>.</p>
+<p>其中<span class="math inline">\(\mu,\sigma(\sigma &gt; 0)\)</span>为常数,则称<span class="math inline">\(X\)</span>服从参数为<span class="math inline">\(\mu,\sigma\)</span>的正态分布,记作<span class="math inline">\(X \sim N(\mu,\sigma^2)\)</span>.</p>
+<p>分布函数<span class="math inline">\(F(x) = \frac{1}{\sqrt{2\pi}\sigma}\int_{-infty}^{x}e^{-\frac{(t-\mu)^2}{2\sigma^2}}{d}t\)</span>.</p>
+<p>正态分布的用途:人的生理尺寸,医学检验指标.</p>
+<p>若<span class="math inline">\(Z \sim N(0,1)\)</span>,称<span class="math inline">\(Z\)</span>服从标准正态分布.</p>
+<p><span class="math inline">\(Z\)</span>的概率密度函数:<span class="math inline">\(\varphi(z) = \frac{1}{\sqrt{2\pi}}e^{-\frac{z^2}{2}}\)</span>.</p>
+<p><span class="math inline">\(Z\)</span>的分布函数:<span class="math inline">\(\phi(z) = \frac{1}{\sqrt{2\pi}}\int_{-infty}^{z}e^{-\frac{t^2}{2}}{d}t\)</span>.</p>
 <p>正态分布(也称为高斯分布,误差分布)的性质.</p>
-<img src="/posts/cf5a0360/15.png" title="p15">
-<img src="/posts/cf5a0360/16.png" title="p16">
+<ol type="1">
+<li><span class="math inline">\(\mu\)</span>--位置参数,<span class="math inline">\(f(x)\)</span>的图形关于<span class="math inline">\(x = \mu\)</span>对称.</li>
+<li><span class="math inline">\(\sigma\)</span>--影响<span class="math inline">\(f(x)\)</span>的曲线的最大值<span class="math inline">\(f_max = \frac{1}{\sqrt{2\pi}\sigma}\)</span>及图形的形状拐点(<span class="math inline">\(x \pm \sigma,f(x \pm \sigma)\)</span>).</li>
+<li>若<span class="math inline">\(X \sim N(\mu,\sigma^2)\)</span>,则<span class="math inline">\(Z = \frac{X - \mu}{\sigma} \sim N(0,1)\)</span>.</li>
+<li><span class="math inline">\(\phi(-x) + \phi(x) = 1 \Rightarrow \phi(-x) = 1 - \phi(x) \Rightarrow \phi(x) - \phi(-x) = 2\phi(x) - 1\)</span>.</li>
+<li>服从正态分布<span class="math inline">\(N(\mu,\sigma^2)\)</span>的随机变量<span class="math inline">\(X\)</span>的值几乎全部落入<span class="math inline">\([\mu - 3\sigma,\mu + 3\sigma]\)</span>内,称为<span class="math inline">\(3\sigma\)</span>原则.</li>
+</ol>
 <p>通过标准正态分布计算其它一切正态分布的概率.</p>
-<img src="/posts/cf5a0360/18.png" title="p18">
-<p>标准正态分布的上分位点.</p>
-<img src="/posts/cf5a0360/21.png" title="p21">
+<p>性质:当<span class="math inline">\(X \sim N(\mu,\sigma^2)\)</span>时,<span class="math inline">\(\frac{X - \mu}{\sigma} \sim N(0,1)\)</span>.</p>
+<p>证明:对于任意的实数<span class="math inline">\(z\)</span>.</p>
+<p><span class="math inline">\(P(\frac{X-\mu}{\sigma}\le z)&amp;=P(X\le\sigma z + \mu) = \int_{-\infty}^{\sigma z + \mu}\frac{1}{\sqrt{2\pi}\sigma}e^{-\frac{(t-\mu)^2}{2\sigma^2}}{d}t\)</span>.</p>
+<p>令<span class="math inline">\(s = \frac{t - \mu}{\sigma}\)</span>,则<span class="math inline">\(\frac{(t - \mu)^2}{2\sigma^2} = \frac{s^2}{2},{d}s = \frac{1}{\sigma}{d}t\)</span>.</p>
+<p>原式<span class="math inline">\(=\int_{-\infty}^{z} \frac{1}{\sqrt{2\pi}}e^{-\frac{s^2}{2}}{d}s = \phi(z)\)</span>.</p>
+<p>由此可知,当<span class="math inline">\(X \sim N(\mu,\sigma^2)\)</span>时,对于任意实数<span class="math inline">\(a\)</span>,<span class="math inline">\(F_X(a)=P(X \le a)=P(\frac{X - \mu}{\sigma} \le \frac{a - \mu}{\sigma})=\phi(\frac{a - \mu}{\sigma})\)</span>.</p>
+<p>设<span class="math inline">\(X \sim N(0,1)\)</span>,若<span class="math inline">\(z_{\alpha}\)</span>满足<span class="math inline">\(P{X &gt; z_{\alpha}} = \alpha,0 &lt; \alpha &lt; 1\)</span>.则称点<span class="math inline">\(z_{\alpha}\)</span>为标准正态分布的上<span class="math inline">\({\alpha}\)</span>分位点.</p>
 <h2 id="随机变量的函数的分布">随机变量的函数的分布</h2>
 <p>由已知的<span class="math inline">\(r.v.X\)</span>的分布,去求得它的函数<span class="math inline">\(Y = g(X)\)</span>的分布(<span class="math inline">\(g(.)\)</span>是已知的连续函数).</p>
-<img src="/posts/cf5a0360/19.png" title="p19">
-<img src="/posts/cf5a0360/20.png" title="p20">
-<img src="/posts/cf5a0360/22.png" title="p22">
-<img src="/posts/cf5a0360/23.png" title="p23">
+<p>若<span class="math inline">\(X\)</span>为离散型随机变量,则先写出Y的可能取值:<span class="math inline">\(y_1,y_2,\cdots,y_j,\cdots\)</span>.再找出<span class="math inline">\(\{Y = y_j\}\)</span>的等价事件{X D},则<span class="math inline">\(P(Y = y_j) = P(X \in D)\)</span>.</p>
+<p>若<span class="math inline">\(X\)</span>为连续型随机变量,先根据<span class="math inline">\(X\)</span>的取值范围,给出<span class="math inline">\(Y\)</span>的取值范围.然后写出<span class="math inline">\(Y\)</span>的概率分布函数:<span class="math inline">\(F_Y(y) = P(Y \le y)\)</span>,找出<span class="math inline">\(\{Y \le y\}\)</span>的等价事件<span class="math inline">\(\{X \in D\}\)</span>,得<span class="math inline">\(F_Y(y) = P(X \in D)\)</span>;再求出<span class="math inline">\(Y\)</span>得概率密度函数<span class="math inline">\(f_Y(y)\)</span>.</p>
+<p>定理:设随机变量<span class="math inline">\(X \sim f_X(x), -\infty &lt; x &lt; +\infty\)</span>,<span class="math inline">\(Y = g(X),g\prime(x) &gt; 0(g\prime(x) &lt; 0)\)</span>.</p>
+<p>则<span class="math inline">\(Y\)</span>具有概率密度为:</p>
+<p><span class="math display">\[
+f_Y(y) = 
+\begin{cases}
+f_X(h(y))\cdot|h\prime(y)|, \alpha &lt; y &lt; \beta\\
+0, 其他,\\
+\end{cases}
+\]</span></p>
+<ul>
+<li><span class="math inline">\((\alpha,\beta)\)</span>是<span class="math inline">\(Y\)</span>的取值范围,其中:<span class="math inline">\(\alpha = g(-\infty),\beta = g(+\infty)\)</span>(若<span class="math inline">\(g\prime(x) &lt; 0\)</span>,则反过来).</li>
+<li><span class="math inline">\(h\)</span>是<span class="math inline">\(g\)</span>的反函数,即<span class="math inline">\(h(y) = x \Leftrightarrow y = g(x)\)</span>.</li>
+</ul>
+<p>一般的,若随机变量<span class="math inline">\(X \sim N(\mu,\sigma^2)\)</span>,则有<span class="math inline">\(Y = aX + b \Rightarrow Y \sim N(a\mu + b,a^2\sigma^2)\)</span>.</p>
 
       
     </div>
@@ -1101,7 +1114,7 @@ f(x) =
       <i class="fa fa-area-chart"></i>
     </span>
     
-    <span title="站点总字数">707k</span>
+    <span title="站点总字数">709k</span>
   
 
   
@@ -1110,7 +1123,7 @@ f(x) =
       <i class="fa fa-coffee"></i>
     </span>
     
-    <span title="站点阅读时长">10:43</span>
+    <span title="站点阅读时长">10:45</span>
   
 </div>
 

@@ -127,11 +127,6 @@
 <meta property="og:site_name" content="w4rd3n">
 <meta property="og:description" content="前言 随机试验的结果未必是数量的,为了数学处理的方便以及理论研究的需要,将随机试验的结果与实数对应起来,引入随机变量的概念. 随机变量作一个从样本空间到实数集的映射(函数),使样本从语言描述变成实数变量,从而将实验结果数量化. 针对实践中人们关心随机变量落入某个区间的概率,定义了分布函数的概念. 由分布函数的连续积分表达式定义出连续型随机变量的概率密度,使概率的求解转化为概率密度的定积分的">
 <meta property="og:locale" content="zh-CN">
-<meta property="og:image" content="https://hitworld.github.io/posts/cf5a0360/11.png">
-<meta property="og:image" content="https://hitworld.github.io/posts/cf5a0360/31.png">
-<meta property="og:image" content="https://hitworld.github.io/posts/cf5a0360/32.png">
-<meta property="og:image" content="https://hitworld.github.io/posts/cf5a0360/12.png">
-<meta property="og:image" content="https://hitworld.github.io/posts/cf5a0360/13.png">
 <meta property="og:image" content="https://hitworld.github.io/posts/cf5a0360/14.png">
 <meta property="og:image" content="https://hitworld.github.io/posts/cf5a0360/33.png">
 <meta property="og:image" content="https://hitworld.github.io/posts/cf5a0360/17.png">
@@ -143,11 +138,11 @@
 <meta property="og:image" content="https://hitworld.github.io/posts/cf5a0360/20.png">
 <meta property="og:image" content="https://hitworld.github.io/posts/cf5a0360/22.png">
 <meta property="og:image" content="https://hitworld.github.io/posts/cf5a0360/23.png">
-<meta property="og:updated_time" content="2020-08-26T12:56:07.122Z">
+<meta property="og:updated_time" content="2020-08-27T05:16:44.032Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Math-probability-theory-随机变量及其分布">
 <meta name="twitter:description" content="前言 随机试验的结果未必是数量的,为了数学处理的方便以及理论研究的需要,将随机试验的结果与实数对应起来,引入随机变量的概念. 随机变量作一个从样本空间到实数集的映射(函数),使样本从语言描述变成实数变量,从而将实验结果数量化. 针对实践中人们关心随机变量落入某个区间的概率,定义了分布函数的概念. 由分布函数的连续积分表达式定义出连续型随机变量的概率密度,使概率的求解转化为概率密度的定积分的">
-<meta name="twitter:image" content="https://hitworld.github.io/posts/cf5a0360/11.png">
+<meta name="twitter:image" content="https://hitworld.github.io/posts/cf5a0360/14.png">
 
 
 
@@ -513,7 +508,7 @@
                 
                   <span class="post-meta-item-text">本文字数：</span>
                 
-                <span title="本文字数">5k</span>
+                <span title="本文字数">6k</span>
               
 
               
@@ -558,10 +553,10 @@
 <p>随机变量可分为离散型随机变量和非离散型随机变量.</p>
 <h2 id="离散型随机变量及其分布律">离散型随机变量及其分布律</h2>
 <p>若随机变量全部可能取到的值是有限多个或可列无限多个(即可数集,指能与自然数集<span class="math inline">\(N\)</span>一一对应的集合),则称为离散型随机变量.</p>
-<p>设离散型随机变量<span class="math inline">\(X\)</span>所有可能取值为<span class="math inline">\(x_k\)</span>(<span class="math inline">\(k = 1, 2, ...\)</span>),<span class="math inline">\(P(X = x_k) = p_k\)</span>(<span class="math inline">\(k = 1, 2, ...\)</span>).</p>
+<p>设离散型随机变量<span class="math inline">\(X\)</span>所有可能取值为<span class="math inline">\(x_k\)</span>(<span class="math inline">\(k = 1, 2, \cdots\)</span>),<span class="math inline">\(P(X = x_k) = p_k\)</span>(<span class="math inline">\(k = 1, 2, \cdots\)</span>).</p>
 <ul>
 <li>任意<span class="math inline">\(p_k\)</span>大于等于<span class="math inline">\(0\)</span>且所有<span class="math inline">\(p_k\)</span>之和为<span class="math inline">\(1\)</span>.</li>
-<li><span class="math inline">\(P(X = x_k) = p_k\)</span>(<span class="math inline">\(k = 1, 2, ...\)</span>)为离散型随机变量<span class="math inline">\(X\)</span>的概率分布(律)或分布律.</li>
+<li><span class="math inline">\(P(X = x_k) = p_k\)</span>(<span class="math inline">\(k = 1, 2, \cdots\)</span>)为离散型随机变量<span class="math inline">\(X\)</span>的概率分布(律)或分布律.</li>
 </ul>
 <p>概率分布或分布律也可以用表格表示.</p>
 <table>
@@ -570,9 +565,9 @@
 <th>X</th>
 <th><span class="math inline">\(x_1\)</span></th>
 <th><span class="math inline">\(x_2\)</span></th>
-<th>...</th>
+<th><span class="math inline">\(\cdots\)</span></th>
 <th><span class="math inline">\(x_n\)</span></th>
-<th>...</th>
+<th><span class="math inline">\(\cdots\)</span></th>
 </tr>
 </thead>
 <tbody>
@@ -580,9 +575,9 @@
 <td><span class="math inline">\(P(X = x_k)\)</span></td>
 <td><span class="math inline">\(p_1\)</span></td>
 <td><span class="math inline">\(p_2\)</span></td>
-<td>...</td>
+<td><span class="math inline">\(\cdots\)</span></td>
 <td><span class="math inline">\(p_n\)</span></td>
-<td>...</td>
+<td><span class="math inline">\(\cdots\)</span></td>
 </tr>
 </tbody>
 </table>
@@ -601,12 +596,12 @@ X = X(e) =
 <h3 id="二项分布">二项分布</h3>
 <p>设试验<span class="math inline">\(E\)</span>只有两个可能结果<span class="math inline">\(A\)</span>与<span class="math inline">\(\overline{A}\)</span>,则称<span class="math inline">\(E\)</span>为伯努利试验.</p>
 <p>设<span class="math inline">\(P(A) = p(0 &lt; p &lt; 1)\)</span>,将试验<span class="math inline">\(E\)</span>独立重复地进行<span class="math inline">\(n\)</span>次,这样的试验称为<span class="math inline">\(n\)</span>重伯努利实验.</p>
-<p>一般地有<span class="math inline">\(P\{X = k\} = C^k_np^k(1-p)^{n-k},k=0,1,...,n\)</span>.</p>
+<p>一般地有<span class="math inline">\(P\{X = k\} = C^k_np^k(1-p)^{n-k},k=0,1,\cdots,n\)</span>.</p>
 <p>称<span class="math inline">\(X\)</span>服从参数为<span class="math inline">\(n,p\)</span>的二项分布,记为<span class="math inline">\(X \sim b(n,p)\)</span>.</p>
 <p>当<span class="math inline">\(n=1\)</span>时,<span class="math inline">\(P\{X=k\}=p^k(1-p)^{1-k},k=0,1,\)</span>即为<span class="math inline">\(0-1\)</span>分布.</p>
 <p>当<span class="math inline">\(n\)</span>较大,<span class="math inline">\(p\)</span>又较小时,二项分布的计算比较困难,可以用<span class="math inline">\(Poisson\)</span>分布近似计算.</p>
 <h3 id="泊松分布">泊松分布</h3>
-<p>若<span class="math inline">\(X\)</span>的分布为<span class="math inline">\(P\{X=k\}=\frac{\lambda^ke^{-\lambda}}{k!},k=0,1,...\)</span>.</p>
+<p>若<span class="math inline">\(X\)</span>的分布为<span class="math inline">\(P\{X=k\}=\frac{\lambda^ke^{-\lambda}}{k!},k=0,1,\cdots\)</span>.</p>
 <p>其中<span class="math inline">\(\lambda&gt;0\)</span>是常数,则称<span class="math inline">\(X\)</span>服从参数为<span class="math inline">\(\lambda\)</span>的泊松分布.记为<span class="math inline">\(X \sim \pi(\lambda)\)</span>.</p>
 <p><span class="math inline">\(\sum_{k=0}^\infty P\{X=k\} = \sum_{k=0}^\infty \frac{\lambda^ke^{-\lambda}}{k!} = e^{-\lambda}\sum_{k=0}^\infty\frac{\lambda^k}{k!} = e^{-\lambda}e^{\lambda} = 1\)</span>.</p>
 <p>如果某事件以固定强度<span class="math inline">\(\lambda\)</span>,随机且独立地出现,该事件在单位时间出现的次数可以看成是服从泊松分布.</p>
@@ -618,9 +613,9 @@ X = X(e) =
 <p>一般当<span class="math inline">\(n \ge 20,p \le 0.05\)</span>时,近似效果较好.</p>
 <h3 id="几何分布">几何分布</h3>
 <p>进行重复独立试验,设每次试验成功的概率为<span class="math inline">\(p\)</span>,失败的概率为<span class="math inline">\(q\)</span>(等于<span class="math inline">\(1 - p\)</span>),<span class="math inline">\((0 &lt; p &lt; 1)\)</span>.</p>
-<p>将试验进行到出现一次成功为止,以<span class="math inline">\(X\)</span>表示所需的试验次数,则<span class="math inline">\(X\)</span>的分布律为:<span class="math inline">\(P\{X = k\} = q^{k - 1}p\)</span>,<span class="math inline">\(k = 1, 2, ...\)</span>.称为<span class="math inline">\(X\)</span>服从参数为<span class="math inline">\(p\)</span>的几何分布.</p>
+<p>将试验进行到出现一次成功为止,以<span class="math inline">\(X\)</span>表示所需的试验次数,则<span class="math inline">\(X\)</span>的分布律为:<span class="math inline">\(P\{X = k\} = q^{k - 1}p\)</span>,<span class="math inline">\(k = 1, 2, \cdots\)</span>.称为<span class="math inline">\(X\)</span>服从参数为<span class="math inline">\(p\)</span>的几何分布.</p>
 <p>若<span class="math inline">\(X\)</span>的概率分布律为</p>
-<p><span class="math inline">\(P(X=k)=p(1-p)^{k-1},k=1,2,3,...\)</span>.</p>
+<p><span class="math inline">\(P(X=k)=p(1-p)^{k-1},k=1,2,3,\cdots\)</span>.</p>
 <p>其中<span class="math inline">\(0 &lt; p &lt; 1\)</span>,称<span class="math inline">\(X\)</span>服从参数为<span class="math inline">\(p\)</span>的几何分布,记为<span class="math inline">\(X \sim Geom(p)\)</span>.</p>
 <h2 id="随机变量的分布函数">随机变量的分布函数</h2>
 <p>对于非离散型<span class="math inline">\(r.v.\)</span>,不能用分布律来描述它,需要考虑<span class="math inline">\(r.v.\)</span>的取值落入一个区间的概率.如:<span class="math inline">\(P\{X &lt;= x\}\)</span>,<span class="math inline">\(P\{x1 &lt;= X &lt;= x2\}\)</span>.为此引入随机变量的分布函数.</p>
@@ -696,12 +691,50 @@ F(x) =
 \end{cases}
 \]</span></p>
 <h4 id="指数分布">指数分布</h4>
-<img src="/posts/cf5a0360/11.png" title="p11">
-<img src="/posts/cf5a0360/31.png" title="p31">
-<img src="/posts/cf5a0360/32.png" title="p32">
+<p>定义:如果连续性随机变量<span class="math inline">\(X\)</span>的概率密度为:</p>
+<p><span class="math display">\[
+f(x) = 
+\begin{cases}
+\frac{1}{\theta}e^{-\frac{x}{\theta}},x \ge 0,\theta &gt; 0\\
+0, x &lt; 0,\\
+\end{cases}
+\]</span></p>
+<p>则称<span class="math inline">\(X\)</span>服从参数为<span class="math inline">\(\theta\)</span>的指数分布.</p>
+<p>指数分布具有无记忆性:<span class="math inline">\(P(X&gt;s+t|X&gt;s)=P(X&gt;t)\)</span>.</p>
+<p>指数分布概率密度的又一种表示.</p>
+<p><span class="math display">\[
+f(x) = 
+\begin{cases}
+\lambda e^{-\lambda x},x \ge 0,\lambda &gt; 0\\
+0, x &lt; 0,\\
+\end{cases}
+\]</span></p>
+<p>分布函数为:</p>
+<p><span class="math display">\[
+F(x) = 
+\begin{cases}
+1 - e^{-\lambda x}, x &gt; 0,\\
+0, x \le 0.\\
+\end{cases}
+\]</span></p>
+<p>指数分布可用来表示:独立随机事件发生的时间间隔;排队论中一个顾客接受服务的时间长短;无记忆性的连续现象.</p>
 <h4 id="伽玛分布">伽玛分布</h4>
-<img src="/posts/cf5a0360/12.png" title="p12">
-<img src="/posts/cf5a0360/13.png" title="p13">
+<p>定义:如果连续型随机变量<span class="math inline">\(X\)</span>的概率密度为:</p>
+<p><span class="math display">\[
+f(x) = 
+\begin{cases}
+\frac{\beta^\alpha}{\Gamma(\alpha)}x^{\alpha - 1}e^{-\beta x},x &gt; 0\\
+0, x \le 0,\\
+\end{cases}
+\]</span></p>
+<p>其中,<span class="math inline">\(\beta &gt; 0,\alpha &gt; 0\)</span>为参数,伽玛函数为:<span class="math inline">\(\Gamma(\alpha) = \int_{0}{+\infty}x^{\alpha-1}e^{-x}{d}x\)</span>.</p>
+<p>则称<span class="math inline">\(X\)</span>服从伽玛分布,简记<span class="math inline">\(X \sim \Gamma(\alpha, \beta)\)</span>.特别的:<span class="math inline">\(\Gamma(1, \beta)\)</span>是参数为<span class="math inline">\(\beta\)</span>的指数分布.</p>
+<p>伽玛函数性质:</p>
+<ol type="1">
+<li><span class="math inline">\(\Gamma(\alpha + 1) = \alpha \Gamma(\alpha)\)</span>.</li>
+<li>对于正整数n,<span class="math inline">\(\Gamma(n + 1) = n!\)</span>.</li>
+<li><span class="math inline">\(\Gamma(\frac{1}{2}) = \sqrt{\pi}\)</span>.</li>
+</ol>
 <h4 id="正态分布">正态分布</h4>
 <img src="/posts/cf5a0360/14.png" title="p14">
 <img src="/posts/cf5a0360/33.png" title="p33">
@@ -1068,7 +1101,7 @@ F(x) =
       <i class="fa fa-area-chart"></i>
     </span>
     
-    <span title="站点总字数">706k</span>
+    <span title="站点总字数">707k</span>
   
 
   
@@ -1077,7 +1110,7 @@ F(x) =
       <i class="fa fa-coffee"></i>
     </span>
     
-    <span title="站点阅读时长">10:42</span>
+    <span title="站点阅读时长">10:43</span>
   
 </div>
 
@@ -1750,7 +1783,7 @@ F(x) =
   //$("body").backstretch("/images/background.jpg");
   </script>
   
-  <script type="text/javascript" src="//cdn.bootcss.com/canvas-nest.js/1.0.0/canvas-nest.min.js"></script>
+  <script type="text/javascript" src="//cdn.bootcss.com/canvas-nest.js/1.0.0/canvas-nest.min.js"></script><!-- hexo-inject:begin --><!-- hexo-inject:end -->
   
-<script src="/live2dw/lib/L2Dwidget.min.js?0c58a1486de42ac6cc1c59c7d98ae887"></script><script>L2Dwidget.init({"pluginRootPath":"live2dw/","pluginJsPath":"lib/","pluginModelPath":"assets/","tagMode":false,"debug":false,"model":{"jsonPath":"/live2dw/assets/koharu.model.json"},"display":{"position":"right","width":150,"height":300},"mobile":{"show":false},"log":false});</script><!-- hexo-inject:begin --><!-- hexo-inject:end --></body>
+<script src="/live2dw/lib/L2Dwidget.min.js?0c58a1486de42ac6cc1c59c7d98ae887"></script><script>L2Dwidget.init({"pluginRootPath":"live2dw/","pluginJsPath":"lib/","pluginModelPath":"assets/","tagMode":false,"debug":false,"model":{"jsonPath":"/live2dw/assets/koharu.model.json"},"display":{"position":"right","width":150,"height":300},"mobile":{"show":false},"log":false});</script></body>
 </html>

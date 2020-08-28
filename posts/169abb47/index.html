@@ -127,9 +127,6 @@
 <meta property="og:site_name" content="w4rd3n">
 <meta property="og:description" content="前言 在某些实际问题中,往往需要同时用两个或两个以上的随机变量来描述试验的结果,这个时候就要考虑多维随机变量及其分布. 二维随机变量 定义:设\(E\)是一个随机试验,样本空间是\(S = \{e\}\),设\(X = X(e)\)和\(Y = Y(e)\)是定义在\(S\)上的\(r.v.\),由它们构成的一个向量\((X, Y)\),叫做二维随机变量. 二维随机变量\((X, Y)\)">
 <meta property="og:locale" content="zh-CN">
-<meta property="og:image" content="https://hitworld.github.io/posts/169abb47/11.png">
-<meta property="og:image" content="https://hitworld.github.io/posts/169abb47/12.png">
-<meta property="og:image" content="https://hitworld.github.io/posts/169abb47/4.png">
 <meta property="og:image" content="https://hitworld.github.io/posts/169abb47/27.png">
 <meta property="og:image" content="https://hitworld.github.io/posts/169abb47/7.png">
 <meta property="og:image" content="https://hitworld.github.io/posts/169abb47/8.png">
@@ -150,11 +147,11 @@
 <meta property="og:image" content="https://hitworld.github.io/posts/169abb47/18.png">
 <meta property="og:image" content="https://hitworld.github.io/posts/169abb47/20.png">
 <meta property="og:image" content="https://hitworld.github.io/posts/169abb47/22.png">
-<meta property="og:updated_time" content="2020-08-28T15:27:22.909Z">
+<meta property="og:updated_time" content="2020-08-28T15:59:12.808Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Math-probability-theory-多维随机变量及其分布">
 <meta name="twitter:description" content="前言 在某些实际问题中,往往需要同时用两个或两个以上的随机变量来描述试验的结果,这个时候就要考虑多维随机变量及其分布. 二维随机变量 定义:设\(E\)是一个随机试验,样本空间是\(S = \{e\}\),设\(X = X(e)\)和\(Y = Y(e)\)是定义在\(S\)上的\(r.v.\),由它们构成的一个向量\((X, Y)\),叫做二维随机变量. 二维随机变量\((X, Y)\)">
-<meta name="twitter:image" content="https://hitworld.github.io/posts/169abb47/11.png">
+<meta name="twitter:image" content="https://hitworld.github.io/posts/169abb47/27.png">
 
 
 
@@ -520,7 +517,7 @@
                 
                   <span class="post-meta-item-text">本文字数：</span>
                 
-                <span title="本文字数">2.6k</span>
+                <span title="本文字数">3.3k</span>
               
 
               
@@ -534,7 +531,7 @@
                 
                   <span class="post-meta-item-text">阅读时长 &asymp;</span>
                 
-                <span title="阅读时长">2 分钟</span>
+                <span title="阅读时长">3 分钟</span>
               
             </div>
           
@@ -586,7 +583,8 @@
 <ol type="1">
 <li><span class="math inline">\(f(x,y) \ge 0\)</span>.</li>
 <li><span class="math inline">\(\int^{+\infty}_{-\infty}\int^{+\infty}_{-\infty}f(x,y){d}x{d}y = 1\)</span>.</li>
-<li>设<span class="math inline">\(D\)</span>为平面<span class="math inline">\(xoy\)</span>上的区域,点<span class="math inline">\((X,Y)\)</span>落在<span class="math inline">\(D\)</span>内的概率为:<span class="math inline">\(P((X,Y) \in D) = \iint_D f(x,y){d}x{d}y\)</span>,<span class="math inline">\(P(x&lt;X&lt;x+\Delta x,x&lt;Y&lt;y+\Delta y) \approx f(x,y)\Delta x\Delta y\)</span>.</li>
+<li>设<span class="math inline">\(D\)</span>为平面<span class="math inline">\(xoy\)</span>上的区域,点<span class="math inline">\((X,Y)\)</span>落在<span class="math inline">\(D\)</span>内的概率为:<span class="math inline">\(P((X,Y) \in D) = \iint_D f(x,y){d}x{d}y\)</span>.</li>
+<li><span class="math inline">\(P(x&lt;X&lt;x+\Delta x,x&lt;Y&lt;y+\Delta y) \approx f(x,y)\Delta x\Delta y\)</span>.</li>
 <li>在<span class="math inline">\(f(x,y)\)</span>的连续点<span class="math inline">\((x,y)\)</span>,有<span class="math inline">\(\frac{\delta^2F(x,y)}{\delta x \delta y} = f(x,y)\)</span>.</li>
 </ol>
 <h2 id="边缘分布">边缘分布</h2>
@@ -599,10 +597,18 @@
 <p>由二维随机变量<span class="math inline">\((X, Y)\)</span>的概率分布可唯一地确定<span class="math inline">\(X\)</span>和<span class="math inline">\(Y\)</span>的边缘分布,反之不能.</p>
 <h2 id="条件分布">条件分布</h2>
 <p>二维离散型<span class="math inline">\(r.v.\)</span>的条件分布.</p>
-<img src="/posts/169abb47/11.png" title="p11">
+<p>设<span class="math inline">\((X,Y)\)</span>是二元离散型随机变量,对于固定的<span class="math inline">\(y_j\)</span>,若<span class="math inline">\(P(Y = y_j) &gt; 0\)</span>,则称:</p>
+<p><span class="math inline">\(P(X = x_i|Y = y_j) = \frac{P(X = x_i,Y = y_j)}{P(Y = y_j)} = \frac{p_{ij}}{p_j},i=1,2,\cdots\)</span></p>
+<p>为在<span class="math inline">\(Y = y_j\)</span>条件下,随机变量<span class="math inline">\(X\)</span>的条件分布率;</p>
+<p>同样,对于固定的<span class="math inline">\(x_i\)</span>,若<span class="math inline">\(P(Y = x_i) &gt; 0\)</span>,则称:</p>
+<p><span class="math inline">\(P(Y = y_j|X = x_i) = \frac{P(X = x_i,Y = y_j)}{P(X = x_i)} = \frac{p_{ij}}{p_j},i=1,2,\cdots\)</span></p>
+<p>为在<span class="math inline">\(X = x_i\)</span>条件下,随机变量<span class="math inline">\(Y\)</span>的条件分布率;</p>
 <p>二维连续型<span class="math inline">\(r.v.\)</span>的条件分布.</p>
-<img src="/posts/169abb47/12.png" title="p12">
-<img src="/posts/169abb47/4.png" title="p4">
+<p>设二元随机变量<span class="math inline">\((X,Y)\)</span>的概率密度为<span class="math inline">\(f(x,y)\)</span>,<span class="math inline">\((X,Y)\)</span>关于<span class="math inline">\(Y\)</span>的边际概率密度为<span class="math inline">\(f_Y(y)\)</span>.</p>
+<p>若对于固定的<span class="math inline">\(y\)</span>,<span class="math inline">\(f_Y(y)&gt;0\)</span>,且<span class="math inline">\(f_Y(y)\)</span>连续,则在<span class="math inline">\(Y=y\)</span>的条件下,<span class="math inline">\(X\)</span>的条件概率密度为:</p>
+<p><span class="math inline">\(f_{X|Y}(x|y)=\frac{f(x,y)}{f_Y(y)}\)</span></p>
+<p>同理,若对于固定的<span class="math inline">\(x\)</span>,<span class="math inline">\(f_X(x)&gt;0\)</span>,且<span class="math inline">\(f_X(x)\)</span>连续,则在<span class="math inline">\(X=x\)</span>的条件下,<span class="math inline">\(Y\)</span>的条件概率密度为:</p>
+<p><span class="math inline">\(f_{Y|X}(y|x)=\frac{f(x,y)}{f_X(x)}\)</span></p>
 <h2 id="二维连续型随机变量和离散型随机变量的比较">二维连续型随机变量和离散型随机变量的比较</h2>
 <img src="/posts/169abb47/27.png" title="p27">
 <h2 id="连续型二维r.v.的均匀分布">连续型二维r.v.的均匀分布</h2>
@@ -992,7 +998,7 @@
       <i class="fa fa-coffee"></i>
     </span>
     
-    <span title="站点阅读时长">10:46</span>
+    <span title="站点阅读时长">10:47</span>
   
 </div>
 

@@ -127,8 +127,6 @@
 <meta property="og:site_name" content="w4rd3n">
 <meta property="og:description" content="前言 在某些实际问题中,往往需要同时用两个或两个以上的随机变量来描述试验的结果,这个时候就要考虑多维随机变量及其分布. 二维随机变量 定义:设\(E\)是一个随机试验,样本空间是\(S = \{e\}\),设\(X = X(e)\)和\(Y = Y(e)\)是定义在\(S\)上的\(r.v.\),由它们构成的一个向量\((X, Y)\),叫做二维随机变量. 二维随机变量\((X, Y)\)">
 <meta property="og:locale" content="zh-CN">
-<meta property="og:image" content="https://hitworld.github.io/posts/169abb47/9.png">
-<meta property="og:image" content="https://hitworld.github.io/posts/169abb47/10.png">
 <meta property="og:image" content="https://hitworld.github.io/posts/169abb47/11.png">
 <meta property="og:image" content="https://hitworld.github.io/posts/169abb47/12.png">
 <meta property="og:image" content="https://hitworld.github.io/posts/169abb47/4.png">
@@ -152,11 +150,11 @@
 <meta property="og:image" content="https://hitworld.github.io/posts/169abb47/18.png">
 <meta property="og:image" content="https://hitworld.github.io/posts/169abb47/20.png">
 <meta property="og:image" content="https://hitworld.github.io/posts/169abb47/22.png">
-<meta property="og:updated_time" content="2020-08-28T15:18:19.420Z">
+<meta property="og:updated_time" content="2020-08-28T15:27:22.909Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Math-probability-theory-多维随机变量及其分布">
 <meta name="twitter:description" content="前言 在某些实际问题中,往往需要同时用两个或两个以上的随机变量来描述试验的结果,这个时候就要考虑多维随机变量及其分布. 二维随机变量 定义:设\(E\)是一个随机试验,样本空间是\(S = \{e\}\),设\(X = X(e)\)和\(Y = Y(e)\)是定义在\(S\)上的\(r.v.\),由它们构成的一个向量\((X, Y)\),叫做二维随机变量. 二维随机变量\((X, Y)\)">
-<meta name="twitter:image" content="https://hitworld.github.io/posts/169abb47/9.png">
+<meta name="twitter:image" content="https://hitworld.github.io/posts/169abb47/11.png">
 
 
 
@@ -522,7 +520,7 @@
                 
                   <span class="post-meta-item-text">本文字数：</span>
                 
-                <span title="本文字数">2.4k</span>
+                <span title="本文字数">2.6k</span>
               
 
               
@@ -566,7 +564,7 @@
 <p>二维<span class="math inline">\(r.v.\)</span>的分布函数的基本性质与一维<span class="math inline">\(r.v.\)</span>的分布函数的性质类似.</p>
 <ul>
 <li><span class="math inline">\(F(x, y)\)</span>是变量<span class="math inline">\(x\)</span>和<span class="math inline">\(y\)</span>的不减函数.</li>
-<li><span class="math inline">\(0 &lt; F(x, y) &lt; 1\)</span>,且对于任意固定的<span class="math inline">\(y\)</span>,<span class="math inline">\(F(-infty, y) = 0\)</span>;对于任意固定的<span class="math inline">\(x\)</span>,<span class="math inline">\(F(x, -infty) = 0\)</span>;<span class="math inline">\(F(-infty, -infty) = 0\)</span>;<span class="math inline">\(F(+infty, +infty) = 1\)</span>.</li>
+<li><span class="math inline">\(0 &lt; F(x, y) &lt; 1\)</span>,且对于任意固定的<span class="math inline">\(y\)</span>,<span class="math inline">\(F(-\infty, y) = 0\)</span>;对于任意固定的<span class="math inline">\(x\)</span>,<span class="math inline">\(F(x, -\infty) = 0\)</span>;<span class="math inline">\(F(-\infty, -\infty) = 0\)</span>;<span class="math inline">\(F(+\infty, +\infty) = 1\)</span>.</li>
 <li><span class="math inline">\(F(x + 0, y) = F(x, y)\)</span>,<span class="math inline">\(F(x, y + 0) = F(x, y)\)</span>,即<span class="math inline">\(F(x, y)\)</span>关于<span class="math inline">\(x\)</span>右连续,关于<span class="math inline">\(y\)</span>也右连续.</li>
 <li><span class="math inline">\(P\{x1 &lt; X \le x2,y1 &lt; Y \le y2\} &gt; 0\)</span>.</li>
 </ul>
@@ -582,21 +580,22 @@
 </ol>
 <p>其中<span class="math inline">\(p_{ij} = P(X = x_i,Y = y_j),i,j=1,2,\cdots\)</span></p>
 <h3 id="二维连续型r.v.的概率密度">二维连续型r.v.的概率密度</h3>
-<p>对于二维随机变量<span class="math inline">\((X, Y)\)</span>的分布函数<span class="math inline">\(F(x,y)\)</span>,如果存在非负函数<span class="math inline">\(f(x,y)\)</span>,使对于任意<span class="math inline">\(x,y\)</span>,有<span class="math inline">\(F(x,y)=\int^x_{-infty}\int^x_{-infty}f(u,v){d}u{d}v\)</span>.</p>
+<p>对于二维随机变量<span class="math inline">\((X, Y)\)</span>的分布函数<span class="math inline">\(F(x,y)\)</span>,如果存在非负函数<span class="math inline">\(f(x,y)\)</span>,使对于任意<span class="math inline">\(x,y\)</span>,有<span class="math inline">\(F(x,y)=\int^x_{-\infty}\int^x_{-\infty}f(u,v){d}u{d}v\)</span>.</p>
 <p>称<span class="math inline">\((X, Y)\)</span>为二维连续型随机变量.并称<span class="math inline">\(f(x,y)\)</span>为二维随机变量<span class="math inline">\((X, Y)\)</span>的联合概率密度函数.</p>
 <p>联合概率密度<span class="math inline">\(f(x, y)\)</span>的性质.</p>
 <ol type="1">
 <li><span class="math inline">\(f(x,y) \ge 0\)</span>.</li>
-<li><span class="math inline">\(\int^{+infty}_{-infty}\int^{+infty}_{-infty}f(x,y){d}x{d}y = 1\)</span>.</li>
+<li><span class="math inline">\(\int^{+\infty}_{-\infty}\int^{+\infty}_{-\infty}f(x,y){d}x{d}y = 1\)</span>.</li>
 <li>设<span class="math inline">\(D\)</span>为平面<span class="math inline">\(xoy\)</span>上的区域,点<span class="math inline">\((X,Y)\)</span>落在<span class="math inline">\(D\)</span>内的概率为:<span class="math inline">\(P((X,Y) \in D) = \iint_D f(x,y){d}x{d}y\)</span>,<span class="math inline">\(P(x&lt;X&lt;x+\Delta x,x&lt;Y&lt;y+\Delta y) \approx f(x,y)\Delta x\Delta y\)</span>.</li>
 <li>在<span class="math inline">\(f(x,y)\)</span>的连续点<span class="math inline">\((x,y)\)</span>,有<span class="math inline">\(\frac{\delta^2F(x,y)}{\delta x \delta y} = f(x,y)\)</span>.</li>
 </ol>
 <h2 id="边缘分布">边缘分布</h2>
 <p>边缘分布函数:对于二维随机变量<span class="math inline">\((X, Y)\)</span>,它作为一个整体,具有分布函数<span class="math inline">\(F(x, y)\)</span>,同时<span class="math inline">\(X\)</span>,<span class="math inline">\(Y\)</span>作为随机变量也有分布函数.称为二维随机变量<span class="math inline">\((X, Y)\)</span>关于<span class="math inline">\(X\)</span>,<span class="math inline">\(Y\)</span>的边缘分布函数.</p>
-<img src="/posts/169abb47/9.png" title="p9">
+<p><span class="math inline">\(F_X(x) = P{X \le x} = P{X \le x, Y &lt; +\infty} = F(x, +\infty)\)</span>.</p>
 <p>同理可知二维随机变量<span class="math inline">\((X, Y)\)</span>关于<span class="math inline">\(Y\)</span>的边缘分布函数.易知二维离散型<span class="math inline">\(r.v.\)</span>的边缘分布律.</p>
-<p>连续型的边缘概率密度.</p>
-<img src="/posts/169abb47/10.png" title="p10">
+<p>对于二维连续型随机变量<span class="math inline">\((X, Y)\)</span>,概率密度为<span class="math inline">\(f(x,y)\)</span>,<span class="math inline">\(X,Y\)</span>的边际概率密度为:</p>
+<p><span class="math inline">\(f_X(x) = \int^{+\infty}_{-\infty}f(x,y){d}y\)</span></p>
+<p><span class="math inline">\(f_Y(y) = \int^{+\infty}_{-\infty}f(x,y){d}x\)</span></p>
 <p>由二维随机变量<span class="math inline">\((X, Y)\)</span>的概率分布可唯一地确定<span class="math inline">\(X\)</span>和<span class="math inline">\(Y\)</span>的边缘分布,反之不能.</p>
 <h2 id="条件分布">条件分布</h2>
 <p>二维离散型<span class="math inline">\(r.v.\)</span>的条件分布.</p>
@@ -1666,7 +1665,7 @@
   //$("body").backstretch("/images/background.jpg");
   </script>
   
-  <script type="text/javascript" src="//cdn.bootcss.com/canvas-nest.js/1.0.0/canvas-nest.min.js"></script>
+  <script type="text/javascript" src="//cdn.bootcss.com/canvas-nest.js/1.0.0/canvas-nest.min.js"></script><!-- hexo-inject:begin --><!-- hexo-inject:end -->
   
-<script src="/live2dw/lib/L2Dwidget.min.js?0c58a1486de42ac6cc1c59c7d98ae887"></script><script>L2Dwidget.init({"pluginRootPath":"live2dw/","pluginJsPath":"lib/","pluginModelPath":"assets/","tagMode":false,"debug":false,"model":{"jsonPath":"/live2dw/assets/koharu.model.json"},"display":{"position":"right","width":150,"height":300},"mobile":{"show":false},"log":false});</script><!-- hexo-inject:begin --><!-- hexo-inject:end --></body>
+<script src="/live2dw/lib/L2Dwidget.min.js?0c58a1486de42ac6cc1c59c7d98ae887"></script><script>L2Dwidget.init({"pluginRootPath":"live2dw/","pluginJsPath":"lib/","pluginModelPath":"assets/","tagMode":false,"debug":false,"model":{"jsonPath":"/live2dw/assets/koharu.model.json"},"display":{"position":"right","width":150,"height":300},"mobile":{"show":false},"log":false});</script></body>
 </html>

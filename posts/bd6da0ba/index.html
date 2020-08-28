@@ -127,7 +127,7 @@
 <meta property="og:site_name" content="w4rd3n">
 <meta property="og:description" content="基础环境 apt换源 修改配置文件. 123sudo gedit /etc/apt/sources.listsudo apt-get update#sudo apt-get upgrade sources.list. 123456789101112131415161718#ubuntu16deb http://mirrors.ustc.edu.cn/ubuntu/ xenial main">
 <meta property="og:locale" content="zh-CN">
-<meta property="og:updated_time" content="2020-08-26T08:49:16.758Z">
+<meta property="og:updated_time" content="2020-08-27T07:03:47.660Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="w4rd3n-ubuntu虚拟机环境搭建">
 <meta name="twitter:description" content="基础环境 apt换源 修改配置文件. 123sudo gedit /etc/apt/sources.listsudo apt-get update#sudo apt-get upgrade sources.list. 123456789101112131415161718#ubuntu16deb http://mirrors.ustc.edu.cn/ubuntu/ xenial main">
@@ -496,7 +496,7 @@
                 
                   <span class="post-meta-item-text">本文字数：</span>
                 
-                <span title="本文字数">6.4k</span>
+                <span title="本文字数">6.5k</span>
               
 
               
@@ -546,7 +546,7 @@
 <h3 id="docker">docker</h3>
 <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">sudo apt-get remove docker docker-engine docker.io containerd runc</span><br><span class="line">sudo apt-get install apt-transport-https ca-certificates curl gnupg-agent software-properties-common</span><br><span class="line">curl -fsSL https://download.docker.com/linux/ubuntu/gpg | sudo apt-key add -</span><br><span class="line">sudo add-apt-repository <span class="string">"deb [arch=amd64] https://mirrors.aliyun.com/docker-ce/linux/ubuntu <span class="variable">$(lsb_release -cs)</span> stable"</span></span><br><span class="line">sudo apt-get update</span><br><span class="line">sudo apt-get install docker-ce docker-ce-cli containerd.io</span><br><span class="line">sudo vim /etc/docker/daemon.json</span><br><span class="line"><span class="comment"># &#123;"registry-mirrors": ["https://docker.mirrors.ustc.edu.cn"]&#125;</span></span><br><span class="line">sudo systemctl start docker</span><br><span class="line">sudo systemctl <span class="built_in">enable</span> docker</span><br></pre></td></tr></table></figure>
 <h3 id="常用动态库">常用动态库</h3>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">sudo apt-get install apt-file</span><br><span class="line">sudo apt-file update</span><br><span class="line"><span class="comment">#apt-file search libcrypto.so.1.0.0</span></span><br><span class="line">sudo apt-get install libssl1.0.0 libssl1.0.0:i386</span><br><span class="line">sudo apt-get install libncurses5-dev libssl-dev</span><br><span class="line">sudo apt-get install libpixman-1-dev</span><br></pre></td></tr></table></figure>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">sudo apt-get install apt-file</span><br><span class="line">sudo apt-file update</span><br><span class="line"><span class="comment">#apt-file search libcrypto.so.1.0.0</span></span><br><span class="line">sudo apt-get install libssl1.0.0 libssl1.0.0:i386</span><br><span class="line">sudo apt-get install libncurses5-dev libssl-dev</span><br><span class="line">sudo apt-get install libpixman-1-dev</span><br><span class="line">sudo apt-get install libseccomp-dev libseccomp2 seccomp</span><br></pre></td></tr></table></figure>
 <h2 id="二进制环境配置">二进制环境配置</h2>
 <h3 id="x86">x86</h3>
 <p><code>64</code>位系统编译和运行<code>32</code>位程序需要另装库.</p>
@@ -939,7 +939,7 @@
       <i class="fa fa-area-chart"></i>
     </span>
     
-    <span title="站点总字数">709k</span>
+    <span title="站点总字数">711k</span>
   
 
   
@@ -948,7 +948,7 @@
       <i class="fa fa-coffee"></i>
     </span>
     
-    <span title="站点阅读时长">10:45</span>
+    <span title="站点阅读时长">10:46</span>
   
 </div>
 

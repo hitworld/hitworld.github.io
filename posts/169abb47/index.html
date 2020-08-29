@@ -127,18 +127,10 @@
 <meta property="og:site_name" content="w4rd3n">
 <meta property="og:description" content="前言 在某些实际问题中,往往需要同时用两个或两个以上的随机变量来描述试验的结果,这个时候就要考虑多维随机变量及其分布. 二维随机变量 定义:设\(E\)是一个随机试验,样本空间是\(S = \{e\}\),设\(X = X(e)\)和\(Y = Y(e)\)是定义在\(S\)上的\(r.v.\),由它们构成的一个向量\((X, Y)\),叫做二维随机变量. 二维随机变量\((X, Y)\)">
 <meta property="og:locale" content="zh-CN">
-<meta property="og:image" content="https://hitworld.github.io/posts/169abb47/36.png">
-<meta property="og:image" content="https://hitworld.github.io/posts/169abb47/23.png">
-<meta property="og:image" content="https://hitworld.github.io/posts/169abb47/16.png">
-<meta property="og:image" content="https://hitworld.github.io/posts/169abb47/17.png">
-<meta property="og:image" content="https://hitworld.github.io/posts/169abb47/18.png">
-<meta property="og:image" content="https://hitworld.github.io/posts/169abb47/20.png">
-<meta property="og:image" content="https://hitworld.github.io/posts/169abb47/22.png">
-<meta property="og:updated_time" content="2020-08-29T06:30:25.746Z">
+<meta property="og:updated_time" content="2020-08-29T07:11:48.598Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Math-probability-theory-多维随机变量及其分布">
 <meta name="twitter:description" content="前言 在某些实际问题中,往往需要同时用两个或两个以上的随机变量来描述试验的结果,这个时候就要考虑多维随机变量及其分布. 二维随机变量 定义:设\(E\)是一个随机试验,样本空间是\(S = \{e\}\),设\(X = X(e)\)和\(Y = Y(e)\)是定义在\(S\)上的\(r.v.\),由它们构成的一个向量\((X, Y)\),叫做二维随机变量. 二维随机变量\((X, Y)\)">
-<meta name="twitter:image" content="https://hitworld.github.io/posts/169abb47/36.png">
 
 
 
@@ -504,7 +496,7 @@
                 
                   <span class="post-meta-item-text">本文字数：</span>
                 
-                <span title="本文字数">6.5k</span>
+                <span title="本文字数">7.9k</span>
               
 
               
@@ -518,7 +510,7 @@
                 
                   <span class="post-meta-item-text">阅读时长 &asymp;</span>
                 
-                <span title="阅读时长">6 分钟</span>
+                <span title="阅读时长">7 分钟</span>
               
             </div>
           
@@ -634,24 +626,38 @@ f(x,y) =
 <p>对于任意<span class="math inline">\(n\)</span>个实数<span class="math inline">\(x_1,x_2,\cdots,x_n\)</span>,<span class="math inline">\(n\)</span>元函数<span class="math inline">\(F(x_1,x_2,\cdots,x_n) = P(X_1 \le x_1,X_2 \le x_2,\cdots,X_n \le x_n)\)</span>称为<span class="math inline">\(n\)</span>元随机变量<span class="math inline">\((X_1,X_2,\cdots,X_n)\)</span>的分布函数.</p>
 <p>同理可知<span class="math inline">\(n\)</span>元离散型随机变量的分布律和<span class="math inline">\(n\)</span>元连续型随机变量的概率密度定义.</p>
 <p><span class="math inline">\(n\)</span>元随机变量的边际分布.</p>
-<p><span class="math inline">\(F_{X_1}(x_1)=F(x_1,\infty,\infty,\codts,\infty)\)</span></p>
-<p><span class="math inline">\(p_{X_1}(x_1)=P(X_1=x_1)=\sum_{x_2,x_3,\cdots,x_n}P(X_1=x_1,X_2=x_2,\codts,X_n=x_n)\)</span></p>
-<p><span class="math inline">\(f_{X_1}(x_1)=\int_{-\infty}^{+\infty}\codts\int_{-\infty}^{+\infty}f(x_1,x_2,\cdots,x_n){d}x_2{d}x_3\codts{d}x_n\)</span></p>
+<p><span class="math inline">\(F_{X_1}(x_1)=F(x_1,\infty,\infty,\cdots,\infty)\)</span></p>
+<p><span class="math inline">\(p_{X_1}(x_1)=P(X_1=x_1)=\sum_{x_2,x_3,\cdots,x_n}P(X_1=x_1,X_2=x_2,\cdots,X_n=x_n)\)</span></p>
+<p><span class="math inline">\(f_{X_1}(x_1)=\int_{-\infty}^{+\infty}\cdots\int_{-\infty}^{+\infty}f(x_1,x_2,\cdots,x_n){d}x_2{d}x_3 \cdots {d}x_n\)</span></p>
 <p>同理可知<span class="math inline">\(n\)</span>元随机变量的相互独立的判定.</p>
 <p>两个多元随机变量之间的独立性.</p>
 <p>若<span class="math inline">\(F(x_1,x_2,\cdots,x_m,y_1,y_2,\cdots,y_n)=F_1(x_1,x_2,\cdots,x_m)F_2(y_1,y_2,\cdots,y_n)\)</span>对于一切<span class="math inline">\(x_1,x_2,\cdots,x_m,y_1,y_2,\cdots,y_n\)</span>成立,称<span class="math inline">\((X_1,X_2,\cdots,X_m)\)</span>与<span class="math inline">\((Y_1,Y_2,\cdots,Y_n)\)</span>相互独立.</p>
 <p>同时可知:<span class="math inline">\(X_i\)</span>与<span class="math inline">\(Y_j\)</span>两两相互独立.若<span class="math inline">\(h(x_1,x_2,\cdots,x_m)\)</span>和<span class="math inline">\(g(y_1,y_2,\cdots,y_n)\)</span>是连续函数,则<span class="math inline">\(h(X_1,X_2,\cdots,X_m)\)</span>和<span class="math inline">\(g(Y_1,Y_2,\cdots,Y_n)\)</span>相互独立.</p>
 <h2 id="两个r.v.的函数的分布">两个r.v.的函数的分布</h2>
-<img src="/posts/169abb47/36.png" title="p36">
-<img src="/posts/169abb47/23.png" title="p23">
+<p>设二元离散型随机变量<span class="math inline">\((X,Y)\)</span>具有概率分布<span class="math inline">\(P(X=x_i,Y=y_j) = p_{ij},i,j=1,2,\cdots\)</span></p>
+<p>若<span class="math inline">\(U=g(X,Y)\)</span>,则可以先确定<span class="math inline">\(U\)</span>的取值<span class="math inline">\(u_i,i=1,2,\cdots\)</span>,再找出<span class="math inline">\((U=u_i)=\{(X,Y) \in D\}\)</span>,从而计算出分布律.</p>
+<p>设二元连续型随机变量<span class="math inline">\((X,Y)\)</span>具有概率密度<span class="math inline">\(f(x,y)\)</span>.</p>
+<p>若<span class="math inline">\(Z=g(X,Y)\)</span>.可以先求<span class="math inline">\(Z\)</span>的分布函数再求导得到密度函数.</p>
+<p><span class="math inline">\(F_Z(z)=P(Z \le z)=P(g(X,Y) \le z)=\iint_{g(x,y) \le z}f(x,y){d}x{d}y\)</span></p>
+<p><span class="math inline">\(f_Z(z)=F_Z\prime(z)\)</span></p>
 <h3 id="z-x-y的分布">Z = X + Y的分布</h3>
-<img src="/posts/169abb47/16.png" title="p16">
-<img src="/posts/169abb47/17.png" title="p17">
+<p>设<span class="math inline">\((X,Y)\)</span>的概率密度为<span class="math inline">\(f(x,y)\)</span>,则<span class="math inline">\(Z = X + Y\)</span>的分布函数为:</p>
+<p><span class="math inline">\(F_Z(z)=P(Z \le z)=\iint_{x + y \le z}f(x,y){d}x{d}y\)</span></p>
+<p><span class="math inline">\(=\int_{-\infty}^{+\infty}\left[\int_{-\infty}^{z-y}f(x,y){d}x \right]{d}y\)</span></p>
+<p><span class="math inline">\(=\int_{-\infty}^{+\infty}\left[\int_{-\infty}^{z}f(u-y,y){d}u \right]{d}y\)</span></p>
+<p><span class="math inline">\(=\int_{-\infty}^{z}\left[\int_{-\infty}^{+\infty}f(u-y,y){d}y \right]{d}u\)</span></p>
+<p><span class="math inline">\(=\int_{-\infty}^{z}f_Z(u){d}u\)</span></p>
+<p>所以<span class="math inline">\(Z = X + Y\)</span>概率密度为:<span class="math inline">\(f_Z(z)=\int_{-\infty}^{+\infty}f(z-y,y){d}y\)</span>.</p>
+<p>卷积公式:当<span class="math inline">\(X,Y\)</span>相互独立时,<span class="math inline">\(Z = X + Y\)</span>的密度函数公式称为卷积公式,即<span class="math inline">\(f_Z(z)=\int_{-\infty}^{+\infty}f_X(z-y)f_Y(y){d}y=\int_{-\infty}^{+\infty}f_X(x)f_Y(z-x){d}x\)</span>.</p>
 <h3 id="正太r.v.的线性组合">正太r.v.的线性组合</h3>
-<img src="/posts/169abb47/18.png" title="p18">
+<p>设<span class="math inline">\(X,Y\)</span>相互独立,<span class="math inline">\(X \sim N(\mu_1,\sigma_1^2)\)</span>,<span class="math inline">\(Y \sim N(\mu_2,\sigma_2^2)\)</span>.</p>
+<p>则<span class="math inline">\(Z = X + Y \sim N(\mu_1 + \mu_2,\sigma_1^2 + \sigma_2^2)\)</span>.</p>
+<p>更一般的结论,<span class="math inline">\(n\)</span>个独立的正太<span class="math inline">\(r.v.\)</span>的线性组合仍服从正态分布.</p>
 <h3 id="maxx-y与minx-y">max(X, Y)与min(X, Y)</h3>
-<img src="/posts/169abb47/20.png" title="p20">
-<img src="/posts/169abb47/22.png" title="p22">
+<p>设<span class="math inline">\(X,Y\)</span>相互独立,它们的分布函数分别为<span class="math inline">\(F_X(x)\)</span>和<span class="math inline">\(F_Y(y)\)</span>,求<span class="math inline">\(M,N\)</span>的分布函数F_{max}(z)和F_{min}(z).</p>
+<p><span class="math inline">\(M=max(X,Y)\)</span>的分布函数:<span class="math inline">\(F_max(z)=P(M \le z)=P(X \le z,Y \le z)=P(X \le z)P(Y \le z),F_max(z)=F_X(z)F_Y(z)\)</span>.</p>
+<p><span class="math inline">\(N=min(X,Y)\)</span>的分布函数:<span class="math inline">\(F_min(z)=P(N \le z)=1 - P(N &gt; z)=1-P(X &gt; z,Y &gt; z)=1-P(X&gt;z)P(Y&gt;z)=1-(1-F_X(z))(1-F_Y(z))\)</span>.</p>
+<p><span class="math inline">\(n\)</span>个相互独立的随机变量的公式同理可得.</p>
 
       
     </div>
@@ -1000,7 +1006,7 @@ f(x,y) =
       <i class="fa fa-area-chart"></i>
     </span>
     
-    <span title="站点总字数">715k</span>
+    <span title="站点总字数">716k</span>
   
 
   
@@ -1009,7 +1015,7 @@ f(x,y) =
       <i class="fa fa-coffee"></i>
     </span>
     
-    <span title="站点阅读时长">10:50</span>
+    <span title="站点阅读时长">10:51</span>
   
 </div>
 
@@ -1682,7 +1688,7 @@ f(x,y) =
   //$("body").backstretch("/images/background.jpg");
   </script>
   
-  <script type="text/javascript" src="//cdn.bootcss.com/canvas-nest.js/1.0.0/canvas-nest.min.js"></script><!-- hexo-inject:begin --><!-- hexo-inject:end -->
+  <script type="text/javascript" src="//cdn.bootcss.com/canvas-nest.js/1.0.0/canvas-nest.min.js"></script>
   
-<script src="/live2dw/lib/L2Dwidget.min.js?0c58a1486de42ac6cc1c59c7d98ae887"></script><script>L2Dwidget.init({"pluginRootPath":"live2dw/","pluginJsPath":"lib/","pluginModelPath":"assets/","tagMode":false,"debug":false,"model":{"jsonPath":"/live2dw/assets/koharu.model.json"},"display":{"position":"right","width":150,"height":300},"mobile":{"show":false},"log":false});</script></body>
+<script src="/live2dw/lib/L2Dwidget.min.js?0c58a1486de42ac6cc1c59c7d98ae887"></script><script>L2Dwidget.init({"pluginRootPath":"live2dw/","pluginJsPath":"lib/","pluginModelPath":"assets/","tagMode":false,"debug":false,"model":{"jsonPath":"/live2dw/assets/koharu.model.json"},"display":{"position":"right","width":150,"height":300},"mobile":{"show":false},"log":false});</script><!-- hexo-inject:begin --><!-- hexo-inject:end --></body>
 </html>

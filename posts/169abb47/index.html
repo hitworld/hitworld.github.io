@@ -143,7 +143,7 @@
 <meta property="og:image" content="https://hitworld.github.io/posts/169abb47/18.png">
 <meta property="og:image" content="https://hitworld.github.io/posts/169abb47/20.png">
 <meta property="og:image" content="https://hitworld.github.io/posts/169abb47/22.png">
-<meta property="og:updated_time" content="2020-08-29T05:37:45.739Z">
+<meta property="og:updated_time" content="2020-08-29T05:42:36.092Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Math-probability-theory-多维随机变量及其分布">
 <meta name="twitter:description" content="前言 在某些实际问题中,往往需要同时用两个或两个以上的随机变量来描述试验的结果,这个时候就要考虑多维随机变量及其分布. 二维随机变量 定义:设\(E\)是一个随机试验,样本空间是\(S = \{e\}\),设\(X = X(e)\)和\(Y = Y(e)\)是定义在\(S\)上的\(r.v.\),由它们构成的一个向量\((X, Y)\),叫做二维随机变量. 二维随机变量\((X, Y)\)">
@@ -621,16 +621,12 @@ f(x,y) =
 <p>其中<span class="math inline">\(\mu_1,\mu_2,\sigma_1&gt;0,\sigma_2&gt;0,-1&lt;\rho&lt;1\)</span>都是常数,称<span class="math inline">\((X,Y)\)</span>为服从参数为<span class="math inline">\(\mu_1,\mu_2,\sigma_1,\sigma_2,\rho\)</span>的二元正态分布.</p>
 <p>记为<span class="math inline">\((X,Y) \sim N(\mu_1,\mu_2,\sigma_1^2,\sigma_2^2,\rho)\)</span></p>
 <p>求二元正太随机变量的边际概率密度,记<span class="math inline">\(C = 1/(2\pi\sigma_1\sigma_2\sqrt{1-\rho^2})\)</span>.</p>
-<p><span class="math display">\[
-\begin{align}
-f_X(x) &amp;= \int^{+\infty}_{-\infty}f(x,y){d}y\\
-&amp;= \int^{+\infty}_{-\infty}Ce^{\frac{-1}{2(1-\rho^2)}\left[\frac{(x-\mu_1)^2}{\sigma_1^2} - 2\rho\frac{(x-\mu_1)(y-\mu_2)}{\sigma_1\sigma_2}+\frac{(y-\mu_2)^2}{\sigma_2^2}\right]}{d}y\\
-&amp;= \int^{+\infty}_{-\infty}Ce^{\frac{-(x-\mu_1)^2}{2\sigma_2^2}}e^{\frac{-1}{2(1-\rho^2)}\left[\frac{y-\mu_2}{\sigma_2}-\rho\frac{x-\mu_1}{\sigma_1} \right]^2}{d}y\\
-&amp;= \frac{1}{\sqrt{2\pi}\sigma_1}e^{\frac{-(x-\mu_1)^2}{2\sigma_1^2}}\times\int^{+\infty}_{-\infty}\frac{1}{\sqrt{2\pi}\sigma_2\sqrt{1-\rho^2}}e^{\frac{-1}{2\sigma_2^2(1-\rho^2)}\left{y-\left[\mu_2+\rho\frac{\sigma_2}{\sigma_1}(x-\mu_1) \right]\right}^2}{d}y\\
-&amp;= \frac{1}{\sqrt{2\pi}\sigma_1}e^{\frac{-(x-\mu_1)^2}{2\sigma_1^2}}\\
-\end{align}
-\]</span></p>
-<p>同理:<span class="math inline">\(f_Y(y) = \frac{1}{\sqrt{2\pi}\sigma_2}e^{\frac{-(y-\mu_2)^2}{2\sigma_2^2}}\)</span>.</p>
+<p><span class="math inline">\(f_X(x) &amp;= \int^{+\infty}_{-\infty}f(x,y){d}y\)</span></p>
+<p><span class="math inline">\(= \int^{+\infty}_{-\infty}Ce^{\frac{-1}{2(1-\rho^2)}\left[\frac{(x-\mu_1)^2}{\sigma_1^2} - 2\rho\frac{(x-\mu_1)(y-\mu_2)}{\sigma_1\sigma_2}+\frac{(y-\mu_2)^2}{\sigma_2^2}\right]}{d}y\)</span></p>
+<p><span class="math inline">\(= \int^{+\infty}_{-\infty}Ce^{\frac{-(x-\mu_1)^2}{2\sigma_2^2}}e^{\frac{-1}{2(1-\rho^2)}\left[\frac{y-\mu_2}{\sigma_2}-\rho\frac{x-\mu_1}{\sigma_1} \right]^2}{d}y\)</span></p>
+<p><span class="math inline">\(= \frac{1}{\sqrt{2\pi}\sigma_1}e^{\frac{-(x-\mu_1)^2}{2\sigma_1^2}}\times\int^{+\infty}_{-\infty}\frac{1}{\sqrt{2\pi}\sigma_2\sqrt{1-\rho^2}}e^{\frac{-1}{2\sigma_2^2(1-\rho^2)}\left{y-\left[\mu_2+\rho\frac{\sigma_2}{\sigma_1}(x-\mu_1) \right]\right}^2}{d}y\)</span></p>
+<p><span class="math inline">\(= \frac{1}{\sqrt{2\pi}\sigma_1}e^{\frac{-(x-\mu_1)^2}{2\sigma_1^2}}\)</span></p>
+<p>同理:<span class="math inline">\(f_Y(y) = \frac{1}{\sqrt{2\pi}\sigma_2}e^{\frac{-(y-\mu_2)^2}{2\sigma_2^2}},-\infty &lt; y &lt; +\infty\)</span>.</p>
 <img src="/posts/169abb47/29.png" title="p29">
 <img src="/posts/169abb47/30.png" title="p30">
 <h2 id="相互独立的随机变量">相互独立的随机变量</h2>
@@ -1685,7 +1681,7 @@ f_X(x) &amp;= \int^{+\infty}_{-\infty}f(x,y){d}y\\
   //$("body").backstretch("/images/background.jpg");
   </script>
   
-  <script type="text/javascript" src="//cdn.bootcss.com/canvas-nest.js/1.0.0/canvas-nest.min.js"></script><!-- hexo-inject:begin --><!-- hexo-inject:end -->
+  <script type="text/javascript" src="//cdn.bootcss.com/canvas-nest.js/1.0.0/canvas-nest.min.js"></script>
   
-<script src="/live2dw/lib/L2Dwidget.min.js?0c58a1486de42ac6cc1c59c7d98ae887"></script><script>L2Dwidget.init({"pluginRootPath":"live2dw/","pluginJsPath":"lib/","pluginModelPath":"assets/","tagMode":false,"debug":false,"model":{"jsonPath":"/live2dw/assets/koharu.model.json"},"display":{"position":"right","width":150,"height":300},"mobile":{"show":false},"log":false});</script></body>
+<script src="/live2dw/lib/L2Dwidget.min.js?0c58a1486de42ac6cc1c59c7d98ae887"></script><script>L2Dwidget.init({"pluginRootPath":"live2dw/","pluginJsPath":"lib/","pluginModelPath":"assets/","tagMode":false,"debug":false,"model":{"jsonPath":"/live2dw/assets/koharu.model.json"},"display":{"position":"right","width":150,"height":300},"mobile":{"show":false},"log":false});</script><!-- hexo-inject:begin --><!-- hexo-inject:end --></body>
 </html>

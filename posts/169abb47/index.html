@@ -127,8 +127,6 @@
 <meta property="og:site_name" content="w4rd3n">
 <meta property="og:description" content="前言 在某些实际问题中,往往需要同时用两个或两个以上的随机变量来描述试验的结果,这个时候就要考虑多维随机变量及其分布. 二维随机变量 定义:设\(E\)是一个随机试验,样本空间是\(S = \{e\}\),设\(X = X(e)\)和\(Y = Y(e)\)是定义在\(S\)上的\(r.v.\),由它们构成的一个向量\((X, Y)\),叫做二维随机变量. 二维随机变量\((X, Y)\)">
 <meta property="og:locale" content="zh-CN">
-<meta property="og:image" content="https://hitworld.github.io/posts/169abb47/29.png">
-<meta property="og:image" content="https://hitworld.github.io/posts/169abb47/30.png">
 <meta property="og:image" content="https://hitworld.github.io/posts/169abb47/13.png">
 <meta property="og:image" content="https://hitworld.github.io/posts/169abb47/31.png">
 <meta property="og:image" content="https://hitworld.github.io/posts/169abb47/14.png">
@@ -143,11 +141,11 @@
 <meta property="og:image" content="https://hitworld.github.io/posts/169abb47/18.png">
 <meta property="og:image" content="https://hitworld.github.io/posts/169abb47/20.png">
 <meta property="og:image" content="https://hitworld.github.io/posts/169abb47/22.png">
-<meta property="og:updated_time" content="2020-08-29T05:50:03.956Z">
+<meta property="og:updated_time" content="2020-08-29T05:55:49.502Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Math-probability-theory-多维随机变量及其分布">
 <meta name="twitter:description" content="前言 在某些实际问题中,往往需要同时用两个或两个以上的随机变量来描述试验的结果,这个时候就要考虑多维随机变量及其分布. 二维随机变量 定义:设\(E\)是一个随机试验,样本空间是\(S = \{e\}\),设\(X = X(e)\)和\(Y = Y(e)\)是定义在\(S\)上的\(r.v.\),由它们构成的一个向量\((X, Y)\),叫做二维随机变量. 二维随机变量\((X, Y)\)">
-<meta name="twitter:image" content="https://hitworld.github.io/posts/169abb47/29.png">
+<meta name="twitter:image" content="https://hitworld.github.io/posts/169abb47/13.png">
 
 
 
@@ -513,7 +511,7 @@
                 
                   <span class="post-meta-item-text">本文字数：</span>
                 
-                <span title="本文字数">4.8k</span>
+                <span title="本文字数">5.1k</span>
               
 
               
@@ -527,7 +525,7 @@
                 
                   <span class="post-meta-item-text">阅读时长 &asymp;</span>
                 
-                <span title="阅读时长">4 分钟</span>
+                <span title="阅读时长">5 分钟</span>
               
             </div>
           
@@ -627,8 +625,9 @@ f(x,y) =
 <p><span class="math inline">\(= \frac{1}{\sqrt{2\pi}\sigma_1}e^{\frac{-(x-\mu_1)^2}{2\sigma_1^2}}\times\int^{+\infty}_{-\infty}\frac{1}{\sqrt{2\pi}\sigma_2\sqrt{1-\rho^2}}e^{\frac{-1}{2\sigma_2^2(1-\rho^2)}\left\{y-\left[\mu_2+\rho\frac{\sigma_2}{\sigma_1}(x-\mu_1) \right]\right\}^2}{d}y\)</span></p>
 <p><span class="math inline">\(= \frac{1}{\sqrt{2\pi}\sigma_1}e^{\frac{-(x-\mu_1)^2}{2\sigma_1^2}}\)</span></p>
 <p>同理:<span class="math inline">\(f_Y(y) = \frac{1}{\sqrt{2\pi}\sigma_2}e^{\frac{-(y-\mu_2)^2}{2\sigma_2^2}},-\infty &lt; y &lt; +\infty\)</span>.</p>
-<img src="/posts/169abb47/29.png" title="p29">
-<img src="/posts/169abb47/30.png" title="p30">
+<p>可发现二元正太随机变量的两个边际分布都是一元正太分布,并且都不依赖于参数<span class="math inline">\(\rho\)</span>.</p>
+<p>设二元随机变量<span class="math inline">\((X,Y) \sim N(\mu_1,\mu_2,\sigma_1^2,\sigma_2^2,\rho)\)</span>,求条件概率密度<span class="math inline">\(f_{Y|X}(y|x)\)</span>.</p>
+<p><span class="math inline">\(f_{Y|X}(y|x) = \frac{f(x,y)}{f_X(x)} = \frac{1}{\sqrt{2\pi}\sigma_2\sqrt{1-\rho^2}}e^{\frac{-1}{2\sigma_2^2(1-\rho^2)}\left\{y-\left[\mu_2+\rho\frac{\sigma_2}{\sigma_1}(x-\mu_1) \right]\right\}^2}\)</span>.</p>
 <h2 id="相互独立的随机变量">相互独立的随机变量</h2>
 <p>由两个事件相互独立的概念可引出两个随机变量相互独立的概念.</p>
 <img src="/posts/169abb47/13.png" title="p13">
@@ -1008,7 +1007,7 @@ f(x,y) =
       <i class="fa fa-coffee"></i>
     </span>
     
-    <span title="站点阅读时长">10:48</span>
+    <span title="站点阅读时长">10:49</span>
   
 </div>
 
@@ -1681,7 +1680,7 @@ f(x,y) =
   //$("body").backstretch("/images/background.jpg");
   </script>
   
-  <script type="text/javascript" src="//cdn.bootcss.com/canvas-nest.js/1.0.0/canvas-nest.min.js"></script><!-- hexo-inject:begin --><!-- hexo-inject:end -->
+  <script type="text/javascript" src="//cdn.bootcss.com/canvas-nest.js/1.0.0/canvas-nest.min.js"></script>
   
-<script src="/live2dw/lib/L2Dwidget.min.js?0c58a1486de42ac6cc1c59c7d98ae887"></script><script>L2Dwidget.init({"pluginRootPath":"live2dw/","pluginJsPath":"lib/","pluginModelPath":"assets/","tagMode":false,"debug":false,"model":{"jsonPath":"/live2dw/assets/koharu.model.json"},"display":{"position":"right","width":150,"height":300},"mobile":{"show":false},"log":false});</script></body>
+<script src="/live2dw/lib/L2Dwidget.min.js?0c58a1486de42ac6cc1c59c7d98ae887"></script><script>L2Dwidget.init({"pluginRootPath":"live2dw/","pluginJsPath":"lib/","pluginModelPath":"assets/","tagMode":false,"debug":false,"model":{"jsonPath":"/live2dw/assets/koharu.model.json"},"display":{"position":"right","width":150,"height":300},"mobile":{"show":false},"log":false});</script><!-- hexo-inject:begin --><!-- hexo-inject:end --></body>
 </html>

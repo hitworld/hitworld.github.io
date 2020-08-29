@@ -127,7 +127,6 @@
 <meta property="og:site_name" content="w4rd3n">
 <meta property="og:description" content="前言 在某些实际问题中,往往需要同时用两个或两个以上的随机变量来描述试验的结果,这个时候就要考虑多维随机变量及其分布. 二维随机变量 定义:设\(E\)是一个随机试验,样本空间是\(S = \{e\}\),设\(X = X(e)\)和\(Y = Y(e)\)是定义在\(S\)上的\(r.v.\),由它们构成的一个向量\((X, Y)\),叫做二维随机变量. 二维随机变量\((X, Y)\)">
 <meta property="og:locale" content="zh-CN">
-<meta property="og:image" content="https://hitworld.github.io/posts/169abb47/28.png">
 <meta property="og:image" content="https://hitworld.github.io/posts/169abb47/29.png">
 <meta property="og:image" content="https://hitworld.github.io/posts/169abb47/30.png">
 <meta property="og:image" content="https://hitworld.github.io/posts/169abb47/13.png">
@@ -144,11 +143,11 @@
 <meta property="og:image" content="https://hitworld.github.io/posts/169abb47/18.png">
 <meta property="og:image" content="https://hitworld.github.io/posts/169abb47/20.png">
 <meta property="og:image" content="https://hitworld.github.io/posts/169abb47/22.png">
-<meta property="og:updated_time" content="2020-08-29T05:16:51.808Z">
+<meta property="og:updated_time" content="2020-08-29T05:37:45.739Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Math-probability-theory-多维随机变量及其分布">
 <meta name="twitter:description" content="前言 在某些实际问题中,往往需要同时用两个或两个以上的随机变量来描述试验的结果,这个时候就要考虑多维随机变量及其分布. 二维随机变量 定义:设\(E\)是一个随机试验,样本空间是\(S = \{e\}\),设\(X = X(e)\)和\(Y = Y(e)\)是定义在\(S\)上的\(r.v.\),由它们构成的一个向量\((X, Y)\),叫做二维随机变量. 二维随机变量\((X, Y)\)">
-<meta name="twitter:image" content="https://hitworld.github.io/posts/169abb47/28.png">
+<meta name="twitter:image" content="https://hitworld.github.io/posts/169abb47/29.png">
 
 
 
@@ -514,7 +513,7 @@
                 
                   <span class="post-meta-item-text">本文字数：</span>
                 
-                <span title="本文字数">3.7k</span>
+                <span title="本文字数">4.8k</span>
               
 
               
@@ -528,7 +527,7 @@
                 
                   <span class="post-meta-item-text">阅读时长 &asymp;</span>
                 
-                <span title="阅读时长">3 分钟</span>
+                <span title="阅读时长">4 分钟</span>
               
             </div>
           
@@ -579,9 +578,9 @@
 <p>联合概率密度<span class="math inline">\(f(x, y)\)</span>的性质.</p>
 <ol type="1">
 <li><span class="math inline">\(f(x,y) \ge 0\)</span>.</li>
-<li><span class="math inline">\(\int^{+\infty}_{-\infty}\int^{+\infty}_{-\infty}f(x,y){d}x{d}y = 1\)</span>.</li>
+<li><span class="math inline">\(\int_{-\infty}^{+\infty}\int^{+\infty}_{-\infty}f(x,y){d}x{d}y = 1\)</span>.</li>
 <li>设<span class="math inline">\(D\)</span>为平面<span class="math inline">\(xoy\)</span>上的区域,点<span class="math inline">\((X,Y)\)</span>落在<span class="math inline">\(D\)</span>内的概率为:<span class="math inline">\(P((X,Y) \in D) = \iint_D f(x,y){d}x{d}y\)</span>.</li>
-<li><span class="math inline">\(P(x&lt;X&lt;x+\Delta x,x&lt;Y&lt;y+\Delta y) \approx f(x,y)\Delta x\Delta y\)</span>.</li>
+<li><span class="math inline">\(P(x&lt; X &lt; x+\Delta x,x&lt; Y &lt; y+\Delta y) \approx f(x,y)\Delta x\Delta y\)</span>.</li>
 <li>在<span class="math inline">\(f(x,y)\)</span>的连续点<span class="math inline">\((x,y)\)</span>,有<span class="math inline">\(\frac{\delta^2F(x,y)}{\delta x \delta y} = f(x,y)\)</span>.</li>
 </ol>
 <h2 id="边缘分布">边缘分布</h2>
@@ -619,7 +618,19 @@ f(x,y) =
 <h2 id="连续型二维r.v.的正态分布">连续型二维r.v.的正态分布</h2>
 <p>设连续型二维随机变量<span class="math inline">\((X,Y)\)</span>的概率密度为:</p>
 <p><span class="math inline">\(f(x,y)=\frac{1}{2\pi\sigma_1\sigma_2\sqrt{1-\rho^2}}\times e^{\frac{-1}{2(1-\rho^2)}\left[\frac{(x-\mu_1)^2}{\sigma_1^2} - 2\rho\frac{(x-\mu_1)(y-\mu_2)}{\sigma_1\sigma_2}+\frac{(y-\mu_2)^2}{\sigma_2^2}\right]}\)</span></p>
-<img src="/posts/169abb47/28.png" title="p28">
+<p>其中<span class="math inline">\(\mu_1,\mu_2,\sigma_1&gt;0,\sigma_2&gt;0,-1&lt;\rho&lt;1\)</span>都是常数,称<span class="math inline">\((X,Y)\)</span>为服从参数为<span class="math inline">\(\mu_1,\mu_2,\sigma_1,\sigma_2,\rho\)</span>的二元正态分布.</p>
+<p>记为<span class="math inline">\((X,Y) \sim N(\mu_1,\mu_2,\sigma_1^2,\sigma_2^2,\rho)\)</span></p>
+<p>求二元正太随机变量的边际概率密度,记<span class="math inline">\(C = 1/(2\pi\sigma_1\sigma_2\sqrt{1-\rho^2})\)</span>.</p>
+<p><span class="math display">\[
+\begin{align}
+f_X(x) &amp;= \int^{+\infty}_{-\infty}f(x,y){d}y\\
+&amp;= \int^{+\infty}_{-\infty}Ce^{\frac{-1}{2(1-\rho^2)}\left[\frac{(x-\mu_1)^2}{\sigma_1^2} - 2\rho\frac{(x-\mu_1)(y-\mu_2)}{\sigma_1\sigma_2}+\frac{(y-\mu_2)^2}{\sigma_2^2}\right]}{d}y\\
+&amp;= \int^{+\infty}_{-\infty}Ce^{\frac{-(x-\mu_1)^2}{2\sigma_2^2}}e^{\frac{-1}{2(1-\rho^2)}\left[\frac{y-\mu_2}{\sigma_2}-\rho\frac{x-\mu_1}{\sigma_1} \right]^2}{d}y\\
+&amp;= \frac{1}{\sqrt{2\pi}\sigma_1}e^{\frac{-(x-\mu_1)^2}{2\sigma_1^2}}\times\int^{+\infty}_{-\infty}\frac{1}{\sqrt{2\pi}\sigma_2\sqrt{1-\rho^2}}e^{\frac{-1}{2\sigma_2^2(1-\rho^2)}\left{y-\left[\mu_2+\rho\frac{\sigma_2}{\sigma_1}(x-\mu_1) \right]\right}^2}{d}y\\
+&amp;= \frac{1}{\sqrt{2\pi}\sigma_1}e^{\frac{-(x-\mu_1)^2}{2\sigma_1^2}}\\
+\end{align}
+\]</span></p>
+<p>同理:<span class="math inline">\(f_Y(y) = \frac{1}{\sqrt{2\pi}\sigma_2}e^{\frac{-(y-\mu_2)^2}{2\sigma_2^2}}\)</span>.</p>
 <img src="/posts/169abb47/29.png" title="p29">
 <img src="/posts/169abb47/30.png" title="p30">
 <h2 id="相互独立的随机变量">相互独立的随机变量</h2>
@@ -992,7 +1003,7 @@ f(x,y) =
       <i class="fa fa-area-chart"></i>
     </span>
     
-    <span title="站点总字数">712k</span>
+    <span title="站点总字数">713k</span>
   
 
   
@@ -1001,7 +1012,7 @@ f(x,y) =
       <i class="fa fa-coffee"></i>
     </span>
     
-    <span title="站点阅读时长">10:47</span>
+    <span title="站点阅读时长">10:48</span>
   
 </div>
 
@@ -1674,7 +1685,7 @@ f(x,y) =
   //$("body").backstretch("/images/background.jpg");
   </script>
   
-  <script type="text/javascript" src="//cdn.bootcss.com/canvas-nest.js/1.0.0/canvas-nest.min.js"></script>
+  <script type="text/javascript" src="//cdn.bootcss.com/canvas-nest.js/1.0.0/canvas-nest.min.js"></script><!-- hexo-inject:begin --><!-- hexo-inject:end -->
   
-<script src="/live2dw/lib/L2Dwidget.min.js?0c58a1486de42ac6cc1c59c7d98ae887"></script><script>L2Dwidget.init({"pluginRootPath":"live2dw/","pluginJsPath":"lib/","pluginModelPath":"assets/","tagMode":false,"debug":false,"model":{"jsonPath":"/live2dw/assets/koharu.model.json"},"display":{"position":"right","width":150,"height":300},"mobile":{"show":false},"log":false});</script><!-- hexo-inject:begin --><!-- hexo-inject:end --></body>
+<script src="/live2dw/lib/L2Dwidget.min.js?0c58a1486de42ac6cc1c59c7d98ae887"></script><script>L2Dwidget.init({"pluginRootPath":"live2dw/","pluginJsPath":"lib/","pluginModelPath":"assets/","tagMode":false,"debug":false,"model":{"jsonPath":"/live2dw/assets/koharu.model.json"},"display":{"position":"right","width":150,"height":300},"mobile":{"show":false},"log":false});</script></body>
 </html>

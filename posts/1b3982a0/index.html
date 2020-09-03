@@ -127,7 +127,7 @@
 <meta property="og:site_name" content="w4rd3n">
 <meta property="og:description" content="cred结构体提权 每个线程在内核中都对应一个线程栈,一个线程结构体thread_info,结构体同时也包含了线程的一系列信息,thread_info结构体存放在线程栈的最低地址. 12345678struct thread_info &amp;#123;	unsigned long flags;		/* low level flags */	int preempt_count;		/* 0 =&amp;gt">
 <meta property="og:locale" content="zh-CN">
-<meta property="og:updated_time" content="2020-08-30T16:21:15.217Z">
+<meta property="og:updated_time" content="2020-08-31T11:26:33.247Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="IS-pwn-Linux-kernel-任意读写到权限提升">
 <meta name="twitter:description" content="cred结构体提权 每个线程在内核中都对应一个线程栈,一个线程结构体thread_info,结构体同时也包含了线程的一系列信息,thread_info结构体存放在线程栈的最低地址. 12345678struct thread_info &amp;#123;	unsigned long flags;		/* low level flags */	int preempt_count;		/* 0 =&amp;gt">
@@ -503,7 +503,7 @@
                 
                   <span class="post-meta-item-text">本文字数：</span>
                 
-                <span title="本文字数">5.6k</span>
+                <span title="本文字数">5.8k</span>
               
 
               
@@ -544,10 +544,10 @@
 <figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">struct</span> <span class="title">task_struct</span> &#123;</span></span><br><span class="line">    <span class="keyword">volatile</span> <span class="keyword">long</span> state;</span><br><span class="line">    <span class="keyword">void</span> *<span class="built_in">stack</span>;</span><br><span class="line">    <span class="keyword">atomic_t</span> usage;</span><br><span class="line">    <span class="keyword">unsigned</span> <span class="keyword">int</span> flags;</span><br><span class="line">    <span class="keyword">unsigned</span> <span class="keyword">int</span> ptrace;</span><br><span class="line">	  <span class="comment">//...</span></span><br><span class="line">    <span class="keyword">const</span> <span class="class"><span class="keyword">struct</span> <span class="title">cred</span> __<span class="title">rcu</span> *<span class="title">ptracer_cred</span>;</span></span><br><span class="line">    <span class="keyword">const</span> <span class="class"><span class="keyword">struct</span> <span class="title">cred</span> __<span class="title">rcu</span> *<span class="title">real_cred</span>;</span></span><br><span class="line">    <span class="keyword">const</span> <span class="class"><span class="keyword">struct</span> <span class="title">cred</span> __<span class="title">rcu</span> *<span class="title">cred</span>;</span></span><br><span class="line">    <span class="keyword">char</span> comm[TASK_COMM_LEN];</span><br><span class="line">	  <span class="comment">//...</span></span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
 <figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">struct</span> <span class="title">cred</span> &#123;</span></span><br><span class="line">	<span class="keyword">atomic_t</span>	usage;</span><br><span class="line"><span class="meta">#<span class="meta-keyword">ifdef</span> CONFIG_DEBUG_CREDENTIALS</span></span><br><span class="line">	<span class="keyword">atomic_t</span>	subscribers;</span><br><span class="line">	<span class="keyword">void</span>		*put_addr;</span><br><span class="line">	<span class="keyword">unsigned</span>	magic;</span><br><span class="line"><span class="meta">#<span class="meta-keyword">define</span> CRED_MAGIC	0x43736564</span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">define</span> CRED_MAGIC_DEAD	0x44656144</span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">endif</span></span></span><br><span class="line">	<span class="keyword">kuid_t</span>		uid;</span><br><span class="line">	<span class="keyword">kgid_t</span>		gid;</span><br><span class="line">	<span class="keyword">kuid_t</span>		suid;</span><br><span class="line">	<span class="keyword">kgid_t</span>		sgid;</span><br><span class="line">	<span class="keyword">kuid_t</span>		euid;</span><br><span class="line">	<span class="keyword">kgid_t</span>		egid;</span><br><span class="line">	<span class="keyword">kuid_t</span>		fsuid;</span><br><span class="line">	<span class="keyword">kgid_t</span>		fsgid;</span><br><span class="line">	<span class="comment">//...</span></span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
 <p><code>cred</code>结构体在线程初始化由<code>prepare_creds</code>函数创建,创建<code>cred</code>结构体的方法是<code>kmem_cache_alloc</code>.可以通过修改<code>cred</code>结构体中的<code>uid ~ fsgid</code>(前<code>28</code>字节)为<code>0</code>获取<code>root</code>权限.也可以执行<code>commit_creds(prepare_kernel_cred(0))</code>获得<code>root</code>权限.</p>
+<p><code>cred</code>结构体在线程初始化由<code>prepare_creds</code>函数创建,在新版本内核中<code>cred</code>采用了<code>cred_jar</code>这个新的<code>kmem_cache</code>,与<code>kmalloc</code>使用的<code>kmalloc-xx</code>是隔离的.</p>
 <p>可以通过<code>prctl</code>函数中的<code>PR_SET_NAME</code>功能设置<code>task_struct</code>里的<code>char comm[TASK_COMM_LEN]</code>成员为一个特殊值,再利用内存任意读找到<code>task_structure</code>结构体,从而找到<code>cred</code>结构体.</p>
 <p>由于<code>task_structure</code>是<code>kmem_cache_alloc_node</code>,因此<code>task_struct</code>应该存在内核的动态分配区域,爆破范围应该在<code>0xffff880000000000 ~ 0xffffc80000000000</code>.</p>
 <p>例子:<code>https://github.com/mncoppola/StringIPC/blob/master/solution/solution.c</code>.</p>
-<p>在新版本内核中<code>cred</code>采用了<code>cred_jar</code>这个新的<code>kmem_cache</code>,与<code>kmalloc</code>使用的<code>kmalloc-xx</code>是隔离的.</p>
 <h2 id="vdso重写">vdso重写</h2>
 <p><code>vdso</code>在用户空间映射为<code>R/X</code>,而在内核空间为<code>R/W</code>,所以可以在内核空间修改它,接着在用户空间执行.</p>
 <p>由于<code>vdso</code>同时映射在内核空间以及每一个进程的虚拟内存中,包括那些以<code>root</code>权限运行的进程,利用内存读找到内存中<code>vdso</code>的逻辑页,由于内核态有写入的权限,因此利用任意写写入<code>shellcode</code>覆盖其中某些函数然后等待某<code>root</code>进程或者有<code>s</code>权限的进程调用这个函数就可以利用反弹<code>shell</code>完成提权.</p>
@@ -561,6 +561,7 @@
 <p>参考:<code>https://gist.github.com/itsZN/1ab36391d1849f15b785</code>.这个<code>shellcode</code>利用的是<code>crontab</code>进程会执行<code>gettimeofday</code>从而提权.</p>
 <p><code>vdso/vsyyscall overwriting</code>是一个非常有用的技术,它能够用在对于中断上下文(<code>interrupt context</code>)的利用,因为它不需要本地进程来映射一段内存,或者提升权限.但是新的内核可以通过设置编译参数使<code>vdso</code>内核态不可写.</p>
 <h2 id="hijackprctl">HijackPrctl</h2>
+<p><code>HijackPrctl</code>的原理在<code>dong-hoon you(x86)</code>分享的《<code>New Reliable Android Kernel Root Exploitation Techniques</code>》中提到,被用于安卓<code>root</code>,可以绕过<code>PXN</code>防御.</p>
 <figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//include/linux/security.h</span></span><br><span class="line"><span class="function"><span class="keyword">extern</span> <span class="keyword">int</span> <span class="title">cap_task_prctl</span><span class="params">(<span class="keyword">int</span> option, <span class="keyword">unsigned</span> <span class="keyword">long</span> arg2, <span class="keyword">unsigned</span> <span class="keyword">long</span> arg3, <span class="keyword">unsigned</span> <span class="keyword">long</span> arg4, <span class="keyword">unsigned</span> <span class="keyword">long</span> arg5)</span></span>;</span><br></pre></td></tr></table></figure>
 <p>在<code>kernel/sys.c</code>中,可以发现<code>prctl</code>系统调用将参数原封不动的传给了<code>security_task_prctl</code>函数进行处理.</p>
 <figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">SYSCALL_DEFINE5(prctl, <span class="keyword">int</span>, option, <span class="keyword">unsigned</span> <span class="keyword">long</span>, arg2, <span class="keyword">unsigned</span> <span class="keyword">long</span>, arg3, <span class="keyword">unsigned</span> <span class="keyword">long</span>, arg4, <span class="keyword">unsigned</span> <span class="keyword">long</span>, arg5) &#123;</span><br><span class="line">	<span class="class"><span class="keyword">struct</span> <span class="title">task_struct</span> *<span class="title">me</span> = <span class="title">current</span>;</span></span><br><span class="line">	<span class="keyword">unsigned</span> <span class="keyword">char</span> comm[<span class="keyword">sizeof</span>(me-&gt;comm)];</span><br><span class="line">	<span class="keyword">long</span> error;</span><br><span class="line">	error = security_task_prctl(option, arg2, arg3, arg4, arg5);</span><br><span class="line">    <span class="comment">/* code */</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
@@ -930,7 +931,7 @@
       <i class="fa fa-area-chart"></i>
     </span>
     
-    <span title="站点总字数">724k</span>
+    <span title="站点总字数">725k</span>
   
 
   
@@ -939,7 +940,7 @@
       <i class="fa fa-coffee"></i>
     </span>
     
-    <span title="站点阅读时长">10:58</span>
+    <span title="站点阅读时长">10:59</span>
   
 </div>
 

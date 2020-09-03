@@ -127,7 +127,7 @@
 <meta property="og:site_name" content="w4rd3n">
 <meta property="og:description" content="栈溢出ROP 12int commit_creds(struct cred * new);struct cred * prepare_kernel_cred(struct task_struct * daemon); 通过栈溢出漏洞写入ROP链调用commit_creds(prepare_kernel_cred(0))等函数进行提权,首先要泄露内核基址.与用户态栈溢出不同的是这里需要返回用户态">
 <meta property="og:locale" content="zh-CN">
-<meta property="og:updated_time" content="2020-08-30T16:09:00.437Z">
+<meta property="og:updated_time" content="2020-08-31T09:20:37.515Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="IS-pwn-Linux-kernel-常见漏洞利用">
 <meta name="twitter:description" content="栈溢出ROP 12int commit_creds(struct cred * new);struct cred * prepare_kernel_cred(struct task_struct * daemon); 通过栈溢出漏洞写入ROP链调用commit_creds(prepare_kernel_cred(0))等函数进行提权,首先要泄露内核基址.与用户态栈溢出不同的是这里需要返回用户态">
@@ -545,7 +545,7 @@
 <p><code>ret2usr</code>攻击利用用户空间的进程不能访问内核空间,但内核空间能访问用户空间的特性来定向内核代码或数据流指向用户空间,以<code>Ring 0</code>特权执行用户空间代码完成提权等操作.</p>
 <p>可以直接<code>ROP</code>劫持控制流返回到用户空间代码提权.也可以利用<code>tty_struct</code>结构体的<code>ops</code>函数表劫持控制流,因为<code>rax</code>中存储着伪造的函数表指针,通过<code>mov rsp, rax</code>,<code>xchg rsp, rax</code>这种<code>ROPgadget</code>即可将栈转换到用户态来构造<code>ROP</code>.</p>
 <h3 id="ret2dir">ret2dir</h3>
-<p><code>linux</code>内核在设计的时候,为了提高内存的操作效率,在用户空间映射内存的时候,内核也相应地在内核的低端内存区地址映射一段影子内存.</p>
+<p><code>linux</code>内核在设计的时候,为了提高内存的操作效率,在用户空间映射内存的时候,内核也相应地在内核的低端内存区地址映射一段影子内存.<code>physmap</code></p>
 <p>攻击者可以将用户空间的攻击代码映射到内核的低端内存可执行区或者将特定数据进行喷射到内核的低端内存,进行内存布局,然后利用漏洞让内核执行攻击代码,从而达到提权的目的,这项技术在<code>32</code>位<code>arm</code>设备上有<code>60%</code>以上的成功率,而在<code>64</code>位<code>arm</code>中有<code>96%</code>的成功率.</p>
 <p><code>2016</code>年<code>7</code>月<code>google</code>在<code>android PIXEL</code>(内核<code>3.18-16.04</code>)版本以后封杀了<code>ret2dir</code>的攻击方式.</p>
 <h3 id="bypass-smep">bypass-smep</h3>
@@ -920,7 +920,7 @@
       <i class="fa fa-area-chart"></i>
     </span>
     
-    <span title="站点总字数">724k</span>
+    <span title="站点总字数">725k</span>
   
 
   
@@ -929,7 +929,7 @@
       <i class="fa fa-coffee"></i>
     </span>
     
-    <span title="站点阅读时长">10:58</span>
+    <span title="站点阅读时长">10:59</span>
   
 </div>
 

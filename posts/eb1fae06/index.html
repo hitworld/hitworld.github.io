@@ -127,7 +127,7 @@
 <meta property="og:site_name" content="w4rd3n">
 <meta property="og:description" content="概念 栈溢出指由于程序使用了不安全的函数或逻辑错误,导致攻击者溢出栈中缓冲区破坏(篡改)其他数据. 可以看到在栈中,位于局部变量(溢出点)后面的有:部分其他局部变量,返回地址,和所有的之前的栈帧.栈溢出可以让攻击者劫持PC register(eip/rip). 有时候要劫持ebp(即被保存的栈指针)来控制栈的位置从而劫持控制流或者调用函数的局部变量值(因为局部变量一般使用ebp相对偏移).">
 <meta property="og:locale" content="zh-CN">
-<meta property="og:updated_time" content="2020-08-30T16:11:07.605Z">
+<meta property="og:updated_time" content="2020-08-31T05:42:36.149Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="IS-pwn-Linux-栈溢出概览">
 <meta name="twitter:description" content="概念 栈溢出指由于程序使用了不安全的函数或逻辑错误,导致攻击者溢出栈中缓冲区破坏(篡改)其他数据. 可以看到在栈中,位于局部变量(溢出点)后面的有:部分其他局部变量,返回地址,和所有的之前的栈帧.栈溢出可以让攻击者劫持PC register(eip/rip). 有时候要劫持ebp(即被保存的栈指针)来控制栈的位置从而劫持控制流或者调用函数的局部变量值(因为局部变量一般使用ebp相对偏移).">
@@ -542,6 +542,7 @@
 <p>可以看到在栈中,位于局部变量(溢出点)后面的有:部分其他局部变量,返回地址,和所有的之前的栈帧.栈溢出可以让攻击者劫持<code>PC register(eip/rip)</code>.</p>
 <p>有时候要劫持<code>ebp</code>(即被保存的栈指针)来控制栈的位置从而劫持控制流或者调用函数的局部变量值(因为局部变量一般使用<code>ebp</code>相对偏移).</p>
 <h2 id="利用方法">利用方法</h2>
+<p>在<code>Intel</code>体系中,内存空间中的数据被权限分为<code>code</code>(<code>rx</code>)和<code>data</code>(<code>rw</code>)(如果没有的权限的话这两者就没有本质上的区别).</p>
 <p>可执行的代码有两种,进程内存空间本身的代码(包括程序代码,动态库代码,甚至错误偏移产生的代码等等)和攻击者写进去的<code>shellcode</code>(如果程序没有开启<code>DEP</code>,也就是<code>NX</code>).</p>
 <p>利用前者的方法也叫做面向返回编程(<code>Return-Oriented Programming</code>,缩写:<code>ROP</code>).即攻击者控制堆栈调用以劫持程序控制流并执行针对性的机器语言指令序列(称为<code>gadget</code>).<code>gadget</code>通常结束于<code>ret</code>指令.对于动态库代码中的<code>gadget</code>需要先泄露<code>libc</code>基址(绕过<code>ASLR</code>).</p>
 <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">ROPgadget --binary [fileName] | grep <span class="string">"pop rdi"</span></span><br><span class="line">ROPgadget --binary [fileName] --string /bin/sh</span><br></pre></td></tr></table></figure>
@@ -938,7 +939,7 @@
       <i class="fa fa-area-chart"></i>
     </span>
     
-    <span title="站点总字数">724k</span>
+    <span title="站点总字数">725k</span>
   
 
   
@@ -947,7 +948,7 @@
       <i class="fa fa-coffee"></i>
     </span>
     
-    <span title="站点阅读时长">10:58</span>
+    <span title="站点阅读时长">10:59</span>
   
 </div>
 

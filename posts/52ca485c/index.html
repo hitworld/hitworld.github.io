@@ -130,7 +130,7 @@
 <meta property="og:image" content="https://hitworld.github.io/posts/52ca485c/3.png">
 <meta property="og:image" content="https://hitworld.github.io/posts/52ca485c/4.png">
 <meta property="og:image" content="https://hitworld.github.io/posts/52ca485c/5.png">
-<meta property="og:updated_time" content="2020-08-26T08:49:16.682Z">
+<meta property="og:updated_time" content="2020-08-31T07:01:46.905Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="IS-pwn-Linux-glibc-2.23-基础">
 <meta name="twitter:description" content="Linux动态内存分配 heap和mmap映射区域是可以运行时分配的内存空间.操作系统提供了相关的系统调用来分配内存给这两个区域. 对于heap,操作系统提供了brk()系统调用函数,C运行时库提供了sbrk()函数.对于mmap,操作系统提供了mmap()和munmap()函数. 内核对brk的实现可以看作是mmap的一个精简版,brk只是改变mm_struct结构的成员变量brk的值.">
@@ -583,7 +583,7 @@
 <p><code>chunk</code>指针指向一个<code>chunk</code>的开始.<code>mem</code>指针才是真正返回给用户的指针.</p>
 <p><code>chunk</code>的第二个域的最低一位为<code>P</code>,标识前一<code>chunk</code>是否在使用,为<code>0</code>表示前一<code>chunk</code>空闲,此时此<code>chunk</code>的<code>prev_size</code>有效(前一<code>chunk</code>的<code>size</code>).为<code>1</code>则<code>prev_size</code>无效.<code>ptmalloc</code>分配的第一个<code>chunk</code>总是将<code>P</code>设为<code>1</code>.</p>
 <p><code>chunk</code>的第二个域的倒数第二个位为<code>M</code>,表示此<code>chunk</code>是从哪个内存区域获得的虚拟内存.为<code>1</code>表示是从<code>mmap</code>映射区域分配的,为<code>0</code>则是从<code>heap</code>区域分配的.</p>
-<p><code>chunk</code>的第二个域的倒数第三个位为<code>A</code>,表示此<code>chunk</code>属于主分配区或者非主分配区,为<code>1</code>表示属于非主分配区,为<code>0</code>则是非主分配区.</p>
+<p><code>chunk</code>的第二个域的倒数第三个位为<code>A</code>,表示此<code>chunk</code>属于主分配区或者非主分配区,为<code>1</code>表示属于主分配区,为<code>0</code>则是非主分配区.</p>
 <p>空闲<code>chunk</code>.</p>
 <img src="/posts/52ca485c/4.png" title="p4">
 <p>空闲<code>chunk</code>不存在<code>M</code>状态.</p>
@@ -1019,7 +1019,7 @@
       <i class="fa fa-area-chart"></i>
     </span>
     
-    <span title="站点总字数">724k</span>
+    <span title="站点总字数">725k</span>
   
 
   
@@ -1028,7 +1028,7 @@
       <i class="fa fa-coffee"></i>
     </span>
     
-    <span title="站点阅读时长">10:58</span>
+    <span title="站点阅读时长">10:59</span>
   
 </div>
 

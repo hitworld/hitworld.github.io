@@ -119,18 +119,18 @@
 
 
 
-  <meta name="description" content="概览 在一些计算机软件里有一段专门负责保护软件不被非法修改或反编译的程序,它们一般都是先于程序运行,拿到控制权,然后完成它们保护软件的任务.由于这段程序和自然界的壳在功能上有很多相同的地方,就把这样的程序称为壳了. 加壳 加壳过的可执行文件依旧是可执行文件,它可以同正常的可执行文件一样执行.用户执行的实际上是外壳程序,这个外壳程序负责把用户原来的程序在内存中解压缩,并把控制权交还给解开后的真">
+  <meta name="description" content="壳 从技术的角度出发,壳是一段执行于原始程序前的代码,原始程序的代码在加壳的过程中可能被压缩,加密等,当加壳后的文件执行时,壳把压缩加密后的代码还原成原始程序代码,然后再把执行权交还给原始代码. 软件的壳分为加密,压缩壳等类,都会隐藏程序真正的OEP或者用假的OEP(Original Entry Point,程序的入口点)防止被破解. 加壳 加壳过的可执行文件依旧是可执行文件,它可以同正常">
 <meta name="keywords" content="Windows">
 <meta property="og:type" content="article">
 <meta property="og:title" content="IS-reverse-Windows-加壳与脱壳">
 <meta property="og:url" content="https://hitworld.github.io/posts/2240e62b/index.html">
 <meta property="og:site_name" content="w4rd3n">
-<meta property="og:description" content="概览 在一些计算机软件里有一段专门负责保护软件不被非法修改或反编译的程序,它们一般都是先于程序运行,拿到控制权,然后完成它们保护软件的任务.由于这段程序和自然界的壳在功能上有很多相同的地方,就把这样的程序称为壳了. 加壳 加壳过的可执行文件依旧是可执行文件,它可以同正常的可执行文件一样执行.用户执行的实际上是外壳程序,这个外壳程序负责把用户原来的程序在内存中解压缩,并把控制权交还给解开后的真">
+<meta property="og:description" content="壳 从技术的角度出发,壳是一段执行于原始程序前的代码,原始程序的代码在加壳的过程中可能被压缩,加密等,当加壳后的文件执行时,壳把压缩加密后的代码还原成原始程序代码,然后再把执行权交还给原始代码. 软件的壳分为加密,压缩壳等类,都会隐藏程序真正的OEP或者用假的OEP(Original Entry Point,程序的入口点)防止被破解. 加壳 加壳过的可执行文件依旧是可执行文件,它可以同正常">
 <meta property="og:locale" content="zh-CN">
-<meta property="og:updated_time" content="2020-09-08T12:39:07.605Z">
+<meta property="og:updated_time" content="2020-09-21T02:48:36.902Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="IS-reverse-Windows-加壳与脱壳">
-<meta name="twitter:description" content="概览 在一些计算机软件里有一段专门负责保护软件不被非法修改或反编译的程序,它们一般都是先于程序运行,拿到控制权,然后完成它们保护软件的任务.由于这段程序和自然界的壳在功能上有很多相同的地方,就把这样的程序称为壳了. 加壳 加壳过的可执行文件依旧是可执行文件,它可以同正常的可执行文件一样执行.用户执行的实际上是外壳程序,这个外壳程序负责把用户原来的程序在内存中解压缩,并把控制权交还给解开后的真">
+<meta name="twitter:description" content="壳 从技术的角度出发,壳是一段执行于原始程序前的代码,原始程序的代码在加壳的过程中可能被压缩,加密等,当加壳后的文件执行时,壳把压缩加密后的代码还原成原始程序代码,然后再把执行权交还给原始代码. 软件的壳分为加密,压缩壳等类,都会隐藏程序真正的OEP或者用假的OEP(Original Entry Point,程序的入口点)防止被破解. 加壳 加壳过的可执行文件依旧是可执行文件,它可以同正常">
 
 
 
@@ -503,7 +503,7 @@
                 
                   <span class="post-meta-item-text">本文字数：</span>
                 
-                <span title="本文字数">3k</span>
+                <span title="本文字数">5.1k</span>
               
 
               
@@ -517,7 +517,7 @@
                 
                   <span class="post-meta-item-text">阅读时长 &asymp;</span>
                 
-                <span title="阅读时长">3 分钟</span>
+                <span title="阅读时长">5 分钟</span>
               
             </div>
           
@@ -537,64 +537,68 @@
       
 
       
-        <h2 id="概览">概览</h2>
-<p>在一些计算机软件里有一段专门负责保护软件不被非法修改或反编译的程序,它们一般都是先于程序运行,拿到控制权,然后完成它们保护软件的任务.由于这段程序和自然界的壳在功能上有很多相同的地方,就把这样的程序称为壳了.</p>
+        <h2 id="壳">壳</h2>
+<p>从技术的角度出发,壳是一段执行于原始程序前的代码,原始程序的代码在加壳的过程中可能被压缩,加密等,当加壳后的文件执行时,壳把压缩加密后的代码还原成原始程序代码,然后再把执行权交还给原始代码.</p>
+<p>软件的壳分为加密,压缩壳等类,都会隐藏程序真正的<code>OEP</code>或者用假的<code>OEP</code>(<code>Original Entry Point</code>,程序的入口点)防止被破解.</p>
 <h2 id="加壳">加壳</h2>
 <p>加壳过的可执行文件依旧是可执行文件,它可以同正常的可执行文件一样执行.用户执行的实际上是外壳程序,这个外壳程序负责把用户原来的程序在内存中解压缩,并把控制权交还给解开后的真正程序,这一切工作都是在内存中运行的,整个过程对用户是透明的.</p>
 <p>壳修改了原程序的执行文件的组织结构,从而能够比原程序的代码提前获得控制权,并且不会影响原程序的正常运行.</p>
 <p>壳一般都修改了原程序文件的输入表,加壳后的输入表一般所引入的<code>DLL</code>和<code>API</code>函数都很少;壳出于保护原程序代码和数据的目的,一般都会加密原程序文件的各个区块;各类加壳软件,其压缩算法一般不是自己实现的,大多是调用其他的压缩引擎.</p>
-<h2 id="壳的加载">壳的加载</h2>
-<p>一般壳的装载过程.</p>
+<h2 id="壳装载">壳装载</h2>
+<p>壳装载的一般过程.</p>
 <ul>
-<li>保护入口参数,<code>ASPack</code>一般是<code>pushad</code>.</li>
+<li>保护入口参数,<code>pushad/pushfd</code>.</li>
 <li>用显式链接方式动态加载壳所需要使用的<code>API</code>地址,<code>3</code>个相关的重要函数:<code>GetModuleHandle</code>(返回指定模块的句柄),<code>GetProcAddress</code>(返回指定函数地址),<code>LoadLibrary</code>(加载动态链接库).</li>
 <li>对原程序文件的各个区块数据解密,并把解密的区块数据按照区块的定义放在合适的内存位置,以让程序能正常运行.如果加壳时用到了压缩技术,那么在解密之前还有解压缩.</li>
-<li><code>IAT</code>的初始化.</li>
-<li>重定位项的处理.</li>
-<li><code>HOOK API</code>.</li>
-<li>跳转到程序原入口点.</li>
+<li><code>IAT</code>的初始化,重定位项的处理,<code>DLL</code>文件脱壳,<code>HOOK API</code>.</li>
+<li>跳转到程序原入口点<code>OEP</code>.</li>
 </ul>
-<h2 id="常见压缩壳与加密壳">常见压缩壳与加密壳</h2>
-<p>加壳软件按照其加壳目的和作用,可分为压缩壳与加密壳.</p>
-<p>压缩壳主要目的是减小程序体积,如<code>ASPacK</code>,<code>UPX</code>和<code>PECompact</code>等;加密壳主要目的是保护程序,用上了各种反跟踪技术保护程序不被调试,脱壳等,如<code>ASProtect</code>,<code>Armadillo</code>,<code>EXECryptor</code>等.</p>
-<p>随着加壳技术的发展,这两类软件之间的界线越来越模糊,很多加壳软件除具有较强的压缩性能,同时也有了较强的保护性能.</p>
+<h2 id="壳自校检">壳自校检</h2>
+<p>壳自检验大致分为以下几个类型.</p>
+<ul>
+<li>调用<code>CreatFileA(W)</code>函数加载自身,然后通过<code>GetFileSize</code>获取文件大小比较来检测是否被脱壳.调用<code>SetFilePointer</code>设置文件指针,通过<code>ReadFile</code>读取文件中的一些数据,来判断是否被脱壳.</li>
+<li>对程序在内存中镜像进行<code>CRC</code>,<code>MD5</code>等检验,如果不相等则认为已脱壳或被修改.用<code>PEID</code>插件可以查看算法的所在位置,就可以到达解密点了.</li>
+<li>脚本编程语言(如<code>autoit</code>,<code>autohotkey</code>)等语言编译出来的程序一般都是天生带壳的,而且自校验是对附加数据进行多次细致的检查,如果不弄清楚检验过程,即使更改跳转也不能让程序正常运行.</li>
+<li>在主程序中插入一些跳到壳地址中的代码,并返回一些无关紧要的数据或做无关紧要的操作.如果程序被脱壳了,这些代码执行的时候就会出现异常.出现异常后,在堆栈中找到返回的位置,<code>nop</code>掉相应的指令即可.</li>
+</ul>
+<h2 id="常见壳">常见壳</h2>
+<p>加壳软件按照其加壳目的和作用,可分为压缩壳,加密壳,虚拟机保护壳.</p>
+<p>压缩壳主要目的是减小程序体积,如<code>ASPacK</code>,<code>UPX</code>和<code>PECompact</code>等;加密壳主要目的是保护程序,用上了各种反跟踪技术保护程序不被调试,脱壳等,如<code>ASProtect</code>,<code>Armadillo</code>,<code>EXECryptor</code>等.虚拟机保护壳实现了一个软件版的<code>CPU</code>,被加密的可执行代码已经不再遵守<code>Intel</code>制定的<code>OPCode</code>标准了,而是执行由虚拟机作者本身制定的非公开的,动态的<code>CPU</code>指令编码解码标准,通常称之为<code>TextCode</code>.</p>
 <ul>
 <li><code>http://www.aspack.com/</code>:<code>ASPack</code>可压缩<code>Win32</code>可执行文件以及库文件,文件压缩比率高达<code>40% ~ 70%</code>.</li>
 <li><code>http://upx.sourceforge.net/</code>:<code>UPX</code>是一个以命令行方式操作的可执行文件经典免费压缩程序,开源.</li>
-<li><code>http://www.bitsum.com/</code>:<code>PECompact</code>同样也是一款能压缩可执行文件的工具.相比同类软件,<code>PECompact</code>提供了多种压缩项目的选择,用户可以根据需要确定哪些内部资源需要压缩处理.同时,该软件还提供了加解密的插件接口功能.</li>
+<li><code>http://www.bitsum.com/</code>:<code>PECompact</code>提供了多种压缩项目的选择,用户可以根据需要确定哪些内部资源需要压缩处理.同时,该软件还提供了加解密的插件接口功能.</li>
 <li><code>http://www.aspack.com/</code>:<code>ASProtect</code>.</li>
 <li><code>http://www.ultraprotect.com/</code>:<code>ACProtect</code>.</li>
 <li><code>http://www.siliconrealms.com</code>:<code>Armadillo</code>.</li>
 <li><code>http://www.strongbit.com/</code>:<code>EXECryptor</code>.</li>
 <li><code>http://www.obsidium.de/</code>:<code>Obsidium</code>.</li>
 <li><code>http://pespin.w.interia.pl/</code>:<code>PESpin</code>.</li>
-<li><code>http://www.polytech.ural.ru/</code>:<code>VMProtect</code>.</li>
+<li><code>http://www.polytech.ural.ru/</code>:虚拟机保护软件<code>VMProtect</code>,将程序代码转换成字节码,然后跳转到虚拟机解释执行.</li>
 <li><code>http://www.oreans.com/xprotector/</code>:<code>Xtreme-Protector</code>.</li>
 <li><code>http://www.oreans.com</code>:<code>Themida/WinLicense</code>.</li>
 </ul>
-<h2 id="自校检">自校检</h2>
-<p>脱壳自检验大致分为以下几个类型.</p>
+<h2 id="常见脱壳工具">常见脱壳工具</h2>
 <ul>
-<li><code>CreateFile</code>型:调用<code>CreatFileA(W)</code>函数加载自身,然后通过<code>GetFileSize</code>获取文件大小,通过比较文件的大小来检测是否被脱壳.通过<code>SetFilePointer</code>来设置文件指针,然后通过<code>ReadFile</code>读取文件中的一些数据,来判断是否被脱壳(一般来说读取的时候附加数据).这种直接对<code>API</code>下断,基本就可以到达解密点.</li>
-<li>内存型:对程序在内存中镜像进行<code>CRC</code>,<code>MD5</code>等检验,如果不相等则认为已脱壳或被修改.用<code>PEID</code>插件可以查看算法的所在位置,就可以到达解密点了.</li>
-<li>脚本语言型:脚本编程语言指的是像<code>autoit</code>,<code>autohotkey</code>等语言.这种语言编译出来的程序一般都是天生带壳的,而且自校验是对附加数据进行多次细致的检查,如果不弄清楚检验过程,即使更改跳转也不能让程序正常运行.</li>
-<li>壳校检型:在主程序中插入一些跳到壳地址中的代码,并返回一些无关紧要的数据或做无关紧要的操作.如果程序被脱壳了,这些代码执行的时候就会出现异常.出现异常后,在堆栈中找到返回的位置,<code>nop</code>掉相应的指令即可.</li>
+<li>文件分析工具:<code>PEiD</code>,<code>ExeinfoPe</code>.</li>
+<li><code>OEP</code>入口查找工具:<code>Ollydbg</code>,<code>PEiD</code>,<code>ExeinfoPe</code>.</li>
+<li><code>dump</code>工具:<code>PEditor</code>,<code>Procdump</code>,<code>LordPE</code>.</li>
+<li><code>PE</code>文件编辑工具:<code>PEditor</code>,<code>Procdump</code>,<code>LordPE</code>.</li>
+<li>重建<code>Import Table</code>工具,输入表重建工具:<code>ImportREConstructor</code>.</li>
+<li><code>ASProtect</code>脱壳专用工具:<code>Caspr</code>(<code>ASPr V1.1-V1.2</code>有效),<code>Rad</code>(<code>ASPr V1.1</code>有效),<code>LordPE</code>,<code>PEiD</code>.</li>
+<li>调试器:<code>Ollydbg</code>.</li>
+<li>内存抓取工具:<code>Procdump</code>,<code>LordPE</code>.</li>
+<li><code>PE</code>编辑工具:<code>Procdump</code>,<code>PEditor</code>.</li>
 </ul>
 <h2 id="脱壳">脱壳</h2>
-<p>脱壳的一般流程是:查壳 <code>-&gt;</code> 寻找<code>OEP</code> <code>-&gt;</code> <code>Dump</code> <code>-&gt;</code> 修复.</p>
-<p>首先用相关工具分析一下是什么壳,然后跟踪分析.文件分析工具有<code>PEID</code>,<code>Exeinfo PE</code>等.</p>
-<p>一般压缩壳都有专用的脱壳机,而加密壳很少有,必须手工脱壳.</p>
-<p>手工脱壳常用的工具.</p>
-<ul>
-<li>调试器:<code>SoftICE</code>,<code>TRW2000</code>,<code>Ollydbg</code>,<code>ImmunityDebugger</code>等.</li>
-<li>内存抓取工具:<code>Procdump</code>,<code>LordPE</code>等.</li>
-<li>十六进制工具:<code>010 Editor</code>等.</li>
-<li><code>PE</code>编辑工具:<code>Procdump</code>,<code>PEditor</code>等.</li>
-<li>输入表重建工具:<code>ImportReconstruction</code>等.</li>
-</ul>
-<p>脱壳过程中可以通过查看资源类型来大致判断源程序语言类型.</p>
-<p>脱壳首先要确定<code>OEP</code>(原始入口点),决大多数<code>PE</code>加壳程序在被加密的程序中加上一个或多个段,所以跨段转移或跳转就有可能是跳往<code>OEP</code>.</p>
-<p>然后要<code>Dump</code>内存中已经还原的文件,使用内存抓取工具即可.对于用<code>Procdump</code>之类的<code>FULL DUMP</code>功能脱壳的文件,要用<code>Procdump</code>或<code>PEditor</code>之类的<code>PE</code>编辑工具修正入口点.</p>
+<p>脱壳主要有两种方法:硬脱壳和动态脱壳.</p>
+<p>硬脱壳指找出加壳软件的加壳算法,然后写出对应的脱壳算法或者使用对应的脱壳工具,就像压缩和解压缩一样,一般压缩壳都有专用的脱壳机,而加密壳很少有.</p>
+<p>动态脱壳的一般流程是:查壳-&gt;寻找<code>OEP</code>-&gt;<code>Dump</code>-&gt;重建<code>PE</code>文件.</p>
+<p>首先用相关工具分析一下是什么壳,然后跟踪分析.脱壳过程中可以通过查看资源类型来大致判断源程序语言类型.</p>
+<p>一般加壳程序在使用<code>Ollydbg</code>等动态调试工具时,会停在壳的预处理块.即处在对于程序原始代码块的解压或解密操作之前,在运行完程序自脱壳模块后,会停留在程序加壳之前的<code>OEP</code>位置,此时是<code>dump</code>程序的最佳时期.脱壳时在真实<code>OEP</code>处下<code>int3</code>断点,就可以捕捉到程序代码段完全恢复的状态.</p>
+<p>所以脱壳首先要确定<code>OEP</code>(原始入口点),决大多数<code>PE</code>加壳程序在被加密的程序中加上一个或多个段,所以跨段转移或跳转就有可能是跳往<code>OEP</code>.</p>
+<p>然后<code>Dump</code>内存中已经还原的文件,使用内存抓取工具即可.对于用<code>Procdump</code>之类的<code>FULL DUMP</code>功能脱壳的文件,要用<code>Procdump</code>或<code>PEditor</code>之类的<code>PE</code>编辑工具修正入口点.</p>
+<p>然后就是修复<code>IAT</code>(<code>Import Address Table</code>,导入地址表),当<code>PE</code>文件被装入内存的时候,<code>Windows</code>装载器才将<code>DLL</code>装入,并将调用导入函数的指令和函数实际所处的地址联系起,这操作就需要导入表完成.其中导入地址表就指示函数实际地址,多数加壳软件在运行时会重建导入地址表,因此获取加壳程序正确的导入地址表也是手动脱壳操作中的一个关键问题.</p>
 <p>使用<code>Import REConstructor</code>修复<code>IAT</code>表.</p>
 <ol type="1">
 <li>运行<code>Import REConstructor</code>和需要脱壳的应用程序,选择应用程序进程并填上<code>OEP</code>,点击<code>IAT AutoSearch</code>,出现<code>Get Import</code>按钮则表示输入的<code>OEP</code>发挥作用.</li>
@@ -604,6 +608,36 @@
 <li>如果还是出错,可以利用<code>Invalidate function(s)</code>,<code>Delete thunk(s)</code>,编辑<code>Import</code>表(双击函数)等功能手动修复.</li>
 <li>之后开始修复已脱壳的程序,选择<code>Add new section</code>来为<code>Dump</code>出来的文件加一个<code>Section</code>.</li>
 <li>点击<code>Fix Dump</code>,并选择<code>Dump</code>出来的文件,此时<code>OEP</code>也被修正.生成的文件可以跨平台运行.</li>
+</ol>
+<h3 id="单步跟踪法">单步跟踪法</h3>
+<p>通过<code>Ollydbg</code>的单步步过(<code>F8</code>),单步进入(<code>F7</code>)和运行到(<code>F4</code>)功能,完整走过程序的自脱壳过程,跳过一些循环恢复代码的片段,并用单步进入确保程序不会越过<code>OEP</code>,这样可以在软件自动脱壳模块运行完毕后,到达<code>OEP</code>,并<code>dump</code>程序.</p>
+<p>一般先<code>f8</code>单步步过,遇见向上的就<code>f4</code>跳到下一条语句,一般有很大的跳转(跨段)就可能会到程序的<code>OEP</code>.</p>
+<h3 id="esp定律法">ESP定律法</h3>
+<p><code>ESP</code>定律的原理在于程序中堆栈平衡的合理利用.由于在程序自解密或者自解压过程中,不少壳会先将当前寄存器内容压栈,如使用<code>pushad</code>,在解压结束后,会将之前的寄存器值出栈,如使用<code>popad</code>.因此在寄存器出栈时,往往程序代码被自动恢复,此时硬件断点触发.然后在程序当前位置,只需要少许单步跟踪,就很容易到达正确的<code>OEP</code>位置.</p>
+<p>示例:将<code>upx</code>壳程序拖入<code>Ollydbg</code>后,<code>F8</code>,同时注意右面寄存器<code>FPU</code>的显示,当<code>pushad</code>结束后,就可以右键<code>ESP</code>选择在数据窗口跟随,在下面的内存数据窗口与堆栈窗口都会转移到该地址的位置,随后右键该地址中数值设置断点-&gt;硬件访问-&gt;<code>word</code>型.</p>
+<p>随后<code>F9</code>,此时程序会暂停在断点位置.<code>F8</code>到<code>jnz</code>位置后不要再按<code>F8</code>,用鼠标点击下一行然后按<code>F4</code>,让程序强制转到跳转下面继续运行,到达<code>jmp</code>发现目标地址就是程序的<code>OEP</code>.右键使用<code>OllyDump</code>脱壳调试程序即可.</p>
+<h3 id="内存镜像法二次断点法">内存镜像法(二次断点法)</h3>
+<p>内存镜像法是在加壳程序被加载时,通过<code>Ollydbg</code>的<code>ALT + M</code>快捷键进入到程序虚拟内存区段.然后通过加两次内存一次性断点,到达程序正确<code>OEP</code>的位置.</p>
+<p>内存镜像法的原理在于对于程序资源段和代码段下断点,一般程序自解压或者自解密时,会首先访问资源段获取所需资源(此时代码段一般已经解密),然后在自动脱壳完成后,转回程序代码段.这时候下内存一次性断点,程序就会停在<code>OEP</code>处.</p>
+<h3 id="一步到达oep">一步到达OEP</h3>
+<p>根据所脱壳的特征,寻找其距离<code>OEP</code>最近的一处汇编指令,然后下<code>int3</code>断点,在程序走到<code>OEP</code>的时候<code>dump</code>程序.</p>
+<p>如一些压缩壳往往<code>popad</code>指令距离<code>OEP</code>或者<code>Magic Jump</code>特别近,因此使用<code>Ollydbg</code>的搜索功能,可以搜索壳的特征汇编代码,达到一步断点到达<code>OEP</code>的效果.</p>
+<h3 id="最后一次异常法">最后一次异常法</h3>
+<p>最后一次异常法的原理是,程序在自解压或自解密过程中,可能会触发无数次的异常.如果能定位到最后一次程序异常的位置,可能就会很接近自动脱壳完成位置.</p>
+<p>现在最后一次异常法脱壳可以利用<code>Ollydbg</code>的异常计数器插件,先记录异常数目,然后重新载入,自动停在最后一次异常处.</p>
+<h3 id="根据编译语言特点寻找oep">根据编译语言特点寻找OEP</h3>
+<p>比如在<code>VC6</code>的启动部分有<code>GetCommandLineA(W)</code>,<code>GetVersion</code>函数等,可以对<code>GetVersion</code>函数设置断点,中断两次后,就可以回到<code>OEP</code>附近.</p>
+<h3 id="sfx法">SFX法</h3>
+<p><code>SFX</code>法利用了<code>Ollydbg</code>自带的<code>OEP</code>寻找功能,可以选择直接让程序停在<code>Ollydbg</code>找到的<code>OEP</code>处,此时自解压已经完成,可以直接<code>dump</code>程序.</p>
+<h2 id="vmprotect脱壳">vmprotect脱壳</h2>
+<ol type="1">
+<li>用<code>exeinfo PE</code>查壳.</li>
+<li>设置<code>Ollydbg</code>:选项-&gt;调试设置-&gt;事件-&gt;系统断点.</li>
+<li>将程序载入<code>Ollydbg</code>,<code>f9</code>运行,便会来到一个<code>call</code>,<code>ctrl + g</code>搜索<code>VirtualProtect</code>.</li>
+<li>接着便会来到一个地址,在这里下断点,继续<code>f9</code>.</li>
+<li>然后运行几次<code>f9</code>都会断到这里,<code>NewProtect = READONLY</code>且最后一次时<code>alt + B</code>,断点界面取消或禁用断点,然后<code>alt + M</code>,对<code>text</code>段下内存访问断点.</li>
+<li><code>ctrl + g</code>搜索<code>401000</code>,硬件访问断点.运行,接着可以搜索特征码:<code>EB0B85F375078BC6C1E0100BF0</code>.</li>
+<li>此时就找到<code>OEP</code>了,直接<code>dump</code>出来<code>IDA</code>分析,<code>IAT</code>修复后运行.</li>
 </ol>
 
       
@@ -641,8 +675,8 @@
         <div class="post-nav">
           <div class="post-nav-next post-nav-item">
             
-              <a href="/posts/a5fee3d1/" rel="next" title="writeup-hackergame-2018-confused-flxg">
-                <i class="fa fa-chevron-left"></i> writeup-hackergame-2018-confused-flxg
+              <a href="/posts/16b2bf6c/" rel="next" title="CS-BASIC-compiler-principles-词法分析">
+                <i class="fa fa-chevron-left"></i> CS-BASIC-compiler-principles-词法分析
               </a>
             
           </div>
@@ -919,7 +953,7 @@
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#概览"><span class="nav-number">1.</span> <span class="nav-text">概览</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#加壳"><span class="nav-number">2.</span> <span class="nav-text">加壳</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#壳的加载"><span class="nav-number">3.</span> <span class="nav-text">壳的加载</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#常见压缩壳与加密壳"><span class="nav-number">4.</span> <span class="nav-text">常见压缩壳与加密壳</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#自校检"><span class="nav-number">5.</span> <span class="nav-text">自校检</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#脱壳"><span class="nav-number">6.</span> <span class="nav-text">脱壳</span></a></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#壳"><span class="nav-number">1.</span> <span class="nav-text">壳</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#加壳"><span class="nav-number">2.</span> <span class="nav-text">加壳</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#壳装载"><span class="nav-number">3.</span> <span class="nav-text">壳装载</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#壳自校检"><span class="nav-number">4.</span> <span class="nav-text">壳自校检</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#常见壳"><span class="nav-number">5.</span> <span class="nav-text">常见壳</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#常见脱壳工具"><span class="nav-number">6.</span> <span class="nav-text">常见脱壳工具</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#脱壳"><span class="nav-number">7.</span> <span class="nav-text">脱壳</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#单步跟踪法"><span class="nav-number">7.1.</span> <span class="nav-text">单步跟踪法</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#esp定律法"><span class="nav-number">7.2.</span> <span class="nav-text">ESP定律法</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#内存镜像法二次断点法"><span class="nav-number">7.3.</span> <span class="nav-text">内存镜像法(二次断点法)</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#一步到达oep"><span class="nav-number">7.4.</span> <span class="nav-text">一步到达OEP</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#最后一次异常法"><span class="nav-number">7.5.</span> <span class="nav-text">最后一次异常法</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#根据编译语言特点寻找oep"><span class="nav-number">7.6.</span> <span class="nav-text">根据编译语言特点寻找OEP</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#sfx法"><span class="nav-number">7.7.</span> <span class="nav-text">SFX法</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#vmprotect脱壳"><span class="nav-number">8.</span> <span class="nav-text">vmprotect脱壳</span></a></li></ol></div>
             
 
           </div>
@@ -951,7 +985,7 @@
       <i class="fa fa-area-chart"></i>
     </span>
     
-    <span title="站点总字数">737k</span>
+    <span title="站点总字数">753k</span>
   
 
   
@@ -960,7 +994,7 @@
       <i class="fa fa-coffee"></i>
     </span>
     
-    <span title="站点阅读时长">11:10</span>
+    <span title="站点阅读时长">11:24</span>
   
 </div>
 

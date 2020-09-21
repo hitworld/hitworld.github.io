@@ -127,7 +127,7 @@
 <meta property="og:site_name" content="w4rd3n">
 <meta property="og:description" content="泛型类示例 Java通过通配符类型来设计一个泛型类或者泛型方法. 123456789101112131415161718public class MyTest&amp;lt;T&amp;gt; &amp;#123;    private T a;    public MyTest() &amp;#123; a = null; &amp;#125;    //code&amp;#125;//codeMyTest&amp;lt;String&amp;gt; a">
 <meta property="og:locale" content="zh-CN">
-<meta property="og:updated_time" content="2020-09-08T12:39:07.087Z">
+<meta property="og:updated_time" content="2020-09-21T02:48:36.330Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="CS-develop-java-泛型程序设计">
 <meta name="twitter:description" content="泛型类示例 Java通过通配符类型来设计一个泛型类或者泛型方法. 123456789101112131415161718public class MyTest&amp;lt;T&amp;gt; &amp;#123;    private T a;    public MyTest() &amp;#123; a = null; &amp;#125;    //code&amp;#125;//codeMyTest&amp;lt;String&amp;gt; a">
@@ -540,7 +540,7 @@
         <h2 id="泛型类示例">泛型类示例</h2>
 <p><code>Java</code>通过通配符类型来设计一个泛型类或者泛型方法.</p>
 <figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">MyTest</span>&lt;<span class="title">T</span>&gt; </span>&#123;</span><br><span class="line">    <span class="keyword">private</span> T a;</span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="title">MyTest</span><span class="params">()</span> </span>&#123; a = <span class="keyword">null</span>; &#125;</span><br><span class="line">    <span class="comment">//code</span></span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">//code</span></span><br><span class="line">MyTest&lt;String&gt; a = <span class="keyword">new</span> MyTest&lt;String&gt;;</span><br><span class="line"></span><br><span class="line"><span class="comment">//code</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">MyTest2</span> </span>&#123;</span><br><span class="line">    <span class="comment">//code</span></span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">static</span> &lt;T&gt; <span class="function">T <span class="title">test</span><span class="params">(T a)</span> </span>&#123; <span class="keyword">return</span> a; &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">//code</span></span><br><span class="line">String a = MyTest2.&lt;String&gt;test(<span class="string">"aaa"</span>);</span><br></pre></td></tr></table></figure>
-<p>可以限定一个泛型类<code>/</code>方法可以实例化的类型.</p>
+<p>可以限定一个泛型类/方法可以实例化的类型.</p>
 <figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">MyTest3</span> </span>&#123;</span><br><span class="line">    <span class="comment">//code</span></span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">static</span> &lt;T extend Comparable&gt; <span class="function">T <span class="title">test</span><span class="params">(T a)</span> </span>&#123; <span class="keyword">return</span> a; &#125;</span><br><span class="line">    <span class="comment">//限定类型T必须实现Comparable接口</span></span><br><span class="line">    <span class="comment">//多个限定条件可以通过&amp;连接</span></span><br><span class="line">    <span class="comment">//如果限定条件中包含类则类必须位于限定列表的第一个</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 <p><code>Java</code>的泛型类与<code>C++</code>的模板类有本质区别.</p>
 <p><code>JVM</code>中没有泛型类,泛型类在编译时会被转换为普通类.这一过程称为类型擦除.</p>
@@ -890,7 +890,7 @@
       <i class="fa fa-area-chart"></i>
     </span>
     
-    <span title="站点总字数">737k</span>
+    <span title="站点总字数">753k</span>
   
 
   
@@ -899,7 +899,7 @@
       <i class="fa fa-coffee"></i>
     </span>
     
-    <span title="站点阅读时长">11:10</span>
+    <span title="站点阅读时长">11:24</span>
   
 </div>
 

@@ -130,7 +130,7 @@
 <meta property="og:image" content="https://hitworld.github.io/posts/undefined/2.png">
 <meta property="og:image" content="https://hitworld.github.io/posts/undefined/3.png">
 <meta property="og:image" content="https://hitworld.github.io/posts/undefined/4.png">
-<meta property="og:updated_time" content="2020-09-08T12:39:07.372Z">
+<meta property="og:updated_time" content="2020-09-21T02:48:36.516Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="IS-pwn-fuzz-AFL-基础">
 <meta name="twitter:description" content="简介 AFL是一种Fuzzing测试工具.通过对源码进行编译时插桩(通过注入探针代码来实现程序分析)的方式监测边界(代码)覆盖率,通过算法自动变异新的测试用例来探索二进制程序内部新的执行路径.AFL也支持直接对没有源码的二进制程序进行测试,但需要QEMU的支持. 原理 AFL的一个特点就是基于边界覆盖率的反馈机制,边界覆盖率的统计工作通过插桩完成,然后通过边界覆盖率来进行状态分析.记录输入样">
@@ -583,13 +583,13 @@
 <li><code>bitflip</code>,按位翻转,<code>1</code>变为<code>0</code>,<code>0</code>变为<code>1</code>.</li>
 <li><code>arithmetic</code>,整数加减算术运算.</li>
 <li><code>interest</code>,把一些特殊内容替换到原文件中.</li>
-<li><code>dictionary</code>,把自动生成或用户提供的<code>token</code>替换<code>/</code>插入到原文件中.</li>
+<li><code>dictionary</code>,把自动生成或用户提供的<code>token</code>替换/插入到原文件中.</li>
 <li><code>havoc</code>,此阶段会对原文件进行大量变异.</li>
 <li><code>splice</code>,此阶段会将两个文件拼接起来得到一个新的文件.</li>
 </ul>
 <p>其中,前四项是非<code>dumb mode</code>(<code>-d</code>)和主<code>fuzzer</code>(<code>-M</code>)会进行的操作,由于其变异方式没有随机性,所以也称为<code>deterministic fuzzing</code>;<code>havoc</code>和<code>splice</code>则存在随机性,是所有状况的<code>fuzzer</code>都会执行的变异.</p>
 <h4 id="bitflip">bitflip</h4>
-<p>最先使用的变异策略就是<code>bitflip</code>,根据翻转量<code>/</code>步长会进行多种不同的翻转,按照顺序依次为.</p>
+<p>最先使用的变异策略就是<code>bitflip</code>,根据翻转量/步长会进行多种不同的翻转,按照顺序依次为.</p>
 <ul>
 <li><code>bitflip 1/1</code>,每次翻转<code>1</code>个bit,按照每<code>1</code>个bit的步长从头开始.</li>
 <li><code>bitflip 2/1</code>,每次翻转相邻的<code>2</code>个<code>bit</code>,按照每1个bit的步长从头开始.</li>
@@ -634,12 +634,12 @@
 <p><code>havoc</code>包含了对原文件的多轮变异,每一轮都是将多种方式组合<code>stacked</code>而成.</p>
 <ul>
 <li>随机选取某个<code>bit</code>进行翻转.</li>
-<li>随机选取某个<code>byte</code>/<code>word</code>/<code>dword</code>,将其设置为随机的<code>interesting value</code>.</li>
-<li>随机选取某个<code>byte</code>/<code>word</code>/<code>dword</code>,并随机选取大<code>/</code>小端序,对其加<code>/</code>减去一个随机数.</li>
+<li>随机选取某个<code>byte/word/dword</code>,将其设置为随机的<code>interesting value</code>.</li>
+<li>随机选取某个<code>byte/word/dword</code>,并随机选取大/小端序,对其加/减去一个随机数.</li>
 <li>随机选取某个<code>byte</code>,将其设置为随机数.</li>
 <li>随机删除一段<code>bytes</code>.</li>
-<li>随机选取一个位置,插入<code>/</code>替换一段随机长度的内容,其中<code>75%</code>的概率是插入原文中随机位置的内容,<code>25%</code>的概率是插入一段随机选取的数.</li>
-<li>随机选取一个位置,用随机选取的<code>token</code>(用户提供的或自动生成的)替换<code>/</code>插入.</li>
+<li>随机选取一个位置,插入/替换一段随机长度的内容,其中<code>75%</code>的概率是插入原文中随机位置的内容,<code>25%</code>的概率是插入一段随机选取的数.</li>
+<li>随机选取一个位置,用随机选取的<code>token</code>(用户提供的或自动生成的)替换/插入.</li>
 </ul>
 <p><code>AFL</code>会生成一个随机数,作为变异组合的数量,并根据这个数量,每次从上面那些方式中随机选取一个,依次作用到文件上.</p>
 <h4 id="splice">splice</h4>
@@ -1006,7 +1006,7 @@
       <i class="fa fa-area-chart"></i>
     </span>
     
-    <span title="站点总字数">737k</span>
+    <span title="站点总字数">753k</span>
   
 
   
@@ -1015,7 +1015,7 @@
       <i class="fa fa-coffee"></i>
     </span>
     
-    <span title="站点阅读时长">11:10</span>
+    <span title="站点阅读时长">11:24</span>
   
 </div>
 

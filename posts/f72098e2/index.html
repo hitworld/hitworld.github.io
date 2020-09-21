@@ -127,7 +127,7 @@
 <meta property="og:site_name" content="w4rd3n">
 <meta property="og:description" content="概览 攻击者通过提交参数并绕过过滤,导致执行了额外的SQL(结构化查询语言)语句从而获取敏感信息或者执行其他恶意操作. 注入检测 通过在应用程序中触发错误和布尔逻辑来检测存在SQL注入的输入点. 布尔注入检测 SQL注入可以按照注入点的参数类型分为数字型注入和字符型注入. 数字型注入没有单引号. 12$id = $_GET[&apos;id&apos;];$sql = &quot;SELECT * FROM us">
 <meta property="og:locale" content="zh-CN">
-<meta property="og:updated_time" content="2020-09-08T12:39:07.788Z">
+<meta property="og:updated_time" content="2020-09-21T02:48:37.019Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="IS-web-SQL注入-基础">
 <meta name="twitter:description" content="概览 攻击者通过提交参数并绕过过滤,导致执行了额外的SQL(结构化查询语言)语句从而获取敏感信息或者执行其他恶意操作. 注入检测 通过在应用程序中触发错误和布尔逻辑来检测存在SQL注入的输入点. 布尔注入检测 SQL注入可以按照注入点的参数类型分为数字型注入和字符型注入. 数字型注入没有单引号. 12$id = $_GET[&apos;id&apos;];$sql = &quot;SELECT * FROM us">
@@ -572,7 +572,7 @@
 <p><code>ORDER BY</code>按一个或多个字段排序查询结果,可以是升序(<code>ASC</code>)和降序(<code>DESC</code>),缺省是升序.<code>ORDER BY</code>子句通常放在<code>SQL</code>语句的最后.<code>ORDER BY</code>子句中可以用字段的列序号(从<code>1</code>开始)代替字段名.</p>
 <p>发现注入漏洞后,可以使用<code>ORDER BY n</code>的回显判断出结果集的列数,这个时候可以使用类似<code>and 1=2 union select 1,2,...,n</code>来判断回显的具体是哪些列.</p>
 <h3 id="堆叠式注入">堆叠式注入</h3>
-<p>通过<code>;</code>分割语句,通常用于更新<code>/</code>修改数据.</p>
+<p>通过<code>;</code>分割语句,通常用于更新/修改数据.</p>
 <h3 id="floor报错注入">floor报错注入</h3>
 <p><code>floor</code>报错注入准确地说应该是<code>floor</code>,<code>count</code>,<code>group by</code>冲突报错.</p>
 <p><code>floor(x)</code>返回不大于<code>x</code>的最大整数值. <code>rand()</code>返回一个0-1之间的随机数.<code>rand()</code>在<code>ORDER BY</code>和<code>GROUP BY</code>子句中会被执行多次.</p>
@@ -948,7 +948,7 @@
       <i class="fa fa-area-chart"></i>
     </span>
     
-    <span title="站点总字数">737k</span>
+    <span title="站点总字数">753k</span>
   
 
   
@@ -957,7 +957,7 @@
       <i class="fa fa-coffee"></i>
     </span>
     
-    <span title="站点阅读时长">11:10</span>
+    <span title="站点阅读时长">11:24</span>
   
 </div>
 

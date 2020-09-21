@@ -127,7 +127,7 @@
 <meta property="og:site_name" content="w4rd3n">
 <meta property="og:description" content="反汇编 IDA是一个反汇编工具,软件开发过程中,程序员使用编译器,汇编器和链接器来创建可执行程序.对应的可以使用反汇编器和反编译器来获得可执行程序的可阅读的代码. 但反编译会面临由于编译过程的损失,编译过程的多对多等问题.(反汇编由于是一对一,处理过程简单很多) 汇编语言源代码主要采用两种语法:AT&amp;amp;T和Intel语法. 反汇编算法 首先要确定代码区域,这需要知道对应可执行文件的">
 <meta property="og:locale" content="zh-CN">
-<meta property="og:updated_time" content="2020-09-08T12:39:07.569Z">
+<meta property="og:updated_time" content="2020-09-21T02:48:36.832Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="IS-reverse-tool-IDA-基础">
 <meta name="twitter:description" content="反汇编 IDA是一个反汇编工具,软件开发过程中,程序员使用编译器,汇编器和链接器来创建可执行程序.对应的可以使用反汇编器和反编译器来获得可执行程序的可阅读的代码. 但反编译会面临由于编译过程的损失,编译过程的多对多等问题.(反汇编由于是一对一,处理过程简单很多) 汇编语言源代码主要采用两种语法:AT&amp;amp;T和Intel语法. 反汇编算法 首先要确定代码区域,这需要知道对应可执行文件的">
@@ -569,6 +569,7 @@
 <li><code>f12</code>:函数流程图.</li>
 <li><code>esc</code>:在反汇编窗口会倒回上一部操作的视图,在其他窗口会关闭该窗口.</li>
 <li><code>shift + f12</code>:打开<code>string</code>窗口.</li>
+<li><code>shift + f2</code>:打开脚本窗口,可以运行<code>python</code>和<code>idc</code>脚本.</li>
 <li><code>shift + e</code>:导出数据,逆向时常使用该操作导出<code>key</code>.</li>
 <li><code>ctrl + f12</code>:函数调用图.</li>
 <li><code>ctrl + w</code>:保存<code>ida</code>数据库.</li>
@@ -580,7 +581,7 @@
 <li><code>n</code>:更改函数,变量的名称,输入空白则会变成默认名称.</li>
 <li><code>y</code>:更改变量的类型.</li>
 <li><code>/</code>:在反编译后伪代码的界面中写注释.</li>
-<li><code>\</code>:在反编译后伪代码的界面中隐藏<code>/</code>显示变量和函数的类型描述.</li>
+<li><code>\</code>:在反编译后伪代码的界面中隐藏/显示变量和函数的类型描述.</li>
 <li><code>;</code>:在反汇编后的界面中写下注释.</li>
 <li><code>c</code>:定义一段指令.</li>
 <li><code>p</code>:定义一个子程序.</li>
@@ -604,7 +605,7 @@
 <h3 id="flirt">FLIRT</h3>
 <p><code>Fast Library Identification and Recognition Technology</code>(库文件快速识别与鉴定技术).</p>
 <p><code>IDA</code>可以通过导入签名文件(<code>Shift + F5</code>,右键导入)进一步识别库函数.还可以利用<code>FLIRT</code>解析器(存放在<code>bin</code>目录)创建签名文件,具体可查阅文档.</p>
-<p>可以通过<a href="%60https://github.com/maroueneboubakri/lscan%60"><code>lscan</code></a>找到对应的签名库,首先<code>python lscan.py -S amd64/sig -f ./demo</code>,然后将对应签名库拷贝到<code>IDA</code>的<code>sig/pc</code>文件夹导入即可.</p>
+<p>可以通过<a href="https://github.com/maroueneboubakri/lscan" target="_blank" rel="noopener"><code>lscan</code></a>找到对应的签名库,首先<code>python lscan.py -S amd64/sig -f ./demo</code>,然后将对应签名库拷贝到<code>IDA</code>的<code>sig/pc</code>文件夹导入即可.</p>
 <h3 id="调试器">调试器</h3>
 <p><code>IDA</code>支持本地调试,<code>Attach</code>已有进程和远程调试等多种方式(支持<code>IDC</code>脚本自动化调试).</p>
 <p>远程调试只需要利用<code>dbgsrv</code>下对应目标主机版本的程序,在目标主机运行该程序即可.程序支持<code>-p &lt;port&gt;</code>,默认<code>23496</code>;<code>-P &lt;password&gt;</code>,设置连接调试密码;<code>-v</code>设置为详细模式.</p>
@@ -970,7 +971,7 @@
       <i class="fa fa-area-chart"></i>
     </span>
     
-    <span title="站点总字数">737k</span>
+    <span title="站点总字数">753k</span>
   
 
   
@@ -979,7 +980,7 @@
       <i class="fa fa-coffee"></i>
     </span>
     
-    <span title="站点阅读时长">11:10</span>
+    <span title="站点阅读时长">11:24</span>
   
 </div>
 

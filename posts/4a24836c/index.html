@@ -127,7 +127,7 @@
 <meta property="og:site_name" content="w4rd3n">
 <meta property="og:description" content="开发环境 node.js,angular-cli,chrome(或其他浏览器). 重要文件 通过修改package.json文件中的dependencies字段然后npm install来安装对应软件包,或者直接npm install &amp;lt;package name&amp;gt;来安装软件包. package.json文件中的devDependencies用于指定开发过程用到的包,script">
 <meta property="og:locale" content="zh-CN">
-<meta property="og:updated_time" content="2020-09-08T12:39:07.054Z">
+<meta property="og:updated_time" content="2020-09-21T02:48:36.289Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="CS-develop-FrontEnd-Angular-基础">
 <meta name="twitter:description" content="开发环境 node.js,angular-cli,chrome(或其他浏览器). 重要文件 通过修改package.json文件中的dependencies字段然后npm install来安装对应软件包,或者直接npm install &amp;lt;package name&amp;gt;来安装软件包. package.json文件中的devDependencies用于指定开发过程用到的包,script">
@@ -560,7 +560,7 @@
 <p>还可以使用事件绑定来触发对应组件内的函数.</p>
 <figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">date-picker</span> (<span class="attr">dateChanged</span>)=<span class="string">"statement()"</span>&gt;</span><span class="tag">&lt;/<span class="name">date-picker</span>&gt;</span></span><br></pre></td></tr></table></figure>
 <p>对于<code>Http</code>请求可以使用内置的<code>HttpClientModule</code>模块.</p>
-<figure class="highlight typescript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> &#123; HttpClientModule &#125; <span class="keyword">from</span> <span class="string">'@angular/common/http'</span>;</span><br><span class="line"><span class="comment">//...</span></span><br><span class="line">imports: [..., HttpModule],</span><br><span class="line"><span class="comment">//...</span></span><br><span class="line"></span><br><span class="line"><span class="comment">//...</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">this</span>.http.get&lt;Member[]&gt;(<span class="string">`https://api.github.com/orgs/angular/members?	page=1&amp;per_page=5`</span>).subscribe(<span class="function"><span class="params">data</span> =&gt;</span> &#123;</span><br><span class="line">  <span class="keyword">if</span> (data) <span class="keyword">this</span>.members = data;</span><br><span class="line">&#125;);</span><br></pre></td></tr></table></figure>
+<figure class="highlight typescript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> &#123; HttpClientModule &#125; <span class="keyword">from</span> <span class="string">'@angular/common/http'</span>;</span><br><span class="line"><span class="comment">//...</span></span><br><span class="line">imports: [..., HttpModule],</span><br><span class="line"><span class="comment">//...</span></span><br><span class="line"></span><br><span class="line"><span class="comment">//...</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">this</span>.http.get&lt;Member[]&gt;(<span class="string">"https://api.github.com/orgs/angular/members?	page=1&amp;per_page=5"</span>).subscribe(<span class="function"><span class="params">data</span> =&gt;</span> &#123;</span><br><span class="line">  <span class="keyword">if</span> (data) <span class="keyword">this</span>.members = data;</span><br><span class="line">&#125;);</span><br></pre></td></tr></table></figure>
 <h2 id="指令">指令</h2>
 <p><code>Angular</code>指令用于在模板中处理数据的展示.常用的有<code>ngFor</code>,<code>ngIf</code>等等.作为元素的属性使用.</p>
 <figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">h2</span>&gt;</span>大家好，我是&#123;&#123;name&#125;&#125;<span class="tag">&lt;/<span class="name">h2</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">p</span>&gt;</span>我来自<span class="tag">&lt;<span class="name">strong</span>&gt;</span>&#123;&#123;address.province&#125;&#125;<span class="tag">&lt;/<span class="name">strong</span>&gt;</span>省,</span><br><span class="line">  <span class="tag">&lt;<span class="name">strong</span>&gt;</span>&#123;&#123;address.city&#125;&#125;<span class="tag">&lt;/<span class="name">strong</span>&gt;</span>市</span><br><span class="line"><span class="tag">&lt;/<span class="name">p</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">div</span> *<span class="attr">ngIf</span>=<span class="string">"showSkills"</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">h3</span>&gt;</span>我的技能<span class="tag">&lt;/<span class="name">h3</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">ul</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">li</span> *<span class="attr">ngFor</span>=<span class="string">"let skill of skills"</span>&gt;</span></span><br><span class="line">      &#123;&#123;skill&#125;&#125;</span><br><span class="line">    <span class="tag">&lt;/<span class="name">li</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;/<span class="name">ul</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br></pre></td></tr></table></figure>
@@ -616,8 +616,8 @@
 
           <div class="post-nav-prev post-nav-item">
             
-              <a href="/posts/aa9c134/" rel="prev" title="CS-BASIC-数据结构-队列和栈">
-                CS-BASIC-数据结构-队列和栈 <i class="fa fa-chevron-right"></i>
+              <a href="/posts/2d27a156/" rel="prev" title="CS-BASIC-data-structure-队列和栈">
+                CS-BASIC-data-structure-队列和栈 <i class="fa fa-chevron-right"></i>
               </a>
             
           </div>
@@ -916,7 +916,7 @@
       <i class="fa fa-area-chart"></i>
     </span>
     
-    <span title="站点总字数">737k</span>
+    <span title="站点总字数">753k</span>
   
 
   
@@ -925,7 +925,7 @@
       <i class="fa fa-coffee"></i>
     </span>
     
-    <span title="站点阅读时长">11:10</span>
+    <span title="站点阅读时长">11:24</span>
   
 </div>
 

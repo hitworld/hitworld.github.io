@@ -128,7 +128,7 @@
 <meta property="og:description" content="WinDbg WinDbg是Windows平台上的用户态和内核态调试工具支持x86,IA64,AMD64平台.官网下载即可. 调试符号 WinDbg允许指定一个或多个目录来存放符号文件,并使用环境变量_NT_SYMBOL_PATH来指向这些目录.对于操作系统内部模块的符号文件,可以根据使用的模块版本访问微软提供的符号服务器.  也可以设置好符号服务器自动获取,前面设置的下载文件的储存目录">
 <meta property="og:locale" content="zh-CN">
 <meta property="og:image" content="https://hitworld.github.io/posts/undefined/1.png">
-<meta property="og:updated_time" content="2020-09-08T12:39:07.595Z">
+<meta property="og:updated_time" content="2020-09-21T02:48:36.894Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="IS-reverse-tool-WinDbg">
 <meta name="twitter:description" content="WinDbg WinDbg是Windows平台上的用户态和内核态调试工具支持x86,IA64,AMD64平台.官网下载即可. 调试符号 WinDbg允许指定一个或多个目录来存放符号文件,并使用环境变量_NT_SYMBOL_PATH来指向这些目录.对于操作系统内部模块的符号文件,可以根据使用的模块版本访问微软提供的符号服务器.  也可以设置好符号服务器自动获取,前面设置的下载文件的储存目录">
@@ -689,7 +689,7 @@
 <li><code>.hh</code>:帮助.</li>
 <li><code>lmf/lm</code>:列举出已加载的模块.</li>
 <li><code>poi</code>:相当于<code>C</code>语言中对指针的操作符<code>*</code>.</li>
-<li><code>r &lt;@eax, ...&gt;&lt;=value&gt;</code>:查看<code>/</code>赋值寄存器组,单纯的<code>r</code>打印所以寄存器.</li>
+<li><code>r &lt;@eax, ...&gt;&lt;=value&gt;</code>:查看/赋值寄存器组,单纯的<code>r</code>打印所以寄存器.</li>
 <li><code>rdmsr/wrmsr</code>:读写<code>MSR</code>寄存器.</li>
 <li><code>u addr L(n)</code>:对目标地址进行反汇编,<code>L(n)</code>指定行数.</li>
 </ul>
@@ -723,11 +723,11 @@
 <ul>
 <li><code>$ntnsym</code>:<code>ntoskrnl</code>基址.</li>
 <li><code>$ntwsym</code>:<code>ntdll</code>基址.</li>
-<li><code>$ntsym</code>:根据用户态<code>/</code>内核态自动选择.</li>
+<li><code>$ntsym</code>:根据用户态/内核态自动选择.</li>
 </ul>
 <h3 id="表达式">表达式</h3>
 <p><code>WinDbg</code>能识别<code>MASM</code>和<code>C++</code>表达式,默认使用<code>MASM</code>表达式(使用<code>.expr</code>查看默认使用的表达式语法).使用<code>@@c++(expr)</code>(或<code>??expr</code>),<code>@@masm(expr)</code>(或<code>?expr</code>)指定表达式求值器.</p>
-<p><code>MASM</code>表达式可以使用<code>+</code>,<code>-</code>,<code>*</code>,<code>/</code>算术运算符和一些类似转型运算符.</p>
+<p><code>MASM</code>表达式可以使用<code>+</code>,<code>-</code>,<code>*</code>,/算术运算符和一些类似转型运算符.</p>
 <ul>
 <li>使用<code>hi/low</code>获得一个<code>32</code>位数的高/低<code>16</code>位.</li>
 <li>使用<code>by/wo</code>获得指定地址处的<code>BYTE/WORD</code>.</li>
@@ -1101,7 +1101,7 @@
       <i class="fa fa-area-chart"></i>
     </span>
     
-    <span title="站点总字数">737k</span>
+    <span title="站点总字数">753k</span>
   
 
   
@@ -1110,7 +1110,7 @@
       <i class="fa fa-coffee"></i>
     </span>
     
-    <span title="站点阅读时长">11:10</span>
+    <span title="站点阅读时长">11:24</span>
   
 </div>
 

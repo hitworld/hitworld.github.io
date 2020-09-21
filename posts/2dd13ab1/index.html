@@ -140,7 +140,7 @@
 <meta property="og:image" content="https://hitworld.github.io/posts/undefined/10.png">
 <meta property="og:image" content="https://hitworld.github.io/posts/undefined/11.png">
 <meta property="og:image" content="https://hitworld.github.io/posts/undefined/2.png">
-<meta property="og:updated_time" content="2020-09-08T12:39:07.298Z">
+<meta property="og:updated_time" content="2020-09-21T02:48:36.431Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="CS-RTFSC-v8-概览">
 <meta name="twitter:description" content="概览 v8是Google的JavaScript与WebAssembly引擎,使用C++编写,被用于Chrome和Node.js等应用程序中,同时也可以独立运行. 早期的v8引擎首先解析源代码构造AST(抽象语法树),JIT编译器(实时编译器)再基于AST将其编译成机器代码执行,运行过程中有选择的进行优化. 而现在AST首先被转化为bytecode执行,再有选择的将字节码与分析数据一起发给优化">
@@ -597,11 +597,11 @@
 <p><code>Ignition</code>是一种基于寄存器的<code>bytecode</code>解释器,将值分配给<code>CPU</code>的寄存器,并执行它们.<code>Ignition</code>通过预先生成一个名为<code>BytecodeHandler</code>的字节码处理函数,该函数从<code>bytecode</code>中获得一个索引,调用对应的汇编代码,从而执行<code>bytecode</code>数组.</p>
 <h3 id="优化编译器">优化编译器</h3>
 <p><code>Crankshaft</code>和<code>TurboFan</code>都属于优化编译器,会在运行过程中对<code>hot-code</code>进行优化.</p>
-<p><code>hot-code</code>指被多次调用的函数<code>/</code>循环,被判断为<code>hot-code</code>的代码会在其他线程里被<code>turbofan/crankshar</code>再次编译,通过替换<code>jmp</code>目标地址(在主线程中执行)来执行优化过的代码.</p>
+<p><code>hot-code</code>指被多次调用的函数/循环,被判断为<code>hot-code</code>的代码会在其他线程里被<code>turbofan/crankshar</code>再次编译,通过替换<code>jmp</code>目标地址(在主线程中执行)来执行优化过的代码.</p>
 <p><code>2015 ~ 2017</code>期间有两种优化编译器,根据以下规则运行.</p>
 <ul>
-<li>函数<code>/</code>循环中使用<code>debugger</code>语句和<code>eval</code>语句不调用优化编译器.</li>
-<li>函数<code>/</code>循环中有<code>use asm</code>语句或者<code>Crankshaft</code>不支持的语法,使用<code>TurboFan</code>.</li>
+<li>函数/循环中使用<code>debugger</code>语句和<code>eval</code>语句不调用优化编译器.</li>
+<li>函数/循环中有<code>use asm</code>语句或者<code>Crankshaft</code>不支持的语法,使用<code>TurboFan</code>.</li>
 <li>其他时候<code>Crankshaft</code>被默认使用.</li>
 </ul>
 <p>之后便只有<code>TurboFan</code>这一个优化编译器了.</p>
@@ -718,7 +718,7 @@
 <li>如果一个页非常活跃,如其中有过多需要记录的指针,那么地址记录会跳过它,等到下一轮垃圾回收进行处理.</li>
 </ul>
 <h2 id="v8的object">v8的object</h2>
-<p><code>v8</code>自定义了一些类,并针对<code>C++</code>类结构制作了触发器来与<code>GC</code>合作.<code>v8</code>的<code>object</code>没有成员变量,也没有虚函数和构造<code>/</code>析构函数.</p>
+<p><code>v8</code>自定义了一些类,并针对<code>C++</code>类结构制作了触发器来与<code>GC</code>合作.<code>v8</code>的<code>object</code>没有成员变量,也没有虚函数和构造/析构函数.</p>
 <p>继承关系在文件<code>v8/src/objects.h</code>中.</p>
 <figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// v8/src/objects.h</span></span><br><span class="line"><span class="comment">// Most object types in the V8 JavaScript are described in this file.</span></span><br><span class="line"></span><br><span class="line"><span class="comment">// Inheritance hierarchy:</span></span><br><span class="line"><span class="comment">// - Object</span></span><br><span class="line"><span class="comment">//   - Smi          (immediate small integer)</span></span><br><span class="line"><span class="comment">//   - HeapObject   (superclass for everything allocated in the heap)</span></span><br><span class="line"><span class="comment">//     - JSReceiver  (suitable for property access)</span></span><br><span class="line"><span class="comment">//       - JSObject</span></span><br><span class="line"><span class="comment">//         - JSArray</span></span><br><span class="line"><span class="comment">//         - JSArrayBuffer</span></span><br><span class="line"><span class="comment">//         - JSArrayBufferView</span></span><br><span class="line"><span class="comment">//           - JSTypedArray</span></span><br><span class="line"><span class="comment">//           - JSDataView</span></span><br><span class="line"><span class="comment">//         - JSBoundFunction</span></span><br><span class="line"><span class="comment">//...</span></span><br><span class="line"></span><br><span class="line"><span class="comment">// Formats of Object*:</span></span><br><span class="line"><span class="comment">//  Smi:        [31 bit signed int] 0</span></span><br><span class="line"><span class="comment">//  HeapObject: [32 bit direct pointer] (4 byte aligned) | 01</span></span><br></pre></td></tr></table></figure>
 <p><code>v8</code>所有类都继承自<code>Object</code>,它由以下两种类型组成.</p>
@@ -1110,7 +1110,7 @@
       <i class="fa fa-area-chart"></i>
     </span>
     
-    <span title="站点总字数">737k</span>
+    <span title="站点总字数">753k</span>
   
 
   
@@ -1119,7 +1119,7 @@
       <i class="fa fa-coffee"></i>
     </span>
     
-    <span title="站点阅读时长">11:10</span>
+    <span title="站点阅读时长">11:24</span>
   
 </div>
 

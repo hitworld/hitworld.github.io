@@ -134,7 +134,7 @@
 <meta property="og:image" content="https://hitworld.github.io/posts/undefined/5.png">
 <meta property="og:image" content="https://hitworld.github.io/posts/undefined/4.png">
 <meta property="og:image" content="https://hitworld.github.io/posts/undefined/7.png">
-<meta property="og:updated_time" content="2020-09-08T12:39:07.007Z">
+<meta property="og:updated_time" content="2020-09-21T02:48:36.286Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="CS-BASIC-virtualization-基础">
 <meta name="twitter:description" content="虚拟化初探 在计算机中,虚拟化是指创建一个虚拟版本的计算机,包括硬件,存储设备和网络资源. 管理程序(Hypervisor)或VMM(Virtual Machine Monitor,虚拟机监视器)是一种可以在同一物理硬件上创建分离的多台(虚拟)机器的软件.VMM是在给出的虚拟化环境中管理CPU,内存,I/O设备,中断和指令集的软件.hypervisor可能指带有VMM的操作系统.这两个术语也可">
@@ -632,7 +632,7 @@
 <li><code>Kernel</code>模式:负责将<code>CPU</code>切换到<code>Guest</code>模式执行代码,并在<code>CPU</code>退出<code>Guest</code>模式时回到<code>Kernel</code>模式.</li>
 <li><code>User</code>模式:替代客户机系统执行<code>I/O</code>操作.</li>
 </ul>
-<p><code>kvm</code>虚拟机基于<code>vCPU</code>,而<code>vCPU</code>作为<code>qemu</code>线程被<code>Linux</code>作为普通的线程<code>/</code>轻量级进程调度到物理<code>CPU</code>上,所以虚拟机代码是运行在物理<code>CPU</code>之上.</p>
+<p><code>kvm</code>虚拟机基于<code>vCPU</code>,而<code>vCPU</code>作为<code>qemu</code>线程被<code>Linux</code>作为普通的线程/轻量级进程调度到物理<code>CPU</code>上,所以虚拟机代码是运行在物理<code>CPU</code>之上.</p>
 <p>要将虚拟机的线程调度到某个物理<code>CPU</code>,需要经历两个过程:虚拟机线程调度到<code>vCPU</code>,该调度由虚拟机操作系统负责;<code>vCPU</code>线程调度到物理<code>CPU</code>即主机物理<code>CPU</code>,该调度由<code>Hypervisor</code>即<code>Linux</code>负责.</p>
 <img src="/posts/undefined/7.png" title="p7">
 <h4 id="内存虚拟化-2">内存虚拟化</h4>
@@ -994,7 +994,7 @@
       <i class="fa fa-area-chart"></i>
     </span>
     
-    <span title="站点总字数">737k</span>
+    <span title="站点总字数">753k</span>
   
 
   
@@ -1003,7 +1003,7 @@
       <i class="fa fa-coffee"></i>
     </span>
     
-    <span title="站点阅读时长">11:10</span>
+    <span title="站点阅读时长">11:24</span>
   
 </div>
 

@@ -127,18 +127,18 @@
 <meta property="og:site_name" content="w4rd3n">
 <meta property="og:description" content="前言 适用版本:win10(1809) 64bit OS build - 17763.379. 内存分配机制 win10默认内存分配机制为Nt Heap,win10还有一套全新的内存分配机制SegmentHeap,现用于部分系统程序及UWP程序.这里主要讨论Nt Heap. win10的内存分配机制与win7/Linux最大的差别在于分配的结果随机化,难以预测分配的堆块. Nt Heap">
 <meta property="og:locale" content="zh-CN">
-<meta property="og:image" content="https://hitworld.github.io/posts/undefined/1.png">
-<meta property="og:image" content="https://hitworld.github.io/posts/undefined/2.png">
-<meta property="og:image" content="https://hitworld.github.io/posts/undefined/3.png">
-<meta property="og:image" content="https://hitworld.github.io/posts/undefined/4.png">
-<meta property="og:image" content="https://hitworld.github.io/posts/undefined/5.png">
-<meta property="og:image" content="https://hitworld.github.io/posts/undefined/6.png">
-<meta property="og:image" content="https://hitworld.github.io/posts/undefined/7.png">
-<meta property="og:updated_time" content="2020-09-21T02:48:36.742Z">
+<meta property="og:image" content="https://hitworld.github.io/posts/e791ac95/1.png">
+<meta property="og:image" content="https://hitworld.github.io/posts/e791ac95/2.png">
+<meta property="og:image" content="https://hitworld.github.io/posts/e791ac95/3.png">
+<meta property="og:image" content="https://hitworld.github.io/posts/e791ac95/4.png">
+<meta property="og:image" content="https://hitworld.github.io/posts/e791ac95/5.png">
+<meta property="og:image" content="https://hitworld.github.io/posts/e791ac95/6.png">
+<meta property="og:image" content="https://hitworld.github.io/posts/e791ac95/7.png">
+<meta property="og:updated_time" content="2020-09-21T02:49:04.501Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="IS-pwn-Windows-NtHeap-基础">
 <meta name="twitter:description" content="前言 适用版本:win10(1809) 64bit OS build - 17763.379. 内存分配机制 win10默认内存分配机制为Nt Heap,win10还有一套全新的内存分配机制SegmentHeap,现用于部分系统程序及UWP程序.这里主要讨论Nt Heap. win10的内存分配机制与win7/Linux最大的差别在于分配的结果随机化,难以预测分配的堆块. Nt Heap">
-<meta name="twitter:image" content="https://hitworld.github.io/posts/undefined/1.png">
+<meta name="twitter:image" content="https://hitworld.github.io/posts/e791ac95/1.png">
 
 
 
@@ -552,7 +552,7 @@
 <p><code>win10</code>的内存分配机制与<code>win7/Linux</code>最大的差别在于分配的结果随机化,难以预测分配的堆块.</p>
 <p><code>Nt Heap</code>机制中主要分为两部分:后端管理器<code>Back-End</code>和前端管理器<code>Front-End</code>(非<code>Debug</code>模式才会启用).</p>
 <p>前端管理器又称为<code>LowFragmentationHeap</code>(<code>LFH</code>),相同大小(只针对<code>size &lt;= 0x4000</code>)分配到一定次数后启用<code>LFH</code>.</p>
-<img src="/posts/undefined/1.png" title="p1">
+<img src="/posts/e791ac95/1.png" title="p1">
 <p><code>LFH</code>未启用时由后端管理器<code>Back-End</code>直接管理内存分配,当某个大小的<code>LFH</code>启用后,第一次或<code>LFH</code>管理的内存用尽时会向后端管理器申请内存进行管理,其他时候<code>LFH</code>直接管理该大小的内存分配.</p>
 <h2 id="heap种类">HEAP种类</h2>
 <p>一个进程的<code>HEAP</code>可分为<code>Process Heap</code>和<code>Private Heap</code>.</p>
@@ -582,7 +582,7 @@
 <h3 id="heap_entry">_HEAP_ENTRY</h3>
 <p><code>Back-End</code>中<code>_HEAP_ENTRY</code>有两种状态:<code>Allocated chunk</code>,<code>Freed chunk</code>.</p>
 <p>下面是<code>Allocated chunk</code>.</p>
-<img src="/posts/undefined/2.png" title="p2">
+<img src="/posts/e791ac95/2.png" title="p2">
 <figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">+<span class="number">0x000</span> PreviousBlockPrivateData : Ptr64 Void  <span class="comment">//8B</span></span><br><span class="line">+<span class="number">0x008</span> Size             : Uint2B              <span class="comment">//2B</span></span><br><span class="line">+<span class="number">0x00a</span> Flags            : UChar               <span class="comment">//1B</span></span><br><span class="line">+<span class="number">0x00b</span> SmallTagIndex    : UChar               <span class="comment">//1B</span></span><br><span class="line">+<span class="number">0x00c</span> PreviousSize     : Uint2B              <span class="comment">//2B</span></span><br><span class="line">+<span class="number">0x00e</span> SegmentOffset    : UChar               <span class="comment">//1B</span></span><br><span class="line">+<span class="number">0x00f</span> UnusedBytes      : UChar               <span class="comment">//1B</span></span><br></pre></td></tr></table></figure>
 <ul>
 <li><code>PreviousBlockPrivateData</code>:可做为前一<code>chunk</code>的<code>data</code>,因为<code>64</code>位<code>chunk</code>要<code>0x10</code>对齐,对该<code>chunk</code>无意义.</li>
@@ -595,7 +595,7 @@
 <li><code>User Data</code>:用户真正存储数据的区域.</li>
 </ul>
 <p>下面是<code>Freed chunk</code>.</p>
-<img src="/posts/undefined/3.png" title="p3">
+<img src="/posts/e791ac95/3.png" title="p3">
 <ul>
 <li><code>User Data</code>前<code>0x10</code>字节存储<code>Flink</code>和<code>Blink</code>.</li>
 <li><code>Flink</code>:指向<code>linked list</code>中的下一个<code>chunk</code>.</li>
@@ -606,7 +606,7 @@
 <p>其他与<code>Allocated chunk</code>一致.</p>
 <h3 id="heap_virtual_alloc_entry">_HEAP_VIRTUAL_ALLOC_ENTRY</h3>
 <p>还有一种<code>VirtualAlloc chunk</code>,类型为<code>_HEAP_VIRTUAL_ALLOC_ENTRY</code>(<code>mmap chunk</code>).</p>
-<img src="/posts/undefined/4.png" title="p4">
+<img src="/posts/e791ac95/4.png" title="p4">
 <figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">+<span class="number">0x000</span> Entry            : _LIST_ENTRY       <span class="comment">//10B</span></span><br><span class="line">+<span class="number">0x010</span> ExtraStuff       : _HEAP_ENTRY_EXTRA <span class="comment">//10B</span></span><br><span class="line">+<span class="number">0x020</span> CommitSize       : Uint8B            <span class="comment">//8B</span></span><br><span class="line">+<span class="number">0x028</span> ReserveSize      : Uint8B            <span class="comment">//8B</span></span><br><span class="line">+<span class="number">0x030</span> BusyBlock        : _HEAP_ENTRY       <span class="comment">//10B</span></span><br></pre></td></tr></table></figure>
 <ul>
 <li><code>Flink</code>(<code>Entry</code>):指向下一个<code>VirtualAlloc chunk</code>.</li>
@@ -615,7 +615,7 @@
 <li><code>UnusedBytes</code>(<code>BusyBlock</code>):恒为<code>4</code>.</li>
 </ul>
 <h3 id="heap_list_lookup">_HEAP_LIST_LOOKUP</h3>
-<img src="/posts/undefined/5.png" title="p5">
+<img src="/posts/e791ac95/5.png" title="p5">
 <figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">+<span class="number">0x000</span> ExtendedLookup   : Ptr64 _HEAP_LIST_LOOKUP <span class="comment">//8B</span></span><br><span class="line">+<span class="number">0x008</span> ArraySize        : Uint4B                  <span class="comment">//4B</span></span><br><span class="line">+<span class="number">0x00c</span> ExtraItem        : Uint4B                  <span class="comment">//4B</span></span><br><span class="line">+<span class="number">0x010</span> ItemCount        : Uint4B                  <span class="comment">//4B</span></span><br><span class="line">+<span class="number">0x014</span> OutOfRangeItems  : Uint4B                  <span class="comment">//4B</span></span><br><span class="line">+<span class="number">0x018</span> BaseIndex        : Uint4B                  <span class="comment">//4B</span></span><br><span class="line">+<span class="number">0x020</span> ListHead         : Ptr64 _LIST_ENTRY       <span class="comment">//8B</span></span><br><span class="line">+<span class="number">0x028</span> ListsInUseUlong  : Ptr64 Uint4B            <span class="comment">//8B</span></span><br><span class="line">+<span class="number">0x030</span> ListHints        : Ptr64 Ptr64 _LIST_ENTRY <span class="comment">//8B</span></span><br></pre></td></tr></table></figure>
 <ul>
 <li><code>ExtendedLookup</code>:指向下一个<code>_HEAP_LIST_LOOKUP</code>结构,通常用于管理更大<code>Size</code>的<code>chunk</code>(<code>BlocksIndex</code>通常初始化<code>null</code>).</li>
@@ -627,9 +627,9 @@
 <li><code>ListsInUseUlong</code>:指向用于指示<code>ListHints</code>中是否对应大小的<code>chunk list</code>的<code>bitmap</code>.</li>
 <li><code>ListHints</code>:指向一个成员为对应大小的<code>chunk list</code>的数组.</li>
 </ul>
-<img src="/posts/undefined/6.png" title="p6">
+<img src="/posts/e791ac95/6.png" title="p6">
 <h3 id="lfh_heap">_LFH_HEAP</h3>
-<img src="/posts/undefined/7.png" title="p7">
+<img src="/posts/e791ac95/7.png" title="p7">
 <figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line">+<span class="number">0x000</span> Lock             : _RTL_SRWLOCK</span><br><span class="line">+<span class="number">0x008</span> SubSegmentZones  : _LIST_ENTRY</span><br><span class="line">+<span class="number">0x018</span> Heap             : Ptr64 Void</span><br><span class="line">+<span class="number">0x020</span> NextSegmentInfoArrayAddress : Ptr64 Void</span><br><span class="line">+<span class="number">0x028</span> FirstUncommittedAddress : Ptr64 Void</span><br><span class="line">+<span class="number">0x030</span> ReservedAddressLimit : Ptr64 Void</span><br><span class="line">+<span class="number">0x038</span> SegmentCreate    : Uint4B</span><br><span class="line">+<span class="number">0x03c</span> SegmentDelete    : Uint4B</span><br><span class="line">+<span class="number">0x040</span> MinimumCacheDepth : Uint4B</span><br><span class="line">+<span class="number">0x044</span> CacheShiftThreshold : Uint4B</span><br><span class="line">+<span class="number">0x048</span> SizeInCache      : Uint8B</span><br><span class="line">+<span class="number">0x050</span> RunInfo          : _HEAP_BUCKET_RUN_INFO</span><br><span class="line">+<span class="number">0x060</span> UserBlockCache   : [<span class="number">12</span>] _USER_MEMORY_CACHE_ENTRY</span><br><span class="line">+<span class="number">0x2a0</span> MemoryPolicies   : _HEAP_LFH_MEM_POLICIES</span><br><span class="line">+<span class="number">0x2a4</span> Buckets          : [<span class="number">129</span>] _HEAP_BUCKET</span><br><span class="line">+<span class="number">0x4a8</span> SegmentInfoArrays : [<span class="number">129</span>] Ptr64 _HEAP_LOCAL_SEGMENT_INFO</span><br><span class="line">+<span class="number">0x8b0</span> AffinitizedInfoArrays : [<span class="number">129</span>] Ptr64 _HEAP_LOCAL_SEGMENT_INFO</span><br><span class="line">+<span class="number">0xcb8</span> SegmentAllocator : Ptr64 _SEGMENT_HEAP</span><br><span class="line">+<span class="number">0xcc0</span> LocalData        : [<span class="number">1</span>] _HEAP_LOCAL_DATA</span><br></pre></td></tr></table></figure>
 <ul>
 <li><code>Heap</code>:指向对应的<code>_HEAP</code>对象.</li>
@@ -1077,7 +1077,7 @@
       <i class="fa fa-area-chart"></i>
     </span>
     
-    <span title="站点总字数">753k</span>
+    <span title="站点总字数">761k</span>
   
 
   
@@ -1086,7 +1086,7 @@
       <i class="fa fa-coffee"></i>
     </span>
     
-    <span title="站点阅读时长">11:24</span>
+    <span title="站点阅读时长">11:32</span>
   
 </div>
 

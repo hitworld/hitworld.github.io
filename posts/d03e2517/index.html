@@ -119,25 +119,25 @@
 
 
 
-  <meta name="description" content="union-find 一个集合可以被一种等价关系分为多个等价类,比如两个点的相连关系可以将一个点集分为多个连通分量,将这种判断是否连通并更新对应连通分量的问题称为动态连通性问题. 动态连通性问题解决思路:可以给每一个连通分量选择一个不同的标识符,通过检索标识符并判断是否相等来判断连通性. 第一种解决方案:如果对所有同一连通分量中的点都保存标识符,检索过程只需要一次即可,但是合并连通分量时就要">
+  <meta name="description" content="概念 一个集合可以被一种等价关系分为多个等价类,比如两个点的相连关系可以将一个点集分为多个连通分量,将这种判断是否连通并更新对应连通分量的问题称为动态连通性问题. 动态连通性问题解决思路:可以给每一个连通分量选择一个不同的标识符,通过检索标识符并判断是否相等来判断连通性. 第一种解决方案:如果对所有同一连通分量中的点都保存标识符,检索过程只需要一次即可,但是合并连通分量时就要遍历点集. 第">
 <meta name="keywords" content="algorithm">
 <meta property="og:type" content="article">
-<meta property="og:title" content="CS-BASIC-algorithm-union-find">
-<meta property="og:url" content="https://hitworld.github.io/posts/d6337b68/index.html">
+<meta property="og:title" content="CS-BASIC-algorithm-动态连通性">
+<meta property="og:url" content="https://hitworld.github.io/posts/d03e2517/index.html">
 <meta property="og:site_name" content="w4rd3n">
-<meta property="og:description" content="union-find 一个集合可以被一种等价关系分为多个等价类,比如两个点的相连关系可以将一个点集分为多个连通分量,将这种判断是否连通并更新对应连通分量的问题称为动态连通性问题. 动态连通性问题解决思路:可以给每一个连通分量选择一个不同的标识符,通过检索标识符并判断是否相等来判断连通性. 第一种解决方案:如果对所有同一连通分量中的点都保存标识符,检索过程只需要一次即可,但是合并连通分量时就要">
+<meta property="og:description" content="概念 一个集合可以被一种等价关系分为多个等价类,比如两个点的相连关系可以将一个点集分为多个连通分量,将这种判断是否连通并更新对应连通分量的问题称为动态连通性问题. 动态连通性问题解决思路:可以给每一个连通分量选择一个不同的标识符,通过检索标识符并判断是否相等来判断连通性. 第一种解决方案:如果对所有同一连通分量中的点都保存标识符,检索过程只需要一次即可,但是合并连通分量时就要遍历点集. 第">
 <meta property="og:locale" content="zh-CN">
-<meta property="og:updated_time" content="2020-09-21T02:48:36.265Z">
+<meta property="og:updated_time" content="2020-09-21T05:40:40.347Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="CS-BASIC-algorithm-union-find">
-<meta name="twitter:description" content="union-find 一个集合可以被一种等价关系分为多个等价类,比如两个点的相连关系可以将一个点集分为多个连通分量,将这种判断是否连通并更新对应连通分量的问题称为动态连通性问题. 动态连通性问题解决思路:可以给每一个连通分量选择一个不同的标识符,通过检索标识符并判断是否相等来判断连通性. 第一种解决方案:如果对所有同一连通分量中的点都保存标识符,检索过程只需要一次即可,但是合并连通分量时就要">
+<meta name="twitter:title" content="CS-BASIC-algorithm-动态连通性">
+<meta name="twitter:description" content="概念 一个集合可以被一种等价关系分为多个等价类,比如两个点的相连关系可以将一个点集分为多个连通分量,将这种判断是否连通并更新对应连通分量的问题称为动态连通性问题. 动态连通性问题解决思路:可以给每一个连通分量选择一个不同的标识符,通过检索标识符并判断是否相等来判断连通性. 第一种解决方案:如果对所有同一连通分量中的点都保存标识符,检索过程只需要一次即可,但是合并连通分量时就要遍历点集. 第">
 
 
 
 
 
 
-  <link rel="canonical" href="https://hitworld.github.io/posts/d6337b68/">
+  <link rel="canonical" href="https://hitworld.github.io/posts/d03e2517/">
 
 
 
@@ -147,7 +147,7 @@
   };
 </script>
 
-  <title>CS-BASIC-algorithm-union-find | w4rd3n</title>
+  <title>CS-BASIC-algorithm-动态连通性 | w4rd3n</title>
   
 
 
@@ -396,7 +396,7 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="https://hitworld.github.io/posts/d6337b68/">
+    <link itemprop="mainEntityOfPage" href="https://hitworld.github.io/posts/d03e2517/">
 
     <span hidden itemprop="author" itemscope="" itemtype="http://schema.org/Person">
       <meta itemprop="name" content="w4rd3n">
@@ -413,7 +413,7 @@
 
         
         
-          <h1 class="post-title" itemprop="name headline">CS-BASIC-algorithm-union-find
+          <h1 class="post-title" itemprop="name headline">CS-BASIC-algorithm-动态连通性
               
             
           </h1>
@@ -477,7 +477,7 @@
 
           
           
-             <span id="/posts/d6337b68/" class="leancloud_visitors" data-flag-title="CS-BASIC-algorithm-union-find">
+             <span id="/posts/d03e2517/" class="leancloud_visitors" data-flag-title="CS-BASIC-algorithm-动态连通性">
                <span class="post-meta-divider">|</span>
                <span class="post-meta-item-icon">
                  <i class="fa fa-eye"></i>
@@ -537,7 +537,7 @@
       
 
       
-        <h2 id="union-find">union-find</h2>
+        <h2 id="概念">概念</h2>
 <p>一个集合可以被一种等价关系分为多个等价类,比如两个点的相连关系可以将一个点集分为多个连通分量,将这种判断是否连通并更新对应连通分量的问题称为动态连通性问题.</p>
 <p>动态连通性问题解决思路:可以给每一个连通分量选择一个不同的标识符,通过检索标识符并判断是否相等来判断连通性.</p>
 <p>第一种解决方案:如果对所有同一连通分量中的点都保存标识符,检索过程只需要一次即可,但是合并连通分量时就要遍历点集.</p>
@@ -859,7 +859,7 @@
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#union-find"><span class="nav-number">1.</span> <span class="nav-text">union-find</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#java实现"><span class="nav-number">2.</span> <span class="nav-text">Java实现</span></a></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#概念"><span class="nav-number">1.</span> <span class="nav-text">概念</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#java实现"><span class="nav-number">2.</span> <span class="nav-text">Java实现</span></a></li></ol></div>
             
 
           </div>
@@ -891,7 +891,7 @@
       <i class="fa fa-area-chart"></i>
     </span>
     
-    <span title="站点总字数">753k</span>
+    <span title="站点总字数">761k</span>
   
 
   
@@ -900,7 +900,7 @@
       <i class="fa fa-coffee"></i>
     </span>
     
-    <span title="站点阅读时长">11:24</span>
+    <span title="站点阅读时长">11:32</span>
   
 </div>
 

@@ -127,12 +127,12 @@
 <meta property="og:site_name" content="w4rd3n">
 <meta property="og:description" content="概览 XXE(XML External Entity Injection)全称为XML外部实体注入.在解析外部实体的过程中,XML解析器可以根据URL中指定的方案(协议)来查询各种网络协议和服务(DNS,FTP,HTTP,SMB等),攻击者可以通过构造恶意输入达成目的. PHP中有XXE漏洞的标志性函数为simplexml_load_string(),会解析外部实体. XML XML(可扩">
 <meta property="og:locale" content="zh-CN">
-<meta property="og:image" content="https://hitworld.github.io/posts/undefined/1.png">
-<meta property="og:updated_time" content="2020-09-21T02:48:37.084Z">
+<meta property="og:image" content="https://hitworld.github.io/posts/481d8dbb/1.png">
+<meta property="og:updated_time" content="2020-09-21T02:49:04.516Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="IS-web-XXE-基础">
 <meta name="twitter:description" content="概览 XXE(XML External Entity Injection)全称为XML外部实体注入.在解析外部实体的过程中,XML解析器可以根据URL中指定的方案(协议)来查询各种网络协议和服务(DNS,FTP,HTTP,SMB等),攻击者可以通过构造恶意输入达成目的. PHP中有XXE漏洞的标志性函数为simplexml_load_string(),会解析外部实体. XML XML(可扩">
-<meta name="twitter:image" content="https://hitworld.github.io/posts/undefined/1.png">
+<meta name="twitter:image" content="https://hitworld.github.io/posts/481d8dbb/1.png">
 
 
 
@@ -555,7 +555,7 @@
 <p><code>c:/test.dtd</code>.</p>
 <figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&lt;?xml version="1.0" encoding="UTF-8"?&gt;</span> </span><br><span class="line"><span class="tag">&lt;<span class="name">!ENTITY</span> <span class="attr">xxe3</span> "<span class="attr">test2</span>"&gt;</span></span><br></pre></td></tr></table></figure>
 <p>不同<code>XML</code>解析器支持的协议不一样.</p>
-<img src="/posts/undefined/1.png" title="p1">
+<img src="/posts/481d8dbb/1.png" title="p1">
 <h2 id="利用">利用</h2>
 <p>对于直接解析的并有回显的,可以读取任意文件.</p>
 <figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&lt;?xml version="1.0"?&gt;</span></span><br><span class="line"><span class="meta">&lt;!DOCTYPE foo [</span></span><br><span class="line"><span class="meta">    &lt;!ELEMENT foo ANY &gt;</span></span><br><span class="line"><span class="meta">    &lt;!ENTITY xxe SYSTEM "file://a:/tools/Apache24/htdocs/test.php" &gt;</span></span><br><span class="line"><span class="meta">]&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">foo</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">user</span>&gt;</span>&amp;xxe;<span class="tag">&lt;/<span class="name">user</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">foo</span>&gt;</span></span><br></pre></td></tr></table></figure>
@@ -924,7 +924,7 @@
       <i class="fa fa-area-chart"></i>
     </span>
     
-    <span title="站点总字数">753k</span>
+    <span title="站点总字数">761k</span>
   
 
   
@@ -933,7 +933,7 @@
       <i class="fa fa-coffee"></i>
     </span>
     
-    <span title="站点阅读时长">11:24</span>
+    <span title="站点阅读时长">11:32</span>
   
 </div>
 

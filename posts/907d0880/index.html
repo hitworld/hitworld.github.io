@@ -127,7 +127,7 @@
 <meta property="og:site_name" content="w4rd3n">
 <meta property="og:description" content="基础 \(RSA\)加密算法是一种非对称加密算法,\(RSA\)算法的可靠性由极大整数因数分解的难度决定. 首先选取两个素数\(p\),\(q\). 接下来将\(p\)和\(q\)相乘获得模\(m = p * q\).同时也就知道了:\(\phi(m) = \phi(p) * \phi(q) = (p − 1)(q − 1)\). 选取与\(\phi(m)\)互素的整数\(k\),即\(g">
 <meta property="og:locale" content="zh-CN">
-<meta property="og:updated_time" content="2020-09-24T05:11:54.586Z">
+<meta property="og:updated_time" content="2020-09-24T05:58:57.100Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="IS-crypto-非对称加密-RSA">
 <meta name="twitter:description" content="基础 \(RSA\)加密算法是一种非对称加密算法,\(RSA\)算法的可靠性由极大整数因数分解的难度决定. 首先选取两个素数\(p\),\(q\). 接下来将\(p\)和\(q\)相乘获得模\(m = p * q\).同时也就知道了:\(\phi(m) = \phi(p) * \phi(q) = (p − 1)(q − 1)\). 选取与\(\phi(m)\)互素的整数\(k\),即\(g">
@@ -503,7 +503,7 @@
                 
                   <span class="post-meta-item-text">本文字数：</span>
                 
-                <span title="本文字数">3.2k</span>
+                <span title="本文字数">3.3k</span>
               
 
               
@@ -578,6 +578,7 @@ r_n = gcd(k, \phi(m)) = 1 = ku − \phi(m)v\\
 <h2 id="tool">tool</h2>
 <h3 id="rsatool">RSAtool</h3>
 <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">git <span class="built_in">clone</span> https://github.com/ius/rsatool.git</span><br><span class="line"><span class="built_in">cd</span> rsatool</span><br><span class="line">python rsatool.py -h</span><br></pre></td></tr></table></figure>
+<p><a href="https://github.com/Ganapati/RsaCtfTool" target="_blank" rel="noopener"><code>RsaCtfTool.py</code></a>.</p>
 <p><a href="https://sourceforge.net/projects/rsaconverter/" target="_blank" rel="noopener"><code>RsaConverter.exe</code></a>.</p>
 <p><a href="%60https://sourceforge.net/projects/yafu/%60"><code>yafu</code></a>.</p>
 <h3 id="openssl">openssl</h3>
@@ -587,7 +588,7 @@ r_n = gcd(k, \phi(m)) = 1 = ku − \phi(m)v\\
 <h3 id="在线工具">在线工具</h3>
 <ul>
 <li><a href="http://factordb.com/index.php" target="_blank" rel="noopener">分解整数</a>.</li>
-<li><span class="math inline">\(sage\)</span>:<code>https://sagecell.sagemath.org/</code>.</li>
+<li><span class="math inline">\(sage\)</span>:<code>https://sagecell.sagemath.org/</code>,<code>https://cloud.sagemath.com/</code>.</li>
 </ul>
 <h3 id="python库">python库</h3>
 <ul>
@@ -595,6 +596,7 @@ r_n = gcd(k, \phi(m)) = 1 = ku − \phi(m)v\\
 <li><span class="math inline">\(gmpy\)</span>:提供对<span class="math inline">\(GMP\)</span>或<span class="math inline">\(MPIR\)</span>多精度算术库的访问.</li>
 <li><span class="math inline">\(gmpy2\)</span>:<span class="math inline">\(gmpy\)</span>的升级版.</li>
 <li><span class="math inline">\(pycrypto\)</span>:<span class="math inline">\(python\)</span>加解密标准库.</li>
+<li><span class="math inline">\(primefac\)</span>:<span class="math inline">\(p+1/p-1\)</span>光滑.</li>
 </ul>
 
       
@@ -938,7 +940,7 @@ r_n = gcd(k, \phi(m)) = 1 = ku − \phi(m)v\\
       <i class="fa fa-area-chart"></i>
     </span>
     
-    <span title="站点总字数">784k</span>
+    <span title="站点总字数">797k</span>
   
 
   
@@ -947,7 +949,7 @@ r_n = gcd(k, \phi(m)) = 1 = ku − \phi(m)v\\
       <i class="fa fa-coffee"></i>
     </span>
     
-    <span title="站点阅读时长">11:53</span>
+    <span title="站点阅读时长">12:04</span>
   
 </div>
 

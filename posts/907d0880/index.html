@@ -127,7 +127,7 @@
 <meta property="og:site_name" content="w4rd3n">
 <meta property="og:description" content="基础 \(RSA\)加密算法是一种非对称加密算法,\(RSA\)算法的可靠性由极大整数因数分解的难度决定. 首先选取两个素数\(p\),\(q\). 接下来将\(p\)和\(q\)相乘获得模\(m = p * q\).同时也就知道了:\(\phi(m) = \phi(p) * \phi(q) = (p − 1)(q − 1)\). 选取与\(\phi(m)\)互素的整数\(k\),即\(g">
 <meta property="og:locale" content="zh-CN">
-<meta property="og:updated_time" content="2020-09-21T02:49:04.494Z">
+<meta property="og:updated_time" content="2020-09-24T05:11:54.586Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="IS-crypto-非对称加密-RSA">
 <meta name="twitter:description" content="基础 \(RSA\)加密算法是一种非对称加密算法,\(RSA\)算法的可靠性由极大整数因数分解的难度决定. 首先选取两个素数\(p\),\(q\). 接下来将\(p\)和\(q\)相乘获得模\(m = p * q\).同时也就知道了:\(\phi(m) = \phi(p) * \phi(q) = (p − 1)(q − 1)\). 选取与\(\phi(m)\)互素的整数\(k\),即\(g">
@@ -503,7 +503,7 @@
                 
                   <span class="post-meta-item-text">本文字数：</span>
                 
-                <span title="本文字数">6.2k</span>
+                <span title="本文字数">3.2k</span>
               
 
               
@@ -517,7 +517,7 @@
                 
                   <span class="post-meta-item-text">阅读时长 &asymp;</span>
                 
-                <span title="阅读时长">6 分钟</span>
+                <span title="阅读时长">3 分钟</span>
               
             </div>
           
@@ -575,100 +575,20 @@ r_n = gcd(k, \phi(m)) = 1 = ku − \phi(m)v\\
 </ul>
 <h3 id="python代码实现">python代码实现</h3>
 <figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">egcd</span><span class="params">(a, b)</span>:</span></span><br><span class="line">    r_0 = a</span><br><span class="line">    r_1 = b</span><br><span class="line">    r_2 = r_0 % r_1</span><br><span class="line">    q = r_0 // r_1</span><br><span class="line">    u_0 = <span class="number">0</span></span><br><span class="line">    u_1 = <span class="number">1</span></span><br><span class="line">    u_2 = u_0 - q * u_1</span><br><span class="line">    <span class="keyword">while</span> r_2:</span><br><span class="line">        r_0 = r_1</span><br><span class="line">        r_1 = r_2</span><br><span class="line">        r_2 = r_0 % r_1</span><br><span class="line">        q = r_0 // r_1</span><br><span class="line">        u_0 = u_1</span><br><span class="line">        u_1 = u_2</span><br><span class="line">        u_2 = u_0 - q * u_1</span><br><span class="line">    u_0 = u_1</span><br><span class="line">    u_1 = u_2</span><br><span class="line">    u_2 = u_0 - q * u_1</span><br><span class="line">    <span class="keyword">return</span> u_2</span><br><span class="line"></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">myRSA</span><span class="params">(object)</span>:</span></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">__init__</span><span class="params">(self, p, q, e)</span>:</span></span><br><span class="line">        self.N = p * q</span><br><span class="line">        print(<span class="string">"N: "</span> + str(self.N))</span><br><span class="line">        self.phiN = (p - <span class="number">1</span>) * (q - <span class="number">1</span>)</span><br><span class="line">        self.e = e</span><br><span class="line">        <span class="comment"># undo:check e</span></span><br><span class="line">        self.d = egcd(self.phiN, self.e)</span><br><span class="line">        <span class="keyword">while</span> self.d &lt; <span class="number">0</span>:</span><br><span class="line">            self.d = self.d + self.phiN</span><br><span class="line">        print(<span class="string">"d: "</span> + str(self.d))</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">encode</span><span class="params">(self, m)</span>:</span></span><br><span class="line">        c = pow(m, self.e, self.N)</span><br><span class="line">        <span class="keyword">return</span> c</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">decode</span><span class="params">(self, c)</span>:</span></span><br><span class="line">        m = pow(c, self.d, self.N)</span><br><span class="line">        <span class="keyword">return</span> m</span><br></pre></td></tr></table></figure>
-<h2 id="rsa衍生算法-rabin算法">RSA衍生算法-Rabin算法</h2>
-<p><span class="math inline">\(Rabin\)</span>算法的特征在于<span class="math inline">\(e = 2\)</span>.加密过程和<span class="math inline">\(RSA\)</span>一样.</p>
-<p><span class="math inline">\(c = m^2 \pmod{n}\)</span></p>
-<p>解密过程.</p>
-<p><span class="math display">\[
-\begin{align}
-m_p &amp;\equiv \sqrt{c} \pmod{p}\\
-m_q &amp;\equiv \sqrt{c} \pmod{q}\\
-\mbox{用扩展欧几里得算法解:}y_p \cdot p + y_q \cdot q &amp;= 1\\
-a &amp;= (y_p \cdot p \cdot m_q + y_q \cdot q \cdot m_p) \bmod n\\
-b &amp;= n - a\\
-c &amp;= (y_p \cdot p \cdot m_q - y_q \cdot q \cdot m_p) \bmod n\\
-d &amp;= n - c\\
-\end{align}
-\]</span></p>
-<p>如果<span class="math inline">\(p\)</span>,<span class="math inline">\(q\)</span>模<span class="math inline">\(4\)</span>余<span class="math inline">\(3\)</span>的不同素数,则.</p>
-<p><span class="math display">\[
-m_p = c^{\frac{1}{4}(p+1)} \bmod p\\
-m_q = c^{\frac{1}{4}(q+1)} \bmod q\\
-\]</span></p>
-<p>证明.</p>
-<p><span class="math display">\[
-\begin{align}
-a^2 &amp;\equiv (y_p \cdot p \cdot m_q + y_q \cdot q \cdot m_p)^2 \equiv (y_p \cdot p \cdot m_q)^2 + (y_q \cdot q \cdot m_p)^2 \pmod{n}\\
-m_q^2 &amp;= k_1q + c,m_p^2 = k_2p + c\\
-a^2 &amp;\equiv c(a^2 \cdot p^2 + b^2 \cdot q^2) \pmod{n}\\
-a^2 &amp;\equiv c((a \cdot p + b \cdot q)^2 - 2a \cdot p \cdot b \cdot q) \equiv c \pmod{n}\\
-\end{align}
-\]</span></p>
-<h2 id="常见攻击方式">常见攻击方式</h2>
-<h3 id="暴力分解">暴力分解</h3>
-<p>在<span class="math inline">\(N\)</span>的比特位数小于<span class="math inline">\(512\)</span>的时候,可以采用大整数分解的策略获取<span class="math inline">\(p\)</span>和<span class="math inline">\(q\)</span>.<a href="http://factordb.com/index.php" target="_blank" rel="noopener">网站分解</a>.</p>
-<h3 id="pq不当分解n">p&amp;q不当分解N</h3>
-<p>当<span class="math inline">\(|p-q|\)</span>很大时,一定存在某一个参数较小,可以通过穷举的方法对模数进行试除.</p>
-<p>当<span class="math inline">\(|p-q|\)</span>很小时.</p>
-<p><span class="math inline">\(\frac{(p + q)^2}{4} - n = \frac{(p + q)^2}{4} - pq = \frac{(p - q)^2}{4}\)</span>.</p>
-<p>说明<span class="math inline">\(\frac{p + q}{2}\)</span>接近<span class="math inline">\(\sqrt{n}\)</span>,从而找出<span class="math inline">\(\frac{p + q}{2}\)</span>和<span class="math inline">\(\frac{p - q}{2}\)</span>.然后分解出<span class="math inline">\(p\)</span>,<span class="math inline">\(q\)</span>.</p>
-<p>当<span class="math inline">\(p\)</span>是<span class="math inline">\(N\)</span>的因数,并且<span class="math inline">\(p - 1\)</span>是光滑的时候,可能可以使用<span class="math inline">\(Pollard&#39;s p − 1\)</span>算法或者<span class="math inline">\(Williams&#39;s p + 1\)</span>算法来分解<span class="math inline">\(N\)</span>,但是可能不会成功.</p>
-<h3 id="模不互素">模不互素</h3>
-<p>当存在两个公钥的<span class="math inline">\(N\)</span>不互素时,显然可以直接对这两个数求最大公因数(最大公因数为其中一个的<span class="math inline">\(p\)</span>或者<span class="math inline">\(q\)</span>),然后直接获得两对<span class="math inline">\(p\)</span>,<span class="math inline">\(q\)</span>,进而获得相应的私钥.</p>
-<h3 id="共模攻击">共模攻击</h3>
-<p>不同的<span class="math inline">\(e\)</span>和<span class="math inline">\(d\)</span>共用一个模数<span class="math inline">\(N\)</span>,会导致不用分解<span class="math inline">\(N\)</span>就能恢复明文.</p>
-<p>假设<span class="math inline">\(m\)</span>为信息明文,加密密钥为<span class="math inline">\(e1\)</span>和<span class="math inline">\(e2\)</span>,公共模数为<span class="math inline">\(N\)</span>.</p>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">c1 = pow(m, e1, n)</span><br><span class="line">c2 = pow(m, e2, n)</span><br></pre></td></tr></table></figure>
-<p>此时<span class="math inline">\(e_1\)</span>,<span class="math inline">\(e_2\)</span>,<span class="math inline">\(c_1\)</span>,<span class="math inline">\(c_2\)</span>,<span class="math inline">\(N\)</span>都是公开的.</p>
-<p>用扩展欧几里得算法求出满足<span class="math inline">\(re1 + se2 = 1\)</span>的两个整数<span class="math inline">\(r\)</span>和<span class="math inline">\(s\)</span>.</p>
-<p><span class="math display">\[
-\begin{align}
-c_1^rc_2^s &amp;\equiv m^{re_1}m^{se_2} \bmod n\\
-&amp;\equiv m^{re_1 + se_2} \bmod n\\
-&amp;\equiv m \bmod n\\
-\end{align}
-\]</span></p>
-<p>假如其中有一个为负数(最多一个为负数),则需要进行处理.</p>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">egcd</span><span class="params">(a, b)</span>:</span></span><br><span class="line">    <span class="keyword">if</span> a == <span class="number">0</span>:</span><br><span class="line">        <span class="keyword">return</span> b, <span class="number">0</span>, <span class="number">1</span></span><br><span class="line">    <span class="keyword">else</span>:</span><br><span class="line">        g, y, x = egcd(b % a, a)</span><br><span class="line">        <span class="keyword">return</span> g, x - b // a * y, y</span><br><span class="line"></span><br><span class="line">rs = egcd(e1, e2)</span><br><span class="line">r = rs[<span class="number">0</span>]</span><br><span class="line">s = rs[<span class="number">1</span>]</span><br><span class="line"></span><br><span class="line"><span class="comment"># 求模反元素</span></span><br><span class="line"><span class="keyword">if</span> r &lt; <span class="number">0</span>:</span><br><span class="line">    r = -r</span><br><span class="line">    c1 = invert(c1, n)</span><br><span class="line"><span class="keyword">elif</span> s &lt; <span class="number">0</span>:</span><br><span class="line">    s = -s</span><br><span class="line">    c2 = invert(c2, n)</span><br><span class="line">m = pow(c1, s1, NN) * pow(c2, s2, N) % N</span><br></pre></td></tr></table></figure>
-<h3 id="小公钥指数攻击">小公钥指数攻击</h3>
-<p><span class="math inline">\(e\)</span>特别小的情况下.已知:</p>
-<p><span class="math display">\[
-\begin{align}
-c &amp;\equiv m^{e} \pmod N\\
-m^e &amp;= c + kN\\
-m &amp;= \sqrt[e]{c + kN}\\
-\end{align}
-\]</span></p>
-<p>攻击者可以从小到大枚举<span class="math inline">\(k\)</span>.</p>
-<h3 id="d泄露攻击">d泄露攻击</h3>
-<p>当获得了一次加密中的<span class="math inline">\(d\)</span>,不仅可以解密本次加密的数据,还可以对模数<span class="math inline">\(N\)</span>进行分解.</p>
-<p><span class="math display">\[
-\begin{align}
-ed &amp;\equiv 1 \pmod{\phi(n)}\\
-ed + 1 &amp;= k\phi(n)\\
-\end{align}
-\]</span></p>
-<p>所以<span class="math inline">\(\forall a \in \mathbb{Z}^*_n\)</span>,满足<span class="math inline">\(a^{ed-1} \equiv 1 \pmod{n}\)</span>.</p>
-<p>令:<span class="math inline">\(ed - 1 = 2^st\)</span>,<span class="math inline">\(t\)</span>是一个奇数.</p>
-<p>对于至少一半的<span class="math inline">\(a \in \mathbb{Z}^*_n\)</span>,存在一个<span class="math inline">\(i \in [1, s]\)</span>,使得:<span class="math inline">\(a^{2^{i-1}t} \not\equiv \pm 1 \pmod{n}, 2^{2^it} \equiv 1 \pmod{n}\)</span>.</p>
-<p>如果<span class="math inline">\(a\)</span>,<span class="math inline">\(i\)</span>满足上述条件,则<span class="math inline">\(gcd(a^{2^{i-1}t} - 1, n)\)</span>是<span class="math inline">\(n\)</span>的一个非平凡因子,所以可以对<span class="math inline">\(n\)</span>进行暴力破解.</p>
-<p>利用以下工具可以直接进行计算.</p>
-<ul>
-<li><code>https://github.com/ius/rsatool</code>.</li>
-<li><a href="https://sourceforge.net/projects/rsaconverter/" target="_blank" rel="noopener"><code>RsaConverter.exe</code></a>.</li>
-</ul>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">#将数转化为AB CD EF格式的字符串.</span></span><br><span class="line">s = hex(N)[<span class="number">2</span>:<span class="number">-1</span>]</span><br><span class="line"><span class="keyword">if</span> len(s) % <span class="number">2</span>:</span><br><span class="line">    s = <span class="string">"0"</span> + s</span><br><span class="line">s2 = <span class="string">""</span></span><br><span class="line"><span class="keyword">for</span> i <span class="keyword">in</span> range(<span class="number">0</span>, len(s), <span class="number">2</span>):</span><br><span class="line">    s2 += s[i:i+<span class="number">2</span>]</span><br><span class="line">    s2 += <span class="string">" "</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">print</span> s2</span><br></pre></td></tr></table></figure>
-<h3 id="wieners-attack">Wiener's Attack</h3>
-<p>工具:<code>https://github.com/pablocelayes/rsa-wiener-attack</code>.</p>
 <h2 id="tool">tool</h2>
 <h3 id="rsatool">RSAtool</h3>
 <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">git <span class="built_in">clone</span> https://github.com/ius/rsatool.git</span><br><span class="line"><span class="built_in">cd</span> rsatool</span><br><span class="line">python rsatool.py -h</span><br></pre></td></tr></table></figure>
+<p><a href="https://sourceforge.net/projects/rsaconverter/" target="_blank" rel="noopener"><code>RsaConverter.exe</code></a>.</p>
+<p><a href="%60https://sourceforge.net/projects/yafu/%60"><code>yafu</code></a>.</p>
 <h3 id="openssl">openssl</h3>
 <p><span class="math inline">\(openssl rsautl\)</span>.</p>
 <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">openssl rsautl [-<span class="keyword">in</span> file] [-out file] [-inkey file] [-passin arg] [-keyform PEM|DER|NET] [-pubin] [-certin][-asn1parse] [-hexdump] [-raw] [-oaep] [-ssl] [-pkcs] [-x931] [-sign] [-verify][-encrypt] [-decrypt] [-rev] [-engine e]</span><br></pre></td></tr></table></figure>
 <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">openssl genrsa -des3 -out prikey.pem</span><br><span class="line"><span class="comment">#生成RSA密钥</span></span><br><span class="line">openssl rsa -<span class="keyword">in</span> prikey.pem -pubout -out pubkey.pem</span><br><span class="line">openssl rsa -inform PEM -<span class="keyword">in</span> pubkey.pem -pubin -text -out Keypub.txt</span><br><span class="line">openssl rsa -pubin -<span class="keyword">in</span> pubkey.pem -text -modulus</span><br><span class="line"><span class="comment">#分离出公钥</span></span><br><span class="line">openssl rsautl -encrypt -pubin -inkey pubkey.pem -<span class="keyword">in</span> a.txt -out b.txt</span><br><span class="line"><span class="comment">#公钥加密</span></span><br><span class="line">openssl rsautl -decrypt -inkey prikey.pem -<span class="keyword">in</span> b.txt</span><br><span class="line"><span class="comment">#私钥解密</span></span><br></pre></td></tr></table></figure>
-<h3 id="分解整数工具">分解整数工具</h3>
-<p><a href="http://factordb.com/index.php" target="_blank" rel="noopener">网站分解</a>.</p>
+<h3 id="在线工具">在线工具</h3>
+<ul>
+<li><a href="http://factordb.com/index.php" target="_blank" rel="noopener">分解整数</a>.</li>
+<li><span class="math inline">\(sage\)</span>:<code>https://sagecell.sagemath.org/</code>.</li>
+</ul>
 <h3 id="python库">python库</h3>
 <ul>
 <li><span class="math inline">\(primefac\)</span>:整数分解库,包含了很多整数分解的算法.</li>
@@ -936,11 +856,7 @@ ed + 1 &amp;= k\phi(n)\\
                     
                       
                     
-                      
-                    
-                      
-                    
-                    <span class="site-state-item-count">43</span>
+                    <span class="site-state-item-count">41</span>
                     <span class="site-state-item-name">标签</span>
                   </a>
                 </div>
@@ -990,7 +906,7 @@ ed + 1 &amp;= k\phi(n)\\
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#基础"><span class="nav-number">1.</span> <span class="nav-text">基础</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#加密过程"><span class="nav-number">1.1.</span> <span class="nav-text">加密过程</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#解密过程"><span class="nav-number">1.2.</span> <span class="nav-text">解密过程</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#python代码实现"><span class="nav-number">1.3.</span> <span class="nav-text">python代码实现</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#rsa衍生算法-rabin算法"><span class="nav-number">2.</span> <span class="nav-text">RSA衍生算法-Rabin算法</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#常见攻击方式"><span class="nav-number">3.</span> <span class="nav-text">常见攻击方式</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#暴力分解"><span class="nav-number">3.1.</span> <span class="nav-text">暴力分解</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#pq不当分解n"><span class="nav-number">3.2.</span> <span class="nav-text">p&amp;q不当分解N</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#模不互素"><span class="nav-number">3.3.</span> <span class="nav-text">模不互素</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#共模攻击"><span class="nav-number">3.4.</span> <span class="nav-text">共模攻击</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#小公钥指数攻击"><span class="nav-number">3.5.</span> <span class="nav-text">小公钥指数攻击</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#d泄露攻击"><span class="nav-number">3.6.</span> <span class="nav-text">d泄露攻击</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#wieners-attack"><span class="nav-number">3.7.</span> <span class="nav-text">Wiener&#39;s Attack</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#tool"><span class="nav-number">4.</span> <span class="nav-text">tool</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#rsatool"><span class="nav-number">4.1.</span> <span class="nav-text">RSAtool</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#openssl"><span class="nav-number">4.2.</span> <span class="nav-text">openssl</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#分解整数工具"><span class="nav-number">4.3.</span> <span class="nav-text">分解整数工具</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#python库"><span class="nav-number">4.4.</span> <span class="nav-text">python库</span></a></li></ol></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#基础"><span class="nav-number">1.</span> <span class="nav-text">基础</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#加密过程"><span class="nav-number">1.1.</span> <span class="nav-text">加密过程</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#解密过程"><span class="nav-number">1.2.</span> <span class="nav-text">解密过程</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#python代码实现"><span class="nav-number">1.3.</span> <span class="nav-text">python代码实现</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#tool"><span class="nav-number">2.</span> <span class="nav-text">tool</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#rsatool"><span class="nav-number">2.1.</span> <span class="nav-text">RSAtool</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#openssl"><span class="nav-number">2.2.</span> <span class="nav-text">openssl</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#在线工具"><span class="nav-number">2.3.</span> <span class="nav-text">在线工具</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#python库"><span class="nav-number">2.4.</span> <span class="nav-text">python库</span></a></li></ol></li></ol></div>
             
 
           </div>
@@ -1022,7 +938,7 @@ ed + 1 &amp;= k\phi(n)\\
       <i class="fa fa-area-chart"></i>
     </span>
     
-    <span title="站点总字数">761k</span>
+    <span title="站点总字数">785k</span>
   
 
   
@@ -1031,7 +947,7 @@ ed + 1 &amp;= k\phi(n)\\
       <i class="fa fa-coffee"></i>
     </span>
     
-    <span title="站点阅读时长">11:32</span>
+    <span title="站点阅读时长">11:54</span>
   
 </div>
 

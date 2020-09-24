@@ -1,0 +1,1777 @@
+<!DOCTYPE html>
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+
+<html class="theme-next mist use-motion" lang="zh-CN">
+<head><meta name="generator" content="Hexo 3.8.0">
+  <!-- hexo-inject:begin --><!-- hexo-inject:end --><meta charset="UTF-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+
+
+
+
+
+
+  
+  
+    
+    
+  <script src="/lib/pace/pace.min.js?v=1.0.2"></script>
+  <link href="/lib/pace/pace-theme-minimal.min.css?v=1.0.2" rel="stylesheet">
+
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform">
+<meta http-equiv="Cache-Control" content="no-siteapp">
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css">
+
+<link href="/css/main.css?v=6.5.0" rel="stylesheet" type="text/css">
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon.png?v=6.5.0">
+
+
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32.png?v=6.5.0">
+
+
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16.png?v=6.5.0">
+
+
+  <link rel="mask-icon" href="/images/safari_pinned_tab.svg?v=6.5.0" color="#222">
+
+
+  <link rel="manifest" href="/images/manifest.json">
+
+
+  <meta name="msapplication-config" content="/images/browserconfig.xml">
+
+
+
+
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Mist',
+    version: '6.5.0',
+    sidebar: {"position":"left","display":"post","offset":12,"b2t":false,"scrollpercent":true,"onmobile":true},
+    fancybox: false,
+    fastclick: false,
+    lazyload: false,
+    tabs: true,
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+  
+
+
+
+
+  <meta name="description" content="暴力分解 在\(N\)的比特位数小于\(512\)的时候,可以采用大整数分解的策略获取\(p\)和\(q\).网站分解. p&amp;amp;q不当分解N 当\(|p-q|\)很大时,一定存在某一个参数较小,可以通过穷举的方法对模数进行试除. 当\(|p-q|\)很小时. \(\frac{(p + q)^2}{4} - n = \frac{(p + q)^2}{4} - pq = \frac{(">
+<meta name="keywords" content="非对称加密">
+<meta property="og:type" content="article">
+<meta property="og:title" content="IS-crypto-非对称加密-RSA的攻击方式">
+<meta property="og:url" content="https://hitworld.github.io/posts/2cb5ce06/index.html">
+<meta property="og:site_name" content="w4rd3n">
+<meta property="og:description" content="暴力分解 在\(N\)的比特位数小于\(512\)的时候,可以采用大整数分解的策略获取\(p\)和\(q\).网站分解. p&amp;amp;q不当分解N 当\(|p-q|\)很大时,一定存在某一个参数较小,可以通过穷举的方法对模数进行试除. 当\(|p-q|\)很小时. \(\frac{(p + q)^2}{4} - n = \frac{(p + q)^2}{4} - pq = \frac{(">
+<meta property="og:locale" content="zh-CN">
+<meta property="og:updated_time" content="2020-09-24T05:39:23.364Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="IS-crypto-非对称加密-RSA的攻击方式">
+<meta name="twitter:description" content="暴力分解 在\(N\)的比特位数小于\(512\)的时候,可以采用大整数分解的策略获取\(p\)和\(q\).网站分解. p&amp;amp;q不当分解N 当\(|p-q|\)很大时,一定存在某一个参数较小,可以通过穷举的方法对模数进行试除. 当\(|p-q|\)很小时. \(\frac{(p + q)^2}{4} - n = \frac{(p + q)^2}{4} - pq = \frac{(">
+
+
+
+
+
+
+  <link rel="canonical" href="https://hitworld.github.io/posts/2cb5ce06/">
+
+
+
+<script type="text/javascript" id="page.configurations">
+  CONFIG.page = {
+    sidebar: "",
+  };
+</script>
+
+  <title>IS-crypto-非对称加密-RSA的攻击方式 | w4rd3n</title>
+  
+
+
+
+
+
+
+
+
+
+
+
+  <noscript>
+  <style type="text/css">
+    .use-motion .motion-element,
+    .use-motion .brand,
+    .use-motion .menu-item,
+    .sidebar-inner,
+    .use-motion .post-block,
+    .use-motion .pagination,
+    .use-motion .comments,
+    .use-motion .post-header,
+    .use-motion .post-body,
+    .use-motion .collection-title { opacity: initial; }
+
+    .use-motion .logo,
+    .use-motion .site-title,
+    .use-motion .site-subtitle {
+      opacity: initial;
+      top: initial;
+    }
+
+    .use-motion {
+      .logo-line-before i { left: initial; }
+      .logo-line-after i { right: initial; }
+    }
+  </style>
+</noscript><!-- hexo-inject:begin --><!-- hexo-inject:end -->
+
+</head>
+
+<body itemscope="" itemtype="http://schema.org/WebPage" lang="zh-CN">
+
+  
+  
+    
+  
+
+  <!-- hexo-inject:begin --><!-- hexo-inject:end --><div class="container sidebar-position-left page-post-detail">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope="" itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/" class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">w4rd3n</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+    
+      
+        <p class="site-subtitle">混吃等死</p>
+      
+    
+  </div>
+
+  <div class="site-nav-toggle">
+    <button aria-label="切换导航栏">
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+
+
+<nav class="site-nav">
+  
+    <ul id="menu" class="menu">
+      
+        
+        
+        
+          
+          <li class="menu-item menu-item-home">
+
+    
+    
+    
+      
+    
+
+    
+
+    <a href="/" rel="section"><i class="menu-item-icon fa fa-fw fa-home"></i> <br>首页</a>
+
+  </li>
+        
+        
+        
+          
+          <li class="menu-item menu-item-about">
+
+    
+    
+    
+      
+    
+
+    
+
+    <a href="/about/" rel="section"><i class="menu-item-icon fa fa-fw fa-user"></i> <br>友链</a>
+
+  </li>
+        
+        
+        
+          
+          <li class="menu-item menu-item-tags">
+
+    
+    
+    
+      
+    
+
+    
+
+    <a href="/tags/" rel="section"><i class="menu-item-icon fa fa-fw fa-tags"></i> <br>标签</a>
+
+  </li>
+        
+        
+        
+          
+          <li class="menu-item menu-item-categories">
+
+    
+    
+    
+      
+    
+
+    
+
+    <a href="/categories/" rel="section"><i class="menu-item-icon fa fa-fw fa-th"></i> <br>分类</a>
+
+  </li>
+        
+        
+        
+          
+          <li class="menu-item menu-item-archives">
+
+    
+    
+    
+      
+    
+
+    
+
+    <a href="/archives/" rel="section"><i class="menu-item-icon fa fa-fw fa-archive"></i> <br>归档</a>
+
+  </li>
+
+      
+      
+        <li class="menu-item menu-item-search">
+          
+            <a href="javascript:;" class="popup-trigger">
+          
+            
+              <i class="menu-item-icon fa fa-search fa-fw"></i> <br>搜索</a>
+        </li>
+      
+    </ul>
+  
+
+  
+    
+
+  
+
+  
+    <div class="site-search">
+      
+  <div class="popup search-popup local-search-popup">
+  <div class="local-search-header clearfix">
+    <span class="search-icon">
+      <i class="fa fa-search"></i>
+    </span>
+    <span class="popup-btn-close">
+      <i class="fa fa-times-circle"></i>
+    </span>
+    <div class="local-search-input-wrapper">
+      <input autocomplete="off" placeholder="搜索..." spellcheck="false" type="text" id="local-search-input">
+    </div>
+  </div>
+  <div id="local-search-result"></div>
+</div>
+
+
+
+    </div>
+  
+</nav>
+
+
+
+  
+
+
+
+</div>
+    </header>
+
+    
+
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  
+
+  <article class="post post-type-normal" itemscope="" itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="https://hitworld.github.io/posts/2cb5ce06/">
+
+    <span hidden itemprop="author" itemscope="" itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="w4rd3n">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/apple-touch-icon.png">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope="" itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="w4rd3n">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">IS-crypto-非对称加密-RSA的攻击方式
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+
+            
+            
+            
+
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+
+              
+                
+              
+
+              <time title="创建时间：2020-09-24 09:12:07" itemprop="dateCreated datePublished" datetime="2020-09-24T09:12:07+08:00">2020-09-24</time>
+            
+
+            
+          </span>
+
+          
+            <span class="post-category">
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope="" itemtype="http://schema.org/Thing"><a href="/categories/IS/" itemprop="url" rel="index"><span itemprop="name">IS</span></a></span>
+
+                
+                
+                  ，
+                
+              
+                <span itemprop="about" itemscope="" itemtype="http://schema.org/Thing"><a href="/categories/IS/crypto/" itemprop="url" rel="index"><span itemprop="name">crypto</span></a></span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+             <span id="/posts/2cb5ce06/" class="leancloud_visitors" data-flag-title="IS-crypto-非对称加密-RSA的攻击方式">
+               <span class="post-meta-divider">|</span>
+               <span class="post-meta-item-icon">
+                 <i class="fa fa-eye"></i>
+               </span>
+               
+                 <span class="post-meta-item-text">热度：</span>
+               
+                 <span class="leancloud-visitors-count"></span>
+                 <span>℃</span>
+             </span>
+          
+
+          
+
+          
+            <div class="post-symbolscount">
+              
+
+              
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-file-word-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">本文字数：</span>
+                
+                <span title="本文字数">25k</span>
+              
+
+              
+                <span class="post-meta-divider">|</span>
+              
+
+              
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-clock-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">阅读时长 &asymp;</span>
+                
+                <span title="阅读时长">22 分钟</span>
+              
+            </div>
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <h2 id="暴力分解">暴力分解</h2>
+<p>在<span class="math inline">\(N\)</span>的比特位数小于<span class="math inline">\(512\)</span>的时候,可以采用大整数分解的策略获取<span class="math inline">\(p\)</span>和<span class="math inline">\(q\)</span>.<a href="http://factordb.com/index.php" target="_blank" rel="noopener">网站分解</a>.</p>
+<h2 id="pq不当分解n">p&amp;q不当分解N</h2>
+<p>当<span class="math inline">\(|p-q|\)</span>很大时,一定存在某一个参数较小,可以通过穷举的方法对模数进行试除.</p>
+<p>当<span class="math inline">\(|p-q|\)</span>很小时.</p>
+<p><span class="math inline">\(\frac{(p + q)^2}{4} - n = \frac{(p + q)^2}{4} - pq = \frac{(p - q)^2}{4}\)</span>.</p>
+<p>说明<span class="math inline">\(\frac{p + q}{2}\)</span>接近<span class="math inline">\(\sqrt{n}\)</span>,从而找出<span class="math inline">\(\frac{p + q}{2}\)</span>和<span class="math inline">\(\frac{p - q}{2}\)</span>.然后分解出<span class="math inline">\(p\)</span>,<span class="math inline">\(q\)</span>.</p>
+<p>针对大整数的分解有很多种算法,性能上各有优异,有<span class="math inline">\(Fermat\)</span>方法,<span class="math inline">\(Pollard rho\)</span>方法,试除法,以及椭圆曲线法,连分数法,二次筛选法,数域分析法等等.</p>
+<p>在<span class="math inline">\(p\)</span>,<span class="math inline">\(q\)</span>的取值差异过大,或者<span class="math inline">\(p\)</span>,<span class="math inline">\(q\)</span>的取值过于相近的时候,<span class="math inline">\(Format\)</span>方法与<span class="math inline">\(Pollard rho\)</span>方法都可以很快将<span class="math inline">\(n\)</span>分解成功.</p>
+<p>此类分解方法有一个开源项目<span class="math inline">\(yafu\)</span>将其自动化实现了,不论<span class="math inline">\(n\)</span>的大小,只要<span class="math inline">\(p\)</span>和<span class="math inline">\(q\)</span>存在相差过大或者过近时,都可以通过<span class="math inline">\(yafu\)</span>很快地分解成功.</p>
+<h3 id="p-1光滑">p-1光滑</h3>
+<p>光滑数指可以分解为小素数乘积的正整数,当<span class="math inline">\(p - 1\)</span>是光滑数的时候,可能可以使用<span class="math inline">\(Pollard&#39;s p − 1\)</span>算法或者<span class="math inline">\(Williams&#39;s p + 1\)</span>算法来分解<span class="math inline">\(N\)</span>,但是可能不会成功.</p>
+<p><span class="math inline">\(a^{t(p-1)} - 1 = k * p\)</span>.</p>
+<p>根据<code>Pollard’s p - 1</code>算法:如果<span class="math inline">\(p-1\)</span>是一些很小质数的乘积,那么<span class="math inline">\(n!\)</span>就能被<span class="math inline">\(p-1\)</span>整除,即<span class="math inline">\(n! = t(p-1)\)</span>.</p>
+<p>对于每一个<span class="math inline">\(n = 2, 3, 4, ...\)</span>,任意选择一个底数<span class="math inline">\(a\)</span>,并计算:<span class="math inline">\(gcd(a^{n!} - 1, N)\)</span>,如果结果不为<code>1</code>或<span class="math inline">\(N\)</span>,那么就已成功分解<span class="math inline">\(N\)</span>.</p>
+<p>但当<span class="math inline">\(n\)</span>较大时,直接计算<span class="math inline">\(n!\)</span>将会很消耗资源.在遍历<span class="math inline">\(n\)</span>时,可以简化运算.<span class="math inline">\(a^{n!} \bmod N = (a \bmod N) ^ {n!} \bmod N\)</span>.</p>
+<p><span class="math display">\[
+a^{n!} \bmod N =
+\begin{cases}
+(a \bmod N) ^ 2 \bmod N &amp; \text{n = 2} \\
+(a^{(n-1)!} \bmod N) ^ n \bmod N &amp; \text{n &gt;= 3}\\
+\end{cases}
+\]</span></p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> gmpy2</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">Pollards_p_1</span><span class="params">(N)</span>:</span></span><br><span class="line">    a = <span class="number">2</span></span><br><span class="line">    n = <span class="number">2</span></span><br><span class="line">    <span class="keyword">while</span> <span class="keyword">True</span>:</span><br><span class="line">        a = pow(a, n, N)</span><br><span class="line">        res = gmpy2.gcd(a - <span class="number">1</span>, N)</span><br><span class="line">        <span class="keyword">if</span> res != <span class="number">1</span> <span class="keyword">and</span> res != N:</span><br><span class="line">            <span class="keyword">print</span> <span class="string">'n ='</span>, n</span><br><span class="line">            <span class="keyword">print</span> <span class="string">'p ='</span>, res</span><br><span class="line">            <span class="keyword">return</span> res</span><br><span class="line">        n += <span class="number">1</span></span><br></pre></td></tr></table></figure>
+<h3 id="other">other</h3>
+<p>当<span class="math inline">\(q\)</span>是<span class="math inline">\(p\)</span>的<span class="math inline">\(t\)</span>倍的后几个素数,甚至<span class="math inline">\(q\)</span>就是<span class="math inline">\(p\)</span>的后几个素数,可以在较短时间内分解<span class="math inline">\(n\)</span>.</p>
+<p><span class="math display">\[
+\begin{align}
+q = tp + k\\
+n = pq = p(tp + k) = tp^2 + pk\\
+tp^2 + kp - n = 0\\
+p = \frac{-k + \sqrt{k^2 + 4tn}}{2t}\\
+\end{align}
+\]</span></p>
+<p>由于<span class="math inline">\(p\)</span>是整数,所以<span class="math inline">\(\sqrt{k^2 + 4tn}\)</span>是整数,即<span class="math inline">\(k^2 + 4tn\)</span>开方后是整数.</p>
+<p><span class="math display">\[
+\begin{aligned}
+p &amp; = \frac{-k + \sqrt{k^2 + 4tn}}{2t}\\
+q &amp; = tp + k\\
+\end{aligned}
+\]</span></p>
+<p>如果<span class="math inline">\(pq == n\)</span>,那么已成功分解.否则继续寻找<span class="math inline">\(k\)</span>.</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">factor</span><span class="params">()</span>:</span></span><br><span class="line">    n_4t = n * <span class="number">4</span> * t</span><br><span class="line">    <span class="keyword">for</span> k <span class="keyword">in</span> range(<span class="number">100000</span>):</span><br><span class="line">        delta = k ** <span class="number">2</span> + n_4t</span><br><span class="line">        <span class="keyword">if</span> gmpy2.iroot(delta, <span class="number">2</span>)[<span class="number">1</span>]:</span><br><span class="line">            <span class="keyword">print</span> <span class="string">'k ='</span>, k</span><br><span class="line">            p = (-k + gmpy2.iroot(delta, <span class="number">2</span>)[<span class="number">0</span>]) / (<span class="number">2</span> * t)</span><br><span class="line">            q = t * p + k</span><br><span class="line">            <span class="keyword">if</span> p * q == n:</span><br><span class="line">                <span class="keyword">print</span> <span class="string">'p ='</span>, p</span><br><span class="line">                <span class="keyword">print</span> <span class="string">'q ='</span>, q</span><br><span class="line">                <span class="keyword">return</span> p, q</span><br></pre></td></tr></table></figure>
+<h2 id="模不互素">模不互素</h2>
+<p>当存在两个公钥的<span class="math inline">\(N\)</span>不互素时,显然可以直接对这两个数求最大公因数(最大公因数为其中一个的<span class="math inline">\(p\)</span>或者<span class="math inline">\(q\)</span>),然后直接获得两对<span class="math inline">\(p\)</span>,<span class="math inline">\(q\)</span>,进而获得相应的私钥.</p>
+<h2 id="多因子">多因子</h2>
+<p>如果选取两个以上的素数,记为<span class="math inline">\(p_1, p_2, p_3, \cdots\)</span>,相乘得到<span class="math inline">\(n\)</span>.</p>
+<p><span class="math display">\[
+\varphi (n) = (p_1 - 1)(p_2 - 1)(p_3 - 1)\cdots\\
+\]</span></p>
+<p>公钥,私钥,加解密都与一般<code>RSA</code>相同.</p>
+<h2 id="共模攻击">共模攻击</h2>
+<p>不同的<span class="math inline">\(e\)</span>和<span class="math inline">\(d\)</span>共用一个模数<span class="math inline">\(N\)</span>,会导致不用分解<span class="math inline">\(N\)</span>就能恢复明文.</p>
+<p>假设<span class="math inline">\(m\)</span>为信息明文,加密密钥为<span class="math inline">\(e1\)</span>和<span class="math inline">\(e2\)</span>,公共模数为<span class="math inline">\(N\)</span>.</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">c1 = pow(m, e1, n)</span><br><span class="line">c2 = pow(m, e2, n)</span><br></pre></td></tr></table></figure>
+<p>此时<span class="math inline">\(e_1\)</span>,<span class="math inline">\(e_2\)</span>,<span class="math inline">\(c_1\)</span>,<span class="math inline">\(c_2\)</span>,<span class="math inline">\(N\)</span>都是公开的.</p>
+<p>用扩展欧几里得算法求出满足<span class="math inline">\(re1 + se2 = 1\)</span>的两个整数<span class="math inline">\(r\)</span>和<span class="math inline">\(s\)</span>.</p>
+<p><span class="math display">\[
+\begin{align}
+c_1^rc_2^s &amp;\equiv m^{re_1}m^{se_2} \bmod n\\
+&amp;\equiv m^{re_1 + se_2} \bmod n\\
+&amp;\equiv m \bmod n\\
+\end{align}
+\]</span></p>
+<p>假如其中有一个为负数(最多一个为负数),则需要进行处理.</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">egcd</span><span class="params">(a, b)</span>:</span></span><br><span class="line">    <span class="keyword">if</span> a == <span class="number">0</span>:</span><br><span class="line">        <span class="keyword">return</span> b, <span class="number">0</span>, <span class="number">1</span></span><br><span class="line">    <span class="keyword">else</span>:</span><br><span class="line">        g, y, x = egcd(b % a, a)</span><br><span class="line">        <span class="keyword">return</span> g, x - b // a * y, y</span><br><span class="line">rs = egcd(e1, e2)</span><br><span class="line">r = rs[<span class="number">0</span>]</span><br><span class="line">s = rs[<span class="number">1</span>]</span><br><span class="line"><span class="comment"># 求模反元素</span></span><br><span class="line"><span class="keyword">if</span> r &lt; <span class="number">0</span>:</span><br><span class="line">    r = -r</span><br><span class="line">    c1 = invert(c1, n)</span><br><span class="line"><span class="keyword">elif</span> s &lt; <span class="number">0</span>:</span><br><span class="line">    s = -s</span><br><span class="line">    c2 = invert(c2, n)</span><br><span class="line">m = pow(c1, s1, NN) * pow(c2, s2, N) % N</span><br></pre></td></tr></table></figure>
+<h2 id="小公钥指数攻击">小公钥指数攻击</h2>
+<p><span class="math inline">\(e\)</span>特别小的情况下.已知:</p>
+<p><span class="math display">\[
+\begin{align}
+c &amp;\equiv m^{e} \pmod N\\
+m^e &amp;= c + kN\\
+m &amp;= \sqrt[e]{c + kN}\\
+\end{align}
+\]</span></p>
+<p>攻击者可以从小到大枚举<span class="math inline">\(k\)</span>.</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">from</span> Crypto.Util.number <span class="keyword">import</span> *</span><br><span class="line"><span class="keyword">from</span> gmpy2 <span class="keyword">import</span> iroot</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">smallEattack</span><span class="params">(c, e, n)</span>:</span></span><br><span class="line">        <span class="keyword">for</span> i <span class="keyword">in</span> range(<span class="number">10</span> ** <span class="number">10</span>):</span><br><span class="line">            res = iroot(n * i + c, e)</span><br><span class="line">            <span class="keyword">if</span> res[<span class="number">1</span>]:</span><br><span class="line">                print(res)</span><br><span class="line">                <span class="keyword">break</span></span><br></pre></td></tr></table></figure>
+<h2 id="低加密指数广播攻击">低加密指数广播攻击</h2>
+<p><span class="math display">\[
+\begin{align}
+c_1 &amp;\equiv m^e mod n_1\\
+c_2 &amp;\equiv m^e mod n_2\\
+c_3 &amp;\equiv m^e mod n_3\\
+\end{align}
+\]</span></p>
+<p>假设<code>n1</code>,<code>n2</code>,<code>n3</code>互素,否则可计算最大公约数直接得到<code>p,</code>q`,根据中国剩余定理,在<span class="math inline">\(e = 3\)</span>时,可以得到:<span class="math inline">\(c_x\equiv m^3 mod n_1 n_2 n_3\)</span>,通过对<span class="math inline">\(c_x\)</span>进行三次开方就可以求得明文.</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">from</span> CRT <span class="keyword">import</span> chinese_remainder</span><br><span class="line"><span class="keyword">from</span> gmpy2 <span class="keyword">import</span> iroot</span><br><span class="line"></span><br><span class="line">datas = [(<span class="number">5</span>,<span class="number">92270627783020341903769877272635163757611737252302329401876135487358785338853904185572496782685853218459404423868889360808646192858060332110830962463986164014331540336037718684606223893506327126112739408023014900003600028654929488487584130630596342720833061628867179840913592694993869009133576053124769728363</span>,<span class="number">83421434286602546493364204139182949897795123160498680670964040331447569764445309937195566103281638928183742488663157138572020817924561990979723444797045375101801354862472761507421896454904818874439231990567738173059815647539737800523632262742398190575822391771655932895657208471832891505814792263361394479317</span>), (<span class="number">5</span>,<span class="number">102900163930497791064402577447949741195464555746599233552338455905339363524435647082637326033518083289523250670463907211548409422234391456982344516192210687545692054217151133151915216123275005464229534891629568864361154658107093228352829098251468904800809585061088484485542019575848774643260318502441084765867</span>,<span class="number">25585088950095290712328215701309273521406235982885781641137768116285362079062975527364909549362511146004390419156826709543326814581466248280564194951706937822088902607754944405407698735824315900942915322054614437632116732271787823814807624841386886185122143173564380877370643120953803688563589496390425159539</span>), (<span class="number">5</span>,<span class="number">90267480939368160749458049207367083180407266027531212674879245323647502822038591438536367206422215464489854541063867946215243190345476874546091188408120551902573113507876754578290674792643018845798263156849027209440979746485414654160320058352559498237296080490768064578067282805498131582552189186085941328701</span>,<span class="number">44374979291120575503988741531987454898919254880086464254904878064332010355432423956182135846738023874326776872139229379943321321362822522900479438294291206287205647145759972233097276253408812699557305314344220807356024994977399840843758750494467535572805794732065369887057841293267499209427585419962565568495</span>), (<span class="number">5</span>,<span class="number">90673177193017332602781813187879442725562909473411994052511479411887936365983777106776080722300002656952655125041151156684340743907349108729774157616323863062525593382279143395837261053976652138764279456528493914961780300269591722101449703932139132398288208673556967030162666354552157189525415838326249712949</span>,<span class="number">24086371701602948122317790211004032014326487279907486724991846810668564197542368948703436295770758262739732290677177527297040556666434577730354732397784651220918412407485171180732327730242552955646750279842251200227937257322414662213662054605527282812231172173474061845763736546747711105935349033514358348526</span>), (<span class="number">5</span>,<span class="number">90916739755838083837461026375700330885001446224187511395518230504776419813625940046511904838818660297497622072999229706061698225191645268591198600955240116302461331913178712722096591257619538927050886521512453691902946234986556913039431677697816965623861908091178749411071673467596883926097177996147858865293</span>,<span class="number">23204039098754030513954332212496652705175644349879686639449689791620605370809827884267260830136516742466455588549253481016504796674014871020503543639681251834114159250986728840380777774144853925216884802529230212783759821262799845229436535491711201551797166082529740271577684082458494926929260818927584104158</span>)]</span><br><span class="line">nList = [x[<span class="number">1</span>] <span class="keyword">for</span> x <span class="keyword">in</span> datas]</span><br><span class="line">cList = [x[<span class="number">2</span>] <span class="keyword">for</span> x <span class="keyword">in</span> datas]</span><br><span class="line"></span><br><span class="line">print(len(datas))</span><br><span class="line">print(iroot(chinese_remainder(nList, cList), datas[<span class="number">0</span>][<span class="number">0</span>]))</span><br></pre></td></tr></table></figure>
+<h2 id="rsa衍生算法-rabin算法">RSA衍生算法-Rabin算法</h2>
+<p><span class="math inline">\(Rabin\)</span>算法的特征在于<span class="math inline">\(e = 2\)</span>.加密过程和<span class="math inline">\(RSA\)</span>一样.</p>
+<p><span class="math inline">\(c = m^2 \pmod{n}\)</span></p>
+<p>解密过程.</p>
+<p><span class="math display">\[
+\begin{align}
+m_p &amp;\equiv \sqrt{c} \pmod{p}\\
+m_q &amp;\equiv \sqrt{c} \pmod{q}\\
+\mbox{用扩展欧几里得算法解:}y_p \cdot p + y_q \cdot q &amp;= 1\\
+a &amp;= (y_p \cdot p \cdot m_q + y_q \cdot q \cdot m_p) \bmod n\\
+b &amp;= n - a\\
+c &amp;= (y_p \cdot p \cdot m_q - y_q \cdot q \cdot m_p) \bmod n\\
+d &amp;= n - c\\
+\end{align}
+\]</span></p>
+<p>如果<span class="math inline">\(p\)</span>,<span class="math inline">\(q\)</span>模<span class="math inline">\(4\)</span>余<span class="math inline">\(3\)</span>的不同素数,则.</p>
+<p><span class="math display">\[
+m_p = c^{\frac{1}{4}(p+1)} \bmod p\\
+m_q = c^{\frac{1}{4}(q+1)} \bmod q\\
+\]</span></p>
+<p>证明.</p>
+<p><span class="math display">\[
+\begin{align}
+a^2 &amp;\equiv (y_p \cdot p \cdot m_q + y_q \cdot q \cdot m_p)^2 \equiv (y_p \cdot p \cdot m_q)^2 + (y_q \cdot q \cdot m_p)^2 \pmod{n}\\
+m_q^2 &amp;= k_1q + c,m_p^2 = k_2p + c\\
+a^2 &amp;\equiv c(a^2 \cdot p^2 + b^2 \cdot q^2) \pmod{n}\\
+a^2 &amp;\equiv c((a \cdot p + b \cdot q)^2 - 2a \cdot p \cdot b \cdot q) \equiv c \pmod{n}\\
+\end{align}
+\]</span></p>
+<h2 id="d泄露攻击">d泄露攻击</h2>
+<p>当获得了一次加密中的<span class="math inline">\(d\)</span>,不仅可以解密本次加密的数据,还可以对模数<span class="math inline">\(N\)</span>进行分解.</p>
+<p><span class="math display">\[
+\begin{align}
+ed &amp;\equiv 1 \pmod{\phi(n)}\\
+ed + 1 &amp;= k\phi(n)\\
+\end{align}
+\]</span></p>
+<p>所以<span class="math inline">\(\forall a \in \mathbb{Z}^*_n\)</span>,满足<span class="math inline">\(a^{ed-1} \equiv 1 \pmod{n}\)</span>.</p>
+<p>令:<span class="math inline">\(ed - 1 = 2^st\)</span>,<span class="math inline">\(t\)</span>是一个奇数.</p>
+<p>对于至少一半的<span class="math inline">\(a \in \mathbb{Z}^*_n\)</span>,存在一个<span class="math inline">\(i \in [1, s]\)</span>,使得:<span class="math inline">\(a^{2^{i-1}t} \not\equiv \pm 1 \pmod{n}, 2^{2^it} \equiv 1 \pmod{n}\)</span>.</p>
+<p>如果<span class="math inline">\(a\)</span>,<span class="math inline">\(i\)</span>满足上述条件,则<span class="math inline">\(gcd(a^{2^{i-1}t} - 1, n)\)</span>是<span class="math inline">\(n\)</span>的一个非平凡因子,所以可以对<span class="math inline">\(n\)</span>进行暴力破解.</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> random</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">gcd</span><span class="params">(a, b)</span>:</span></span><br><span class="line">    <span class="keyword">if</span> a &lt; b:</span><br><span class="line">        a, b = b, a</span><br><span class="line">    <span class="keyword">while</span> b != <span class="number">0</span>:</span><br><span class="line">        temp = a % b</span><br><span class="line">        a = b</span><br><span class="line">        b = temp</span><br><span class="line">    <span class="keyword">return</span> a</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">getpq</span><span class="params">(n, e, d)</span>:</span></span><br><span class="line">    p = <span class="number">1</span></span><br><span class="line">    q = <span class="number">1</span></span><br><span class="line">    <span class="keyword">while</span> p == <span class="number">1</span> <span class="keyword">and</span> q == <span class="number">1</span>:</span><br><span class="line">        k = d * e - <span class="number">1</span></span><br><span class="line">        g = random.randint(<span class="number">0</span>, n)</span><br><span class="line">        <span class="keyword">while</span> p == <span class="number">1</span> <span class="keyword">and</span> q == <span class="number">1</span> <span class="keyword">and</span> k % <span class="number">2</span> == <span class="number">0</span>:</span><br><span class="line">            k /= <span class="number">2</span></span><br><span class="line">            y = pow(g, k, n)</span><br><span class="line">            <span class="keyword">if</span> y != <span class="number">1</span> <span class="keyword">and</span> gcd(y - <span class="number">1</span>, n) &gt; <span class="number">1</span>:</span><br><span class="line">                p = gcd(y - <span class="number">1</span>, n)</span><br><span class="line">                q = n / p</span><br><span class="line">        <span class="keyword">return</span> p, q</span><br><span class="line"></span><br><span class="line">n = <span class="number">0xa66791dc6988168de7ab77419bb7fb0c001c62710270075142942e19a8d8c51d053b3e3782a1de5dc5af4ebe99468170114a1dfe67cdc9a9af55d655620bbab</span></span><br><span class="line">e = <span class="number">0x10001</span></span><br><span class="line">d = <span class="number">0x123c5b61ba36edb1d3679904199a89ea80c09b9122e1400c09adcf7784676d01d23356a7d44d6bd8bd50e94bfc723fa87d8862b75177691c11d757692df8881</span></span><br><span class="line">p, q = getpq(n, e, d)</span><br><span class="line"><span class="keyword">print</span> <span class="string">"p: "</span> + hex(p)</span><br><span class="line"><span class="keyword">print</span> <span class="string">"q: "</span> + hex(q)</span><br></pre></td></tr></table></figure>
+<p>利用以下工具可以直接进行计算.</p>
+<ul>
+<li><code>https://github.com/ius/rsatool</code>.</li>
+<li><a href="https://sourceforge.net/projects/rsaconverter/" target="_blank" rel="noopener"><code>RsaConverter.exe</code></a>.</li>
+</ul>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">#将数转化为AB CD EF格式的字符串.</span></span><br><span class="line">s = hex(N)[<span class="number">2</span>:<span class="number">-1</span>]</span><br><span class="line"><span class="keyword">if</span> len(s) % <span class="number">2</span>:</span><br><span class="line">    s = <span class="string">"0"</span> + s</span><br><span class="line">s2 = <span class="string">""</span></span><br><span class="line"><span class="keyword">for</span> i <span class="keyword">in</span> range(<span class="number">0</span>, len(s), <span class="number">2</span>):</span><br><span class="line">    s2 += s[i:i+<span class="number">2</span>]</span><br><span class="line">    s2 += <span class="string">" "</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">print</span> s2</span><br></pre></td></tr></table></figure>
+<h2 id="低解密指数攻击">低解密指数攻击</h2>
+<p>如果满足:<span class="math inline">\(d&lt;\frac{1}{3}en^\frac{1}{4}\)</span>和<span class="math inline">\(q &lt; p &lt; 2p\)</span>,就可以通过<span class="math inline">\(Wiener Attack\)</span>分解<span class="math inline">\(n\)</span>.</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> gmpy2</span><br><span class="line"><span class="keyword">import</span> time</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">continuedFra</span><span class="params">(x, y)</span>:</span></span><br><span class="line">    cF = []</span><br><span class="line">    <span class="keyword">while</span> y:</span><br><span class="line">        cF += [x / y]</span><br><span class="line">        x, y = y, x % y</span><br><span class="line">    <span class="keyword">return</span> cF</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">Simplify</span><span class="params">(ctnf)</span>:</span></span><br><span class="line">    numerator = <span class="number">0</span></span><br><span class="line">    denominator = <span class="number">1</span></span><br><span class="line">    <span class="keyword">for</span> x <span class="keyword">in</span> ctnf[::<span class="number">-1</span>]:</span><br><span class="line">        numerator, denominator = denominator, x * denominator + numerator</span><br><span class="line">    <span class="keyword">return</span> (numerator, denominator)</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">calculateFrac</span><span class="params">(x, y)</span>:</span></span><br><span class="line">    cF = continuedFra(x, y)</span><br><span class="line">    cF = map(Simplify, (cF[<span class="number">0</span>:i] <span class="keyword">for</span> i <span class="keyword">in</span> xrange(<span class="number">1</span>, len(cF))))</span><br><span class="line">    <span class="keyword">return</span> cF</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">solve_pq</span><span class="params">(a, b, c)</span>:</span></span><br><span class="line">    par = gmpy2.isqrt(b * b - <span class="number">4</span> * a * c)</span><br><span class="line">    <span class="keyword">return</span> (-b + par) / (<span class="number">2</span> * a), (-b - par) / (<span class="number">2</span> * a)</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">wienerAttack</span><span class="params">(e, n)</span>:</span></span><br><span class="line">    <span class="keyword">for</span> (d, k) <span class="keyword">in</span> calculateFrac(e, n):</span><br><span class="line">        <span class="keyword">if</span> k == <span class="number">0</span>: <span class="keyword">continue</span></span><br><span class="line">        <span class="keyword">if</span> (e * d - <span class="number">1</span>) % k != <span class="number">0</span>: <span class="keyword">continue</span></span><br><span class="line">        phi = (e * d - <span class="number">1</span>) / k</span><br><span class="line">        p, q = solve_pq(<span class="number">1</span>, n - phi + <span class="number">1</span>, n)</span><br><span class="line">        <span class="keyword">if</span> p * q == n:</span><br><span class="line">            <span class="keyword">return</span> abs(int(p)), abs(int(q))</span><br><span class="line">    <span class="keyword">print</span> <span class="string">'not find!'</span></span><br><span class="line"></span><br><span class="line">n = <span class="number">12238605063252292170613110607692779326628090745751955692266649177882959231822580682548279800443278979485092243645806337103841086023159482786712759291169541633901936290854044069486201989034158882661270017305064348254800318759062921744741432214818915527537124001063995865927527037625277330117588414586505635959411443039463168463608235165929831344586283875119363703480280602514451713723663297066810128769907278246434745483846869482536367912810637275405943566734099622063142293421936734750356828712268385319217225803602442033960930413469179550331907541244416573641309943913383658451409219852933526106735587605884499707827</span></span><br><span class="line">e = <span class="number">11850552481503020257392808424743510851763548184936536180317707155841959788151862976445957810691568475609821000653594584717037528429828330763571556164988619635320288125983463358648887090031957900011546300841211712664477474767941406651977784177969001025954167441377912326806132232375497798238928464025466905201977180541053129691501120197010080001677260814313906843670652972019631997467352264392296894192998971542816081534808106792758008676039929763345402657578681818891775091140555977382868531202964486261123748663752490909455324860302967636149379567988941803701512680099398021640317868259975961261408500449965277690517</span></span><br><span class="line">c = <span class="number">9472193174575536616954091686751964873836697237500198884451530469300324470671555310791335185133679697207007374620225900775502162690848135615431624557389304657410880981454777737587420426091879654002644281066474715074536611611252677882396384453641127487515845176069574754606670518031472235144795376526854484442135299818868525539923568705203042265537204111153151119105287648912908771710419648445826883069030285651763726003413418764301988228077415599665616637501056116290476861280240577145515875430665394216054222788697052979429015400411487342877096677666406389711074591330476335174211990429870900468249946600544116793793</span></span><br><span class="line">p, q = wienerAttack(e, n)</span><br><span class="line">d = gmpy2.invert(e, (p - <span class="number">1</span>) * (q - <span class="number">1</span>))</span><br></pre></td></tr></table></figure>
+<p>工具:<code>https://github.com/pablocelayes/rsa-wiener-attack</code>.</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">Bob is extremely paranoid, so he decided that just one RSA encryption is not enough. Before sending his message to Alice, he forced her to create 5 public keys so he could encrypt his message 5 times! Show him that he still is not secure.</span><br><span class="line">Here are the 5 public keys that Bob used, each in the format of (N, e):</span><br><span class="line">(9247606623523847772698953161616455664821867183571218056970099751301682205123115716089486799837447397925308887976775994817175994945760278197527909621793469, 11)</span><br><span class="line">(9247606623523847772698953161616455664821867183571218056970099751301682205123115716089486799837447397925308887976775994817175994945760278197527909621793469, 41)</span><br><span class="line">(9247606623523847772698953161616455664821867183571218056970099751301682205123115716089486799837447397925308887976775994817175994945760278197527909621793469, 67623079903)</span><br><span class="line">(9247606623523847772698953161616455664821867183571218056970099751301682205123115716089486799837447397925308887976775994817175994945760278197527909621793469, 5161910578063)</span><br><span class="line">(9247606623523847772698953161616455664821867183571218056970099751301682205123115716089486799837447397925308887976775994817175994945760278197527909621793469, 175238643578591220695210061216092361657427152135258210375005373467710731238260448371371798471959129039441888531548193154205671)</span><br><span class="line">Here is his encrypted message:</span><br><span class="line">7117565509436551004326380884878672285722722211683863300406979545670706419248965442464045826652880670654603049188012705474321735863639519103720255725251120</span><br></pre></td></tr></table></figure>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> ContinuedFractions, Arithmetic, RSAvulnerableKeyGenerator</span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">hack_RSA</span><span class="params">(e,n)</span>:</span></span><br><span class="line">    <span class="string">'''</span></span><br><span class="line"><span class="string">    Finds d knowing (e,n)</span></span><br><span class="line"><span class="string">    applying the Wiener continued fraction attack</span></span><br><span class="line"><span class="string">    '''</span></span><br><span class="line">    frac = ContinuedFractions.rational_to_contfrac(e, n)</span><br><span class="line">    convergents = ContinuedFractions.convergents_from_contfrac(frac)</span><br><span class="line">    </span><br><span class="line">    <span class="keyword">for</span> (k,d) <span class="keyword">in</span> convergents:</span><br><span class="line">        </span><br><span class="line">        <span class="comment">#check if d is actually the key</span></span><br><span class="line">        <span class="keyword">if</span> k!=<span class="number">0</span> <span class="keyword">and</span> (e*d<span class="number">-1</span>)%k == <span class="number">0</span>:</span><br><span class="line">            phi = (e*d<span class="number">-1</span>)//k</span><br><span class="line">            s = n - phi + <span class="number">1</span></span><br><span class="line">            <span class="comment"># check if the equation x^2 - s*x + n = 0</span></span><br><span class="line">            <span class="comment"># has integer roots</span></span><br><span class="line">            discr = s*s - <span class="number">4</span>*n</span><br><span class="line">            <span class="keyword">if</span>(discr&gt;=<span class="number">0</span>):</span><br><span class="line">                t = Arithmetic.is_perfect_square(discr)</span><br><span class="line">                <span class="keyword">if</span> t!=<span class="number">-1</span> <span class="keyword">and</span> (s+t)%<span class="number">2</span>==<span class="number">0</span>:</span><br><span class="line">                    print(<span class="string">"Hacked!"</span>)</span><br><span class="line">                    <span class="keyword">return</span> d</span><br><span class="line">(n1,e1)=(<span class="number">9247606623523847772698953161616455664821867183571218056970099751301682205123115716089486799837447397925308887976775994817175994945760278197527909621793469</span>, <span class="number">11</span>)</span><br><span class="line">(n2,e2)=(<span class="number">9247606623523847772698953161616455664821867183571218056970099751301682205123115716089486799837447397925308887976775994817175994945760278197527909621793469</span>, <span class="number">41</span>)</span><br><span class="line">(n3,e3)=(<span class="number">9247606623523847772698953161616455664821867183571218056970099751301682205123115716089486799837447397925308887976775994817175994945760278197527909621793469</span>, <span class="number">67623079903</span>)</span><br><span class="line">(n4,e4)=(<span class="number">9247606623523847772698953161616455664821867183571218056970099751301682205123115716089486799837447397925308887976775994817175994945760278197527909621793469</span>, <span class="number">5161910578063</span>)</span><br><span class="line">(n5,e5)=(<span class="number">9247606623523847772698953161616455664821867183571218056970099751301682205123115716089486799837447397925308887976775994817175994945760278197527909621793469</span>, <span class="number">175238643578591220695210061216092361657427152135258210375005373467710731238260448371371798471959129039441888531548193154205671</span>)</span><br><span class="line">c=<span class="number">7117565509436551004326380884878672285722722211683863300406979545670706419248965442464045826652880670654603049188012705474321735863639519103720255725251120</span></span><br><span class="line">e=e1*e2*e3*e4*e5%n1</span><br><span class="line">d=hack_RSA(e,n1)</span><br><span class="line">m=pow(c,d,n1)</span><br><span class="line"><span class="keyword">print</span> <span class="string">'&#123;:x&#125;'</span>.format(m).decode(<span class="string">'hex'</span>)</span><br></pre></td></tr></table></figure>
+<h2 id="coppersmith定理">Coppersmith定理</h2>
+<p><span class="math inline">\(Coppersmith\)</span>定理:在一个<code>e</code>阶的<code>mod n</code>多项式<code>f(x)</code>中,如果有一个根小于<span class="math inline">\(n^frac{1}{e}\)</span>.就可以运用一个<code>O(log n)</code>的算法求出这些根.</p>
+<h2 id="coppersmith-partial-information-attack">Coppersmith partial information attack</h2>
+<p>已知素数<span class="math inline">\(p\)</span>或者<span class="math inline">\(q\)</span>的前一定位数,可以根据这个算法还原完整的<span class="math inline">\(p\)</span>,<span class="math inline">\(q\)</span>.</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line">p4 = <span class="number">0xf3a5f928e11c5901f9f4289e513f046748efb99d4f8e706e207a943e1d2c9df43feab38e20c2106d87167e5501ac41adfc4912732457103a4359e5b433da78f39ad6f206b8f170192aa0841feb501ce1</span></span><br><span class="line">n = <span class="number">0x7e7007c7c85788b9b77cda64c9b3f5d2a795fe1b1f8d3f120288a30a168c3ea932c7574700ff0f596c5ad04a703756aedc66b9b9e44911d55f0a72a1cc1a569cee02a84499cdb091b8471a8e6cc0ebca583dfd6fb8d5fecf32ff67d2ddeaaaaf9c71a10009b4218fc57743675f283d22734ac7ade2ca240772d11b5783755378f7c30988f41d4a9d62561ea6e5f2f21d3d44e8689e781d3f61356123929457d17b07a1d04741bf970afb590cd820dd12cf88f68b0e896388f433fd2adf3354353c9c56abb0cfea223387e6d0b2df10e450c621ac153e47369f888fdc0b39c842a5ddc6a11339862ccdb4be97a81445205fb8f8bde9daaad5d0dc2ea5bd3b8c43</span></span><br><span class="line">//p的位数</span><br><span class="line">pbits = <span class="number">1024</span></span><br><span class="line">//p未知的位数</span><br><span class="line">kbits = pbits - p4.nbits()</span><br><span class="line"><span class="keyword">print</span> p4.nbits()</span><br><span class="line">p4 = p4 &lt;&lt; kbits</span><br><span class="line">PR.&lt;x&gt; = PolynomialRing(Zmod(n))</span><br><span class="line">//f是原始的p</span><br><span class="line">f = x + p4</span><br><span class="line">x0 = f.small_roots(X=<span class="number">2</span>^kbits, beta=<span class="number">0.4</span>)[<span class="number">0</span>]</span><br><span class="line"><span class="keyword">print</span> <span class="string">"x: %s"</span> %hex(int(x0))</span><br><span class="line">p = p4+x0</span><br><span class="line"><span class="keyword">print</span> <span class="string">"p: "</span>, hex(int(p))</span><br><span class="line"><span class="keyword">assert</span> n % p == <span class="number">0</span></span><br><span class="line">q = n/int(p)</span><br><span class="line"><span class="keyword">print</span> <span class="string">"q: "</span>, hex(int(q))</span><br></pre></td></tr></table></figure>
+<h2 id="known-high-in-plaintext">Known high in plaintext</h2>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">e = <span class="number">0x3</span></span><br><span class="line">b = <span class="number">0x9e67d3a220a3dcf6fc4742052621f543b8c78d5d9813e69272e65ac676672446e5c88887e8bfdfc92ec87ec74c16350e6b539e3bd910b000000000000000000L</span></span><br><span class="line">n = <span class="number">0xa1888c641a05aeb81b3d1686317a86f104791fe1d570a5b11209f45d09ea401d255a70744e7a2d39520e359c23a9f1209ee47f496dbd279e62ee1648b3a277ced8825298274322e0a7a86deea282676310a73b6bb946fc924c34ac6c8784ff559bf9a004c03fb167ef54aaea90ce587f2f3074b40d7f632022ec8fb12e659953L</span></span><br><span class="line">c=<span class="number">0x93145ece45f416a11e5e9475518f165365456183c361500c2f78aff263028c90f20b7d97205f54e21f3bcc8a556b457889fde3719d0a0f9c9646f3f0d0a1e4bee0f259f023168fe8cc0511848c1635022fcc20b6088084585e2f8055a9d1b1d6bdb228087900bf7c6d42298f8e45c451562c816e2303990834c94e580bf0cbd1L</span></span><br><span class="line">kbits = <span class="number">72</span></span><br><span class="line">PR.&lt;x&gt; = PolynomialRing(Zmod(n))</span><br><span class="line">f = (x + b)^e - c</span><br><span class="line">x0 = f.small_roots(X = <span class="number">2</span>^kbits, beta = <span class="number">1</span>)[<span class="number">0</span>]</span><br><span class="line"><span class="keyword">print</span> <span class="string">"x: %s"</span> % hex(int(x0))</span><br></pre></td></tr></table></figure>
+<h2 id="factoring-with-high-bits-known">Factoring with High Bits Known</h2>
+<p>当知道一个公钥中模数<span class="math inline">\(N\)</span>的一个因子的较高位时,就有一定几率来分解<span class="math inline">\(N\)</span>.</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">n = <span class="number">0x241ac918f708fff645d3d6e24315e5bb045c02e788c2b7f74b2b83484ce9c0285b6c54d99e2a601a386237d666db2805175e7cc86a733a97aeaab63486133103e30c1dca09741819026bd3ea8d08746d1d38df63c025c1793bdc7e38d194a30b492aadf9e31a6c1240a65db49e061b48f1f2ae949ac9e7e0992ed24f9c01578dL</span></span><br><span class="line">p_fake = <span class="number">0x2c1e75652df018588875c7ab60472abf26a234bc1bfc1b685888fb5ded29ab5b93f5105c1e9b46912368e626777a873200000000000000000000000000000000L</span></span><br><span class="line">pbits = <span class="number">1024</span></span><br><span class="line">kbits = <span class="number">130</span></span><br><span class="line">pbar = p_fake &amp; (<span class="number">2</span>^pbits<span class="number">-2</span>^kbits)</span><br><span class="line"><span class="keyword">print</span> <span class="string">"upper %d bits (of %d bits) is given"</span> % (pbits-kbits, pbits)</span><br><span class="line">PR.&lt;x&gt; = PolynomialRing(Zmod(n))</span><br><span class="line">f = x + pbar</span><br><span class="line">x0 = f.small_roots(X=<span class="number">2</span>^kbits, beta=<span class="number">0.4</span>)[<span class="number">0</span>]  <span class="comment"># find root &lt; 2^kbits with factor &gt;= n^0.3</span></span><br><span class="line"><span class="keyword">print</span> hex(int(x0 + pbar))</span><br></pre></td></tr></table></figure>
+<h2 id="partial-key-exposure-attack">Partial Key Exposure Attack</h2>
+<p>已知低位的密钥和<span class="math inline">\(N\)</span>.</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">partial_p</span><span class="params">(p0, kbits, n)</span>:</span></span><br><span class="line">    PR.&lt;x&gt; = PolynomialRing(Zmod(n))</span><br><span class="line">    nbits = n.nbits()</span><br><span class="line">    f = <span class="number">2</span>^kbits*x + p0</span><br><span class="line">    f = f.monic()</span><br><span class="line">    roots = f.small_roots(X=<span class="number">2</span>^(nbits//<span class="number">2</span>-kbits), beta=<span class="number">0.3</span>)  <span class="comment"># find root &lt; 2^(nbits//2-kbits) with factor &gt;= n^0.3</span></span><br><span class="line">    <span class="keyword">if</span> roots:</span><br><span class="line">        x0 = roots[<span class="number">0</span>]</span><br><span class="line">        p = gcd(<span class="number">2</span>^kbits*x0 + p0, n)</span><br><span class="line">        <span class="keyword">return</span> ZZ(p)</span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">find_p</span><span class="params">(d0, kbits, e, n)</span>:</span></span><br><span class="line">    X = var(<span class="string">'X'</span>)</span><br><span class="line">    <span class="keyword">for</span> k <span class="keyword">in</span> xrange(<span class="number">1</span>, e+<span class="number">1</span>):</span><br><span class="line">        results = solve_mod([e*d0*X - k*X*(n-X+<span class="number">1</span>) + k*n == X], <span class="number">2</span>^kbits)</span><br><span class="line">        <span class="keyword">for</span> x <span class="keyword">in</span> results:</span><br><span class="line">            p0 = ZZ(x[<span class="number">0</span>])</span><br><span class="line">            p = partial_p(p0, kbits, n)</span><br><span class="line">            <span class="keyword">if</span> p:</span><br><span class="line">                <span class="keyword">return</span> p</span><br><span class="line"><span class="keyword">if</span> __name__ == <span class="string">'__main__'</span>:</span><br><span class="line">    <span class="comment"># n = 0x51fb3416aa0d71a430157d7c9853602a758e15462e7c08827b04cd3220c427bbb8199ed4f5393dae43f013b68732a685defc17497f0912c886fa780dfacdfbb1461197d95a92a7a74ade874127a61411e14a901382ed3fb9d62c040c0dbaa374b5a4df06481a26da3fca271429ff10a4fc973b1c82553e3c1dd4f2f37dc24b3bL</span></span><br><span class="line">    e = <span class="number">3</span></span><br><span class="line">    <span class="comment"># d = 0x17c4b18f1290b6a0886eaa7bf426485a3994c5b71186fe84d5138e18de7e060db57f9580381a917fdfd171bfd159825a7d1e2800e2774f5e4449d17e6723749bL</span></span><br><span class="line">    n = <span class="number">57569201048993475052349187244752169754165154575782760003851777813767048953051839288528137121670999884309849815765999616346303792471518639080697166767644957046582385785721102370288806038187956032505761532789716009522131450217010629338000241936036185205038814391205848232364006349213836317806903032515194407739</span></span><br><span class="line">    nbits = n.nbits()</span><br><span class="line">    kbits = floor(nbits * <span class="number">0.5</span>)</span><br><span class="line">    <span class="keyword">print</span> <span class="string">"kbits : "</span>, kbits </span><br><span class="line">    d0 = <span class="number">1244848677959253796774387650148978357579294769878147704641867595620534030329181934099194560059806799908134954814673426128260540575360296026444649631806619</span></span><br><span class="line">    <span class="keyword">print</span> <span class="string">"lower %d bits (of %d bits) is given"</span> % (kbits, nbits)</span><br><span class="line">    p = find_p(d0, kbits, e, n)</span><br><span class="line">    <span class="keyword">print</span> <span class="string">"found p: %d"</span> % p</span><br><span class="line">    q = n//p</span><br><span class="line">    <span class="comment"># print d</span></span><br><span class="line">    <span class="keyword">print</span> inverse_mod(e, (p<span class="number">-1</span>))</span><br></pre></td></tr></table></figure>
+<h2 id="boneh-and-durfee-attack">Boneh and Durfee attack</h2>
+<p>当<span class="math inline">\(d\)</span>较小时,满足<span class="math inline">\(d &lt; N^{0.292}\)</span>时可以利用该攻击.</p>
+<p><code>https://github.com/mimoo/RSA-and-LLL-attacks/blob/master/boneh_durfee.sage</code>.</p>
+<h2 id="dpdq泄露rsa_crt-leaks">dp&amp;dq泄露(RSA_CRT leaks)</h2>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">dp = d % (p - <span class="number">1</span>)</span><br><span class="line">dq = d % (q - <span class="number">1</span>)</span><br></pre></td></tr></table></figure>
+<p>假设题目仅给出<span class="math inline">\(p,q,dp,dq,c\)</span>,即不给公钥<span class="math inline">\(e\)</span>.</p>
+<p><span class="math display">\[
+\begin{align}
+d ∗ e &amp;\equiv 1 \pmod{ϕ(n)}\\
+dp &amp;\equiv d \pmod{p−1}\\
+dq &amp;\equiv d \pmod{q−1}\\
+\end{align}
+\]</span></p>
+<p>由中国剩余定理可得.</p>
+<p><span class="math display">\[
+\begin{cases}
+m_1 &amp;\equiv c^d \pmod{p}\\
+m_2 &amp;\equiv c^d \pmod{q}\\
+\end{cases}
+\]</span></p>
+<p><span class="math display">\[
+\begin{align}
+m_1 &amp;\equiv c^d \pmod{p}\\
+&amp;\equiv c^{dp+k*(p-1)} \pmod{p}\\
+&amp;\equiv c^{dp} \pmod{p}\\
+\end{align}
+\]</span></p>
+<p><span class="math inline">\(m_2\)</span>同理.</p>
+<p><span class="math display">\[
+\begin{align}
+c^d &amp;= kp + m_1\\
+m_2 &amp;\equiv (kp+m_1) \pmod{q}\\
+(m_2-m_1) &amp;\equiv kp \pmod{q}\\
+gcd(p,q) = 1 &amp;\Rightarrow (m_2-m_1) * p^{-1} \equiv k \pmod{q}\\\
+m &amp;\equiv c^d \pmod{n}\\
+&amp;\equiv (kp + m_1) \pmod{n}\\
+&amp;\equiv (((m_2-m_1) * p^{-1} \pmod{q})p + m_1) \pmod{n}\\
+\end{align}
+\]</span></p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> gmpy2</span><br><span class="line"><span class="keyword">import</span> binascii</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">decrypt</span><span class="params">(dp,dq,p,q,c)</span>:</span></span><br><span class="line">    InvQ = gmpy2.invert(q, p)</span><br><span class="line">    mp = pow(c, dp, p)</span><br><span class="line">    mq = pow(c, dq, q)</span><br><span class="line">    m=(((mp - mq) * InvQ) % p) * q + mq</span><br><span class="line">    <span class="keyword">print</span> (binascii.unhexlify(hex(m)[<span class="number">2</span>:]))</span><br><span class="line"></span><br><span class="line">p = <span class="number">0xf85d730bbf09033a75379e58a8465f8048b8516f8105ce2879ce774241305b6eb4ea506b61eb7e376d4fcd425c76e80cb748ebfaf3a852b5cf3119f028cc5971</span></span><br><span class="line">q = <span class="number">0xc1f34b4f826f91c5d68c5751c9af830bc770467a68699991be6e847c29c13170110ccd5e855710950abab2694b6ac730141152758acbeca0c5a51889cbe84d57</span></span><br><span class="line">dp = <span class="number">0xf7b885a246a59fa1b3fe88a2971cb1ee8b19c4a7f9c1a791b9845471320220803854a967a1a03820e297c0fc1aabc2e1c40228d50228766ebebc93c97577f511</span></span><br><span class="line">dq = <span class="number">0x865fe807b8595067ff93d053cc269be6a75134a34e800b741cba39744501a31cffd31cdea6078267a0bd652aeaa39a49c73d9121fafdfa7e1131a764a12fdb95</span></span><br><span class="line">c = <span class="number">0xae05e0c34e2ba4ca3536987cc2cfc3f1f7f53190164d0ac50b44832f0e7224c6fdeebd2c91e3991e7d179c26b1b997295dc9724925ba431f527fba212703a0d14a34ce133661ae0b6001ee326303d6ccdc27dbd94e0987fae25a84f197c1535bdac9094bfb3846b7ca696b2e5082bea7bff804da275772ca05dd51b185a4fc30</span></span><br><span class="line">decrypt(dp, dq, p, q, c)</span><br></pre></td></tr></table></figure>
+<h2 id="dp泄露">dp泄露</h2>
+<p>假设题目给出公钥<span class="math inline">\(n,e\)</span>以及<span class="math inline">\(dp\)</span>.</p>
+<p><span class="math display">\[
+\begin{align}
+d ∗ e &amp;\equiv 1 \pmod{ϕ(n)}\\
+dp &amp;\equiv d \pmod{p−1}\\
+dp ∗ e &amp;\equiv d ∗ e \pmod{p−1}\\
+d ∗ e &amp;= k_1 ∗ (p−1) + dp ∗ e\\
+k_1 ∗ (p−1) + dp ∗ e &amp;\equiv 1 \pmod{ϕ(n)}\\
+k_2 ∗ (p−1) ∗ (q−1) + 1 &amp;= k1 ∗ (p−1) + dp ∗ e\\
+(p−1) ∗ [k2 ∗ (q−1) − k1] + 1 &amp;= dp ∗ e\\
+dp &lt; p − 1 &amp;\Rightarrow e &gt; k2 ∗ (q−1) − k1
+\end{align}
+\]</span></p>
+<p>这里可以遍历<span class="math inline">\((0,e)\)</span>,通过<span class="math inline">\((k2 ∗ (q−1) − k1)*(p−1) + 1 = dp * e\)</span>求出<span class="math inline">\(p - 1\)</span>,验证<span class="math inline">\(p\)</span>能否被<span class="math inline">\(n\)</span>整除.</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> gmpy2</span><br><span class="line"><span class="keyword">import</span> libnum</span><br><span class="line">e = <span class="number">65537</span></span><br><span class="line">n = <span class="number">248254007851526241177721526698901802985832766176221609612258877371620580060433101538328030305219918697643619814200930679612109885533801335348445023751670478437073055544724280684733298051599167660303645183146161497485358633681492129668802402065797789905550489547645118787266601929429724133167768465309665906113</span></span><br><span class="line">dp = <span class="number">905074498052346904643025132879518330691925174573054004621877253318682675055421970943552016695528560364834446303196939207056642927148093290374440210503657</span></span><br><span class="line">c = <span class="number">140423670976252696807533673586209400575664282100684119784203527124521188996403826597436883766041879067494280957410201958935737360380801845453829293997433414188838725751796261702622028587211560353362847191060306578510511380965162133472698713063592621028959167072781482562673683090590521214218071160287665180751</span></span><br><span class="line"><span class="keyword">for</span> i <span class="keyword">in</span> range(<span class="number">1</span>, e + <span class="number">1</span>):</span><br><span class="line">    <span class="keyword">if</span> (dp * e - <span class="number">1</span>) % i == <span class="number">0</span>:</span><br><span class="line">        <span class="keyword">if</span> n % (((dp * e - <span class="number">1</span>) / i) + <span class="number">1</span>) == <span class="number">0</span>:</span><br><span class="line">            p = ((dp * e - <span class="number">1</span>) / i) + <span class="number">1</span></span><br><span class="line">            q = n / p</span><br><span class="line">            phi = (p - <span class="number">1</span>)*(q - <span class="number">1</span>)</span><br><span class="line">            d = gmpy2.invert(e, phi) % phi</span><br><span class="line">            <span class="keyword">print</span> libnum.n2s(pow(c, d, n))</span><br></pre></td></tr></table></figure>
+
+      
+    </div>
+
+    
+
+    
+    
+    
+
+    
+
+    
+       
+    
+    
+
+    
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/非对称加密/" rel="tag"><i class="fa fa-tag"></i> 非对称加密</a>
+          
+        </div>
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/posts/bd1636bf/" rel="next" title="IS-reverse-Android-hook">
+                <i class="fa fa-chevron-left"></i> IS-reverse-Android-hook
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/posts/36159cdd/" rel="prev" title="w4rd3n-朝花夕拾">
+                w4rd3n-朝花夕拾 <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+  </div>
+
+
+          </div>
+          
+
+  
+
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    
+      <div id="sidebar-dimmer"></div>
+    
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview-wrap sidebar-panel">
+        <div class="site-overview">
+          <div class="site-author motion-element" itemprop="author" itemscope="" itemtype="http://schema.org/Person">
+            
+              <img class="site-author-image" itemprop="image" src="/images/apple-touch-icon.png" alt="w4rd3n">
+            
+              <p class="site-author-name" itemprop="name">w4rd3n</p>
+              <p class="site-description motion-element" itemprop="description"></p>
+          </div>
+
+          
+            <nav class="site-state motion-element">
+              
+                <div class="site-state-item site-state-posts">
+                
+                  <a href="/archives/">
+                
+                    <span class="site-state-item-count">174</span>
+                    <span class="site-state-item-name">日志</span>
+                  </a>
+                </div>
+              
+
+              
+                
+                
+                <div class="site-state-item site-state-categories">
+                  <a href="/categories/index.html">
+                    
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                    <span class="site-state-item-count">15</span>
+                    <span class="site-state-item-name">分类</span>
+                  </a>
+                </div>
+              
+
+              
+                
+                
+                <div class="site-state-item site-state-tags">
+                  <a href="/tags/index.html">
+                    
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                    <span class="site-state-item-count">41</span>
+                    <span class="site-state-item-name">标签</span>
+                  </a>
+                </div>
+              
+            </nav>
+          
+
+          
+
+          
+            <div class="links-of-author motion-element">
+              
+                <span class="links-of-author-item">
+                  
+                  
+                    
+                  
+                  
+                    
+                  
+                  <a href="https://github.com/hitworld" title="GitHub &rarr; https://github.com/hitworld" rel="noopener" target="_blank"><i class="fa fa-fw fa-github"></i>GitHub</a>
+                </span>
+              
+            </div>
+          
+
+          
+
+          
+          
+
+          
+            
+          
+          
+
+        </div>
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#暴力分解"><span class="nav-number">1.</span> <span class="nav-text">暴力分解</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#pq不当分解n"><span class="nav-number">2.</span> <span class="nav-text">p&amp;q不当分解N</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#p-1光滑"><span class="nav-number">2.1.</span> <span class="nav-text">p-1光滑</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#other"><span class="nav-number">2.2.</span> <span class="nav-text">other</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#模不互素"><span class="nav-number">3.</span> <span class="nav-text">模不互素</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#多因子"><span class="nav-number">4.</span> <span class="nav-text">多因子</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#共模攻击"><span class="nav-number">5.</span> <span class="nav-text">共模攻击</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#小公钥指数攻击"><span class="nav-number">6.</span> <span class="nav-text">小公钥指数攻击</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#低加密指数广播攻击"><span class="nav-number">7.</span> <span class="nav-text">低加密指数广播攻击</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#rsa衍生算法-rabin算法"><span class="nav-number">8.</span> <span class="nav-text">RSA衍生算法-Rabin算法</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#d泄露攻击"><span class="nav-number">9.</span> <span class="nav-text">d泄露攻击</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#低解密指数攻击"><span class="nav-number">10.</span> <span class="nav-text">低解密指数攻击</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#coppersmith定理"><span class="nav-number">11.</span> <span class="nav-text">Coppersmith定理</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#coppersmith-partial-information-attack"><span class="nav-number">12.</span> <span class="nav-text">Coppersmith partial information attack</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#known-high-in-plaintext"><span class="nav-number">13.</span> <span class="nav-text">Known high in plaintext</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#factoring-with-high-bits-known"><span class="nav-number">14.</span> <span class="nav-text">Factoring with High Bits Known</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#partial-key-exposure-attack"><span class="nav-number">15.</span> <span class="nav-text">Partial Key Exposure Attack</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#boneh-and-durfee-attack"><span class="nav-number">16.</span> <span class="nav-text">Boneh and Durfee attack</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#dpdq泄露rsa_crt-leaks"><span class="nav-number">17.</span> <span class="nav-text">dp&amp;dq泄露(RSA_CRT leaks)</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#dp泄露"><span class="nav-number">18.</span> <span class="nav-text">dp泄露</span></a></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright">&copy; <span itemprop="copyrightYear">2020</span>
+  <span class="with-love" id="animate">
+    <i class="fa fa-gg-circle"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">w4rd3n</span>
+
+  
+    <span class="post-meta-divider">|</span>
+    <span class="post-meta-item-icon">
+      <i class="fa fa-area-chart"></i>
+    </span>
+    
+    <span title="站点总字数">785k</span>
+  
+
+  
+    <span class="post-meta-divider">|</span>
+    <span class="post-meta-item-icon">
+      <i class="fa fa-coffee"></i>
+    </span>
+    
+    <span title="站点阅读时长">11:54</span>
+  
+</div>
+
+
+
+
+
+
+
+
+
+        
+<div class="busuanzi-count">
+  <script async src="https://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+  
+    <span class="site-uv" title="总访客量">
+      <i class="fa fa-user"></i>
+      <span class="busuanzi-value" id="busuanzi_value_site_uv"></span>
+    </span>
+  
+
+  
+    <span class="site-pv" title="总访问量">
+      <i class="fa fa-eye"></i>
+      <span class="busuanzi-value" id="busuanzi_value_site_pv"></span>
+    </span>
+  
+</div>
+
+
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+          <span id="scrollpercent"><span>0</span>%</span>
+        
+      </div>
+    
+
+    
+	
+    
+
+    
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+    
+      
+  
+  <script type="text/javascript" color="0,0,255" opacity="0.5" zindex="-1" count="99" src="/lib/canvas-nest/canvas-nest.min.js"></script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+  
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=6.5.0"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=6.5.0"></script>
+
+
+
+  
+  
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=6.5.0"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=6.5.0"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=6.5.0"></script>
+
+
+
+  
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+  
+
+  <script type="text/javascript">
+    // Popup Window;
+    var isfetched = false;
+    var isXml = true;
+    // Search DB path;
+    var search_path = "search.xml";
+    if (search_path.length === 0) {
+      search_path = "search.xml";
+    } else if (/json$/i.test(search_path)) {
+      isXml = false;
+    }
+    var path = "/" + search_path;
+    // monitor main search box;
+
+    var onPopupClose = function (e) {
+      $('.popup').hide();
+      $('#local-search-input').val('');
+      $('.search-result-list').remove();
+      $('#no-result').remove();
+      $(".local-search-pop-overlay").remove();
+      $('body').css('overflow', '');
+    }
+
+    function proceedsearch() {
+      $("body")
+        .append('<div class="search-popup-overlay local-search-pop-overlay"></div>')
+        .css('overflow', 'hidden');
+      $('.search-popup-overlay').click(onPopupClose);
+      $('.popup').toggle();
+      var $localSearchInput = $('#local-search-input');
+      $localSearchInput.attr("autocapitalize", "none");
+      $localSearchInput.attr("autocorrect", "off");
+      $localSearchInput.focus();
+    }
+
+    // search function;
+    var searchFunc = function(path, search_id, content_id) {
+      'use strict';
+
+      // start loading animation
+      $("body")
+        .append('<div class="search-popup-overlay local-search-pop-overlay">' +
+          '<div id="search-loading-icon">' +
+          '<i class="fa fa-spinner fa-pulse fa-5x fa-fw"></i>' +
+          '</div>' +
+          '</div>')
+        .css('overflow', 'hidden');
+      $("#search-loading-icon").css('margin', '20% auto 0 auto').css('text-align', 'center');
+
+      
+
+      $.ajax({
+        url: path,
+        dataType: isXml ? "xml" : "json",
+        async: true,
+        success: function(res) {
+          // get the contents from search data
+          isfetched = true;
+          $('.popup').detach().appendTo('.header-inner');
+          var datas = isXml ? $("entry", res).map(function() {
+            return {
+              title: $("title", this).text(),
+              content: $("content",this).text(),
+              url: $("url" , this).text()
+            };
+          }).get() : res;
+          var input = document.getElementById(search_id);
+          var resultContent = document.getElementById(content_id);
+          var inputEventFunction = function() {
+            var searchText = input.value.trim().toLowerCase();
+            var keywords = searchText.split(/[\s\-]+/);
+            if (keywords.length > 1) {
+              keywords.push(searchText);
+            }
+            var resultItems = [];
+            if (searchText.length > 0) {
+              // perform local searching
+              datas.forEach(function(data) {
+                var isMatch = false;
+                var hitCount = 0;
+                var searchTextCount = 0;
+                var title = data.title.trim();
+                var titleInLowerCase = title.toLowerCase();
+                var content = data.content.trim().replace(/<[^>]+>/g,"");
+                
+                var contentInLowerCase = content.toLowerCase();
+                var articleUrl = decodeURIComponent(data.url);
+                var indexOfTitle = [];
+                var indexOfContent = [];
+                // only match articles with not empty titles
+                if(title != '') {
+                  keywords.forEach(function(keyword) {
+                    function getIndexByWord(word, text, caseSensitive) {
+                      var wordLen = word.length;
+                      if (wordLen === 0) {
+                        return [];
+                      }
+                      var startPosition = 0, position = [], index = [];
+                      if (!caseSensitive) {
+                        text = text.toLowerCase();
+                        word = word.toLowerCase();
+                      }
+                      while ((position = text.indexOf(word, startPosition)) > -1) {
+                        index.push({position: position, word: word});
+                        startPosition = position + wordLen;
+                      }
+                      return index;
+                    }
+
+                    indexOfTitle = indexOfTitle.concat(getIndexByWord(keyword, titleInLowerCase, false));
+                    indexOfContent = indexOfContent.concat(getIndexByWord(keyword, contentInLowerCase, false));
+                  });
+                  if (indexOfTitle.length > 0 || indexOfContent.length > 0) {
+                    isMatch = true;
+                    hitCount = indexOfTitle.length + indexOfContent.length;
+                  }
+                }
+
+                // show search results
+
+                if (isMatch) {
+                  // sort index by position of keyword
+
+                  [indexOfTitle, indexOfContent].forEach(function (index) {
+                    index.sort(function (itemLeft, itemRight) {
+                      if (itemRight.position !== itemLeft.position) {
+                        return itemRight.position - itemLeft.position;
+                      } else {
+                        return itemLeft.word.length - itemRight.word.length;
+                      }
+                    });
+                  });
+
+                  // merge hits into slices
+
+                  function mergeIntoSlice(text, start, end, index) {
+                    var item = index[index.length - 1];
+                    var position = item.position;
+                    var word = item.word;
+                    var hits = [];
+                    var searchTextCountInSlice = 0;
+                    while (position + word.length <= end && index.length != 0) {
+                      if (word === searchText) {
+                        searchTextCountInSlice++;
+                      }
+                      hits.push({position: position, length: word.length});
+                      var wordEnd = position + word.length;
+
+                      // move to next position of hit
+
+                      index.pop();
+                      while (index.length != 0) {
+                        item = index[index.length - 1];
+                        position = item.position;
+                        word = item.word;
+                        if (wordEnd > position) {
+                          index.pop();
+                        } else {
+                          break;
+                        }
+                      }
+                    }
+                    searchTextCount += searchTextCountInSlice;
+                    return {
+                      hits: hits,
+                      start: start,
+                      end: end,
+                      searchTextCount: searchTextCountInSlice
+                    };
+                  }
+
+                  var slicesOfTitle = [];
+                  if (indexOfTitle.length != 0) {
+                    slicesOfTitle.push(mergeIntoSlice(title, 0, title.length, indexOfTitle));
+                  }
+
+                  var slicesOfContent = [];
+                  while (indexOfContent.length != 0) {
+                    var item = indexOfContent[indexOfContent.length - 1];
+                    var position = item.position;
+                    var word = item.word;
+                    // cut out 100 characters
+                    var start = position - 20;
+                    var end = position + 80;
+                    if(start < 0){
+                      start = 0;
+                    }
+                    if (end < position + word.length) {
+                      end = position + word.length;
+                    }
+                    if(end > content.length){
+                      end = content.length;
+                    }
+                    slicesOfContent.push(mergeIntoSlice(content, start, end, indexOfContent));
+                  }
+
+                  // sort slices in content by search text's count and hits' count
+
+                  slicesOfContent.sort(function (sliceLeft, sliceRight) {
+                    if (sliceLeft.searchTextCount !== sliceRight.searchTextCount) {
+                      return sliceRight.searchTextCount - sliceLeft.searchTextCount;
+                    } else if (sliceLeft.hits.length !== sliceRight.hits.length) {
+                      return sliceRight.hits.length - sliceLeft.hits.length;
+                    } else {
+                      return sliceLeft.start - sliceRight.start;
+                    }
+                  });
+
+                  // select top N slices in content
+
+                  var upperBound = parseInt('1');
+                  if (upperBound >= 0) {
+                    slicesOfContent = slicesOfContent.slice(0, upperBound);
+                  }
+
+                  // highlight title and content
+
+                  function highlightKeyword(text, slice) {
+                    var result = '';
+                    var prevEnd = slice.start;
+                    slice.hits.forEach(function (hit) {
+                      result += text.substring(prevEnd, hit.position);
+                      var end = hit.position + hit.length;
+                      result += '<b class="search-keyword">' + text.substring(hit.position, end) + '</b>';
+                      prevEnd = end;
+                    });
+                    result += text.substring(prevEnd, slice.end);
+                    return result;
+                  }
+
+                  var resultItem = '';
+
+                  if (slicesOfTitle.length != 0) {
+                    resultItem += "<li><a href='" + articleUrl + "' class='search-result-title'>" + highlightKeyword(title, slicesOfTitle[0]) + "</a>";
+                  } else {
+                    resultItem += "<li><a href='" + articleUrl + "' class='search-result-title'>" + title + "</a>";
+                  }
+
+                  slicesOfContent.forEach(function (slice) {
+                    resultItem += "<a href='" + articleUrl + "'>" +
+                      "<p class=\"search-result\">" + highlightKeyword(content, slice) +
+                      "...</p>" + "</a>";
+                  });
+
+                  resultItem += "</li>";
+                  resultItems.push({
+                    item: resultItem,
+                    searchTextCount: searchTextCount,
+                    hitCount: hitCount,
+                    id: resultItems.length
+                  });
+                }
+              })
+            };
+            if (keywords.length === 1 && keywords[0] === "") {
+              resultContent.innerHTML = '<div id="no-result"><i class="fa fa-search fa-5x" /></div>'
+            } else if (resultItems.length === 0) {
+              resultContent.innerHTML = '<div id="no-result"><i class="fa fa-frown-o fa-5x" /></div>'
+            } else {
+              resultItems.sort(function (resultLeft, resultRight) {
+                if (resultLeft.searchTextCount !== resultRight.searchTextCount) {
+                  return resultRight.searchTextCount - resultLeft.searchTextCount;
+                } else if (resultLeft.hitCount !== resultRight.hitCount) {
+                  return resultRight.hitCount - resultLeft.hitCount;
+                } else {
+                  return resultRight.id - resultLeft.id;
+                }
+              });
+              var searchResultList = '<ul class=\"search-result-list\">';
+              resultItems.forEach(function (result) {
+                searchResultList += result.item;
+              })
+              searchResultList += "</ul>";
+              resultContent.innerHTML = searchResultList;
+            }
+          }
+
+          if ('auto' === 'auto') {
+            input.addEventListener('input', inputEventFunction);
+          } else {
+            $('.search-icon').click(inputEventFunction);
+            input.addEventListener('keypress', function (event) {
+              if (event.keyCode === 13) {
+                inputEventFunction();
+              }
+            });
+          }
+
+          // remove loading animation
+          $(".local-search-pop-overlay").remove();
+          $('body').css('overflow', '');
+
+          proceedsearch();
+        }
+      });
+    }
+
+    // handle and trigger popup window;
+    $('.popup-trigger').click(function(e) {
+      e.stopPropagation();
+      if (isfetched === false) {
+        searchFunc(path, 'local-search-input', 'local-search-result');
+      } else {
+        proceedsearch();
+      };
+    });
+
+    $('.popup-btn-close').click(onPopupClose);
+    $('.popup').click(function(e){
+      e.stopPropagation();
+    });
+    $(document).on('keyup', function (event) {
+      var shouldDismissSearchPopup = event.which === 27 &&
+        $('.search-popup').is(':visible');
+      if (shouldDismissSearchPopup) {
+        onPopupClose();
+      }
+    });
+  </script>
+
+
+
+
+
+  
+
+  
+  <script>
+    
+    function addCount(Counter) {
+      var $visitors = $(".leancloud_visitors");
+      var url = $visitors.attr('id').trim();
+      var title = $visitors.attr('data-flag-title').trim();
+
+      Counter('get', '/classes/Counter', { where: JSON.stringify({ url }) })
+        .done(function ({ results }) {
+          if (results.length > 0) {
+            var counter = results[0];
+            
+            Counter('put', `/classes/Counter/${counter.objectId}`, JSON.stringify({ time: { "__op":"Increment", "amount":1 } }))
+            
+            .done(function () {
+                  var $element = $(document.getElementById(url));
+                  $element.find('.leancloud-visitors-count').text(counter.time + 1);
+            })
+            
+            .fail(function ({ responseJSON }) {
+                console.log('Failed to save Visitor num, with error message: ' + responseJSON.error);
+            })
+          } else {
+            
+              Counter('post', '/classes/Counter', JSON.stringify({ title: title, url: url, time: 1}))
+                .done(function () {
+                  var $element = $(document.getElementById(url));
+                  $element.find('.leancloud-visitors-count').text(1);
+                })
+                .fail(function () {
+                  console.log('Failed to create');
+                });
+            
+          }
+        })
+      .fail(function ({ responseJSON }) {
+        console.log('LeanCloud Counter Error:' + responseJSON.code + " " + responseJSON.error);
+      });
+    }
+    
+
+    $(function() {
+      $.get('https://app-router.leancloud.cn/2/route?appId=' + "no3Ip4mNLc3JyF1AeTy8LrAm-gzGzoHsz")
+        .done(function ({ api_server }) {
+          var Counter = function (method, url, data) {
+            return $.ajax({
+              method: method,
+              url: `https://${api_server}/1.1${url}`,
+              headers: {
+                'X-LC-Id': "no3Ip4mNLc3JyF1AeTy8LrAm-gzGzoHsz",
+                'X-LC-Key': "UvlYMzpJKw0Jrw61V5BA5ifU",
+                'Content-Type': 'application/json',
+              },
+              data: data,
+            });
+          };
+          
+          addCount(Counter);
+          
+        })
+    });
+  </script>
+
+
+
+  
+
+  
+
+  
+
+  
+  
+
+  
+  
+
+  
+    
+      <script type="text/x-mathjax-config">
+    MathJax.Hub.Config({
+      tex2jax: {
+        inlineMath: [ ['$','$'], ["\\(","\\)"]  ],
+        processEscapes: true,
+        skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
+      },
+      TeX: {equationNumbers: { autoNumber: "AMS" }}
+    });
+</script>
+
+<script type="text/x-mathjax-config">
+    MathJax.Hub.Queue(function() {
+      var all = MathJax.Hub.getAllJax(), i;
+        for (i=0; i < all.length; i += 1) {
+          all[i].SourceElement().parentNode.className += ' has-jax';
+        }
+    });
+</script>
+<script type="text/javascript" src="//cdn.bootcss.com/mathjax/2.7.1/latest.js?config=TeX-AMS-MML_HTMLorMML"></script>
+
+    
+  
+
+
+  
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+  <style>
+    .copy-btn {
+      display: inline-block;
+      padding: 6px 12px;
+      font-size: 13px;
+      font-weight: 700;
+      line-height: 20px;
+      color: #333;
+      white-space: nowrap;
+      vertical-align: middle;
+      cursor: pointer;
+      background-color: #eee;
+      background-image: linear-gradient(#fcfcfc, #eee);
+      border: 1px solid #d5d5d5;
+      border-radius: 3px;
+      user-select: none;
+      outline: 0;
+    }
+
+    .highlight-wrap .copy-btn {
+      transition: opacity .3s ease-in-out;
+      opacity: 0;
+      padding: 2px 6px;
+      position: absolute;
+      right: 4px;
+      top: 8px;
+    }
+
+    .highlight-wrap:hover .copy-btn,
+    .highlight-wrap .copy-btn:focus {
+      opacity: 1
+    }
+
+    .highlight-wrap {
+      position: relative;
+    }
+  </style>
+  <script>
+    $('.highlight').each(function (i, e) {
+      var $wrap = $('<div>').addClass('highlight-wrap')
+      $(e).after($wrap)
+      $wrap.append($('<button>').addClass('copy-btn').append('复制').on('click', function (e) {
+        var code = $(this).parent().find('.code').find('.line').map(function (i, e) {
+          return $(e).text()
+        }).toArray().join('\n')
+        var ta = document.createElement('textarea')
+        document.body.appendChild(ta)
+        ta.style.position = 'absolute'
+        ta.style.top = '0px'
+        ta.style.left = '0px'
+        ta.value = code
+        ta.select()
+        ta.focus()
+        var result = document.execCommand('copy')
+        document.body.removeChild(ta)
+        
+        $(this).blur()
+      })).on('mouseleave', function (e) {
+        var $b = $(this).find('.copy-btn')
+        setTimeout(function () {
+          $b.text('复制')
+        }, 300)
+      }).append(e)
+    })
+  </script>
+
+
+  
+
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-backstretch/2.0.4/jquery.backstretch.min.js"></script>;
+  <script>
+  //$("body").backstretch("/images/background.jpg");
+  </script>
+  
+  <script type="text/javascript" src="//cdn.bootcss.com/canvas-nest.js/1.0.0/canvas-nest.min.js"></script>
+  
+<script src="/live2dw/lib/L2Dwidget.min.js?0c58a1486de42ac6cc1c59c7d98ae887"></script><script>L2Dwidget.init({"pluginRootPath":"live2dw/","pluginJsPath":"lib/","pluginModelPath":"assets/","tagMode":false,"debug":false,"model":{"jsonPath":"/live2dw/assets/koharu.model.json"},"display":{"position":"right","width":150,"height":300},"mobile":{"show":false},"log":false});</script><!-- hexo-inject:begin --><!-- hexo-inject:end --></body>
+</html>

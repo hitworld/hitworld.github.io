@@ -119,21 +119,25 @@
 
 
 
-  <meta name="keywords" content="hack">
-<meta property="og:type" content="website">
-<meta property="og:title" content="w4rd3n">
-<meta property="og:url" content="https://hitworld.github.io/tags/ocaml/index.html">
+  <meta name="description" content="OLLVM OLLVM(Obfuscator-LLVM)旨在提供一套开源的针对LLVM的代码混淆工具,以增加对逆向工程的难度. OLLVM是基于LLVM实现的,LLVM是一个编译器框架,采用经典的三段式设计:前端可以使用不同的编译工具对代码文件做词法分析以形成抽象语法树AST,然后将分析好的代码转换成LLVM的中间表示IR;中间部分的优化器只对中间表示IR操作,通过一系列的Pass对IR做优化">
+<meta name="keywords" content="tool">
+<meta property="og:type" content="article">
+<meta property="og:title" content="IS-reverse-tool-OLLVM">
+<meta property="og:url" content="https://hitworld.github.io/posts/37700b49/index.html">
 <meta property="og:site_name" content="w4rd3n">
+<meta property="og:description" content="OLLVM OLLVM(Obfuscator-LLVM)旨在提供一套开源的针对LLVM的代码混淆工具,以增加对逆向工程的难度. OLLVM是基于LLVM实现的,LLVM是一个编译器框架,采用经典的三段式设计:前端可以使用不同的编译工具对代码文件做词法分析以形成抽象语法树AST,然后将分析好的代码转换成LLVM的中间表示IR;中间部分的优化器只对中间表示IR操作,通过一系列的Pass对IR做优化">
 <meta property="og:locale" content="zh-CN">
+<meta property="og:updated_time" content="2020-09-23T08:16:58.939Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="w4rd3n">
+<meta name="twitter:title" content="IS-reverse-tool-OLLVM">
+<meta name="twitter:description" content="OLLVM OLLVM(Obfuscator-LLVM)旨在提供一套开源的针对LLVM的代码混淆工具,以增加对逆向工程的难度. OLLVM是基于LLVM实现的,LLVM是一个编译器框架,采用经典的三段式设计:前端可以使用不同的编译工具对代码文件做词法分析以形成抽象语法树AST,然后将分析好的代码转换成LLVM的中间表示IR;中间部分的优化器只对中间表示IR操作,通过一系列的Pass对IR做优化">
 
 
 
 
 
 
-  <link rel="canonical" href="https://hitworld.github.io/tags/ocaml/">
+  <link rel="canonical" href="https://hitworld.github.io/posts/37700b49/">
 
 
 
@@ -143,7 +147,7 @@
   };
 </script>
 
-  <title>标签: ocaml | w4rd3n</title>
+  <title>IS-reverse-tool-OLLVM | w4rd3n</title>
   
 
 
@@ -192,7 +196,7 @@
     
   
 
-  <!-- hexo-inject:begin --><!-- hexo-inject:end --><div class="container sidebar-position-left ">
+  <!-- hexo-inject:begin --><!-- hexo-inject:end --><div class="container sidebar-position-left page-post-detail">
     <div class="headband"></div>
 
     <header id="header" class="header" itemscope="" itemtype="http://schema.org/WPHeader">
@@ -267,7 +271,7 @@
         
         
           
-          <li class="menu-item menu-item-tags menu-item-active">
+          <li class="menu-item menu-item-tags">
 
     
     
@@ -331,28 +335,6 @@
   
     
 
-    
-    
-      
-      
-    
-      
-      
-    
-      
-      
-    
-      
-      
-    
-      
-      
-    
-    
-
-  
-
-
   
 
   
@@ -398,56 +380,253 @@
           <div id="content" class="content">
             
 
-  
-  
-  
-  <div class="post-block tag">
+  <div id="posts" class="posts-expand">
+    
 
-    <div id="posts" class="posts-collapse">
-      <div class="collection-title">
-        <h1>ocaml<small>标签</small>
-        </h1>
-      </div>
+  
 
-      
-        
+  
+  
+  
+
+  
 
   <article class="post post-type-normal" itemscope="" itemtype="http://schema.org/Article">
-    <header class="post-header">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="https://hitworld.github.io/posts/37700b49/">
 
-      <h2 class="post-title">
+    <span hidden itemprop="author" itemscope="" itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="w4rd3n">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/apple-touch-icon.png">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope="" itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="w4rd3n">
+    </span>
+
+    
+      <header class="post-header">
+
         
-            <a class="post-title-link" href="/posts/3ec10f80/" itemprop="url">
-              
-                <span itemprop="name">CS-develop-ocaml-基础</span>
-              
-            </a>
         
-      </h2>
+          <h1 class="post-title" itemprop="name headline">IS-reverse-tool-OLLVM
+              
+            
+          </h1>
+        
 
-      <div class="post-meta">
-        <time class="post-time" itemprop="dateCreated" datetime="2019-11-24T13:33:21+08:00" content="2019-11-24">
-          11-24
-        </time>
-      </div>
+        <div class="post-meta">
+          <span class="post-time">
 
-    </header>
-  </article>
+            
+            
+            
 
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+
+              
+                
+              
+
+              <time title="创建时间：2020-02-20 20:32:47" itemprop="dateCreated datePublished" datetime="2020-02-20T20:32:47+08:00">2020-02-20</time>
+            
+
+            
+          </span>
+
+          
+            <span class="post-category">
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope="" itemtype="http://schema.org/Thing"><a href="/categories/IS/" itemprop="url" rel="index"><span itemprop="name">IS</span></a></span>
+
+                
+                
+                  ，
+                
+              
+                <span itemprop="about" itemscope="" itemtype="http://schema.org/Thing"><a href="/categories/IS/reverse/" itemprop="url" rel="index"><span itemprop="name">reverse</span></a></span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+             <span id="/posts/37700b49/" class="leancloud_visitors" data-flag-title="IS-reverse-tool-OLLVM">
+               <span class="post-meta-divider">|</span>
+               <span class="post-meta-item-icon">
+                 <i class="fa fa-eye"></i>
+               </span>
+               
+                 <span class="post-meta-item-text">热度：</span>
+               
+                 <span class="leancloud-visitors-count"></span>
+                 <span>℃</span>
+             </span>
+          
+
+          
+
+          
+            <div class="post-symbolscount">
+              
+
+              
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-file-word-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">本文字数：</span>
+                
+                <span title="本文字数">1.3k</span>
+              
+
+              
+                <span class="post-meta-divider">|</span>
+              
+
+              
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-clock-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">阅读时长 &asymp;</span>
+                
+                <span title="阅读时长">1 分钟</span>
+              
+            </div>
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <h2 id="ollvm">OLLVM</h2>
+<p><code>OLLVM</code>(<code>Obfuscator-LLVM</code>)旨在提供一套开源的针对<code>LLVM</code>的代码混淆工具,以增加对逆向工程的难度.</p>
+<p><code>OLLVM</code>是基于<code>LLVM</code>实现的,<code>LLVM</code>是一个编译器框架,采用经典的三段式设计:前端可以使用不同的编译工具对代码文件做词法分析以形成抽象语法树<code>AST</code>,然后将分析好的代码转换成<code>LLVM</code>的中间表示<code>IR</code>;中间部分的优化器只对中间表示<code>IR</code>操作,通过一系列的<code>Pass</code>对<code>IR</code>做优化;后端负责将优化好的<code>IR</code>解释成对应平台的机器码.</p>
+<p><code>OLLVM</code>的混淆操作就是在中间表示<code>IR</code>层,通过编写<code>Pass</code>来混淆<code>IR</code>.<code>OLLVM</code>适用<code>LLVM</code>支持的所有语言和目标平台.</p>
+<p><code>OLLVM</code>默认支持<code>-fla</code>,<code>-sub</code>,<code>-bcf</code>三个混淆参数,可以单独使用,也可以配合使用.<code>-fla</code>参数表示使用控制流平展(<code>Control Flow Flattening</code>)模式,<code>-sub</code>参数表示使用指令替换(<code>Instructions Substitution</code>)模式,<code>-bcf</code>参数表示使用控制流伪造(<code>Bogus Control Flow</code>)模式.</p>
+<h3 id="instructions-substitution">Instructions Substitution</h3>
+<p>指令替换是一种比较简单的混淆方式,<code>OLLVM</code>将一些简单的运算复杂化,但这种方式容易被代码优化给去除,目前<code>OLLVM</code>只实现对整数运算的混淆.</p>
+<h3 id="control-flow-flattening">control flow flattening</h3>
+<p><code>control flow flattening</code>通过多个<code>case-swich</code>结构将程序的控制流变成扁平形状,打破原有的逻辑结构,增加逆向的难度.<code>OLLVM</code>将源代码分割为几个基本块,并放在一个<code>while</code>循环结构中无限循环,程序的流程由一个变量控制.</p>
+<h3 id="bogus-control-flow">bogus control flow</h3>
+<p><code>bogus control flow</code>通过在源程序的控制流中添加一些基本块,这些基本块仅仅起了连接作用,并不影响实际的执行逻辑.</p>
+<h3 id="functions-annotations">Functions annotations</h3>
+<p><code>OLLVM</code>的<code>Functions annotations</code>模式支持对单个函数进行混淆.</p>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">func</span><span class="params">()</span> __<span class="title">attribute</span><span class="params">((__annotate__((<span class="string">"bcf"</span>))))</span></span>;</span><br><span class="line"><span class="comment">//对函数func()使用bcf混淆</span></span><br></pre></td></tr></table></figure>
+<p><code>OLLVM</code>的<code>fla</code>,<code>sub</code>和<code>bcf</code>三个属性可以搭配使用,只需要添加对应的编译选项即可.</p>
+<h3 id="下载并编译">下载并编译</h3>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># git clone -b llvm-4.0 https://github.com/obfuscator-llvm/obfuscator.git</span></span><br><span class="line">git <span class="built_in">clone</span> -b llvm-4.0 https://gitee.com/hitworld/obfuscator.git</span><br><span class="line">mkdir build</span><br><span class="line"><span class="built_in">cd</span> build</span><br><span class="line"><span class="comment">#cmake -DCMAKE_BUILD_TYPE=Release ../obfuscator/</span></span><br><span class="line">cmake -DCMAKE_BUILD_TYPE=Release -DLLVM_INCLUDE_TESTS=OFF ../fuscator/</span><br><span class="line">make -j7</span><br><span class="line"><span class="built_in">cd</span> ..</span><br><span class="line">build/bin/clang demo.c -o demo -mllvm -sub -mllvm -bcf -mllvm -fla</span><br></pre></td></tr></table></figure>
 
       
     </div>
 
+    
+
+    
+    
+    
+
+    
+
+    
+       
+    
+    
+
+    
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/tool/" rel="tag"><i class="fa fa-tag"></i> tool</a>
+          
+        </div>
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/posts/efad5586/" rel="next" title="IS-reverse-Android-Smali-语法">
+                <i class="fa fa-chevron-left"></i> IS-reverse-Android-Smali-语法
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/posts/16b2bf6c/" rel="prev" title="CS-BASIC-compiler-principles-词法分析">
+                CS-BASIC-compiler-principles-词法分析 <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
   </div>
   
   
   
+  </article>
 
-  
+
+  </div>
 
 
           </div>
           
+
+  
+
+
 
         </div>
         
@@ -470,8 +649,17 @@
       
 
       
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            站点概览
+          </li>
+        </ul>
+      
 
-      <section class="site-overview-wrap sidebar-panel sidebar-panel-active">
+      <section class="site-overview-wrap sidebar-panel">
         <div class="site-overview">
           <div class="site-author motion-element" itemprop="author" itemscope="" itemtype="http://schema.org/Person">
             
@@ -626,11 +814,7 @@
                     
                       
                     
-                      
-                    
-                      
-                    
-                    <span class="site-state-item-count">43</span>
+                    <span class="site-state-item-count">41</span>
                     <span class="site-state-item-name">标签</span>
                   </a>
                 </div>
@@ -671,6 +855,22 @@
       </section>
 
       
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#ollvm"><span class="nav-number">1.</span> <span class="nav-text">OLLVM</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#instructions-substitution"><span class="nav-number">1.1.</span> <span class="nav-text">Instructions Substitution</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#control-flow-flattening"><span class="nav-number">1.2.</span> <span class="nav-text">control flow flattening</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#bogus-control-flow"><span class="nav-number">1.3.</span> <span class="nav-text">bogus control flow</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#functions-annotations"><span class="nav-number">1.4.</span> <span class="nav-text">Functions annotations</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#下载并编译"><span class="nav-number">1.5.</span> <span class="nav-text">下载并编译</span></a></li></ol></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
 
       
 
@@ -696,7 +896,7 @@
       <i class="fa fa-area-chart"></i>
     </span>
     
-    <span title="站点总字数">761k</span>
+    <span title="站点总字数">785k</span>
   
 
   
@@ -705,7 +905,7 @@
       <i class="fa fa-coffee"></i>
     </span>
     
-    <span title="站点阅读时长">11:32</span>
+    <span title="站点阅读时长">11:54</span>
   
 </div>
 
@@ -832,6 +1032,10 @@
   
 
   
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=6.5.0"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=6.5.0"></script>
+
+
 
   
 
@@ -1186,43 +1390,42 @@
   
   <script>
     
-    function showTime(Counter) {
-      var entries = [];
+    function addCount(Counter) {
       var $visitors = $(".leancloud_visitors");
+      var url = $visitors.attr('id').trim();
+      var title = $visitors.attr('data-flag-title').trim();
 
-      $visitors.each(function () {
-        entries.push( $(this).attr("id").trim() );
-      });
-
-      Counter('get', '/classes/Counter', { where: JSON.stringify({ url: { "$in": entries } }) })
+      Counter('get', '/classes/Counter', { where: JSON.stringify({ url }) })
         .done(function ({ results }) {
-          var COUNT_CONTAINER_REF = '.leancloud-visitors-count';
-
-          if (results.length === 0) {
-            $visitors.find(COUNT_CONTAINER_REF).text(0);
-            return;
-          }
-
-          for (var i = 0; i < results.length; i++) {
-            var item = results[i];
-            var url = item.url;
-            var time = item.time;
-            var element = document.getElementById(url);
-
-            $(element).find(COUNT_CONTAINER_REF).text(time);
-          }
-          for(var i = 0; i < entries.length; i++) {
-            var url = entries[i];
-            var element = document.getElementById(url);
-            var countSpan = $(element).find(COUNT_CONTAINER_REF);
-            if( countSpan.text() == '') {
-              countSpan.text(0);
-            }
+          if (results.length > 0) {
+            var counter = results[0];
+            
+            Counter('put', `/classes/Counter/${counter.objectId}`, JSON.stringify({ time: { "__op":"Increment", "amount":1 } }))
+            
+            .done(function () {
+                  var $element = $(document.getElementById(url));
+                  $element.find('.leancloud-visitors-count').text(counter.time + 1);
+            })
+            
+            .fail(function ({ responseJSON }) {
+                console.log('Failed to save Visitor num, with error message: ' + responseJSON.error);
+            })
+          } else {
+            
+              Counter('post', '/classes/Counter', JSON.stringify({ title: title, url: url, time: 1}))
+                .done(function () {
+                  var $element = $(document.getElementById(url));
+                  $element.find('.leancloud-visitors-count').text(1);
+                })
+                .fail(function () {
+                  console.log('Failed to create');
+                });
+            
           }
         })
-        .fail(function ({ responseJSON }) {
-          console.log("LeanCloud Counter Error: " + responseJSON.code + " " + responseJSON.error);
-        });
+      .fail(function ({ responseJSON }) {
+        console.log('LeanCloud Counter Error:' + responseJSON.code + " " + responseJSON.error);
+      });
     }
     
 
@@ -1242,9 +1445,7 @@
             });
           };
           
-          if ($('.post-title-link').length >= 1) {
-            showTime(Counter);
-          }
+          addCount(Counter);
           
         })
     });

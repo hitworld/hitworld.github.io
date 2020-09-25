@@ -127,7 +127,7 @@
 <meta property="og:site_name" content="w4rd3n">
 <meta property="og:description" content="概念 栈溢出指由于程序使用了不安全的函数或逻辑错误,导致攻击者溢出栈中缓冲区破坏(篡改)其他数据. 可以看到在栈中,位于局部变量(溢出点)后面的有:部分其他局部变量,返回地址,和所有的之前的栈帧.栈溢出可以让攻击者劫持PC register(eip/rip). 有时候要劫持ebp(即被保存的栈指针)来控制栈的位置从而劫持控制流或者调用函数的局部变量值(因为局部变量一般使用ebp相对偏移).">
 <meta property="og:locale" content="zh-CN">
-<meta property="og:updated_time" content="2020-09-21T02:49:04.500Z">
+<meta property="og:updated_time" content="2020-09-25T03:24:40.683Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="IS-pwn-Linux-栈溢出概览">
 <meta name="twitter:description" content="概念 栈溢出指由于程序使用了不安全的函数或逻辑错误,导致攻击者溢出栈中缓冲区破坏(篡改)其他数据. 可以看到在栈中,位于局部变量(溢出点)后面的有:部分其他局部变量,返回地址,和所有的之前的栈帧.栈溢出可以让攻击者劫持PC register(eip/rip). 有时候要劫持ebp(即被保存的栈指针)来控制栈的位置从而劫持控制流或者调用函数的局部变量值(因为局部变量一般使用ebp相对偏移).">
@@ -561,12 +561,6 @@
 <p><code>/bin/sh</code>的地址也可以用<code>ROPgadget</code>找到.</p>
 <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">ROPgadget --binary ./pwn --string /bin/sh</span><br></pre></td></tr></table></figure>
 <p>而实际上这就是<code>Return-2-csu</code>,因为<code>libc_init_cus</code>函数中就有控制<code>rdi</code>和<code>rsi</code>的<code>gadget</code>,还有组合起来可以控制<code>rdx</code>的<code>gadget</code>.</p>
-<h3 id="vdso-vsyscall">vdso &amp; vsyscall</h3>
-<p><code>vdso</code>(<code>Virtual Dynamic Shared Object</code>,虚拟动态共享对象)是指内核和用户空间共享的代码空间,动态分配,地址随机(栈上的环境变量中存在这个地址),提供超过<code>4</code>个系统调用,由<code>glibc</code>库提供功能.</p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">dumpmem vdso.so 0x00007ffff7ffd000 ​0x00007ffff7fff000</span><br><span class="line"><span class="comment">#vdso映射的是一整个ELF文件</span></span><br></pre></td></tr></table></figure>
-<p>由于使用<code>int 0x80</code>进行系统调用效率低,<code>Intel</code>和<code>AMD</code>分别实现了<code>sysenter/sysexit</code>和<code>syscall/sysret</code>(快速系统调用指令).</p>
-<p>为了兼容这两种快速系统调用指令和未实现快速系统调用指令的<code>CPU</code>,<code>Linux</code>实现了<code>vsyscall</code>,程序调用<code>vsyscall</code>,具体的选择由内核来决定.而<code>vsyscall</code>的实现就在<code>vdso</code>中.<code>vsyscall</code>在每个进程中静态分配在相同的地址,只允许<code>4</code>个系统调用,<code>gettimeofday</code>,<code>time</code>和<code>getcpu</code>.由内核提供功能.</p>
-<p><code>x86_64</code>从<code>AMD</code>引进了<code>syscall</code>指令,但是<code>vdso</code>,<code>vsyscall</code>的机制依旧未变.<code>vsyscall</code>执行时会进行检查,如果不是从函数开头执行的话就会出错,所以一般只能用于平滑跳转,类似于<code>shellcode</code>中<code>nop</code>的作用.<code>vdso</code>常用于寻找系统调用指令或者搭配<code>srop</code>,<code>x86</code>环境下<code>vdso</code>只有一字节是<code>random</code>,也就是<code>1/256</code>的命中率,范围为<code>0xf7700000 ~ 0xf7800000</code>.</p>
 <h3 id="绕过pie">绕过PIE</h3>
 <p>泄露一个属于该可执行文件里的内容的地址从而求出基址,或者使用部分覆盖.</p>
 <h3 id="绕过canary">绕过canary</h3>
@@ -591,6 +585,12 @@
 <p>需要存在类似<code>pop esp; ret;</code>等栈迁移<code>gadget</code>,作用是将栈迁移到可控区域从而使第二次<code>ROP</code>链的内容更可控.</p>
 <h3 id="其他">其他</h3>
 <p>具体环境不同设计,重要就是找到可写区域,可读区域和可执行区域然后通过构造<code>ROP</code>链等操作获得<code>shell</code>.</p>
+<h2 id="vdso-vsyscall">vdso &amp; vsyscall</h2>
+<p><code>vdso</code>(<code>Virtual Dynamic Shared Object</code>,虚拟动态共享对象)是指内核和用户空间共享的代码空间,动态分配,地址随机(栈上的环境变量中存在这个地址),提供超过<code>4</code>个系统调用,由<code>glibc</code>库提供功能.</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">dumpmem vdso.so 0x00007ffff7ffd000 ​0x00007ffff7fff000</span><br><span class="line"><span class="comment">#vdso映射的是一整个ELF文件</span></span><br></pre></td></tr></table></figure>
+<p>由于使用<code>int 0x80</code>进行系统调用效率低,<code>Intel</code>和<code>AMD</code>分别实现了<code>sysenter/sysexit</code>和<code>syscall/sysret</code>(快速系统调用指令).</p>
+<p>为了兼容这两种快速系统调用指令和未实现快速系统调用指令的<code>CPU</code>,<code>Linux</code>实现了<code>vsyscall</code>,程序调用<code>vsyscall</code>,具体的选择由内核来决定.而<code>vsyscall</code>的实现就在<code>vdso</code>中.<code>vsyscall</code>在每个进程中静态分配在相同的地址,只允许<code>4</code>个系统调用,<code>gettimeofday</code>,<code>time</code>和<code>getcpu</code>.由内核提供功能.</p>
+<p><code>x86_64</code>从<code>AMD</code>引进了<code>syscall</code>指令,但是<code>vdso</code>,<code>vsyscall</code>的机制依旧未变.<code>vsyscall</code>执行时会进行检查,如果不是从函数开头执行的话就会出错,所以一般只能用于平滑跳转,类似于<code>shellcode</code>中<code>nop</code>的作用.<code>vdso</code>常用于寻找系统调用指令或者搭配<code>srop</code>,<code>x86</code>环境下<code>vdso</code>只有一字节是<code>random</code>,也就是<code>1/256</code>的命中率,范围为<code>0xf7700000 ~ 0xf7800000</code>.</p>
 
       
     </div>
@@ -713,7 +713,7 @@
                 
                   <a href="/archives/">
                 
-                    <span class="site-state-item-count">174</span>
+                    <span class="site-state-item-count">168</span>
                     <span class="site-state-item-name">日志</span>
                   </a>
                 </div>
@@ -849,9 +849,7 @@
                     
                       
                     
-                      
-                    
-                    <span class="site-state-item-count">41</span>
+                    <span class="site-state-item-count">40</span>
                     <span class="site-state-item-name">标签</span>
                   </a>
                 </div>
@@ -901,7 +899,7 @@
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#概念"><span class="nav-number">1.</span> <span class="nav-text">概念</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#利用方法"><span class="nav-number">2.</span> <span class="nav-text">利用方法</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#return-2-shellcode"><span class="nav-number">2.1.</span> <span class="nav-text">Return-2-Shellcode</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#return-2-libc"><span class="nav-number">2.2.</span> <span class="nav-text">Return-2-libc</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#return-2-csu"><span class="nav-number">2.3.</span> <span class="nav-text">Return-2-csu</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#vdso-vsyscall"><span class="nav-number">2.4.</span> <span class="nav-text">vdso &amp; vsyscall</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#绕过pie"><span class="nav-number">2.5.</span> <span class="nav-text">绕过PIE</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#绕过canary"><span class="nav-number">2.6.</span> <span class="nav-text">绕过canary</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#brop"><span class="nav-number">2.7.</span> <span class="nav-text">BROP</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#stack-pivot"><span class="nav-number">2.8.</span> <span class="nav-text">stack pivot</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#其他"><span class="nav-number">2.9.</span> <span class="nav-text">其他</span></a></li></ol></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#概念"><span class="nav-number">1.</span> <span class="nav-text">概念</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#利用方法"><span class="nav-number">2.</span> <span class="nav-text">利用方法</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#return-2-shellcode"><span class="nav-number">2.1.</span> <span class="nav-text">Return-2-Shellcode</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#return-2-libc"><span class="nav-number">2.2.</span> <span class="nav-text">Return-2-libc</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#return-2-csu"><span class="nav-number">2.3.</span> <span class="nav-text">Return-2-csu</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#绕过pie"><span class="nav-number">2.4.</span> <span class="nav-text">绕过PIE</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#绕过canary"><span class="nav-number">2.5.</span> <span class="nav-text">绕过canary</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#brop"><span class="nav-number">2.6.</span> <span class="nav-text">BROP</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#stack-pivot"><span class="nav-number">2.7.</span> <span class="nav-text">stack pivot</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#其他"><span class="nav-number">2.8.</span> <span class="nav-text">其他</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#vdso-vsyscall"><span class="nav-number">3.</span> <span class="nav-text">vdso &amp; vsyscall</span></a></li></ol></div>
             
 
           </div>
@@ -933,7 +931,7 @@
       <i class="fa fa-area-chart"></i>
     </span>
     
-    <span title="站点总字数">797k</span>
+    <span title="站点总字数">787k</span>
   
 
   
@@ -942,7 +940,7 @@
       <i class="fa fa-coffee"></i>
     </span>
     
-    <span title="站点阅读时长">12:04</span>
+    <span title="站点阅读时长">11:55</span>
   
 </div>
 

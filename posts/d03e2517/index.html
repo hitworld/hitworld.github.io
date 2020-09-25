@@ -119,18 +119,18 @@
 
 
 
-  <meta name="description" content="概念 一个集合可以被一种等价关系分为多个等价类,比如两个点的相连关系可以将一个点集分为多个连通分量,将这种判断是否连通并更新对应连通分量的问题称为动态连通性问题. 动态连通性问题解决思路:可以给每一个连通分量选择一个不同的标识符,通过检索标识符并判断是否相等来判断连通性. 第一种解决方案:如果对所有同一连通分量中的点都保存标识符,检索过程只需要一次即可,但是合并连通分量时就要遍历点集. 第">
+  <meta name="description" content="概念 一个集合可以被一种等价关系分为多个等价类,比如两个点的相连关系可以将一个点集分为多个连通分量,将这种判断是否连通并更新对应连通分量的问题称为动态连通性问题. 动态连通性问题解决思路:给每一个连通分量选择一个不同的标识符,通过检索标识符并判断是否相等来判断连通性. 第一种解决方案:所有同一连通分量中的点都保存标识符,检索过程只需要一次即可,但是合并连通分量时就要遍历点集. 第二种解决方">
 <meta name="keywords" content="algorithm">
 <meta property="og:type" content="article">
 <meta property="og:title" content="CS-BASIC-algorithm-动态连通性">
 <meta property="og:url" content="https://hitworld.github.io/posts/d03e2517/index.html">
 <meta property="og:site_name" content="w4rd3n">
-<meta property="og:description" content="概念 一个集合可以被一种等价关系分为多个等价类,比如两个点的相连关系可以将一个点集分为多个连通分量,将这种判断是否连通并更新对应连通分量的问题称为动态连通性问题. 动态连通性问题解决思路:可以给每一个连通分量选择一个不同的标识符,通过检索标识符并判断是否相等来判断连通性. 第一种解决方案:如果对所有同一连通分量中的点都保存标识符,检索过程只需要一次即可,但是合并连通分量时就要遍历点集. 第">
+<meta property="og:description" content="概念 一个集合可以被一种等价关系分为多个等价类,比如两个点的相连关系可以将一个点集分为多个连通分量,将这种判断是否连通并更新对应连通分量的问题称为动态连通性问题. 动态连通性问题解决思路:给每一个连通分量选择一个不同的标识符,通过检索标识符并判断是否相等来判断连通性. 第一种解决方案:所有同一连通分量中的点都保存标识符,检索过程只需要一次即可,但是合并连通分量时就要遍历点集. 第二种解决方">
 <meta property="og:locale" content="zh-CN">
-<meta property="og:updated_time" content="2020-09-22T01:29:11.053Z">
+<meta property="og:updated_time" content="2020-09-25T03:24:40.632Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="CS-BASIC-algorithm-动态连通性">
-<meta name="twitter:description" content="概念 一个集合可以被一种等价关系分为多个等价类,比如两个点的相连关系可以将一个点集分为多个连通分量,将这种判断是否连通并更新对应连通分量的问题称为动态连通性问题. 动态连通性问题解决思路:可以给每一个连通分量选择一个不同的标识符,通过检索标识符并判断是否相等来判断连通性. 第一种解决方案:如果对所有同一连通分量中的点都保存标识符,检索过程只需要一次即可,但是合并连通分量时就要遍历点集. 第">
+<meta name="twitter:description" content="概念 一个集合可以被一种等价关系分为多个等价类,比如两个点的相连关系可以将一个点集分为多个连通分量,将这种判断是否连通并更新对应连通分量的问题称为动态连通性问题. 动态连通性问题解决思路:给每一个连通分量选择一个不同的标识符,通过检索标识符并判断是否相等来判断连通性. 第一种解决方案:所有同一连通分量中的点都保存标识符,检索过程只需要一次即可,但是合并连通分量时就要遍历点集. 第二种解决方">
 
 
 
@@ -539,10 +539,10 @@
       
         <h2 id="概念">概念</h2>
 <p>一个集合可以被一种等价关系分为多个等价类,比如两个点的相连关系可以将一个点集分为多个连通分量,将这种判断是否连通并更新对应连通分量的问题称为动态连通性问题.</p>
-<p>动态连通性问题解决思路:可以给每一个连通分量选择一个不同的标识符,通过检索标识符并判断是否相等来判断连通性.</p>
-<p>第一种解决方案:如果对所有同一连通分量中的点都保存标识符,检索过程只需要一次即可,但是合并连通分量时就要遍历点集.</p>
+<p>动态连通性问题解决思路:给每一个连通分量选择一个不同的标识符,通过检索标识符并判断是否相等来判断连通性.</p>
+<p>第一种解决方案:所有同一连通分量中的点都保存标识符,检索过程只需要一次即可,但是合并连通分量时就要遍历点集.</p>
 <p>第二种解决方案:如果一个点只保存自己链接的点,初始链接自己,合并只改变一个点的链接,而检索过程需要沿链接向上找到根链接点(链接自己).</p>
-<p>在第二种方法中实际上将关系变成了森林,而且第二种情况可以优化,对于合并时谁作为父节点,通过比较前连通分量的结点数实现加权算法.</p>
+<p>在第二种方法中实际上将关系变成了森林,对于合并时谁作为父节点,通过比较前连通分量的结点数实现加权算法.</p>
 <h2 id="java实现">Java实现</h2>
 <figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">UF</span> </span>&#123;</span><br><span class="line">    <span class="keyword">private</span> <span class="keyword">int</span>[] id;</span><br><span class="line">    <span class="keyword">private</span> <span class="keyword">int</span> count;</span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="title">UF</span><span class="params">(<span class="keyword">int</span> N)</span> </span>&#123;</span><br><span class="line">        count = N;</span><br><span class="line">        id = <span class="keyword">new</span> <span class="keyword">int</span>[N];</span><br><span class="line">        <span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; N; i++) &#123;</span><br><span class="line">            id[i] = i;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">int</span> <span class="title">count</span><span class="params">()</span> </span>&#123;</span><br><span class="line">        <span class="keyword">return</span> count;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">boolean</span> <span class="title">connected</span><span class="params">(<span class="keyword">int</span> p, <span class="keyword">int</span> q)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">return</span> find(p) == find(q);</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="comment">/* 对所有同一连通分量中的点都保存同一标识符 */</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">int</span> <span class="title">find</span><span class="params">(<span class="keyword">int</span> p)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">return</span> id[p];</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">union</span><span class="params">(<span class="keyword">int</span> p, <span class="keyword">int</span> q)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">int</span> pID = find(p);</span><br><span class="line">        <span class="keyword">int</span> qID = find(q);</span><br><span class="line"></span><br><span class="line">        <span class="keyword">if</span> (pID == qID) <span class="keyword">return</span>;</span><br><span class="line"></span><br><span class="line">        <span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; id.length; i++)</span><br><span class="line">        &#123;</span><br><span class="line">            <span class="keyword">if</span>(id[i] == pID) id[i] = qID;</span><br><span class="line">        &#125;</span><br><span class="line">        count--;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="comment">/* 一个点只保存自己链接的点 */</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">int</span> <span class="title">find</span><span class="params">(<span class="keyword">int</span> p)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">while</span> (p != id[p]) p = id[p];</span><br><span class="line">        <span class="keyword">return</span> p;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">union</span><span class="params">(<span class="keyword">int</span> p, <span class="keyword">int</span> q)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">int</span> pRoot = find(p);</span><br><span class="line">        <span class="keyword">int</span> qRoot = find(q);</span><br><span class="line"></span><br><span class="line">        <span class="keyword">if</span> (pRoot == qRoot) <span class="keyword">return</span>;</span><br><span class="line"></span><br><span class="line">        id[pRoot] = qRoot;</span><br><span class="line"></span><br><span class="line">        count--;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 
@@ -667,7 +667,7 @@
                 
                   <a href="/archives/">
                 
-                    <span class="site-state-item-count">174</span>
+                    <span class="site-state-item-count">168</span>
                     <span class="site-state-item-name">日志</span>
                   </a>
                 </div>
@@ -803,9 +803,7 @@
                     
                       
                     
-                      
-                    
-                    <span class="site-state-item-count">41</span>
+                    <span class="site-state-item-count">40</span>
                     <span class="site-state-item-name">标签</span>
                   </a>
                 </div>
@@ -887,7 +885,7 @@
       <i class="fa fa-area-chart"></i>
     </span>
     
-    <span title="站点总字数">797k</span>
+    <span title="站点总字数">787k</span>
   
 
   
@@ -896,7 +894,7 @@
       <i class="fa fa-coffee"></i>
     </span>
     
-    <span title="站点阅读时长">12:04</span>
+    <span title="站点阅读时长">11:55</span>
   
 </div>
 

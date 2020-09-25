@@ -119,18 +119,18 @@
 
 
 
-  <meta name="description" content="一个简单的Java应用程序 1234567public class Sample &amp;#123;  //类名以大写字母开头    public static void main(String[] args) &amp;#123;        System.out.println(&quot;233&quot;);        //我是一个注释    &amp;#125;&amp;#125; 运行. 1234javac Sample.">
+  <meta name="description" content="Demo 1234567public class Sample &amp;#123;  //类名以大写字母开头    public static void main(String[] args) &amp;#123;        System.out.println(&quot;233&quot;);        //我是一个注释    &amp;#125;&amp;#125; 1234javac Sample.java#注意文件名一定要与">
 <meta name="keywords" content="java">
 <meta property="og:type" content="article">
 <meta property="og:title" content="CS-develop-java-基础">
 <meta property="og:url" content="https://hitworld.github.io/posts/ffd96d81/index.html">
 <meta property="og:site_name" content="w4rd3n">
-<meta property="og:description" content="一个简单的Java应用程序 1234567public class Sample &amp;#123;  //类名以大写字母开头    public static void main(String[] args) &amp;#123;        System.out.println(&quot;233&quot;);        //我是一个注释    &amp;#125;&amp;#125; 运行. 1234javac Sample.">
+<meta property="og:description" content="Demo 1234567public class Sample &amp;#123;  //类名以大写字母开头    public static void main(String[] args) &amp;#123;        System.out.println(&quot;233&quot;);        //我是一个注释    &amp;#125;&amp;#125; 1234javac Sample.java#注意文件名一定要与">
 <meta property="og:locale" content="zh-CN">
-<meta property="og:updated_time" content="2020-09-22T01:29:11.126Z">
+<meta property="og:updated_time" content="2020-09-25T03:24:40.656Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="CS-develop-java-基础">
-<meta name="twitter:description" content="一个简单的Java应用程序 1234567public class Sample &amp;#123;  //类名以大写字母开头    public static void main(String[] args) &amp;#123;        System.out.println(&quot;233&quot;);        //我是一个注释    &amp;#125;&amp;#125; 运行. 1234javac Sample.">
+<meta name="twitter:description" content="Demo 1234567public class Sample &amp;#123;  //类名以大写字母开头    public static void main(String[] args) &amp;#123;        System.out.println(&quot;233&quot;);        //我是一个注释    &amp;#125;&amp;#125; 1234javac Sample.java#注意文件名一定要与">
 
 
 
@@ -503,7 +503,7 @@
                 
                   <span class="post-meta-item-text">本文字数：</span>
                 
-                <span title="本文字数">2.7k</span>
+                <span title="本文字数">13k</span>
               
 
               
@@ -517,7 +517,7 @@
                 
                   <span class="post-meta-item-text">阅读时长 &asymp;</span>
                 
-                <span title="阅读时长">2 分钟</span>
+                <span title="阅读时长">11 分钟</span>
               
             </div>
           
@@ -537,24 +537,16 @@
       
 
       
-        <h2 id="一个简单的java应用程序">一个简单的Java应用程序</h2>
+        <h2 id="demo">Demo</h2>
 <figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">Sample</span> </span>&#123;</span><br><span class="line">  <span class="comment">//类名以大写字母开头</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span> </span>&#123;</span><br><span class="line">        System.out.println(<span class="string">"233"</span>);</span><br><span class="line">        <span class="comment">//我是一个注释</span></span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<p>运行.</p>
 <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">javac Sample.java</span><br><span class="line"><span class="comment">#注意文件名一定要与公共类名一致,且一个源文件中只能有一个公共类</span></span><br><span class="line">java Sample</span><br><span class="line"><span class="comment">#调用Sample类的main方法,也可以调用该文件中其他类的main方法</span></span><br></pre></td></tr></table></figure>
-<h3 id="简单分析">简单分析</h3>
 <p><code>public</code>为访问修饰符,表示对所有类可见,使用对象为类,接口,变量,方法.</p>
 <p><code>class</code>用于声明一个类,在<code>Java</code>中类是程序内容的唯一容器(面向对象编程),类名首字母必须大写.源代码文件名必须与公共类的名字相同,且一个源文件中只能有一个公有类.</p>
 <p><code>static</code>表示方法为静态方法,静态方法只能访问静态成员,而实例方法可以访问静态和实例成员.<code>void</code>表示该方法无返回值.</p>
 <p>在<code>Java</code>中<code>main</code>方法必须声明为<code>public static void main(String[])</code>,<code>String[]</code>中就是命令行参数(与<code>C</code>和<code>C++</code>不一样的是其中不包括程序名).</p>
-<h3 id="注释">注释</h3>
-<p><code>Java</code>中有三种注释方式.</p>
-<ol type="1">
-<li><code>//</code>用于注释一行,作用域其后的字符.</li>
-<li><code>/*</code>和<code>*/</code>注释其之间的所有字符,不能嵌套.</li>
-<li><code>/**</code>和<code>*/</code>可以用来自动生成文档.</li>
-</ol>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//第一种</span></span><br><span class="line"><span class="comment">/* 第二种 */</span></span><br><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment"> * 第三种</span></span><br><span class="line"><span class="comment"> */</span></span><br></pre></td></tr></table></figure>
-<h3 id="数据类型">数据类型</h3>
+<h2 id="注释">注释</h2>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//用于注释一行</span></span><br><span class="line"><span class="comment">/* 注释其之间的所有字符,不能嵌套 */</span></span><br><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment"> * 可以用来自动生成文档</span></span><br><span class="line"><span class="comment"> */</span></span><br></pre></td></tr></table></figure>
+<h2 id="数据类型">数据类型</h2>
 <p><code>4</code>种整型类型:<code>long</code>,<code>int</code>,<code>short</code>,<code>byte</code>.分别为<code>8</code>,<code>4</code>,<code>2</code>,<code>1</code>个字节.</p>
 <p>而整数字面量有长整型数值<code>4000L</code>;十六进制数值<code>0x16</code>,<code>0XAA</code>;八进制数值<code>010</code>;二进制数<code>0b101</code>,<code>0B100</code>;还可以加下划线<code>1_000_000</code>,其中下划线会被<code>Java</code>编译器忽略;和普通的<code>233</code>;</p>
 <p>其中和<code>C</code>和<code>C++</code>不一样的是<code>Java</code>整型类型的大小与平台无关,且没有无符号整型.但<code>Java</code>用<code>&gt;&gt;</code>代表算术右移运算,<code>&gt;&gt;&gt;</code>代表逻辑右移运算.</p>
@@ -564,10 +556,10 @@
 <p><code>char</code>类型原本用于表示单个字符,由于字符集的扩展和<code>Unicode</code>编码机制有些字符需要两个<code>char</code>值,一般不使用<code>char</code>类型.</p>
 <p><code>boolean</code>类型有两个值:<code>true</code>和<code>false</code>,用于判断逻辑条件,与<code>C</code>和<code>C++</code>不一样的是<code>Java</code>种布尔值不等同于整型值,比如<code>if(0){}</code>无法通过编译.</p>
 <p>还有枚举类型,字符串.<code>Java</code>没有内置的字符串类型,而是在标准库提供了<code>String</code>,每个用双引号括起来的字符串都是<code>String</code>类的一个实例.</p>
-<h3 id="变量">变量</h3>
+<h2 id="变量">变量</h2>
 <p>每一个变量都有自己的类型和值,<code>Java</code>不区分变量的声明和定义(<code>C</code>和<code>C++</code>区分).</p>
 <p><code>Java</code>中使用<code>final</code>关键字指示常量(类似<code>C</code>和<code>C++</code>中的<code>const</code>,表示只能初始化一次,在<code>Java</code>中<code>const</code>是保留的关键字).</p>
-<h3 id="运算符">运算符</h3>
+<h2 id="运算符">运算符</h2>
 <p>关于<code>%</code>运算,<code>Java</code>同<code>C</code>和<code>C++</code>有同一个结果,就是余数与被除数同号.</p>
 <p>而变量计算时的隐式类型转换同有符号数的<code>C</code>和<code>C++</code>(<code>Java</code>)没有无符号整数.<code>tips</code>:不要对<code>boolean</code>类型进行强制类型转换.</p>
 <p><code>Java</code>关于移位运算有一个专门的<code>&gt;&gt;&gt;</code>代表逻辑右移(自然<code>&gt;&gt;</code>就是算术右移).其他的与<code>C</code>和<code>C++</code>基本相同.</p>
@@ -578,17 +570,187 @@
 <p><code>Java</code>对数组的声明和对象类似,需要<code>new</code>来创建数组,数字数组元素初始化为<code>0</code>,<code>boolean</code>数组元素初始化为<code>false</code>,对象数组元素初始化为<code>null</code>(<code>Java</code>中运行数组长度为<code>0</code>).如果使用<code>{1,2,3}</code>来初始化数组对象则不需要显示的使用<code>new</code>.</p>
 <p>同时<code>Java</code>的数组变量也是引用,且可以赋值.</p>
 <p><code>Java</code>数组与<code>C</code>和<code>C++</code>分配在堆上的数组指针基本一样.同理<code>double [][] a = new double[6][10]</code>声明的是一个包含<code>6</code>个指针的数组,而<code>a</code>是指向它的指针(实际上<code>Java</code>并没有提供对指针的操作,也没有指针这个概念).</p>
-<h3 id="基础输入输出">基础输入输出</h3>
-<p>标准输出可以使用<code>System.out</code>对象的方法实现,而读取标准输入需要先构造一个<code>Scanner</code>对象并与<code>System.in</code>关联.</p>
+<h2 id="基础输入输出">基础输入输出</h2>
+<p>标准输出可以使用<code>System.out</code>对象的方法实现,而读取标准输入需要先构造一个<code>Scanner</code>对象并与<code>System.in</code>关联.然后调用相应方法即可.<code>Scanner</code>类定义在<code>java.util</code>包中.</p>
 <figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">Scanner in = <span class="keyword">new</span> Scanner(System.in);</span><br></pre></td></tr></table></figure>
-<p>然后调用相应方法即可.<code>Scanner</code>类定义在<code>java.util</code>包中.</p>
-<p>读写文件需要借助类.</p>
+<p>读写文件需要借助类<code>PrintWriter</code>.</p>
 <figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">Scanner in = <span class="keyword">new</span> Scanner(<span class="string">"1.txt"</span>, <span class="string">"UTF-8"</span>);</span><br><span class="line">PrintWriter out = <span class="keyword">new</span> PrintWriter(<span class="string">"1.txt"</span>, <span class="string">"UTF-8"</span>)</span><br></pre></td></tr></table></figure>
-<h3 id="面向过程编程">面向过程编程</h3>
+<h2 id="面向过程编程">面向过程编程</h2>
 <p><code>Java</code>控制流程的结构与<code>C</code>和<code>C++</code>基本一样,但<code>Java</code>没有<code>goto</code>语句,用于替代跳出多重循环的是带标签的<code>break</code>和带标签的<code>continue</code>(只能跳出,不能跳入).</p>
 <p>另外还有一个类似<code>C#</code>中<code>foreach</code>循环的<code>for</code>循环,也叫<code>for each</code>循环.</p>
 <figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">for</span>(type arg:args) &#123;&#125;</span><br></pre></td></tr></table></figure>
 <p><code>Java</code>中有块作用域(与<code>C</code>和<code>C++</code>不一样,<code>Java</code>不允许嵌套定义),即一个变量的生命周期和可见范围为声明到当前块结束.</p>
+<h2 id="类与对象">类与对象</h2>
+<p>类是构造对象的模板,由类构造对象的过程称为创建类的实例.用<code>Java</code>编写的所有代码都位于某个类的内部.</p>
+<p>对象中的数据称为实例域,操纵数据的过程称为方法.类和对象是封装的体现.</p>
+<p>在<code>Java</code>中所有的类都源自一个<code>Object</code>超类,通过扩展一个类建立另一个类的过程称为继承.</p>
+<p>使用构造器(特殊的方法)构造对象的实例,通过声明变量并赋值引用来使用对象的实例.</p>
+<p>注意,变量不是对象,未初始化的变量也没有引用任何对象.局部变量不会自动的初始化为<code>null</code>.</p>
+<p><code>Java</code>的变量可以看作<code>C++</code>的对象指针.</p>
+<h3 id="访问控制符">访问控制符</h3>
+<ul>
+<li><code>public</code>:对任何类的任何方法可见.</li>
+<li><code>private</code>:只有本类的方法可以访问.</li>
+<li><code>proteced</code>:对所有子类(包括本类)及同一个包中的所有其他类都可见.(<code>C++</code>中没有包这个概念,只对本类及所有子类可见)</li>
+<li>默认:对本包可见.</li>
+</ul>
+<h3 id="构造器">构造器</h3>
+<p>构造器与类同名,没有返回类型(其实是返回类的实例).类可以有一个及以上的构造器.构造器总是伴随<code>new</code>操作符使用(<code>C++</code>中为单独使用).</p>
+<h3 id="隐式参数this">隐式参数this</h3>
+<p>类的非静态方法都有一个隐式参数,即调用这个方法的类的实例,可以使用<code>this</code>参数访问该实例的数据,也可以直接用实例域的标识符访问.</p>
+<p><code>C++</code>和<code>Java</code>的方法都可以访问所属类的私有特性,而不限于隐式参数的私有特性.</p>
+<h3 id="传参">传参</h3>
+<p><code>Java</code>分两种参数类型,基本数据类型和对象引用,<code>Java</code>参数为传值调用.</p>
+<h3 id="final域">final域</h3>
+<p><code>final</code>修饰符指明该实例域构建对象时必须初始化这个域且之后不能更改(同<code>C++</code>的<code>const</code>).大多应用于基本类型域.</p>
+<h3 id="静态域和静态方法">静态域和静态方法</h3>
+<p>一个类的静态域有且只有一个(普通实例域每个类都有一个自己的备份).</p>
+<p>静态方法不能操作对象(因为静态方法并没有自己所属的对象),但可以访问自己的静态域.</p>
+<p>这两者使用<code>static</code>声明,解释为:属于类且不属于类对象的函数和变量.</p>
+<p>可以使用静态工厂方法来生成不同风格的格式化对象,静态方法的调用不需要对象实例.</p>
+<h3 id="重载">重载</h3>
+<p>在同一名称空间使用相同的名字,不同的参数的多个方法就产生了重载.(所以完整描述一个方法需要指出方法名字和参数类型,称为函数的签名)</p>
+<h3 id="初始化">初始化</h3>
+<p>如果没有在构造器显式的给域赋初值,那么域会被初始化为默认值:<code>0</code>,<code>false</code>,<code>null</code>(这一点与局部变量不同).</p>
+<p>当类没有提供构造器时,系统会提供一个默认的无参构造器.</p>
+<p><code>Java</code>还可以显式域初始化(<code>C++11</code>也行),例如:<code>private int id = 1;</code>.</p>
+<p>与实例域同名的参数会屏蔽实例域.</p>
+<p>如果构造器的第一个语句形如<code>this(...)</code>,这个构造器将会调用同一个类的另一个构造器(类似功能在<code>C++11</code>中使用委托构造函数实现).</p>
+<p>除了在构造器初始化或者使用显式域初始化,<code>Java</code>支持初始化块这一机制.</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">A</span></span></span><br><span class="line"><span class="class"></span>&#123;</span><br><span class="line">  <span class="comment">//实例域</span></span><br><span class="line"></span><br><span class="line">  &#123;</span><br><span class="line">    <span class="comment">//初始化块内容</span></span><br><span class="line">  &#125;</span><br><span class="line"></span><br><span class="line">  <span class="comment">//其他</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>而当调用构造器时,具体初始化步骤如下:</p>
+<ol type="1">
+<li>所有数据域被默认初始化.</li>
+<li>按照类声明的次序,依次执行所有域初始化语句和初始化块.</li>
+<li>执行构造器主体或调用第二个构造器并返回此步.</li>
+</ol>
+<h3 id="finalize方法">finalize方法</h3>
+<p><code>Java</code>有自动的垃圾回收器,所有不需要析构器.但可以为类添加<code>finalize</code>方法,其会在垃圾回收器清除对象前调用(但具体调用时间未知).</p>
+<h2 id="包">包</h2>
+<p><code>Java</code>使用包将类组织起来.对编译器来说,嵌套的包没有任何关系.</p>
+<p>一个类可以使用所属包的所有类,以及其他包的公有类.</p>
+<p>可以通过<code>import</code>来引用包含在包中的类(<code>import static</code>导入静态方法与静态域),从而简化引用.或者显式的写出包名(还可以导入静态方法,静态域或其他特定的方法或域).</p>
+<p>通过<code>package &lt;packageName&gt;</code>来将一个类放入包中.</p>
+<h2 id="对象包装器">对象包装器</h2>
+<p><code>Java</code>为每个基本类型设计了一个对应的<code>final</code>类,<code>Integer</code>,<code>Long</code>,<code>Float</code>,<code>Double</code>,<code>Short</code>,<code>Byte</code>,<code>Character</code>,<code>Void</code>,<code>Boolean</code>(前六个类派生于公共超类<code>Number</code>).</p>
+<p>而且<code>Java</code>对其支持自动装箱机制,如下(注意包装器类不能实现修改数值参数,因为这种对象是不可变的).</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">Integer n = <span class="number">3</span>;</span><br><span class="line"><span class="comment">//编译器会将其变为:Integer n = Integer.valueOf(3);</span></span><br><span class="line"><span class="keyword">int</span> a = n;</span><br><span class="line"><span class="comment">//编译器会将其变为:int a = n.intValue();</span></span><br></pre></td></tr></table></figure>
+<h2 id="超类与子类">超类与子类</h2>
+<p><code>is-a</code>(是)关系是继承的一个明显特征.在<code>Java</code>中子类(也称派生类或孩子类)继承于超类(也称基类或父类),使用关键字<code>extends</code>(<code>C++</code>为<code>:</code>)表示继承.</p>
+<p>对比<code>C++</code>,<code>Java</code>所有的继承都是公有继承,没有私有和保护继承.</p>
+<p>子类会继承父类的方法和域,可以通过<code>super.func()</code>调用超类的方法(注意<code>super</code>并不是引用,只是告诉编译器这里要调用超类的方法,<code>C++</code>中使用超类名加上<code>::</code>操作符).</p>
+<p>通过重新定义函数来覆盖超类的方法(注意需要参数类型,函数名一致,类似<code>C++</code>中虚函数的覆盖,也可以说<code>Java</code>方法默认为虚函数,如果不想被子类覆盖可使用<code>final</code>标记方法,或者直接标记类使类的方法自动变成<code>final</code>,不包括域).</p>
+<p>超类引用可以引用子类对象,可以使用<code>super(arg1, ...)</code>调用超类的构造器(<code>C++</code>中使用初始化列表语法).</p>
+<p>虚函数使一个对象变量可以在运行时能够自动地选择调用哪个方法,这种现象称为动态绑定.而一个对象变量可以指示多种实际类型的现象称为多态.</p>
+<h2 id="方法调用">方法调用</h2>
+<p>对于类<code>X</code>的对象<code>x</code>的方法调用<code>x.f(args)</code>.调用过程如下.</p>
+<ol type="1">
+<li>编译器首先查看对象声明类型,方法名和方法参数类型等找到要调用的函数的函数签名.</li>
+<li>如果为<code>private</code>方法,<code>static</code>方法,<code>final</code>方法或者构造器则此时就可以确定调用的方法.这种调用方式称为静态绑定.</li>
+<li>如果不是,则从当前类开始,沿继承链向超类寻找这个方法调用.实际上<code>Java</code>虚拟机会为每一个类创建一个方法表(虚函数表)以供动态调用.</li>
+</ol>
+<h2 id="强制类型转换">强制类型转换</h2>
+<p>可以通过<code>instanceof</code>操作符查看是否能进行类型转换.</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">if</span> (x <span class="keyword">instanceof</span> Master)</span><br><span class="line">&#123;</span><br><span class="line">    x2 = (Master) x;</span><br><span class="line">    ...</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>实际上的类型转换只能在继承层次内发生,并且超类转换成子类之前需要使用<code>instanceof</code>检测(类似<code>C++</code>的<code>dynamic_cast</code>).</p>
+<h2 id="抽象类">抽象类</h2>
+<p>可以使用<code>abstract</code>声明抽象方法与抽象类,包含与一个或多个抽象方法的类本身必须被声明为抽象的.</p>
+<p>抽象方法相当于一个占位符,其具体实现在子类中.抽象类不能被实例化.<code>C++</code>通过在类的一个成员函数声明尾部用<code>= 0</code>标记声明其为纯虚函数来声明这个类为抽象类.</p>
+<h2 id="object">Object</h2>
+<p><code>Object</code>类为<code>Java</code>所有类的始祖,类声明时如果没有明确指出超类,则此类的超类为<code>Object</code>.(在<code>Java</code>中只有基本类型不是对象)</p>
+<p><code>Object</code>提供了以下<code>11</code>个方法.</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="keyword">final</span> <span class="keyword">native</span> Class&lt;?&gt; getClass()</span><br><span class="line"><span class="comment">//getClass方法是一个final方法,并且也是一个native方法.</span></span><br><span class="line"><span class="comment">//返回当前运行时对象的Class对象.</span></span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">native</span> <span class="keyword">int</span> <span class="title">hashCode</span><span class="params">()</span></span></span><br><span class="line"><span class="function"><span class="comment">//hashCode方法是一个native方法.</span></span></span><br><span class="line"><span class="function"><span class="comment">//返回对象的哈希码,主要使用在哈希表中.</span></span></span><br><span class="line"><span class="function"><span class="comment">//哈希码的通用约定如下:在同一java程序执行过程中,在一个对象没有被改变的前提下,hashCode方法都会返回相同的整数值;如果2个对象使用equals方法进行比较相同的话,那么这2个对象的hashCode的值也必须相等;如果equals方法得到两个对象不相等,不相等的对象的hashCode值不同的话可以提高哈希表的性能;</span></span></span><br><span class="line"><span class="function"></span></span><br><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">boolean</span> <span class="title">equals</span><span class="params">(Object obj)</span></span></span><br><span class="line"><span class="function"><span class="comment">//比较两个对象是否相等.Object类的默认实现,即比较2个对象的内存地址是否相等.</span></span></span><br><span class="line"><span class="function"><span class="comment">//equals方法在非空对象引用上的特性:</span></span></span><br><span class="line"><span class="function"><span class="comment">//自反性,任何非空引用值x,对于x.equals(x)必须返回true;</span></span></span><br><span class="line"><span class="function"><span class="comment">//对称性,任何非空引用值x和y,如果x.equals(y)为true,那么y.equals(x)也必须为true;</span></span></span><br><span class="line"><span class="function"><span class="comment">//传递性,任何非空引用值x,y和z,如果x.equals(y)为true并且y.equals(z)为true,那么x.equals(z)也必定为true;</span></span></span><br><span class="line"><span class="function"><span class="comment">//一致性,任何非空引用值x和y,多次调用x.equals(y)始终返回true或始终返回false,前提是对象equals比较中所用的信息没有被修改;</span></span></span><br><span class="line"><span class="function"><span class="comment">//对于任何非空引用值x,x.equals(null)都应返回false;</span></span></span><br><span class="line"><span class="function"></span></span><br><span class="line"><span class="function"><span class="keyword">protected</span> <span class="keyword">native</span> Object <span class="title">clone</span><span class="params">()</span> <span class="keyword">throws</span> CloneNotSupportedException</span></span><br><span class="line"><span class="function"><span class="comment">//clone方法是一个protected的native方法.</span></span></span><br><span class="line"><span class="function"><span class="comment">//创建并返回当前对象的一份拷贝.一般情况下,对于任何对象x,表达式x.clone() != x为true,x.clone().getClass() == x.getClass()也为true.</span></span></span><br><span class="line"><span class="function"><span class="comment">//由于Object本身没有实现Cloneable接口,所以不重写clone方法并且进行调用的话会发生CloneNotSupportedException异常.</span></span></span><br><span class="line"><span class="function"></span></span><br><span class="line"><span class="function"><span class="keyword">public</span> String <span class="title">toString</span><span class="params">()</span></span></span><br><span class="line"><span class="function"><span class="comment">//Object对象的默认实现,即输出类的名字@实例的哈希码的16进制.</span></span></span><br><span class="line"><span class="function"><span class="comment">//建议Object所有的子类都重写这个方法.</span></span></span><br><span class="line"><span class="function"></span></span><br><span class="line"><span class="function"><span class="keyword">protected</span> <span class="keyword">void</span> <span class="title">finalize</span><span class="params">()</span> <span class="keyword">throws</span> Throwable </span>&#123; &#125;</span><br><span class="line"><span class="comment">//finalize方法是一个protected方法,Object类的默认实现是不进行任何操作.</span></span><br><span class="line"><span class="comment">//该方法的作用是实例被垃圾回收器回收的时候触发的操作.类似C++的析构函数.</span></span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">final</span> <span class="keyword">native</span> <span class="keyword">void</span> <span class="title">notify</span><span class="params">()</span></span></span><br><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">final</span> <span class="keyword">native</span> <span class="keyword">void</span> <span class="title">notifyAll</span><span class="params">()</span></span></span><br><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">final</span> <span class="keyword">native</span> <span class="keyword">void</span> <span class="title">wait</span><span class="params">(<span class="keyword">long</span> timeout)</span> <span class="keyword">throws</span> InterruptedException</span></span><br><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">final</span> <span class="keyword">void</span> <span class="title">wait</span><span class="params">(<span class="keyword">long</span> timeout, <span class="keyword">int</span> nanos)</span> <span class="keyword">throws</span> InterruptedException</span></span><br><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">final</span> <span class="keyword">void</span> <span class="title">wait</span><span class="params">()</span> <span class="keyword">throws</span> InterruptedException</span></span><br><span class="line"><span class="function"><span class="comment">//都是关于线程的,后面再解释.</span></span></span><br></pre></td></tr></table></figure>
+<h2 id="反射">反射</h2>
+<p><code>Java</code>中通过反射库实现了一个反射机制,能够在运行时分析类的能力和查看对象,实现通用的数组操作代码,利用<code>Method</code>对象(类似<code>C++</code>的函数指针).</p>
+<h3 id="class类">Class类</h3>
+<p>这是<code>Java</code>运行时为所有对象维护的一个保存类型信息的类<code>Class</code>.通过<code>getClass()</code>方法获得实例.</p>
+<h3 id="异常捕获">异常捕获</h3>
+<p>类似<code>C++</code>的异常处理机制.</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">try</span> &#123;</span><br><span class="line">  <span class="comment">//</span></span><br><span class="line">&#125; <span class="keyword">catch</span> (Exception e) &#123;</span><br><span class="line">  <span class="comment">//</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h3 id="分析类">分析类</h3>
+<p>反射机制能在运行时检查类的结构.通过<code>java.lang.reflect</code>包中的三个类<code>Field</code>,<code>Method</code>和<code>Constructor</code>来描述类的域,方法和构造器.对应接口为<code>Class</code>类中的<code>getFields</code>,<code>getMethods</code>,<code>getConstructors</code>,<code>getDeclareFields</code>,<code>getDeclareMethods</code>,<code>getDeclareConstructors</code>.</p>
+<h3 id="调用任意方法">调用任意方法</h3>
+<p><code>Java</code>中没有提供函数指针之类的东西,但可以通过反射机制调用任意方法.<code>Method</code>类中有一个<code>invoke</code>方法允许调用包装在当前<code>Method</code>对象中的方法.</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="function">Object <span class="title">invoke</span><span class="params">(Object obj, Object... args)</span></span></span><br></pre></td></tr></table></figure>
+<p>通过对应的<code>Class</code>类的<code>getMethod</code>方法获取对应的<code>Method</code>实例.</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">Method a = Sample.Class.getMethod(<span class="string">"getName"</span>, <span class="keyword">double</span>.class)</span><br><span class="line"><span class="comment">//第一个参数为方法名,后面为方法每个参数的参数类型</span></span><br></pre></td></tr></table></figure>
+<h2 id="继承的设计技巧">继承的设计技巧</h2>
+<ul>
+<li>将公共操作和域放到超类.</li>
+<li>不要使用受保护的域.</li>
+<li>使用继承实现<code>is-a</code>关系.</li>
+<li>除非所有继承的方法都有意义,否则不要使用继承.</li>
+<li>在覆盖方法时,不要改变预期的行为.</li>
+<li>使用多态而非类型信息.</li>
+<li>不要过多的使用反射.</li>
+</ul>
+<h2 id="接口">接口</h2>
+<p>在<code>Java</code>中接口是对类的一组需求描述.如果类遵从某个特定接口,就履行这项服务.</p>
+<ul>
+<li>接口中所有方法自动属于<code>public</code>,且可以被扩展.</li>
+<li>接口有除函数原型外对方法作用的要求.</li>
+<li>接口不能有实例域,但可以有常量(接口的域自动设为<code>public static final</code>).在<code>Java SE 8</code>前不能在接口中实现方法,之后可以实现静态方法(实际使用中常用伴随类代替).</li>
+<li>接口不能实例化,但是可以声明变量,同时可以用<code>instanceof</code>检测一个对象是否实现了某个接口.</li>
+</ul>
+<p>接口的定义.</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">interface</span> <span class="title">Comparable</span>&lt;<span class="title">T</span>&gt; </span>&#123;</span><br><span class="line">    <span class="function"><span class="keyword">int</span> <span class="title">compareTo</span><span class="params">(T other)</span></span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>接口的默认实现.</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">interface</span> <span class="title">Comparable</span>&lt;<span class="title">T</span>&gt; </span>&#123;</span><br><span class="line">    <span class="function"><span class="keyword">default</span> <span class="keyword">int</span> <span class="title">compareTo</span><span class="params">(T other)</span> </span>&#123; <span class="comment">/* code */</span> &#125;</span><br><span class="line">    <span class="comment">//必要的关键字default</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>类实现接口(实现时必须把方法显式声明为<code>public</code>),一个类可以实现多个接口,用逗号<code>,</code>分隔.</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">Class MyTest implements Comparable&lt;MyTest&gt; &#123;</span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">int</span> <span class="title">compareTo</span><span class="params">(MyTest other)</span> </span>&#123;</span><br><span class="line">        <span class="comment">//code</span></span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>如果接口的默认方法与超类或另一个接口中定义的方法冲突,按照以下规则处理.</p>
+<ul>
+<li>超类优先.</li>
+<li>接口冲突(至少一个接口提供了默认实现,就会发生冲突)则必须覆盖方法.</li>
+</ul>
+<h3 id="示例">示例</h3>
+<p><code>Cloneable</code>接口,该接口的默认实现为浅拷贝,有时候程序的情景需要深拷贝.</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">MyTest</span> <span class="keyword">implements</span> <span class="title">Cloneable</span> </span>&#123;</span><br><span class="line">    <span class="function"><span class="keyword">public</span> MyTest <span class="title">clone</span><span class="params">()</span> <span class="keyword">throws</span> CloneNotSupportedException </span>&#123;</span><br><span class="line">        MyTest cloned = (MyTest) <span class="keyword">super</span>.clone();</span><br><span class="line">        cloned.day = (Date) day.clone();</span><br><span class="line"></span><br><span class="line">        <span class="keyword">return</span> cloned;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h2 id="lambda表达式">lambda表达式</h2>
+<p><code>lambda</code>表达式是一个可传递的代码块和必须传入代码的变量(就像参数)规范,可供之后执行.<code>lambda</code>表达式无需指定返回类型,<code>lambda</code>表达式的返回类型总是会由上下文推导得出(所以要合理返回).</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">(String first, String second) -&gt; first.length() - second.length()</span><br><span class="line"><span class="comment">//等同于(first, second) -&gt; first.length() - second.length()</span></span><br><span class="line">() -&gt; &#123; System.out.println(<span class="string">"hello"</span>); &#125;</span><br><span class="line"><span class="comment">//即使没有参数仍然要提供空括号</span></span><br><span class="line">event -&gt; System.out.println(event);</span><br><span class="line"><span class="comment">//如果可以推导出参数类型,则可以忽略参数类型,且如果此时只有一个参数,可以省略小括号</span></span><br></pre></td></tr></table></figure>
+<p><code>lambda</code>表达式与接口兼容,对于只有一个抽象方法的接口,需要该接口的对象时可以提供一个<code>lambda</code>表达式,这种接口称为函数式接口.或者可以直接方法引用代替.</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">Timer t = <span class="keyword">new</span> Timer(<span class="number">1000</span>, System.out::println);</span><br><span class="line"><span class="comment">//System.out::println等价于x -&gt; System.out.println(x)</span></span><br></pre></td></tr></table></figure>
+<p>构造器引用与方法引用类似,只不过方法名为<code>new</code>,例如:<code>Person::new</code>,<code>Person[]::new</code>.</p>
+<p><code>lambda</code>表达式包括三个部分:一个代码块,参数,自由变量的值(非参数而且不在代码中定义的最终变量,即初始化后不会再赋值),表示<code>lambda</code>表达式得数据结构必须存储自由变量的值.这种代码块存储自由变量的值的情况叫做闭包.</p>
+<p><code>lambda</code>表达式的体与嵌套块有相同的作用域,所以不能定义同名的变量.<code>lambda</code>表达式中的<code>this</code>关键字是指创建这个<code>lambda</code>表达式的方法的<code>this</code>参数.</p>
+<h2 id="内部类">内部类</h2>
+<p>内部类是定义在另一个类中的类,内部类方法可以访问该类定义所在的作用域中的数据,包括私有数据;内部类对同一个包的其他类是不可见的.非<code>static</code>内部类的对象有一个隐式引用,其引用了实例化该内部对象的外围类对象(与<code>C++</code>中嵌套类的主要区别).</p>
+<p>内部类是一种编译器现象,与虚拟机无关,编译器会将内部类翻译成:外部类名<code>$</code>内部类名.类似于方法重载的本质.</p>
+<p><code>Java</code>还支持在方法中定义局部内部类,其作用域为当前块.同时局部内部类还可以访问当前块的<code>final</code>局部变量,其原理是局部内部类会在局部变量释放前将其备份一次.</p>
+<p><code>Java</code>还支持匿名内部类,匿名内部类没有类名,所以不能有构造器,如果构造参数的小括号后跟一个大括号,正在定义的就是匿名内部类.</p>
+<p><code>Java</code>还支持静态内部类,只有内部类可以声明为<code>static</code>,静态内部类除了没有对外围类的引用权外与其他内部类一样.</p>
+<h2 id="异常处理">异常处理</h2>
+<p><code>Java</code>的异常处理与<code>C++</code>的十分类似,都是由发生错误的方法抛出异常,然后异常处理机制捕获异常并使用对应的异常处理器处理异常.</p>
+<h3 id="异常分类">异常分类</h3>
+<p>在<code>Java</code>中异常对象都是派生于<code>Throwable</code>类的实例,同时支持创建自己的异常类.</p>
+<p>所有异常都是由<code>Throwable</code>继承而来,<code>Throwable</code>有两个子类:<code>Error</code>和<code>Exception</code>.</p>
+<p><code>Error</code>类及其派生类描述了<code>Java</code>运行时系统的内部错误和资源耗尽错误.应用程序不应该抛出这种错误.</p>
+<p><code>Exception</code>又分两种:<code>RuntimeException</code>和其他异常.前者及其派生类用于描述程序错误导致的异常,后者及其派生类描述如<code>IO</code>错误导致的异常(即不属于<code>Error</code>和<code>Exception</code>范围的,也称为受查异常).</p>
+<p>程序开发者导致的问题都属于<code>RuntimeException</code>负责的范围,也就是说自己创建的类应该派生于<code>Exception</code>或其子类.同时异常类应该包含两个构造器,一个无参的默认构造器,一个带有描述信息的构造器.</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">MyException</span> <span class="keyword">extends</span> <span class="title">IOException</span> </span>&#123;</span><br><span class="line">  <span class="function"><span class="keyword">public</span> <span class="title">MyException</span><span class="params">()</span> </span>&#123;&#125;</span><br><span class="line">  <span class="function"><span class="keyword">public</span> <span class="title">MyException</span><span class="params">(String gripe)</span> </span>&#123;</span><br><span class="line">    <span class="keyword">super</span>(gripe);</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>编译器将核查是否所有受查异常都提供了异常处理器.</p>
+<h3 id="声明并抛出受查异常">声明并抛出受查异常</h3>
+<p>方法需要告诉编译器所有可能抛出的受查异常,子类方法中声明的受查异常不能比超类方法中的更通用.</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">public</span> <span class="title">FileInputStream</span><span class="params">(String name)</span> <span class="keyword">throws</span> FileNotFoundException, EOFException </span>&#123;</span><br><span class="line">  <span class="comment">//..</span></span><br><span class="line">  <span class="keyword">if</span> (b &lt; len) &#123;</span><br><span class="line">    <span class="keyword">throw</span> <span class="keyword">new</span> EOFException();</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h3 id="捕获异常">捕获异常</h3>
+<p>如果抛出的异常未被捕获则程序会终止执行并打印异常信息,包括异常的类型和堆栈内容(图形化程序捕获异常后也会打印堆栈信息).</p>
+<p><code>Java</code>中通过<code>try/catch</code>语句块捕获异常.</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">try</span> &#123;</span><br><span class="line">  <span class="comment">//code</span></span><br><span class="line">&#125; <span class="keyword">catch</span> (EOFException e) &#123;</span><br><span class="line">  <span class="comment">//code</span></span><br><span class="line">&#125; <span class="keyword">catch</span> (MyException e) &#123;</span><br><span class="line">  <span class="comment">//可捕获多种异常</span></span><br><span class="line">  <span class="comment">//code</span></span><br><span class="line">&#125; <span class="keyword">catch</span> (MyException1 | MyException2 e) &#123;</span><br><span class="line">  <span class="comment">//Java SE 7后支持,区别在于这样两种异常共用一个异常处理块</span></span><br><span class="line">  <span class="comment">//code</span></span><br><span class="line">&#125; <span class="keyword">finally</span> &#123;</span><br><span class="line">  <span class="comment">//无论try语句中是否发生异常(即使try中已经返回)都会执行finally中的语句,常用于回收资源</span></span><br><span class="line">  <span class="comment">//code</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>如果异常类型不对未被捕获,则函数会终止并返回(控制权交给调用者函数,看调用者函数是否处理该种异常).异常处理代码中可再次抛出异常.</p>
+<h2 id="断言">断言</h2>
+<p>断言机制允许在测试期间在代码中插入一些检查语句,当代码发布时这些语句会被自动移走.</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">assert</span> x &gt;= <span class="number">0</span>;</span><br><span class="line"><span class="comment">//assert 条件;</span></span><br><span class="line"><span class="keyword">assert</span> x &gt;= <span class="number">0</span> : x;</span><br><span class="line"><span class="comment">//assert 条件 : 表达式;</span></span><br></pre></td></tr></table></figure>
+<p>如果条件判断为<code>false</code>则会抛出一个<code>AssertionError</code>异常,若有表达式则表达式会被传入<code>AssertionError</code>的构造器.</p>
+<p>断言机制默认关闭,通过运行时<code>-ea</code>或<code>-enableassertions</code>选项来对某个类或包启用该机制,<code>-da/-disableassertions</code>选项来对某个类或包禁用该机制(对于系统类使用<code>-esa/-dsa</code>选项).</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">java -ea Sample</span><br></pre></td></tr></table></figure>
+<h2 id="泛型类示例">泛型类示例</h2>
+<p><code>Java</code>通过通配符类型来设计一个泛型类或者泛型方法.</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">MyTest</span>&lt;<span class="title">T</span>&gt; </span>&#123;</span><br><span class="line">    <span class="keyword">private</span> T a;</span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="title">MyTest</span><span class="params">()</span> </span>&#123; a = <span class="keyword">null</span>; &#125;</span><br><span class="line">    <span class="comment">//code</span></span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">//code</span></span><br><span class="line">MyTest&lt;String&gt; a = <span class="keyword">new</span> MyTest&lt;String&gt;;</span><br><span class="line"></span><br><span class="line"><span class="comment">//code</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">MyTest2</span> </span>&#123;</span><br><span class="line">    <span class="comment">//code</span></span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">static</span> &lt;T&gt; <span class="function">T <span class="title">test</span><span class="params">(T a)</span> </span>&#123; <span class="keyword">return</span> a; &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">//code</span></span><br><span class="line">String a = MyTest2.&lt;String&gt;test(<span class="string">"aaa"</span>);</span><br></pre></td></tr></table></figure>
+<p>可以限定一个泛型类/方法可以实例化的类型.</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">MyTest3</span> </span>&#123;</span><br><span class="line">    <span class="comment">//code</span></span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">static</span> &lt;T extend Comparable&gt; <span class="function">T <span class="title">test</span><span class="params">(T a)</span> </span>&#123; <span class="keyword">return</span> a; &#125;</span><br><span class="line">    <span class="comment">//限定类型T必须实现Comparable接口</span></span><br><span class="line">    <span class="comment">//多个限定条件可以通过&amp;连接</span></span><br><span class="line">    <span class="comment">//如果限定条件中包含类则类必须位于限定列表的第一个</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p><code>Java</code>的泛型类与<code>C++</code>的模板类有本质区别.</p>
+<p><code>JVM</code>中没有泛型类,泛型类在编译时会被转换为普通类.这一过程称为类型擦除.</p>
 
       
     </div>
@@ -711,7 +873,7 @@
                 
                   <a href="/archives/">
                 
-                    <span class="site-state-item-count">174</span>
+                    <span class="site-state-item-count">168</span>
                     <span class="site-state-item-name">日志</span>
                   </a>
                 </div>
@@ -847,9 +1009,7 @@
                     
                       
                     
-                      
-                    
-                    <span class="site-state-item-count">41</span>
+                    <span class="site-state-item-count">40</span>
                     <span class="site-state-item-name">标签</span>
                   </a>
                 </div>
@@ -899,7 +1059,7 @@
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#一个简单的java应用程序"><span class="nav-number">1.</span> <span class="nav-text">一个简单的Java应用程序</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#简单分析"><span class="nav-number">1.1.</span> <span class="nav-text">简单分析</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#注释"><span class="nav-number">1.2.</span> <span class="nav-text">注释</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#数据类型"><span class="nav-number">1.3.</span> <span class="nav-text">数据类型</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#变量"><span class="nav-number">1.4.</span> <span class="nav-text">变量</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#运算符"><span class="nav-number">1.5.</span> <span class="nav-text">运算符</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#基础输入输出"><span class="nav-number">1.6.</span> <span class="nav-text">基础输入输出</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#面向过程编程"><span class="nav-number">1.7.</span> <span class="nav-text">面向过程编程</span></a></li></ol></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#demo"><span class="nav-number">1.</span> <span class="nav-text">Demo</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#注释"><span class="nav-number">2.</span> <span class="nav-text">注释</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#数据类型"><span class="nav-number">3.</span> <span class="nav-text">数据类型</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#变量"><span class="nav-number">4.</span> <span class="nav-text">变量</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#运算符"><span class="nav-number">5.</span> <span class="nav-text">运算符</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#基础输入输出"><span class="nav-number">6.</span> <span class="nav-text">基础输入输出</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#面向过程编程"><span class="nav-number">7.</span> <span class="nav-text">面向过程编程</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#类与对象"><span class="nav-number">8.</span> <span class="nav-text">类与对象</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#访问控制符"><span class="nav-number">8.1.</span> <span class="nav-text">访问控制符</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#构造器"><span class="nav-number">8.2.</span> <span class="nav-text">构造器</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#隐式参数this"><span class="nav-number">8.3.</span> <span class="nav-text">隐式参数this</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#传参"><span class="nav-number">8.4.</span> <span class="nav-text">传参</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#final域"><span class="nav-number">8.5.</span> <span class="nav-text">final域</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#静态域和静态方法"><span class="nav-number">8.6.</span> <span class="nav-text">静态域和静态方法</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#重载"><span class="nav-number">8.7.</span> <span class="nav-text">重载</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#初始化"><span class="nav-number">8.8.</span> <span class="nav-text">初始化</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#finalize方法"><span class="nav-number">8.9.</span> <span class="nav-text">finalize方法</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#包"><span class="nav-number">9.</span> <span class="nav-text">包</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#对象包装器"><span class="nav-number">10.</span> <span class="nav-text">对象包装器</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#超类与子类"><span class="nav-number">11.</span> <span class="nav-text">超类与子类</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#方法调用"><span class="nav-number">12.</span> <span class="nav-text">方法调用</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#强制类型转换"><span class="nav-number">13.</span> <span class="nav-text">强制类型转换</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#抽象类"><span class="nav-number">14.</span> <span class="nav-text">抽象类</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#object"><span class="nav-number">15.</span> <span class="nav-text">Object</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#反射"><span class="nav-number">16.</span> <span class="nav-text">反射</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#class类"><span class="nav-number">16.1.</span> <span class="nav-text">Class类</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#异常捕获"><span class="nav-number">16.2.</span> <span class="nav-text">异常捕获</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#分析类"><span class="nav-number">16.3.</span> <span class="nav-text">分析类</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#调用任意方法"><span class="nav-number">16.4.</span> <span class="nav-text">调用任意方法</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#继承的设计技巧"><span class="nav-number">17.</span> <span class="nav-text">继承的设计技巧</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#接口"><span class="nav-number">18.</span> <span class="nav-text">接口</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#示例"><span class="nav-number">18.1.</span> <span class="nav-text">示例</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#lambda表达式"><span class="nav-number">19.</span> <span class="nav-text">lambda表达式</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#内部类"><span class="nav-number">20.</span> <span class="nav-text">内部类</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#异常处理"><span class="nav-number">21.</span> <span class="nav-text">异常处理</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#异常分类"><span class="nav-number">21.1.</span> <span class="nav-text">异常分类</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#声明并抛出受查异常"><span class="nav-number">21.2.</span> <span class="nav-text">声明并抛出受查异常</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#捕获异常"><span class="nav-number">21.3.</span> <span class="nav-text">捕获异常</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#断言"><span class="nav-number">22.</span> <span class="nav-text">断言</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#泛型类示例"><span class="nav-number">23.</span> <span class="nav-text">泛型类示例</span></a></li></ol></div>
             
 
           </div>
@@ -931,7 +1091,7 @@
       <i class="fa fa-area-chart"></i>
     </span>
     
-    <span title="站点总字数">797k</span>
+    <span title="站点总字数">787k</span>
   
 
   
@@ -940,7 +1100,7 @@
       <i class="fa fa-coffee"></i>
     </span>
     
-    <span title="站点阅读时长">12:04</span>
+    <span title="站点阅读时长">11:55</span>
   
 </div>
 

@@ -127,7 +127,7 @@
 <meta property="og:site_name" content="w4rd3n">
 <meta property="og:description" content="分析 解包分析init,发现只是加载驱动等正常套路.分析驱动发现由于存放指针的变量是全局变量,存在一个伪条件竞争引发的UAF漏洞. 利用思路 打开两次设备,通过ioctl更改其大小为cred结构体的大小,释放其中一个,fork一个新进程,那么这个新进程的cred的空间就会和之前释放的空间重叠,此时就可以通过另一个文件描述符对cred空间写. 需要确定cred结构体的大小,计算一下是0xa8(">
 <meta property="og:locale" content="zh-CN">
-<meta property="og:updated_time" content="2020-09-21T02:49:04.526Z">
+<meta property="og:updated_time" content="2020-09-25T03:24:40.711Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="writeup-ciscn-2017-babydriver">
 <meta name="twitter:description" content="分析 解包分析init,发现只是加载驱动等正常套路.分析驱动发现由于存放指针的变量是全局变量,存在一个伪条件竞争引发的UAF漏洞. 利用思路 打开两次设备,通过ioctl更改其大小为cred结构体的大小,释放其中一个,fork一个新进程,那么这个新进程的cred的空间就会和之前释放的空间重叠,此时就可以通过另一个文件描述符对cred空间写. 需要确定cred结构体的大小,计算一下是0xa8(">
@@ -658,7 +658,7 @@
                 
                   <a href="/archives/">
                 
-                    <span class="site-state-item-count">174</span>
+                    <span class="site-state-item-count">168</span>
                     <span class="site-state-item-name">日志</span>
                   </a>
                 </div>
@@ -794,9 +794,7 @@
                     
                       
                     
-                      
-                    
-                    <span class="site-state-item-count">41</span>
+                    <span class="site-state-item-count">40</span>
                     <span class="site-state-item-name">标签</span>
                   </a>
                 </div>
@@ -878,7 +876,7 @@
       <i class="fa fa-area-chart"></i>
     </span>
     
-    <span title="站点总字数">797k</span>
+    <span title="站点总字数">787k</span>
   
 
   
@@ -887,7 +885,7 @@
       <i class="fa fa-coffee"></i>
     </span>
     
-    <span title="站点阅读时长">12:04</span>
+    <span title="站点阅读时长">11:55</span>
   
 </div>
 

@@ -127,7 +127,7 @@
 <meta property="og:site_name" content="w4rd3n">
 <meta property="og:description" content="概念 当printf等格式化字符串函数的第一个参数用户可控时,即可任意读写.这就是格式化字符串漏洞. 原理 格式化字符串的格式如下. 1%[parameter][flags][width][.precision][length]type parameter:n$,使用第n个参数. flags:在width设置后指定可以用来作为填充的内容之类的内容. width:最小输出长度. preci">
 <meta property="og:locale" content="zh-CN">
-<meta property="og:updated_time" content="2020-09-21T02:49:04.502Z">
+<meta property="og:updated_time" content="2020-09-25T03:24:40.683Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="IS-pwn-Linux-格式化字符串漏洞">
 <meta name="twitter:description" content="概念 当printf等格式化字符串函数的第一个参数用户可控时,即可任意读写.这就是格式化字符串漏洞. 原理 格式化字符串的格式如下. 1%[parameter][flags][width][.precision][length]type parameter:n$,使用第n个参数. flags:在width设置后指定可以用来作为填充的内容之类的内容. width:最小输出长度. preci">
@@ -503,7 +503,7 @@
                 
                   <span class="post-meta-item-text">本文字数：</span>
                 
-                <span title="本文字数">990</span>
+                <span title="本文字数">2.9k</span>
               
 
               
@@ -517,7 +517,7 @@
                 
                   <span class="post-meta-item-text">阅读时长 &asymp;</span>
                 
-                <span title="阅读时长">1 分钟</span>
+                <span title="阅读时长">3 分钟</span>
               
             </div>
           
@@ -564,6 +564,16 @@
 <p>这里分两种情况.</p>
 <p>第一种是格式化字符串在调用的格式化字符串函数的栈帧之上(即可以作为格式化控制符解析参数),这种情况基本上可以测出偏移后利用<code>%num$x</code>,<code>%num$n</code>任意读任意写.</p>
 <p>第二种是格式化字符串不可作为解析参数.就只能利用栈上的参数进行读写.</p>
+<h2 id="fprintf_chk-沙箱逃逸">fprintf_chk &amp; 沙箱逃逸</h2>
+<p><code>fprintf_chk</code>执行<code>%n</code>会报错.</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">*** %n <span class="keyword">in</span> writable segment detected ***</span><br></pre></td></tr></table></figure>
+<p>检测逻辑(<code>glibc2.23</code>).</p>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">LABEL (form_number):</span><br><span class="line">    <span class="keyword">if</span> (s-&gt;_flags2 &amp; _IO_FLAGS2_FORTIFY) &#123;</span><br><span class="line">        <span class="keyword">if</span> (! readonly_format) &#123;</span><br><span class="line">            <span class="keyword">extern</span> <span class="keyword">int</span> __readonly_area (<span class="keyword">const</span> <span class="keyword">void</span> *, <span class="keyword">size_t</span>) attribute_hidden;</span><br><span class="line">            readonly_format = __readonly_area (format, ((STR_LEN (format) + <span class="number">1</span>) * <span class="keyword">sizeof</span> (CHAR_T)));</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">if</span> (readonly_format &lt; <span class="number">0</span>)</span><br><span class="line">            __libc_fatal (<span class="string">"*** %n in writable segment detected ***\n"</span>);</span><br><span class="line">    &#125;</span><br></pre></td></tr></table></figure>
+<p><code>__readonly_area</code>通过<code>fopen</code>打开<code>/proc/self/maps</code>,来判断<code>format</code>是否是只读段.</p>
+<p>结构体<code>__IO_FILE</code>利用<code>_fileno</code>来判定是哪个文件.</p>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br></pre></td><td class="code"><pre><span class="line">_IO_FILE * _IO_file_open (_IO_FILE *fp, <span class="keyword">const</span> <span class="keyword">char</span> *filename, <span class="keyword">int</span> posix_mode, <span class="keyword">int</span> prot, <span class="keyword">int</span> read_write, <span class="keyword">int</span> is32not64) &#123;</span><br><span class="line">    <span class="keyword">int</span> fdesc;</span><br><span class="line"><span class="meta">#<span class="meta-keyword">ifdef</span> _LIBC</span></span><br><span class="line">    <span class="keyword">if</span> (__glibc_unlikely (fp-&gt;_flags2 &amp; _IO_FLAGS2_NOTCANCEL))</span><br><span class="line">        fdesc = open_not_cancel (filename, posix_mode | (is32not64 ? <span class="number">0</span> : O_LARGEFILE), prot);</span><br><span class="line">    <span class="keyword">else</span></span><br><span class="line">        fdesc = open (filename, posix_mode | (is32not64 ? <span class="number">0</span> : O_LARGEFILE), prot);</span><br><span class="line"><span class="meta">#<span class="meta-keyword">else</span></span></span><br><span class="line">    fdesc = open (filename, posix_mode, prot);</span><br><span class="line"><span class="meta">#<span class="meta-keyword">endif</span></span></span><br><span class="line">    <span class="keyword">if</span> (fdesc &lt; <span class="number">0</span>)</span><br><span class="line">        <span class="keyword">return</span> <span class="literal">NULL</span>;</span><br><span class="line">    fp-&gt;_fileno = fdesc;</span><br><span class="line">    _IO_mask_flags (fp, read_write,_IO_NO_READS+_IO_NO_WRITES+_IO_IS_APPENDING);</span><br><span class="line">    <span class="keyword">if</span> ((read_write &amp; (_IO_IS_APPENDING | _IO_NO_READS)) == (_IO_IS_APPENDING | _IO_NO_READS)) &#123;</span><br><span class="line">        _IO_off64_t new_pos = _IO_SYSSEEK (fp, <span class="number">0</span>, _IO_seek_end);</span><br><span class="line">        <span class="keyword">if</span> (new_pos == _IO_pos_BAD &amp;&amp; errno != ESPIPE) &#123;</span><br><span class="line">	        close_not_cancel (fdesc);</span><br><span class="line">	        <span class="keyword">return</span> <span class="literal">NULL</span>;</span><br><span class="line">	    &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    _IO_link_in ((struct _IO_FILE_plus *) fp);</span><br><span class="line">    <span class="keyword">return</span> fp;</span><br><span class="line">&#125;</span><br><span class="line">libc_hidden_def (_IO_file_open)</span><br></pre></td></tr></table></figure>
+<p>而<code>stdin._fileno = 0</code>,所以可以控制<code>seccomp</code>让<code>fopen("/proc/self/maps")</code>返回<code>ERROR</code>,此时,<code>open</code>的返回值为<code>0</code>,此时<code>fopen</code>认为其<code>fileno</code>是<code>0</code>,程序会从<code>STDIN</code>中读取数据,进行判断.</p>
+<p>此时只需要输入<code>000000000000-7fffffffffff r-xp 00000000 00:00 0 /bin/w4rd3n</code>即可绕过<code>%n</code>检测.</p>
 
       
     </div>
@@ -686,7 +696,7 @@
                 
                   <a href="/archives/">
                 
-                    <span class="site-state-item-count">174</span>
+                    <span class="site-state-item-count">168</span>
                     <span class="site-state-item-name">日志</span>
                   </a>
                 </div>
@@ -822,9 +832,7 @@
                     
                       
                     
-                      
-                    
-                    <span class="site-state-item-count">41</span>
+                    <span class="site-state-item-count">40</span>
                     <span class="site-state-item-name">标签</span>
                   </a>
                 </div>
@@ -874,7 +882,7 @@
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#概念"><span class="nav-number">1.</span> <span class="nav-text">概念</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#原理"><span class="nav-number">2.</span> <span class="nav-text">原理</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#利用"><span class="nav-number">3.</span> <span class="nav-text">利用</span></a></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#概念"><span class="nav-number">1.</span> <span class="nav-text">概念</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#原理"><span class="nav-number">2.</span> <span class="nav-text">原理</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#利用"><span class="nav-number">3.</span> <span class="nav-text">利用</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#fprintf_chk-沙箱逃逸"><span class="nav-number">4.</span> <span class="nav-text">fprintf_chk &amp; 沙箱逃逸</span></a></li></ol></div>
             
 
           </div>
@@ -906,7 +914,7 @@
       <i class="fa fa-area-chart"></i>
     </span>
     
-    <span title="站点总字数">797k</span>
+    <span title="站点总字数">787k</span>
   
 
   
@@ -915,7 +923,7 @@
       <i class="fa fa-coffee"></i>
     </span>
     
-    <span title="站点阅读时长">12:04</span>
+    <span title="站点阅读时长">11:55</span>
   
 </div>
 

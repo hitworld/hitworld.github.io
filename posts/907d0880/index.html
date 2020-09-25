@@ -127,7 +127,7 @@
 <meta property="og:site_name" content="w4rd3n">
 <meta property="og:description" content="基础 \(RSA\)加密算法是一种非对称加密算法,\(RSA\)算法的可靠性由极大整数因数分解的难度决定. 首先选取两个素数\(p\),\(q\). 接下来将\(p\)和\(q\)相乘获得模\(m = p * q\).同时也就知道了:\(\phi(m) = \phi(p) * \phi(q) = (p − 1)(q − 1)\). 选取与\(\phi(m)\)互素的整数\(k\),即\(g">
 <meta property="og:locale" content="zh-CN">
-<meta property="og:updated_time" content="2020-09-24T05:58:57.100Z">
+<meta property="og:updated_time" content="2020-09-25T03:24:40.670Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="IS-crypto-非对称加密-RSA">
 <meta name="twitter:description" content="基础 \(RSA\)加密算法是一种非对称加密算法,\(RSA\)算法的可靠性由极大整数因数分解的难度决定. 首先选取两个素数\(p\),\(q\). 接下来将\(p\)和\(q\)相乘获得模\(m = p * q\).同时也就知道了:\(\phi(m) = \phi(p) * \phi(q) = (p − 1)(q − 1)\). 选取与\(\phi(m)\)互素的整数\(k\),即\(g">
@@ -503,7 +503,7 @@
                 
                   <span class="post-meta-item-text">本文字数：</span>
                 
-                <span title="本文字数">3.3k</span>
+                <span title="本文字数">3.4k</span>
               
 
               
@@ -543,12 +543,12 @@
 <p>接下来将<span class="math inline">\(p\)</span>和<span class="math inline">\(q\)</span>相乘获得模<span class="math inline">\(m = p * q\)</span>.同时也就知道了:<span class="math inline">\(\phi(m) = \phi(p) * \phi(q) = (p − 1)(q − 1)\)</span>.</p>
 <p>选取与<span class="math inline">\(\phi(m)\)</span>互素的整数<span class="math inline">\(k\)</span>,即<span class="math inline">\(gcd(k, \phi(m)) = 1\)</span>.</p>
 <p>此时可以将<span class="math inline">\(m\)</span>和<span class="math inline">\(k\)</span>作为公钥告诉别人,别人可以利用<span class="math inline">\(m\)</span>和<span class="math inline">\(k\)</span>加密信息,收到密文后通过<span class="math inline">\(\phi(m)\)</span>计算模<span class="math inline">\(m\)</span>的<span class="math inline">\(k\)</span>次根求出明文即可.</p>
-<h3 id="加密过程">加密过程</h3>
+<h2 id="加密过程">加密过程</h2>
 <ol type="1">
-<li>先将信息数串分段成小于<span class="math inline">\(m\)</span>的数,从而获得一个数表<span class="math inline">\(a_1\)</span>,<span class="math inline">\(a_2\)</span>,...,<span class="math inline">\(a_r\)</span>.</li>
+<li>将明文数串分段成小于<span class="math inline">\(m\)</span>的数,从而获得一个数表<span class="math inline">\(a_1\)</span>,<span class="math inline">\(a_2\)</span>,...,<span class="math inline">\(a_r\)</span>.</li>
 <li>使用逐次平方法计算<span class="math inline">\(a_1^k \pmod{m}\)</span>,<span class="math inline">\(a_2^k \pmod{m}\)</span>,...,<span class="math inline">\(a_r^k \pmod{m}\)</span>, 获得一个新的数表<span class="math inline">\(b_1\)</span>,<span class="math inline">\(b_2\)</span>,...,<span class="math inline">\(b_r\)</span>,也就是加密后的密文.</li>
 </ol>
-<h3 id="解密过程">解密过程</h3>
+<h2 id="解密过程">解密过程</h2>
 <ol type="1">
 <li>获取加密后的数表<span class="math inline">\(b_1\)</span>,<span class="math inline">\(b_2\)</span>,...,<span class="math inline">\(b_r\)</span>后,实际上就是解<span class="math inline">\(a_i^k \equiv bi \pmod{m}\)</span>.</li>
 <li>由于自己拥有<span class="math inline">\(p\)</span>和<span class="math inline">\(q\)</span>,可以计算出<span class="math inline">\(\phi(m) = \phi(p) * \phi(q) = (p − 1)(q − 1)\)</span>.</li>
@@ -573,24 +573,25 @@ r_n = gcd(k, \phi(m)) = 1 = ku − \phi(m)v\\
 <li><span class="math inline">\(u_0 = 0\)</span>,<span class="math inline">\(u_1 = 1\)</span>,<span class="math inline">\(u_{i+1} = u_{i-1} - q_1 * u_i\)</span>.</li>
 <li><span class="math inline">\(v_0 = 1\)</span>,<span class="math inline">\(v_1 = 0\)</span>,<span class="math inline">\(v_{i+1} = v_{i-1} - q_1 * v_i\)</span>.</li>
 </ul>
-<h3 id="python代码实现">python代码实现</h3>
+<h2 id="python代码实现">python代码实现</h2>
 <figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">egcd</span><span class="params">(a, b)</span>:</span></span><br><span class="line">    r_0 = a</span><br><span class="line">    r_1 = b</span><br><span class="line">    r_2 = r_0 % r_1</span><br><span class="line">    q = r_0 // r_1</span><br><span class="line">    u_0 = <span class="number">0</span></span><br><span class="line">    u_1 = <span class="number">1</span></span><br><span class="line">    u_2 = u_0 - q * u_1</span><br><span class="line">    <span class="keyword">while</span> r_2:</span><br><span class="line">        r_0 = r_1</span><br><span class="line">        r_1 = r_2</span><br><span class="line">        r_2 = r_0 % r_1</span><br><span class="line">        q = r_0 // r_1</span><br><span class="line">        u_0 = u_1</span><br><span class="line">        u_1 = u_2</span><br><span class="line">        u_2 = u_0 - q * u_1</span><br><span class="line">    u_0 = u_1</span><br><span class="line">    u_1 = u_2</span><br><span class="line">    u_2 = u_0 - q * u_1</span><br><span class="line">    <span class="keyword">return</span> u_2</span><br><span class="line"></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">myRSA</span><span class="params">(object)</span>:</span></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">__init__</span><span class="params">(self, p, q, e)</span>:</span></span><br><span class="line">        self.N = p * q</span><br><span class="line">        print(<span class="string">"N: "</span> + str(self.N))</span><br><span class="line">        self.phiN = (p - <span class="number">1</span>) * (q - <span class="number">1</span>)</span><br><span class="line">        self.e = e</span><br><span class="line">        <span class="comment"># undo:check e</span></span><br><span class="line">        self.d = egcd(self.phiN, self.e)</span><br><span class="line">        <span class="keyword">while</span> self.d &lt; <span class="number">0</span>:</span><br><span class="line">            self.d = self.d + self.phiN</span><br><span class="line">        print(<span class="string">"d: "</span> + str(self.d))</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">encode</span><span class="params">(self, m)</span>:</span></span><br><span class="line">        c = pow(m, self.e, self.N)</span><br><span class="line">        <span class="keyword">return</span> c</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">decode</span><span class="params">(self, c)</span>:</span></span><br><span class="line">        m = pow(c, self.d, self.N)</span><br><span class="line">        <span class="keyword">return</span> m</span><br></pre></td></tr></table></figure>
 <h2 id="tool">tool</h2>
-<h3 id="rsatool">RSAtool</h3>
 <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">git <span class="built_in">clone</span> https://github.com/ius/rsatool.git</span><br><span class="line"><span class="built_in">cd</span> rsatool</span><br><span class="line">python rsatool.py -h</span><br></pre></td></tr></table></figure>
 <p><a href="https://github.com/Ganapati/RsaCtfTool" target="_blank" rel="noopener"><code>RsaCtfTool.py</code></a>.</p>
 <p><a href="https://sourceforge.net/projects/rsaconverter/" target="_blank" rel="noopener"><code>RsaConverter.exe</code></a>.</p>
-<p><a href="%60https://sourceforge.net/projects/yafu/%60"><code>yafu</code></a>.</p>
-<h3 id="openssl">openssl</h3>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">#将数转化为AB CD EF格式的字符串.</span></span><br><span class="line">s = hex(N)[<span class="number">2</span>:<span class="number">-1</span>]</span><br><span class="line"><span class="keyword">if</span> len(s) % <span class="number">2</span>:</span><br><span class="line">    s = <span class="string">"0"</span> + s</span><br><span class="line">s2 = <span class="string">""</span></span><br><span class="line"><span class="keyword">for</span> i <span class="keyword">in</span> range(<span class="number">0</span>, len(s), <span class="number">2</span>):</span><br><span class="line">    s2 += s[i:i+<span class="number">2</span>]</span><br><span class="line">    s2 += <span class="string">" "</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">print</span> s2</span><br></pre></td></tr></table></figure>
+<p><a href="https://sourceforge.net/projects/yafu/" target="_blank" rel="noopener"><code>yafu</code></a>.</p>
+<p><a href="https://sourceforge.net/projects/msieve/" target="_blank" rel="noopener"><code>msieve</code></a>.</p>
+<h2 id="openssl">openssl</h2>
 <p><span class="math inline">\(openssl rsautl\)</span>.</p>
 <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">openssl rsautl [-<span class="keyword">in</span> file] [-out file] [-inkey file] [-passin arg] [-keyform PEM|DER|NET] [-pubin] [-certin][-asn1parse] [-hexdump] [-raw] [-oaep] [-ssl] [-pkcs] [-x931] [-sign] [-verify][-encrypt] [-decrypt] [-rev] [-engine e]</span><br></pre></td></tr></table></figure>
 <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">openssl genrsa -des3 -out prikey.pem</span><br><span class="line"><span class="comment">#生成RSA密钥</span></span><br><span class="line">openssl rsa -<span class="keyword">in</span> prikey.pem -pubout -out pubkey.pem</span><br><span class="line">openssl rsa -inform PEM -<span class="keyword">in</span> pubkey.pem -pubin -text -out Keypub.txt</span><br><span class="line">openssl rsa -pubin -<span class="keyword">in</span> pubkey.pem -text -modulus</span><br><span class="line"><span class="comment">#分离出公钥</span></span><br><span class="line">openssl rsautl -encrypt -pubin -inkey pubkey.pem -<span class="keyword">in</span> a.txt -out b.txt</span><br><span class="line"><span class="comment">#公钥加密</span></span><br><span class="line">openssl rsautl -decrypt -inkey prikey.pem -<span class="keyword">in</span> b.txt</span><br><span class="line"><span class="comment">#私钥解密</span></span><br></pre></td></tr></table></figure>
-<h3 id="在线工具">在线工具</h3>
+<h2 id="在线工具">在线工具</h2>
 <ul>
 <li><a href="http://factordb.com/index.php" target="_blank" rel="noopener">分解整数</a>.</li>
 <li><span class="math inline">\(sage\)</span>:<code>https://sagecell.sagemath.org/</code>,<code>https://cloud.sagemath.com/</code>.</li>
 </ul>
-<h3 id="python库">python库</h3>
+<h2 id="python库">python库</h2>
 <ul>
 <li><span class="math inline">\(primefac\)</span>:整数分解库,包含了很多整数分解的算法.</li>
 <li><span class="math inline">\(gmpy\)</span>:提供对<span class="math inline">\(GMP\)</span>或<span class="math inline">\(MPIR\)</span>多精度算术库的访问.</li>
@@ -720,7 +721,7 @@ r_n = gcd(k, \phi(m)) = 1 = ku − \phi(m)v\\
                 
                   <a href="/archives/">
                 
-                    <span class="site-state-item-count">174</span>
+                    <span class="site-state-item-count">168</span>
                     <span class="site-state-item-name">日志</span>
                   </a>
                 </div>
@@ -856,9 +857,7 @@ r_n = gcd(k, \phi(m)) = 1 = ku − \phi(m)v\\
                     
                       
                     
-                      
-                    
-                    <span class="site-state-item-count">41</span>
+                    <span class="site-state-item-count">40</span>
                     <span class="site-state-item-name">标签</span>
                   </a>
                 </div>
@@ -908,7 +907,7 @@ r_n = gcd(k, \phi(m)) = 1 = ku − \phi(m)v\\
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#基础"><span class="nav-number">1.</span> <span class="nav-text">基础</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#加密过程"><span class="nav-number">1.1.</span> <span class="nav-text">加密过程</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#解密过程"><span class="nav-number">1.2.</span> <span class="nav-text">解密过程</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#python代码实现"><span class="nav-number">1.3.</span> <span class="nav-text">python代码实现</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#tool"><span class="nav-number">2.</span> <span class="nav-text">tool</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#rsatool"><span class="nav-number">2.1.</span> <span class="nav-text">RSAtool</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#openssl"><span class="nav-number">2.2.</span> <span class="nav-text">openssl</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#在线工具"><span class="nav-number">2.3.</span> <span class="nav-text">在线工具</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#python库"><span class="nav-number">2.4.</span> <span class="nav-text">python库</span></a></li></ol></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#基础"><span class="nav-number">1.</span> <span class="nav-text">基础</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#加密过程"><span class="nav-number">2.</span> <span class="nav-text">加密过程</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#解密过程"><span class="nav-number">3.</span> <span class="nav-text">解密过程</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#python代码实现"><span class="nav-number">4.</span> <span class="nav-text">python代码实现</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#tool"><span class="nav-number">5.</span> <span class="nav-text">tool</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#openssl"><span class="nav-number">6.</span> <span class="nav-text">openssl</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#在线工具"><span class="nav-number">7.</span> <span class="nav-text">在线工具</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#python库"><span class="nav-number">8.</span> <span class="nav-text">python库</span></a></li></ol></div>
             
 
           </div>
@@ -940,7 +939,7 @@ r_n = gcd(k, \phi(m)) = 1 = ku − \phi(m)v\\
       <i class="fa fa-area-chart"></i>
     </span>
     
-    <span title="站点总字数">797k</span>
+    <span title="站点总字数">787k</span>
   
 
   
@@ -949,7 +948,7 @@ r_n = gcd(k, \phi(m)) = 1 = ku − \phi(m)v\\
       <i class="fa fa-coffee"></i>
     </span>
     
-    <span title="站点阅读时长">12:04</span>
+    <span title="站点阅读时长">11:55</span>
   
 </div>
 

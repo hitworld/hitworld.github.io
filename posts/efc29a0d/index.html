@@ -127,12 +127,12 @@
 <meta property="og:site_name" content="w4rd3n">
 <meta property="og:description" content="WinDbg WinDbg是Windows平台上的用户态和内核态调试工具支持x86,IA64,AMD64平台.官网下载即可. 调试符号 WinDbg允许指定一个或多个目录来存放符号文件,并使用环境变量_NT_SYMBOL_PATH来指向这些目录.对于操作系统内部模块的符号文件,可以根据使用的模块版本访问微软提供的符号服务器.  也可以设置好符号服务器自动获取,前面设置的下载文件的储存目录">
 <meta property="og:locale" content="zh-CN">
-<meta property="og:image" content="https://hitworld.github.io/posts/efc29a0d/1.png">
-<meta property="og:updated_time" content="2020-10-22T11:34:07.423Z">
+<meta property="og:image" content="https://hitworld.github.io/posts/undefined/1.png">
+<meta property="og:updated_time" content="2020-11-23T13:15:41.592Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="IS-reverse-tool-WinDbg">
 <meta name="twitter:description" content="WinDbg WinDbg是Windows平台上的用户态和内核态调试工具支持x86,IA64,AMD64平台.官网下载即可. 调试符号 WinDbg允许指定一个或多个目录来存放符号文件,并使用环境变量_NT_SYMBOL_PATH来指向这些目录.对于操作系统内部模块的符号文件,可以根据使用的模块版本访问微软提供的符号服务器.  也可以设置好符号服务器自动获取,前面设置的下载文件的储存目录">
-<meta name="twitter:image" content="https://hitworld.github.io/posts/efc29a0d/1.png">
+<meta name="twitter:image" content="https://hitworld.github.io/posts/undefined/1.png">
 
 
 
@@ -543,7 +543,7 @@
 <p><code>WinDbg</code>是<code>Windows</code>平台上的用户态和内核态调试工具支持<code>x86</code>,<code>IA64</code>,<code>AMD64</code>平台.官网下载即可.</p>
 <h2 id="调试符号">调试符号</h2>
 <p><code>WinDbg</code>允许指定一个或多个目录来存放符号文件,并使用环境变量<code>_NT_SYMBOL_PATH</code>来指向这些目录.对于操作系统内部模块的符号文件,可以根据使用的模块版本访问微软提供的<a href="http://msdl.microsoft.com/download/symbols" target="_blank" rel="noopener">符号服务器</a>.</p>
-<img src="/posts/efc29a0d/1.png" title="p1">
+<img src="/posts/undefined/1.png" title="p1">
 <p>也可以设置好符号服务器自动获取,前面设置的下载文件的储存目录为<code>C:\Symbols</code>,后面设置访问的<code>url</code>(等同于命令<code>!symfix C:\Symbols</code>).</p>
 <p>调式时可以使用<code>ld</code>命令从符号文件目录或符号服务器加载符号,使用<code>lm</code>命令或<code>Debug-&gt;Modules</code>显示模块列表.</p>
 <p><code>WinDbg</code>中对符号的表示方式为<code>Module!Symbol</code>,如<code>kernel32!OpenProcess</code>,但操作系统的内核模块是例外,统一使用<code>nt</code>这个模块名表示,如<code>nt!NtOpenProcess</code>.</p>

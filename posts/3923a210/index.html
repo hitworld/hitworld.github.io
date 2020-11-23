@@ -127,12 +127,12 @@
 <meta property="og:site_name" content="w4rd3n">
 <meta property="og:description" content="ARMv8 ARMv8的架构继承以往ARMv7与之前处理器技术的基础,除了现有的16/32bit的Thumb2指令支持外,也向前兼容现有的A32(ARM 32bit)指令集,称为AArch32,引入了64bit的AArch64架构. 除了新增A64(ARM 64bit)指令集外,也扩充了现有的A32(ARM 32bit)和T32(Thumb2 32bit)指令集(二者统称AArch32 ISA">
 <meta property="og:locale" content="zh-CN">
-<meta property="og:image" content="https://hitworld.github.io/posts/undefined/1.png">
-<meta property="og:updated_time" content="2020-09-25T03:24:40.633Z">
+<meta property="og:image" content="https://hitworld.github.io/posts/3923a210/1.png">
+<meta property="og:updated_time" content="2020-10-22T11:34:05.812Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="CS-BASIC-assembly-ARM-ARMv8">
 <meta name="twitter:description" content="ARMv8 ARMv8的架构继承以往ARMv7与之前处理器技术的基础,除了现有的16/32bit的Thumb2指令支持外,也向前兼容现有的A32(ARM 32bit)指令集,称为AArch32,引入了64bit的AArch64架构. 除了新增A64(ARM 64bit)指令集外,也扩充了现有的A32(ARM 32bit)和T32(Thumb2 32bit)指令集(二者统称AArch32 ISA">
-<meta name="twitter:image" content="https://hitworld.github.io/posts/undefined/1.png">
+<meta name="twitter:image" content="https://hitworld.github.io/posts/3923a210/1.png">
 
 
 
@@ -571,7 +571,7 @@
 <p>还有<code>4</code>个堆栈指针寄存器<code>SP_EL0</code>,<code>SP_EL1</code>,<code>SP_EL2</code>,<code>SP_EL3</code>(<code>64</code>位,还有<code>32</code>位的<code>WSP</code>).<code>3</code>个异常链接寄存器<code>ELR_EL1</code>,<code>ELR_EL2</code>,<code>ELR_EL3</code>(<code>64</code>位).<code>3</code>个存储状态寄存器<code>SPSR_EL1</code>,<code>SPSR_EL2</code>,<code>SPSR_EL3</code>(<code>32</code>位).状态寄存器<code>CPSR</code>.一个程序计数器<code>PC</code>(<code>64</code>位).还有<code>Zero register</code>(<code>WZR 32bits</code>,<code>XZR 64bits</code>).</p>
 <p>当在指令中使用<code>32</code>位的寄存器时,源寄存器高<code>32</code>位会被忽略,目的寄存器高<code>32</code>位置零.</p>
 <p>通用寄存器分为<code>4</code>组.</p>
-<img src="/posts/undefined/1.png" title="p1">
+<img src="/posts/3923a210/1.png" title="p1">
 <p>参数寄存器(<code>X0 - X7</code>):用作临时寄存器或可以保存的调用者保存的寄存器变量函数内的中间值,调用其他函数之间的值(可用于传递参数).</p>
 <p>调用者保护寄存器(<code>X9 - X15</code>):如果调用者要求在任何这些寄存器中保留值调用另一个函数,调用者必须将受影响的寄存器保存在自己的堆栈中.它们可以通过被调用的子程序进行修改,而无需保存并在返回调用者之前恢复它们.</p>
 <p>被调用者保存的寄存器(<code>X19 - X29</code>):这些寄存器保存在被调用者帧中,它们可以被被调用者修改子程序,只要它们在返回之前保存并恢复.</p>
@@ -721,7 +721,7 @@
                 
                   <a href="/archives/">
                 
-                    <span class="site-state-item-count">168</span>
+                    <span class="site-state-item-count">169</span>
                     <span class="site-state-item-name">日志</span>
                   </a>
                 </div>
@@ -939,7 +939,7 @@
       <i class="fa fa-area-chart"></i>
     </span>
     
-    <span title="站点总字数">787k</span>
+    <span title="站点总字数">788k</span>
   
 
   
@@ -948,7 +948,7 @@
       <i class="fa fa-coffee"></i>
     </span>
     
-    <span title="站点阅读时长">11:55</span>
+    <span title="站点阅读时长">11:56</span>
   
 </div>
 

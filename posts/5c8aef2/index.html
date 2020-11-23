@@ -127,13 +127,13 @@
 <meta property="og:site_name" content="w4rd3n">
 <meta property="og:description" content="概览 (ELF)[https://paper.seebug.org/papers/Archive/refs/elf/Understanding_ELF.pdf],即Executable and Linking Format(可执行可连接格式),具有这种格式的文件称为ELF文件. ELF文件主要分为以下三种类型.  可重定位文件(relocatable file):用于与其它目标文件进行连接">
 <meta property="og:locale" content="zh-CN">
-<meta property="og:image" content="https://hitworld.github.io/posts/undefined/1.png">
-<meta property="og:image" content="https://hitworld.github.io/posts/undefined/2.png">
-<meta property="og:updated_time" content="2020-09-25T03:24:40.689Z">
+<meta property="og:image" content="https://hitworld.github.io/posts/5c8aef2/1.png">
+<meta property="og:image" content="https://hitworld.github.io/posts/5c8aef2/2.png">
+<meta property="og:updated_time" content="2020-10-22T11:34:07.332Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="IS-reverse-Linux-ELF">
 <meta name="twitter:description" content="概览 (ELF)[https://paper.seebug.org/papers/Archive/refs/elf/Understanding_ELF.pdf],即Executable and Linking Format(可执行可连接格式),具有这种格式的文件称为ELF文件. ELF文件主要分为以下三种类型.  可重定位文件(relocatable file):用于与其它目标文件进行连接">
-<meta name="twitter:image" content="https://hitworld.github.io/posts/undefined/1.png">
+<meta name="twitter:image" content="https://hitworld.github.io/posts/5c8aef2/1.png">
 
 
 
@@ -550,7 +550,7 @@
 </ul>
 <h2 id="文件格式">文件格式</h2>
 <p>从连接的角度和运行的角度,可以分别把目标文件的组成部分做以下的划分.</p>
-<img src="/posts/undefined/1.png" title="p1">
+<img src="/posts/5c8aef2/1.png" title="p1">
 <p><code>ELF</code>文件头位于文件的最开始处,包含有整个文件的结构信息.</p>
 <p>节(<code>section</code>)是专用于连接过程而言的,在每个节中包含有指令数据,符号数据,重定位数据等等.</p>
 <p>程序头表(<code>program header table</code>)在运行过程中是必须的,在连接过程中是可选的,因为它的作用是告诉系统如何创建进程的镜像.</p>
@@ -577,7 +577,7 @@
 <p>如果本节的内容需要映射到进程空间中去,<code>sh_addr</code>指定映射的起始地址,不需要映射则为<code>0</code>.</p>
 <p><code>sh_offset</code>指明本节位置,该值是节的第一个字节在文件中的位置.<code>sh_size</code>指明节的大小.<code>sh_addralign</code>指明本节对齐字节,该值为<code>0</code>或<code>1</code>表明没有对齐约束,否则应该为<code>2</code>的正整数倍.</p>
 <p><code>sh_link</code>和<code>sh_info</code>根据节的类型不同表示不同的意义.</p>
-<img src="/posts/undefined/2.png" title="p2">
+<img src="/posts/5c8aef2/2.png" title="p2">
 <p>可以使用<code>readelf -S</code>解析数据.</p>
 <h3 id="段">段</h3>
 <p>可执行文件或共享目标文件的程序头表(<code>program header table</code>)是一个数组,数组中的每一个元素称为程序头(<code>program header</code>),每一个程序头描述了一个段(<code>segment</code>)或者一块用于准备执行程序的信息.程序头只对可执行文件或共享目标文件有意义.</p>
@@ -709,7 +709,7 @@
                 
                   <a href="/archives/">
                 
-                    <span class="site-state-item-count">168</span>
+                    <span class="site-state-item-count">169</span>
                     <span class="site-state-item-name">日志</span>
                   </a>
                 </div>
@@ -927,7 +927,7 @@
       <i class="fa fa-area-chart"></i>
     </span>
     
-    <span title="站点总字数">787k</span>
+    <span title="站点总字数">788k</span>
   
 
   
@@ -936,7 +936,7 @@
       <i class="fa fa-coffee"></i>
     </span>
     
-    <span title="站点阅读时长">11:55</span>
+    <span title="站点阅读时长">11:56</span>
   
 </div>
 

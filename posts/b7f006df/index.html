@@ -127,7 +127,7 @@
 <meta property="og:site_name" content="w4rd3n">
 <meta property="og:description" content="VPS 购买VPS服务器 推荐:在vultr官网购买,操作系统选centos6,centos7默认的防火墙可能会干扰SSR的正常连接. 如果开启vps的ipv6,可以在后台设置选项找到服务器ipv6 ip.在部署SSR账号时,用ipv6 ip就行.需要电脑系统开启ipv6. 部署VPS服务器 远程登录到vps服务器,执行脚本. 12yum -y install wgetwget -N">
 <meta property="og:locale" content="zh-CN">
-<meta property="og:updated_time" content="2020-09-25T03:24:40.707Z">
+<meta property="og:updated_time" content="2020-10-22T11:34:07.817Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="w4rd3n-centos虚拟机环境搭建">
 <meta name="twitter:description" content="VPS 购买VPS服务器 推荐:在vultr官网购买,操作系统选centos6,centos7默认的防火墙可能会干扰SSR的正常连接. 如果开启vps的ipv6,可以在后台设置选项找到服务器ipv6 ip.在部署SSR账号时,用ipv6 ip就行.需要电脑系统开启ipv6. 部署VPS服务器 远程登录到vps服务器,执行脚本. 12yum -y install wgetwget -N">
@@ -540,7 +540,7 @@
 <p>此脚本是开机自动启动,部署一次即可.</p>
 <h3 id="加速vps服务器">加速VPS服务器</h3>
 <p>使用谷歌<code>BBR</code>加速,<code>vultr</code>的服务器框架可以装<code>BBR</code>加速.</p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">wget --no-check-certificate https://github.com/teddysun/across/raw/master/bbr.sh</span><br><span class="line">chmod +x bbr.sh</span><br><span class="line">./bbr.sh</span><br></pre></td></tr></table></figure>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">wget --no-check-certificate https://github.com/teddysun/across/raw/master/bbr.sh &amp;&amp; chmod +x bbr.sh &amp;&amp; ./bbr.sh</span><br></pre></td></tr></table></figure>
 <p>此脚本也是开机自动启动,部署一次即可.安装完后重启.</p>
 <p>输入命令<code>lsmod | grep bbr</code>,如果出现<code>tcp_bbr</code>字样表示<code>bbr</code>已安装并启动成功.</p>
 <h2 id="ctf平台">CTF平台</h2>
@@ -686,7 +686,7 @@
                 
                   <a href="/archives/">
                 
-                    <span class="site-state-item-count">168</span>
+                    <span class="site-state-item-count">169</span>
                     <span class="site-state-item-name">日志</span>
                   </a>
                 </div>
@@ -904,7 +904,7 @@
       <i class="fa fa-area-chart"></i>
     </span>
     
-    <span title="站点总字数">787k</span>
+    <span title="站点总字数">788k</span>
   
 
   
@@ -913,7 +913,7 @@
       <i class="fa fa-coffee"></i>
     </span>
     
-    <span title="站点阅读时长">11:55</span>
+    <span title="站点阅读时长">11:56</span>
   
 </div>
 

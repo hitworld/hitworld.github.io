@@ -127,7 +127,7 @@
 <meta property="og:site_name" content="w4rd3n">
 <meta property="og:description" content="明文攻击 小明文攻击 明文过小,导致明文的\(e\)次方仍然小于\(n\)(或者大不了多少),这种情况直接对密文\(e\)次开方(或者爆破\(k\)加\(kn\)后\(e\)次开方),即可得到明文. 分段加密明文 如果每段长度字节数很小,也就是说明文空间太小,就可以直接爆破生成表. 分解N 暴力分解 在\(N\)的比特位数小于\(512\)的时候,可以采用大整数分解的策略获取\(p\">
 <meta property="og:locale" content="zh-CN">
-<meta property="og:updated_time" content="2020-09-25T03:24:40.671Z">
+<meta property="og:updated_time" content="2020-10-22T11:34:06.887Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="IS-crypto-非对称加密-RSA的攻击方式">
 <meta name="twitter:description" content="明文攻击 小明文攻击 明文过小,导致明文的\(e\)次方仍然小于\(n\)(或者大不了多少),这种情况直接对密文\(e\)次开方(或者爆破\(k\)加\(kn\)后\(e\)次开方),即可得到明文. 分段加密明文 如果每段长度字节数很小,也就是说明文空间太小,就可以直接爆破生成表. 分解N 暴力分解 在\(N\)的比特位数小于\(512\)的时候,可以采用大整数分解的策略获取\(p\">
@@ -744,8 +744,10 @@ x^e-c2 &amp;\equiv 0 \pmod{n}\\
 \end{cases}
 \]</span></p>
 <p><span class="math display">\[
+\begin{align}
 s(x) &amp;= x^e-c2 \equiv (x-M_2)*k_1 \pmod{n}\\
 t(x) &amp;= f(x)^e-c1 \equiv (x-M_2)*k_2 \pmod{n}\\
+\end{align}
 \]</span></p>
 <p><span class="math inline">\(k_1,k_2\)</span>为多项式.<span class="math inline">\(gcd(k_1,k_2)=1 \Rightarrow gcd(s(x),t(x))=x-M_2\)</span>.</p>
 <p>最后求得<span class="math inline">\(m \equiv \frac{\frac{3b(a^3c_2-b^3)}{c1-a^3c_2+2b^3}+b}{a}-padding2 \pmod{n}\)</span>.</p>
@@ -865,8 +867,8 @@ c^bd \equiv m^{abbd} \equiv m^b \pmod{n}\\
 
           <div class="post-nav-prev post-nav-item">
             
-              <a href="/posts/36159cdd/" rel="prev" title="w4rd3n-朝花夕拾">
-                w4rd3n-朝花夕拾 <i class="fa fa-chevron-right"></i>
+              <a href="/posts/9b93d9d4/" rel="prev" title="w4rd3n-随笔">
+                w4rd3n-随笔 <i class="fa fa-chevron-right"></i>
               </a>
             
           </div>
@@ -941,7 +943,7 @@ c^bd \equiv m^{abbd} \equiv m^b \pmod{n}\\
                 
                   <a href="/archives/">
                 
-                    <span class="site-state-item-count">168</span>
+                    <span class="site-state-item-count">169</span>
                     <span class="site-state-item-name">日志</span>
                   </a>
                 </div>
@@ -1159,7 +1161,7 @@ c^bd \equiv m^{abbd} \equiv m^b \pmod{n}\\
       <i class="fa fa-area-chart"></i>
     </span>
     
-    <span title="站点总字数">787k</span>
+    <span title="站点总字数">788k</span>
   
 
   
@@ -1168,7 +1170,7 @@ c^bd \equiv m^{abbd} \equiv m^b \pmod{n}\\
       <i class="fa fa-coffee"></i>
     </span>
     
-    <span title="站点阅读时长">11:55</span>
+    <span title="站点阅读时长">11:56</span>
   
 </div>
 

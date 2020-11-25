@@ -127,12 +127,12 @@
 <meta property="og:site_name" content="w4rd3n">
 <meta property="og:description" content="逆向 游戏过关 OllyICE打开通过关键字符串找到程序主逻辑,往下走找到8个比较,把所有jmp目标改变(不必要),输入获得flag. WEB 本地包含 @$_REQUEST的意思是获得参数,包括@$_GET和@$_POST. 使用GET参数返回:Too Young Too Simple. 文件包含 http://123.206.87.240:8003/?hello=1);incl">
 <meta property="og:locale" content="zh-CN">
-<meta property="og:image" content="https://hitworld.github.io/posts/undefined/2.png">
-<meta property="og:updated_time" content="2020-11-23T13:15:41.612Z">
+<meta property="og:image" content="https://hitworld.github.io/posts/254aad4f/2.png">
+<meta property="og:updated_time" content="2020-11-23T13:16:00.781Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="writeup-bugku">
 <meta name="twitter:description" content="逆向 游戏过关 OllyICE打开通过关键字符串找到程序主逻辑,往下走找到8个比较,把所有jmp目标改变(不必要),输入获得flag. WEB 本地包含 @$_REQUEST的意思是获得参数,包括@$_GET和@$_POST. 使用GET参数返回:Too Young Too Simple. 文件包含 http://123.206.87.240:8003/?hello=1);incl">
-<meta name="twitter:image" content="https://hitworld.github.io/posts/undefined/2.png">
+<meta name="twitter:image" content="https://hitworld.github.io/posts/254aad4f/2.png">
 
 
 
@@ -550,7 +550,7 @@
 <p><code>$$args</code>,使用全局变量<code>GLOBALS</code>即可.</p>
 <h3 id="welcome-to-bugkuctf">welcome to bugkuctf</h3>
 <p>第一步绕过,<code>php</code>可以使用<code>file_get_contents("php://input",'r')</code>读取<code>post</code>数据.</p>
-<img src="/posts/undefined/2.png" title="p2">
+<img src="/posts/254aad4f/2.png" title="p2">
 <p>利用文件包含获取<code>hint.php</code></p>
 <figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&lt;?php</span></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Flag</span> </span>&#123;<span class="comment">//flag.php  </span></span><br><span class="line">  <span class="keyword">public</span> $file;  </span><br><span class="line">  <span class="keyword">public</span> <span class="function"><span class="keyword">function</span> <span class="title">__tostring</span><span class="params">()</span> </span>&#123;  </span><br><span class="line">    <span class="keyword">if</span>(<span class="keyword">isset</span>(<span class="keyword">$this</span>-&gt;file)) &#123;  </span><br><span class="line">      <span class="keyword">echo</span> file_get_contents(<span class="keyword">$this</span>-&gt;file); </span><br><span class="line">			<span class="keyword">echo</span> <span class="string">"&lt;br&gt;"</span>;</span><br><span class="line">		  <span class="keyword">return</span> (<span class="string">"good"</span>);</span><br><span class="line">    &#125;</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br><span class="line"><span class="meta">?&gt;</span></span><br></pre></td></tr></table></figure>
 <p>获取<code>index.php</code>.</p>

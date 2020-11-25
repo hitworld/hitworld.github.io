@@ -127,20 +127,20 @@
 <meta property="og:site_name" content="w4rd3n">
 <meta property="og:description" content="基本概念 物理层考虑的是怎样才能在连接各种计算机的传输媒体上传输数据比特流,物理层的作用是要尽可能地屏蔽掉不同传输媒体和通信手段的差异.物理层的协议也常称为物理层规程. 物理层所规定的传输媒体的四个特性.  机械特性:规定了DTE和DCE之间的连接方式,说明接口所用接线器的形状和尺寸,引线数目和排列等. 电气特性:规定了DTE和DCE之间接口电路上信号发生器与接收器之间的电气特性. 功">
 <meta property="og:locale" content="zh-CN">
-<meta property="og:image" content="https://hitworld.github.io/posts/undefined/1.png">
-<meta property="og:image" content="https://hitworld.github.io/posts/undefined/4.png">
-<meta property="og:image" content="https://hitworld.github.io/posts/undefined/3.png">
-<meta property="og:image" content="https://hitworld.github.io/posts/undefined/11.png">
-<meta property="og:image" content="https://hitworld.github.io/posts/undefined/8.png">
-<meta property="og:image" content="https://hitworld.github.io/posts/undefined/12.png">
-<meta property="og:image" content="https://hitworld.github.io/posts/undefined/21.png">
-<meta property="og:image" content="https://hitworld.github.io/posts/undefined/25.png">
-<meta property="og:image" content="https://hitworld.github.io/posts/undefined/26.png">
-<meta property="og:updated_time" content="2020-11-23T13:15:41.529Z">
+<meta property="og:image" content="https://hitworld.github.io/posts/c5ff560c/1.png">
+<meta property="og:image" content="https://hitworld.github.io/posts/c5ff560c/4.png">
+<meta property="og:image" content="https://hitworld.github.io/posts/c5ff560c/3.png">
+<meta property="og:image" content="https://hitworld.github.io/posts/c5ff560c/11.png">
+<meta property="og:image" content="https://hitworld.github.io/posts/c5ff560c/8.png">
+<meta property="og:image" content="https://hitworld.github.io/posts/c5ff560c/12.png">
+<meta property="og:image" content="https://hitworld.github.io/posts/c5ff560c/21.png">
+<meta property="og:image" content="https://hitworld.github.io/posts/c5ff560c/25.png">
+<meta property="og:image" content="https://hitworld.github.io/posts/c5ff560c/26.png">
+<meta property="og:updated_time" content="2020-11-23T13:16:00.730Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="CS-BASIC-computer-network-物理层">
 <meta name="twitter:description" content="基本概念 物理层考虑的是怎样才能在连接各种计算机的传输媒体上传输数据比特流,物理层的作用是要尽可能地屏蔽掉不同传输媒体和通信手段的差异.物理层的协议也常称为物理层规程. 物理层所规定的传输媒体的四个特性.  机械特性:规定了DTE和DCE之间的连接方式,说明接口所用接线器的形状和尺寸,引线数目和排列等. 电气特性:规定了DTE和DCE之间接口电路上信号发生器与接收器之间的电气特性. 功">
-<meta name="twitter:image" content="https://hitworld.github.io/posts/undefined/1.png">
+<meta name="twitter:image" content="https://hitworld.github.io/posts/c5ff560c/1.png">
 
 
 
@@ -558,7 +558,7 @@
 </ul>
 <p><code>DTE</code>是数据终端设备,也就是具有一定的数据处理能力以及发送和接收数据能力的设备;数据电路端设备<code>DCE</code>的作用就是在<code>DTE</code>和传输线路之间提供信号变换和编码的功能,负责建立,保持和释放数据链路的连接.</p>
 <h2 id="数据通信基础">数据通信基础</h2>
-<img src="/posts/undefined/1.png" title="p1">
+<img src="/posts/c5ff560c/1.png" title="p1">
 <ul>
 <li>数据:运送消息的实体.</li>
 <li>信号:数据的电气的或电磁的表现.</li>
@@ -586,18 +586,18 @@
 <li>曼彻斯特编码:位周期中心的向上跳变代表<code>0</code>,位周期中心的向下跳变代表<code>1</code>,但也可反过来定义.</li>
 <li>差分晏彻斯特编码:在每一位的中心处始终都有跳变,位开始边界有跳变代表<code>0</code>,而位开始边界没有跳变代表<code>1</code>.</li>
 </ul>
-<img src="/posts/undefined/4.png" title="p4">
+<img src="/posts/c5ff560c/4.png" title="p4">
 <p>曼彻斯特编码和差分曼彻斯特编码产生的信号频率比不归零制高;从自同步能力来看,不归零制不能从信号波形本身中提取信号时钟频率(没有自同步能力),而曼彻斯特编码和差分晏彻斯特编码具有自同步能力.</p>
 <h3 id="带通调制方法">带通调制方法</h3>
 <p>基带信号往往包含有较多的低频成分,甚至有直流成分,而许多信道并不能传输这种低频分量或直流分量,因此必须对基带信号进行调制.最基本的二元制调制方法有以下几种.</p>
-<img src="/posts/undefined/3.png" title="p3">
+<img src="/posts/c5ff560c/3.png" title="p3">
 <ol type="1">
 <li>调幅(<code>AM</code>):载波的振幅随基带数字信号而变化.</li>
 <li>调频(<code>FM</code>):载波的频率随基带数字信号而变化.</li>
 <li>调相(<code>PM</code>):载波的初始相位随基带数字信号而变化.</li>
 </ol>
 <p>为了达到更高的信息传输速率,必须采用技术上更为复杂的多元制的振幅相位混合调制方法:正交振幅调制<code>QAM</code>.</p>
-<img src="/posts/undefined/11.png" title="p11">
+<img src="/posts/c5ff560c/11.png" title="p11">
 <p>图例可供选择的相位有<code>12</code>种,而对于每一种相位有<code>1</code>或<code>2</code>种振幅可供选择,总共有<code>16</code>种组合(对应四个比特),即<code>16</code>个码元.可以看出每个码元可以用一组极坐标来描述.码元不是越多越好,若每一个码元可表示的比特数越多,则在接收端进行解调时要正确识别每一种状态就越困难,出错率增加.</p>
 <h3 id="信道的极限容量">信道的极限容量</h3>
 <p>任何实际的信道都不是理想的,在传输信号时会产生各种失真以及带来多种干扰.码元传输的速率越高,或信号传输的距离越远,或传输媒体质量越差,在信道的输出端的波形的失真就越严重.</p>
@@ -612,7 +612,7 @@
 <li>理想带通信道的最高码元传输速率:<code>W Baud</code>.</li>
 </ul>
 <p>如果信道的频带越宽,也就是能够通过的信号高频分量多,那么就可以用更高的速率传送码元而不出现码间串扰.每码元的信息量越多,信道传输速率就越快.</p>
-<img src="/posts/undefined/8.png" title="p8">
+<img src="/posts/c5ff560c/8.png" title="p8">
 <h2 id="物理层下面的传输媒体">物理层下面的传输媒体</h2>
 <p>传输媒体也称为传输介质或传输媒介,它就是数据传输系统中在发送器和接收器之间的物理通路.传输媒体可分为两大类,即导引型传输媒体和非导引型传输媒体.</p>
 <ul>
@@ -623,7 +623,7 @@
 <h4 id="双绞线">双绞线</h4>
 <p>双绞线是最常用的传输媒体,可用于模拟传输和数字传输,通信距离一般为几到十几公里.分为屏蔽双绞线<code>STP</code>和无屏蔽双绞线<code>UTP</code>.<code>EIA/TIA-568-A</code>标准规定了<code>5</code>种<code>UTP</code>标准(从<code>1</code>类线到<code>5</code>类线),对传送数据来说,现在最常用的<code>UTP</code>是<code>5</code>类线(<code>Category 5</code>或<code>CAT5</code>).</p>
 <p>双绞线标准.<code>10Base-T</code>中<code>10</code>是指数据传输速率<code>10Mbps</code>.<code>Base</code>是指基带,<code>T</code>表示双绞线,指用于该网络的电缆.</p>
-<img src="/posts/undefined/12.png" title="p12">
+<img src="/posts/c5ff560c/12.png" title="p12">
 <h4 id="同轴电缆">同轴电缆</h4>
 <p>同轴电缆具有很好的抗干扰特性,被广泛用于传输较高速率的数据,同轴电缆的带宽取决于电缆的质量.</p>
 <ul>
@@ -663,7 +663,7 @@
 </ul>
 <p>假定<code>S</code>站要发送信息的数据率为<code>b bit/s</code>,由于每一个比特要转换成<code>m</code>个比特的码片,因此<code>S</code>站实际上发送的数据率提高到<code>mb bit/s</code>,同时<code>S</code>站所占用的频带宽度也提高到原来数值的<code>m</code>倍.这种通信方式是扩频通信中的一种.扩频通信通常有两类:直接序列扩频<code>DSSS</code>,码片序列就是这一类;跳频扩频<code>FHSS</code>.</p>
 <p>每个站分配的码片序列不仅必须各不相同，并且还必须互相正交,令向量<code>S</code>表示站<code>S</code>的码片向量(<code>0011</code>对应向量<code>(-1 -1 1 1)</code>),令<code>T</code>表示其他任何站的码片向量.两个不同站的码片序列正交就是向量<code>S</code>和<code>T</code>的规格化内积为<code>0</code>.而任何一个码片向量和该码片向量自己的规格化内积都是<code>1</code>,一个码片向量和该码片反码的向量的规格化内积值是<code>-1</code>.</p>
-<img src="/posts/undefined/21.png" title="p21">
+<img src="/posts/c5ff560c/21.png" title="p21">
 <h2 id="数字传输系统">数字传输系统</h2>
 <h3 id="时分复用pcm">时分复用PCM</h3>
 <p>脉码调制<code>PCM</code>技术将模拟信号转变为数字信号,<code>PCM</code>先对模拟信号进行采样,这里存在一个采样定理:要不失真的还原原始信号,采样频率不能低于信号最高频率的<code>2</code>倍.</p>
@@ -684,14 +684,14 @@
 <p><code>ADSL</code>的特点:上行和下行带宽是不对称的,上行指从用户到<code>ISP</code>,下行指从<code>ISP</code>到用户.<code>ADSL</code>在用户线的两端各安装一个<code>ADSL</code>调制解调器.</p>
 <p>离散多音调(多子信道)<code>DMT</code>调制技术.</p>
 <p><code>DMT</code>调制技术采用频分复用的方法把,<code>40kHz</code>以上一直到<code>1.1MHz</code>的高端频谱划分为许多子信道,其中<code>25</code>个子信道用于上行信道,<code>249</code>个子信道用于下行信道.每个子信道占据<code>4kHz</code>带宽(<code>4.3125kHz</code>)并使用不同的载波进行数字调制.这种做法相当于在一对用户线上使用许多小的调制解调器并行地传送数据.</p>
-<img src="/posts/undefined/25.png" title="p25">
+<img src="/posts/c5ff560c/25.png" title="p25">
 <p><code>ADSL2</code>(<code>G.992.3</code>和<code>G.992.4</code>)和<code>ADSL2+</code>(<code>G.992.5</code>)通过提高调制效率得到更高的数据率.<code>ADSL2</code>要求至少支持下行<code>8Mbit/s</code>,上行<code>800kbit/s</code>的速率.<code>ADSL2+</code>则将频谱范围从<code>1.1MHz</code>扩展至<code>2.2MHz</code>,下行速率可达<code>16Mbit/s</code>(最大传输速率可达<code>25Mbit/s</code>),而上行速率可达<code>800kbit/s</code>.</p>
 <p>采用无缝速率自适应技术<code>SRA</code>可在运营中不中断通信和不产生误码的情况下,自适应调整数据率.改善了线路质量评测和故障定位功能,这对提高网络的运行维护水平具有非常重要的意义.</p>
 <h3 id="光纤同轴混合网hfc">光纤同轴混合网HFC</h3>
 <p>光纤同轴混合网<code>HFC</code>网是在目前覆盖面很广的有线电视网<code>CATV</code>的基础上开发的一种居民宽带接入网.<code>HFC</code>网除可传送<code>CATV</code>外,还提供电话,数据和其他宽带交互型业务.</p>
 <p>现有的<code>CATV</code>网是树形拓扑结构的同轴电缆网络,它采用模拟技术的频分复用对电视节目进行单向传输,<code>HFC</code>网对<code>CATV</code>网进行了双向通信的改造.</p>
 <p><code>HFC</code>网将原<code>CATV</code>网中的同轴电缆主干部分改换为光纤并使用模拟光纤技术,在模拟光纤中采用光的振幅调制<code>AM</code>,比使用数字光纤更为经济.</p>
-<img src="/posts/undefined/26.png" title="p26">
+<img src="/posts/c5ff560c/26.png" title="p26">
 <h3 id="用户接口盒">用户接口盒</h3>
 <p>用户接口盒<code>UIB</code>提供三种连接.</p>
 <ol type="1">

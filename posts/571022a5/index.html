@@ -127,13 +127,13 @@
 <meta property="og:site_name" content="w4rd3n">
 <meta property="og:description" content="概览 kernel是一个软件,用于管理其他所有软件发出的数据I/O要求并将这其转义为指令交给CPU和计算机中的其他组件处理,并进行权限控制,系统调用,进程管理,内存管理等多项功能,kernel是现代操作系统最基本的部分.Intel CPU将CPU的特权级别分为4个级别:Ring 0 ~ 3.Ring 0只给OS使用,Ring 3所有程序都可以使用,内层Ring可以随便使用外层Ring的资源.">
 <meta property="og:locale" content="zh-CN">
-<meta property="og:image" content="https://hitworld.github.io/posts/undefined/2.png">
-<meta property="og:image" content="https://hitworld.github.io/posts/undefined/1.png">
-<meta property="og:updated_time" content="2020-11-23T13:15:41.575Z">
+<meta property="og:image" content="https://hitworld.github.io/posts/571022a5/2.png">
+<meta property="og:image" content="https://hitworld.github.io/posts/571022a5/1.png">
+<meta property="og:updated_time" content="2020-11-23T13:16:00.753Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="IS-pwn-Linux-kernel-基础">
 <meta name="twitter:description" content="概览 kernel是一个软件,用于管理其他所有软件发出的数据I/O要求并将这其转义为指令交给CPU和计算机中的其他组件处理,并进行权限控制,系统调用,进程管理,内存管理等多项功能,kernel是现代操作系统最基本的部分.Intel CPU将CPU的特权级别分为4个级别:Ring 0 ~ 3.Ring 0只给OS使用,Ring 3所有程序都可以使用,内层Ring可以随便使用外层Ring的资源.">
-<meta name="twitter:image" content="https://hitworld.github.io/posts/undefined/2.png">
+<meta name="twitter:image" content="https://hitworld.github.io/posts/571022a5/2.png">
 
 
 
@@ -545,7 +545,7 @@
 <p>大多数的现代操作系统只使用了<code>Ring 0</code>和<code>Ring 3</code>.且在<code>Linux</code>等现代操作系统中,虚拟内存地址通常被划分为内核空间和用户空间.内核地址空间由所有进程共享,但只有运行在内核态的进程才能访问,用户进程可以通过系统调用切换到内核态访问内核空间.</p>
 <p><code>linux</code>内核源码:<code>https://github.com/torvalds/linux</code>.<code>linux</code>内核源码在线查看:<code>https://elixir.bootlin.com/linux/latest/source</code>.</p>
 <p><code>linux</code>内核内存分布图:<code>https://elixir.bootlin.com/linux/v5.0/source/Documentation/x86/x86_64/mm.txt</code>.</p>
-<img src="/posts/undefined/2.png" title="p2">
+<img src="/posts/571022a5/2.png" title="p2">
 <h2 id="lkm">LKM</h2>
 <p>可加载核心模块(<code>LKM</code>)就是运行在内核空间的可执行程序,包括:驱动程序(如设备驱动,文件系统驱动),内核扩展模块(<code>modules</code>)等.</p>
 <p><code>LKM</code>的文件格式和用户态的可执行程序相同,后缀常常是<code>ko</code>,因此可以直接用<code>IDA</code>等工具来分析.模块不能单独运行(就像一个动态链接库),它在运行时被链接到内核作为内核的一部分在内核空间运行.</p>
@@ -592,7 +592,7 @@
 <li><code>Stack Protector</code>:关于函数返回地址的检测,属于<code>CFI</code>(<code>Control Flow Integrity</code>,控制流完整性保护)中的后向控制流完整性保护.</li>
 </ul>
 <p><code>CR4</code>寄存器用于存储内核的标志位.</p>
-<img src="/posts/undefined/1.png" title="p1">
+<img src="/posts/571022a5/1.png" title="p1">
 <h2 id="上传二进制文件">上传二进制文件</h2>
 <figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">exp_base = system(<span class="string">"base64 exp"</span>)</span><br><span class="line">r. sendline(<span class="string">"echo "</span> + exp_base + <span class="string">" &gt; exp.txt"</span>)</span><br><span class="line">r. sendline(<span class="string">"base64 -d exp.txt &gt; exp"</span>)</span><br></pre></td></tr></table></figure>
 

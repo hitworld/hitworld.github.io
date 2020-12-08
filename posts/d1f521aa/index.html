@@ -1,0 +1,1673 @@
+<!DOCTYPE html>
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+
+<html class="theme-next mist use-motion" lang="zh-CN">
+<head><meta name="generator" content="Hexo 3.8.0">
+  <!-- hexo-inject:begin --><!-- hexo-inject:end --><meta charset="UTF-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+
+
+
+
+
+
+  
+  
+    
+    
+  <script src="/lib/pace/pace.min.js?v=1.0.2"></script>
+  <link href="/lib/pace/pace-theme-minimal.min.css?v=1.0.2" rel="stylesheet">
+
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform">
+<meta http-equiv="Cache-Control" content="no-siteapp">
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css">
+
+<link href="/css/main.css?v=6.5.0" rel="stylesheet" type="text/css">
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon.png?v=6.5.0">
+
+
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32.png?v=6.5.0">
+
+
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16.png?v=6.5.0">
+
+
+  <link rel="mask-icon" href="/images/safari_pinned_tab.svg?v=6.5.0" color="#222">
+
+
+  <link rel="manifest" href="/images/manifest.json">
+
+
+  <meta name="msapplication-config" content="/images/browserconfig.xml">
+
+
+
+
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Mist',
+    version: '6.5.0',
+    sidebar: {"position":"left","display":"post","offset":12,"b2t":false,"scrollpercent":true,"onmobile":true},
+    fancybox: false,
+    fastclick: false,
+    lazyload: false,
+    tabs: true,
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+  
+
+
+
+
+  <meta name="description" content="概述 漏洞是在硬件,软件,协议的具体实现或系统安全策略上存在的缺陷,从而可以使攻击者能够在未授权的情况下访问或破坏系统.二进制漏洞就是指机器代码层面的漏洞. pwn即二进制漏洞利用,通过漏洞来提升权限或得到shell或达到某种目的. Linux进程内存布局 Linux系统在装载elf格式的程序文件时,会调用loader把可执行文件中的各个段依次载入到从某一地址开始的空间中,载入地址取决li">
+<meta name="keywords" content="Linux">
+<meta property="og:type" content="article">
+<meta property="og:title" content="IS-pwn-Linux-基础">
+<meta property="og:url" content="https://hitworld.github.io/posts/d1f521aa/index.html">
+<meta property="og:site_name" content="w4rd3n">
+<meta property="og:description" content="概述 漏洞是在硬件,软件,协议的具体实现或系统安全策略上存在的缺陷,从而可以使攻击者能够在未授权的情况下访问或破坏系统.二进制漏洞就是指机器代码层面的漏洞. pwn即二进制漏洞利用,通过漏洞来提升权限或得到shell或达到某种目的. Linux进程内存布局 Linux系统在装载elf格式的程序文件时,会调用loader把可执行文件中的各个段依次载入到从某一地址开始的空间中,载入地址取决li">
+<meta property="og:locale" content="zh-CN">
+<meta property="og:image" content="https://hitworld.github.io/posts/d1f521aa/1.png">
+<meta property="og:image" content="https://hitworld.github.io/posts/d1f521aa/2.png">
+<meta property="og:image" content="https://hitworld.github.io/posts/d1f521aa/4.png">
+<meta property="og:updated_time" content="2020-11-23T13:16:00.756Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="IS-pwn-Linux-基础">
+<meta name="twitter:description" content="概述 漏洞是在硬件,软件,协议的具体实现或系统安全策略上存在的缺陷,从而可以使攻击者能够在未授权的情况下访问或破坏系统.二进制漏洞就是指机器代码层面的漏洞. pwn即二进制漏洞利用,通过漏洞来提升权限或得到shell或达到某种目的. Linux进程内存布局 Linux系统在装载elf格式的程序文件时,会调用loader把可执行文件中的各个段依次载入到从某一地址开始的空间中,载入地址取决li">
+<meta name="twitter:image" content="https://hitworld.github.io/posts/d1f521aa/1.png">
+
+
+
+
+
+
+  <link rel="canonical" href="https://hitworld.github.io/posts/d1f521aa/">
+
+
+
+<script type="text/javascript" id="page.configurations">
+  CONFIG.page = {
+    sidebar: "",
+  };
+</script>
+
+  <title>IS-pwn-Linux-基础 | w4rd3n</title>
+  
+
+
+
+
+
+
+
+
+
+
+
+  <noscript>
+  <style type="text/css">
+    .use-motion .motion-element,
+    .use-motion .brand,
+    .use-motion .menu-item,
+    .sidebar-inner,
+    .use-motion .post-block,
+    .use-motion .pagination,
+    .use-motion .comments,
+    .use-motion .post-header,
+    .use-motion .post-body,
+    .use-motion .collection-title { opacity: initial; }
+
+    .use-motion .logo,
+    .use-motion .site-title,
+    .use-motion .site-subtitle {
+      opacity: initial;
+      top: initial;
+    }
+
+    .use-motion {
+      .logo-line-before i { left: initial; }
+      .logo-line-after i { right: initial; }
+    }
+  </style>
+</noscript><!-- hexo-inject:begin --><!-- hexo-inject:end -->
+
+</head>
+
+<body itemscope="" itemtype="http://schema.org/WebPage" lang="zh-CN">
+
+  
+  
+    
+  
+
+  <!-- hexo-inject:begin --><!-- hexo-inject:end --><div class="container sidebar-position-left page-post-detail">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope="" itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/" class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">w4rd3n</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+    
+      
+        <p class="site-subtitle">混吃等死</p>
+      
+    
+  </div>
+
+  <div class="site-nav-toggle">
+    <button aria-label="切换导航栏">
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+
+
+<nav class="site-nav">
+  
+    <ul id="menu" class="menu">
+      
+        
+        
+        
+          
+          <li class="menu-item menu-item-home">
+
+    
+    
+    
+      
+    
+
+    
+
+    <a href="/" rel="section"><i class="menu-item-icon fa fa-fw fa-home"></i> <br>首页</a>
+
+  </li>
+        
+        
+        
+          
+          <li class="menu-item menu-item-about">
+
+    
+    
+    
+      
+    
+
+    
+
+    <a href="/about/" rel="section"><i class="menu-item-icon fa fa-fw fa-user"></i> <br>友链</a>
+
+  </li>
+        
+        
+        
+          
+          <li class="menu-item menu-item-tags">
+
+    
+    
+    
+      
+    
+
+    
+
+    <a href="/tags/" rel="section"><i class="menu-item-icon fa fa-fw fa-tags"></i> <br>标签</a>
+
+  </li>
+        
+        
+        
+          
+          <li class="menu-item menu-item-categories">
+
+    
+    
+    
+      
+    
+
+    
+
+    <a href="/categories/" rel="section"><i class="menu-item-icon fa fa-fw fa-th"></i> <br>分类</a>
+
+  </li>
+        
+        
+        
+          
+          <li class="menu-item menu-item-archives">
+
+    
+    
+    
+      
+    
+
+    
+
+    <a href="/archives/" rel="section"><i class="menu-item-icon fa fa-fw fa-archive"></i> <br>归档</a>
+
+  </li>
+
+      
+      
+        <li class="menu-item menu-item-search">
+          
+            <a href="javascript:;" class="popup-trigger">
+          
+            
+              <i class="menu-item-icon fa fa-search fa-fw"></i> <br>搜索</a>
+        </li>
+      
+    </ul>
+  
+
+  
+    
+
+  
+
+  
+    <div class="site-search">
+      
+  <div class="popup search-popup local-search-popup">
+  <div class="local-search-header clearfix">
+    <span class="search-icon">
+      <i class="fa fa-search"></i>
+    </span>
+    <span class="popup-btn-close">
+      <i class="fa fa-times-circle"></i>
+    </span>
+    <div class="local-search-input-wrapper">
+      <input autocomplete="off" placeholder="搜索..." spellcheck="false" type="text" id="local-search-input">
+    </div>
+  </div>
+  <div id="local-search-result"></div>
+</div>
+
+
+
+    </div>
+  
+</nav>
+
+
+
+  
+
+
+
+</div>
+    </header>
+
+    
+
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  
+
+  <article class="post post-type-normal" itemscope="" itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="https://hitworld.github.io/posts/d1f521aa/">
+
+    <span hidden itemprop="author" itemscope="" itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="w4rd3n">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/apple-touch-icon.png">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope="" itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="w4rd3n">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">IS-pwn-Linux-基础
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+
+            
+            
+            
+
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+
+              
+                
+              
+
+              <time title="创建时间：2019-04-25 05:56:04" itemprop="dateCreated datePublished" datetime="2019-04-25T05:56:04+08:00">2019-04-25</time>
+            
+
+            
+          </span>
+
+          
+            <span class="post-category">
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope="" itemtype="http://schema.org/Thing"><a href="/categories/IS/" itemprop="url" rel="index"><span itemprop="name">IS</span></a></span>
+
+                
+                
+                  ，
+                
+              
+                <span itemprop="about" itemscope="" itemtype="http://schema.org/Thing"><a href="/categories/IS/pwn/" itemprop="url" rel="index"><span itemprop="name">pwn</span></a></span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+             <span id="/posts/d1f521aa/" class="leancloud_visitors" data-flag-title="IS-pwn-Linux-基础">
+               <span class="post-meta-divider">|</span>
+               <span class="post-meta-item-icon">
+                 <i class="fa fa-eye"></i>
+               </span>
+               
+                 <span class="post-meta-item-text">热度：</span>
+               
+                 <span class="leancloud-visitors-count"></span>
+                 <span>℃</span>
+             </span>
+          
+
+          
+
+          
+            <div class="post-symbolscount">
+              
+
+              
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-file-word-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">本文字数：</span>
+                
+                <span title="本文字数">6.8k</span>
+              
+
+              
+                <span class="post-meta-divider">|</span>
+              
+
+              
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-clock-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">阅读时长 &asymp;</span>
+                
+                <span title="阅读时长">6 分钟</span>
+              
+            </div>
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <h2 id="概述">概述</h2>
+<p>漏洞是在硬件,软件,协议的具体实现或系统安全策略上存在的缺陷,从而可以使攻击者能够在未授权的情况下访问或破坏系统.二进制漏洞就是指机器代码层面的漏洞.</p>
+<p><code>pwn</code>即二进制漏洞利用,通过漏洞来提升权限或得到<code>shell</code>或达到某种目的.</p>
+<h2 id="linux进程内存布局">Linux进程内存布局</h2>
+<p><code>Linux</code>系统在装载<code>elf</code>格式的程序文件时,会调用<code>loader</code>把可执行文件中的各个段依次载入到从某一地址开始的空间中,载入地址取决<code>link editor(ld)</code>和机器地址位数.</p>
+<p><code>32</code>位进程内存经典布局.</p>
+<img src="/posts/d1f521aa/1.png" title="p1">
+<p><code>64</code>与之类似.除了载入位置外最大的不同就是<code>Memory Mapping Segment</code>生长的方向不一样.</p>
+<img src="/posts/d1f521aa/2.png" title="p2">
+<p>内核数据结构<code>mm_struct</code>的成员变量<code>start_code</code>和<code>end_code</code>是进程代码段的起始和终止地址,<code>start_data</code>和<code>end_data</code>是进程数据段的起始和终止地址,<code>start_stack</code>是进程堆栈段起始地址,<code>start_brk</code>和<code>brk</code>是进程主分配区中<code>heap</code>的起始和终止地址.</p>
+<p>当<code>ELF</code>文件比较小的时候,不同区段可能会被多次映射.</p>
+<h2 id="预备知识">预备知识</h2>
+<p>前期主要为:<code>x86/x86-64</code>架构下<code>Linux</code>平台的<code>C</code>语言,汇编语言,<code>python</code>(写利用脚本),<code>Linux</code>常用操作,操作系统原理.</p>
+<p>不同<code>CPU</code>架构下的<code>Linux</code>在利用上区别大多体现在汇编语言(严格说是<code>ISA</code>)层面.</p>
+<h2 id="常见二进制漏洞">常见二进制漏洞</h2>
+<h3 id="非法写">非法写</h3>
+<p>常见的有堆溢出,栈溢出和数据段溢出.</p>
+<p>比如<code>gets</code>函数:从<code>stdio</code>流中读取字符串,直至接受到换行符或<code>EOF</code>时停止,并将读取的结果存放在<code>buffer</code>指针所指向的内存(字符指针)中.换行符不作为读取串的内容,读取的换行符被转换为<code>'\0'</code>空字符.</p>
+<p>然而函数的设计者没有考虑如果输入的内容超过字符数组的长度会怎么样.</p>
+<p>从<code>C</code>语言可以知道,指针的值是一个地址,大部分时候字符串数组都是局部变量,而局部变量存储在栈中,并且内存大小确定.那么如果输入的内容超过字符数组的长度,则数组本身的内存就容不下这么多"字符"了,就会溢出到其他内存.而发生在栈中的溢出就叫做栈溢出,由于栈的设计和函数调用的设计,使得栈溢出可以造成很大的危害.</p>
+<p>常见的危险函数:<code>gets</code>,<code>scanf</code>,<code>strcpy</code>,<code>sprintf</code>,<code>memcpy</code>,<code>strcat</code>等.</p>
+<p>与其类似的还有数组越界,<code>read</code>函数的<code>size</code>参数过大等等.这一类漏洞的特点就是用户可以通过输入修改一些程序设计者不想其修改的数据,甚至还有程序逻辑的缺陷(栈溢出中易实现).</p>
+<h3 id="非法读">非法读</h3>
+<p>这种漏洞也叫做泄露,这种漏洞主要作用是泄露信息以方便绕过程序保护机制,有的时候也可以直接通过泄露获取目的信息.</p>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//某函数内</span></span><br><span class="line"><span class="keyword">char</span> a[<span class="number">16</span>];</span><br><span class="line"></span><br><span class="line">read(<span class="number">0</span>, a, <span class="number">160</span>);</span><br><span class="line"><span class="built_in">puts</span>(a);</span><br></pre></td></tr></table></figure>
+<p>上述代码生成的程序如果输入中不带<code>\0</code>,那么就会输出栈中数据(遇<code>\0</code>截断),比如栈地址,残留<code>libc</code>地址,<code>canary</code>等.</p>
+<p>栈地址可以用来通过相对地址差求出缓冲区等栈上的地址,从而设计并利用漏洞.残留<code>libc</code>地址可以用来通过二进制文件函数和全局变量偏移固定求出加载机制(常用在<code>libc</code>).</p>
+<p>这些运用的原理都是基于虽然随机化了段加载的基址,但同一个段中偏移固定.</p>
+<h3 id="函数实现缺陷">函数实现缺陷</h3>
+<p>典型例子.</p>
+<ul>
+<li><code>abs(0x80000000) == 0x80000000;</code>.</li>
+<li><code>scanf("%d", &amp;x);</code>,如果输入<code>+\n</code>会导致<code>scanf</code>正常执行但是不改变<code>x</code>.</li>
+</ul>
+<h3 id="整数溢出">整数溢出</h3>
+<p>当程序中的数据超过其数据类型的范围就会造成溢出,整数类型的溢出被称为整数溢出.这种情况可能会导致越界写等漏洞.</p>
+<h3 id="条件竞争">条件竞争</h3>
+<p>条件竞争是指一个系统的运行结果依赖于不受控制的事件的先后顺序,这些不受控制的事件没有按照开发者想要的方式运行时,就会出现<code>bug</code>.</p>
+<p>条件竞争需要如下的条件.</p>
+<ul>
+<li>并发,即至少存在两个并发执行流.这里的执行流包括线程,进程,任务等级别的执行流.</li>
+<li>共享对象,即多个并发流会访问同一对象.常见的共享对象有共享内存,文件系统,信号.称访问共享对象的代码为临界区,在正常写代码时这部分应该加锁.</li>
+<li>改变对象,即至少有一个控制流会改变竞争对象的状态.因为如果程序只是对对象进行读操作,那么并不会产生条件竞争.</li>
+</ul>
+<p>典型的有文件读写的问题.</p>
+<h2 id="程序的运行">程序的运行</h2>
+<p>以<code>ELF</code>文件的运行为例.当执行<code>./test</code>时发生了什么.</p>
+<ul>
+<li><code>shell</code>读取命令发现这是一个执行命令.调用<code>fork()</code>并在子进程中执行<code>execve("./test", *argv[], *envp[])</code>.</li>
+<li><code>execve</code>系统调用会使进程陷入内核态,调用<code>sys_execve -&gt; do_execve -&gt; ...</code>(<code>sys_execve</code>检测<code>execve</code>的后两个参数,<code>do_execve</code>判断文件类型并调用对应的处理器),最后调用<code>load_elf_binary</code>解析文件头,如果程序为动态链接则通过<code>.interp</code>确定加载器路径,然后通过程序头表加载<code>ELF</code>文件,最后修改<code>sys_execve</code>返回地址返回用户态(动态链接返回<code>ld.so</code>的<code>entry point</code>,静态链接返回<code>ELF</code>的<code>entry point</code>)).</li>
+<li>动态链接情况下,<code>ld.so</code>会进行映射共享库,初始化<code>GOT</code>等操作,最后返回<code>ELF</code>的<code>entry point</code>.</li>
+<li><code>ELF</code>的<code>entry point</code>一般为<code>_start</code>,负责将环境变量指针,<code>.init</code>指针和<code>.fini</code>指针传给<code>libc_start_main</code>函数.</li>
+<li><code>libc_start_main</code>函数依次调用<code>.init</code>,<code>main</code>,<code>.fini</code>,最后执行<code>exit</code>结束程序的运行.</li>
+</ul>
+<h2 id="栈">栈</h2>
+<p>栈是一片内存区域,本质上是一个内核数据结构,保存了一个函数调用时所需要的维护信息,包括局部变量,返回地址,函数参数等.从栈底开始(也就是最开始)保存的依次为运行的环境变量,命令行参数,函数栈帧.</p>
+<p>也可以说栈是程序时用来保存局部变量,返回地址和其他需要保存的值的一片内存区域(也是一个<code>FILO</code>的数据结构).</p>
+<p>其栈顶的值保存在寄存器<code>esp</code>(<code>32</code>位环境),栈底的值由操作系统决定.且栈顶小于栈底,也就是说栈是向下增长的.</p>
+<h2 id="延时绑定">延时绑定</h2>
+<p>首先编译程序可以选择动态链接和静态链接.</p>
+<p>静态链接把所有使用的函数库函数(一般一个函数一个文件)链接到目标文件,这样会让可执行文件大小变大,同时运行时物理内存中会多次映射同一个函数,但运行速度快.</p>
+<p>延时绑定基于动态链接,动态链接并不把目标文件和函数库文件链接在一起,而是等到程序在装载或运行过程中链接函数库.(这样用同一函数库的进程可以共用这个函数库,节约内存和磁盘)</p>
+<p>动态链接会在调用库函数的地方打桩(<code>stub</code>),然后通过<code>plt</code>和<code>dl_runtime_resolve</code>函数实现,链接后地址存储在<code>.got</code>表.</p>
+<p>延时绑定有以下特点.</p>
+<ul>
+<li>最开始<code>.got</code>表表项不是真正的函数地址.在第一次调用触发延时绑定后才被改为真正的地址.</li>
+<li>调用库函数时会将<code>.got</code>表表项当做函数地址.</li>
+<li>每个<code>plt</code>表项都是一段对对应库函数的调用代码.</li>
+</ul>
+<h2 id="线程局部存储">线程局部存储</h2>
+<p><code>TLS</code>是为了避免多个线程同时访存同一全局变量或者静态变量时所导致的冲突,尤其是多个线程同时需要修改这一变量时.</p>
+<p>通过<code>TLS</code>机制为每一个使用该全局变量的线程都提供一个变量值的副本,每一个线程均可以独立地改变自己的副本,而不会和其它线程的副本冲突.这个机制在不同的架构和操作系统上的实现不同.</p>
+<p><code>x86-64</code>的<code>linux</code>中由<code>glibc</code>实现该机制,在<code>glibc</code>实现中,每个线程有一个对应的结构体<code>tcbhead_t</code>,被指向段寄存器<code>fs</code>(<code>x86-64</code>).</p>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">typedef</span> <span class="class"><span class="keyword">struct</span> &#123;</span></span><br><span class="line">  <span class="keyword">void</span> *tcb;</span><br><span class="line">  <span class="keyword">dtv_t</span> *dtv;</span><br><span class="line">  <span class="keyword">void</span> *self;</span><br><span class="line">  <span class="keyword">int</span> multiple_threads;</span><br><span class="line">  <span class="keyword">int</span> gscope_flag;</span><br><span class="line">  <span class="keyword">uintptr_t</span> sysinfo;</span><br><span class="line">  <span class="keyword">uintptr_t</span> stack_guard;</span><br><span class="line">  <span class="keyword">uintptr_t</span> pointer_guard;</span><br><span class="line">  <span class="comment">//...</span></span><br><span class="line">&#125; <span class="keyword">tcbhead_t</span>;</span><br></pre></td></tr></table></figure>
+<p>线程在<code>pthread_create</code>的帮助下创建,然后给这个新线程选择<code>TLS</code>,为栈分配内存后<code>glibc</code>在内存的高地址初始化<code>TLS</code>,在<code>x86-64</code>架构上,栈向下增长,将<code>TLS</code>放在栈顶部.</p>
+<p>从<code>TLS</code>中减去一个特定的常量值得到被新线程的<code>stack register</code>所使用的值.从<code>TLS</code>到<code>pthread_create</code>的函数参数传递栈帧的距离小于一页.</p>
+<h2 id="加载其他版本ld和libc">加载其他版本ld和libc</h2>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">from</span> pwn <span class="keyword">import</span> *</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">change_ld</span><span class="params">(binary, ld)</span>:</span></span><br><span class="line">    binary = ELF(binary)</span><br><span class="line">    <span class="keyword">for</span> segment <span class="keyword">in</span> binary.segments:</span><br><span class="line">        <span class="keyword">if</span> segment.header[<span class="string">'p_type'</span>] == <span class="string">'PT_INTERP'</span>:</span><br><span class="line">            size = segment.header[<span class="string">'p_memsz'</span>]</span><br><span class="line">            addr = segment.header[<span class="string">'p_paddr'</span>]</span><br><span class="line">            data = segment.data()</span><br><span class="line">            <span class="keyword">if</span> size &lt;= len(ld):</span><br><span class="line">                log.failure(<span class="string">"Failed to change PT_INTERP from &#123;&#125; to &#123;&#125;"</span>.format(data, ld))</span><br><span class="line">                <span class="keyword">return</span> <span class="keyword">None</span></span><br><span class="line">            binary.write(addr, ld.ljust(size, <span class="string">'\0'</span>))</span><br><span class="line">            <span class="keyword">if</span> <span class="keyword">not</span> os.access(<span class="string">'/tmp/pwn'</span>, os.F_OK): os.mkdir(<span class="string">'/tmp/pwn'</span>)</span><br><span class="line">            path = <span class="string">'/tmp/pwn/&#123;&#125;_debug'</span>.format(os.path.basename(binary.path))</span><br><span class="line">            <span class="keyword">if</span> os.access(path, os.F_OK):</span><br><span class="line">                os.remove(path)</span><br><span class="line">                info(<span class="string">"Removing exist file &#123;&#125;"</span>.format(path))</span><br><span class="line">            binary.save(path)</span><br><span class="line">            os.chmod(path, <span class="number">0b111000000</span>)</span><br><span class="line">    <span class="keyword">return</span> ELF(path)</span><br><span class="line"></span><br><span class="line">elf = change_ld(<span class="string">'./chall'</span>, <span class="string">'./ld-2.29.so'</span>)</span><br><span class="line">r = elf.process(env = &#123;<span class="string">'LD_PRELOAD'</span> : <span class="string">'./libc-2.29.so'</span>&#125;)</span><br></pre></td></tr></table></figure>
+<h2 id="运行与调试不同架构程序">运行与调试不同架构程序</h2>
+<p>对于不同架构的程序可以通过<code>qemu</code>和对应动态库运行.</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">qemu-arm -L /usr/arm-linux-gnueabi -g 1234 ./pwn</span><br><span class="line">qemu-aarch64 -L /usr/aarch64-linux-gnu -g 1234 ./pwn</span><br></pre></td></tr></table></figure>
+<p>调试.</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">gdb-multiarch</span><br><span class="line">file pwn</span><br><span class="line">target remote :1234</span><br></pre></td></tr></table></figure>
+<p>根据需要安装共享库.以<code>mips</code>为例.</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">apt-cache search <span class="string">"libc6"</span> | grep mips</span><br></pre></td></tr></table></figure>
+<h2 id="程序保护">程序保护</h2>
+<p>由于二进制漏洞日益增多,相应的产生了很多保护机制.</p>
+<p>使用<code>checksec</code>检测程序保护措施.</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">checksec [fileName]</span><br></pre></td></tr></table></figure>
+<h3 id="aslr">ASLR</h3>
+<p><code>Address Space Layout Randomization</code>(地址空间随机化).</p>
+<p>随机生成进程地址空间(例如栈,库和基于<code>brk</code>的堆)的关键部分的起始地址.</p>
+<p>由<code>/proc/sys/kernel/randomize_va_space</code>决定,有以下三种情况.</p>
+<ul>
+<li><code>0</code> - 表示关闭进程地址空间随机化.</li>
+<li><code>1</code> - 表示将<code>mmap</code>的基址,<code>stack</code>和<code>vDSO</code>页面随机化.</li>
+<li><code>2</code> - 表示在<code>1</code>的基础上增加<code>heap</code>的随机化.</li>
+</ul>
+<h4 id="off2lib">Off2lib</h4>
+<ul>
+<li><p><code>Linux Kernel &lt; 3.18</code>.</p></li>
+<li><p><code>PIE enabled</code>情況下<code>image</code>之间的<code>offset</code>固定.</p></li>
+<li><p>可由<code>code image</code>推出所有<code>mapping</code>.</p></li>
+<li><p><code>kernel</code>版本不同<code>offset</code>也有差异.</p></li>
+<li><p><code>Fixed kernel &gt;= 3.18</code>.</p></li>
+<li><p>无法由<code>code</code>段推出<code>libc</code>位置.</p></li>
+<li><p>但可以用<code>libc</code>推出<code>mmap</code>及其他<code>Library</code>的位置.</p></li>
+</ul>
+<img src="/posts/d1f521aa/4.png" title="p4">
+<h3 id="stack-canary">stack Canary</h3>
+<p>在栈中保存的<code>ebp</code>和局部变量之间维护一个变量,函数执行完的时候检测这个值是否改变来检测栈是否被破坏.(这个值每个进程唯一).</p>
+<p><code>Linux</code>程序的<code>Canary</code>保护是通过<code>gcc</code>编译选项来控制的. - <code>-fstack-protector</code>:启用堆栈保护.不过只为局部变量中含有<code>char</code>数组的函数插入保护代码. - <code>-fstack-protector-strong</code>:启用堆栈保护.比前者广. - <code>-fstack-protector-all</code>:启用堆栈保护,为所有函数插入保护代码. - <code>-fno-stack-protector</code>:禁用堆栈保护,为默认选项.</p>
+<p>这个值会先存放在<code>TLS</code>区段的<code>tcbhead_t</code>结构中,<code>x86</code>架构中寄存器<code>gs</code>指向该结构,<code>x86-64</code>中寄存器<code>fs</code>指向该结构.</p>
+<h3 id="nx">NX</h3>
+<p>属于<code>DEP</code>技术,堆栈不可执行,防止<code>shellcode</code>的执行.早期通过<code>jmp esp</code>这一特殊的机器代码,使控制流到栈上,然后在栈上写<code>shellcode</code>.</p>
+<p>通过映射页的时候设置页的<code>rwx</code>属性中的<code>x</code>实现,可以通过<code>mprotect</code>函数改变页属性从而执行<code>shellcode</code>,或者使用<code>ROP</code>绕过.</p>
+<p><code>gcc</code>编译器默认开启了<code>NX</code>选项,如果需要关闭<code>NX</code>选项,可以添加<code>-z execstack</code>参数.</p>
+<h3 id="pie">PIE</h3>
+<p>地址无关可执行文件,可执行文件每次运行加载的基址随机化,需要操作系统支持.</p>
+<p><code>fPIE</code>不能用于编译库(<code>so</code>),<code>PIE</code>默认不开启,<code>-no-pie</code>显式关闭.</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">gcc -o <span class="built_in">test</span> test.c				      // 默认情况下,不开启PIE</span><br><span class="line">gcc -fpie -pie -o <span class="built_in">test</span> test.c		// 开启PIE,此时强度为1</span><br><span class="line">gcc -fPIE -pie -o <span class="built_in">test</span> test.c		// 开启PIE,此时为最高强度2</span><br><span class="line">gcc -fpic -o <span class="built_in">test</span> test.c		    // 开启PIC,此时强度为1,不会开启PIE</span><br><span class="line">gcc -fPIC -o <span class="built_in">test</span> test.c		    // 开启PIC,此时为最高强度2,不会开启PIE</span><br></pre></td></tr></table></figure>
+<h3 id="relro">RELRO</h3>
+<p><code>Relocation Read-Only</code>,重定位表只读.</p>
+<p>具体选项:<code>Disabled</code>,<code>.got/.got.plt</code>都可写;<code>Partial</code>,<code>got</code>表可写;<code>Full</code>,<code>got</code>表不可写.</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">gcc -o <span class="built_in">test</span> test.c						  // 默认情况下,是Partial RELRO</span><br><span class="line">gcc -z norelro -o <span class="built_in">test</span> test.c	  // 关闭,即No RELRO</span><br><span class="line">gcc -z lazy -o <span class="built_in">test</span> test.c			// 部分开启,即Partial RELRO</span><br><span class="line">gcc -z now -o <span class="built_in">test</span> test.c				// 全部开启,即Full RELRO</span><br></pre></td></tr></table></figure>
+<h3 id="fortify">FORTIFY</h3>
+<p>用于检查是否存在缓冲区溢出的错误,限制<code>%n</code>等格式化操作符,针对的是字符串,内存操作函数,例如<code>memcpy</code>,<code>memset</code>,<code>strcpy</code>,<code>strcats</code>,<code>snprintf</code>等等.</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">$ gcc -o <span class="built_in">test</span> test.c                          // 默认不会开启检查</span><br><span class="line">$ gcc -D_FORTIFY_SOURCE=1 -o <span class="built_in">test</span> test.c      // 仅在编译时检查</span><br><span class="line">$ gcc -D_FORTIFY_SOURCE=2 -o <span class="built_in">test</span> test.c      // 在程序运行时也会检查,如果判断到缓冲区溢出则会直接终止程序</span><br></pre></td></tr></table></figure>
+
+      
+    </div>
+
+    
+
+    
+    
+    
+
+    
+
+    
+       
+    
+    
+
+    
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/Linux/" rel="tag"><i class="fa fa-tag"></i> Linux</a>
+          
+        </div>
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/posts/f92e4c21/" rel="next" title="IS-reverse-Windows-基础">
+                <i class="fa fa-chevron-left"></i> IS-reverse-Windows-基础
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/posts/eb1fae06/" rel="prev" title="IS-pwn-Linux-栈溢出概览">
+                IS-pwn-Linux-栈溢出概览 <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+  </div>
+
+
+          </div>
+          
+
+  
+
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    
+      <div id="sidebar-dimmer"></div>
+    
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview-wrap sidebar-panel">
+        <div class="site-overview">
+          <div class="site-author motion-element" itemprop="author" itemscope="" itemtype="http://schema.org/Person">
+            
+              <img class="site-author-image" itemprop="image" src="/images/apple-touch-icon.png" alt="w4rd3n">
+            
+              <p class="site-author-name" itemprop="name">w4rd3n</p>
+              <p class="site-description motion-element" itemprop="description"></p>
+          </div>
+
+          
+            <nav class="site-state motion-element">
+              
+                <div class="site-state-item site-state-posts">
+                
+                  <a href="/archives/">
+                
+                    <span class="site-state-item-count">169</span>
+                    <span class="site-state-item-name">日志</span>
+                  </a>
+                </div>
+              
+
+              
+                
+                
+                <div class="site-state-item site-state-categories">
+                  <a href="/categories/index.html">
+                    
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                    <span class="site-state-item-count">15</span>
+                    <span class="site-state-item-name">分类</span>
+                  </a>
+                </div>
+              
+
+              
+                
+                
+                <div class="site-state-item site-state-tags">
+                  <a href="/tags/index.html">
+                    
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                    <span class="site-state-item-count">40</span>
+                    <span class="site-state-item-name">标签</span>
+                  </a>
+                </div>
+              
+            </nav>
+          
+
+          
+
+          
+            <div class="links-of-author motion-element">
+              
+                <span class="links-of-author-item">
+                  
+                  
+                    
+                  
+                  
+                    
+                  
+                  <a href="https://github.com/hitworld" title="GitHub &rarr; https://github.com/hitworld" rel="noopener" target="_blank"><i class="fa fa-fw fa-github"></i>GitHub</a>
+                </span>
+              
+            </div>
+          
+
+          
+
+          
+          
+
+          
+            
+          
+          
+
+        </div>
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#概述"><span class="nav-number">1.</span> <span class="nav-text">概述</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#linux进程内存布局"><span class="nav-number">2.</span> <span class="nav-text">Linux进程内存布局</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#预备知识"><span class="nav-number">3.</span> <span class="nav-text">预备知识</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#常见二进制漏洞"><span class="nav-number">4.</span> <span class="nav-text">常见二进制漏洞</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#非法写"><span class="nav-number">4.1.</span> <span class="nav-text">非法写</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#非法读"><span class="nav-number">4.2.</span> <span class="nav-text">非法读</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#函数实现缺陷"><span class="nav-number">4.3.</span> <span class="nav-text">函数实现缺陷</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#整数溢出"><span class="nav-number">4.4.</span> <span class="nav-text">整数溢出</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#条件竞争"><span class="nav-number">4.5.</span> <span class="nav-text">条件竞争</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#程序的运行"><span class="nav-number">5.</span> <span class="nav-text">程序的运行</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#栈"><span class="nav-number">6.</span> <span class="nav-text">栈</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#延时绑定"><span class="nav-number">7.</span> <span class="nav-text">延时绑定</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#线程局部存储"><span class="nav-number">8.</span> <span class="nav-text">线程局部存储</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#加载其他版本ld和libc"><span class="nav-number">9.</span> <span class="nav-text">加载其他版本ld和libc</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#运行与调试不同架构程序"><span class="nav-number">10.</span> <span class="nav-text">运行与调试不同架构程序</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#程序保护"><span class="nav-number">11.</span> <span class="nav-text">程序保护</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#aslr"><span class="nav-number">11.1.</span> <span class="nav-text">ASLR</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#off2lib"><span class="nav-number">11.1.1.</span> <span class="nav-text">Off2lib</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#stack-canary"><span class="nav-number">11.2.</span> <span class="nav-text">stack Canary</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#nx"><span class="nav-number">11.3.</span> <span class="nav-text">NX</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#pie"><span class="nav-number">11.4.</span> <span class="nav-text">PIE</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#relro"><span class="nav-number">11.5.</span> <span class="nav-text">RELRO</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#fortify"><span class="nav-number">11.6.</span> <span class="nav-text">FORTIFY</span></a></li></ol></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright">&copy; <span itemprop="copyrightYear">2020</span>
+  <span class="with-love" id="animate">
+    <i class="fa fa-gg-circle"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">w4rd3n</span>
+
+  
+    <span class="post-meta-divider">|</span>
+    <span class="post-meta-item-icon">
+      <i class="fa fa-area-chart"></i>
+    </span>
+    
+    <span title="站点总字数">788k</span>
+  
+
+  
+    <span class="post-meta-divider">|</span>
+    <span class="post-meta-item-icon">
+      <i class="fa fa-coffee"></i>
+    </span>
+    
+    <span title="站点阅读时长">11:56</span>
+  
+</div>
+
+
+
+
+
+
+
+
+
+        
+<div class="busuanzi-count">
+  <script async src="https://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+  
+    <span class="site-uv" title="总访客量">
+      <i class="fa fa-user"></i>
+      <span class="busuanzi-value" id="busuanzi_value_site_uv"></span>
+    </span>
+  
+
+  
+    <span class="site-pv" title="总访问量">
+      <i class="fa fa-eye"></i>
+      <span class="busuanzi-value" id="busuanzi_value_site_pv"></span>
+    </span>
+  
+</div>
+
+
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+          <span id="scrollpercent"><span>0</span>%</span>
+        
+      </div>
+    
+
+    
+	
+    
+
+    
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+    
+      
+  
+  <script type="text/javascript" color="0,0,255" opacity="0.5" zindex="-1" count="99" src="/lib/canvas-nest/canvas-nest.min.js"></script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+  
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=6.5.0"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=6.5.0"></script>
+
+
+
+  
+  
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=6.5.0"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=6.5.0"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=6.5.0"></script>
+
+
+
+  
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+  
+
+  <script type="text/javascript">
+    // Popup Window;
+    var isfetched = false;
+    var isXml = true;
+    // Search DB path;
+    var search_path = "search.xml";
+    if (search_path.length === 0) {
+      search_path = "search.xml";
+    } else if (/json$/i.test(search_path)) {
+      isXml = false;
+    }
+    var path = "/" + search_path;
+    // monitor main search box;
+
+    var onPopupClose = function (e) {
+      $('.popup').hide();
+      $('#local-search-input').val('');
+      $('.search-result-list').remove();
+      $('#no-result').remove();
+      $(".local-search-pop-overlay").remove();
+      $('body').css('overflow', '');
+    }
+
+    function proceedsearch() {
+      $("body")
+        .append('<div class="search-popup-overlay local-search-pop-overlay"></div>')
+        .css('overflow', 'hidden');
+      $('.search-popup-overlay').click(onPopupClose);
+      $('.popup').toggle();
+      var $localSearchInput = $('#local-search-input');
+      $localSearchInput.attr("autocapitalize", "none");
+      $localSearchInput.attr("autocorrect", "off");
+      $localSearchInput.focus();
+    }
+
+    // search function;
+    var searchFunc = function(path, search_id, content_id) {
+      'use strict';
+
+      // start loading animation
+      $("body")
+        .append('<div class="search-popup-overlay local-search-pop-overlay">' +
+          '<div id="search-loading-icon">' +
+          '<i class="fa fa-spinner fa-pulse fa-5x fa-fw"></i>' +
+          '</div>' +
+          '</div>')
+        .css('overflow', 'hidden');
+      $("#search-loading-icon").css('margin', '20% auto 0 auto').css('text-align', 'center');
+
+      
+
+      $.ajax({
+        url: path,
+        dataType: isXml ? "xml" : "json",
+        async: true,
+        success: function(res) {
+          // get the contents from search data
+          isfetched = true;
+          $('.popup').detach().appendTo('.header-inner');
+          var datas = isXml ? $("entry", res).map(function() {
+            return {
+              title: $("title", this).text(),
+              content: $("content",this).text(),
+              url: $("url" , this).text()
+            };
+          }).get() : res;
+          var input = document.getElementById(search_id);
+          var resultContent = document.getElementById(content_id);
+          var inputEventFunction = function() {
+            var searchText = input.value.trim().toLowerCase();
+            var keywords = searchText.split(/[\s\-]+/);
+            if (keywords.length > 1) {
+              keywords.push(searchText);
+            }
+            var resultItems = [];
+            if (searchText.length > 0) {
+              // perform local searching
+              datas.forEach(function(data) {
+                var isMatch = false;
+                var hitCount = 0;
+                var searchTextCount = 0;
+                var title = data.title.trim();
+                var titleInLowerCase = title.toLowerCase();
+                var content = data.content.trim().replace(/<[^>]+>/g,"");
+                
+                var contentInLowerCase = content.toLowerCase();
+                var articleUrl = decodeURIComponent(data.url);
+                var indexOfTitle = [];
+                var indexOfContent = [];
+                // only match articles with not empty titles
+                if(title != '') {
+                  keywords.forEach(function(keyword) {
+                    function getIndexByWord(word, text, caseSensitive) {
+                      var wordLen = word.length;
+                      if (wordLen === 0) {
+                        return [];
+                      }
+                      var startPosition = 0, position = [], index = [];
+                      if (!caseSensitive) {
+                        text = text.toLowerCase();
+                        word = word.toLowerCase();
+                      }
+                      while ((position = text.indexOf(word, startPosition)) > -1) {
+                        index.push({position: position, word: word});
+                        startPosition = position + wordLen;
+                      }
+                      return index;
+                    }
+
+                    indexOfTitle = indexOfTitle.concat(getIndexByWord(keyword, titleInLowerCase, false));
+                    indexOfContent = indexOfContent.concat(getIndexByWord(keyword, contentInLowerCase, false));
+                  });
+                  if (indexOfTitle.length > 0 || indexOfContent.length > 0) {
+                    isMatch = true;
+                    hitCount = indexOfTitle.length + indexOfContent.length;
+                  }
+                }
+
+                // show search results
+
+                if (isMatch) {
+                  // sort index by position of keyword
+
+                  [indexOfTitle, indexOfContent].forEach(function (index) {
+                    index.sort(function (itemLeft, itemRight) {
+                      if (itemRight.position !== itemLeft.position) {
+                        return itemRight.position - itemLeft.position;
+                      } else {
+                        return itemLeft.word.length - itemRight.word.length;
+                      }
+                    });
+                  });
+
+                  // merge hits into slices
+
+                  function mergeIntoSlice(text, start, end, index) {
+                    var item = index[index.length - 1];
+                    var position = item.position;
+                    var word = item.word;
+                    var hits = [];
+                    var searchTextCountInSlice = 0;
+                    while (position + word.length <= end && index.length != 0) {
+                      if (word === searchText) {
+                        searchTextCountInSlice++;
+                      }
+                      hits.push({position: position, length: word.length});
+                      var wordEnd = position + word.length;
+
+                      // move to next position of hit
+
+                      index.pop();
+                      while (index.length != 0) {
+                        item = index[index.length - 1];
+                        position = item.position;
+                        word = item.word;
+                        if (wordEnd > position) {
+                          index.pop();
+                        } else {
+                          break;
+                        }
+                      }
+                    }
+                    searchTextCount += searchTextCountInSlice;
+                    return {
+                      hits: hits,
+                      start: start,
+                      end: end,
+                      searchTextCount: searchTextCountInSlice
+                    };
+                  }
+
+                  var slicesOfTitle = [];
+                  if (indexOfTitle.length != 0) {
+                    slicesOfTitle.push(mergeIntoSlice(title, 0, title.length, indexOfTitle));
+                  }
+
+                  var slicesOfContent = [];
+                  while (indexOfContent.length != 0) {
+                    var item = indexOfContent[indexOfContent.length - 1];
+                    var position = item.position;
+                    var word = item.word;
+                    // cut out 100 characters
+                    var start = position - 20;
+                    var end = position + 80;
+                    if(start < 0){
+                      start = 0;
+                    }
+                    if (end < position + word.length) {
+                      end = position + word.length;
+                    }
+                    if(end > content.length){
+                      end = content.length;
+                    }
+                    slicesOfContent.push(mergeIntoSlice(content, start, end, indexOfContent));
+                  }
+
+                  // sort slices in content by search text's count and hits' count
+
+                  slicesOfContent.sort(function (sliceLeft, sliceRight) {
+                    if (sliceLeft.searchTextCount !== sliceRight.searchTextCount) {
+                      return sliceRight.searchTextCount - sliceLeft.searchTextCount;
+                    } else if (sliceLeft.hits.length !== sliceRight.hits.length) {
+                      return sliceRight.hits.length - sliceLeft.hits.length;
+                    } else {
+                      return sliceLeft.start - sliceRight.start;
+                    }
+                  });
+
+                  // select top N slices in content
+
+                  var upperBound = parseInt('1');
+                  if (upperBound >= 0) {
+                    slicesOfContent = slicesOfContent.slice(0, upperBound);
+                  }
+
+                  // highlight title and content
+
+                  function highlightKeyword(text, slice) {
+                    var result = '';
+                    var prevEnd = slice.start;
+                    slice.hits.forEach(function (hit) {
+                      result += text.substring(prevEnd, hit.position);
+                      var end = hit.position + hit.length;
+                      result += '<b class="search-keyword">' + text.substring(hit.position, end) + '</b>';
+                      prevEnd = end;
+                    });
+                    result += text.substring(prevEnd, slice.end);
+                    return result;
+                  }
+
+                  var resultItem = '';
+
+                  if (slicesOfTitle.length != 0) {
+                    resultItem += "<li><a href='" + articleUrl + "' class='search-result-title'>" + highlightKeyword(title, slicesOfTitle[0]) + "</a>";
+                  } else {
+                    resultItem += "<li><a href='" + articleUrl + "' class='search-result-title'>" + title + "</a>";
+                  }
+
+                  slicesOfContent.forEach(function (slice) {
+                    resultItem += "<a href='" + articleUrl + "'>" +
+                      "<p class=\"search-result\">" + highlightKeyword(content, slice) +
+                      "...</p>" + "</a>";
+                  });
+
+                  resultItem += "</li>";
+                  resultItems.push({
+                    item: resultItem,
+                    searchTextCount: searchTextCount,
+                    hitCount: hitCount,
+                    id: resultItems.length
+                  });
+                }
+              })
+            };
+            if (keywords.length === 1 && keywords[0] === "") {
+              resultContent.innerHTML = '<div id="no-result"><i class="fa fa-search fa-5x" /></div>'
+            } else if (resultItems.length === 0) {
+              resultContent.innerHTML = '<div id="no-result"><i class="fa fa-frown-o fa-5x" /></div>'
+            } else {
+              resultItems.sort(function (resultLeft, resultRight) {
+                if (resultLeft.searchTextCount !== resultRight.searchTextCount) {
+                  return resultRight.searchTextCount - resultLeft.searchTextCount;
+                } else if (resultLeft.hitCount !== resultRight.hitCount) {
+                  return resultRight.hitCount - resultLeft.hitCount;
+                } else {
+                  return resultRight.id - resultLeft.id;
+                }
+              });
+              var searchResultList = '<ul class=\"search-result-list\">';
+              resultItems.forEach(function (result) {
+                searchResultList += result.item;
+              })
+              searchResultList += "</ul>";
+              resultContent.innerHTML = searchResultList;
+            }
+          }
+
+          if ('auto' === 'auto') {
+            input.addEventListener('input', inputEventFunction);
+          } else {
+            $('.search-icon').click(inputEventFunction);
+            input.addEventListener('keypress', function (event) {
+              if (event.keyCode === 13) {
+                inputEventFunction();
+              }
+            });
+          }
+
+          // remove loading animation
+          $(".local-search-pop-overlay").remove();
+          $('body').css('overflow', '');
+
+          proceedsearch();
+        }
+      });
+    }
+
+    // handle and trigger popup window;
+    $('.popup-trigger').click(function(e) {
+      e.stopPropagation();
+      if (isfetched === false) {
+        searchFunc(path, 'local-search-input', 'local-search-result');
+      } else {
+        proceedsearch();
+      };
+    });
+
+    $('.popup-btn-close').click(onPopupClose);
+    $('.popup').click(function(e){
+      e.stopPropagation();
+    });
+    $(document).on('keyup', function (event) {
+      var shouldDismissSearchPopup = event.which === 27 &&
+        $('.search-popup').is(':visible');
+      if (shouldDismissSearchPopup) {
+        onPopupClose();
+      }
+    });
+  </script>
+
+
+
+
+
+  
+
+  
+  <script>
+    
+    function addCount(Counter) {
+      var $visitors = $(".leancloud_visitors");
+      var url = $visitors.attr('id').trim();
+      var title = $visitors.attr('data-flag-title').trim();
+
+      Counter('get', '/classes/Counter', { where: JSON.stringify({ url }) })
+        .done(function ({ results }) {
+          if (results.length > 0) {
+            var counter = results[0];
+            
+            Counter('put', `/classes/Counter/${counter.objectId}`, JSON.stringify({ time: { "__op":"Increment", "amount":1 } }))
+            
+            .done(function () {
+                  var $element = $(document.getElementById(url));
+                  $element.find('.leancloud-visitors-count').text(counter.time + 1);
+            })
+            
+            .fail(function ({ responseJSON }) {
+                console.log('Failed to save Visitor num, with error message: ' + responseJSON.error);
+            })
+          } else {
+            
+              Counter('post', '/classes/Counter', JSON.stringify({ title: title, url: url, time: 1}))
+                .done(function () {
+                  var $element = $(document.getElementById(url));
+                  $element.find('.leancloud-visitors-count').text(1);
+                })
+                .fail(function () {
+                  console.log('Failed to create');
+                });
+            
+          }
+        })
+      .fail(function ({ responseJSON }) {
+        console.log('LeanCloud Counter Error:' + responseJSON.code + " " + responseJSON.error);
+      });
+    }
+    
+
+    $(function() {
+      $.get('https://app-router.leancloud.cn/2/route?appId=' + "no3Ip4mNLc3JyF1AeTy8LrAm-gzGzoHsz")
+        .done(function ({ api_server }) {
+          var Counter = function (method, url, data) {
+            return $.ajax({
+              method: method,
+              url: `https://${api_server}/1.1${url}`,
+              headers: {
+                'X-LC-Id': "no3Ip4mNLc3JyF1AeTy8LrAm-gzGzoHsz",
+                'X-LC-Key': "UvlYMzpJKw0Jrw61V5BA5ifU",
+                'Content-Type': 'application/json',
+              },
+              data: data,
+            });
+          };
+          
+          addCount(Counter);
+          
+        })
+    });
+  </script>
+
+
+
+  
+
+  
+
+  
+
+  
+  
+
+  
+  
+
+  
+
+
+  
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+  <style>
+    .copy-btn {
+      display: inline-block;
+      padding: 6px 12px;
+      font-size: 13px;
+      font-weight: 700;
+      line-height: 20px;
+      color: #333;
+      white-space: nowrap;
+      vertical-align: middle;
+      cursor: pointer;
+      background-color: #eee;
+      background-image: linear-gradient(#fcfcfc, #eee);
+      border: 1px solid #d5d5d5;
+      border-radius: 3px;
+      user-select: none;
+      outline: 0;
+    }
+
+    .highlight-wrap .copy-btn {
+      transition: opacity .3s ease-in-out;
+      opacity: 0;
+      padding: 2px 6px;
+      position: absolute;
+      right: 4px;
+      top: 8px;
+    }
+
+    .highlight-wrap:hover .copy-btn,
+    .highlight-wrap .copy-btn:focus {
+      opacity: 1
+    }
+
+    .highlight-wrap {
+      position: relative;
+    }
+  </style>
+  <script>
+    $('.highlight').each(function (i, e) {
+      var $wrap = $('<div>').addClass('highlight-wrap')
+      $(e).after($wrap)
+      $wrap.append($('<button>').addClass('copy-btn').append('复制').on('click', function (e) {
+        var code = $(this).parent().find('.code').find('.line').map(function (i, e) {
+          return $(e).text()
+        }).toArray().join('\n')
+        var ta = document.createElement('textarea')
+        document.body.appendChild(ta)
+        ta.style.position = 'absolute'
+        ta.style.top = '0px'
+        ta.style.left = '0px'
+        ta.value = code
+        ta.select()
+        ta.focus()
+        var result = document.execCommand('copy')
+        document.body.removeChild(ta)
+        
+        $(this).blur()
+      })).on('mouseleave', function (e) {
+        var $b = $(this).find('.copy-btn')
+        setTimeout(function () {
+          $b.text('复制')
+        }, 300)
+      }).append(e)
+    })
+  </script>
+
+
+  
+
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-backstretch/2.0.4/jquery.backstretch.min.js"></script>;
+  <script>
+  //$("body").backstretch("/images/background.jpg");
+  </script>
+  
+  <script type="text/javascript" src="//cdn.bootcss.com/canvas-nest.js/1.0.0/canvas-nest.min.js"></script>
+  
+<script src="/live2dw/lib/L2Dwidget.min.js?0c58a1486de42ac6cc1c59c7d98ae887"></script><script>L2Dwidget.init({"pluginRootPath":"live2dw/","pluginJsPath":"lib/","pluginModelPath":"assets/","tagMode":false,"debug":false,"model":{"jsonPath":"/live2dw/assets/koharu.model.json"},"display":{"position":"right","width":150,"height":300},"mobile":{"show":false},"log":false});</script><!-- hexo-inject:begin --><!-- hexo-inject:end --></body>
+</html>

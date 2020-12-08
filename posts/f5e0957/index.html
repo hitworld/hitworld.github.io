@@ -1,0 +1,1652 @@
+<!DOCTYPE html>
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+
+<html class="theme-next mist use-motion" lang="zh-CN">
+<head><meta name="generator" content="Hexo 3.8.0">
+  <!-- hexo-inject:begin --><!-- hexo-inject:end --><meta charset="UTF-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+
+
+
+
+
+
+  
+  
+    
+    
+  <script src="/lib/pace/pace.min.js?v=1.0.2"></script>
+  <link href="/lib/pace/pace-theme-minimal.min.css?v=1.0.2" rel="stylesheet">
+
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform">
+<meta http-equiv="Cache-Control" content="no-siteapp">
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css">
+
+<link href="/css/main.css?v=6.5.0" rel="stylesheet" type="text/css">
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon.png?v=6.5.0">
+
+
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32.png?v=6.5.0">
+
+
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16.png?v=6.5.0">
+
+
+  <link rel="mask-icon" href="/images/safari_pinned_tab.svg?v=6.5.0" color="#222">
+
+
+  <link rel="manifest" href="/images/manifest.json">
+
+
+  <meta name="msapplication-config" content="/images/browserconfig.xml">
+
+
+
+
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Mist',
+    version: '6.5.0',
+    sidebar: {"position":"left","display":"post","offset":12,"b2t":false,"scrollpercent":true,"onmobile":true},
+    fancybox: false,
+    fastclick: false,
+    lazyload: false,
+    tabs: true,
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+  
+
+
+
+
+  <meta name="description" content="虚拟化初探 在计算机中,虚拟化是指创建一个虚拟版本的计算机,包括硬件,存储设备和网络资源. 管理程序(Hypervisor)或VMM(Virtual Machine Monitor,虚拟机监视器)是一种可以在同一物理硬件上创建分离的多台(虚拟)机器的软件.VMM是在给出的虚拟化环境中管理CPU,内存,I/O设备,中断和指令集的软件.hypervisor可能指带有VMM的操作系统.这两个术语也可">
+<meta name="keywords" content="virtualization">
+<meta property="og:type" content="article">
+<meta property="og:title" content="CS-BASIC-virtualization-基础">
+<meta property="og:url" content="https://hitworld.github.io/posts/f5e0957/index.html">
+<meta property="og:site_name" content="w4rd3n">
+<meta property="og:description" content="虚拟化初探 在计算机中,虚拟化是指创建一个虚拟版本的计算机,包括硬件,存储设备和网络资源. 管理程序(Hypervisor)或VMM(Virtual Machine Monitor,虚拟机监视器)是一种可以在同一物理硬件上创建分离的多台(虚拟)机器的软件.VMM是在给出的虚拟化环境中管理CPU,内存,I/O设备,中断和指令集的软件.hypervisor可能指带有VMM的操作系统.这两个术语也可">
+<meta property="og:locale" content="zh-CN">
+<meta property="og:image" content="https://hitworld.github.io/posts/f5e0957/1.png">
+<meta property="og:image" content="https://hitworld.github.io/posts/f5e0957/2.png">
+<meta property="og:image" content="https://hitworld.github.io/posts/f5e0957/3.png">
+<meta property="og:image" content="https://hitworld.github.io/posts/f5e0957/6.png">
+<meta property="og:image" content="https://hitworld.github.io/posts/f5e0957/5.png">
+<meta property="og:image" content="https://hitworld.github.io/posts/f5e0957/4.png">
+<meta property="og:image" content="https://hitworld.github.io/posts/f5e0957/7.png">
+<meta property="og:updated_time" content="2020-11-23T13:16:00.734Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="CS-BASIC-virtualization-基础">
+<meta name="twitter:description" content="虚拟化初探 在计算机中,虚拟化是指创建一个虚拟版本的计算机,包括硬件,存储设备和网络资源. 管理程序(Hypervisor)或VMM(Virtual Machine Monitor,虚拟机监视器)是一种可以在同一物理硬件上创建分离的多台(虚拟)机器的软件.VMM是在给出的虚拟化环境中管理CPU,内存,I/O设备,中断和指令集的软件.hypervisor可能指带有VMM的操作系统.这两个术语也可">
+<meta name="twitter:image" content="https://hitworld.github.io/posts/f5e0957/1.png">
+
+
+
+
+
+
+  <link rel="canonical" href="https://hitworld.github.io/posts/f5e0957/">
+
+
+
+<script type="text/javascript" id="page.configurations">
+  CONFIG.page = {
+    sidebar: "",
+  };
+</script>
+
+  <title>CS-BASIC-virtualization-基础 | w4rd3n</title>
+  
+
+
+
+
+
+
+
+
+
+
+
+  <noscript>
+  <style type="text/css">
+    .use-motion .motion-element,
+    .use-motion .brand,
+    .use-motion .menu-item,
+    .sidebar-inner,
+    .use-motion .post-block,
+    .use-motion .pagination,
+    .use-motion .comments,
+    .use-motion .post-header,
+    .use-motion .post-body,
+    .use-motion .collection-title { opacity: initial; }
+
+    .use-motion .logo,
+    .use-motion .site-title,
+    .use-motion .site-subtitle {
+      opacity: initial;
+      top: initial;
+    }
+
+    .use-motion {
+      .logo-line-before i { left: initial; }
+      .logo-line-after i { right: initial; }
+    }
+  </style>
+</noscript><!-- hexo-inject:begin --><!-- hexo-inject:end -->
+
+</head>
+
+<body itemscope="" itemtype="http://schema.org/WebPage" lang="zh-CN">
+
+  
+  
+    
+  
+
+  <!-- hexo-inject:begin --><!-- hexo-inject:end --><div class="container sidebar-position-left page-post-detail">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope="" itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/" class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">w4rd3n</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+    
+      
+        <p class="site-subtitle">混吃等死</p>
+      
+    
+  </div>
+
+  <div class="site-nav-toggle">
+    <button aria-label="切换导航栏">
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+
+
+<nav class="site-nav">
+  
+    <ul id="menu" class="menu">
+      
+        
+        
+        
+          
+          <li class="menu-item menu-item-home">
+
+    
+    
+    
+      
+    
+
+    
+
+    <a href="/" rel="section"><i class="menu-item-icon fa fa-fw fa-home"></i> <br>首页</a>
+
+  </li>
+        
+        
+        
+          
+          <li class="menu-item menu-item-about">
+
+    
+    
+    
+      
+    
+
+    
+
+    <a href="/about/" rel="section"><i class="menu-item-icon fa fa-fw fa-user"></i> <br>友链</a>
+
+  </li>
+        
+        
+        
+          
+          <li class="menu-item menu-item-tags">
+
+    
+    
+    
+      
+    
+
+    
+
+    <a href="/tags/" rel="section"><i class="menu-item-icon fa fa-fw fa-tags"></i> <br>标签</a>
+
+  </li>
+        
+        
+        
+          
+          <li class="menu-item menu-item-categories">
+
+    
+    
+    
+      
+    
+
+    
+
+    <a href="/categories/" rel="section"><i class="menu-item-icon fa fa-fw fa-th"></i> <br>分类</a>
+
+  </li>
+        
+        
+        
+          
+          <li class="menu-item menu-item-archives">
+
+    
+    
+    
+      
+    
+
+    
+
+    <a href="/archives/" rel="section"><i class="menu-item-icon fa fa-fw fa-archive"></i> <br>归档</a>
+
+  </li>
+
+      
+      
+        <li class="menu-item menu-item-search">
+          
+            <a href="javascript:;" class="popup-trigger">
+          
+            
+              <i class="menu-item-icon fa fa-search fa-fw"></i> <br>搜索</a>
+        </li>
+      
+    </ul>
+  
+
+  
+    
+
+  
+
+  
+    <div class="site-search">
+      
+  <div class="popup search-popup local-search-popup">
+  <div class="local-search-header clearfix">
+    <span class="search-icon">
+      <i class="fa fa-search"></i>
+    </span>
+    <span class="popup-btn-close">
+      <i class="fa fa-times-circle"></i>
+    </span>
+    <div class="local-search-input-wrapper">
+      <input autocomplete="off" placeholder="搜索..." spellcheck="false" type="text" id="local-search-input">
+    </div>
+  </div>
+  <div id="local-search-result"></div>
+</div>
+
+
+
+    </div>
+  
+</nav>
+
+
+
+  
+
+
+
+</div>
+    </header>
+
+    
+
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  
+
+  <article class="post post-type-normal" itemscope="" itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="https://hitworld.github.io/posts/f5e0957/">
+
+    <span hidden itemprop="author" itemscope="" itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="w4rd3n">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/apple-touch-icon.png">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope="" itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="w4rd3n">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">CS-BASIC-virtualization-基础
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+
+            
+            
+            
+
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+
+              
+                
+              
+
+              <time title="创建时间：2020-01-22 20:27:17" itemprop="dateCreated datePublished" datetime="2020-01-22T20:27:17+08:00">2020-01-22</time>
+            
+
+            
+          </span>
+
+          
+            <span class="post-category">
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope="" itemtype="http://schema.org/Thing"><a href="/categories/CS/" itemprop="url" rel="index"><span itemprop="name">CS</span></a></span>
+
+                
+                
+                  ，
+                
+              
+                <span itemprop="about" itemscope="" itemtype="http://schema.org/Thing"><a href="/categories/CS/BASIC/" itemprop="url" rel="index"><span itemprop="name">BASIC</span></a></span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+             <span id="/posts/f5e0957/" class="leancloud_visitors" data-flag-title="CS-BASIC-virtualization-基础">
+               <span class="post-meta-divider">|</span>
+               <span class="post-meta-item-icon">
+                 <i class="fa fa-eye"></i>
+               </span>
+               
+                 <span class="post-meta-item-text">热度：</span>
+               
+                 <span class="leancloud-visitors-count"></span>
+                 <span>℃</span>
+             </span>
+          
+
+          
+
+          
+            <div class="post-symbolscount">
+              
+
+              
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-file-word-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">本文字数：</span>
+                
+                <span title="本文字数">6.8k</span>
+              
+
+              
+                <span class="post-meta-divider">|</span>
+              
+
+              
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-clock-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">阅读时长 &asymp;</span>
+                
+                <span title="阅读时长">6 分钟</span>
+              
+            </div>
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <h2 id="虚拟化初探">虚拟化初探</h2>
+<p>在计算机中,虚拟化是指创建一个虚拟版本的计算机,包括硬件,存储设备和网络资源.</p>
+<p>管理程序(<code>Hypervisor</code>)或<code>VMM</code>(<code>Virtual Machine Monitor</code>,虚拟机监视器)是一种可以在同一物理硬件上创建分离的多台(虚拟)机器的软件.<code>VMM</code>是在给出的虚拟化环境中管理<code>CPU</code>,内存,<code>I/O</code>设备,中断和指令集的软件.<code>hypervisor</code>可能指带有<code>VMM</code>的操作系统.这两个术语也可以被认为是同义词.</p>
+<p>虚拟机管理程序需要考虑:<code>CPU</code>虚拟化(特权指令);内存虚拟化(页表);<code>IO</code>设备虚拟化(网络,磁盘,<code>BIOS</code>).</p>
+<p>论文<code>虚拟化第三代体系结构的正式要求</code>准确定义了为了有效的支持虚拟化所需满足的条件.</p>
+<blockquote>
+<p>等价性:程序运行在虚拟机中和运行在本地完全相同,不包括资源可用性和时间的差异. 性能:绝大多数的客户指令由硬件执行,没有VMM的介入. 安全性:VMM管理所有硬件资源.</p>
+</blockquote>
+<p>早期的虚拟化技术被称为陷阱和模拟(经典虚拟化),<code>VMM</code>捕获客户机操作系统运行特定指令(敏感指令或特权指令)时发生的异常并模拟完成该指令.由于许多如敏感非特权指令的阻碍,<code>x86</code>不是可经典虚拟化的.</p>
+<h2 id="vmm">VMM</h2>
+<p>操作系统是设计在直接运行在裸硬件设备上的,它自动认为它完全占有计算机硬件.<code>x86</code>架构提供四个特权级别给操作系统和应用程序来访问硬件.宿主操作系统是工作在<code>Ring 0</code>的,客户操作系统就不能也在<code>Ring 0</code>.但是客户操作系统不知道,然后执行特权指令就会出错.</p>
+<p>虚拟机管理程序(<code>VMM</code>)就是处理这种情况的,根据其原理不同有三种实现技术.</p>
+<ol type="1">
+<li>全虚拟化.</li>
+<li>半虚拟化.</li>
+<li>硬件辅助的虚拟化.</li>
+</ol>
+<p>管理程序又可以分为以下三类.</p>
+<ol type="1">
+<li>裸机管理程序(例如<code>Xen</code>,<code>VMWare ESXi</code>,<code>Hyper-V</code>).</li>
+<li>主机管理程序(例如<code>VirtualBox</code>,<code>VMWare Workstation</code>).</li>
+<li>仅主机管理程序(例如<code>SimpleVisor</code>,<code>HyperPlatform</code>,<code>kvm</code>).</li>
+</ol>
+<h3 id="基于二进制翻译的全虚拟化">基于二进制翻译的全虚拟化</h3>
+<img src="/posts/f5e0957/1.png" title="p1">
+<p>客户操作系统运行在<code>Ring 1</code>,它在执行特权指令时会触发异常,然后<code>VMM</code>捕获这个异常,在异常里面做翻译,模拟,最后返回到客户操作系统内,客户操作系统认为自己的特权指令工作正常,继续运行.这种处理方式性能损耗大.</p>
+<p>早期的<code>VMWare Workstation</code>针对<code>x86</code>架构特殊设计的就是这种实现.<code>VMWare</code>打包为一个正常的应用程序被运行在宿主操作系统上,同时每个虚拟机实例以进程(<code>vmware-vmx.exe</code>)的形式运行在宿主操作系统上.</p>
+<p><code>VMWare</code>的<code>VMM</code>可以在系统级运行,在一段有限的时间内完全控制硬件,在这段时间内宿主操作系统被从虚拟和线性内存中短暂移除.<code>VMM</code>和宿主操作系统的上下文切换又称为世界切换,每个上下文有自己的地址空间,中断描述符表,堆栈,执行上下文.也就是说驻留在宿主机的<code>VMM</code>驱动程序实现了一系列操作,包括锁定物理内存页,转发中断以及调用世界切换原语.</p>
+<h4 id="vmm保护">VMM保护</h4>
+<p><code>VMM</code>必须为自己保留部分客户机虚拟地址空间同时阻止客户机访问<code>VMM</code>正在使用的客户机<code>VA</code>空间的那些部分.</p>
+<p>客户机用户模式应用在<code>Ring 3</code>正常运行,而客户机内核代码被降权在运行在<code>Ring 1</code>或<code>%cpl = 1</code>上的二进制翻译下运行.此时虚拟机段被<code>VMM</code>截断来确保它们不会与<code>VMM</code>自身重叠,任何尝试从<code>VM</code>访问<code>VMM</code>段的行为会触发会被<code>VMM</code>正确处理的通常保护错误.</p>
+<p>同时预留一个段寄存器<code>%gs</code>,用来始终指向<code>VMM</code>区域.二进制翻译器保证在翻译时没有虚拟机指令会直接使用<code>gs</code>前缀,翻译后的代码将<code>fs</code>寄存器用于最初具有<code>fs</code>或<code>gs</code>前缀的<code>VM</code>指令.</p>
+<p><code>VMM</code>截断段的方式是通过不改变基址减少段描述符的范围,这会导致<code>VMM</code>必须在地址空间的最顶端区域.在实现中<code>VMWare</code>设置<code>VMM</code>的大小为<code>4MB</code>.</p>
+<h4 id="cpu虚拟化">CPU虚拟化</h4>
+<p><code>VMWare</code>使用<code>DE</code>运行客户机用户模式应用以及<code>BT</code>运行客户机系统代码(内核).<code>BT</code>(二进制翻译)将输入的可执行指令序列转换成可以在目标系统自身上执行的二进制指令序列,动态二进制翻译器在运行时通过存储目标序列到称为翻译缓存的缓冲区中来执行翻译.</p>
+<h4 id="内存虚拟化">内存虚拟化</h4>
+<p>虚拟内存到物理内存的转换由<code>MMU</code>通过名为页表的查找表完成,当尝试访问某些虚拟内存时硬件页面遍历器遍历那些页表来将<code>VA</code>翻译为<code>PA</code>.同时结果会缓存在成为<code>TLB</code>的<code>CPU</code>缓存中.</p>
+<p><code>VMM</code>通过名为影子页表的技术管理从客户机物理内存到机器物理内存的映射.</p>
+<h4 id="设备虚拟化">设备虚拟化</h4>
+<p><code>VMWare</code>使用宿主操作系统的设备资源接口来执行虚拟机中对资源的调用.</p>
+<h3 id="超虚拟化类虚拟化-paravirtualization">超虚拟化/类虚拟化-Paravirtualization</h3>
+<img src="/posts/f5e0957/2.png" title="p2">
+<p>类虚拟化的思想就是,修改操作系统内核,替换掉不能虚拟化的指令,通过超级调用(<code>hypercall</code>)直接和底层的虚拟化层<code>hypervisor</code>来通讯,<code>hypervisor</code>同时也提供了<code>hypercall</code>接口来满足其他关键内核操作,比如内存管理,中断和时间保持.这种做法省去了全虚拟化中的捕获和模拟.</p>
+<p>对于<code>Xen</code>这种类虚拟化技术,客户机操作系统都是有一个专门的定制内核版本,和<code>x86</code>,<code>mips</code>这些内核版本等价.性能损耗非常低.</p>
+<p><code>Xen</code>中用域来指代正在运行客户操作系统的虚拟机.<code>Domain0</code>是<code>Xen</code>管理程序启动时的第一个域,会运行一个<code>Linux</code>操作系统,该域可以访问硬件及管理其他域.其他域被称为<code>DomUs</code>,能运行任何已经移植到<code>Xen</code>的操作系统.</p>
+<h4 id="vmm保护-1">VMM保护</h4>
+<p>和<code>VMWare</code>一样,客户操作系统内核被降权后占据<code>Ring 1</code>,<code>Xen</code>占据在<code>Ring 0</code>,用户模式应用依然运行在<code>Ring 3</code>.</p>
+<p><code>Xen</code>被映射到每个客户操作系统的顶部<code>64M</code>内存的地址空间中,以节省<code>TLB</code>刷新.虚拟机的段被<code>VMM</code>截断以确保它们不会与<code>VMM</code>自身重叠.用户模式应用使用被截断的段运行,并受到自身操作系统的限制,无法使用页保护<code>pet.us</code>来访问客户内核区域.</p>
+<h4 id="cpu虚拟化-1">CPU虚拟化</h4>
+<p>无论何时客户机需要执行一个特权操作,客户机使用<code>hypercall</code>来跳转到<code>Xen</code>中,可以把<code>hypercall</code>看作是允许用户代码以可信代码的控制和管理的方式执行特权指令.</p>
+<p><code>hypercall</code>在一个常规的操作系统中以类似系统调用的方式被调用:一个软中断被引发,中断的向量指向<code>Xen</code>中的入口点.<code>32</code>位<code>x86</code>机器上指令是<code>int 0x82</code>,<code>64</code>位是<code>syscall</code>.<code>hypercall</code>的向量编号被放在<code>eax</code>中,在<code>xen/include/public/xen.h</code>可以找到讲这些值与符号<code>hypercall</code>名称相映射的列表.</p>
+<p>异常,包括内存错误和软件陷入,在<code>x86</code>上直接被虚拟化了.提供了一个虚拟<code>IDT</code>,一个域可以通过<code>HYPERVISORsettraptable</code>这个<code>hypercall</code>向<code>Xen</code>提交陷入处理程序表.</p>
+<p>大多数陷阱处理程序和原生<code>x86</code>的处理程序是相同的,因为在<code>Xen</code>的类虚拟化架构中,异常栈帧是没有被修改的,但页错误处理程序有些不同,原因是正常的页错误处理程序从<code>CR2</code>读取导致错误的地址,这需要<code>Ring 0</code>权限.所以<code>Xen</code>将错误的地址写入扩展栈帧,当在<code>Ring 0</code>外执行时发生了异常,<code>Xen</code>的处理程序在客户机操作系统栈上创建异常栈帧的副本,并将控制权返回给相应的已注册的处理程序.</p>
+<p>位于<code>xen/i386/kernel/entry.S</code>的文件包含了系统调用和故障低级处理程序.</p>
+<h4 id="内存虚拟化-1">内存虚拟化</h4>
+<p>客户操作系统只允许对实际页表进行只读访问,必须通过<code>hypercall</code>更新页表,而不是直接写内存,以防止客户操作系统做了不可接受的更改.</p>
+<p>每次客户操作系统请求一个新的页表,它会从自身的保留的内存中分配并初始化页,并将其注册到<code>Xen</code>.客户操作系统可以批量请求更新以缓解进入管理程序的开销.</p>
+<h4 id="设备虚拟化-1">设备虚拟化</h4>
+<p><code>Xen</code>通过特权域(<code>Domain0</code>或者特权级驱动程序域)管理实际设备,然后给所有的客户机导出一类通用设备.</p>
+<p><code>Xen</code>所使用的架构称为分离驱动程序模型,即非特权客户机运行前端驱动程序,而直接访问设备的特权域运行后端驱动程序,后端驱动程序了解特定物理设备的底层细节.该类虚拟化模型允许客户操作系统只为每种通用类型的设备实现一种设备驱动程序,随后依赖于特权域中的操作系统来获得实际物理设备的设备驱动程序.</p>
+<p>大多数主流的虚拟机管理程序以建立在环缓冲区的共享内存来实现前端驱动程序和后端驱动程序的通讯.通过<code>PV</code>驱动程序垂直传递缓冲区信息的高性能通讯机制的优势使这种通讯很容易实现.在<code>Hyper-V</code>中,后端被称为虚拟化服务提供者,前端被称为虚拟化服务客户端.</p>
+<p><code>Xen</code>的最后一个选项是能够将物理设备直接授权给非特权域,如果不支持虚拟化特定设备或者如果需要尽可能高的性能的话.</p>
+<h3 id="硬件辅助虚拟化">硬件辅助虚拟化</h3>
+<img src="/posts/f5e0957/3.png" title="p3">
+<p><code>2005</code>年后,<code>Intel</code>和<code>AMD</code>开始支持虚拟化,<code>Intel</code>引入<code>Intel-VT</code>技术,增加了<code>VMX root operation</code>和<code>VMX non-root operation</code>两种模式,两种模式都支持所有的<code>4</code>个运行级别.这样,<code>VMM</code>可以运行在<code>VMX root operation</code>模式下,客户<code>OS</code>运行在<code>VMX non-root operation</code>模式下.</p>
+<p>运行在<code>VMX root operation</code> 模式下的<code>VMM</code>通过显式调用<code>VMLAUNCH</code>或<code>VMRESUME</code>指令切换到<code>VMX non-root operation</code>模式,硬件自动加载<code>Guest OS</code>的上下文,于是<code>Guest OS</code>获得运行,这种转换称为<code>VM entry</code>.</p>
+<p><code>Guest OS</code>运行过程中遇到需要<code>VMM</code>处理的事件,例如外部中断或缺页异常,或者主动调用<code>VMCALL</code>指令调用<code>VMM</code>的服务的时候(与系统调用类似),硬件自动挂起<code>Guest OS</code>,切换到<code>VMX root operation</code>模式,恢复<code>VMM</code>的运行,这种转换称为<code>VM exit</code>.</p>
+<p><code>VMX root operation</code>模式下软件的行为与在没有<code>VT-x</code>技术的处理器上的行为基本一致.而<code>VMX non-root operation</code>模式则有很大不同,最主要的区别是此时运行某些指令或遇到某些事件时,会发生<code>VM exit</code>.</p>
+<img src="/posts/f5e0957/6.png" title="p6">
+<p><code>guest</code>:客户机系统,包括<code>CPU</code>(<code>vCPU</code>),内存,驱动,被<code>kvm</code>置于一种受限制的<code>CPU</code>模式下运行. <code>kvm</code>:运行在内核空间,提供<code>CPU</code>和内存的虚拟化,以及<code>guest</code>的<code>I/O</code>拦截. <code>qemu</code>:运行在用户空间,提供硬件<code>I/O</code>虚拟化,通过<code>/dev/kvm</code>设备和虚拟机交互.</p>
+<p><code>qemu</code>与<code>kvm</code>就是一套基于硬件辅助的全虚拟化的实现.<code>kvm</code>主要功能是初始化<code>CPU</code>硬件打开虚拟化模式,然后将虚拟客户机运行在虚拟机模式下,并对其运行提供一定的支持.</p>
+<p>以在<code>Intel</code>上运行为例,<code>kvm</code>模块被加载的时候,首先初始化<code>kvm</code>内部的数据结构,然后打开<code>CPU</code>控制及存取<code>CR4</code>的虚拟化模式开关,并通过执行<code>VMXON</code>指令将宿主操作系统置于<code>VMX root operation</code>.最后<code>kvm</code>模块创建特殊设备文件<code>/dev/kvm</code>并等待来自用户空间的指令.</p>
+<p><code>kvm</code>需要一个用户程序通过<code>/dev/kvm</code>接口来设置一个虚拟服务器的地址空间和向虚拟机提供模拟的<code>I/O</code>设备并将界面显示映射回宿主机的显示屏供用户操作.</p>
+<img src="/posts/f5e0957/5.png" title="p5">
+<p>这个程序就是<code>qemu-kvm</code>(<code>qemu-kvm</code>是<code>qemu</code>的一个分支,但现在两者已经没有区别),在<code>qemu-kvm</code>中,<code>kvm</code>的虚拟机被实现为常规的<code>Linux</code>进程,即一个<code>qemu-kvm</code>进程,由标准调度程序调度.该进程包括几种线程:<code>I/O</code>线程用于管理模拟设备,<code>vCPU</code>线程用于运行<code>Guest</code>代码,和处理<code>event loop</code>,<code>offloaded tasks</code>的线程.</p>
+<p>然后由<code>qemu</code>和<code>kvm</code>相互配合进行虚拟机的创建和运行,两者的通信主要是针对特殊设备文件<code>dev/kvm</code>的<code>ioctl</code>调用.创建虚拟机时<code>kvm</code>会分配对应的内核数据结构,同时返回一个文件句柄来代表所创建的虚拟机.针对该句柄的调用可以对虚拟机做相应地管理,比如创建用户空间虚拟地址和客户机物理地址,真实物理地址之间的映射关系,运行虚拟机等.</p>
+<h4 id="cpu虚拟化-2">CPU虚拟化</h4>
+<img src="/posts/f5e0957/4.png" title="p4">
+<p><code>kvm</code>为每一个<code>vCPU</code>生成对应的文件句柄,用于进行包括执行虚拟处理器在内的一些操作,虚拟机在<code>kvm</code>的支持下置于<code>VMX non-root operation</code>模式下执行二进制指令.</p>
+<p>普通的<code>Linux</code>内核有两种执行模式:内核模式(<code>Kenerl</code>)和用户模式(<code>User</code>).为了支持带有虚拟化功能的<code>CPU</code>,<code>kvm</code>向<code>Linux</code>内核增加了第三种模式即客户机模式,对应于<code>CPU</code>的<code>VMX non-root mode</code>.在<code>non-root</code>模式下,所有敏感的二进制指令都被<code>CPU</code>捕捉到,<code>CPU</code>在保存现场之后自动切换到<code>VMX root operation</code>模式,由<code>kvm</code>决定如何处理.</p>
+<p><code>kvm</code>内核模块作为用户模式和客户机模式之间的桥梁,用户模式中的<code>qemu-kvm</code>会通过<code>ioctl</code>命令来运行虚拟机,<code>kvm</code>内核模块收到该请求后,它先进行初始化,比如将<code>vCPU</code>上下文加载到<code>VMCS</code>等,然后使<code>CPU</code>进入<code>VMX non-root</code>模式,开始执行客户机代码.</p>
+<p>三种模式的分工.</p>
+<ul>
+<li><code>Guest</code>模式:执行客户机系统非<code>I/O</code>代码,并在需要的时候驱动<code>CPU</code>退出该模式.</li>
+<li><code>Kernel</code>模式:负责将<code>CPU</code>切换到<code>Guest</code>模式执行代码,并在<code>CPU</code>退出<code>Guest</code>模式时回到<code>Kernel</code>模式.</li>
+<li><code>User</code>模式:替代客户机系统执行<code>I/O</code>操作.</li>
+</ul>
+<p><code>kvm</code>虚拟机基于<code>vCPU</code>,而<code>vCPU</code>作为<code>qemu</code>线程被<code>Linux</code>作为普通的线程/轻量级进程调度到物理<code>CPU</code>上,所以虚拟机代码是运行在物理<code>CPU</code>之上.</p>
+<p>要将虚拟机的线程调度到某个物理<code>CPU</code>,需要经历两个过程:虚拟机线程调度到<code>vCPU</code>,该调度由虚拟机操作系统负责;<code>vCPU</code>线程调度到物理<code>CPU</code>即主机物理<code>CPU</code>,该调度由<code>Hypervisor</code>即<code>Linux</code>负责.</p>
+<img src="/posts/f5e0957/7.png" title="p7">
+<h4 id="内存虚拟化-2">内存虚拟化</h4>
+<p>除了<code>CPU</code>的虚拟化,内存虚拟化也由<code>kvm</code>实现.<code>kvm</code>的内存虚拟化就是一个将虚拟机的虚拟内存转换为宿主机物理内存的过程,<code>Guest</code>使用的依然是宿主机的物理内存.</p>
+<p><code>CPU</code>中的内存管理单元<code>MMU</code>是通过页表的形式将程序运行的虚拟地址转换成实际物理地址.</p>
+<p><code>kvm</code>实现虚拟机内存的方式是,利用<code>mmap</code>系统调用,在<code>qemu-kvm</code>主线程的虚拟地址空间中申明一段连续的大小的空间用于客户机物理内存映射.在虚拟机模式下,<code>MMU</code>的页表则必须在一次查询的时候完成两次地址转换,因为除了将客户机程序的虚拟地址转换了客户机的物理地址外,还要将客户机物理地址转化成真实物理地址.</p>
+<p>内存虚拟化有两种实现方式:通过软件实现内存地址的翻译,比如<code>Shadow page table</code>;或者通过基于<code>CPU</code>的辅助虚拟化功能,比如<code>AMD</code>的<code>NPT</code>和<code>Intel</code>的<code>EPT</code>技术.</p>
+<p>影子页表由软件(<code>qemu-kvm</code>)维护,实际上就是一个<code>Guest</code>的页表到宿主机页表的映射,每一级的页表的<code>hash</code>值对应到<code>qemu-kvm</code>中影子页表的一个目录.</p>
+<p>在初次<code>GVA -&gt; HPA</code>(客户机虚拟地址到宿主机物理地址)的转换时候,<code>Guest</code>产生缺页中断,和传统的转换过程一样,经过两次转换,然后影子页表记录这个转换关系.坏处在于<code>qemu-kvm</code>需要为<code>Guest</code>的每个进程维护一个影子页表,带来很大的内存开销.</p>
+<p><code>EPT</code>可以看做一个硬件的影子页表,在<code>Guest</code>中增加<code>EPT</code>寄存器.</p>
+<p>当<code>Guest</code>产生了<code>CR3</code>和页表的访问时会产生缺页异常,如果在软件模拟或者影子页表的虚拟化方式中,此时会有<code>VM</code>退出,<code>qemu-kvm</code>进程接管并获取到此异常.但是在<code>EPT</code>中,<code>qemu-kvm</code>忽略此异常,按照传统的缺页中断处理,产生<code>EXIT_REASON_EPT_VIOLATION</code>,然后<code>Guest</code>退出,<code>qemu-kvm</code>捕获到异常,分配物理地址建立<code>GVA -&gt; HPA</code>的映射并保存到<code>EPT</code>中,将<code>EPT</code>载入到<code>MMU</code>,下次转换时候直接查询根据<code>CR3</code>查询<code>EPT</code>表来完成<code>GVA -&gt; HPA</code>的转换.</p>
+<h4 id="其他优化技术">其他优化技术</h4>
+<p><code>Kernel SamePage Merging</code>,<code>KSM</code>作为内核中的守护进程存在,定期执行页面扫描识别副本页面并合并副本,从而释放这些页面.因此,在多个进程中,<code>Linux</code>将内核相似的内存页合并成一个内存页.</p>
+<p>这个特性被<code>kvm</code>用来减少多个相似的虚拟机的内存占用,提高内存的使用效率.</p>
+<p><code>kvm</code>虚拟机还有一个优化技术:<code>Huge Page Backed Memory</code>.<code>x86 CPU</code>通常使用<code>4Kb</code>内存页,经过配置后能够使用巨页(<code>huge page</code>).使用巨页则<code>kvm</code>的虚拟机页表将使用更少的内存,并且提高<code>CPU</code>的效率.</p>
+
+      
+    </div>
+
+    
+
+    
+    
+    
+
+    
+
+    
+       
+    
+    
+
+    
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/virtualization/" rel="tag"><i class="fa fa-tag"></i> virtualization</a>
+          
+        </div>
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/posts/30c17dd1/" rel="next" title="IS-pwn-Linux-kernel-CVE-2013-1763">
+                <i class="fa fa-chevron-left"></i> IS-pwn-Linux-kernel-CVE-2013-1763
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/posts/ddc429e1/" rel="prev" title="writeup-hitcon-2018-abyss">
+                writeup-hitcon-2018-abyss <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+  </div>
+
+
+          </div>
+          
+
+  
+
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    
+      <div id="sidebar-dimmer"></div>
+    
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview-wrap sidebar-panel">
+        <div class="site-overview">
+          <div class="site-author motion-element" itemprop="author" itemscope="" itemtype="http://schema.org/Person">
+            
+              <img class="site-author-image" itemprop="image" src="/images/apple-touch-icon.png" alt="w4rd3n">
+            
+              <p class="site-author-name" itemprop="name">w4rd3n</p>
+              <p class="site-description motion-element" itemprop="description"></p>
+          </div>
+
+          
+            <nav class="site-state motion-element">
+              
+                <div class="site-state-item site-state-posts">
+                
+                  <a href="/archives/">
+                
+                    <span class="site-state-item-count">169</span>
+                    <span class="site-state-item-name">日志</span>
+                  </a>
+                </div>
+              
+
+              
+                
+                
+                <div class="site-state-item site-state-categories">
+                  <a href="/categories/index.html">
+                    
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                    <span class="site-state-item-count">15</span>
+                    <span class="site-state-item-name">分类</span>
+                  </a>
+                </div>
+              
+
+              
+                
+                
+                <div class="site-state-item site-state-tags">
+                  <a href="/tags/index.html">
+                    
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                    <span class="site-state-item-count">40</span>
+                    <span class="site-state-item-name">标签</span>
+                  </a>
+                </div>
+              
+            </nav>
+          
+
+          
+
+          
+            <div class="links-of-author motion-element">
+              
+                <span class="links-of-author-item">
+                  
+                  
+                    
+                  
+                  
+                    
+                  
+                  <a href="https://github.com/hitworld" title="GitHub &rarr; https://github.com/hitworld" rel="noopener" target="_blank"><i class="fa fa-fw fa-github"></i>GitHub</a>
+                </span>
+              
+            </div>
+          
+
+          
+
+          
+          
+
+          
+            
+          
+          
+
+        </div>
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#虚拟化初探"><span class="nav-number">1.</span> <span class="nav-text">虚拟化初探</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#vmm"><span class="nav-number">2.</span> <span class="nav-text">VMM</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#基于二进制翻译的全虚拟化"><span class="nav-number">2.1.</span> <span class="nav-text">基于二进制翻译的全虚拟化</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#vmm保护"><span class="nav-number">2.1.1.</span> <span class="nav-text">VMM保护</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#cpu虚拟化"><span class="nav-number">2.1.2.</span> <span class="nav-text">CPU虚拟化</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#内存虚拟化"><span class="nav-number">2.1.3.</span> <span class="nav-text">内存虚拟化</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#设备虚拟化"><span class="nav-number">2.1.4.</span> <span class="nav-text">设备虚拟化</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#超虚拟化类虚拟化-paravirtualization"><span class="nav-number">2.2.</span> <span class="nav-text">超虚拟化/类虚拟化-Paravirtualization</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#vmm保护-1"><span class="nav-number">2.2.1.</span> <span class="nav-text">VMM保护</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#cpu虚拟化-1"><span class="nav-number">2.2.2.</span> <span class="nav-text">CPU虚拟化</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#内存虚拟化-1"><span class="nav-number">2.2.3.</span> <span class="nav-text">内存虚拟化</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#设备虚拟化-1"><span class="nav-number">2.2.4.</span> <span class="nav-text">设备虚拟化</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#硬件辅助虚拟化"><span class="nav-number">2.3.</span> <span class="nav-text">硬件辅助虚拟化</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#cpu虚拟化-2"><span class="nav-number">2.3.1.</span> <span class="nav-text">CPU虚拟化</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#内存虚拟化-2"><span class="nav-number">2.3.2.</span> <span class="nav-text">内存虚拟化</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#其他优化技术"><span class="nav-number">2.3.3.</span> <span class="nav-text">其他优化技术</span></a></li></ol></li></ol></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright">&copy; <span itemprop="copyrightYear">2020</span>
+  <span class="with-love" id="animate">
+    <i class="fa fa-gg-circle"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">w4rd3n</span>
+
+  
+    <span class="post-meta-divider">|</span>
+    <span class="post-meta-item-icon">
+      <i class="fa fa-area-chart"></i>
+    </span>
+    
+    <span title="站点总字数">788k</span>
+  
+
+  
+    <span class="post-meta-divider">|</span>
+    <span class="post-meta-item-icon">
+      <i class="fa fa-coffee"></i>
+    </span>
+    
+    <span title="站点阅读时长">11:56</span>
+  
+</div>
+
+
+
+
+
+
+
+
+
+        
+<div class="busuanzi-count">
+  <script async src="https://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+  
+    <span class="site-uv" title="总访客量">
+      <i class="fa fa-user"></i>
+      <span class="busuanzi-value" id="busuanzi_value_site_uv"></span>
+    </span>
+  
+
+  
+    <span class="site-pv" title="总访问量">
+      <i class="fa fa-eye"></i>
+      <span class="busuanzi-value" id="busuanzi_value_site_pv"></span>
+    </span>
+  
+</div>
+
+
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+          <span id="scrollpercent"><span>0</span>%</span>
+        
+      </div>
+    
+
+    
+	
+    
+
+    
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+    
+      
+  
+  <script type="text/javascript" color="0,0,255" opacity="0.5" zindex="-1" count="99" src="/lib/canvas-nest/canvas-nest.min.js"></script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+  
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=6.5.0"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=6.5.0"></script>
+
+
+
+  
+  
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=6.5.0"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=6.5.0"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=6.5.0"></script>
+
+
+
+  
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+  
+
+  <script type="text/javascript">
+    // Popup Window;
+    var isfetched = false;
+    var isXml = true;
+    // Search DB path;
+    var search_path = "search.xml";
+    if (search_path.length === 0) {
+      search_path = "search.xml";
+    } else if (/json$/i.test(search_path)) {
+      isXml = false;
+    }
+    var path = "/" + search_path;
+    // monitor main search box;
+
+    var onPopupClose = function (e) {
+      $('.popup').hide();
+      $('#local-search-input').val('');
+      $('.search-result-list').remove();
+      $('#no-result').remove();
+      $(".local-search-pop-overlay").remove();
+      $('body').css('overflow', '');
+    }
+
+    function proceedsearch() {
+      $("body")
+        .append('<div class="search-popup-overlay local-search-pop-overlay"></div>')
+        .css('overflow', 'hidden');
+      $('.search-popup-overlay').click(onPopupClose);
+      $('.popup').toggle();
+      var $localSearchInput = $('#local-search-input');
+      $localSearchInput.attr("autocapitalize", "none");
+      $localSearchInput.attr("autocorrect", "off");
+      $localSearchInput.focus();
+    }
+
+    // search function;
+    var searchFunc = function(path, search_id, content_id) {
+      'use strict';
+
+      // start loading animation
+      $("body")
+        .append('<div class="search-popup-overlay local-search-pop-overlay">' +
+          '<div id="search-loading-icon">' +
+          '<i class="fa fa-spinner fa-pulse fa-5x fa-fw"></i>' +
+          '</div>' +
+          '</div>')
+        .css('overflow', 'hidden');
+      $("#search-loading-icon").css('margin', '20% auto 0 auto').css('text-align', 'center');
+
+      
+
+      $.ajax({
+        url: path,
+        dataType: isXml ? "xml" : "json",
+        async: true,
+        success: function(res) {
+          // get the contents from search data
+          isfetched = true;
+          $('.popup').detach().appendTo('.header-inner');
+          var datas = isXml ? $("entry", res).map(function() {
+            return {
+              title: $("title", this).text(),
+              content: $("content",this).text(),
+              url: $("url" , this).text()
+            };
+          }).get() : res;
+          var input = document.getElementById(search_id);
+          var resultContent = document.getElementById(content_id);
+          var inputEventFunction = function() {
+            var searchText = input.value.trim().toLowerCase();
+            var keywords = searchText.split(/[\s\-]+/);
+            if (keywords.length > 1) {
+              keywords.push(searchText);
+            }
+            var resultItems = [];
+            if (searchText.length > 0) {
+              // perform local searching
+              datas.forEach(function(data) {
+                var isMatch = false;
+                var hitCount = 0;
+                var searchTextCount = 0;
+                var title = data.title.trim();
+                var titleInLowerCase = title.toLowerCase();
+                var content = data.content.trim().replace(/<[^>]+>/g,"");
+                
+                var contentInLowerCase = content.toLowerCase();
+                var articleUrl = decodeURIComponent(data.url);
+                var indexOfTitle = [];
+                var indexOfContent = [];
+                // only match articles with not empty titles
+                if(title != '') {
+                  keywords.forEach(function(keyword) {
+                    function getIndexByWord(word, text, caseSensitive) {
+                      var wordLen = word.length;
+                      if (wordLen === 0) {
+                        return [];
+                      }
+                      var startPosition = 0, position = [], index = [];
+                      if (!caseSensitive) {
+                        text = text.toLowerCase();
+                        word = word.toLowerCase();
+                      }
+                      while ((position = text.indexOf(word, startPosition)) > -1) {
+                        index.push({position: position, word: word});
+                        startPosition = position + wordLen;
+                      }
+                      return index;
+                    }
+
+                    indexOfTitle = indexOfTitle.concat(getIndexByWord(keyword, titleInLowerCase, false));
+                    indexOfContent = indexOfContent.concat(getIndexByWord(keyword, contentInLowerCase, false));
+                  });
+                  if (indexOfTitle.length > 0 || indexOfContent.length > 0) {
+                    isMatch = true;
+                    hitCount = indexOfTitle.length + indexOfContent.length;
+                  }
+                }
+
+                // show search results
+
+                if (isMatch) {
+                  // sort index by position of keyword
+
+                  [indexOfTitle, indexOfContent].forEach(function (index) {
+                    index.sort(function (itemLeft, itemRight) {
+                      if (itemRight.position !== itemLeft.position) {
+                        return itemRight.position - itemLeft.position;
+                      } else {
+                        return itemLeft.word.length - itemRight.word.length;
+                      }
+                    });
+                  });
+
+                  // merge hits into slices
+
+                  function mergeIntoSlice(text, start, end, index) {
+                    var item = index[index.length - 1];
+                    var position = item.position;
+                    var word = item.word;
+                    var hits = [];
+                    var searchTextCountInSlice = 0;
+                    while (position + word.length <= end && index.length != 0) {
+                      if (word === searchText) {
+                        searchTextCountInSlice++;
+                      }
+                      hits.push({position: position, length: word.length});
+                      var wordEnd = position + word.length;
+
+                      // move to next position of hit
+
+                      index.pop();
+                      while (index.length != 0) {
+                        item = index[index.length - 1];
+                        position = item.position;
+                        word = item.word;
+                        if (wordEnd > position) {
+                          index.pop();
+                        } else {
+                          break;
+                        }
+                      }
+                    }
+                    searchTextCount += searchTextCountInSlice;
+                    return {
+                      hits: hits,
+                      start: start,
+                      end: end,
+                      searchTextCount: searchTextCountInSlice
+                    };
+                  }
+
+                  var slicesOfTitle = [];
+                  if (indexOfTitle.length != 0) {
+                    slicesOfTitle.push(mergeIntoSlice(title, 0, title.length, indexOfTitle));
+                  }
+
+                  var slicesOfContent = [];
+                  while (indexOfContent.length != 0) {
+                    var item = indexOfContent[indexOfContent.length - 1];
+                    var position = item.position;
+                    var word = item.word;
+                    // cut out 100 characters
+                    var start = position - 20;
+                    var end = position + 80;
+                    if(start < 0){
+                      start = 0;
+                    }
+                    if (end < position + word.length) {
+                      end = position + word.length;
+                    }
+                    if(end > content.length){
+                      end = content.length;
+                    }
+                    slicesOfContent.push(mergeIntoSlice(content, start, end, indexOfContent));
+                  }
+
+                  // sort slices in content by search text's count and hits' count
+
+                  slicesOfContent.sort(function (sliceLeft, sliceRight) {
+                    if (sliceLeft.searchTextCount !== sliceRight.searchTextCount) {
+                      return sliceRight.searchTextCount - sliceLeft.searchTextCount;
+                    } else if (sliceLeft.hits.length !== sliceRight.hits.length) {
+                      return sliceRight.hits.length - sliceLeft.hits.length;
+                    } else {
+                      return sliceLeft.start - sliceRight.start;
+                    }
+                  });
+
+                  // select top N slices in content
+
+                  var upperBound = parseInt('1');
+                  if (upperBound >= 0) {
+                    slicesOfContent = slicesOfContent.slice(0, upperBound);
+                  }
+
+                  // highlight title and content
+
+                  function highlightKeyword(text, slice) {
+                    var result = '';
+                    var prevEnd = slice.start;
+                    slice.hits.forEach(function (hit) {
+                      result += text.substring(prevEnd, hit.position);
+                      var end = hit.position + hit.length;
+                      result += '<b class="search-keyword">' + text.substring(hit.position, end) + '</b>';
+                      prevEnd = end;
+                    });
+                    result += text.substring(prevEnd, slice.end);
+                    return result;
+                  }
+
+                  var resultItem = '';
+
+                  if (slicesOfTitle.length != 0) {
+                    resultItem += "<li><a href='" + articleUrl + "' class='search-result-title'>" + highlightKeyword(title, slicesOfTitle[0]) + "</a>";
+                  } else {
+                    resultItem += "<li><a href='" + articleUrl + "' class='search-result-title'>" + title + "</a>";
+                  }
+
+                  slicesOfContent.forEach(function (slice) {
+                    resultItem += "<a href='" + articleUrl + "'>" +
+                      "<p class=\"search-result\">" + highlightKeyword(content, slice) +
+                      "...</p>" + "</a>";
+                  });
+
+                  resultItem += "</li>";
+                  resultItems.push({
+                    item: resultItem,
+                    searchTextCount: searchTextCount,
+                    hitCount: hitCount,
+                    id: resultItems.length
+                  });
+                }
+              })
+            };
+            if (keywords.length === 1 && keywords[0] === "") {
+              resultContent.innerHTML = '<div id="no-result"><i class="fa fa-search fa-5x" /></div>'
+            } else if (resultItems.length === 0) {
+              resultContent.innerHTML = '<div id="no-result"><i class="fa fa-frown-o fa-5x" /></div>'
+            } else {
+              resultItems.sort(function (resultLeft, resultRight) {
+                if (resultLeft.searchTextCount !== resultRight.searchTextCount) {
+                  return resultRight.searchTextCount - resultLeft.searchTextCount;
+                } else if (resultLeft.hitCount !== resultRight.hitCount) {
+                  return resultRight.hitCount - resultLeft.hitCount;
+                } else {
+                  return resultRight.id - resultLeft.id;
+                }
+              });
+              var searchResultList = '<ul class=\"search-result-list\">';
+              resultItems.forEach(function (result) {
+                searchResultList += result.item;
+              })
+              searchResultList += "</ul>";
+              resultContent.innerHTML = searchResultList;
+            }
+          }
+
+          if ('auto' === 'auto') {
+            input.addEventListener('input', inputEventFunction);
+          } else {
+            $('.search-icon').click(inputEventFunction);
+            input.addEventListener('keypress', function (event) {
+              if (event.keyCode === 13) {
+                inputEventFunction();
+              }
+            });
+          }
+
+          // remove loading animation
+          $(".local-search-pop-overlay").remove();
+          $('body').css('overflow', '');
+
+          proceedsearch();
+        }
+      });
+    }
+
+    // handle and trigger popup window;
+    $('.popup-trigger').click(function(e) {
+      e.stopPropagation();
+      if (isfetched === false) {
+        searchFunc(path, 'local-search-input', 'local-search-result');
+      } else {
+        proceedsearch();
+      };
+    });
+
+    $('.popup-btn-close').click(onPopupClose);
+    $('.popup').click(function(e){
+      e.stopPropagation();
+    });
+    $(document).on('keyup', function (event) {
+      var shouldDismissSearchPopup = event.which === 27 &&
+        $('.search-popup').is(':visible');
+      if (shouldDismissSearchPopup) {
+        onPopupClose();
+      }
+    });
+  </script>
+
+
+
+
+
+  
+
+  
+  <script>
+    
+    function addCount(Counter) {
+      var $visitors = $(".leancloud_visitors");
+      var url = $visitors.attr('id').trim();
+      var title = $visitors.attr('data-flag-title').trim();
+
+      Counter('get', '/classes/Counter', { where: JSON.stringify({ url }) })
+        .done(function ({ results }) {
+          if (results.length > 0) {
+            var counter = results[0];
+            
+            Counter('put', `/classes/Counter/${counter.objectId}`, JSON.stringify({ time: { "__op":"Increment", "amount":1 } }))
+            
+            .done(function () {
+                  var $element = $(document.getElementById(url));
+                  $element.find('.leancloud-visitors-count').text(counter.time + 1);
+            })
+            
+            .fail(function ({ responseJSON }) {
+                console.log('Failed to save Visitor num, with error message: ' + responseJSON.error);
+            })
+          } else {
+            
+              Counter('post', '/classes/Counter', JSON.stringify({ title: title, url: url, time: 1}))
+                .done(function () {
+                  var $element = $(document.getElementById(url));
+                  $element.find('.leancloud-visitors-count').text(1);
+                })
+                .fail(function () {
+                  console.log('Failed to create');
+                });
+            
+          }
+        })
+      .fail(function ({ responseJSON }) {
+        console.log('LeanCloud Counter Error:' + responseJSON.code + " " + responseJSON.error);
+      });
+    }
+    
+
+    $(function() {
+      $.get('https://app-router.leancloud.cn/2/route?appId=' + "no3Ip4mNLc3JyF1AeTy8LrAm-gzGzoHsz")
+        .done(function ({ api_server }) {
+          var Counter = function (method, url, data) {
+            return $.ajax({
+              method: method,
+              url: `https://${api_server}/1.1${url}`,
+              headers: {
+                'X-LC-Id': "no3Ip4mNLc3JyF1AeTy8LrAm-gzGzoHsz",
+                'X-LC-Key': "UvlYMzpJKw0Jrw61V5BA5ifU",
+                'Content-Type': 'application/json',
+              },
+              data: data,
+            });
+          };
+          
+          addCount(Counter);
+          
+        })
+    });
+  </script>
+
+
+
+  
+
+  
+
+  
+
+  
+  
+
+  
+  
+
+  
+
+
+  
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+  <style>
+    .copy-btn {
+      display: inline-block;
+      padding: 6px 12px;
+      font-size: 13px;
+      font-weight: 700;
+      line-height: 20px;
+      color: #333;
+      white-space: nowrap;
+      vertical-align: middle;
+      cursor: pointer;
+      background-color: #eee;
+      background-image: linear-gradient(#fcfcfc, #eee);
+      border: 1px solid #d5d5d5;
+      border-radius: 3px;
+      user-select: none;
+      outline: 0;
+    }
+
+    .highlight-wrap .copy-btn {
+      transition: opacity .3s ease-in-out;
+      opacity: 0;
+      padding: 2px 6px;
+      position: absolute;
+      right: 4px;
+      top: 8px;
+    }
+
+    .highlight-wrap:hover .copy-btn,
+    .highlight-wrap .copy-btn:focus {
+      opacity: 1
+    }
+
+    .highlight-wrap {
+      position: relative;
+    }
+  </style>
+  <script>
+    $('.highlight').each(function (i, e) {
+      var $wrap = $('<div>').addClass('highlight-wrap')
+      $(e).after($wrap)
+      $wrap.append($('<button>').addClass('copy-btn').append('复制').on('click', function (e) {
+        var code = $(this).parent().find('.code').find('.line').map(function (i, e) {
+          return $(e).text()
+        }).toArray().join('\n')
+        var ta = document.createElement('textarea')
+        document.body.appendChild(ta)
+        ta.style.position = 'absolute'
+        ta.style.top = '0px'
+        ta.style.left = '0px'
+        ta.value = code
+        ta.select()
+        ta.focus()
+        var result = document.execCommand('copy')
+        document.body.removeChild(ta)
+        
+        $(this).blur()
+      })).on('mouseleave', function (e) {
+        var $b = $(this).find('.copy-btn')
+        setTimeout(function () {
+          $b.text('复制')
+        }, 300)
+      }).append(e)
+    })
+  </script>
+
+
+  
+
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-backstretch/2.0.4/jquery.backstretch.min.js"></script>;
+  <script>
+  //$("body").backstretch("/images/background.jpg");
+  </script>
+  
+  <script type="text/javascript" src="//cdn.bootcss.com/canvas-nest.js/1.0.0/canvas-nest.min.js"></script>
+  
+<script src="/live2dw/lib/L2Dwidget.min.js?0c58a1486de42ac6cc1c59c7d98ae887"></script><script>L2Dwidget.init({"pluginRootPath":"live2dw/","pluginJsPath":"lib/","pluginModelPath":"assets/","tagMode":false,"debug":false,"model":{"jsonPath":"/live2dw/assets/koharu.model.json"},"display":{"position":"right","width":150,"height":300},"mobile":{"show":false},"log":false});</script><!-- hexo-inject:begin --><!-- hexo-inject:end --></body>
+</html>

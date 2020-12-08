@@ -1,0 +1,1645 @@
+<!DOCTYPE html>
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+
+<html class="theme-next mist use-motion" lang="zh-CN">
+<head><meta name="generator" content="Hexo 3.8.0">
+  <!-- hexo-inject:begin --><!-- hexo-inject:end --><meta charset="UTF-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+
+
+
+
+
+
+  
+  
+    
+    
+  <script src="/lib/pace/pace.min.js?v=1.0.2"></script>
+  <link href="/lib/pace/pace-theme-minimal.min.css?v=1.0.2" rel="stylesheet">
+
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform">
+<meta http-equiv="Cache-Control" content="no-siteapp">
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css">
+
+<link href="/css/main.css?v=6.5.0" rel="stylesheet" type="text/css">
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon.png?v=6.5.0">
+
+
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32.png?v=6.5.0">
+
+
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16.png?v=6.5.0">
+
+
+  <link rel="mask-icon" href="/images/safari_pinned_tab.svg?v=6.5.0" color="#222">
+
+
+  <link rel="manifest" href="/images/manifest.json">
+
+
+  <meta name="msapplication-config" content="/images/browserconfig.xml">
+
+
+
+
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Mist',
+    version: '6.5.0',
+    sidebar: {"position":"left","display":"post","offset":12,"b2t":false,"scrollpercent":true,"onmobile":true},
+    fancybox: false,
+    fastclick: false,
+    lazyload: false,
+    tabs: true,
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+  
+
+
+
+
+  <meta name="description" content="简介 ARM架构是一个精简指令集处理器架构家族,拥有一套精简的指令集以及比CISC处理器更多的通用寄存器.ARM指令只处理寄存器中的数据,只有load/store指令可以读/写存储器. 这种架构的优势是指令可以被更快的执行,同时RISC处理器通过引入流水线机制,减少每个指令的占用的CPU的时钟周期来缩短执行时间. ARM官方信息中心:ARM Information Center. 工作状态">
+<meta name="keywords" content="assembly">
+<meta property="og:type" content="article">
+<meta property="og:title" content="CS-BASIC-assembly-ARM-基础">
+<meta property="og:url" content="https://hitworld.github.io/posts/f6dfed73/index.html">
+<meta property="og:site_name" content="w4rd3n">
+<meta property="og:description" content="简介 ARM架构是一个精简指令集处理器架构家族,拥有一套精简的指令集以及比CISC处理器更多的通用寄存器.ARM指令只处理寄存器中的数据,只有load/store指令可以读/写存储器. 这种架构的优势是指令可以被更快的执行,同时RISC处理器通过引入流水线机制,减少每个指令的占用的CPU的时钟周期来缩短执行时间. ARM官方信息中心:ARM Information Center. 工作状态">
+<meta property="og:locale" content="zh-CN">
+<meta property="og:image" content="https://hitworld.github.io/posts/f6dfed73/1.png">
+<meta property="og:image" content="https://hitworld.github.io/posts/f6dfed73/2.png">
+<meta property="og:image" content="https://hitworld.github.io/posts/f6dfed73/3.png">
+<meta property="og:updated_time" content="2020-11-23T13:16:00.725Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="CS-BASIC-assembly-ARM-基础">
+<meta name="twitter:description" content="简介 ARM架构是一个精简指令集处理器架构家族,拥有一套精简的指令集以及比CISC处理器更多的通用寄存器.ARM指令只处理寄存器中的数据,只有load/store指令可以读/写存储器. 这种架构的优势是指令可以被更快的执行,同时RISC处理器通过引入流水线机制,减少每个指令的占用的CPU的时钟周期来缩短执行时间. ARM官方信息中心:ARM Information Center. 工作状态">
+<meta name="twitter:image" content="https://hitworld.github.io/posts/f6dfed73/1.png">
+
+
+
+
+
+
+  <link rel="canonical" href="https://hitworld.github.io/posts/f6dfed73/">
+
+
+
+<script type="text/javascript" id="page.configurations">
+  CONFIG.page = {
+    sidebar: "",
+  };
+</script>
+
+  <title>CS-BASIC-assembly-ARM-基础 | w4rd3n</title>
+  
+
+
+
+
+
+
+
+
+
+
+
+  <noscript>
+  <style type="text/css">
+    .use-motion .motion-element,
+    .use-motion .brand,
+    .use-motion .menu-item,
+    .sidebar-inner,
+    .use-motion .post-block,
+    .use-motion .pagination,
+    .use-motion .comments,
+    .use-motion .post-header,
+    .use-motion .post-body,
+    .use-motion .collection-title { opacity: initial; }
+
+    .use-motion .logo,
+    .use-motion .site-title,
+    .use-motion .site-subtitle {
+      opacity: initial;
+      top: initial;
+    }
+
+    .use-motion {
+      .logo-line-before i { left: initial; }
+      .logo-line-after i { right: initial; }
+    }
+  </style>
+</noscript><!-- hexo-inject:begin --><!-- hexo-inject:end -->
+
+</head>
+
+<body itemscope="" itemtype="http://schema.org/WebPage" lang="zh-CN">
+
+  
+  
+    
+  
+
+  <!-- hexo-inject:begin --><!-- hexo-inject:end --><div class="container sidebar-position-left page-post-detail">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope="" itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/" class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">w4rd3n</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+    
+      
+        <p class="site-subtitle">混吃等死</p>
+      
+    
+  </div>
+
+  <div class="site-nav-toggle">
+    <button aria-label="切换导航栏">
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+
+
+<nav class="site-nav">
+  
+    <ul id="menu" class="menu">
+      
+        
+        
+        
+          
+          <li class="menu-item menu-item-home">
+
+    
+    
+    
+      
+    
+
+    
+
+    <a href="/" rel="section"><i class="menu-item-icon fa fa-fw fa-home"></i> <br>首页</a>
+
+  </li>
+        
+        
+        
+          
+          <li class="menu-item menu-item-about">
+
+    
+    
+    
+      
+    
+
+    
+
+    <a href="/about/" rel="section"><i class="menu-item-icon fa fa-fw fa-user"></i> <br>友链</a>
+
+  </li>
+        
+        
+        
+          
+          <li class="menu-item menu-item-tags">
+
+    
+    
+    
+      
+    
+
+    
+
+    <a href="/tags/" rel="section"><i class="menu-item-icon fa fa-fw fa-tags"></i> <br>标签</a>
+
+  </li>
+        
+        
+        
+          
+          <li class="menu-item menu-item-categories">
+
+    
+    
+    
+      
+    
+
+    
+
+    <a href="/categories/" rel="section"><i class="menu-item-icon fa fa-fw fa-th"></i> <br>分类</a>
+
+  </li>
+        
+        
+        
+          
+          <li class="menu-item menu-item-archives">
+
+    
+    
+    
+      
+    
+
+    
+
+    <a href="/archives/" rel="section"><i class="menu-item-icon fa fa-fw fa-archive"></i> <br>归档</a>
+
+  </li>
+
+      
+      
+        <li class="menu-item menu-item-search">
+          
+            <a href="javascript:;" class="popup-trigger">
+          
+            
+              <i class="menu-item-icon fa fa-search fa-fw"></i> <br>搜索</a>
+        </li>
+      
+    </ul>
+  
+
+  
+    
+
+  
+
+  
+    <div class="site-search">
+      
+  <div class="popup search-popup local-search-popup">
+  <div class="local-search-header clearfix">
+    <span class="search-icon">
+      <i class="fa fa-search"></i>
+    </span>
+    <span class="popup-btn-close">
+      <i class="fa fa-times-circle"></i>
+    </span>
+    <div class="local-search-input-wrapper">
+      <input autocomplete="off" placeholder="搜索..." spellcheck="false" type="text" id="local-search-input">
+    </div>
+  </div>
+  <div id="local-search-result"></div>
+</div>
+
+
+
+    </div>
+  
+</nav>
+
+
+
+  
+
+
+
+</div>
+    </header>
+
+    
+
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  
+
+  <article class="post post-type-normal" itemscope="" itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="https://hitworld.github.io/posts/f6dfed73/">
+
+    <span hidden itemprop="author" itemscope="" itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="w4rd3n">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/apple-touch-icon.png">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope="" itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="w4rd3n">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">CS-BASIC-assembly-ARM-基础
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+
+            
+            
+            
+
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+
+              
+                
+              
+
+              <time title="创建时间：2019-09-26 14:45:28" itemprop="dateCreated datePublished" datetime="2019-09-26T14:45:28+08:00">2019-09-26</time>
+            
+
+            
+          </span>
+
+          
+            <span class="post-category">
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope="" itemtype="http://schema.org/Thing"><a href="/categories/CS/" itemprop="url" rel="index"><span itemprop="name">CS</span></a></span>
+
+                
+                
+                  ，
+                
+              
+                <span itemprop="about" itemscope="" itemtype="http://schema.org/Thing"><a href="/categories/CS/BASIC/" itemprop="url" rel="index"><span itemprop="name">BASIC</span></a></span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+             <span id="/posts/f6dfed73/" class="leancloud_visitors" data-flag-title="CS-BASIC-assembly-ARM-基础">
+               <span class="post-meta-divider">|</span>
+               <span class="post-meta-item-icon">
+                 <i class="fa fa-eye"></i>
+               </span>
+               
+                 <span class="post-meta-item-text">热度：</span>
+               
+                 <span class="leancloud-visitors-count"></span>
+                 <span>℃</span>
+             </span>
+          
+
+          
+
+          
+            <div class="post-symbolscount">
+              
+
+              
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-file-word-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">本文字数：</span>
+                
+                <span title="本文字数">6.9k</span>
+              
+
+              
+                <span class="post-meta-divider">|</span>
+              
+
+              
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-clock-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">阅读时长 &asymp;</span>
+                
+                <span title="阅读时长">6 分钟</span>
+              
+            </div>
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <h2 id="简介">简介</h2>
+<p><code>ARM</code>架构是一个精简指令集处理器架构家族,拥有一套精简的指令集以及比<code>CISC</code>处理器更多的通用寄存器.<code>ARM</code>指令只处理寄存器中的数据,只有<code>load/store</code>指令可以读/写存储器.</p>
+<p>这种架构的优势是指令可以被更快的执行,同时<code>RISC</code>处理器通过引入流水线机制,减少每个指令的占用的<code>CPU</code>的时钟周期来缩短执行时间.</p>
+<p><code>ARM</code>官方信息中心:<a href="http://infocenter.arm.com" target="_blank" rel="noopener"><code>ARM Information Center</code></a>.</p>
+<h2 id="工作状态">工作状态</h2>
+<p><code>ARM</code>处理器有两种工作状态<code>ARM</code>和<code>Thumb</code>.两种工作状态之间最大的差异是指令集,<code>ARM</code>状态的指令长度为<code>32</code>位且字对齐,<code>Thumb</code>状态的指令长度一般为<code>16</code>位且半字对齐,也可能为<code>32</code>位(<code>ARM</code>中的字为四字节,半字为两字节).</p>
+<p>编写<code>ARM</code>的<code>shellcode</code>时,使用<code>Thumb</code>指令代替<code>ARM</code>指令可以避免在指令中出现<code>\0</code>截断.</p>
+<h3 id="thumb">Thumb</h3>
+<p>不同的<code>ARM</code>版本,支持的<code>Thumb</code>指令集并不相同.</p>
+<ul>
+<li><code>Thumb-1</code>(<code>16</code>位指令):用于<code>ARMv6</code>和更早的版本.</li>
+<li><code>Thumb-2</code>(<code>16</code>位和<code>32</code>位指令):对<code>Thumb-1</code>的扩展,添加了更多指令并允许它们为<code>16</code>位或<code>32</code>位宽,用于<code>ARMv6T2</code>,<code>ARMv7</code>.</li>
+<li><code>ThumbEE</code>:在<code>Thumb-2</code>基础上包含了针对动态代码生成(代码在执行前或执行期间编译代码)的一些变更和补充,用于之后的版本.</li>
+</ul>
+<p>不同的命名只是为了区分不同的版本.处理器只知道它运行在<code>Thumb</code>工作状态.</p>
+<h3 id="arm">ARM</h3>
+<p><code>ARM</code>和<code>Thumb</code>的区别.</p>
+<ul>
+<li><code>ARM</code>工作状态下的所有指令都支持条件执行,而<code>Thumb</code>只有某些<code>ARM</code>处理器版本允许使用<code>IT</code>指令进行条件执行.</li>
+<li><code>32</code>位<code>ARM</code>和<code>Thumb</code>指令的区别为<code>32</code>位<code>Thumb</code>指令具有<code>.w</code>后缀.</li>
+<li><code>ARM</code>工作状态下有一个特有的功能:桶形移位器,支持数据的各种移位操作,移位操作在<code>ARM</code>指令集中只能作为指令格式中的一个字段.例如:<code>MOV R0, R1, LSL#2</code>.</li>
+</ul>
+<h2 id="运行模式">运行模式</h2>
+<p><code>ARM</code>处理器支持<code>7</code>种运行模式.</p>
+<ul>
+<li><code>usr</code>(用户模式):<code>ARM</code>处理器正常程序执行模式.</li>
+<li><code>fiq</code>(快速中断模式):用于高速数据传输或通道处理.</li>
+<li><code>irq</code>(外部中断模式):用于通用的中断处理.</li>
+<li><code>svc</code>(管理模式):操作系统使用的保护模式.</li>
+<li><code>abt</code>(数据访问终止模式):当数据或指令预取终止时进入该模式,可用于虚拟存储及存储保护.</li>
+<li><code>sys</code>(系统模式):运行具有特权的操作系统任务.</li>
+<li><code>und</code>(未定义指令中止模式):当执行未定义的指令时进入该模式,可用于支持硬件协处理器的软件仿真.</li>
+</ul>
+<p><code>ARM</code>处理器的运行模式可以通过软件改变,也可以通过外部中断或异常处理改变.除用户模式以外的所有<code>6</code>种模式称之为非用户模式,或特权模式(<code>Privileged Modes</code>);除用户模式和系统模式以外的<code>5</code>种又称为异常模式(<code>Exception Modes</code>),常用于处理中断或异常,以及需要访问受保护的系统资源等情况.</p>
+<p><code>ARM</code>处理器在每一种处理器模式下均有一组相应的寄存器与之对应.即在任意一种处理器模式下,可访问的寄存器包括<code>15</code>个通用寄存器(<code>R0~R14</code>),一至二个状态寄存器和程序计数器.</p>
+<p>在所有的寄存器中,有些是在<code>7</code>种处理器模式下共用的同一个物理寄存器,而有些寄存器则是在不同的处理器模式下有不同的物理寄存器.</p>
+<h2 id="寄存器">寄存器</h2>
+<p>ARM微处理器共有<code>37</code>个<code>32</code>位寄存器,其中<code>31</code>个为通用寄存器,<code>6</code>个为状态寄存器.这些寄存器不是随时都能访问的,取决于此时<code>ARM</code>处理器的工作状态及具体的运行模式.任何时候通用寄存器<code>R0 ~ R14</code>,程序计数器<code>PC</code>(<code>R15</code>)和<code>CPSR</code>状态寄存器都是可访问的.</p>
+<p>通用寄存器(<code>R0~R15</code>)可分成不分组寄存器<code>R0~R7</code>,分组寄存器<code>R8~R14</code>和程序计数器<code>R15</code>.</p>
+<p>不分组寄存器是真正的通用寄存器,在所有处理器模式下访问的都是同一个物理寄存器.分组寄存器取决于当前的处理器模式,每种模式有专用的分组寄存器用于快速异常处理.</p>
+<img src="/posts/f6dfed73/1.png" title="p1">
+<p>寄存器<code>R13</code>通常用做堆栈指针<code>SP</code>;寄存器<code>R14</code>用作子程序链接寄存器,也称为<code>LR</code>,指向函数的返回地址;寄存器<code>R15</code>被用作程序计数器(<code>PC</code>),其值等于当前正在执行的指令的地址加<code>8</code>.</p>
+<p>状态寄存器:<code>CPSR</code>,<code>SPSR_svc</code>,<code>SPSR_abt</code>,<code>SPSR_und</code>,<code>SPSR_irq</code>,<code>SPSR_fiq</code>.</p>
+<p><code>CPSR</code>包含条件码标志,中断禁止位,当前处理器模式以及其它状态和控制信息.<code>CPSR</code>在每种异常模式下都有一个对应的程序状态保存寄存器<code>SPSR</code>.当异常出现时,<code>SPSR</code>用于保存<code>CPSR</code>的值,以便异常返回后恢复工作状态.</p>
+<img src="/posts/f6dfed73/2.png" title="p2">
+<img src="/posts/f6dfed73/3.png" title="p3">
+<h2 id="指令集">指令集</h2>
+<p><code>ARM</code>在不同工作状态下有不同的指令集,但助记符不变.</p>
+<h3 id="数据处理指令">数据处理指令</h3>
+<p>指令标识符中的<code>S</code>决定指令的操作是否影响<code>CPSR</code>中条件标志位的值,没有<code>S</code>时指令不更新<code>CPSR</code>中的条件标志位.</p>
+<figure class="highlight armasm"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">MOV&lt;condition&gt;&lt;S&gt; </span>DEST, OP1</span><br><span class="line"><span class="comment">;DEST=OP1,DEST是寄存器,OP1可以是寄存器,被移位的寄存器,或立即数.</span></span><br><span class="line"><span class="comment">;DEST为R15时将修改程序计数器或标志.MOV PC, R14 =&gt; 退出到调用者;MOVS PC, R14 =&gt; 退出到调用者并恢复标志位.</span></span><br><span class="line"><span class="keyword">MVN&lt;condition&gt;&lt;S&gt; </span>DEST, OP1</span><br><span class="line"><span class="comment">;DEST=~OP1,DEST是寄存器,OP1可以是寄存器,被移位的寄存器,或立即数.</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">ADD&lt;condition&gt;&lt;S&gt; </span>DEST, OP1, OP2</span><br><span class="line"><span class="comment">;DEST=OP1+OP2,DEST是寄存器,OP1是寄存器,OP2可以是寄存器,被移位的寄存器,或立即数.</span></span><br><span class="line"><span class="keyword">ADC&lt;condition&gt;&lt;S&gt; </span>DEST, OP1, OP2</span><br><span class="line"><span class="comment">;DEST=OP1+OP2+CPSR.C,DEST是寄存器,OP1是寄存器,OP2可以是寄存器,被移位的寄存器,或立即数.</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">SUB&lt;condition&gt;&lt;S&gt; </span>DEST, OP1, OP2</span><br><span class="line"><span class="comment">;DEST=OP1-OP2,DEST是寄存器,OP1是寄存器,OP2可以是寄存器,被移位的寄存器,或立即数.</span></span><br><span class="line"><span class="keyword">SBC&lt;condition&gt;&lt;S&gt; </span>DEST, OP1, OP2</span><br><span class="line"><span class="comment">;DEST=OP1+OP2-~CPSR.C,DEST是寄存器,OP1是寄存器,OP2可以是寄存器,被移位的寄存器,或立即数.</span></span><br><span class="line"><span class="keyword">RSB&lt;condition&gt;&lt;S&gt; </span>DEST, OP1, OP2</span><br><span class="line"><span class="comment">;DEST=OP2-OP1,DEST是寄存器,OP1是寄存器,OP2可以是寄存器,被移位的寄存器,或立即数.</span></span><br><span class="line"><span class="keyword">RSC&lt;condition&gt;&lt;S&gt; </span>DEST, OP1, OP2</span><br><span class="line"><span class="comment">;DEST=OP2-OP1-~CPSR,DEST是寄存器,OP1是寄存器,OP2可以是寄存器,被移位的寄存器,或立即数.</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">AND&lt;condition&gt;&lt;S&gt; </span>DEST, OP1, OP2</span><br><span class="line"><span class="comment">;DEST=OP1&amp;OP2,DEST是寄存器,OP1是寄存器,OP2可以是寄存器,被移位的寄存器,或立即数.</span></span><br><span class="line"><span class="keyword">ORR&lt;condition&gt;&lt;S&gt; </span>DEST, OP1, OP2</span><br><span class="line"><span class="comment">;DEST=OP1|OP2,DEST是寄存器,OP1是寄存器,OP2可以是寄存器,被移位的寄存器,或立即数.</span></span><br><span class="line"><span class="keyword">EOR&lt;condition&gt;&lt;S&gt; </span>DEST, OP1, OP2</span><br><span class="line"><span class="comment">;DEST=OP1^OP2,DEST是寄存器,OP1是寄存器,OP2可以是寄存器,被移位的寄存器,或立即数.</span></span><br><span class="line"><span class="keyword">BIC&lt;condition&gt;&lt;S&gt; </span>DEST, OP1, OP2</span><br><span class="line"><span class="comment">;DEST=OP1&amp;(~OP2),DEST是寄存器,OP1是寄存器,OP2是32位掩码.</span></span><br><span class="line"><span class="comment">;BIC R0, R0, #%1011;清除R0中的位0,1,和3,其余的位保持不变.</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">CMP&lt;condition&gt; </span>OP1, OP2</span><br><span class="line"><span class="comment">;同SUB,不存储结果,只更改条件标志位.</span></span><br><span class="line"><span class="keyword">CMN&lt;condition&gt; </span>OP1, OP2</span><br><span class="line"><span class="comment">;同SUB,但OP2改为~OP2,不存储结果,只更改条件标志位.</span></span><br><span class="line"><span class="keyword">TST&lt;condition&gt; </span>OP1, OP2</span><br><span class="line"><span class="comment">;同AND,不存储结果,只更改条件标志位.</span></span><br><span class="line"><span class="keyword">TEQ&lt;condition&gt; </span>OP1, OP2</span><br><span class="line"><span class="comment">;同EOR,不存储结果,只更改条件标志位.</span></span><br></pre></td></tr></table></figure>
+<h3 id="移位指令">移位指令</h3>
+<p><code>ARM</code>处理器设置与数据处理指令一起使用的桶式移位器(<code>barrel shifter</code>),也可以使用桶式移位器影响<code>LDR/STR</code>操作中的变址值.移位操作在<code>ARM</code>指令集中不作为单独的指令使用,如果数据处理指令的第二个操作数或者单一数据传送指令中的变址是寄存器,则可以对它进行各种移位操作.</p>
+<p><code>LSL</code>,逻辑左移;<code>ASL</code>,算术左移;<code>LSR</code>,逻辑右移;<code>ASR</code>,算术右移;<code>ROR</code>,循环右移;<code>RRX</code>,带扩展的循环右移.可以用一个立即值(<code>0 ~ 31</code>)指定移位数量,或用包含<code>0 ~ 31</code>值的寄存器指定移位数量.</p>
+<p>指令标识符中的<code>S</code>决定指令的移出位是否设为进位标志的值,有则设置,否则移出位抛弃.</p>
+<figure class="highlight armasm"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"><span class="symbol">Rn</span>, <span class="keyword">LSL </span><span class="symbol">#n</span><span class="comment">;Rn=Rn&lt;&lt;n.最低有效位用零来填充.</span></span><br><span class="line"><span class="symbol">Rn</span>, ASL <span class="symbol">#n</span><span class="comment">;同上.</span></span><br><span class="line"><span class="symbol">Rn</span>, <span class="keyword">LSL </span>Rx<span class="comment">;Rn=Rn&lt;&lt;Rx.最低有效位用零来填充.</span></span><br><span class="line"><span class="symbol">Rn</span>, ASL Rx<span class="comment">;同上.</span></span><br><span class="line"></span><br><span class="line"><span class="symbol">Rn</span>, <span class="keyword">LSR </span><span class="symbol">#n</span><span class="comment">;Rn=Rn&gt;&gt;n.最高有效位用零来填充.</span></span><br><span class="line"><span class="symbol">Rn</span>, <span class="keyword">LSR </span>Rx<span class="comment">;Rn=Rn&gt;&gt;Rx.最高有效位用零来填充.</span></span><br><span class="line"><span class="symbol">Rn</span>, <span class="keyword">ASR </span><span class="symbol">#n</span><span class="comment">;Rn=Rn&gt;&gt;n.最高有效位用第31位的值来填充.</span></span><br><span class="line"><span class="symbol">Rn</span>, <span class="keyword">ASR </span>Rx<span class="comment">;Rn=Rn&gt;&gt;Rx.最高有效位用第31位的值来填充.</span></span><br><span class="line"></span><br><span class="line"><span class="symbol">Rn</span>, <span class="keyword">ROR </span><span class="symbol">#n</span><span class="comment">;循环右移类似于逻辑右移,但是最高有效位用移出位填充.</span></span><br><span class="line"><span class="symbol">Rn</span>, <span class="keyword">ROR </span>Rx<span class="comment">;同上,移位量为32的操作将导致输出与输入完全一致.</span></span><br><span class="line"></span><br><span class="line"><span class="symbol">Rx</span>, <span class="keyword">RRX;Rx的位向右移动一个位置,移动时会使用处理器的进位标志来提供一个要被移位的数量,也就是参与移位的有33个位.</span></span><br></pre></td></tr></table></figure>
+<h3 id="加载存储指令">加载/存储指令</h3>
+<figure class="highlight armasm"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">LDR&lt;condition&gt;(B/H) </span>Rd, <span class="keyword">ADDR</span></span><br><span class="line"><span class="keyword">;用于从存储器中将一个32(8/16)位的字数据传送到目的寄存器中.</span></span><br><span class="line"><span class="keyword">STR&lt;condition&gt;(B/H) </span>Rd, <span class="keyword">ADDR</span></span><br><span class="line"><span class="keyword">;用于从源寄存器中将一个32(8/16)位的字数据传送到存储器中.</span></span><br><span class="line"><span class="keyword"></span></span><br><span class="line"><span class="keyword">;批量数据加载/存储指令指令</span></span><br><span class="line"><span class="keyword">LDM/STM&lt;condition&gt;&lt;type&gt; </span>Rd!, &#123;Rd2, ...&#125;</span><br><span class="line"><span class="comment">;type:IA,每次传送后地址加1;IB,每次传送前地址加1;DA,每次传送后地址减1;DB,每次传送前地址减1;FD,满递减堆栈;ED,空递减堆栈;FA,满递增堆栈;EA,空递增堆栈;</span></span><br></pre></td></tr></table></figure>
+<h3 id="乘法指令">乘法指令</h3>
+<figure class="highlight armasm"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">MUL&lt;condition&gt;&lt;S&gt; </span>DEST, OP1, OP2</span><br><span class="line"><span class="comment">;DEST=OP1*OP2.DEST为R15之外的简单寄存器,DEST和OP1必须是不同的寄存器,所有OP必须为简单寄存器.</span></span><br><span class="line"><span class="keyword">MLA&lt;condition&gt;&lt;S&gt; </span>DEST, OP1, OP2, OP3</span><br><span class="line"><span class="comment">;DEST=(OP1*OP2)+OP3.DEST为R15之外的简单寄存器,DEST和OP1必须是不同的寄存器,所有OP必须为简单寄存器.</span></span><br></pre></td></tr></table></figure>
+<h3 id="跳转指令">跳转指令</h3>
+<p>跳转指令用于实现程序流程的跳转.<code>addr</code>的值由寄存器<code>R0~R15</code>提供.</p>
+<p>存储在跳转指令中的实际值是相对当前<code>R15</code>(<code>PC</code>)的一个偏移量(<code>24</code>位有符号数),左移两位后有符号扩展为<code>32</code>位,表示的有效偏移为<code>26</code>位(<code>+/-32M</code>).</p>
+<figure class="highlight armasm"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">B&lt;condition&gt; </span><span class="keyword">ADDR</span></span><br><span class="line"><span class="keyword">;R15=R15+ADDR.</span></span><br><span class="line"><span class="keyword">BL&lt;condition&gt; </span><span class="keyword">ADDR</span></span><br><span class="line"><span class="keyword">;MOV </span><span class="built_in">R14</span>, <span class="built_in">R15</span><span class="comment">;R15=R15+ADDR.</span></span><br><span class="line"><span class="keyword">BLX </span><span class="keyword">addr</span></span><br><span class="line"><span class="keyword">;ARM工作状态使用,跳转到指令中所指定的目标地址,并切换到Thumb工作状态,该指令同时将PC的当前内容保存到寄存器R14中.</span></span><br><span class="line"><span class="keyword">BX&lt;condition&gt; </span><span class="keyword">addr</span></span><br><span class="line"><span class="keyword">;跳转到指令中所指定的目标地址,状态切换是由addr的最低位来指定的,如果等于0,进入ARM工作状态,如果为1,则进入Thumb工作状态.</span></span><br></pre></td></tr></table></figure>
+<p><code>ARM</code>中还有一种实现程序流程的跳转,直接向程序计数器<code>PC</code>写入跳转地址值,跳转之前保存返回地址从而实现子程序调用.</p>
+<h3 id="状态寄存器访问指令">状态寄存器访问指令</h3>
+<figure class="highlight armasm"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">MRS&lt;condition&gt; </span>Rd, <span class="keyword">CPSR/SPSR</span></span><br><span class="line"><span class="keyword">;用于将程序状态寄存器的内容传送到通用寄存器中.</span></span><br><span class="line"><span class="keyword"></span></span><br><span class="line"><span class="keyword">MSR&lt;condition&gt; </span><span class="keyword">CPSR/SPSR(_f/s/x/c), </span>Rd/num</span><br><span class="line"><span class="comment">;用于将操作数的内容传送到程序状态寄存器的特定域/整个.</span></span><br><span class="line"><span class="comment">;32位的程序状态寄存器可分为4个域:位[31:24]为条件标志位域,用f表示;位[23:16]为状态位域,用s表示;位[15:8]为扩展位域,用x表示;位[7:0]为控制位域,用c表示;</span></span><br></pre></td></tr></table></figure>
+<h3 id="异常产生指令">异常产生指令</h3>
+<figure class="highlight armasm"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">SWI&lt;condition&gt; </span>num</span><br><span class="line"><span class="comment">;用于产生软件中断,访问操作系统例程或第三方生产的模块,num表示SWI编号(24bit).相关参数通过通用寄存器传递.当指令中24位的立即数被忽略时,SWI编号由通用寄存器R0的内容决定.</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">BKPT </span>num</span><br><span class="line"><span class="comment">;ARMv5T之后加入的中断指令,用于产生软件断点中断,可用于程序的调试,16bit num.</span></span><br></pre></td></tr></table></figure>
+<p><code>ARM</code>通过<code>SWI</code>让程序陷入内核进行系统调用.<code>SWI</code>指令用于产生软件中断,从而切换到管理模式,<code>CPSR</code>保存到管理模式的<code>SPSR</code>,跳转到<code>SWI</code>向量.在其他模式下也可使用<code>SWI</code>指令切换到管理模式.调用号:<code>https://elixir.bootlin.com/linux/v2.6.32/source/arch/arm/include/asm/unistd.h</code>.</p>
+<p>异常处理函数(<code>SWI</code>向量)使用下面指令获取<code>24</code>位调用号:<code>LDR R0, [LR, #-4]; BIC R0, R0, #0xFF000000</code>.通过对<code>SPSR</code>访问确定软中断的<code>SWI</code>指令是<code>ARM</code>指令还是<code>Thumb</code>指令.</p>
+<h3 id="条件代码">条件代码</h3>
+<p><code>ARM</code>对所有指令提供了条件执行,条件代码如下.</p>
+<ul>
+<li><code>EQ</code>:等于,如果设置了<code>Z</code>标志.</li>
+<li><code>NE</code>:不等于,如果清除了<code>Z</code>标志.</li>
+<li><code>VS</code>:溢出,如果设置了<code>V</code>标志.</li>
+<li><code>VC</code>:未溢出,如果清除了<code>V</code>标志.</li>
+<li><code>HI</code>:高于(无符号),如果设置了<code>C</code>标志并清除了<code>Z</code>标志.</li>
+<li><code>LS</code>:低于或等于(无符号),如果清除了<code>C</code>标志或设置了<code>Z</code>标志.</li>
+<li><code>PL</code>:非负数,如果清除了<code>N</code>标志.</li>
+<li><code>MI</code>:负数,如果设置了<code>N</code>标志.</li>
+<li><code>CS</code>:进位,如果设置了<code>C</code>标志.</li>
+<li><code>CC</code>:未进位,如果清除了<code>C</code>标志.</li>
+<li><code>GE</code>:大于或等于(有符号),如果设置了<code>N</code>标志并设置了<code>V</code>标志,或者清除了<code>N</code>标志并清除了<code>V</code>标志.</li>
+<li><code>GT</code>:大于(有符号),满足<code>GE</code>的同时清除了<code>Z</code>标志.</li>
+<li><code>LE</code>:小于或等于(有符号),如果设置了<code>N</code>标志并清除了<code>V</code>标志,或者清除了<code>N</code>标志并设置了<code>V</code>标志.满足前面的同时设置了<code>Z</code>标志.</li>
+<li><code>LT</code>:小于(有符号),如果设置了<code>N</code>标志并清除了<code>V</code>标志,或者清除了<code>N</code>标志并设置了<code>V</code>标志.</li>
+<li><code>AL</code>:总是.</li>
+<li><code>NV</code>:从不.</li>
+</ul>
+<h2 id="伪代码">伪代码</h2>
+<p><code>AREA</code>伪指令用于定义一个代码段或数据段:<code>AREA</code> 段名 属性<code>1</code>, 属性<code>2</code>, ...;段名若以数字开头,则该段名需用<code>|</code>括起来,如<code>|1_test|</code>.</p>
+<p>常用的属性:<code>CODE</code>,用于定义代码段,默认为<code>READONLY</code>;<code>DATA</code>,用于定义数据段,默认为<code>READWRITE</code>;<code>ALIGN=n</code>,以<code>2^n</code>对齐,默认是按字对齐的;</p>
+<p><code>CODE16/CODE32</code>.<code>CODE16</code>伪指令通知编译器,其后的指令序列为<code>16</code>位的<code>Thumb</code>指令;<code>CODE32</code>伪指令通知编译器,其后的指令序列为<code>32</code>位的<code>ARM</code>指令.</p>
+<p><code>ENTRY</code>伪指令用于指定汇编程序的入口点.<code>END</code>伪指令用于通知编译器已经到了源程序的结尾.</p>
+<h2 id="函数调用">函数调用</h2>
+<p><code>ARM</code>和<code>AArch64</code>使用的是<code>ATPCS</code>(<code>ARM-Thumb Procedure Call Standard</code>)的函数调用约定.</p>
+<p><code>ARM</code>的函数调用约定:函数的前<code>4</code>个参数分别保存在<code>r0 ~ r3</code>寄存器中,剩下的参数从右向左依次入栈,被调用者实现栈平衡,返回值保存在<code>r0</code>中.</p>
+<p><code>AArch64</code>的函数调用约定:函数的前<code>8</code>个参数分别保存在<code>x0 ~ x7</code>寄存器中,剩下的参数从右往左一次入栈,被调用者实现栈平衡,返回值存放在<code>x0</code>中.</p>
+
+      
+    </div>
+
+    
+
+    
+    
+    
+
+    
+
+    
+       
+    
+    
+
+    
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/assembly/" rel="tag"><i class="fa fa-tag"></i> assembly</a>
+          
+        </div>
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/posts/8722019b/" rel="next" title="IS-pwn-escape-python沙箱逃逸">
+                <i class="fa fa-chevron-left"></i> IS-pwn-escape-python沙箱逃逸
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/posts/598ab275/" rel="prev" title="IS-pwn-Linux-沙箱机制">
+                IS-pwn-Linux-沙箱机制 <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+  </div>
+
+
+          </div>
+          
+
+  
+
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    
+      <div id="sidebar-dimmer"></div>
+    
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview-wrap sidebar-panel">
+        <div class="site-overview">
+          <div class="site-author motion-element" itemprop="author" itemscope="" itemtype="http://schema.org/Person">
+            
+              <img class="site-author-image" itemprop="image" src="/images/apple-touch-icon.png" alt="w4rd3n">
+            
+              <p class="site-author-name" itemprop="name">w4rd3n</p>
+              <p class="site-description motion-element" itemprop="description"></p>
+          </div>
+
+          
+            <nav class="site-state motion-element">
+              
+                <div class="site-state-item site-state-posts">
+                
+                  <a href="/archives/">
+                
+                    <span class="site-state-item-count">169</span>
+                    <span class="site-state-item-name">日志</span>
+                  </a>
+                </div>
+              
+
+              
+                
+                
+                <div class="site-state-item site-state-categories">
+                  <a href="/categories/index.html">
+                    
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                    <span class="site-state-item-count">15</span>
+                    <span class="site-state-item-name">分类</span>
+                  </a>
+                </div>
+              
+
+              
+                
+                
+                <div class="site-state-item site-state-tags">
+                  <a href="/tags/index.html">
+                    
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                    <span class="site-state-item-count">40</span>
+                    <span class="site-state-item-name">标签</span>
+                  </a>
+                </div>
+              
+            </nav>
+          
+
+          
+
+          
+            <div class="links-of-author motion-element">
+              
+                <span class="links-of-author-item">
+                  
+                  
+                    
+                  
+                  
+                    
+                  
+                  <a href="https://github.com/hitworld" title="GitHub &rarr; https://github.com/hitworld" rel="noopener" target="_blank"><i class="fa fa-fw fa-github"></i>GitHub</a>
+                </span>
+              
+            </div>
+          
+
+          
+
+          
+          
+
+          
+            
+          
+          
+
+        </div>
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#简介"><span class="nav-number">1.</span> <span class="nav-text">简介</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#工作状态"><span class="nav-number">2.</span> <span class="nav-text">工作状态</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#thumb"><span class="nav-number">2.1.</span> <span class="nav-text">Thumb</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#arm"><span class="nav-number">2.2.</span> <span class="nav-text">ARM</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#运行模式"><span class="nav-number">3.</span> <span class="nav-text">运行模式</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#寄存器"><span class="nav-number">4.</span> <span class="nav-text">寄存器</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#指令集"><span class="nav-number">5.</span> <span class="nav-text">指令集</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#数据处理指令"><span class="nav-number">5.1.</span> <span class="nav-text">数据处理指令</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#移位指令"><span class="nav-number">5.2.</span> <span class="nav-text">移位指令</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#加载存储指令"><span class="nav-number">5.3.</span> <span class="nav-text">加载/存储指令</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#乘法指令"><span class="nav-number">5.4.</span> <span class="nav-text">乘法指令</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#跳转指令"><span class="nav-number">5.5.</span> <span class="nav-text">跳转指令</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#状态寄存器访问指令"><span class="nav-number">5.6.</span> <span class="nav-text">状态寄存器访问指令</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#异常产生指令"><span class="nav-number">5.7.</span> <span class="nav-text">异常产生指令</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#条件代码"><span class="nav-number">5.8.</span> <span class="nav-text">条件代码</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#伪代码"><span class="nav-number">6.</span> <span class="nav-text">伪代码</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#函数调用"><span class="nav-number">7.</span> <span class="nav-text">函数调用</span></a></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright">&copy; <span itemprop="copyrightYear">2020</span>
+  <span class="with-love" id="animate">
+    <i class="fa fa-gg-circle"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">w4rd3n</span>
+
+  
+    <span class="post-meta-divider">|</span>
+    <span class="post-meta-item-icon">
+      <i class="fa fa-area-chart"></i>
+    </span>
+    
+    <span title="站点总字数">788k</span>
+  
+
+  
+    <span class="post-meta-divider">|</span>
+    <span class="post-meta-item-icon">
+      <i class="fa fa-coffee"></i>
+    </span>
+    
+    <span title="站点阅读时长">11:56</span>
+  
+</div>
+
+
+
+
+
+
+
+
+
+        
+<div class="busuanzi-count">
+  <script async src="https://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+  
+    <span class="site-uv" title="总访客量">
+      <i class="fa fa-user"></i>
+      <span class="busuanzi-value" id="busuanzi_value_site_uv"></span>
+    </span>
+  
+
+  
+    <span class="site-pv" title="总访问量">
+      <i class="fa fa-eye"></i>
+      <span class="busuanzi-value" id="busuanzi_value_site_pv"></span>
+    </span>
+  
+</div>
+
+
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+          <span id="scrollpercent"><span>0</span>%</span>
+        
+      </div>
+    
+
+    
+	
+    
+
+    
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+    
+      
+  
+  <script type="text/javascript" color="0,0,255" opacity="0.5" zindex="-1" count="99" src="/lib/canvas-nest/canvas-nest.min.js"></script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+  
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=6.5.0"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=6.5.0"></script>
+
+
+
+  
+  
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=6.5.0"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=6.5.0"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=6.5.0"></script>
+
+
+
+  
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+  
+
+  <script type="text/javascript">
+    // Popup Window;
+    var isfetched = false;
+    var isXml = true;
+    // Search DB path;
+    var search_path = "search.xml";
+    if (search_path.length === 0) {
+      search_path = "search.xml";
+    } else if (/json$/i.test(search_path)) {
+      isXml = false;
+    }
+    var path = "/" + search_path;
+    // monitor main search box;
+
+    var onPopupClose = function (e) {
+      $('.popup').hide();
+      $('#local-search-input').val('');
+      $('.search-result-list').remove();
+      $('#no-result').remove();
+      $(".local-search-pop-overlay").remove();
+      $('body').css('overflow', '');
+    }
+
+    function proceedsearch() {
+      $("body")
+        .append('<div class="search-popup-overlay local-search-pop-overlay"></div>')
+        .css('overflow', 'hidden');
+      $('.search-popup-overlay').click(onPopupClose);
+      $('.popup').toggle();
+      var $localSearchInput = $('#local-search-input');
+      $localSearchInput.attr("autocapitalize", "none");
+      $localSearchInput.attr("autocorrect", "off");
+      $localSearchInput.focus();
+    }
+
+    // search function;
+    var searchFunc = function(path, search_id, content_id) {
+      'use strict';
+
+      // start loading animation
+      $("body")
+        .append('<div class="search-popup-overlay local-search-pop-overlay">' +
+          '<div id="search-loading-icon">' +
+          '<i class="fa fa-spinner fa-pulse fa-5x fa-fw"></i>' +
+          '</div>' +
+          '</div>')
+        .css('overflow', 'hidden');
+      $("#search-loading-icon").css('margin', '20% auto 0 auto').css('text-align', 'center');
+
+      
+
+      $.ajax({
+        url: path,
+        dataType: isXml ? "xml" : "json",
+        async: true,
+        success: function(res) {
+          // get the contents from search data
+          isfetched = true;
+          $('.popup').detach().appendTo('.header-inner');
+          var datas = isXml ? $("entry", res).map(function() {
+            return {
+              title: $("title", this).text(),
+              content: $("content",this).text(),
+              url: $("url" , this).text()
+            };
+          }).get() : res;
+          var input = document.getElementById(search_id);
+          var resultContent = document.getElementById(content_id);
+          var inputEventFunction = function() {
+            var searchText = input.value.trim().toLowerCase();
+            var keywords = searchText.split(/[\s\-]+/);
+            if (keywords.length > 1) {
+              keywords.push(searchText);
+            }
+            var resultItems = [];
+            if (searchText.length > 0) {
+              // perform local searching
+              datas.forEach(function(data) {
+                var isMatch = false;
+                var hitCount = 0;
+                var searchTextCount = 0;
+                var title = data.title.trim();
+                var titleInLowerCase = title.toLowerCase();
+                var content = data.content.trim().replace(/<[^>]+>/g,"");
+                
+                var contentInLowerCase = content.toLowerCase();
+                var articleUrl = decodeURIComponent(data.url);
+                var indexOfTitle = [];
+                var indexOfContent = [];
+                // only match articles with not empty titles
+                if(title != '') {
+                  keywords.forEach(function(keyword) {
+                    function getIndexByWord(word, text, caseSensitive) {
+                      var wordLen = word.length;
+                      if (wordLen === 0) {
+                        return [];
+                      }
+                      var startPosition = 0, position = [], index = [];
+                      if (!caseSensitive) {
+                        text = text.toLowerCase();
+                        word = word.toLowerCase();
+                      }
+                      while ((position = text.indexOf(word, startPosition)) > -1) {
+                        index.push({position: position, word: word});
+                        startPosition = position + wordLen;
+                      }
+                      return index;
+                    }
+
+                    indexOfTitle = indexOfTitle.concat(getIndexByWord(keyword, titleInLowerCase, false));
+                    indexOfContent = indexOfContent.concat(getIndexByWord(keyword, contentInLowerCase, false));
+                  });
+                  if (indexOfTitle.length > 0 || indexOfContent.length > 0) {
+                    isMatch = true;
+                    hitCount = indexOfTitle.length + indexOfContent.length;
+                  }
+                }
+
+                // show search results
+
+                if (isMatch) {
+                  // sort index by position of keyword
+
+                  [indexOfTitle, indexOfContent].forEach(function (index) {
+                    index.sort(function (itemLeft, itemRight) {
+                      if (itemRight.position !== itemLeft.position) {
+                        return itemRight.position - itemLeft.position;
+                      } else {
+                        return itemLeft.word.length - itemRight.word.length;
+                      }
+                    });
+                  });
+
+                  // merge hits into slices
+
+                  function mergeIntoSlice(text, start, end, index) {
+                    var item = index[index.length - 1];
+                    var position = item.position;
+                    var word = item.word;
+                    var hits = [];
+                    var searchTextCountInSlice = 0;
+                    while (position + word.length <= end && index.length != 0) {
+                      if (word === searchText) {
+                        searchTextCountInSlice++;
+                      }
+                      hits.push({position: position, length: word.length});
+                      var wordEnd = position + word.length;
+
+                      // move to next position of hit
+
+                      index.pop();
+                      while (index.length != 0) {
+                        item = index[index.length - 1];
+                        position = item.position;
+                        word = item.word;
+                        if (wordEnd > position) {
+                          index.pop();
+                        } else {
+                          break;
+                        }
+                      }
+                    }
+                    searchTextCount += searchTextCountInSlice;
+                    return {
+                      hits: hits,
+                      start: start,
+                      end: end,
+                      searchTextCount: searchTextCountInSlice
+                    };
+                  }
+
+                  var slicesOfTitle = [];
+                  if (indexOfTitle.length != 0) {
+                    slicesOfTitle.push(mergeIntoSlice(title, 0, title.length, indexOfTitle));
+                  }
+
+                  var slicesOfContent = [];
+                  while (indexOfContent.length != 0) {
+                    var item = indexOfContent[indexOfContent.length - 1];
+                    var position = item.position;
+                    var word = item.word;
+                    // cut out 100 characters
+                    var start = position - 20;
+                    var end = position + 80;
+                    if(start < 0){
+                      start = 0;
+                    }
+                    if (end < position + word.length) {
+                      end = position + word.length;
+                    }
+                    if(end > content.length){
+                      end = content.length;
+                    }
+                    slicesOfContent.push(mergeIntoSlice(content, start, end, indexOfContent));
+                  }
+
+                  // sort slices in content by search text's count and hits' count
+
+                  slicesOfContent.sort(function (sliceLeft, sliceRight) {
+                    if (sliceLeft.searchTextCount !== sliceRight.searchTextCount) {
+                      return sliceRight.searchTextCount - sliceLeft.searchTextCount;
+                    } else if (sliceLeft.hits.length !== sliceRight.hits.length) {
+                      return sliceRight.hits.length - sliceLeft.hits.length;
+                    } else {
+                      return sliceLeft.start - sliceRight.start;
+                    }
+                  });
+
+                  // select top N slices in content
+
+                  var upperBound = parseInt('1');
+                  if (upperBound >= 0) {
+                    slicesOfContent = slicesOfContent.slice(0, upperBound);
+                  }
+
+                  // highlight title and content
+
+                  function highlightKeyword(text, slice) {
+                    var result = '';
+                    var prevEnd = slice.start;
+                    slice.hits.forEach(function (hit) {
+                      result += text.substring(prevEnd, hit.position);
+                      var end = hit.position + hit.length;
+                      result += '<b class="search-keyword">' + text.substring(hit.position, end) + '</b>';
+                      prevEnd = end;
+                    });
+                    result += text.substring(prevEnd, slice.end);
+                    return result;
+                  }
+
+                  var resultItem = '';
+
+                  if (slicesOfTitle.length != 0) {
+                    resultItem += "<li><a href='" + articleUrl + "' class='search-result-title'>" + highlightKeyword(title, slicesOfTitle[0]) + "</a>";
+                  } else {
+                    resultItem += "<li><a href='" + articleUrl + "' class='search-result-title'>" + title + "</a>";
+                  }
+
+                  slicesOfContent.forEach(function (slice) {
+                    resultItem += "<a href='" + articleUrl + "'>" +
+                      "<p class=\"search-result\">" + highlightKeyword(content, slice) +
+                      "...</p>" + "</a>";
+                  });
+
+                  resultItem += "</li>";
+                  resultItems.push({
+                    item: resultItem,
+                    searchTextCount: searchTextCount,
+                    hitCount: hitCount,
+                    id: resultItems.length
+                  });
+                }
+              })
+            };
+            if (keywords.length === 1 && keywords[0] === "") {
+              resultContent.innerHTML = '<div id="no-result"><i class="fa fa-search fa-5x" /></div>'
+            } else if (resultItems.length === 0) {
+              resultContent.innerHTML = '<div id="no-result"><i class="fa fa-frown-o fa-5x" /></div>'
+            } else {
+              resultItems.sort(function (resultLeft, resultRight) {
+                if (resultLeft.searchTextCount !== resultRight.searchTextCount) {
+                  return resultRight.searchTextCount - resultLeft.searchTextCount;
+                } else if (resultLeft.hitCount !== resultRight.hitCount) {
+                  return resultRight.hitCount - resultLeft.hitCount;
+                } else {
+                  return resultRight.id - resultLeft.id;
+                }
+              });
+              var searchResultList = '<ul class=\"search-result-list\">';
+              resultItems.forEach(function (result) {
+                searchResultList += result.item;
+              })
+              searchResultList += "</ul>";
+              resultContent.innerHTML = searchResultList;
+            }
+          }
+
+          if ('auto' === 'auto') {
+            input.addEventListener('input', inputEventFunction);
+          } else {
+            $('.search-icon').click(inputEventFunction);
+            input.addEventListener('keypress', function (event) {
+              if (event.keyCode === 13) {
+                inputEventFunction();
+              }
+            });
+          }
+
+          // remove loading animation
+          $(".local-search-pop-overlay").remove();
+          $('body').css('overflow', '');
+
+          proceedsearch();
+        }
+      });
+    }
+
+    // handle and trigger popup window;
+    $('.popup-trigger').click(function(e) {
+      e.stopPropagation();
+      if (isfetched === false) {
+        searchFunc(path, 'local-search-input', 'local-search-result');
+      } else {
+        proceedsearch();
+      };
+    });
+
+    $('.popup-btn-close').click(onPopupClose);
+    $('.popup').click(function(e){
+      e.stopPropagation();
+    });
+    $(document).on('keyup', function (event) {
+      var shouldDismissSearchPopup = event.which === 27 &&
+        $('.search-popup').is(':visible');
+      if (shouldDismissSearchPopup) {
+        onPopupClose();
+      }
+    });
+  </script>
+
+
+
+
+
+  
+
+  
+  <script>
+    
+    function addCount(Counter) {
+      var $visitors = $(".leancloud_visitors");
+      var url = $visitors.attr('id').trim();
+      var title = $visitors.attr('data-flag-title').trim();
+
+      Counter('get', '/classes/Counter', { where: JSON.stringify({ url }) })
+        .done(function ({ results }) {
+          if (results.length > 0) {
+            var counter = results[0];
+            
+            Counter('put', `/classes/Counter/${counter.objectId}`, JSON.stringify({ time: { "__op":"Increment", "amount":1 } }))
+            
+            .done(function () {
+                  var $element = $(document.getElementById(url));
+                  $element.find('.leancloud-visitors-count').text(counter.time + 1);
+            })
+            
+            .fail(function ({ responseJSON }) {
+                console.log('Failed to save Visitor num, with error message: ' + responseJSON.error);
+            })
+          } else {
+            
+              Counter('post', '/classes/Counter', JSON.stringify({ title: title, url: url, time: 1}))
+                .done(function () {
+                  var $element = $(document.getElementById(url));
+                  $element.find('.leancloud-visitors-count').text(1);
+                })
+                .fail(function () {
+                  console.log('Failed to create');
+                });
+            
+          }
+        })
+      .fail(function ({ responseJSON }) {
+        console.log('LeanCloud Counter Error:' + responseJSON.code + " " + responseJSON.error);
+      });
+    }
+    
+
+    $(function() {
+      $.get('https://app-router.leancloud.cn/2/route?appId=' + "no3Ip4mNLc3JyF1AeTy8LrAm-gzGzoHsz")
+        .done(function ({ api_server }) {
+          var Counter = function (method, url, data) {
+            return $.ajax({
+              method: method,
+              url: `https://${api_server}/1.1${url}`,
+              headers: {
+                'X-LC-Id': "no3Ip4mNLc3JyF1AeTy8LrAm-gzGzoHsz",
+                'X-LC-Key': "UvlYMzpJKw0Jrw61V5BA5ifU",
+                'Content-Type': 'application/json',
+              },
+              data: data,
+            });
+          };
+          
+          addCount(Counter);
+          
+        })
+    });
+  </script>
+
+
+
+  
+
+  
+
+  
+
+  
+  
+
+  
+  
+
+  
+
+
+  
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+  <style>
+    .copy-btn {
+      display: inline-block;
+      padding: 6px 12px;
+      font-size: 13px;
+      font-weight: 700;
+      line-height: 20px;
+      color: #333;
+      white-space: nowrap;
+      vertical-align: middle;
+      cursor: pointer;
+      background-color: #eee;
+      background-image: linear-gradient(#fcfcfc, #eee);
+      border: 1px solid #d5d5d5;
+      border-radius: 3px;
+      user-select: none;
+      outline: 0;
+    }
+
+    .highlight-wrap .copy-btn {
+      transition: opacity .3s ease-in-out;
+      opacity: 0;
+      padding: 2px 6px;
+      position: absolute;
+      right: 4px;
+      top: 8px;
+    }
+
+    .highlight-wrap:hover .copy-btn,
+    .highlight-wrap .copy-btn:focus {
+      opacity: 1
+    }
+
+    .highlight-wrap {
+      position: relative;
+    }
+  </style>
+  <script>
+    $('.highlight').each(function (i, e) {
+      var $wrap = $('<div>').addClass('highlight-wrap')
+      $(e).after($wrap)
+      $wrap.append($('<button>').addClass('copy-btn').append('复制').on('click', function (e) {
+        var code = $(this).parent().find('.code').find('.line').map(function (i, e) {
+          return $(e).text()
+        }).toArray().join('\n')
+        var ta = document.createElement('textarea')
+        document.body.appendChild(ta)
+        ta.style.position = 'absolute'
+        ta.style.top = '0px'
+        ta.style.left = '0px'
+        ta.value = code
+        ta.select()
+        ta.focus()
+        var result = document.execCommand('copy')
+        document.body.removeChild(ta)
+        
+        $(this).blur()
+      })).on('mouseleave', function (e) {
+        var $b = $(this).find('.copy-btn')
+        setTimeout(function () {
+          $b.text('复制')
+        }, 300)
+      }).append(e)
+    })
+  </script>
+
+
+  
+
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-backstretch/2.0.4/jquery.backstretch.min.js"></script>;
+  <script>
+  //$("body").backstretch("/images/background.jpg");
+  </script>
+  
+  <script type="text/javascript" src="//cdn.bootcss.com/canvas-nest.js/1.0.0/canvas-nest.min.js"></script>
+  
+<script src="/live2dw/lib/L2Dwidget.min.js?0c58a1486de42ac6cc1c59c7d98ae887"></script><script>L2Dwidget.init({"pluginRootPath":"live2dw/","pluginJsPath":"lib/","pluginModelPath":"assets/","tagMode":false,"debug":false,"model":{"jsonPath":"/live2dw/assets/koharu.model.json"},"display":{"position":"right","width":150,"height":300},"mobile":{"show":false},"log":false});</script><!-- hexo-inject:begin --><!-- hexo-inject:end --></body>
+</html>

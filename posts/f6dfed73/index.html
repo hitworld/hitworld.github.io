@@ -127,14 +127,14 @@
 <meta property="og:site_name" content="w4rd3n">
 <meta property="og:description" content="简介 ARM架构是一个精简指令集处理器架构家族,拥有一套精简的指令集以及比CISC处理器更多的通用寄存器.ARM指令只处理寄存器中的数据,只有load/store指令可以读/写存储器. 这种架构的优势是指令可以被更快的执行,同时RISC处理器通过引入流水线机制,减少每个指令的占用的CPU的时钟周期来缩短执行时间. ARM官方信息中心:ARM Information Center. 工作状态">
 <meta property="og:locale" content="zh-CN">
-<meta property="og:image" content="https://hitworld.github.io/posts/f6dfed73/1.png">
-<meta property="og:image" content="https://hitworld.github.io/posts/f6dfed73/2.png">
-<meta property="og:image" content="https://hitworld.github.io/posts/f6dfed73/3.png">
-<meta property="og:updated_time" content="2020-11-23T13:16:00.725Z">
+<meta property="og:image" content="https://hitworld.github.io/posts/f6dfed73/2020-12-29-00-33-26.png">
+<meta property="og:image" content="https://hitworld.github.io/posts/f6dfed73/2020-12-29-00-34-08.png">
+<meta property="og:image" content="https://hitworld.github.io/posts/f6dfed73/2020-12-29-00-34-29.png">
+<meta property="og:updated_time" content="2020-12-28T16:35:02.851Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="CS-BASIC-assembly-ARM-基础">
 <meta name="twitter:description" content="简介 ARM架构是一个精简指令集处理器架构家族,拥有一套精简的指令集以及比CISC处理器更多的通用寄存器.ARM指令只处理寄存器中的数据,只有load/store指令可以读/写存储器. 这种架构的优势是指令可以被更快的执行,同时RISC处理器通过引入流水线机制,减少每个指令的占用的CPU的时钟周期来缩短执行时间. ARM官方信息中心:ARM Information Center. 工作状态">
-<meta name="twitter:image" content="https://hitworld.github.io/posts/f6dfed73/1.png">
+<meta name="twitter:image" content="https://hitworld.github.io/posts/f6dfed73/2020-12-29-00-33-26.png">
 
 
 
@@ -581,12 +581,12 @@
 <p>ARM微处理器共有<code>37</code>个<code>32</code>位寄存器,其中<code>31</code>个为通用寄存器,<code>6</code>个为状态寄存器.这些寄存器不是随时都能访问的,取决于此时<code>ARM</code>处理器的工作状态及具体的运行模式.任何时候通用寄存器<code>R0 ~ R14</code>,程序计数器<code>PC</code>(<code>R15</code>)和<code>CPSR</code>状态寄存器都是可访问的.</p>
 <p>通用寄存器(<code>R0~R15</code>)可分成不分组寄存器<code>R0~R7</code>,分组寄存器<code>R8~R14</code>和程序计数器<code>R15</code>.</p>
 <p>不分组寄存器是真正的通用寄存器,在所有处理器模式下访问的都是同一个物理寄存器.分组寄存器取决于当前的处理器模式,每种模式有专用的分组寄存器用于快速异常处理.</p>
-<img src="/posts/f6dfed73/1.png" title="p1">
+<p><img src="2020-12-29-00-33-26.png"></p>
 <p>寄存器<code>R13</code>通常用做堆栈指针<code>SP</code>;寄存器<code>R14</code>用作子程序链接寄存器,也称为<code>LR</code>,指向函数的返回地址;寄存器<code>R15</code>被用作程序计数器(<code>PC</code>),其值等于当前正在执行的指令的地址加<code>8</code>.</p>
 <p>状态寄存器:<code>CPSR</code>,<code>SPSR_svc</code>,<code>SPSR_abt</code>,<code>SPSR_und</code>,<code>SPSR_irq</code>,<code>SPSR_fiq</code>.</p>
 <p><code>CPSR</code>包含条件码标志,中断禁止位,当前处理器模式以及其它状态和控制信息.<code>CPSR</code>在每种异常模式下都有一个对应的程序状态保存寄存器<code>SPSR</code>.当异常出现时,<code>SPSR</code>用于保存<code>CPSR</code>的值,以便异常返回后恢复工作状态.</p>
-<img src="/posts/f6dfed73/2.png" title="p2">
-<img src="/posts/f6dfed73/3.png" title="p3">
+<p><img src="2020-12-29-00-34-08.png"></p>
+<p><img src="2020-12-29-00-34-29.png"></p>
 <h2 id="指令集">指令集</h2>
 <p><code>ARM</code>在不同工作状态下有不同的指令集,但助记符不变.</p>
 <h3 id="数据处理指令">数据处理指令</h3>
@@ -983,7 +983,7 @@
       <i class="fa fa-area-chart"></i>
     </span>
     
-    <span title="站点总字数">797k</span>
+    <span title="站点总字数">798k</span>
   
 
   

@@ -119,30 +119,29 @@
 
 
 
-  <meta name="description" content="程序设计语言 现今有几千种程序设计语言,可以通过不同方式进行分类. 第一代语言机器语言,第二代语言汇编语言,第三代语言为Fortran,C,C++等高级程序设计语言,第四代语言是为特定应用设计的语言,如SQL,第五代语言指基于逻辑和约束的语言,如Prolog. 指明如何完成一个计算任务的语言称为强制式语言,如C,C++,FORTRAN.指明要进行哪些计算的语言称为声明式语言,如ML,LISP">
+  <meta name="description" content="程序设计语言 程序设计语言可以通过不同方式进行分类. 第一代语言机器语言,第二代语言汇编语言,第三代语言为Fortran,C,C++等高级程序设计语言,第四代语言是为特定应用设计的语言,如SQL,第五代语言指基于逻辑和约束的语言,如Prolog. 指明如何完成一个计算任务的语言称为强制式语言,如C,C++,FORTRAN.指明要进行哪些计算的语言称为声明式语言,如ML,LISP等函数式语言.">
 <meta name="keywords" content="compiler-principles">
 <meta property="og:type" content="article">
 <meta property="og:title" content="CS-BASIC-compiler-principles-基础">
 <meta property="og:url" content="https://hitworld.github.io/posts/493cdcda/index.html">
 <meta property="og:site_name" content="w4rd3n">
-<meta property="og:description" content="程序设计语言 现今有几千种程序设计语言,可以通过不同方式进行分类. 第一代语言机器语言,第二代语言汇编语言,第三代语言为Fortran,C,C++等高级程序设计语言,第四代语言是为特定应用设计的语言,如SQL,第五代语言指基于逻辑和约束的语言,如Prolog. 指明如何完成一个计算任务的语言称为强制式语言,如C,C++,FORTRAN.指明要进行哪些计算的语言称为声明式语言,如ML,LISP">
+<meta property="og:description" content="程序设计语言 程序设计语言可以通过不同方式进行分类. 第一代语言机器语言,第二代语言汇编语言,第三代语言为Fortran,C,C++等高级程序设计语言,第四代语言是为特定应用设计的语言,如SQL,第五代语言指基于逻辑和约束的语言,如Prolog. 指明如何完成一个计算任务的语言称为强制式语言,如C,C++,FORTRAN.指明要进行哪些计算的语言称为声明式语言,如ML,LISP等函数式语言.">
 <meta property="og:locale" content="zh-CN">
-<meta property="og:image" content="https://hitworld.github.io/posts/493cdcda/1.png">
-<meta property="og:image" content="https://hitworld.github.io/posts/493cdcda/2.png">
-<meta property="og:image" content="https://hitworld.github.io/posts/493cdcda/3.png">
-<meta property="og:image" content="https://hitworld.github.io/posts/493cdcda/4.png">
-<meta property="og:image" content="https://hitworld.github.io/posts/493cdcda/5.png">
-<meta property="og:image" content="https://hitworld.github.io/posts/493cdcda/6.png">
-<meta property="og:image" content="https://hitworld.github.io/posts/493cdcda/7.png">
-<meta property="og:image" content="https://hitworld.github.io/posts/493cdcda/8.png">
-<meta property="og:image" content="https://hitworld.github.io/posts/493cdcda/9.png">
-<meta property="og:image" content="https://hitworld.github.io/posts/493cdcda/10.png">
-<meta property="og:image" content="https://hitworld.github.io/posts/493cdcda/11.png">
-<meta property="og:updated_time" content="2020-11-23T13:16:00.727Z">
+<meta property="og:image" content="https://hitworld.github.io/posts/493cdcda/2020-12-29-00-44-55.png">
+<meta property="og:image" content="https://hitworld.github.io/posts/493cdcda/2020-12-29-00-45-15.png">
+<meta property="og:image" content="https://hitworld.github.io/posts/493cdcda/2020-12-29-00-40-57.png">
+<meta property="og:image" content="https://hitworld.github.io/posts/493cdcda/2020-12-29-00-41-15.png">
+<meta property="og:image" content="https://hitworld.github.io/posts/493cdcda/2020-12-29-00-41-32.png">
+<meta property="og:image" content="https://hitworld.github.io/posts/493cdcda/2020-12-29-00-41-48.png">
+<meta property="og:image" content="https://hitworld.github.io/posts/493cdcda/2020-12-29-00-43-16.png">
+<meta property="og:image" content="https://hitworld.github.io/posts/493cdcda/2020-12-29-00-43-38.png">
+<meta property="og:image" content="https://hitworld.github.io/posts/493cdcda/2020-12-29-00-43-52.png">
+<meta property="og:image" content="https://hitworld.github.io/posts/493cdcda/2020-12-29-00-44-06.png">
+<meta property="og:updated_time" content="2020-12-28T16:45:58.249Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="CS-BASIC-compiler-principles-基础">
-<meta name="twitter:description" content="程序设计语言 现今有几千种程序设计语言,可以通过不同方式进行分类. 第一代语言机器语言,第二代语言汇编语言,第三代语言为Fortran,C,C++等高级程序设计语言,第四代语言是为特定应用设计的语言,如SQL,第五代语言指基于逻辑和约束的语言,如Prolog. 指明如何完成一个计算任务的语言称为强制式语言,如C,C++,FORTRAN.指明要进行哪些计算的语言称为声明式语言,如ML,LISP">
-<meta name="twitter:image" content="https://hitworld.github.io/posts/493cdcda/1.png">
+<meta name="twitter:description" content="程序设计语言 程序设计语言可以通过不同方式进行分类. 第一代语言机器语言,第二代语言汇编语言,第三代语言为Fortran,C,C++等高级程序设计语言,第四代语言是为特定应用设计的语言,如SQL,第五代语言指基于逻辑和约束的语言,如Prolog. 指明如何完成一个计算任务的语言称为强制式语言,如C,C++,FORTRAN.指明要进行哪些计算的语言称为声明式语言,如ML,LISP等函数式语言.">
+<meta name="twitter:image" content="https://hitworld.github.io/posts/493cdcda/2020-12-29-00-44-55.png">
 
 
 
@@ -550,40 +549,52 @@
 
       
         <h2 id="程序设计语言">程序设计语言</h2>
-<p>现今有几千种程序设计语言,可以通过不同方式进行分类.</p>
+<p>程序设计语言可以通过不同方式进行分类.</p>
 <p>第一代语言机器语言,第二代语言汇编语言,第三代语言为<code>Fortran</code>,<code>C</code>,<code>C++</code>等高级程序设计语言,第四代语言是为特定应用设计的语言,如<code>SQL</code>,第五代语言指基于逻辑和约束的语言,如<code>Prolog</code>.</p>
 <p>指明如何完成一个计算任务的语言称为强制式语言,如<code>C</code>,<code>C++</code>,<code>FORTRAN</code>.指明要进行哪些计算的语言称为声明式语言,如<code>ML</code>,<code>LISP</code>等函数式语言.还有如面对对象语言,脚本语言等分类.</p>
-<p>高级程序语言都可看成是一个字符集上的字符串.程序语言主要是由语法和语义两方面定义.</p>
+<p>高级程序语言都可看成是一个字符集上的字符串,主要是由语法和语义两方面定义.</p>
 <p>语义规则定义了语言的单词符号和语法单位的意义.</p>
-<p>语言的语法是用来形成一个合法程序的一组规则,这些规则一部分称为词法规则,另一部分称为语法规则.词法规则定义了单词符号的形成规则,而语法规则定义了语法单位的形成规则.常见语法单位:表达式,语句,函数,过程和程序等.</p>
-<h2 id="编译技术的应用">编译技术的应用</h2>
-<p>编译技术基本的数学模型有:有限自动机和正规式,上下文无法文法,树形结构.</p>
-<p>编译技术被用于:高级程序设计语言的实现,针对计算机体系结构的优化,新计算机体系结构的设计,程序的翻译(二进制翻译,硬件合成,数据查询解释器,翻译后模拟),软件生成率工具(错误检测,类型检查,边界检查,内存管理工具).</p>
+<p>语法是用来形成一个合法程序的一组规则,这些规则一部分称为词法规则,另一部分称为语法规则.词法规则定义了单词符号的形成规则,而语法规则定义了语法单位的形成规则.常见语法单位:表达式,语句,函数,过程和程序等.</p>
 <h2 id="语言处理器">语言处理器</h2>
 <p>常见的语言处理器有编译器和解释器.</p>
-<p>编译器是一个读取以源语言编写的程序并把其翻译为一个等价的使用目标语言编写的程序.</p>
-<p>解释器是一个读取以源语言编写的程序并逐个语句的执行.</p>
+<p>编译器是一个读取以源语言编写的程序并把其翻译为一个等价的使用目标语言编写的程序(产生目标代码程序).</p>
+<p>解释器是一个读取以源语言编写的程序并逐个语句的执行(不产生目标代码程序,只产生运行结果).</p>
 <p>也有一些即时编译器(<code>JIT</code>)在运行中处理输入的前一刻将字节码翻译成目标语言再执行.</p>
-<h2 id="编译器概览">编译器概览</h2>
-<p>编译器就是一个映射,由两部分组成:分析部分(前端)和综合部分(后端).</p>
-<p>分析部分主要进行词法分析,语法分析,语义分析,中间代码生成,这个过程中也会产生相应的中间表示形式,并生成符号表,分析部分是与源语言有关但与目标机无关的那些部分.</p>
-<p>综合部份根据中间语言生成目标程序,主要包括编译程序中与目标机有关的那些部分,也就是优化和目标代码生成.</p>
-<p>编译器第一个步骤称为词法分析或扫描,词法分析器将源代码解析成有意义的词素的序列并生成对应的符号表,对于每个词素,词法分析器输出形如<code>&lt;token-name, attribute-value&gt;</code>的词法单元,<code>token-name</code>是该词法单元的类型(如基本字,标识符,常数,算符和界符.基本字又称为保留字,界符又称为分隔符),<code>attribute-value</code>是对应的符号或指向对应的符号(某些词法单元无属性值,例如:<code>=</code>).</p>
-<p>编译器第二个步骤称为语法分析或解析,语法分析根据语语法规则,把单词符号串分解成各类语法单位,如短语,子句,句子和程序等.通过语法分析,确定整个输入串是否构成语法上正确的程序.常用的语法规则用上下文无关文法描述.对应产生的结果一般是语法树.</p>
+<h2 id="编译过程">编译过程</h2>
+<p><img src="2020-12-29-00-44-55.png"></p>
+<h3 id="词法分析">词法分析</h3>
+<p>编译过程第一个步骤称为词法分析或扫描,词法分析器根据词法规则将源代码解析成有意义的词素的序列并生成对应的符号表.常用的词法规则用有限自动机描述.</p>
+<p>对于每个词素,词法分析器输出形如<code>&lt;token-name, attribute-value&gt;</code>的词法单元,<code>token-name</code>是该词法单元的类型(如基本字/保留字,标识符,常数,算符和界符/分隔符),<code>attribute-value</code>是对应的符号或指向对应的符号(某些词法单元无属性值,例如:<code>=</code>).</p>
+<h3 id="语法分析">语法分析</h3>
+<p>编译过程第二个步骤称为语法分析或解析,语法分析根据语法规则(利用有限自动机描述),把单词符号串分解成各类语法单位,如短语,子句,句子和程序等.常用的语法规则用上下文无关文法描述.</p>
+<p>通过语法分析,确定整个输入串是否构成语法上正确的程序.同时产生一个语法树.</p>
 <p>词法分析是一种线性分析,而语法分析是一种层次结构的分析.</p>
-<p>语义分析器使用语法树和符号表来检查语义,同时会收集类型信息来进行类型检查.在编译的过程中编译器会产生多个中间表示形式,例如语法树和中间代码,中间代码是一种含义明确,便于处理的记号系统.语义分析的同时会产生中间代码,典型的有四元式,三地址代码,间接三地址代码,逆波兰式,树形表示等.</p>
-<p>编译器还可能会对中间代码进行优化(公共子表达式的提取,强度削弱,删除无用代码),产生时间或空间上更良好的中间代码,最后将优化结果映射为目标代码.</p>
-<p>其中符号表一直存在,用于记录变量的名字和信息,同时在编译的过程中不断补充类型等信息.</p>
+<h3 id="语义分析-中间代码生成">语义分析 &amp; 中间代码生成</h3>
+<p>语义分析器使用语法树和符号表来检查语义,同时会收集类型信息来进行类型检查.</p>
+<p>在编译的过程中编译器会产生多个中间表示形式,例如语法树和中间代码,中间代码是一种含义明确,便于处理的记号系统.</p>
+<p>语义分析的同时会根据语义规则产生中间代码,典型的有四元式,三地址代码,间接三地址代码,逆波兰式,树形表示等.常用的语义规则用属性文法描述.</p>
+<h3 id="中间代码的优化和目标代码生成">中间代码的优化和目标代码生成</h3>
+<p>编译器还会依据程序的等价变换原则对中间代码进行优化(公共子表达式的提取,强度削弱,删除无用代码),产生时间或空间上更良好的中间代码.</p>
+<p>依赖于硬件系统结构和机器指令的含义将中间代码映射为目标代码.</p>
+<p>目标代码有三种形式:汇编指令代码(需要进行汇编),绝对指令代码(可直接运行),可重新定位指令代码(需要链接).</p>
+<h2 id="编译程序的结构">编译程序的结构</h2>
+<p><img src="2020-12-29-00-45-15.png"></p>
+<p>编译程序由两部分组成:分析部分(前端)和综合部分(后端).</p>
+<p>分析部分是与源语言有关但与目标机无关的那些部分,主要进行词法分析,语法分析,语义分析,中间代码生成和中间代码与目标机无关的优化,这个过程中也会产生相应的中间表示形式,并生成符号表.</p>
+<p>综合部份根据中间代码生成目标程序,主要包括编译程序中与目标机有关的那些部分,也就是中间代码与目标机有关的优化和目标代码生成.</p>
+<h3 id="符号表-纠错">符号表 &amp; 纠错</h3>
+<p>符号表一直存在,用于记录变量的名字和信息,同时在编译的过程中不断补充类型等信息.</p>
 <p>编译程序在各个阶段应诊断和报告源程序中的错误,包括词法错误,语法错误,语义错误等.编译程序应报告出错地点,并给出简明准确的提示信息.</p>
-<h3 id="编译器构造工具">编译器构造工具</h3>
-<p>常用的编译器构造工具.</p>
-<ul>
-<li>词法分析器的生成器:例如<code>Lex</code>,<code>Flex</code>.</li>
-<li>语法分析器的生成器:例如<code>Lex</code>,<code>Yacc</code>,<code>bison++</code>.</li>
-</ul>
-<h3 id="编译程序的移植">编译程序的移植</h3>
-<p>利用<code>A</code>机器上已有的高级语言<code>L</code>编写一个在<code>B</code>机器上运行的高级语言<code>L</code>的编译程序.</p>
-<p>先用<code>L</code>语言编写产生<code>B</code>机器代码的<code>L</code>编译程序源程序<code>R</code>,<code>R</code>经过<code>A</code>机器上的<code>L</code>的编译程序编译后,生成能够在<code>A</code>机器上运行的,产生<code>B</code>机器代码的编译程序<code>I</code>,现在用<code>I</code>编译<code>R</code>,就产生了<code>P</code>程序,<code>P</code>程序可以将<code>L</code>语言编译成能够在<code>B</code>机器上运行的,由<code>B</code>机器代码构成的目标程序.</p>
+<h3 id="遍">遍</h3>
+<p>遍是对源程序或源程序的中间表示从头到尾扫描一次,一遍可以由若干个阶段完成,一个阶段也可以分为若干遍.</p>
+<h2 id="编译程序的生成">编译程序的生成</h2>
+<ol type="1">
+<li>以机器代码和汇编语言为工具实现目标语言的编译器.</li>
+<li>利用已经有的高级语言为工具实现目标语言的编译器.</li>
+<li>移植即把一种机器上的编译程序移植到另一种机器上.</li>
+<li>自编译方式.</li>
+<li>编译程序自动生成:<code>LEX</code>,<code>YACC</code>.</li>
+</ol>
 <h2 id="符号串">符号串</h2>
 <p>字母表是符号的非空有穷集合.任何程序语言都有自己的字母表,一个程序语言只使用一个有限字符集作为字母表,用<code>∑</code>表示.</p>
 <p><code>∑</code>上的一个符号串(字)是指由<code>∑</code>中的符号所构成的一个有穷序列.</p>
@@ -600,55 +611,51 @@
 <li>子串:从<code>s</code>中删去一个前缀和一个后缀.</li>
 <li>子序列:从<code>s</code>中删去零个或多于零个符号(这些符号不要求是连续的).</li>
 <li>逆转:将<code>s</code>中的符号按相反次序写出而得到的符号串.</li>
-<li>长度:是该符号串中的符号的数目.</li>
+<li>长度:符号的数目.</li>
 <li>真前缀,真后缀,真子串:<code>x != s &amp; x != ε</code>.</li>
 </ul>
 <p>符号串的运算.</p>
 <ul>
 <li><code>x = ba</code>,<code>y = nana</code>,<code>xy = banana</code>.</li>
-<li><code>x ^ 0 = ε</code>,<code>...</code>.</li>
+<li><code>x ^ 0 = ε</code>,<code>x ^ 1 = x</code>,<code>...</code>.</li>
 </ul>
 <p>符号串集合的运算.</p>
-<img src="/posts/493cdcda/1.png" title="p1">
+<p><img src="2020-12-29-00-40-57.png"></p>
 <h2 id="文法">文法</h2>
 <p>程序语言的语法规则是用文法来描述的,目前的程序语言一般用上下文无关的文法来描述.</p>
 <p>几个基本概念.</p>
 <ul>
-<li>非终结符号:需进一步定义的符号,只是一个中间产物.</li>
-<li>终结符号:不需要再定义,是组成语言的基本符号.</li>
+<li>非终结符:需进一步定义的符号,只是一个中间产物.</li>
+<li>终结符:不需要再定义,是组成语言的基本符号.</li>
 <li>开始符号:由该符号开始推导,例如:<code>program</code>.</li>
 <li>产生式:由规则左部能产生规则右部,规则左部为非终结符号,例如:<code>program -&gt; expr | program expr | empty</code>(巴科斯范式).</li>
 </ul>
 <p>上下文无关的文法定义.</p>
-<img src="/posts/493cdcda/2.png" title="p2">
-<p>直接推导定义.推导即通过<code>0</code>步或若干步直接推导.</p>
-<img src="/posts/493cdcda/3.png" title="p3">
-<p>对于推导<code>a =&gt; b</code>,如果每一步都是对<code>a</code>中的最左非终结符进行替换的,则称为最左推导;如果每一步都是对<code>a</code>中的最右非终结符进行替换的,则称为最右推导.</p>
-<p>对某文法的同一句型存在不同的推导序列.</p>
+<p><img src="2020-12-29-00-41-15.png"></p>
+<p>直接推导定义.</p>
+<p><img src="2020-12-29-00-41-32.png"></p>
+<p>推导即通过<code>0</code>步或若干步直接推导.对于推导<code>a =&gt; b</code>,如果每一步都是对<code>a</code>中的最左非终结符进行替换的,则称为最左推导;如果每一步都是对<code>a</code>中的最右非终结符进行替换的,则称为最右推导.对某文法的同一句型存在不同的推导序列.</p>
 <p>假定<code>G</code>是一个文法,<code>S</code>是它的开始符号.如果<code>S</code>能推导出<code>a</code>,则称<code>a</code>是一个句型.仅含终结符的句型是一个句子.文法<code>G</code>所产生句子的全体是一个语言,将它记为:<code>L(G)</code>.</p>
-<p>文法和语言之间并不存在一一对应关系,对于一给定的文法,唯一地确定它所产生的语言;但对于一个给定的语言往往可用若干个不同的文法来产.</p>
+<p>文法和语言之间并不存在一一对应关系,对于一给定的文法,唯一地确定它所产生的语言;但对于一个给定的语言往往可用若干个不同的文法来产生.</p>
 <p>化简了的文法:文法中不含有任何形如<code>P -&gt; P</code>的产生式;每个非终结符号<code>P</code>必须都有用处,即必须存在含<code>P</code>的句型,同时对于<code>P</code>不存在永不终结的回路.</p>
 <h3 id="语法分析树与二义性">语法分析树与二义性</h3>
 <p>语法分析树定义.</p>
-<img src="/posts/493cdcda/4.png" title="p4">
-<p>画语法树的两种方法:自顶向下,根据推导序列,对每步推导画相应分枝;自底向上,根据归约序列,对每步归约画相应分枝.分析树是推导的图形表示.</p>
-<p>一个句型推导或分析用一棵树结构图示出来,它反应了一个句子的语法结构层次.若文法是无二义性的,对于一个句子的多种推导画出的分析树是一样的,分析树并未描述推导过程.</p>
+<p><img src="2020-12-29-00-41-48.png"></p>
+<p>画语法树的两种方法:自顶向下,根据推导序列,对每步推导画相应分枝;自底向上,根据归约序列,对每步归约画相应分枝.</p>
+<p>分析树是推导的图形表示.一个句型推导或分析用一棵树结构图示出来,它反应了一个句子的语法结构层次.若文法是无二义性的,对于一个句子的多种推导画出的分析树是一样的,分析树并未描述推导过程.</p>
 <p>描述一个句子的文法不是唯一的,对于一个句子的分析应是唯一的.</p>
 <p>如果一个文法的句子存在两棵不同的分析树,那么该句子是二义性的.如果一个文法包含二义性的句子,则称这个文法是二义性的;否则,该文法是无二义性的.</p>
 <p>对于任意一个上下文无关文法,不存在一个算法,能够在有限的步骤内判定它是无二义性的;但能给出一组充分条件,满足这组充分条件的文法是无二义性的.</p>
 <h3 id="文法的分类">文法的分类</h3>
 <p>乔姆斯基文法有四种类型:<code>0</code>型,<code>1</code>型,<code>2</code>型,<code>3</code>型.</p>
-<img src="/posts/493cdcda/5.png" title="p5">
-<img src="/posts/493cdcda/6.png" title="p6">
-<img src="/posts/493cdcda/7.png" title="p7">
-<img src="/posts/493cdcda/8.png" title="p8">
+<p><img src="2020-12-29-00-43-16.png"></p>
 <p>由于四种文法是按照将产生式做进一步限制而定义的,所以它们之间是逐级包含的关系,由四种文法产生的语言也是逐级包含的关系.<code>ps</code>:<code>0</code>型语言除外,从其中删去或往其中添加一个空串并不改变其语言类.</p>
 <p>在程序语言中,与词法有关的规则属于正规文法;与局部语法有关的规则属于上下文无关文法;而与全局语法和语义有关的部分往往要用上下文有关文法来描述.</p>
-<img src="/posts/493cdcda/9.png" title="p9">
+<p><img src="2020-12-29-00-43-38.png"></p>
 <p>自嵌套的文法.</p>
-<img src="/posts/493cdcda/10.png" title="p10">
+<p><img src="2020-12-29-00-43-52.png"></p>
 <p>文法的递归性.</p>
-<img src="/posts/493cdcda/11.png" title="p11">
+<p><img src="2020-12-29-00-44-06.png"></p>
 
       
     </div>
@@ -959,7 +966,7 @@
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#程序设计语言"><span class="nav-number">1.</span> <span class="nav-text">程序设计语言</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#编译技术的应用"><span class="nav-number">2.</span> <span class="nav-text">编译技术的应用</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#语言处理器"><span class="nav-number">3.</span> <span class="nav-text">语言处理器</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#编译器概览"><span class="nav-number">4.</span> <span class="nav-text">编译器概览</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#编译器构造工具"><span class="nav-number">4.1.</span> <span class="nav-text">编译器构造工具</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#编译程序的移植"><span class="nav-number">4.2.</span> <span class="nav-text">编译程序的移植</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#符号串"><span class="nav-number">5.</span> <span class="nav-text">符号串</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#文法"><span class="nav-number">6.</span> <span class="nav-text">文法</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#语法分析树与二义性"><span class="nav-number">6.1.</span> <span class="nav-text">语法分析树与二义性</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#文法的分类"><span class="nav-number">6.2.</span> <span class="nav-text">文法的分类</span></a></li></ol></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#程序设计语言"><span class="nav-number">1.</span> <span class="nav-text">程序设计语言</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#语言处理器"><span class="nav-number">2.</span> <span class="nav-text">语言处理器</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#编译过程"><span class="nav-number">3.</span> <span class="nav-text">编译过程</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#词法分析"><span class="nav-number">3.1.</span> <span class="nav-text">词法分析</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#语法分析"><span class="nav-number">3.2.</span> <span class="nav-text">语法分析</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#语义分析-中间代码生成"><span class="nav-number">3.3.</span> <span class="nav-text">语义分析 &amp; 中间代码生成</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#中间代码的优化和目标代码生成"><span class="nav-number">3.4.</span> <span class="nav-text">中间代码的优化和目标代码生成</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#编译程序的结构"><span class="nav-number">4.</span> <span class="nav-text">编译程序的结构</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#符号表-纠错"><span class="nav-number">4.1.</span> <span class="nav-text">符号表 &amp; 纠错</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#遍"><span class="nav-number">4.2.</span> <span class="nav-text">遍</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#编译程序的生成"><span class="nav-number">5.</span> <span class="nav-text">编译程序的生成</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#符号串"><span class="nav-number">6.</span> <span class="nav-text">符号串</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#文法"><span class="nav-number">7.</span> <span class="nav-text">文法</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#语法分析树与二义性"><span class="nav-number">7.1.</span> <span class="nav-text">语法分析树与二义性</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#文法的分类"><span class="nav-number">7.2.</span> <span class="nav-text">文法的分类</span></a></li></ol></li></ol></div>
             
 
           </div>
@@ -991,7 +998,7 @@
       <i class="fa fa-area-chart"></i>
     </span>
     
-    <span title="站点总字数">797k</span>
+    <span title="站点总字数">798k</span>
   
 
   

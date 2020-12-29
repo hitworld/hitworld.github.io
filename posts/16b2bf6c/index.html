@@ -138,12 +138,12 @@
 <meta property="og:image" content="https://hitworld.github.io/png/2020-12-29-02-05-12.png">
 <meta property="og:image" content="https://hitworld.github.io/png/2020-12-29-02-05-30.png">
 <meta property="og:image" content="https://hitworld.github.io/png/2020-12-29-02-06-06.png">
-<meta property="og:image" content="https://hitworld.github.io/posts/undefined/12.png">
-<meta property="og:image" content="https://hitworld.github.io/posts/undefined/13.png">
-<meta property="og:image" content="https://hitworld.github.io/posts/undefined/14.png">
-<meta property="og:image" content="https://hitworld.github.io/posts/undefined/15.png">
-<meta property="og:image" content="https://hitworld.github.io/posts/undefined/16.png">
-<meta property="og:updated_time" content="2020-12-29T14:29:59.755Z">
+<meta property="og:image" content="https://hitworld.github.io/posts/16b2bf6c/12.png">
+<meta property="og:image" content="https://hitworld.github.io/posts/16b2bf6c/13.png">
+<meta property="og:image" content="https://hitworld.github.io/posts/16b2bf6c/14.png">
+<meta property="og:image" content="https://hitworld.github.io/posts/16b2bf6c/15.png">
+<meta property="og:image" content="https://hitworld.github.io/posts/16b2bf6c/16.png">
+<meta property="og:updated_time" content="2020-12-29T15:04:08.033Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="CS-BASIC-compiler-principles-词法分析">
 <meta name="twitter:description" content="概览 词法分析的任务:从左到右逐个字符地对源程序进行扫描,产生一个个的单词符号,把作为字符串的源程序改造成为由单词符号组成的中间程序.词法分析程序一般作为一个独立子程序. 单词符号一般包括的种类:关键字,标识符,常数,运算符,界符(分隔符). 词法分析器输出单词符号的形式:(单词种别,单词符号的属性值),单词种别通常用整数编码.词类编码提供给语法分析程序使用,单词自身的属性值提供给语义分析程">
@@ -671,13 +671,13 @@
 <p>设<code>S1</code>与<code>S2</code>交集为空集,在<code>S1</code>与<code>S2</code>的并集中加入新状态<code>q0</code>,<code>f0</code>.则可以构造.</p>
 <p><img src="/png/2020-12-29-02-06-06.png"></p>
 <p><code>M</code>的状态转换图中不难看出,<code>M</code>中有一条从<code>q0</code>到<code>f0</code>的通路,当且仅当在<code>M1</code>中有一条从<code>q1</code>到<code>f1</code>的通路或在<code>M2</code>中有一条从<code>q2</code>到<code>f2</code>的通路.即:<code>L(M) = L(M1) U L(M2) = L(r1) U L(r2) = L(r)</code>.</p>
-<img src="/posts/undefined/12.png" title="p12">
+<img src="/posts/16b2bf6c/12.png" title="p12">
 <p>当<code>r = r1r2</code>,同上可知.</p>
-<img src="/posts/undefined/13.png" title="p13">
+<img src="/posts/16b2bf6c/13.png" title="p13">
 <p>当<code>r = r1*</code>,同上可知.</p>
-<img src="/posts/undefined/14.png" title="p14">
+<img src="/posts/16b2bf6c/14.png" title="p14">
 <p><code>Thompson</code>方法所构造的<code>NFA</code>的状态数和<code>ε</code>转换较多,可以采用下图方法减少.</p>
-<img src="/posts/undefined/15.png" title="p15">
+<img src="/posts/16b2bf6c/15.png" title="p15">
 <h3 id="确定的有限自动机的化简">确定的有限自动机的化简</h3>
 <p>一个<code>DFA M =(Σ, S, δ, s0, F)</code>的化简是指寻找一个状态数比较少的<code>DFA M′</code>,使<code>L(M) = L(M′)</code>.而且可以证明,存在一个最少状态的<code>DFA M′</code>,使<code>L(M) = L(M′)</code>.</p>
 <p>等价状态:设<code>s</code>,<code>t</code>属于<code>S</code>,若对任何<code>w</code>属于<code>Σ*</code>,<code>δ(s，w)</code>属于<code>F</code>当且仅当<code>δ(t，w)</code>属于<code>F</code>,则称<code>s</code>和<code>t</code>是等价状态.等价状态定义了状态集合上的等价关系,因此状态集合能被划分成等价类.</p>
@@ -687,7 +687,7 @@
 <li>蔓延性条件,对于所有<code>a</code>属于<code>Σ</code>,<code>δ(s, a) = r</code>,<code>δ(t, a) = q</code>,<code>r</code>和<code>q</code>必须等价;相反,<code>r</code>和<code>q</code>不等价,则<code>s</code>和<code>t</code>不等价.</li>
 </ul>
 <p>化简方法.</p>
-<img src="/posts/undefined/16.png" title="p16">
+<img src="/posts/16b2bf6c/16.png" title="p16">
 <h2 id="lex简介">LEX简介</h2>
 <p><code>LEX</code>原理.</p>
 <ol type="1">

@@ -24,10 +24,12 @@ for file in files:
                 if '![](/png/' in l:
                     if(not os.path.exists("B:/blog-hexo/source" + l[4:-2])):
                         print("Not find B:/blog-hexo/source" + l[4:-2])
+                    else:
+                        png_num = png_num + 1
                 if file[:-3] in l:
                     flag = 1
                 w.write(l)
             if flag == 0:
                 print("name is error: " + file)
-          if flag == 0:
-                print("name is error: " + file)
+
+print(png_num)

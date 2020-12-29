@@ -138,13 +138,14 @@
 <meta property="og:image" content="https://hitworld.github.io/png/2020-12-29-16-48-51.png">
 <meta property="og:image" content="https://hitworld.github.io/png/2020-12-29-17-08-58.png">
 <meta property="og:image" content="https://hitworld.github.io/png/2020-12-29-17-10-52.png">
+<meta property="og:image" content="https://hitworld.github.io/png/2020-12-29-17-43-57.png">
 <meta property="og:image" content="https://hitworld.github.io/png/2020-12-29-17-12-59.png">
-<meta property="og:image" content="https://hitworld.github.io/png/2020-12-29-17-13-21.png">
+<meta property="og:image" content="https://hitworld.github.io/png/2020-12-29-17-46-46.png">
 <meta property="og:image" content="https://hitworld.github.io/png/2020-12-29-17-13-43.png">
 <meta property="og:image" content="https://hitworld.github.io/png/2020-12-29-01-56-45.png">
 <meta property="og:image" content="https://hitworld.github.io/png/2020-12-29-01-57-05.png">
 <meta property="og:image" content="https://hitworld.github.io/png/2020-12-29-01-57-24.png">
-<meta property="og:updated_time" content="2020-12-29T09:28:20.661Z">
+<meta property="og:updated_time" content="2020-12-29T09:47:12.749Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="CS-BASIC-compiler-principles-基础">
 <meta name="twitter:description" content="语言处理器 常见的语言处理器有编译器和解释器. 编译器是一个读取以源语言编写的程序并把其翻译为一个等价的使用目标语言编写的程序(产生目标代码程序). 解释器是一个读取以源语言编写的程序并逐个语句的执行(不产生目标代码程序,只产生运行结果). 也有一些即时编译器(JIT)在运行中处理输入的前一刻将字节码翻译成目标语言再执行. 编译过程  词法分析 编译过程第一个步骤称为词法分析或扫描">
@@ -642,29 +643,34 @@
 <li>非终结符:需进一步定义的符号,只是一个中间产物.</li>
 <li>终结符:不需要再定义,是组成语言的基本符号.</li>
 <li>开始符号:由该符号开始推导,例如:<code>program</code>.</li>
-<li>产生式:由规则左部能产生规则右部,规则左部为非终结符号,例如:<code>program -&gt; expr | program expr | empty</code>(巴科斯范式).</li>
+<li>产生式:由规则左部能产生规则右部,规则左部为非终结符号,例如:<code>program -&gt; expr | program expr | empty</code>.</li>
 </ul>
-<p>上下文无关的文法定义.</p>
+<h3 id="上下文无关文法">上下文无关文法</h3>
 <p><img src="/png/2020-12-29-16-46-25.png"></p>
 <p><img src="/png/2020-12-29-16-47-39.png"></p>
-<p>直接推导定义.</p>
+<h3 id="推导">推导</h3>
 <p><img src="/png/2020-12-29-16-48-13.png"></p>
 <p><img src="/png/2020-12-29-16-48-51.png"></p>
 <p>对于推导<code>a =&gt; b</code>,如果每一步都是对<code>a</code>中的最左非终结符进行替换的,则称为最左推导;如果每一步都是对<code>a</code>中的最右非终结符进行替换的,则称为最右推导.对某文法的同一句型存在不同的推导序列.</p>
+<h3 id="句型句子和语言">句型,句子和语言</h3>
 <p>假定<code>G</code>是一个文法,<code>S</code>是它的开始符号.如果<code>S</code>能推导出<code>a</code>,则称<code>a</code>是一个句型.仅含终结符的句型是一个句子.文法<code>G</code>所产生句子的全体是一个语言,将它记为:<code>L(G)</code>.</p>
 <p>文法和语言之间并不存在一一对应关系,对于一给定的文法,唯一地确定它所产生的语言;但对于一个给定的语言往往可用若干个不同的文法来产生.</p>
 <p>化简了的文法:文法中不含有任何形如<code>P -&gt; P</code>的产生式;每个非终结符号<code>P</code>必须都有用处,即必须存在含<code>P</code>的句型,同时对于<code>P</code>不存在永不终结的回路.</p>
-<h3 id="语法分析树与二义性">语法分析树与二义性</h3>
+<h3 id="语法树">语法树</h3>
 <p><img src="/png/2020-12-29-17-08-58.png"></p>
-<p>画语法树的两种方法:自顶向下,根据推导序列,对每步推导画相应分枝;自底向上,根据归约序列,对每步归约画相应分枝.</p>
-<p>分析树是推导的图形表示.一个句型推导或分析用一棵树结构图示出来,它反应了一个句子的语法结构层次.若文法是无二义性的,对于一个句子的多种推导画出的分析树是一样的,分析树并未描述推导过程.描述一个句子的文法不是唯一的,对于一个句子的分析应是唯一的.</p>
+<p>画语法树的两种方法: 1. 最左推导,自顶向下,根据推导序列,对每步推导画相应分枝. 2. 最右推导,自底向上,根据归约序列,对每步归约画相应分枝.</p>
+<p>分析树是推导的图形表示.一个句型推导或分析用一棵树结构图示出来,它反应了一个句子的语法结构层次.</p>
+<p>若文法是无二义性的,对于一个句子的多种推导画出的分析树是一样的,分析树并未描述推导过程.</p>
+<p>描述一个句子的文法不是唯一的,对于一个句子的分析应是唯一的.</p>
+<h3 id="二义性">二义性</h3>
 <p><img src="/png/2020-12-29-17-10-52.png"></p>
+<p><img src="/png/2020-12-29-17-43-57.png"></p>
 <p>如果一个文法的句子存在两棵不同的分析树,那么该句子是二义性的.如果一个文法包含二义性的句子,则称这个文法是二义性的;否则,该文法是无二义性的.</p>
 <p>对于任意一个上下文无关文法,不存在一个算法,能够在有限的步骤内判定它是无二义性的;但能给出一组充分条件,满足这组充分条件的文法是无二义性的.</p>
 <h3 id="文法的分类">文法的分类</h3>
 <p>乔姆斯基文法有四种类型:<code>0</code>型,<code>1</code>型,<code>2</code>型,<code>3</code>型.它们都由四部分组成,但对产生式的限制有所不同.</p>
 <p><img src="/png/2020-12-29-17-12-59.png"></p>
-<p><img src="/png/2020-12-29-17-13-21.png"></p>
+<p><img src="/png/2020-12-29-17-46-46.png"></p>
 <p><img src="/png/2020-12-29-17-13-43.png"></p>
 <p>由于四种文法是按照将产生式做进一步限制而定义的,所以它们之间是逐级包含的关系,由四种文法产生的语言也是逐级包含的关系.<code>ps</code>:<code>0</code>型语言除外,从其中删去或往其中添加一个空串并不改变其语言类.</p>
 <p>在程序语言中,与词法有关的规则属于正规文法;与局部语法有关的规则属于上下文无关文法;而与全局语法和语义有关的部分往往要用上下文有关文法来描述.</p>
@@ -983,7 +989,7 @@
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#语言处理器"><span class="nav-number">1.</span> <span class="nav-text">语言处理器</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#编译过程"><span class="nav-number">2.</span> <span class="nav-text">编译过程</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#词法分析"><span class="nav-number">2.1.</span> <span class="nav-text">词法分析</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#语法分析"><span class="nav-number">2.2.</span> <span class="nav-text">语法分析</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#语义分析-中间代码生成"><span class="nav-number">2.3.</span> <span class="nav-text">语义分析 &amp; 中间代码生成</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#中间代码的优化和目标代码生成"><span class="nav-number">2.4.</span> <span class="nav-text">中间代码的优化和目标代码生成</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#编译程序的结构"><span class="nav-number">3.</span> <span class="nav-text">编译程序的结构</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#符号表-纠错"><span class="nav-number">3.1.</span> <span class="nav-text">符号表 &amp; 纠错</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#遍"><span class="nav-number">3.2.</span> <span class="nav-text">遍</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#编译程序的生成"><span class="nav-number">4.</span> <span class="nav-text">编译程序的生成</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#程序设计语言"><span class="nav-number">5.</span> <span class="nav-text">程序设计语言</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#符号串"><span class="nav-number">5.1.</span> <span class="nav-text">符号串</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#文法"><span class="nav-number">6.</span> <span class="nav-text">文法</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#语法分析树与二义性"><span class="nav-number">6.1.</span> <span class="nav-text">语法分析树与二义性</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#文法的分类"><span class="nav-number">6.2.</span> <span class="nav-text">文法的分类</span></a></li></ol></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#语言处理器"><span class="nav-number">1.</span> <span class="nav-text">语言处理器</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#编译过程"><span class="nav-number">2.</span> <span class="nav-text">编译过程</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#词法分析"><span class="nav-number">2.1.</span> <span class="nav-text">词法分析</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#语法分析"><span class="nav-number">2.2.</span> <span class="nav-text">语法分析</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#语义分析-中间代码生成"><span class="nav-number">2.3.</span> <span class="nav-text">语义分析 &amp; 中间代码生成</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#中间代码的优化和目标代码生成"><span class="nav-number">2.4.</span> <span class="nav-text">中间代码的优化和目标代码生成</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#编译程序的结构"><span class="nav-number">3.</span> <span class="nav-text">编译程序的结构</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#符号表-纠错"><span class="nav-number">3.1.</span> <span class="nav-text">符号表 &amp; 纠错</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#遍"><span class="nav-number">3.2.</span> <span class="nav-text">遍</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#编译程序的生成"><span class="nav-number">4.</span> <span class="nav-text">编译程序的生成</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#程序设计语言"><span class="nav-number">5.</span> <span class="nav-text">程序设计语言</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#符号串"><span class="nav-number">5.1.</span> <span class="nav-text">符号串</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#文法"><span class="nav-number">6.</span> <span class="nav-text">文法</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#上下文无关文法"><span class="nav-number">6.1.</span> <span class="nav-text">上下文无关文法</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#推导"><span class="nav-number">6.2.</span> <span class="nav-text">推导</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#句型句子和语言"><span class="nav-number">6.3.</span> <span class="nav-text">句型,句子和语言</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#语法树"><span class="nav-number">6.4.</span> <span class="nav-text">语法树</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#二义性"><span class="nav-number">6.5.</span> <span class="nav-text">二义性</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#文法的分类"><span class="nav-number">6.6.</span> <span class="nav-text">文法的分类</span></a></li></ol></li></ol></div>
             
 
           </div>
@@ -1673,7 +1679,7 @@
   //$("body").backstretch("/images/background.jpg");
   </script>
   
-  <script type="text/javascript" src="//cdn.bootcss.com/canvas-nest.js/1.0.0/canvas-nest.min.js"></script><!-- hexo-inject:begin --><!-- hexo-inject:end -->
+  <script type="text/javascript" src="//cdn.bootcss.com/canvas-nest.js/1.0.0/canvas-nest.min.js"></script>
   
-<script src="/live2dw/lib/L2Dwidget.min.js?0c58a1486de42ac6cc1c59c7d98ae887"></script><script>L2Dwidget.init({"pluginRootPath":"live2dw/","pluginJsPath":"lib/","pluginModelPath":"assets/","tagMode":false,"debug":false,"model":{"jsonPath":"/live2dw/assets/koharu.model.json"},"display":{"position":"right","width":150,"height":300},"mobile":{"show":false},"log":false});</script></body>
+<script src="/live2dw/lib/L2Dwidget.min.js?0c58a1486de42ac6cc1c59c7d98ae887"></script><script>L2Dwidget.init({"pluginRootPath":"live2dw/","pluginJsPath":"lib/","pluginModelPath":"assets/","tagMode":false,"debug":false,"model":{"jsonPath":"/live2dw/assets/koharu.model.json"},"display":{"position":"right","width":150,"height":300},"mobile":{"show":false},"log":false});</script><!-- hexo-inject:begin --><!-- hexo-inject:end --></body>
 </html>

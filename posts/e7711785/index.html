@@ -127,13 +127,13 @@
 <meta property="og:site_name" content="w4rd3n">
 <meta property="og:description" content="概览 C++与C都是生成可执行程序,只不过C++有一些常用的自定义数据结构. mangle C++的符号名是被mangle过的,使用gdb时可以使用set print asm-demangle on恢复.类似的还有命令行工具c++filt. 虚函数表 虚函数是支持C++多态的关键机制,对于每个具有虚函数的类,编译器将根据类的继承层次结构创建一个或多个相关的虚函数表(位于只读段). 相应">
 <meta property="og:locale" content="zh-CN">
-<meta property="og:image" content="https://hitworld.github.io/posts/e7711785/1.png">
-<meta property="og:image" content="https://hitworld.github.io/posts/e7711785/2.png">
-<meta property="og:updated_time" content="2020-12-29T15:04:08.055Z">
+<meta property="og:image" content="https://hitworld.github.io/posts/undefined/1.png">
+<meta property="og:image" content="https://hitworld.github.io/posts/undefined/2.png">
+<meta property="og:updated_time" content="2020-12-30T08:58:00.864Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="IS-pwn-Linux-CPP">
 <meta name="twitter:description" content="概览 C++与C都是生成可执行程序,只不过C++有一些常用的自定义数据结构. mangle C++的符号名是被mangle过的,使用gdb时可以使用set print asm-demangle on恢复.类似的还有命令行工具c++filt. 虚函数表 虚函数是支持C++多态的关键机制,对于每个具有虚函数的类,编译器将根据类的继承层次结构创建一个或多个相关的虚函数表(位于只读段). 相应">
-<meta name="twitter:image" content="https://hitworld.github.io/posts/e7711785/1.png">
+<meta name="twitter:image" content="https://hitworld.github.io/posts/undefined/1.png">
 
 
 
@@ -547,13 +547,13 @@
 <h2 id="虚函数表">虚函数表</h2>
 <p>虚函数是支持<code>C++</code>多态的关键机制,对于每个具有虚函数的类,编译器将根据类的继承层次结构创建一个或多个相关的虚函数表(位于只读段).</p>
 <p>相应的对象实例会有一个虚函数表指针指向对于类的虚函数表,而虚表劫持就是通过其他漏洞修改类实例的虚函数表指针.</p>
-<img src="/posts/e7711785/1.png" title="p1">
+<img src="/posts/undefined/1.png" title="p1">
 <p>例题:<code>强网杯-2019-babycpp</code>,<code>update</code>函数中存在经典<code>abs</code>漏洞,可以修改<code>C++</code>类的<code>vtable</code>指针,爆破<code>4</code>位(<code>1/16</code>).通过<code>string</code>和<code>int</code>四个函数交互使用任意地址读写,通过<code>libc</code>中的<code>environ</code>变量泄露栈地址,最后写返回地址<code>rop</code>即可.</p>
 <h2 id="vector">vector</h2>
 <p><code>vector</code>是<code>C++</code>实现的动态数组类,空间不够时会申请两倍大小来放置内容,分配在堆中.</p>
 <p>成员:<code>_M_start</code>,<code>vector</code>起始位置;<code>_M_finish</code>,<code>vector</code>结尾位置;<code>_M_end_of_storage</code>:容器最后位置.</p>
 <p><code>vector</code>通过<code>_M_finish</code>和<code>_M_end_of_storage</code>判断空间是否足够.</p>
-<img src="/posts/e7711785/2.png" title="p2">
+<img src="/posts/undefined/2.png" title="p2">
 <h2 id="new-delete">new &amp; delete</h2>
 <p><code>new</code>与<code>malloc</code>类似,但配置失败会进行异常处理,而<code>malloc</code>返回<code>null</code>.</p>
 <p><code>delete</code>与<code>free</code>类似.</p>
@@ -903,7 +903,7 @@
       <i class="fa fa-area-chart"></i>
     </span>
     
-    <span title="站点总字数">797k</span>
+    <span title="站点总字数">798k</span>
   
 
   

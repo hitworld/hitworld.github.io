@@ -119,19 +119,19 @@
 
 
 
-  <meta name="description" content="简介 MIPS是一种采取精简指令集的指令集架构,MIPS采用了高度的流水线,其中一个重要的效应是分支延迟效应. 寄存器 MIPS32寄存器分为两类:通用寄存器和特殊寄存器. MIPS体系结构中有32个通用寄存器,汇编程序中用$0 ~ $31表示.也可以用名称表示,如$sp,$t1等. MIPS体系结构中有3个特殊寄存器:PC(程序计数器),HI(乘除结果高位寄存器)和LO(乘除结果低位寄">
+  <meta name="description" content="简介 MIPS是一种采取精简指令集RISC的指令集架构. MIPS采用了高度的流水线,其中一个重要的效应是分支延迟效应. 寄存器 MIPS32寄存器分为两类:通用寄存器和特殊寄存器. MIPS体系结构中有32个通用寄存器,汇编程序中用$0 ~ $31表示.也可以用名称表示,如$sp,$t1等. MIPS体系结构中有3个特殊寄存器:PC(程序计数器),HI(乘除结果高位寄存器)和LO(乘">
 <meta name="keywords" content="assembly">
 <meta property="og:type" content="article">
 <meta property="og:title" content="CS-BASIC-assembly-MIPS-基础">
 <meta property="og:url" content="https://hitworld.github.io/posts/5ac4314b/index.html">
 <meta property="og:site_name" content="w4rd3n">
-<meta property="og:description" content="简介 MIPS是一种采取精简指令集的指令集架构,MIPS采用了高度的流水线,其中一个重要的效应是分支延迟效应. 寄存器 MIPS32寄存器分为两类:通用寄存器和特殊寄存器. MIPS体系结构中有32个通用寄存器,汇编程序中用$0 ~ $31表示.也可以用名称表示,如$sp,$t1等. MIPS体系结构中有3个特殊寄存器:PC(程序计数器),HI(乘除结果高位寄存器)和LO(乘除结果低位寄">
+<meta property="og:description" content="简介 MIPS是一种采取精简指令集RISC的指令集架构. MIPS采用了高度的流水线,其中一个重要的效应是分支延迟效应. 寄存器 MIPS32寄存器分为两类:通用寄存器和特殊寄存器. MIPS体系结构中有32个通用寄存器,汇编程序中用$0 ~ $31表示.也可以用名称表示,如$sp,$t1等. MIPS体系结构中有3个特殊寄存器:PC(程序计数器),HI(乘除结果高位寄存器)和LO(乘">
 <meta property="og:locale" content="zh-CN">
 <meta property="og:image" content="https://hitworld.github.io/png/2020-12-29-01-52-01.png">
-<meta property="og:updated_time" content="2020-12-29T15:04:08.031Z">
+<meta property="og:updated_time" content="2020-12-30T08:58:00.829Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="CS-BASIC-assembly-MIPS-基础">
-<meta name="twitter:description" content="简介 MIPS是一种采取精简指令集的指令集架构,MIPS采用了高度的流水线,其中一个重要的效应是分支延迟效应. 寄存器 MIPS32寄存器分为两类:通用寄存器和特殊寄存器. MIPS体系结构中有32个通用寄存器,汇编程序中用$0 ~ $31表示.也可以用名称表示,如$sp,$t1等. MIPS体系结构中有3个特殊寄存器:PC(程序计数器),HI(乘除结果高位寄存器)和LO(乘除结果低位寄">
+<meta name="twitter:description" content="简介 MIPS是一种采取精简指令集RISC的指令集架构. MIPS采用了高度的流水线,其中一个重要的效应是分支延迟效应. 寄存器 MIPS32寄存器分为两类:通用寄存器和特殊寄存器. MIPS体系结构中有32个通用寄存器,汇编程序中用$0 ~ $31表示.也可以用名称表示,如$sp,$t1等. MIPS体系结构中有3个特殊寄存器:PC(程序计数器),HI(乘除结果高位寄存器)和LO(乘">
 <meta name="twitter:image" content="https://hitworld.github.io/png/2020-12-29-01-52-01.png">
 
 
@@ -505,7 +505,7 @@
                 
                   <span class="post-meta-item-text">本文字数：</span>
                 
-                <span title="本文字数">711</span>
+                <span title="本文字数">719</span>
               
 
               
@@ -540,7 +540,8 @@
 
       
         <h2 id="简介">简介</h2>
-<p><code>MIPS</code>是一种采取精简指令集的指令集架构,<code>MIPS</code>采用了高度的流水线,其中一个重要的效应是分支延迟效应.</p>
+<p><code>MIPS</code>是一种采取精简指令集<code>RISC</code>的指令集架构.</p>
+<p><code>MIPS</code>采用了高度的流水线,其中一个重要的效应是分支延迟效应.</p>
 <h2 id="寄存器">寄存器</h2>
 <p><code>MIPS32</code>寄存器分为两类:通用寄存器和特殊寄存器.</p>
 <p><code>MIPS</code>体系结构中有<code>32</code>个通用寄存器,汇编程序中用<code>$0 ~ $31</code>表示.也可以用名称表示,如<code>$sp</code>,<code>$t1</code>等.</p>
@@ -551,12 +552,13 @@
 <h2 id="函数调用">函数调用</h2>
 <p><code>MIPS32</code>架构函数调用时对堆栈的分配和使用方式与<code>x86</code>架构有相似之处,但又有很大的区别.</p>
 <ul>
-<li>没有<code>ebp</code>,进入一个函数时将当前栈指针向下移动<code>n</code>比特,这就是此函数的栈帧存储区域.</li>
-<li>如果函数<code>A</code>调用函数<code>B</code>,调用者函数<code>A</code>会在自己的栈顶预留一部分空间来保存被调用者函数<code>B</code>的参数,称之为调用参数空间.</li>
+<li>没有<code>ebp</code>,进入一个函数时将当前栈指针向下移动<code>n</code>比特,这就是此函数的栈帧存储区域.如果函数<code>A</code>调用函数<code>B</code>,调用者函数<code>A</code>会在自己的栈顶预留一部分空间来保存被调用者函数<code>B</code>的参数,称之为调用参数空间.</li>
 <li>前四个参数通过<code>$a0 ~ $a3</code>传递,多余的参数会放入调用参数空间.</li>
 <li><code>MIPS32</code>的调用指令把函数的返回地址直接存入<code>$ra</code>寄存器中.</li>
 </ul>
-<p><code>MIPS32</code>架构根据函数是否调用其他函数将函数分成叶子函数与非叶子函数.父函数调用子函数时,会复制当前<code>$PC</code>的值到<code>$ra</code>寄存器,然后跳到子函数执行.子函数如果为非叶子函数,则会将返回地址存入堆栈,否则仍在<code>$ra</code>寄存器中.返回时,如果子函数为叶子函数,<code>jr $ra</code>直接返回,否则先从堆栈取出再返回.</p>
+<p><code>MIPS32</code>架构根据函数是否调用其他函数将函数分成叶子函数与非叶子函数.</p>
+<p>父函数调用子函数时,会复制当前<code>$PC</code>的值到<code>$ra</code>寄存器,然后跳到子函数执行.子函数如果为非叶子函数,则会将返回地址存入堆栈,否则仍在<code>$ra</code>寄存器中.</p>
+<p>返回时,如果子函数为叶子函数,<code>jr $ra</code>直接返回,否则先从堆栈取出再返回.</p>
 <h2 id="系统调用">系统调用</h2>
 <p><code>MIPS32</code>系统调用指令<code>SYSCALL</code>是一个软中断,系统调用号存放在<code>$v0</code>中,参数存放在<code>$a0 ~ $a3</code>中,如果参数过多,会存放在栈中.</p>
 
@@ -901,7 +903,7 @@
       <i class="fa fa-area-chart"></i>
     </span>
     
-    <span title="站点总字数">797k</span>
+    <span title="站点总字数">798k</span>
   
 
   

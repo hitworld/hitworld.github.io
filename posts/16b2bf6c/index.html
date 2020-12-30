@@ -119,15 +119,24 @@
 
 
 
-  <meta name="description" content="概览 词法分析的任务:从左到右逐个字符地对源程序进行扫描,产生一个个的单词符号,把作为字符串的源程序改造成为由单词符号组成的中间程序.词法分析程序一般作为一个独立子程序. 单词符号一般包括的种类:关键字,标识符,常数,运算符,界符(分隔符). 词法分析器输出单词符号的形式:(单词种别,单词符号的属性值),单词种别通常用整数编码.词类编码提供给语法分析程序使用,单词自身的属性值提供给语义分析程">
+  <meta name="description" content="词法分析概览 词法分析的任务:从左到右逐个字符地对源程序进行扫描,产生一个个的单词符号,把作为字符串的源程序改造成为由单词符号组成的中间程序. 单词符号一般包括的种类:关键字/基本字,标识符,常数,运算符,界符(分隔符). 词法分析器输出单词符号的形式:(单词种别,单词符号的属性值). 单词种别通常用整数编码,提供给语法分析程序使用;单词自身的属性值提供给语义分析程序使用. 若一个单词种">
 <meta name="keywords" content="compiler-principles">
 <meta property="og:type" content="article">
 <meta property="og:title" content="CS-BASIC-compiler-principles-词法分析">
 <meta property="og:url" content="https://hitworld.github.io/posts/16b2bf6c/index.html">
 <meta property="og:site_name" content="w4rd3n">
-<meta property="og:description" content="概览 词法分析的任务:从左到右逐个字符地对源程序进行扫描,产生一个个的单词符号,把作为字符串的源程序改造成为由单词符号组成的中间程序.词法分析程序一般作为一个独立子程序. 单词符号一般包括的种类:关键字,标识符,常数,运算符,界符(分隔符). 词法分析器输出单词符号的形式:(单词种别,单词符号的属性值),单词种别通常用整数编码.词类编码提供给语法分析程序使用,单词自身的属性值提供给语义分析程">
+<meta property="og:description" content="词法分析概览 词法分析的任务:从左到右逐个字符地对源程序进行扫描,产生一个个的单词符号,把作为字符串的源程序改造成为由单词符号组成的中间程序. 单词符号一般包括的种类:关键字/基本字,标识符,常数,运算符,界符(分隔符). 词法分析器输出单词符号的形式:(单词种别,单词符号的属性值). 单词种别通常用整数编码,提供给语法分析程序使用;单词自身的属性值提供给语义分析程序使用. 若一个单词种">
 <meta property="og:locale" content="zh-CN">
-<meta property="og:image" content="https://hitworld.github.io/png/2020-12-29-02-02-28.png">
+<meta property="og:image" content="https://hitworld.github.io/png/2020-12-30-16-51-51.png">
+<meta property="og:image" content="https://hitworld.github.io/png/2020-12-30-16-53-55.png">
+<meta property="og:image" content="https://hitworld.github.io/png/2020-12-30-16-54-13.png">
+<meta property="og:image" content="https://hitworld.github.io/png/2020-12-30-16-24-09.png">
+<meta property="og:image" content="https://hitworld.github.io/png/2020-12-30-16-27-10.png">
+<meta property="og:image" content="https://hitworld.github.io/png/2020-12-30-16-56-16.png">
+<meta property="og:image" content="https://hitworld.github.io/png/2020-12-30-16-56-29.png">
+<meta property="og:image" content="https://hitworld.github.io/png/2020-12-30-16-56-41.png">
+<meta property="og:image" content="https://hitworld.github.io/png/2020-12-30-16-57-26.png">
+<meta property="og:image" content="https://hitworld.github.io/png/2020-12-30-16-57-37.png">
 <meta property="og:image" content="https://hitworld.github.io/png/2020-12-29-02-02-46.png">
 <meta property="og:image" content="https://hitworld.github.io/png/2020-12-29-02-03-07.png">
 <meta property="og:image" content="https://hitworld.github.io/png/2020-12-29-02-03-27.png">
@@ -138,16 +147,16 @@
 <meta property="og:image" content="https://hitworld.github.io/png/2020-12-29-02-05-12.png">
 <meta property="og:image" content="https://hitworld.github.io/png/2020-12-29-02-05-30.png">
 <meta property="og:image" content="https://hitworld.github.io/png/2020-12-29-02-06-06.png">
-<meta property="og:image" content="https://hitworld.github.io/posts/16b2bf6c/12.png">
-<meta property="og:image" content="https://hitworld.github.io/posts/16b2bf6c/13.png">
-<meta property="og:image" content="https://hitworld.github.io/posts/16b2bf6c/14.png">
-<meta property="og:image" content="https://hitworld.github.io/posts/16b2bf6c/15.png">
-<meta property="og:image" content="https://hitworld.github.io/posts/16b2bf6c/16.png">
-<meta property="og:updated_time" content="2020-12-29T15:04:08.033Z">
+<meta property="og:image" content="https://hitworld.github.io/png/2020-12-30-15-59-36.png">
+<meta property="og:image" content="https://hitworld.github.io/png/2020-12-30-15-59-52.png">
+<meta property="og:image" content="https://hitworld.github.io/png/2020-12-30-16-00-17.png">
+<meta property="og:image" content="https://hitworld.github.io/png/2020-12-30-16-00-34.png">
+<meta property="og:image" content="https://hitworld.github.io/png/2020-12-30-16-00-52.png">
+<meta property="og:updated_time" content="2020-12-30T08:58:00.832Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="CS-BASIC-compiler-principles-词法分析">
-<meta name="twitter:description" content="概览 词法分析的任务:从左到右逐个字符地对源程序进行扫描,产生一个个的单词符号,把作为字符串的源程序改造成为由单词符号组成的中间程序.词法分析程序一般作为一个独立子程序. 单词符号一般包括的种类:关键字,标识符,常数,运算符,界符(分隔符). 词法分析器输出单词符号的形式:(单词种别,单词符号的属性值),单词种别通常用整数编码.词类编码提供给语法分析程序使用,单词自身的属性值提供给语义分析程">
-<meta name="twitter:image" content="https://hitworld.github.io/png/2020-12-29-02-02-28.png">
+<meta name="twitter:description" content="词法分析概览 词法分析的任务:从左到右逐个字符地对源程序进行扫描,产生一个个的单词符号,把作为字符串的源程序改造成为由单词符号组成的中间程序. 单词符号一般包括的种类:关键字/基本字,标识符,常数,运算符,界符(分隔符). 词法分析器输出单词符号的形式:(单词种别,单词符号的属性值). 单词种别通常用整数编码,提供给语法分析程序使用;单词自身的属性值提供给语义分析程序使用. 若一个单词种">
+<meta name="twitter:image" content="https://hitworld.github.io/png/2020-12-30-16-51-51.png">
 
 
 
@@ -520,7 +529,7 @@
                 
                   <span class="post-meta-item-text">本文字数：</span>
                 
-                <span title="本文字数">5.2k</span>
+                <span title="本文字数">5.3k</span>
               
 
               
@@ -554,25 +563,35 @@
       
 
       
-        <h2 id="概览">概览</h2>
-<p>词法分析的任务:从左到右逐个字符地对源程序进行扫描,产生一个个的单词符号,把作为字符串的源程序改造成为由单词符号组成的中间程序.词法分析程序一般作为一个独立子程序.</p>
-<p>单词符号一般包括的种类:关键字,标识符,常数,运算符,界符(分隔符).</p>
-<p>词法分析器输出单词符号的形式:(单词种别,单词符号的属性值),单词种别通常用整数编码.词类编码提供给语法分析程序使用,单词自身的属性值提供给语义分析程序使用.具体的分类设计以方便语法分析程序使用为原则.</p>
-<p><img src="/png/2020-12-29-02-02-28.png"></p>
-<p>首先进行输入,输出预处理.</p>
-<ul>
-<li>去除掉空白符,跳格符,回车符和换行符等编辑性字符.</li>
-<li>去除程序中的注释符.</li>
-<li>扫描缓冲区</li>
-</ul>
-<p>然后进行单词符号的识别,可能涉及到超前搜索问题.</p>
-<h2 id="理论基础">理论基础</h2>
-<h3 id="状态转换图">状态转换图</h3>
-<p>状态转换图是一张有限方向图,在状态转换图中,结点代表状态,用圆圈表示.状态之间用箭弧连结,箭弧上的标记(字符,正规式)代表在射出结点状态下可能出现的输入字符或字符类.一个状态转换图可用于识别一定的字符串.</p>
-<p>一张状态转换图只包含有限个状态(即有限个结点),其中含有一个初态(用双线箭头指示)和一个或以上个终态(用双圈表示).初态表示分析的开始,终态表示分析的结束.</p>
+        <h2 id="词法分析概览">词法分析概览</h2>
+<p>词法分析的任务:从左到右逐个字符地对源程序进行扫描,产生一个个的单词符号,把作为字符串的源程序改造成为由单词符号组成的中间程序.</p>
+<p>单词符号一般包括的种类:关键字/基本字,标识符,常数,运算符,界符(分隔符).</p>
+<p>词法分析器输出单词符号的形式:(单词种别,单词符号的属性值).</p>
+<p>单词种别通常用整数编码,提供给语法分析程序使用;单词自身的属性值提供给语义分析程序使用.</p>
+<p>若一个单词种别只有一个单词符号,则种别编码就代表该单词符号,例如:运算符,界符(分隔符),基本字.</p>
+<p><img src="/png/2020-12-30-16-51-51.png"></p>
+<p><img src="/png/2020-12-30-16-53-55.png"></p>
+<p><img src="/png/2020-12-30-16-54-13.png"></p>
+<h2 id="词法分析器的设计">词法分析器的设计</h2>
+<p><img src="/png/2020-12-30-16-24-09.png"></p>
+<p><img src="/png/2020-12-30-16-27-10.png"></p>
+<p>单词最大长度的就是编程语言中要求的标识符最大长度,其值为扫描缓冲区总长度的一半.</p>
+<h3 id="状态转化图的实现">状态转化图的实现</h3>
+<p><img src="/png/2020-12-30-16-56-16.png"></p>
+<p><img src="/png/2020-12-30-16-56-29.png"></p>
+<p><img src="/png/2020-12-30-16-56-41.png"></p>
+<p><img src="/png/2020-12-30-16-57-26.png"></p>
+<p><img src="/png/2020-12-30-16-57-37.png"></p>
+<h2 id="状态转换图">状态转换图</h2>
+<p>状态转换图是一张有限方向图,可用于识别或接受一定的字符串.</p>
+<p>在状态转换图中,结点代表状态,用圆圈表示.</p>
+<p>状态之间用箭弧连结,箭弧上的标记(字符,正规式)代表在射出结点状态下可能出现的输入字符或字符类.</p>
+<p>一张状态转换图只包含有限个状态(即有限个结点),其中含有一个初态(用双线箭头指示)和一个或以上个终态(用双圈表示).</p>
+<p>初态表示分析的开始,终态表示分析的结束.</p>
+<p>从状态转换图来看,如果存在一条从初态结点到某一终态结点的通路,且这条通路上所有弧的标记符连接成的字等于<code>α</code>,则称<code>α</code>被该状态转换图识别(接受).</p>
 <p><img src="/png/2020-12-29-02-02-46.png"></p>
 <p><img src="/png/2020-12-29-02-03-07.png"></p>
-<h3 id="正规式正规表达式与正规集">正规式(正规表达式)与正规集</h3>
+<h2 id="正规式正规表达式与正规集">正规式(正规表达式)与正规集</h2>
 <p>正规表达式定义.</p>
 <ul>
 <li><code>ε</code>,<code>Φ</code>都是<code>Σ</code>上的正规式,它们所表示的正规集分别为<code>{ε}</code>和<code>Φ</code>.</li>
@@ -591,7 +610,7 @@
 <li><code>r</code>格式的表达式:其中<code>r</code>是正规式.在这种情况下,<code>L((r)) = L(r)</code>,因此,括号并不改变语言,它们只调整运算的优先权.</li>
 </ul>
 <p><code>|</code>的优先权最低,连结次之,<code>*</code>则最高.另外还注意到在这个定义中,<code>5</code>个符号<code>|</code>,<code>*</code>,<code>*</code>,<code>(</code>和<code>)</code>都有了元字符的含义,正规式的连接一般不满足交换律.</p>
-<h3 id="确定有限自动机">确定有限自动机</h3>
+<h2 id="确定有限自动机">确定有限自动机</h2>
 <p><img src="/png/2020-12-29-02-03-27.png"></p>
 <p>状态转换矩阵:行表示状态,列表示输入字符,矩阵元素表示<code>δ(s,a)</code>的值.</p>
 <p><img src="/png/2020-12-29-02-03-48.png"></p>
@@ -600,7 +619,7 @@
 <p>从状态转换图来看,对于<code>Σ*</code>上的任何字<code>α</code>,如果存在一条从初态结点到某一终态结点的通路,且这条通路上所有弧的标记符连接成的字等于<code>α</code>,则称<code>α</code>可为<code>DFA M</code>所识别(读出或接受).</p>
 <p>如果<code>M</code>的初态结点同时又是终态结点,则空字<code>ε</code>可为<code>DFA M</code>所识别.<code>DFA M</code>所能识别的字的全体记为<code>L(M)</code>.</p>
 <p><img src="/png/2020-12-29-02-04-05.png"></p>
-<h3 id="非确定有限自动机">非确定有限自动机</h3>
+<h2 id="非确定有限自动机">非确定有限自动机</h2>
 <p><img src="/png/2020-12-29-02-04-27.png"></p>
 <p>对于<code>Σ*</code>中的任何一个字<code>α</code>,若存在一条从某一初态结点到某一终态结点的通路,且这条通路上所有弧的标记字依序连接成的字(忽略那些标记为<code>ε</code>的弧)等于<code>α</code>,则称<code>α</code>可为<code>NFA M</code>所识别(读出或接受).</p>
 <p>若<code>M</code>的某些结点既是初态结点又是终态结点,或者存在一条从初态结点到某一终态结点的<code>ε</code>通路,那么空字<code>ε</code>可为<code>M</code>所接受.<code>NFA M</code>所能识别的字的全体记为<code>L(M)</code>.</p>
@@ -671,13 +690,13 @@
 <p>设<code>S1</code>与<code>S2</code>交集为空集,在<code>S1</code>与<code>S2</code>的并集中加入新状态<code>q0</code>,<code>f0</code>.则可以构造.</p>
 <p><img src="/png/2020-12-29-02-06-06.png"></p>
 <p><code>M</code>的状态转换图中不难看出,<code>M</code>中有一条从<code>q0</code>到<code>f0</code>的通路,当且仅当在<code>M1</code>中有一条从<code>q1</code>到<code>f1</code>的通路或在<code>M2</code>中有一条从<code>q2</code>到<code>f2</code>的通路.即:<code>L(M) = L(M1) U L(M2) = L(r1) U L(r2) = L(r)</code>.</p>
-<img src="/posts/16b2bf6c/12.png" title="p12">
+<p><img src="/png/2020-12-30-15-59-36.png"></p>
 <p>当<code>r = r1r2</code>,同上可知.</p>
-<img src="/posts/16b2bf6c/13.png" title="p13">
+<p><img src="/png/2020-12-30-15-59-52.png"></p>
 <p>当<code>r = r1*</code>,同上可知.</p>
-<img src="/posts/16b2bf6c/14.png" title="p14">
+<p><img src="/png/2020-12-30-16-00-17.png"></p>
 <p><code>Thompson</code>方法所构造的<code>NFA</code>的状态数和<code>ε</code>转换较多,可以采用下图方法减少.</p>
-<img src="/posts/16b2bf6c/15.png" title="p15">
+<p><img src="/png/2020-12-30-16-00-34.png"></p>
 <h3 id="确定的有限自动机的化简">确定的有限自动机的化简</h3>
 <p>一个<code>DFA M =(Σ, S, δ, s0, F)</code>的化简是指寻找一个状态数比较少的<code>DFA M′</code>,使<code>L(M) = L(M′)</code>.而且可以证明,存在一个最少状态的<code>DFA M′</code>,使<code>L(M) = L(M′)</code>.</p>
 <p>等价状态:设<code>s</code>,<code>t</code>属于<code>S</code>,若对任何<code>w</code>属于<code>Σ*</code>,<code>δ(s，w)</code>属于<code>F</code>当且仅当<code>δ(t，w)</code>属于<code>F</code>,则称<code>s</code>和<code>t</code>是等价状态.等价状态定义了状态集合上的等价关系,因此状态集合能被划分成等价类.</p>
@@ -687,7 +706,7 @@
 <li>蔓延性条件,对于所有<code>a</code>属于<code>Σ</code>,<code>δ(s, a) = r</code>,<code>δ(t, a) = q</code>,<code>r</code>和<code>q</code>必须等价;相反,<code>r</code>和<code>q</code>不等价,则<code>s</code>和<code>t</code>不等价.</li>
 </ul>
 <p>化简方法.</p>
-<img src="/posts/16b2bf6c/16.png" title="p16">
+<p><img src="/png/2020-12-30-16-00-52.png"></p>
 <h2 id="lex简介">LEX简介</h2>
 <p><code>LEX</code>原理.</p>
 <ol type="1">
@@ -1005,7 +1024,7 @@
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#概览"><span class="nav-number">1.</span> <span class="nav-text">概览</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#理论基础"><span class="nav-number">2.</span> <span class="nav-text">理论基础</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#状态转换图"><span class="nav-number">2.1.</span> <span class="nav-text">状态转换图</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#正规式正规表达式与正规集"><span class="nav-number">2.2.</span> <span class="nav-text">正规式(正规表达式)与正规集</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#确定有限自动机"><span class="nav-number">2.3.</span> <span class="nav-text">确定有限自动机</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#非确定有限自动机"><span class="nav-number">2.4.</span> <span class="nav-text">非确定有限自动机</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#重要证明"><span class="nav-number">3.</span> <span class="nav-text">重要证明</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#由nfa构造dfa"><span class="nav-number">3.1.</span> <span class="nav-text">由NFA构造DFA</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#正规文法与有限自动机的等价性"><span class="nav-number">3.2.</span> <span class="nav-text">正规文法与有限自动机的等价性</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#由nfa构造正规式r"><span class="nav-number">3.3.</span> <span class="nav-text">由NFA构造正规式r</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#由正规式r构造nfa"><span class="nav-number">3.4.</span> <span class="nav-text">由正规式r构造NFA</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#确定的有限自动机的化简"><span class="nav-number">3.5.</span> <span class="nav-text">确定的有限自动机的化简</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#lex简介"><span class="nav-number">4.</span> <span class="nav-text">LEX简介</span></a></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#词法分析概览"><span class="nav-number">1.</span> <span class="nav-text">词法分析概览</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#词法分析器的设计"><span class="nav-number">2.</span> <span class="nav-text">词法分析器的设计</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#状态转化图的实现"><span class="nav-number">2.1.</span> <span class="nav-text">状态转化图的实现</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#状态转换图"><span class="nav-number">3.</span> <span class="nav-text">状态转换图</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#正规式正规表达式与正规集"><span class="nav-number">4.</span> <span class="nav-text">正规式(正规表达式)与正规集</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#确定有限自动机"><span class="nav-number">5.</span> <span class="nav-text">确定有限自动机</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#非确定有限自动机"><span class="nav-number">6.</span> <span class="nav-text">非确定有限自动机</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#重要证明"><span class="nav-number">7.</span> <span class="nav-text">重要证明</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#由nfa构造dfa"><span class="nav-number">7.1.</span> <span class="nav-text">由NFA构造DFA</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#正规文法与有限自动机的等价性"><span class="nav-number">7.2.</span> <span class="nav-text">正规文法与有限自动机的等价性</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#由nfa构造正规式r"><span class="nav-number">7.3.</span> <span class="nav-text">由NFA构造正规式r</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#由正规式r构造nfa"><span class="nav-number">7.4.</span> <span class="nav-text">由正规式r构造NFA</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#确定的有限自动机的化简"><span class="nav-number">7.5.</span> <span class="nav-text">确定的有限自动机的化简</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#lex简介"><span class="nav-number">8.</span> <span class="nav-text">LEX简介</span></a></li></ol></div>
             
 
           </div>
@@ -1037,7 +1056,7 @@
       <i class="fa fa-area-chart"></i>
     </span>
     
-    <span title="站点总字数">797k</span>
+    <span title="站点总字数">798k</span>
   
 
   

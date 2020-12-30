@@ -127,14 +127,14 @@
 <meta property="og:site_name" content="w4rd3n">
 <meta property="og:description" content="概念 进程是程序的运行的实体,是操作系统进行资源分配和调度的一个独立单位.处理机(CPU)是最重要的系统资源,处理机管理的主要内容是处理机调度,而处理机分配和运行又是以进程为基本单位,故对处理机的管理可归结为对进程的管理. 从进程的角度:进程在封闭的环境顺序执行代码,独占全机资源,且每次进程的运行结果都是相同的. 从操作系统的角度:多个进程并发运行,间断的执行各进程,多个进程共享系统中的各种">
 <meta property="og:locale" content="zh-CN">
-<meta property="og:image" content="https://hitworld.github.io/posts/f3fda52a/1.png">
-<meta property="og:image" content="https://hitworld.github.io/posts/f3fda52a/3.png">
-<meta property="og:image" content="https://hitworld.github.io/posts/f3fda52a/2.png">
-<meta property="og:updated_time" content="2020-12-29T15:04:08.039Z">
+<meta property="og:image" content="https://hitworld.github.io/posts/undefined/1.png">
+<meta property="og:image" content="https://hitworld.github.io/posts/undefined/3.png">
+<meta property="og:image" content="https://hitworld.github.io/posts/undefined/2.png">
+<meta property="og:updated_time" content="2020-12-30T08:58:00.842Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="CS-BASIC-operating-system-进程管理">
 <meta name="twitter:description" content="概念 进程是程序的运行的实体,是操作系统进行资源分配和调度的一个独立单位.处理机(CPU)是最重要的系统资源,处理机管理的主要内容是处理机调度,而处理机分配和运行又是以进程为基本单位,故对处理机的管理可归结为对进程的管理. 从进程的角度:进程在封闭的环境顺序执行代码,独占全机资源,且每次进程的运行结果都是相同的. 从操作系统的角度:多个进程并发运行,间断的执行各进程,多个进程共享系统中的各种">
-<meta name="twitter:image" content="https://hitworld.github.io/posts/f3fda52a/1.png">
+<meta name="twitter:image" content="https://hitworld.github.io/posts/undefined/1.png">
 
 
 
@@ -577,9 +577,9 @@
 <li>新状态:指进程刚刚建立,但还未进入就绪队列时的状态.</li>
 <li>终止状态:当一个进程已经正常结束或异常结束,<code>OS</code>已将它从就绪队列中移出,但尚未将它撤消时的状态.</li>
 </ol>
-<img src="/posts/f3fda52a/1.png" title="p1">
+<img src="/posts/undefined/1.png" title="p1">
 <p>有些系统定义一个挂起状态,引起挂起状态可能基于<code>4</code>个方面:终端用户的需要,父进程的需要,工作负荷调节的需要,操作系统的需要.</p>
-<img src="/posts/f3fda52a/3.png" title="p3">
+<img src="/posts/undefined/3.png" title="p3">
 <h3 id="linux进程状态">Linux进程状态</h3>
 <p><code>Linux</code>进程状态共<code>6</code>种.</p>
 <ol type="1">
@@ -590,7 +590,7 @@
 <li>暂停(<code>TASK_STOPPED</code>):进程被暂停,通过其它进程的信号才能唤醒.导致这种状态的原因有二:收到<code>SIGSTOP</code>,<code>SIGSTP</code>,<code>SIGTTIN</code>或<code>SIGTTOU</code>信号;受其它进程的<code>ptrace</code>系统调用的控制而暂时将<code>CPU</code>交给控制进程.</li>
 <li>交换(<code>TASK_SWAPPING</code>):进程页面被交换出内存的进程.<code>2.0.35</code>版本的<code>Linux</code>内核没有使用该状态.</li>
 </ol>
-<img src="/posts/f3fda52a/2.png" title="p2">
+<img src="/posts/undefined/2.png" title="p2">
 <p>此外,<code>Linux</code>还定义<code>11</code>种进程标志.</p>
 <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">PF_ALIGNWARN  <span class="comment">#打印对齐警告信息</span></span><br><span class="line">PF_PTRACED    <span class="comment">#被ptrace系统调用监控</span></span><br><span class="line">PF_TRACESYS   <span class="comment">#正在跟踪</span></span><br><span class="line">PF_FORKNOEXEC <span class="comment">#进程刚创建,但还没执行</span></span><br><span class="line">PF_SUPERPRIV  <span class="comment">#超级用户特权</span></span><br><span class="line">PF_DUMPCORE   <span class="comment">#dumped core</span></span><br><span class="line">PF_SIGNALED   <span class="comment">#进程被信号杀出</span></span><br><span class="line">PF_STARTING   <span class="comment">#进程正被创建</span></span><br><span class="line">PF_EXITING    <span class="comment">#进程开始关闭</span></span><br><span class="line">PF_USEDFPU    <span class="comment">#该进程使用FPU</span></span><br><span class="line">PF_DTRACE     <span class="comment">#delayed trace</span></span><br></pre></td></tr></table></figure>
 <h2 id="进程控制">进程控制</h2>
@@ -1040,7 +1040,7 @@
       <i class="fa fa-area-chart"></i>
     </span>
     
-    <span title="站点总字数">797k</span>
+    <span title="站点总字数">798k</span>
   
 
   

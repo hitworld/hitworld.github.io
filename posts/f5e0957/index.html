@@ -127,18 +127,18 @@
 <meta property="og:site_name" content="w4rd3n">
 <meta property="og:description" content="虚拟化初探 在计算机中,虚拟化是指创建一个虚拟版本的计算机,包括硬件,存储设备和网络资源. 管理程序(Hypervisor)或VMM(Virtual Machine Monitor,虚拟机监视器)是一种可以在同一物理硬件上创建分离的多台(虚拟)机器的软件.VMM是在给出的虚拟化环境中管理CPU,内存,I/O设备,中断和指令集的软件.hypervisor可能指带有VMM的操作系统.这两个术语也可">
 <meta property="og:locale" content="zh-CN">
-<meta property="og:image" content="https://hitworld.github.io/posts/f5e0957/1.png">
-<meta property="og:image" content="https://hitworld.github.io/posts/f5e0957/2.png">
-<meta property="og:image" content="https://hitworld.github.io/posts/f5e0957/3.png">
-<meta property="og:image" content="https://hitworld.github.io/posts/f5e0957/6.png">
-<meta property="og:image" content="https://hitworld.github.io/posts/f5e0957/5.png">
-<meta property="og:image" content="https://hitworld.github.io/posts/f5e0957/4.png">
-<meta property="og:image" content="https://hitworld.github.io/posts/f5e0957/7.png">
-<meta property="og:updated_time" content="2020-12-29T15:04:08.039Z">
+<meta property="og:image" content="https://hitworld.github.io/posts/undefined/1.png">
+<meta property="og:image" content="https://hitworld.github.io/posts/undefined/2.png">
+<meta property="og:image" content="https://hitworld.github.io/posts/undefined/3.png">
+<meta property="og:image" content="https://hitworld.github.io/posts/undefined/6.png">
+<meta property="og:image" content="https://hitworld.github.io/posts/undefined/5.png">
+<meta property="og:image" content="https://hitworld.github.io/posts/undefined/4.png">
+<meta property="og:image" content="https://hitworld.github.io/posts/undefined/7.png">
+<meta property="og:updated_time" content="2020-12-30T08:58:00.843Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="CS-BASIC-virtualization-基础">
 <meta name="twitter:description" content="虚拟化初探 在计算机中,虚拟化是指创建一个虚拟版本的计算机,包括硬件,存储设备和网络资源. 管理程序(Hypervisor)或VMM(Virtual Machine Monitor,虚拟机监视器)是一种可以在同一物理硬件上创建分离的多台(虚拟)机器的软件.VMM是在给出的虚拟化环境中管理CPU,内存,I/O设备,中断和指令集的软件.hypervisor可能指带有VMM的操作系统.这两个术语也可">
-<meta name="twitter:image" content="https://hitworld.github.io/posts/f5e0957/1.png">
+<meta name="twitter:image" content="https://hitworld.github.io/posts/undefined/1.png">
 
 
 
@@ -569,7 +569,7 @@
 <li>仅主机管理程序(例如<code>SimpleVisor</code>,<code>HyperPlatform</code>,<code>kvm</code>).</li>
 </ol>
 <h3 id="基于二进制翻译的全虚拟化">基于二进制翻译的全虚拟化</h3>
-<img src="/posts/f5e0957/1.png" title="p1">
+<img src="/posts/undefined/1.png" title="p1">
 <p>客户操作系统运行在<code>Ring 1</code>,它在执行特权指令时会触发异常,然后<code>VMM</code>捕获这个异常,在异常里面做翻译,模拟,最后返回到客户操作系统内,客户操作系统认为自己的特权指令工作正常,继续运行.这种处理方式性能损耗大.</p>
 <p>早期的<code>VMWare Workstation</code>针对<code>x86</code>架构特殊设计的就是这种实现.<code>VMWare</code>打包为一个正常的应用程序被运行在宿主操作系统上,同时每个虚拟机实例以进程(<code>vmware-vmx.exe</code>)的形式运行在宿主操作系统上.</p>
 <p><code>VMWare</code>的<code>VMM</code>可以在系统级运行,在一段有限的时间内完全控制硬件,在这段时间内宿主操作系统被从虚拟和线性内存中短暂移除.<code>VMM</code>和宿主操作系统的上下文切换又称为世界切换,每个上下文有自己的地址空间,中断描述符表,堆栈,执行上下文.也就是说驻留在宿主机的<code>VMM</code>驱动程序实现了一系列操作,包括锁定物理内存页,转发中断以及调用世界切换原语.</p>
@@ -586,7 +586,7 @@
 <h4 id="设备虚拟化">设备虚拟化</h4>
 <p><code>VMWare</code>使用宿主操作系统的设备资源接口来执行虚拟机中对资源的调用.</p>
 <h3 id="超虚拟化类虚拟化-paravirtualization">超虚拟化/类虚拟化-Paravirtualization</h3>
-<img src="/posts/f5e0957/2.png" title="p2">
+<img src="/posts/undefined/2.png" title="p2">
 <p>类虚拟化的思想就是,修改操作系统内核,替换掉不能虚拟化的指令,通过超级调用(<code>hypercall</code>)直接和底层的虚拟化层<code>hypervisor</code>来通讯,<code>hypervisor</code>同时也提供了<code>hypercall</code>接口来满足其他关键内核操作,比如内存管理,中断和时间保持.这种做法省去了全虚拟化中的捕获和模拟.</p>
 <p>对于<code>Xen</code>这种类虚拟化技术,客户机操作系统都是有一个专门的定制内核版本,和<code>x86</code>,<code>mips</code>这些内核版本等价.性能损耗非常低.</p>
 <p><code>Xen</code>中用域来指代正在运行客户操作系统的虚拟机.<code>Domain0</code>是<code>Xen</code>管理程序启动时的第一个域,会运行一个<code>Linux</code>操作系统,该域可以访问硬件及管理其他域.其他域被称为<code>DomUs</code>,能运行任何已经移植到<code>Xen</code>的操作系统.</p>
@@ -608,21 +608,21 @@
 <p>大多数主流的虚拟机管理程序以建立在环缓冲区的共享内存来实现前端驱动程序和后端驱动程序的通讯.通过<code>PV</code>驱动程序垂直传递缓冲区信息的高性能通讯机制的优势使这种通讯很容易实现.在<code>Hyper-V</code>中,后端被称为虚拟化服务提供者,前端被称为虚拟化服务客户端.</p>
 <p><code>Xen</code>的最后一个选项是能够将物理设备直接授权给非特权域,如果不支持虚拟化特定设备或者如果需要尽可能高的性能的话.</p>
 <h3 id="硬件辅助虚拟化">硬件辅助虚拟化</h3>
-<img src="/posts/f5e0957/3.png" title="p3">
+<img src="/posts/undefined/3.png" title="p3">
 <p><code>2005</code>年后,<code>Intel</code>和<code>AMD</code>开始支持虚拟化,<code>Intel</code>引入<code>Intel-VT</code>技术,增加了<code>VMX root operation</code>和<code>VMX non-root operation</code>两种模式,两种模式都支持所有的<code>4</code>个运行级别.这样,<code>VMM</code>可以运行在<code>VMX root operation</code>模式下,客户<code>OS</code>运行在<code>VMX non-root operation</code>模式下.</p>
 <p>运行在<code>VMX root operation</code> 模式下的<code>VMM</code>通过显式调用<code>VMLAUNCH</code>或<code>VMRESUME</code>指令切换到<code>VMX non-root operation</code>模式,硬件自动加载<code>Guest OS</code>的上下文,于是<code>Guest OS</code>获得运行,这种转换称为<code>VM entry</code>.</p>
 <p><code>Guest OS</code>运行过程中遇到需要<code>VMM</code>处理的事件,例如外部中断或缺页异常,或者主动调用<code>VMCALL</code>指令调用<code>VMM</code>的服务的时候(与系统调用类似),硬件自动挂起<code>Guest OS</code>,切换到<code>VMX root operation</code>模式,恢复<code>VMM</code>的运行,这种转换称为<code>VM exit</code>.</p>
 <p><code>VMX root operation</code>模式下软件的行为与在没有<code>VT-x</code>技术的处理器上的行为基本一致.而<code>VMX non-root operation</code>模式则有很大不同,最主要的区别是此时运行某些指令或遇到某些事件时,会发生<code>VM exit</code>.</p>
-<img src="/posts/f5e0957/6.png" title="p6">
+<img src="/posts/undefined/6.png" title="p6">
 <p><code>guest</code>:客户机系统,包括<code>CPU</code>(<code>vCPU</code>),内存,驱动,被<code>kvm</code>置于一种受限制的<code>CPU</code>模式下运行. <code>kvm</code>:运行在内核空间,提供<code>CPU</code>和内存的虚拟化,以及<code>guest</code>的<code>I/O</code>拦截. <code>qemu</code>:运行在用户空间,提供硬件<code>I/O</code>虚拟化,通过<code>/dev/kvm</code>设备和虚拟机交互.</p>
 <p><code>qemu</code>与<code>kvm</code>就是一套基于硬件辅助的全虚拟化的实现.<code>kvm</code>主要功能是初始化<code>CPU</code>硬件打开虚拟化模式,然后将虚拟客户机运行在虚拟机模式下,并对其运行提供一定的支持.</p>
 <p>以在<code>Intel</code>上运行为例,<code>kvm</code>模块被加载的时候,首先初始化<code>kvm</code>内部的数据结构,然后打开<code>CPU</code>控制及存取<code>CR4</code>的虚拟化模式开关,并通过执行<code>VMXON</code>指令将宿主操作系统置于<code>VMX root operation</code>.最后<code>kvm</code>模块创建特殊设备文件<code>/dev/kvm</code>并等待来自用户空间的指令.</p>
 <p><code>kvm</code>需要一个用户程序通过<code>/dev/kvm</code>接口来设置一个虚拟服务器的地址空间和向虚拟机提供模拟的<code>I/O</code>设备并将界面显示映射回宿主机的显示屏供用户操作.</p>
-<img src="/posts/f5e0957/5.png" title="p5">
+<img src="/posts/undefined/5.png" title="p5">
 <p>这个程序就是<code>qemu-kvm</code>(<code>qemu-kvm</code>是<code>qemu</code>的一个分支,但现在两者已经没有区别),在<code>qemu-kvm</code>中,<code>kvm</code>的虚拟机被实现为常规的<code>Linux</code>进程,即一个<code>qemu-kvm</code>进程,由标准调度程序调度.该进程包括几种线程:<code>I/O</code>线程用于管理模拟设备,<code>vCPU</code>线程用于运行<code>Guest</code>代码,和处理<code>event loop</code>,<code>offloaded tasks</code>的线程.</p>
 <p>然后由<code>qemu</code>和<code>kvm</code>相互配合进行虚拟机的创建和运行,两者的通信主要是针对特殊设备文件<code>dev/kvm</code>的<code>ioctl</code>调用.创建虚拟机时<code>kvm</code>会分配对应的内核数据结构,同时返回一个文件句柄来代表所创建的虚拟机.针对该句柄的调用可以对虚拟机做相应地管理,比如创建用户空间虚拟地址和客户机物理地址,真实物理地址之间的映射关系,运行虚拟机等.</p>
 <h4 id="cpu虚拟化-2">CPU虚拟化</h4>
-<img src="/posts/f5e0957/4.png" title="p4">
+<img src="/posts/undefined/4.png" title="p4">
 <p><code>kvm</code>为每一个<code>vCPU</code>生成对应的文件句柄,用于进行包括执行虚拟处理器在内的一些操作,虚拟机在<code>kvm</code>的支持下置于<code>VMX non-root operation</code>模式下执行二进制指令.</p>
 <p>普通的<code>Linux</code>内核有两种执行模式:内核模式(<code>Kenerl</code>)和用户模式(<code>User</code>).为了支持带有虚拟化功能的<code>CPU</code>,<code>kvm</code>向<code>Linux</code>内核增加了第三种模式即客户机模式,对应于<code>CPU</code>的<code>VMX non-root mode</code>.在<code>non-root</code>模式下,所有敏感的二进制指令都被<code>CPU</code>捕捉到,<code>CPU</code>在保存现场之后自动切换到<code>VMX root operation</code>模式,由<code>kvm</code>决定如何处理.</p>
 <p><code>kvm</code>内核模块作为用户模式和客户机模式之间的桥梁,用户模式中的<code>qemu-kvm</code>会通过<code>ioctl</code>命令来运行虚拟机,<code>kvm</code>内核模块收到该请求后,它先进行初始化,比如将<code>vCPU</code>上下文加载到<code>VMCS</code>等,然后使<code>CPU</code>进入<code>VMX non-root</code>模式,开始执行客户机代码.</p>
@@ -634,7 +634,7 @@
 </ul>
 <p><code>kvm</code>虚拟机基于<code>vCPU</code>,而<code>vCPU</code>作为<code>qemu</code>线程被<code>Linux</code>作为普通的线程/轻量级进程调度到物理<code>CPU</code>上,所以虚拟机代码是运行在物理<code>CPU</code>之上.</p>
 <p>要将虚拟机的线程调度到某个物理<code>CPU</code>,需要经历两个过程:虚拟机线程调度到<code>vCPU</code>,该调度由虚拟机操作系统负责;<code>vCPU</code>线程调度到物理<code>CPU</code>即主机物理<code>CPU</code>,该调度由<code>Hypervisor</code>即<code>Linux</code>负责.</p>
-<img src="/posts/f5e0957/7.png" title="p7">
+<img src="/posts/undefined/7.png" title="p7">
 <h4 id="内存虚拟化-2">内存虚拟化</h4>
 <p>除了<code>CPU</code>的虚拟化,内存虚拟化也由<code>kvm</code>实现.<code>kvm</code>的内存虚拟化就是一个将虚拟机的虚拟内存转换为宿主机物理内存的过程,<code>Guest</code>使用的依然是宿主机的物理内存.</p>
 <p><code>CPU</code>中的内存管理单元<code>MMU</code>是通过页表的形式将程序运行的虚拟地址转换成实际物理地址.</p>
@@ -990,7 +990,7 @@
       <i class="fa fa-area-chart"></i>
     </span>
     
-    <span title="站点总字数">797k</span>
+    <span title="站点总字数">798k</span>
   
 
   

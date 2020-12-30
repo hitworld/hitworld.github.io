@@ -1,6 +1,7 @@
 import os
 path = "B:/blog-hexo/source/_posts"
-files= os.listdir(path)
+files = os.listdir(path)
+pngs = os.listdir("B:/blog-hexo/source/png")
 s = []
 png_num = 0
 for file in files:
@@ -25,11 +26,11 @@ for file in files:
                     if(not os.path.exists("B:/blog-hexo/source" + l[4:-2])):
                         print("Not find B:/blog-hexo/source" + l[4:-2])
                     else:
-                        png_num = png_num + 1
+                        pngs.remove(l[9:-2])
                 if file[:-3] in l:
                     flag = 1
                 w.write(l)
             if flag == 0:
                 print("name is error: " + file)
 
-print(png_num)
+print(pngs)

@@ -139,6 +139,7 @@
 <meta property="og:image" content="https://hitworld.github.io/png/2020-12-30-16-56-41.png">
 <meta property="og:image" content="https://hitworld.github.io/png/2020-12-30-16-57-26.png">
 <meta property="og:image" content="https://hitworld.github.io/png/2020-12-30-16-57-37.png">
+<meta property="og:image" content="https://hitworld.github.io/png/2020-12-30-18-16-22.png">
 <meta property="og:image" content="https://hitworld.github.io/png/2020-12-30-17-28-04.png">
 <meta property="og:image" content="https://hitworld.github.io/png/2020-12-30-17-28-20.png">
 <meta property="og:image" content="https://hitworld.github.io/png/2020-12-30-17-28-43.png">
@@ -157,7 +158,7 @@
 <meta property="og:image" content="https://hitworld.github.io/png/2020-12-30-16-00-17.png">
 <meta property="og:image" content="https://hitworld.github.io/png/2020-12-30-16-00-34.png">
 <meta property="og:image" content="https://hitworld.github.io/png/2020-12-30-16-00-52.png">
-<meta property="og:updated_time" content="2020-12-30T09:30:37.994Z">
+<meta property="og:updated_time" content="2020-12-30T11:20:35.762Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="CS-BASIC-compiler-principles-词法分析">
 <meta name="twitter:description" content="词法分析概览 词法分析的任务:从左到右逐个字符地对源程序进行扫描,产生一个个的单词符号,把作为字符串的源程序改造成为由单词符号组成的中间程序. 单词符号一般包括的种类:关键字/基本字,标识符,常数,运算符,界符(分隔符). 词法分析器输出单词符号的形式:(单词种别,单词符号的属性值). 单词种别通常用整数编码,提供给语法分析程序使用;单词自身的属性值提供给语义分析程序使用. 若一个单词种">
@@ -596,6 +597,7 @@
 <p><img src="/png/2020-12-30-16-56-41.png"></p>
 <p><img src="/png/2020-12-30-16-57-26.png"></p>
 <p><img src="/png/2020-12-30-16-57-37.png"></p>
+<p><img src="/png/2020-12-30-18-16-22.png"></p>
 <h2 id="正规集与正规式正规表达式">正规集与正规式(正规表达式)</h2>
 <p>正规集可以用正规式表示,正规式是表示正规集一种方法.一个字集合是正规集当且仅当它能用正规式表示.</p>
 <p>程序语言定义的合法单词的集合就是正规集,用正规式作为正规集的代表或者说命名.</p>
@@ -610,8 +612,9 @@
 <p><img src="/png/2020-12-29-02-03-48.png"></p>
 <p>确定有限自动机(<code>DFA</code>)的三种表示形式:状态转换函数;状态转换矩阵;状态转换图.</p>
 <p>以下述方式递归扩张<code>δ</code>的定义:<code>δ(s,ε) = s</code>,<code>δ(s,aα) = δ(δ(s,a),α)</code>(<code>a</code>属于<code>Σ</code>,<code>s</code>属于<code>S</code>).</p>
-<p>从状态转换图来看,对于<code>Σ*</code>上的任何字<code>α</code>,如果存在一条从初态结点到某一终态结点的通路,且这条通路上所有弧的标记符连接成的字等于<code>α</code>,则称<code>α</code>可为<code>DFA M</code>所识别(读出或接受).</p>
-<p>如果<code>M</code>的初态结点同时又是终态结点,则空字<code>ε</code>可为<code>DFA M</code>所识别.<code>DFA M</code>所能识别的字的全体记为<code>L(M)</code>.</p>
+<p>对于<code>Σ*</code>上的任何字<code>α</code>,如果存在一条从初态结点到某一终态结点的通路,且这条通路上所有弧的标记符连接成的字等于<code>α</code>,则称<code>α</code>可为<code>DFA M</code>所识别(读出或接受).</p>
+<p>如果<code>M</code>的初态结点同时又是终态结点,则空字<code>ε</code>可为<code>DFA M</code>所识别.</p>
+<p><code>DFA M</code>所能识别的字的全体记为<code>L(M)</code>.</p>
 <p><img src="/png/2020-12-29-02-04-05.png"></p>
 <h2 id="非确定有限自动机">非确定有限自动机</h2>
 <p><img src="/png/2020-12-29-02-04-27.png"></p>
@@ -1059,7 +1062,7 @@
       <i class="fa fa-coffee"></i>
     </span>
     
-    <span title="站点阅读时长">12:05</span>
+    <span title="站点阅读时长">12:04</span>
   
 </div>
 

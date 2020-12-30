@@ -132,13 +132,18 @@
 <meta property="og:image" content="https://hitworld.github.io/png/2020-12-30-16-54-13.png">
 <meta property="og:image" content="https://hitworld.github.io/png/2020-12-30-16-24-09.png">
 <meta property="og:image" content="https://hitworld.github.io/png/2020-12-30-16-27-10.png">
+<meta property="og:image" content="https://hitworld.github.io/png/2020-12-29-02-02-46.png">
+<meta property="og:image" content="https://hitworld.github.io/png/2020-12-29-02-03-07.png">
 <meta property="og:image" content="https://hitworld.github.io/png/2020-12-30-16-56-16.png">
 <meta property="og:image" content="https://hitworld.github.io/png/2020-12-30-16-56-29.png">
 <meta property="og:image" content="https://hitworld.github.io/png/2020-12-30-16-56-41.png">
 <meta property="og:image" content="https://hitworld.github.io/png/2020-12-30-16-57-26.png">
 <meta property="og:image" content="https://hitworld.github.io/png/2020-12-30-16-57-37.png">
-<meta property="og:image" content="https://hitworld.github.io/png/2020-12-29-02-02-46.png">
-<meta property="og:image" content="https://hitworld.github.io/png/2020-12-29-02-03-07.png">
+<meta property="og:image" content="https://hitworld.github.io/png/2020-12-30-17-28-04.png">
+<meta property="og:image" content="https://hitworld.github.io/png/2020-12-30-17-28-20.png">
+<meta property="og:image" content="https://hitworld.github.io/png/2020-12-30-17-28-43.png">
+<meta property="og:image" content="https://hitworld.github.io/png/2020-12-30-17-29-34.png">
+<meta property="og:image" content="https://hitworld.github.io/png/2020-12-30-17-30-24.png">
 <meta property="og:image" content="https://hitworld.github.io/png/2020-12-29-02-03-27.png">
 <meta property="og:image" content="https://hitworld.github.io/png/2020-12-29-02-03-48.png">
 <meta property="og:image" content="https://hitworld.github.io/png/2020-12-29-02-04-05.png">
@@ -152,7 +157,7 @@
 <meta property="og:image" content="https://hitworld.github.io/png/2020-12-30-16-00-17.png">
 <meta property="og:image" content="https://hitworld.github.io/png/2020-12-30-16-00-34.png">
 <meta property="og:image" content="https://hitworld.github.io/png/2020-12-30-16-00-52.png">
-<meta property="og:updated_time" content="2020-12-30T08:58:00.832Z">
+<meta property="og:updated_time" content="2020-12-30T09:30:37.994Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="CS-BASIC-compiler-principles-词法分析">
 <meta name="twitter:description" content="词法分析概览 词法分析的任务:从左到右逐个字符地对源程序进行扫描,产生一个个的单词符号,把作为字符串的源程序改造成为由单词符号组成的中间程序. 单词符号一般包括的种类:关键字/基本字,标识符,常数,运算符,界符(分隔符). 词法分析器输出单词符号的形式:(单词种别,单词符号的属性值). 单词种别通常用整数编码,提供给语法分析程序使用;单词自身的属性值提供给语义分析程序使用. 若一个单词种">
@@ -529,7 +534,7 @@
                 
                   <span class="post-meta-item-text">本文字数：</span>
                 
-                <span title="本文字数">5.3k</span>
+                <span title="本文字数">4.6k</span>
               
 
               
@@ -543,7 +548,7 @@
                 
                   <span class="post-meta-item-text">阅读时长 &asymp;</span>
                 
-                <span title="阅读时长">5 分钟</span>
+                <span title="阅读时长">4 分钟</span>
               
             </div>
           
@@ -576,12 +581,6 @@
 <p><img src="/png/2020-12-30-16-24-09.png"></p>
 <p><img src="/png/2020-12-30-16-27-10.png"></p>
 <p>单词最大长度的就是编程语言中要求的标识符最大长度,其值为扫描缓冲区总长度的一半.</p>
-<h3 id="状态转化图的实现">状态转化图的实现</h3>
-<p><img src="/png/2020-12-30-16-56-16.png"></p>
-<p><img src="/png/2020-12-30-16-56-29.png"></p>
-<p><img src="/png/2020-12-30-16-56-41.png"></p>
-<p><img src="/png/2020-12-30-16-57-26.png"></p>
-<p><img src="/png/2020-12-30-16-57-37.png"></p>
 <h2 id="状态转换图">状态转换图</h2>
 <p>状态转换图是一张有限方向图,可用于识别或接受一定的字符串.</p>
 <p>在状态转换图中,结点代表状态,用圆圈表示.</p>
@@ -591,25 +590,20 @@
 <p>从状态转换图来看,如果存在一条从初态结点到某一终态结点的通路,且这条通路上所有弧的标记符连接成的字等于<code>α</code>,则称<code>α</code>被该状态转换图识别(接受).</p>
 <p><img src="/png/2020-12-29-02-02-46.png"></p>
 <p><img src="/png/2020-12-29-02-03-07.png"></p>
-<h2 id="正规式正规表达式与正规集">正规式(正规表达式)与正规集</h2>
-<p>正规表达式定义.</p>
-<ul>
-<li><code>ε</code>,<code>Φ</code>都是<code>Σ</code>上的正规式,它们所表示的正规集分别为<code>{ε}</code>和<code>Φ</code>.</li>
-<li>任何<code>a</code>属于<code>Σ</code>,<code>a</code>是<code>Σ</code>上的一个正规式,它所表示的正规集为<code>{a}</code>.</li>
-<li>如果<code>U</code>,<code>V</code>都是<code>Σ</code>上的正规式,它们所表示的正规集分别记为<code>L(U)</code>和<code>L(V)</code>,那么<code>(U|V)</code>,<code>(U*V)</code>和<code>(U)*</code>也是正规式,它们所表示的正规集分别为<code>L(U)</code>并<code>L(V)</code>,<code>L(U)L(V)</code>和<code>(L(U))*</code>.</li>
-</ul>
-<p>仅由有限次使用上述步骤而得到的表达式才是<code>Σ</code>上的正规式,仅由这些正规式所表示的字集才是<code>Σ</code>上的正规集.</p>
-<p>正规式的数学运算.</p>
-<p>交换律:<code>U|V = V|U</code>. 结合律:<code>U|(V|W) = (U|V)|W</code>,<code>U(VM) = (UV)W</code>. 分配律:<code>U(V|W) = UV|UW</code>,<code>(V|W)U = VU|WU</code>. <code>ε</code>连接:<code>εU = Uε = U</code>.</p>
-<p>定义正规表达式(<code>regular expression</code>)是以下的一种.</p>
-<ul>
-<li>基本正规表达式由一个单字符<code>a</code>(<code>a</code>属于<code>Σ</code>),以及元字符<code>ε</code>或元字符<code>Φ</code>组成.在第<code>1</code>种情况下,<code>L(a) = {a}</code>;在第<code>2</code>种情况下,<code>L(ε) = {ε}</code>;在第<code>3</code>种情况下,<code>L(Φ) = {}</code>.</li>
-<li><code>r|s</code>格式的表达式:其中<code>r</code>和<code>s</code>均是正规式.在这种情况下,<code>L(r|s) = L(r) U L(s)</code>.</li>
-<li><code>rs</code>格式的表达式:其中<code>r</code>和<code>s</code>均是正规式.在这种情况下,<code>L(rs) = L(r)L(s)</code>.</li>
-<li><code>r*</code>格式的表达式:其中<code>r</code>是正规式.在这种情况下,<code>L(r*)= L(r)*</code>.</li>
-<li><code>r</code>格式的表达式:其中<code>r</code>是正规式.在这种情况下,<code>L((r)) = L(r)</code>,因此,括号并不改变语言,它们只调整运算的优先权.</li>
-</ul>
-<p><code>|</code>的优先权最低,连结次之,<code>*</code>则最高.另外还注意到在这个定义中,<code>5</code>个符号<code>|</code>,<code>*</code>,<code>*</code>,<code>(</code>和<code>)</code>都有了元字符的含义,正规式的连接一般不满足交换律.</p>
+<h3 id="状态转化图的实现">状态转化图的实现</h3>
+<p><img src="/png/2020-12-30-16-56-16.png"></p>
+<p><img src="/png/2020-12-30-16-56-29.png"></p>
+<p><img src="/png/2020-12-30-16-56-41.png"></p>
+<p><img src="/png/2020-12-30-16-57-26.png"></p>
+<p><img src="/png/2020-12-30-16-57-37.png"></p>
+<h2 id="正规集与正规式正规表达式">正规集与正规式(正规表达式)</h2>
+<p>正规集可以用正规式表示,正规式是表示正规集一种方法.一个字集合是正规集当且仅当它能用正规式表示.</p>
+<p>程序语言定义的合法单词的集合就是正规集,用正规式作为正规集的代表或者说命名.</p>
+<p><img src="/png/2020-12-30-17-28-04.png"></p>
+<p><img src="/png/2020-12-30-17-28-20.png"></p>
+<p><img src="/png/2020-12-30-17-28-43.png"></p>
+<p><img src="/png/2020-12-30-17-29-34.png"></p>
+<p><img src="/png/2020-12-30-17-30-24.png"></p>
 <h2 id="确定有限自动机">确定有限自动机</h2>
 <p><img src="/png/2020-12-29-02-03-27.png"></p>
 <p>状态转换矩阵:行表示状态,列表示输入字符,矩阵元素表示<code>δ(s,a)</code>的值.</p>
@@ -1024,7 +1018,7 @@
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#词法分析概览"><span class="nav-number">1.</span> <span class="nav-text">词法分析概览</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#词法分析器的设计"><span class="nav-number">2.</span> <span class="nav-text">词法分析器的设计</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#状态转化图的实现"><span class="nav-number">2.1.</span> <span class="nav-text">状态转化图的实现</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#状态转换图"><span class="nav-number">3.</span> <span class="nav-text">状态转换图</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#正规式正规表达式与正规集"><span class="nav-number">4.</span> <span class="nav-text">正规式(正规表达式)与正规集</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#确定有限自动机"><span class="nav-number">5.</span> <span class="nav-text">确定有限自动机</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#非确定有限自动机"><span class="nav-number">6.</span> <span class="nav-text">非确定有限自动机</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#重要证明"><span class="nav-number">7.</span> <span class="nav-text">重要证明</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#由nfa构造dfa"><span class="nav-number">7.1.</span> <span class="nav-text">由NFA构造DFA</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#正规文法与有限自动机的等价性"><span class="nav-number">7.2.</span> <span class="nav-text">正规文法与有限自动机的等价性</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#由nfa构造正规式r"><span class="nav-number">7.3.</span> <span class="nav-text">由NFA构造正规式r</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#由正规式r构造nfa"><span class="nav-number">7.4.</span> <span class="nav-text">由正规式r构造NFA</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#确定的有限自动机的化简"><span class="nav-number">7.5.</span> <span class="nav-text">确定的有限自动机的化简</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#lex简介"><span class="nav-number">8.</span> <span class="nav-text">LEX简介</span></a></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#词法分析概览"><span class="nav-number">1.</span> <span class="nav-text">词法分析概览</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#词法分析器的设计"><span class="nav-number">2.</span> <span class="nav-text">词法分析器的设计</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#状态转换图"><span class="nav-number">3.</span> <span class="nav-text">状态转换图</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#状态转化图的实现"><span class="nav-number">3.1.</span> <span class="nav-text">状态转化图的实现</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#正规集与正规式正规表达式"><span class="nav-number">4.</span> <span class="nav-text">正规集与正规式(正规表达式)</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#确定有限自动机"><span class="nav-number">5.</span> <span class="nav-text">确定有限自动机</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#非确定有限自动机"><span class="nav-number">6.</span> <span class="nav-text">非确定有限自动机</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#重要证明"><span class="nav-number">7.</span> <span class="nav-text">重要证明</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#由nfa构造dfa"><span class="nav-number">7.1.</span> <span class="nav-text">由NFA构造DFA</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#正规文法与有限自动机的等价性"><span class="nav-number">7.2.</span> <span class="nav-text">正规文法与有限自动机的等价性</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#由nfa构造正规式r"><span class="nav-number">7.3.</span> <span class="nav-text">由NFA构造正规式r</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#由正规式r构造nfa"><span class="nav-number">7.4.</span> <span class="nav-text">由正规式r构造NFA</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#确定的有限自动机的化简"><span class="nav-number">7.5.</span> <span class="nav-text">确定的有限自动机的化简</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#lex简介"><span class="nav-number">8.</span> <span class="nav-text">LEX简介</span></a></li></ol></div>
             
 
           </div>
@@ -1056,7 +1050,7 @@
       <i class="fa fa-area-chart"></i>
     </span>
     
-    <span title="站点总字数">798k</span>
+    <span title="站点总字数">797k</span>
   
 
   

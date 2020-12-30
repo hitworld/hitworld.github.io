@@ -119,19 +119,19 @@
 
 
 
-  <meta name="description" content="概念 一个处理器能够处理的指令集合及其涉及的指令格式,寻址方式,操作数的定义,操作数所存放的寄存器以及存储器的相关规定就是处理器的指令体系结构(ISA). ISA在编译器编写者和处理器设计人员之间提供了一个概念抽象层.按ISA复杂程度有复杂指令集计算机(CISC,如IA-32)和精简指令集计算机(RISC,如MIPS,ARM). 程序的执行 程序运行的实质就是cpu不断读取内存中的指令对其">
+  <meta name="description" content="概念 CPU顺序的执行机器指令,访问存储器获取数据,同时有若干寄存器存放临时数据. 一个处理器能够处理的指令集合及其涉及的指令格式,寻址方式,操作数的定义,操作数所存放的寄存器以及存储器的相关规定就是处理器的指令体系结构(ISA). ISA在编译器编写者和处理器设计人员之间提供了一个概念抽象层.按ISA复杂程度有复杂指令集计算机(CISC,如IA-32)和精简指令集计算机(RISC,如MIP">
 <meta name="keywords" content="CSAPP">
 <meta property="og:type" content="article">
 <meta property="og:title" content="CS-NOTES-CSAPP-处理器体系结构">
 <meta property="og:url" content="https://hitworld.github.io/posts/f59edeb0/index.html">
 <meta property="og:site_name" content="w4rd3n">
-<meta property="og:description" content="概念 一个处理器能够处理的指令集合及其涉及的指令格式,寻址方式,操作数的定义,操作数所存放的寄存器以及存储器的相关规定就是处理器的指令体系结构(ISA). ISA在编译器编写者和处理器设计人员之间提供了一个概念抽象层.按ISA复杂程度有复杂指令集计算机(CISC,如IA-32)和精简指令集计算机(RISC,如MIPS,ARM). 程序的执行 程序运行的实质就是cpu不断读取内存中的指令对其">
+<meta property="og:description" content="概念 CPU顺序的执行机器指令,访问存储器获取数据,同时有若干寄存器存放临时数据. 一个处理器能够处理的指令集合及其涉及的指令格式,寻址方式,操作数的定义,操作数所存放的寄存器以及存储器的相关规定就是处理器的指令体系结构(ISA). ISA在编译器编写者和处理器设计人员之间提供了一个概念抽象层.按ISA复杂程度有复杂指令集计算机(CISC,如IA-32)和精简指令集计算机(RISC,如MIP">
 <meta property="og:locale" content="zh-CN">
 <meta property="og:image" content="https://hitworld.github.io/posts/f59edeb0/1.png">
-<meta property="og:updated_time" content="2020-12-29T15:04:08.040Z">
+<meta property="og:updated_time" content="2020-12-30T06:48:08.076Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="CS-NOTES-CSAPP-处理器体系结构">
-<meta name="twitter:description" content="概念 一个处理器能够处理的指令集合及其涉及的指令格式,寻址方式,操作数的定义,操作数所存放的寄存器以及存储器的相关规定就是处理器的指令体系结构(ISA). ISA在编译器编写者和处理器设计人员之间提供了一个概念抽象层.按ISA复杂程度有复杂指令集计算机(CISC,如IA-32)和精简指令集计算机(RISC,如MIPS,ARM). 程序的执行 程序运行的实质就是cpu不断读取内存中的指令对其">
+<meta name="twitter:description" content="概念 CPU顺序的执行机器指令,访问存储器获取数据,同时有若干寄存器存放临时数据. 一个处理器能够处理的指令集合及其涉及的指令格式,寻址方式,操作数的定义,操作数所存放的寄存器以及存储器的相关规定就是处理器的指令体系结构(ISA). ISA在编译器编写者和处理器设计人员之间提供了一个概念抽象层.按ISA复杂程度有复杂指令集计算机(CISC,如IA-32)和精简指令集计算机(RISC,如MIP">
 <meta name="twitter:image" content="https://hitworld.github.io/posts/f59edeb0/1.png">
 
 
@@ -505,7 +505,7 @@
                 
                   <span class="post-meta-item-text">本文字数：</span>
                 
-                <span title="本文字数">1k</span>
+                <span title="本文字数">1.1k</span>
               
 
               
@@ -540,6 +540,7 @@
 
       
         <h2 id="概念">概念</h2>
+<p><code>CPU</code>顺序的执行机器指令,访问存储器获取数据,同时有若干寄存器存放临时数据.</p>
 <p>一个处理器能够处理的指令集合及其涉及的指令格式,寻址方式,操作数的定义,操作数所存放的寄存器以及存储器的相关规定就是处理器的指令体系结构(<code>ISA</code>).</p>
 <p><code>ISA</code>在编译器编写者和处理器设计人员之间提供了一个概念抽象层.按<code>ISA</code>复杂程度有复杂指令集计算机(<code>CISC</code>,如<code>IA-32</code>)和精简指令集计算机(<code>RISC</code>,如<code>MIPS</code>,<code>ARM</code>).</p>
 <h2 id="程序的执行">程序的执行</h2>

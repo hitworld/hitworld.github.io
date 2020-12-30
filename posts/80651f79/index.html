@@ -119,13 +119,13 @@
 
 
 
-  <meta name="description" content="简介 汇编语言与机器语言之间是一一对应的,不同的CPU支持的机器指令也是不一样的,一种CPU能执行的全局机器指令集合就是该CPU的指令集.CPU顺序的执行机器指令,访问存储器获取数据,同时有若干寄存器存放临时数据. IA-32是Intel研发的一种CPU架构.包括Intel 80386/80486,Intel Pentium,Intel Xeon,Intel Core.使用小端法存储数据(高位">
+  <meta name="description" content="简介 不同的CPU的ISA是不一样的,所以它们支持的机器指令也是不一样的,一种CPU能执行的全局机器指令集合就是该CPU的指令集. IA-32是Intel研发的一种CPU架构.包括Intel 80386/80486,Intel Pentium,Intel Xeon,Intel Core.使用小端法存储数据(高位高地址,低位低地址). 工作方式 IA-32系列CPU有三种工作方式:保护方式,">
 <meta name="keywords" content="assembly">
 <meta property="og:type" content="article">
 <meta property="og:title" content="CS-BASIC-assembly-IA32-基础">
 <meta property="og:url" content="https://hitworld.github.io/posts/80651f79/index.html">
 <meta property="og:site_name" content="w4rd3n">
-<meta property="og:description" content="简介 汇编语言与机器语言之间是一一对应的,不同的CPU支持的机器指令也是不一样的,一种CPU能执行的全局机器指令集合就是该CPU的指令集.CPU顺序的执行机器指令,访问存储器获取数据,同时有若干寄存器存放临时数据. IA-32是Intel研发的一种CPU架构.包括Intel 80386/80486,Intel Pentium,Intel Xeon,Intel Core.使用小端法存储数据(高位">
+<meta property="og:description" content="简介 不同的CPU的ISA是不一样的,所以它们支持的机器指令也是不一样的,一种CPU能执行的全局机器指令集合就是该CPU的指令集. IA-32是Intel研发的一种CPU架构.包括Intel 80386/80486,Intel Pentium,Intel Xeon,Intel Core.使用小端法存储数据(高位高地址,低位低地址). 工作方式 IA-32系列CPU有三种工作方式:保护方式,">
 <meta property="og:locale" content="zh-CN">
 <meta property="og:image" content="https://hitworld.github.io/png/2020-12-29-01-49-37.png">
 <meta property="og:image" content="https://hitworld.github.io/png/2020-12-29-01-49-57.png">
@@ -133,10 +133,10 @@
 <meta property="og:image" content="https://hitworld.github.io/png/2020-12-29-01-50-53.png">
 <meta property="og:image" content="https://hitworld.github.io/png/2020-12-29-01-51-11.png">
 <meta property="og:image" content="https://hitworld.github.io/png/2020-12-29-01-51-34.png">
-<meta property="og:updated_time" content="2020-12-29T15:04:08.032Z">
+<meta property="og:updated_time" content="2020-12-30T06:48:11.476Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="CS-BASIC-assembly-IA32-基础">
-<meta name="twitter:description" content="简介 汇编语言与机器语言之间是一一对应的,不同的CPU支持的机器指令也是不一样的,一种CPU能执行的全局机器指令集合就是该CPU的指令集.CPU顺序的执行机器指令,访问存储器获取数据,同时有若干寄存器存放临时数据. IA-32是Intel研发的一种CPU架构.包括Intel 80386/80486,Intel Pentium,Intel Xeon,Intel Core.使用小端法存储数据(高位">
+<meta name="twitter:description" content="简介 不同的CPU的ISA是不一样的,所以它们支持的机器指令也是不一样的,一种CPU能执行的全局机器指令集合就是该CPU的指令集. IA-32是Intel研发的一种CPU架构.包括Intel 80386/80486,Intel Pentium,Intel Xeon,Intel Core.使用小端法存储数据(高位高地址,低位低地址). 工作方式 IA-32系列CPU有三种工作方式:保护方式,">
 <meta name="twitter:image" content="https://hitworld.github.io/png/2020-12-29-01-49-37.png">
 
 
@@ -545,7 +545,7 @@
 
       
         <h2 id="简介">简介</h2>
-<p>汇编语言与机器语言之间是一一对应的,不同的<code>CPU</code>支持的机器指令也是不一样的,一种<code>CPU</code>能执行的全局机器指令集合就是该<code>CPU</code>的指令集.<code>CPU</code>顺序的执行机器指令,访问存储器获取数据,同时有若干寄存器存放临时数据.</p>
+<p>不同的<code>CPU</code>的<code>ISA</code>是不一样的,所以它们支持的机器指令也是不一样的,一种<code>CPU</code>能执行的全局机器指令集合就是该<code>CPU</code>的指令集.</p>
 <p><code>IA-32</code>是<code>Intel</code>研发的一种<code>CPU</code>架构.包括<code>Intel 80386/80486</code>,<code>Intel Pentium</code>,<code>Intel Xeon</code>,<code>Intel Core</code>.使用小端法存储数据(高位高地址,低位低地址).</p>
 <h2 id="工作方式">工作方式</h2>
 <p><code>IA-32</code>系列<code>CPU</code>有三种工作方式:保护方式,实地址方式和系统管理方式;保护方式有一种子工作方式,虚拟<code>8086</code>方式.<code>IA-32</code>支持<code>8/16/32</code>位的操作数,同时支持<code>16/32</code>位的存储器寻址方式.</p>

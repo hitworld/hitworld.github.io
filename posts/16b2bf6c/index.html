@@ -163,12 +163,19 @@
 <meta property="og:image" content="https://hitworld.github.io/png/2020-12-31-02-52-37.png">
 <meta property="og:image" content="https://hitworld.github.io/png/2020-12-31-02-49-36.png">
 <meta property="og:image" content="https://hitworld.github.io/png/2020-12-29-02-05-30.png">
-<meta property="og:image" content="https://hitworld.github.io/png/2020-12-29-02-06-06.png">
-<meta property="og:image" content="https://hitworld.github.io/png/2020-12-30-15-59-36.png">
-<meta property="og:image" content="https://hitworld.github.io/png/2020-12-30-15-59-52.png">
-<meta property="og:image" content="https://hitworld.github.io/png/2020-12-30-16-00-17.png">
-<meta property="og:image" content="https://hitworld.github.io/png/2020-12-30-16-00-34.png">
-<meta property="og:updated_time" content="2020-12-30T18:55:45.946Z">
+<meta property="og:image" content="https://hitworld.github.io/png/2020-12-31-17-36-41.png">
+<meta property="og:image" content="https://hitworld.github.io/png/2020-12-31-17-36-57.png">
+<meta property="og:image" content="https://hitworld.github.io/png/2020-12-31-17-37-12.png">
+<meta property="og:image" content="https://hitworld.github.io/png/2020-12-31-17-37-25.png">
+<meta property="og:image" content="https://hitworld.github.io/png/2020-12-31-17-37-45.png">
+<meta property="og:image" content="https://hitworld.github.io/png/2020-12-31-17-38-08.png">
+<meta property="og:image" content="https://hitworld.github.io/png/2020-12-31-17-38-25.png">
+<meta property="og:image" content="https://hitworld.github.io/png/2020-12-31-17-39-07.png">
+<meta property="og:image" content="https://hitworld.github.io/png/2020-12-31-17-39-18.png">
+<meta property="og:image" content="https://hitworld.github.io/png/2020-12-31-17-39-31.png">
+<meta property="og:image" content="https://hitworld.github.io/png/2020-12-31-17-39-57.png">
+<meta property="og:image" content="https://hitworld.github.io/png/2020-12-31-17-40-18.png">
+<meta property="og:updated_time" content="2020-12-31T09:40:31.379Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="CS-BASIC-compiler-principles-词法分析">
 <meta name="twitter:description" content="词法分析概览 词法分析的任务:从左到右逐个字符地对源程序进行扫描,产生一个个的单词符号,把作为字符串的源程序改造成为由单词符号组成的中间程序. 单词符号一般包括的种类:关键字/基本字,标识符,常数,运算符,界符(分隔符). 词法分析器输出单词符号的形式:(单词种别,单词符号的属性值). 单词种别通常用整数编码,提供给语法分析程序使用;单词自身的属性值提供给语义分析程序使用. 若一个单词种">
@@ -545,7 +552,7 @@
                 
                   <span class="post-meta-item-text">本文字数：</span>
                 
-                <span title="本文字数">4.8k</span>
+                <span title="本文字数">4.4k</span>
               
 
               
@@ -684,8 +691,7 @@
 <li>对每个右线性正规文法<code>GR</code>或左线性正规文法<code>GL</code>,都存在一个有限自动机(<code>FA</code>)<code>M</code>,使得:<code>L(M) = L(G)</code>.</li>
 <li>对每一个<code>FA M</code>,都存在一个右线性正规文法<code>GR</code>和左线性正规文法<code>GL</code>,使得:<code>L(M) = L(GR) = L(GL)</code>.</li>
 </ul>
-<p>对于任何有限自动机<code>M</code>,都存在一个正规式<code>r</code>,使得<code>L(r) = L(M)</code>;对于任何正规式<code>r</code>,都存在一个有限自动机<code>M</code>,使得<code>L(M) = L(r)</code>.</p>
-<p>证明:右线性正规文法<code>GR</code>同有限自动机的等价性.</p>
+<h3 id="证明右线性正规文法gr同有限自动机的等价性">证明:右线性正规文法GR同有限自动机的等价性</h3>
 <p>设右线性正规文法<code>GR = &lt;VT, VN, S, P&gt;</code>.将<code>VN</code>中的每一非终结符号视为状态符号,并增加一个新的终结状态符号<code>f</code>,<code>f</code>不属于<code>VN</code>,构造有限自动机<code>M = &lt;VN U {f}, VT, δ, S, {f}&gt;</code>.</p>
 <p>状态转换函数<code>δ</code>定义如下.</p>
 <ul>
@@ -693,45 +699,53 @@
 <li>对任意<code>A</code>属于<code>VN</code>且<code>a</code>属于<code>VT U {ε}</code>,设<code>P</code>中左端为<code>A</code>,右端第一符号为<code>a</code>的所有产生式为:<code>A → aA1|aA2|...|aAk</code>(不包含<code>A → a</code>),则令<code>δ(A,a) = {A1, A2, ..., AK}</code>.</li>
 </ul>
 <p>显然,由其状态转移函数可以看出该<code>FA</code>为<code>NFA</code>.</p>
-<p>证明:左线性正规文法<code>GL</code>同有限自动机的等价性.</p>
+<h3 id="证明左线性正规文法gl同有限自动机的等价性">证明:左线性正规文法GL同有限自动机的等价性</h3>
 <p>设左线性正规文法<code>GL = &lt;VT, VN, S, P&gt;</code>.将<code>VN</code>中的每一非终结符号视为状态符号,并且增加一个初态符号<code>q0</code>,<code>q0</code>不属于<code>VN</code>,构造有限自动机<code>M = &lt;VN U {q0}, VT, δ, q0, {S}&gt;</code>.</p>
 <p>状态转换函数<code>δ</code>定义如下.</p>
 <ul>
 <li>若对某个<code>A</code>属于<code>VN</code>且<code>a</code>属于<code>VT U {ε}</code>,<code>P</code>中有产生式<code>A → a</code>,则令<code>δ(q0,a) = A</code>.</li>
 <li>对任意的<code>A</code>属于<code>VN</code>且<code>a</code>属于<code>VT U {ε}</code>,若<code>P</code>中所有右端第一符号为<code>A</code>,第二符号为<code>a</code>的产生式为:<code>A1 → Aa</code>,<code>A2 → Aa</code>,...,<code>Ak → Aa</code>,则令<code>δ(A,a) = {A1, A2, ..., Ak}</code>.</li>
 </ul>
-<p>证明:有限自动机同正规文法的等价性.</p>
-<p>设<code>DFA M = &lt;S, Σ, δ, s0, F&gt;</code>,构造右线性正规文法.</p>
+<h3 id="证明有限自动机同正规文法的等价性">证明:有限自动机同正规文法的等价性</h3>
+<p>设<code>DFA M = &lt;S, Σ, δ, s0, F&gt;</code>.</p>
+<h4 id="构造右线性正规文法">构造右线性正规文法</h4>
 <p>若<code>s0</code>不属于<code>F</code>,令<code>GR = &lt;Σ, S, s0, P&gt;</code>,其中<code>P</code>的产生式集合如下定义.</p>
-<ul>
-<li>对任何<code>a</code>属于<code>Σ</code>及<code>A</code>,<code>B</code>属于<code>S</code>,若有<code>δ(A,a) = B</code>,当<code>B</code>不属于<code>F</code>时,令<code>A → aB</code>;当<code>B</code>属于<code>F</code>时,令<code>A → a|aB</code>.</li>
-<li>对于<code>w</code>属于<code>Σ*</code>,不妨设<code>w = a1a2...ak</code>,其中<code>ai</code>属于<code>Σ</code>.若<code>s0</code>能推导出<code>w</code>,则存在一个最左推导<code>s0 ⇒ a1A1 ⇒ a1a2A2 ⇒ ... ⇒ a1a2...ak</code>,因而,在<code>M</code>中有一条从<code>s0</code>出发依次经过<code>A1</code>,...,<code>Ak - 1</code>达到终态的通路,该通路上所有箭弧依次标记为<code>a1</code>,<code>a2</code>,...,<code>ak</code>.反之亦然.所以<code>w</code>属于<code>L(GR)</code>当且仅当<code>w</code>属于<code>L(M)</code>.</li>
-</ul>
-<p>若<code>s0</code>属于<code>F</code>,因为<code>δ(s0,ε) = s0</code>,所以<code>ε</code>属于<code>L(M)</code>,但<code>ε</code>不属于上面构造的<code>GR</code>产生的文法<code>L(GR)</code>,<code>L(GR) = L(M) - {ε}</code>.所以在上面的<code>GR</code>中添加新的非终结符号<code>s0′</code>(<code>s0′</code>不属于<code>S</code>)和产生式<code>s0′ → s0|ε</code>,并用<code>s0′</code>代替<code>s0</code>作开始符号.这样修正后的文法<code>GR′</code>仍然是右线性正规文法,并且<code>L(GR′) = L(M)</code>.</p>
-<p>构造左线性正规文法,将终态视为开始符号,<code>P</code>的定义如下.</p>
-<ul>
-<li>对任何<code>a</code>属于<code>Σ</code>及<code>A1</code>,<code>A2</code>属于<code>VN</code>,有<code>δ(A1,a) = A2</code>,若<code>A1</code>是初态,<code>A2 → a|A1a</code>;若<code>A1</code>不是初态,<code>A2 → A1a</code>.</li>
-</ul>
+<p>对任何<code>a</code>属于<code>Σ</code>及<code>A</code>,<code>B</code>属于<code>S</code>,若有<code>δ(A,a) = B</code>,当<code>B</code>不属于<code>F</code>时,令<code>A → aB</code>;当<code>B</code>属于<code>F</code>时,令<code>A → a|aB</code>.</p>
+<p>对于<code>w</code>属于<code>Σ*</code>,不妨设<code>w = a1a2...ak</code>,其中<code>ai</code>属于<code>Σ</code>.</p>
+<p>若<code>s0</code>能推导出<code>w</code>,则存在一个最左推导<code>s0 ⇒ a1A1 ⇒ a1a2A2 ⇒ ... ⇒ a1a2...ak</code>,即在<code>M</code>中有一条从<code>s0</code>出发依次经过<code>A1</code>,...,<code>Ak - 1</code>达到终态的通路,该通路上所有箭弧依次标记为<code>a1</code>,<code>a2</code>,...,<code>ak</code>.</p>
+<p>反之亦然.所以<code>w</code>属于<code>L(GR)</code>当且仅当<code>w</code>属于<code>L(M)</code>.</p>
+<p>若<code>s0</code>属于<code>F</code>,因为<code>δ(s0,ε) = s0</code>,所以<code>ε</code>属于<code>L(M)</code>,但<code>ε</code>不属于上面构造的<code>GR</code>产生的文法<code>L(GR)</code>,<code>L(GR) = L(M) - {ε}</code>.</p>
+<p>所以在上面的<code>GR</code>中添加新的非终结符号<code>s0′</code>(<code>s0′</code>不属于<code>S</code>)和产生式<code>s0′ → s0|ε</code>,并用<code>s0′</code>代替<code>s0</code>作开始符号.这样修正后的文法<code>GR′</code>仍然是右线性正规文法,并且<code>L(GR′) = L(M)</code>.</p>
+<h4 id="构造左线性正规文法">构造左线性正规文法</h4>
+<p>将终态视为开始符号,<code>P</code>的定义如下.</p>
+<p>对任何<code>a</code>属于<code>Σ</code>及<code>A1</code>,<code>A2</code>属于<code>VN</code>,有<code>δ(A1,a) = A2</code>,若<code>A1</code>是初态,<code>A2 → a|A1a</code>;若<code>A1</code>不是初态,<code>A2 → A1a</code>.</p>
 <p>如果有多个终态,需要引入新终态,将原来的终态连接到新终态,箭符上的标记符为<code>ε</code>,将新的终态作为左线性正规文法的开始符号,其产生式为<code>f′ → f1|f2|...</code>.</p>
-<p>由前面可知:正规文法,正规式,确定有限自动机和非确定有限自动机在接受语言的能力上是一致的.</p>
-<h2 id="由nfa构造正规式r">由NFA构造正规式r</h2>
-<p>首先对NFA M状态转换图进行改造,在<code>M</code>中加入两个结点<code>X</code>,<code>Y</code>.从<code>X</code>用<code>ε</code>弧连接到<code>M</code>的所有初态结点;从<code>M</code>的所有终态结点用<code>ε</code>连接到<code>Y</code>,从而形成一个新的<code>NFA</code>,记为<code>M′</code>,它只有一个初态<code>X</code>和一个终态<code>Y</code>.显然,<code>L(M) = L(M′)</code>.按下图消除<code>M′</code>中的所有结点,直至只剩<code>X</code>和<code>Y</code>.</p>
+<h2 id="正规式与fa的等价性">正规式与FA的等价性</h2>
+<h3 id="由nfa构造正规式r">由NFA构造正规式r</h3>
+<p>首先对<code>NFA M</code>状态转换图进行改造,在<code>M</code>中加入两个结点<code>X</code>,<code>Y</code>.</p>
+<p>从<code>X</code>用<code>ε</code>弧连接到<code>M</code>的所有初态结点;从<code>M</code>的所有终态结点用<code>ε</code>连接到<code>Y</code>,从而形成一个新的<code>NFA</code>,记为<code>M′</code>.它只有一个初态<code>X</code>和一个终态<code>Y</code>.</p>
+<p>显然,<code>L(M) = L(M′)</code>.</p>
+<p>按下图消除<code>M′</code>中的所有结点,直至只剩<code>X</code>和<code>Y</code>.</p>
 <p><img src="/png/2020-12-29-02-05-30.png"></p>
-<h2 id="由正规式r构造nfa">由正规式r构造NFA</h2>
-<p><code>Thopmson</code>方法:首先对<code>r</code>中运算符数目进行归纳证明.</p>
-<p>若<code>r</code>具有<code>0</code>个运算符,则其状态转换图对应一个<code>NFA</code>.</p>
-<p>当<code>r</code>具有<code>i</code>个运算时,有三种情况.</p>
-<p>当<code>r = r1 | r2</code>,<code>r2</code>中的运算符个数少于<code>k</code>.由归纳假设,对<code>ri</code>存在<code>Mi = &lt;Si, Σi, δi, qi, fi&gt;</code>,使得<code>L(Mi) = L(ri)</code>,并且<code>Mi</code>没有从终态出发的箭弧(<code>i = 1, 2</code>).</p>
-<p>设<code>S1</code>与<code>S2</code>交集为空集,在<code>S1</code>与<code>S2</code>的并集中加入新状态<code>q0</code>,<code>f0</code>.则可以构造.</p>
-<p><img src="/png/2020-12-29-02-06-06.png"></p>
-<p><code>M</code>的状态转换图中不难看出,<code>M</code>中有一条从<code>q0</code>到<code>f0</code>的通路,当且仅当在<code>M1</code>中有一条从<code>q1</code>到<code>f1</code>的通路或在<code>M2</code>中有一条从<code>q2</code>到<code>f2</code>的通路.即:<code>L(M) = L(M1) U L(M2) = L(r1) U L(r2) = L(r)</code>.</p>
-<p><img src="/png/2020-12-30-15-59-36.png"></p>
-<p>当<code>r = r1r2</code>,同上可知.</p>
-<p><img src="/png/2020-12-30-15-59-52.png"></p>
-<p>当<code>r = r1*</code>,同上可知.</p>
-<p><img src="/png/2020-12-30-16-00-17.png"></p>
-<p><code>Thompson</code>方法所构造的<code>NFA</code>的状态数和<code>ε</code>转换较多,可以采用下图方法减少.</p>
-<p><img src="/png/2020-12-30-16-00-34.png"></p>
+<p>最后,<code>X</code>到<code>Y</code>的弧上的标记的正规式即为所构造的正规式<code>r</code>.显然<code>L(r) = L(M) = L(M′)</code>.</p>
+<p>这就证明了:对于任何有限自动机<code>M</code>,都存在一个正规式<code>r</code>,使得<code>L(r) = L(M)</code>.</p>
+<h3 id="由正规式r构造nfa">由正规式r构造NFA</h3>
+<p><img src="/png/2020-12-31-17-36-41.png"></p>
+<p><img src="/png/2020-12-31-17-36-57.png"></p>
+<p><img src="/png/2020-12-31-17-37-12.png"></p>
+<p><img src="/png/2020-12-31-17-37-25.png"></p>
+<p><img src="/png/2020-12-31-17-37-45.png"></p>
+<p><img src="/png/2020-12-31-17-38-08.png"></p>
+<p><img src="/png/2020-12-31-17-38-25.png"></p>
+<p><img src="/png/2020-12-31-17-39-07.png"></p>
+<p><img src="/png/2020-12-31-17-39-18.png"></p>
+<p><img src="/png/2020-12-31-17-39-31.png"></p>
+<p>这证明了:对于任何正规式<code>r</code>,都存在一个有限自动机<code>M</code>,使得<code>L(M) = L(r)</code>.</p>
+<p>示例.</p>
+<p><img src="/png/2020-12-31-17-39-57.png"></p>
+<h2 id="结论">结论</h2>
+<p><img src="/png/2020-12-31-17-40-18.png"></p>
+<p>由前面可知:正规文法,正规式,确定有限自动机和非确定有限自动机在接受语言的能力上是一致的.</p>
 <h2 id="lex简介">LEX简介</h2>
 <p><code>LEX</code>原理.</p>
 <ol type="1">
@@ -1049,7 +1063,7 @@
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#词法分析概览"><span class="nav-number">1.</span> <span class="nav-text">词法分析概览</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#词法分析器的设计"><span class="nav-number">2.</span> <span class="nav-text">词法分析器的设计</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#状态转换图"><span class="nav-number">3.</span> <span class="nav-text">状态转换图</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#状态转化图的实现"><span class="nav-number">3.1.</span> <span class="nav-text">状态转化图的实现</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#正规集与正规式正规表达式"><span class="nav-number">4.</span> <span class="nav-text">正规集与正规式(正规表达式)</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#确定有限自动机"><span class="nav-number">5.</span> <span class="nav-text">确定有限自动机</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#非确定有限自动机"><span class="nav-number">6.</span> <span class="nav-text">非确定有限自动机</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#dfa和nfa的等价性"><span class="nav-number">7.</span> <span class="nav-text">DFA和NFA的等价性</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#基于状态转化图的改造"><span class="nav-number">7.1.</span> <span class="nav-text">基于状态转化图的改造</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#nfa确定化--子集法"><span class="nav-number">7.2.</span> <span class="nav-text">NFA确定化--子集法</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#dfa的化简"><span class="nav-number">8.</span> <span class="nav-text">DFA的化简</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#正规文法与有限自动机的等价性"><span class="nav-number">9.</span> <span class="nav-text">正规文法与有限自动机的等价性</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#由nfa构造正规式r"><span class="nav-number">10.</span> <span class="nav-text">由NFA构造正规式r</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#由正规式r构造nfa"><span class="nav-number">11.</span> <span class="nav-text">由正规式r构造NFA</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#lex简介"><span class="nav-number">12.</span> <span class="nav-text">LEX简介</span></a></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#词法分析概览"><span class="nav-number">1.</span> <span class="nav-text">词法分析概览</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#词法分析器的设计"><span class="nav-number">2.</span> <span class="nav-text">词法分析器的设计</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#状态转换图"><span class="nav-number">3.</span> <span class="nav-text">状态转换图</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#状态转化图的实现"><span class="nav-number">3.1.</span> <span class="nav-text">状态转化图的实现</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#正规集与正规式正规表达式"><span class="nav-number">4.</span> <span class="nav-text">正规集与正规式(正规表达式)</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#确定有限自动机"><span class="nav-number">5.</span> <span class="nav-text">确定有限自动机</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#非确定有限自动机"><span class="nav-number">6.</span> <span class="nav-text">非确定有限自动机</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#dfa和nfa的等价性"><span class="nav-number">7.</span> <span class="nav-text">DFA和NFA的等价性</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#基于状态转化图的改造"><span class="nav-number">7.1.</span> <span class="nav-text">基于状态转化图的改造</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#nfa确定化--子集法"><span class="nav-number">7.2.</span> <span class="nav-text">NFA确定化--子集法</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#dfa的化简"><span class="nav-number">8.</span> <span class="nav-text">DFA的化简</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#正规文法与有限自动机的等价性"><span class="nav-number">9.</span> <span class="nav-text">正规文法与有限自动机的等价性</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#证明右线性正规文法gr同有限自动机的等价性"><span class="nav-number">9.1.</span> <span class="nav-text">证明:右线性正规文法GR同有限自动机的等价性</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#证明左线性正规文法gl同有限自动机的等价性"><span class="nav-number">9.2.</span> <span class="nav-text">证明:左线性正规文法GL同有限自动机的等价性</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#证明有限自动机同正规文法的等价性"><span class="nav-number">9.3.</span> <span class="nav-text">证明:有限自动机同正规文法的等价性</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#构造右线性正规文法"><span class="nav-number">9.3.1.</span> <span class="nav-text">构造右线性正规文法</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#构造左线性正规文法"><span class="nav-number">9.3.2.</span> <span class="nav-text">构造左线性正规文法</span></a></li></ol></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#正规式与fa的等价性"><span class="nav-number">10.</span> <span class="nav-text">正规式与FA的等价性</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#由nfa构造正规式r"><span class="nav-number">10.1.</span> <span class="nav-text">由NFA构造正规式r</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#由正规式r构造nfa"><span class="nav-number">10.2.</span> <span class="nav-text">由正规式r构造NFA</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#结论"><span class="nav-number">11.</span> <span class="nav-text">结论</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#lex简介"><span class="nav-number">12.</span> <span class="nav-text">LEX简介</span></a></li></ol></div>
             
 
           </div>

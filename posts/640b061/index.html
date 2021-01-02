@@ -1,0 +1,1641 @@
+<!DOCTYPE html>
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+
+<html class="theme-next mist use-motion" lang="zh-CN">
+<head><meta name="generator" content="Hexo 3.8.0">
+  <!-- hexo-inject:begin --><!-- hexo-inject:end --><meta charset="UTF-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+
+
+
+
+
+
+  
+  
+    
+    
+  <script src="/lib/pace/pace.min.js?v=1.0.2"></script>
+  <link href="/lib/pace/pace-theme-minimal.min.css?v=1.0.2" rel="stylesheet">
+
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform">
+<meta http-equiv="Cache-Control" content="no-siteapp">
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css">
+
+<link href="/css/main.css?v=6.5.0" rel="stylesheet" type="text/css">
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon.png?v=6.5.0">
+
+
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32.png?v=6.5.0">
+
+
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16.png?v=6.5.0">
+
+
+  <link rel="mask-icon" href="/images/safari_pinned_tab.svg?v=6.5.0" color="#222">
+
+
+  <link rel="manifest" href="/images/manifest.json">
+
+
+  <meta name="msapplication-config" content="/images/browserconfig.xml">
+
+
+
+
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Mist',
+    version: '6.5.0',
+    sidebar: {"position":"left","display":"post","offset":12,"b2t":false,"scrollpercent":true,"onmobile":true},
+    fancybox: false,
+    fastclick: false,
+    lazyload: false,
+    tabs: true,
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+  
+
+
+
+
+  <meta name="description" content="Survey/Review Fuzzing: Challenges and Reflections 在线pdf. Fuzzing is an automatic bug and vulnerability discovery technique which continuously generates inputs and reports those that crash the progr">
+<meta name="keywords" content="fuzz">
+<meta property="og:type" content="article">
+<meta property="og:title" content="IS-pwn-fuzz-theory-present-situation">
+<meta property="og:url" content="https://hitworld.github.io/posts/640b061/index.html">
+<meta property="og:site_name" content="w4rd3n">
+<meta property="og:description" content="Survey/Review Fuzzing: Challenges and Reflections 在线pdf. Fuzzing is an automatic bug and vulnerability discovery technique which continuously generates inputs and reports those that crash the progr">
+<meta property="og:locale" content="zh-CN">
+<meta property="og:updated_time" content="2021-01-02T07:35:25.774Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="IS-pwn-fuzz-theory-present-situation">
+<meta name="twitter:description" content="Survey/Review Fuzzing: Challenges and Reflections 在线pdf. Fuzzing is an automatic bug and vulnerability discovery technique which continuously generates inputs and reports those that crash the progr">
+
+
+
+
+
+
+  <link rel="canonical" href="https://hitworld.github.io/posts/640b061/">
+
+
+
+<script type="text/javascript" id="page.configurations">
+  CONFIG.page = {
+    sidebar: "",
+  };
+</script>
+
+  <title>IS-pwn-fuzz-theory-present-situation | w4rd3n</title>
+  
+
+
+
+
+
+
+
+
+
+
+
+  <noscript>
+  <style type="text/css">
+    .use-motion .motion-element,
+    .use-motion .brand,
+    .use-motion .menu-item,
+    .sidebar-inner,
+    .use-motion .post-block,
+    .use-motion .pagination,
+    .use-motion .comments,
+    .use-motion .post-header,
+    .use-motion .post-body,
+    .use-motion .collection-title { opacity: initial; }
+
+    .use-motion .logo,
+    .use-motion .site-title,
+    .use-motion .site-subtitle {
+      opacity: initial;
+      top: initial;
+    }
+
+    .use-motion {
+      .logo-line-before i { left: initial; }
+      .logo-line-after i { right: initial; }
+    }
+  </style>
+</noscript><!-- hexo-inject:begin --><!-- hexo-inject:end -->
+
+</head>
+
+<body itemscope="" itemtype="http://schema.org/WebPage" lang="zh-CN">
+
+  
+  
+    
+  
+
+  <!-- hexo-inject:begin --><!-- hexo-inject:end --><div class="container sidebar-position-left page-post-detail">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope="" itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/" class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">w4rd3n</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+    
+      
+        <p class="site-subtitle">混吃等死</p>
+      
+    
+  </div>
+
+  <div class="site-nav-toggle">
+    <button aria-label="切换导航栏">
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+
+
+<nav class="site-nav">
+  
+    <ul id="menu" class="menu">
+      
+        
+        
+        
+          
+          <li class="menu-item menu-item-home">
+
+    
+    
+    
+      
+    
+
+    
+
+    <a href="/" rel="section"><i class="menu-item-icon fa fa-fw fa-home"></i> <br>首页</a>
+
+  </li>
+        
+        
+        
+          
+          <li class="menu-item menu-item-about">
+
+    
+    
+    
+      
+    
+
+    
+
+    <a href="/about/" rel="section"><i class="menu-item-icon fa fa-fw fa-user"></i> <br>友链</a>
+
+  </li>
+        
+        
+        
+          
+          <li class="menu-item menu-item-tags">
+
+    
+    
+    
+      
+    
+
+    
+
+    <a href="/tags/" rel="section"><i class="menu-item-icon fa fa-fw fa-tags"></i> <br>标签</a>
+
+  </li>
+        
+        
+        
+          
+          <li class="menu-item menu-item-categories">
+
+    
+    
+    
+      
+    
+
+    
+
+    <a href="/categories/" rel="section"><i class="menu-item-icon fa fa-fw fa-th"></i> <br>分类</a>
+
+  </li>
+        
+        
+        
+          
+          <li class="menu-item menu-item-archives">
+
+    
+    
+    
+      
+    
+
+    
+
+    <a href="/archives/" rel="section"><i class="menu-item-icon fa fa-fw fa-archive"></i> <br>归档</a>
+
+  </li>
+
+      
+      
+        <li class="menu-item menu-item-search">
+          
+            <a href="javascript:;" class="popup-trigger">
+          
+            
+              <i class="menu-item-icon fa fa-search fa-fw"></i> <br>搜索</a>
+        </li>
+      
+    </ul>
+  
+
+  
+    
+
+  
+
+  
+    <div class="site-search">
+      
+  <div class="popup search-popup local-search-popup">
+  <div class="local-search-header clearfix">
+    <span class="search-icon">
+      <i class="fa fa-search"></i>
+    </span>
+    <span class="popup-btn-close">
+      <i class="fa fa-times-circle"></i>
+    </span>
+    <div class="local-search-input-wrapper">
+      <input autocomplete="off" placeholder="搜索..." spellcheck="false" type="text" id="local-search-input">
+    </div>
+  </div>
+  <div id="local-search-result"></div>
+</div>
+
+
+
+    </div>
+  
+</nav>
+
+
+
+  
+
+
+
+</div>
+    </header>
+
+    
+
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  
+
+  <article class="post post-type-normal" itemscope="" itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="https://hitworld.github.io/posts/640b061/">
+
+    <span hidden itemprop="author" itemscope="" itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="w4rd3n">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/apple-touch-icon.png">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope="" itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="w4rd3n">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">IS-pwn-fuzz-theory-present-situation
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+
+            
+            
+            
+
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+
+              
+                
+              
+
+              <time title="创建时间：2021-01-01 23:41:38" itemprop="dateCreated datePublished" datetime="2021-01-01T23:41:38+08:00">2021-01-01</time>
+            
+
+            
+          </span>
+
+          
+            <span class="post-category">
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope="" itemtype="http://schema.org/Thing"><a href="/categories/IS/" itemprop="url" rel="index"><span itemprop="name">IS</span></a></span>
+
+                
+                
+                  ，
+                
+              
+                <span itemprop="about" itemscope="" itemtype="http://schema.org/Thing"><a href="/categories/IS/pwn/" itemprop="url" rel="index"><span itemprop="name">pwn</span></a></span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+             <span id="/posts/640b061/" class="leancloud_visitors" data-flag-title="IS-pwn-fuzz-theory-present-situation">
+               <span class="post-meta-divider">|</span>
+               <span class="post-meta-item-icon">
+                 <i class="fa fa-eye"></i>
+               </span>
+               
+                 <span class="post-meta-item-text">热度：</span>
+               
+                 <span class="leancloud-visitors-count"></span>
+                 <span>℃</span>
+             </span>
+          
+
+          
+
+          
+            <div class="post-symbolscount">
+              
+
+              
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-file-word-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">本文字数：</span>
+                
+                <span title="本文字数">11k</span>
+              
+
+              
+                <span class="post-meta-divider">|</span>
+              
+
+              
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-clock-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">阅读时长 &asymp;</span>
+                
+                <span title="阅读时长">10 分钟</span>
+              
+            </div>
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <h2 id="surveyreview">Survey/Review</h2>
+<h3 id="fuzzing-challenges-and-reflections">Fuzzing: Challenges and Reflections</h3>
+<p><a href="https://www.comp.nus.edu.sg/~abhik/pdf/IEEE-SW-Fuzzing.pdf" target="_blank" rel="noopener">在线pdf</a>.</p>
+<p>Fuzzing is an automatic bug and vulnerability discovery technique which continuously generates inputs and reports those that crash the program.</p>
+<p>There are three main categories of fuzzing tools and techniques: blackbox, greybox and whitebox fuzzing.</p>
+<p>自动化漏洞发现技术---通过持续不断地生成输入并报告程序crash。</p>
+<h4 id="blackbox-fuzzing">Blackbox fuzzing</h4>
+<p>Blackbox fuzzing generates inputs without any knowledge of the program.</p>
+<p>There are two main variants of blackbox fuzzing: mutational and generational.</p>
+<p>In mutational blackbox fuzzing, the fuzz campaign starts with one or more seed inputs. These seeds are modified to generate new inputs. Random mutations are applied to random locations in the input. For instance, a file fuzzer may flip random bits in a seed file. The process continues until a time budget is exhausted.</p>
+<p>In generational blackbox fuzzing, inputs are generated from scratch. If a structural specification of the input format is provided, new inputs are generated that meet the grammar.</p>
+<p>Peach (http://community.peachfuzzer.com) is one popular blackbox fuzzer.</p>
+<p>两种黑盒模糊测试区别在于前者通过初始语料库开始变异，后者通过提供的输入格式进行生成。</p>
+<h4 id="greybox-fuzzing">Greybox fuzzing</h4>
+<p>Greybox fuzzing leverages program instrumentation to get lightweight feedback which is used to steer the fuzzer.</p>
+<p>Typically, a few control locations in the program are instrumented at compile time and an initial seed corpus is provided.</p>
+<p>Seed inputs are mutated to generate new inputs. Generated inputs that cover new control locations, and thus increase code coverage, are added to the seed corpus.</p>
+<p>The coverage feedback allows a greybox fuzzer to gradually reach deeper into the code.</p>
+<p>In order to identify bugs and vulnerabilities, sanitizers inject assertions into the program.</p>
+<p>Existing greybox fuzzing tools include AFL (https://lcamtuf.coredump.cx/afl/), LibFuzzer (https://llvm.org/docs/LibFuzzer.html), and Honggfuzz (https://github.com/google/honggfuzz).</p>
+<p>灰盒模糊测试通过在编译时对一些位置（例如代码块跳转点）进行插桩来获取运行时反馈，从而更好的筛选语料进入语料库，获取更好的覆盖率，深入代码发现漏洞。</p>
+<h4 id="whitebox-fuzzing">Whitebox fuzzing</h4>
+<p>Whitebox fuzzing is based on a technique called symbolic execution, which uses program analysis and constraint solvers to systematically enumerate interesting program paths. The constraint solvers used as the back-end in whitebox fuzzing are Satisfiability Modulo Theory (SMT) solvers, which allow for reasoning about (quantifier free) first-order logic formulas with equality and function/predicate symbols drawn from different background theories.</p>
+<p>Whitebox fuzzers calculate the path condition of an input i—the set of inputs which traverse the same path as i. The path condition is represented as an SMTformula, e.g. i[0] = 42 ∧ i[0] − i[1] &gt; 7.</p>
+<p>Given a seed input s, the path condition is calculated and mutated (as opposed to mutating the program input). The mutated path condition is then sent to a constraint solver to generate new inputs.</p>
+<p>The main benefit of this technique is that by carefully keeping track of path conditions of all inputs seen so far, it always generates an input traversing a new path (new control flow).</p>
+<p>Existing whitebox fuzzing tools include KLEE (https://klee. github.io/) and SAGE.</p>
+<p>基于符号执行的白盒模糊测试，通过变异路径条件，然后利用约束求解器生成新的输入，这种方式总是能生成一个经过新的路径（深入代码）的输入。</p>
+<h4 id="other-fuzzing-tools">Other fuzzing tools</h4>
+<p>DeepState, a unit testing framework that allows developers to fuzz the various units of their system (https://github. com/trailofbits/deepstate).</p>
+<p>The Mayhem system. --- Sang Kil Cha, Thanassis Avgerinos, Alexandre Rebert, David Brumley. 2012. Unleashing Mayhem on Binary Code. IEEE Symposium on Security and Privacy (S&amp;P’12).</p>
+<h4 id="challenges">Challenges</h4>
+<h6 id="automation">Automation</h6>
+<h6 id="c.1-more-software.-how-can-we-fuzz-efficiently-more-types-of-software-systems">[C.1] More Software. How can we fuzz efficiently more types of software systems?</h6>
+<p>How to fuzz programs that take highly-structured inputs, such as file parsers or object-oriented programs.</p>
+<p>Fuzzing cyber-physical systems, which interact with the environment as part of their execution, or machine learning systems, whose behavior is determined by their training data, is an under-explored area.</p>
+<p>How do we fuzz stateful software, such as protocol implementations, which can produce different outputs for the same input?</p>
+<p>How do we fuzz polyglot software which is written in several languages?</p>
+<p>How do we fuzz GUI-based programs that take as inputs a sequence of events executed on a user interface?</p>
+<p>Given a program whose input domain is defined by a grammar and/or protocol, how can a symbolic execution tool effectively formulate constraints on such ,,structured” input domains?</p>
+<p>如何扩展能够进行模糊测试的领域和范围。</p>
+<h6 id="c.2-more-bug-types.-how-can-the-fuzzer-identify-more-types-of-vulnerabilities">[C.2] More Bug Types. How can the fuzzer identify more types of vulnerabilities?</h6>
+<p>Vulnerabilities are often encoded as assertions on the program state.</p>
+<p>Using such assertions, we already know how we can discover memory- or concurrency related errors.</p>
+<p>The discovery of side-channel vulnerabilities, such as information leaks or timing, cache, or energy-related side-channels is currently an active research topic.</p>
+<p>Going forward, we should invent techniques to automatically detect and invoke privilege escalation, remote code execution, and other types of critical security flaws, not only in C/C++ but also in other programming languages.</p>
+<p>如何扩展模糊测试发现的漏洞类型？现在已经可以利用断言检测程序运行状态发现内存和并发漏洞。侧信道漏洞发现已经成为热门，未来应该着眼于其他的关键性安全漏洞，包括其他编程语言中的。</p>
+<h6 id="c.3-more-difficult-bugs.-how-can-we-find-deep-bugs-for-which-efficient-oracles-exist-but-which-nevertheless-evade-detection">[C.3] More Difficult Bugs. How can we find “deep bugs” for which efficient oracles exist, but which nevertheless evade detection?</h6>
+<p>Are there certain kinds of deep bugs that can be found efficiently with specialized approaches? Structure-aware and grammar-based fuzzing as well as the integration of static analysis and symbolic execution with greybox fuzzing are promising directions.</p>
+<p>Software also changes all the time—techniques that can target software patches will prove essential for finding bugs as they are introduced.</p>
+<p>We should investigate strategies to boost fault finding, such as AFLFast which enables faster crash detection in greybox fuzzers, and study the utility of GPUs and other means of efficient parallelization to maximize the number of executions per unit time.</p>
+<p>Ranking bugs in terms of their importance can also improve the effectiveness of fuzzing in practice.</p>
+<p>如何发现更深层次的漏洞？</p>
+<ol type="1">
+<li>结构感知和基于语法的模糊测试，以及静态分析和符号执行与灰盒模糊测试的结合是很有前途的方向。</li>
+<li>针对软件补丁的技术可能是发现错误的关键。</li>
+<li>应该研究促进故障发现的策略。</li>
+</ol>
+<h6 id="c.4-more-empirical-studies.-what-is-the-nature-of-vulnerabilities-that-have-evaded-discovery-despite-long-fuzzing-campaigns">[C.4] More Empirical Studies. What is the nature of vulnerabilities that have evaded discovery despite long fuzzing campaigns?</h6>
+<p>Why have they evaded discovery? We need empirical studies to understand the nature and distribution of security vulnerabilities in source code.</p>
+<p>需要实证研究来了解源代码中安全漏洞的性质和分布。</p>
+<h5 id="the-human-component">The Human Component</h5>
+<h6 id="c.5-human-in-the-loop.-how-can-fuzzers-leverage-the-ingenuity-of-the-auditor">[C.5] Human-In-The-Loop. How can fuzzers leverage the ingenuity of the auditor?</h6>
+<p>During our meeting, Ned Williamson, a prolific security researcher at Google, demonstrated his semi-automated approach to vulnerability discovery.</p>
+<p>Ned would first audit the code to identify units that may contain a security flaw.</p>
+<p>He would prepare the unit for fuzzing, run the fuzzer for a while, and identify roadblocks for the fuzzer.</p>
+<p>Ned would manually patch out the roadblock to help the fuzzer make better progress.</p>
+<p>If the fuzzer spends more time fuzzing less relevant portions of the code, Ned would adjust the test driver and re-focus the fuzzer.</p>
+<p>Once a potential vulnerability is found, he would backtrack, add each roadblock back, and adjust the vulnerability-exposing input accordingly.</p>
+<p>This semi-automated process raises several research questions. How can we facilitate a more effective communication between fuzzer and security auditor? How can the security auditor dynamically direct the fuzzer? How can the fuzzer explain what prevents it from progressing, and how can the auditor instruct the fuzzer to overcome the roadblock?</p>
+<p>人在模糊测试中能起到的作用，也就是什么才是最合理的半自动化模糊测试方案？</p>
+<h6 id="c.6-usability.-how-can-we-improve-the-usability-of-fuzzing-tools">[C.6] Usability. How can we improve the usability of fuzzing tools?</h6>
+<p>如何提高模糊工具的可用性？</p>
+<h5 id="fuzzing-theory">Fuzzing Theory</h5>
+<p>Why do some fuzzers work so much better than others? What are their limitations? We want to be able to explain interesting phenomena that we have observed empirically, make predictions and extrapolate from these observations.</p>
+<p>To do this, we need a sound theoretical model of the fuzzing process.</p>
+<h6 id="c.7-how-can-we-assess-residual-security-risk-if-the-fuzzing-campaign-was-unsuccessful">[C.7] How can we assess residual security risk if the fuzzing campaign was unsuccessful?</h6>
+<p>Blackbox and whitebox fuzzing sit on two ends of a spectrum.</p>
+<p>A whitebox fuzzer might provide a formal guarantee about the absence of detectable vulnerabilities. If we assume that a symbolic execution engine can enumerate all paths in piece of code and the oracle is encoded as assertions, then whitebox fuzzing can formally verify the absence of bugs.</p>
+<p>If it can enumerate only some paths in reasonable time, we can still provide partial guarantees.</p>
+<p>To make symbolic execution applicable in practice, correctness or completeness are traded for scalability. How does this trade-off affect the guarantees?</p>
+<p>In contrast, a blackbox fuzzer can never guarantee the absence of vulnerabilities for all inputs.</p>
+<p>What is the residual risk that at the end of a fuzzing campaign a bug still exists in the program that has not been found? If we model blackbox fuzzing as a random sampling from the program’s input space, we can leverage methods from applied statistics to estimate the residual risk.</p>
+<p>A greybox fuzzer uses program feedback to boost the efficiency of finding errors. However, this program feedback introduces an adaptive bias. How do we account for this adaptive bias when assessing residual risk? To answer such questions, we should develop statistical and probabilistic frameworks, and methodologies for sound estimation with quantifiable accuracy.</p>
+<p>除了白盒模糊测试，灰盒模糊测试和黑盒模糊测试都不能保证没有未发现的漏洞。白盒模糊测试受限于时间和可扩展性也无法完全保证，灰盒模糊测试存在适应性偏差，黑盒模糊测试存在剩余风险。</p>
+<h6 id="c.8-what-are-the-theoretical-limitations-of-blackbox-greybox-and-whitebox-fuzzing">[C.8] What are the theoretical limitations of blackbox, greybox, and whitebox fuzzing?</h6>
+<p>Given a program and a time budget, how can we select that fuzzing technique, or combination of techniques, which finds the most vulnerabilities within the time budget?</p>
+<p>How do program size and complexity affect the scalability and performance of each technique?</p>
+<p>How much more efficient is an attacker that has an order of magnitude more computational resources?</p>
+<h5 id="evaluation-and-benchmarks">Evaluation and Benchmarks</h5>
+<p>[C.9] How can we evaluate specialized fuzzers?</p>
+<p>[C.10] How can we prevent overfitting to a specific benchmark?</p>
+<p>[C.11] Are synthetic bugs representative?</p>
+<p>[C.12] Are real bugs, which have previously been discovered with other fuzzers, representative?</p>
+<p>[C.13] Is coverage a good measure of fuzzer effectiveness?</p>
+<p>[C.14] What is a fair choice of time budget?</p>
+<p>[C.15] How do we evaluate techniques instead of implementations?</p>
+<h4 id="survey">Survey</h4>
+<p>The survey participants marked improving automation (71%), building a theory of fuzzing (63%), and finding valid measures of fuzzer performance (63%) as their Top-3 most important challenges.</p>
+<p>While practitioners and researchers were mostly in agreement, practitioners demonstrated a particularly greater interest in the development of human-in-the-loop approaches (+0.8 Likert points).</p>
+<p>On average, a respondent marked all identified challenges as important or very important on a 5-point Likert-scale.</p>
+<h3 id="sok-the-progress-challenges-and-perspectives-of-directed-greybox-fuzzing">SoK: The Progress, Challenges, and Perspectives of Directed Greybox Fuzzing</h3>
+
+      
+    </div>
+
+    
+
+    
+    
+    
+
+    
+
+    
+       
+    
+    
+
+    
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/fuzz/" rel="tag"><i class="fa fa-tag"></i> fuzz</a>
+          
+        </div>
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/posts/2cb5ce06/" rel="next" title="IS-crypto-非对称加密-RSA的攻击方式">
+                <i class="fa fa-chevron-left"></i> IS-crypto-非对称加密-RSA的攻击方式
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+  </div>
+
+
+          </div>
+          
+
+  
+
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    
+      <div id="sidebar-dimmer"></div>
+    
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview-wrap sidebar-panel">
+        <div class="site-overview">
+          <div class="site-author motion-element" itemprop="author" itemscope="" itemtype="http://schema.org/Person">
+            
+              <img class="site-author-image" itemprop="image" src="/images/apple-touch-icon.png" alt="w4rd3n">
+            
+              <p class="site-author-name" itemprop="name">w4rd3n</p>
+              <p class="site-description motion-element" itemprop="description"></p>
+          </div>
+
+          
+            <nav class="site-state motion-element">
+              
+                <div class="site-state-item site-state-posts">
+                
+                  <a href="/archives/">
+                
+                    <span class="site-state-item-count">168</span>
+                    <span class="site-state-item-name">日志</span>
+                  </a>
+                </div>
+              
+
+              
+                
+                
+                <div class="site-state-item site-state-categories">
+                  <a href="/categories/index.html">
+                    
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                    <span class="site-state-item-count">16</span>
+                    <span class="site-state-item-name">分类</span>
+                  </a>
+                </div>
+              
+
+              
+                
+                
+                <div class="site-state-item site-state-tags">
+                  <a href="/tags/index.html">
+                    
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                    <span class="site-state-item-count">40</span>
+                    <span class="site-state-item-name">标签</span>
+                  </a>
+                </div>
+              
+            </nav>
+          
+
+          
+
+          
+            <div class="links-of-author motion-element">
+              
+                <span class="links-of-author-item">
+                  
+                  
+                    
+                  
+                  
+                    
+                  
+                  <a href="https://github.com/hitworld" title="GitHub &rarr; https://github.com/hitworld" rel="noopener" target="_blank"><i class="fa fa-fw fa-github"></i>GitHub</a>
+                </span>
+              
+            </div>
+          
+
+          
+
+          
+          
+
+          
+            
+          
+          
+
+        </div>
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#surveyreview"><span class="nav-number">1.</span> <span class="nav-text">Survey/Review</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#fuzzing-challenges-and-reflections"><span class="nav-number">1.1.</span> <span class="nav-text">Fuzzing: Challenges and Reflections</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#blackbox-fuzzing"><span class="nav-number">1.1.1.</span> <span class="nav-text">Blackbox fuzzing</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#greybox-fuzzing"><span class="nav-number">1.1.2.</span> <span class="nav-text">Greybox fuzzing</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#whitebox-fuzzing"><span class="nav-number">1.1.3.</span> <span class="nav-text">Whitebox fuzzing</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#other-fuzzing-tools"><span class="nav-number">1.1.4.</span> <span class="nav-text">Other fuzzing tools</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#challenges"><span class="nav-number">1.1.5.</span> <span class="nav-text">Challenges</span></a><ol class="nav-child"><li class="nav-item nav-level-6"><a class="nav-link" href="#automation"><span class="nav-number">1.1.5.0.1.</span> <span class="nav-text">Automation</span></a></li><li class="nav-item nav-level-6"><a class="nav-link" href="#c.1-more-software.-how-can-we-fuzz-efficiently-more-types-of-software-systems"><span class="nav-number">1.1.5.0.2.</span> <span class="nav-text">[C.1] More Software. How can we fuzz efficiently more types of software systems?</span></a></li><li class="nav-item nav-level-6"><a class="nav-link" href="#c.2-more-bug-types.-how-can-the-fuzzer-identify-more-types-of-vulnerabilities"><span class="nav-number">1.1.5.0.3.</span> <span class="nav-text">[C.2] More Bug Types. How can the fuzzer identify more types of vulnerabilities?</span></a></li><li class="nav-item nav-level-6"><a class="nav-link" href="#c.3-more-difficult-bugs.-how-can-we-find-deep-bugs-for-which-efficient-oracles-exist-but-which-nevertheless-evade-detection"><span class="nav-number">1.1.5.0.4.</span> <span class="nav-text">[C.3] More Difficult Bugs. How can we find “deep bugs” for which efficient oracles exist, but which nevertheless evade detection?</span></a></li><li class="nav-item nav-level-6"><a class="nav-link" href="#c.4-more-empirical-studies.-what-is-the-nature-of-vulnerabilities-that-have-evaded-discovery-despite-long-fuzzing-campaigns"><span class="nav-number">1.1.5.0.5.</span> <span class="nav-text">[C.4] More Empirical Studies. What is the nature of vulnerabilities that have evaded discovery despite long fuzzing campaigns?</span></a></li></ol></li><li class="nav-item nav-level-5"><a class="nav-link" href="#the-human-component"><span class="nav-number">1.1.5.1.</span> <span class="nav-text">The Human Component</span></a><ol class="nav-child"><li class="nav-item nav-level-6"><a class="nav-link" href="#c.5-human-in-the-loop.-how-can-fuzzers-leverage-the-ingenuity-of-the-auditor"><span class="nav-number">1.1.5.1.1.</span> <span class="nav-text">[C.5] Human-In-The-Loop. How can fuzzers leverage the ingenuity of the auditor?</span></a></li><li class="nav-item nav-level-6"><a class="nav-link" href="#c.6-usability.-how-can-we-improve-the-usability-of-fuzzing-tools"><span class="nav-number">1.1.5.1.2.</span> <span class="nav-text">[C.6] Usability. How can we improve the usability of fuzzing tools?</span></a></li></ol></li><li class="nav-item nav-level-5"><a class="nav-link" href="#fuzzing-theory"><span class="nav-number">1.1.5.2.</span> <span class="nav-text">Fuzzing Theory</span></a><ol class="nav-child"><li class="nav-item nav-level-6"><a class="nav-link" href="#c.7-how-can-we-assess-residual-security-risk-if-the-fuzzing-campaign-was-unsuccessful"><span class="nav-number">1.1.5.2.1.</span> <span class="nav-text">[C.7] How can we assess residual security risk if the fuzzing campaign was unsuccessful?</span></a></li><li class="nav-item nav-level-6"><a class="nav-link" href="#c.8-what-are-the-theoretical-limitations-of-blackbox-greybox-and-whitebox-fuzzing"><span class="nav-number">1.1.5.2.2.</span> <span class="nav-text">[C.8] What are the theoretical limitations of blackbox, greybox, and whitebox fuzzing?</span></a></li></ol></li><li class="nav-item nav-level-5"><a class="nav-link" href="#evaluation-and-benchmarks"><span class="nav-number">1.1.5.3.</span> <span class="nav-text">Evaluation and Benchmarks</span></a></li></ol></li><li class="nav-item nav-level-4"><a class="nav-link" href="#survey"><span class="nav-number">1.1.6.</span> <span class="nav-text">Survey</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#sok-the-progress-challenges-and-perspectives-of-directed-greybox-fuzzing"><span class="nav-number">1.2.</span> <span class="nav-text">SoK: The Progress, Challenges, and Perspectives of Directed Greybox Fuzzing</span></a></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright">&copy; <span itemprop="copyrightYear">2021</span>
+  <span class="with-love" id="animate">
+    <i class="fa fa-gg-circle"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">w4rd3n</span>
+
+  
+    <span class="post-meta-divider">|</span>
+    <span class="post-meta-item-icon">
+      <i class="fa fa-area-chart"></i>
+    </span>
+    
+    <span title="站点总字数">808k</span>
+  
+
+  
+    <span class="post-meta-divider">|</span>
+    <span class="post-meta-item-icon">
+      <i class="fa fa-coffee"></i>
+    </span>
+    
+    <span title="站点阅读时长">12:14</span>
+  
+</div>
+
+
+
+
+
+
+
+
+
+        
+<div class="busuanzi-count">
+  <script async src="https://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+  
+    <span class="site-uv" title="总访客量">
+      <i class="fa fa-user"></i>
+      <span class="busuanzi-value" id="busuanzi_value_site_uv"></span>
+    </span>
+  
+
+  
+    <span class="site-pv" title="总访问量">
+      <i class="fa fa-eye"></i>
+      <span class="busuanzi-value" id="busuanzi_value_site_pv"></span>
+    </span>
+  
+</div>
+
+
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+          <span id="scrollpercent"><span>0</span>%</span>
+        
+      </div>
+    
+
+    
+	
+    
+
+    
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+    
+      
+  
+  <script type="text/javascript" color="0,0,255" opacity="0.5" zindex="-1" count="99" src="/lib/canvas-nest/canvas-nest.min.js"></script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+  
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=6.5.0"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=6.5.0"></script>
+
+
+
+  
+  
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=6.5.0"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=6.5.0"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=6.5.0"></script>
+
+
+
+  
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+  
+
+  <script type="text/javascript">
+    // Popup Window;
+    var isfetched = false;
+    var isXml = true;
+    // Search DB path;
+    var search_path = "search.xml";
+    if (search_path.length === 0) {
+      search_path = "search.xml";
+    } else if (/json$/i.test(search_path)) {
+      isXml = false;
+    }
+    var path = "/" + search_path;
+    // monitor main search box;
+
+    var onPopupClose = function (e) {
+      $('.popup').hide();
+      $('#local-search-input').val('');
+      $('.search-result-list').remove();
+      $('#no-result').remove();
+      $(".local-search-pop-overlay").remove();
+      $('body').css('overflow', '');
+    }
+
+    function proceedsearch() {
+      $("body")
+        .append('<div class="search-popup-overlay local-search-pop-overlay"></div>')
+        .css('overflow', 'hidden');
+      $('.search-popup-overlay').click(onPopupClose);
+      $('.popup').toggle();
+      var $localSearchInput = $('#local-search-input');
+      $localSearchInput.attr("autocapitalize", "none");
+      $localSearchInput.attr("autocorrect", "off");
+      $localSearchInput.focus();
+    }
+
+    // search function;
+    var searchFunc = function(path, search_id, content_id) {
+      'use strict';
+
+      // start loading animation
+      $("body")
+        .append('<div class="search-popup-overlay local-search-pop-overlay">' +
+          '<div id="search-loading-icon">' +
+          '<i class="fa fa-spinner fa-pulse fa-5x fa-fw"></i>' +
+          '</div>' +
+          '</div>')
+        .css('overflow', 'hidden');
+      $("#search-loading-icon").css('margin', '20% auto 0 auto').css('text-align', 'center');
+
+      
+
+      $.ajax({
+        url: path,
+        dataType: isXml ? "xml" : "json",
+        async: true,
+        success: function(res) {
+          // get the contents from search data
+          isfetched = true;
+          $('.popup').detach().appendTo('.header-inner');
+          var datas = isXml ? $("entry", res).map(function() {
+            return {
+              title: $("title", this).text(),
+              content: $("content",this).text(),
+              url: $("url" , this).text()
+            };
+          }).get() : res;
+          var input = document.getElementById(search_id);
+          var resultContent = document.getElementById(content_id);
+          var inputEventFunction = function() {
+            var searchText = input.value.trim().toLowerCase();
+            var keywords = searchText.split(/[\s\-]+/);
+            if (keywords.length > 1) {
+              keywords.push(searchText);
+            }
+            var resultItems = [];
+            if (searchText.length > 0) {
+              // perform local searching
+              datas.forEach(function(data) {
+                var isMatch = false;
+                var hitCount = 0;
+                var searchTextCount = 0;
+                var title = data.title.trim();
+                var titleInLowerCase = title.toLowerCase();
+                var content = data.content.trim().replace(/<[^>]+>/g,"");
+                
+                var contentInLowerCase = content.toLowerCase();
+                var articleUrl = decodeURIComponent(data.url);
+                var indexOfTitle = [];
+                var indexOfContent = [];
+                // only match articles with not empty titles
+                if(title != '') {
+                  keywords.forEach(function(keyword) {
+                    function getIndexByWord(word, text, caseSensitive) {
+                      var wordLen = word.length;
+                      if (wordLen === 0) {
+                        return [];
+                      }
+                      var startPosition = 0, position = [], index = [];
+                      if (!caseSensitive) {
+                        text = text.toLowerCase();
+                        word = word.toLowerCase();
+                      }
+                      while ((position = text.indexOf(word, startPosition)) > -1) {
+                        index.push({position: position, word: word});
+                        startPosition = position + wordLen;
+                      }
+                      return index;
+                    }
+
+                    indexOfTitle = indexOfTitle.concat(getIndexByWord(keyword, titleInLowerCase, false));
+                    indexOfContent = indexOfContent.concat(getIndexByWord(keyword, contentInLowerCase, false));
+                  });
+                  if (indexOfTitle.length > 0 || indexOfContent.length > 0) {
+                    isMatch = true;
+                    hitCount = indexOfTitle.length + indexOfContent.length;
+                  }
+                }
+
+                // show search results
+
+                if (isMatch) {
+                  // sort index by position of keyword
+
+                  [indexOfTitle, indexOfContent].forEach(function (index) {
+                    index.sort(function (itemLeft, itemRight) {
+                      if (itemRight.position !== itemLeft.position) {
+                        return itemRight.position - itemLeft.position;
+                      } else {
+                        return itemLeft.word.length - itemRight.word.length;
+                      }
+                    });
+                  });
+
+                  // merge hits into slices
+
+                  function mergeIntoSlice(text, start, end, index) {
+                    var item = index[index.length - 1];
+                    var position = item.position;
+                    var word = item.word;
+                    var hits = [];
+                    var searchTextCountInSlice = 0;
+                    while (position + word.length <= end && index.length != 0) {
+                      if (word === searchText) {
+                        searchTextCountInSlice++;
+                      }
+                      hits.push({position: position, length: word.length});
+                      var wordEnd = position + word.length;
+
+                      // move to next position of hit
+
+                      index.pop();
+                      while (index.length != 0) {
+                        item = index[index.length - 1];
+                        position = item.position;
+                        word = item.word;
+                        if (wordEnd > position) {
+                          index.pop();
+                        } else {
+                          break;
+                        }
+                      }
+                    }
+                    searchTextCount += searchTextCountInSlice;
+                    return {
+                      hits: hits,
+                      start: start,
+                      end: end,
+                      searchTextCount: searchTextCountInSlice
+                    };
+                  }
+
+                  var slicesOfTitle = [];
+                  if (indexOfTitle.length != 0) {
+                    slicesOfTitle.push(mergeIntoSlice(title, 0, title.length, indexOfTitle));
+                  }
+
+                  var slicesOfContent = [];
+                  while (indexOfContent.length != 0) {
+                    var item = indexOfContent[indexOfContent.length - 1];
+                    var position = item.position;
+                    var word = item.word;
+                    // cut out 100 characters
+                    var start = position - 20;
+                    var end = position + 80;
+                    if(start < 0){
+                      start = 0;
+                    }
+                    if (end < position + word.length) {
+                      end = position + word.length;
+                    }
+                    if(end > content.length){
+                      end = content.length;
+                    }
+                    slicesOfContent.push(mergeIntoSlice(content, start, end, indexOfContent));
+                  }
+
+                  // sort slices in content by search text's count and hits' count
+
+                  slicesOfContent.sort(function (sliceLeft, sliceRight) {
+                    if (sliceLeft.searchTextCount !== sliceRight.searchTextCount) {
+                      return sliceRight.searchTextCount - sliceLeft.searchTextCount;
+                    } else if (sliceLeft.hits.length !== sliceRight.hits.length) {
+                      return sliceRight.hits.length - sliceLeft.hits.length;
+                    } else {
+                      return sliceLeft.start - sliceRight.start;
+                    }
+                  });
+
+                  // select top N slices in content
+
+                  var upperBound = parseInt('1');
+                  if (upperBound >= 0) {
+                    slicesOfContent = slicesOfContent.slice(0, upperBound);
+                  }
+
+                  // highlight title and content
+
+                  function highlightKeyword(text, slice) {
+                    var result = '';
+                    var prevEnd = slice.start;
+                    slice.hits.forEach(function (hit) {
+                      result += text.substring(prevEnd, hit.position);
+                      var end = hit.position + hit.length;
+                      result += '<b class="search-keyword">' + text.substring(hit.position, end) + '</b>';
+                      prevEnd = end;
+                    });
+                    result += text.substring(prevEnd, slice.end);
+                    return result;
+                  }
+
+                  var resultItem = '';
+
+                  if (slicesOfTitle.length != 0) {
+                    resultItem += "<li><a href='" + articleUrl + "' class='search-result-title'>" + highlightKeyword(title, slicesOfTitle[0]) + "</a>";
+                  } else {
+                    resultItem += "<li><a href='" + articleUrl + "' class='search-result-title'>" + title + "</a>";
+                  }
+
+                  slicesOfContent.forEach(function (slice) {
+                    resultItem += "<a href='" + articleUrl + "'>" +
+                      "<p class=\"search-result\">" + highlightKeyword(content, slice) +
+                      "...</p>" + "</a>";
+                  });
+
+                  resultItem += "</li>";
+                  resultItems.push({
+                    item: resultItem,
+                    searchTextCount: searchTextCount,
+                    hitCount: hitCount,
+                    id: resultItems.length
+                  });
+                }
+              })
+            };
+            if (keywords.length === 1 && keywords[0] === "") {
+              resultContent.innerHTML = '<div id="no-result"><i class="fa fa-search fa-5x" /></div>'
+            } else if (resultItems.length === 0) {
+              resultContent.innerHTML = '<div id="no-result"><i class="fa fa-frown-o fa-5x" /></div>'
+            } else {
+              resultItems.sort(function (resultLeft, resultRight) {
+                if (resultLeft.searchTextCount !== resultRight.searchTextCount) {
+                  return resultRight.searchTextCount - resultLeft.searchTextCount;
+                } else if (resultLeft.hitCount !== resultRight.hitCount) {
+                  return resultRight.hitCount - resultLeft.hitCount;
+                } else {
+                  return resultRight.id - resultLeft.id;
+                }
+              });
+              var searchResultList = '<ul class=\"search-result-list\">';
+              resultItems.forEach(function (result) {
+                searchResultList += result.item;
+              })
+              searchResultList += "</ul>";
+              resultContent.innerHTML = searchResultList;
+            }
+          }
+
+          if ('auto' === 'auto') {
+            input.addEventListener('input', inputEventFunction);
+          } else {
+            $('.search-icon').click(inputEventFunction);
+            input.addEventListener('keypress', function (event) {
+              if (event.keyCode === 13) {
+                inputEventFunction();
+              }
+            });
+          }
+
+          // remove loading animation
+          $(".local-search-pop-overlay").remove();
+          $('body').css('overflow', '');
+
+          proceedsearch();
+        }
+      });
+    }
+
+    // handle and trigger popup window;
+    $('.popup-trigger').click(function(e) {
+      e.stopPropagation();
+      if (isfetched === false) {
+        searchFunc(path, 'local-search-input', 'local-search-result');
+      } else {
+        proceedsearch();
+      };
+    });
+
+    $('.popup-btn-close').click(onPopupClose);
+    $('.popup').click(function(e){
+      e.stopPropagation();
+    });
+    $(document).on('keyup', function (event) {
+      var shouldDismissSearchPopup = event.which === 27 &&
+        $('.search-popup').is(':visible');
+      if (shouldDismissSearchPopup) {
+        onPopupClose();
+      }
+    });
+  </script>
+
+
+
+
+
+  
+
+  
+  <script>
+    
+    function addCount(Counter) {
+      var $visitors = $(".leancloud_visitors");
+      var url = $visitors.attr('id').trim();
+      var title = $visitors.attr('data-flag-title').trim();
+
+      Counter('get', '/classes/Counter', { where: JSON.stringify({ url }) })
+        .done(function ({ results }) {
+          if (results.length > 0) {
+            var counter = results[0];
+            
+            Counter('put', `/classes/Counter/${counter.objectId}`, JSON.stringify({ time: { "__op":"Increment", "amount":1 } }))
+            
+            .done(function () {
+                  var $element = $(document.getElementById(url));
+                  $element.find('.leancloud-visitors-count').text(counter.time + 1);
+            })
+            
+            .fail(function ({ responseJSON }) {
+                console.log('Failed to save Visitor num, with error message: ' + responseJSON.error);
+            })
+          } else {
+            
+              Counter('post', '/classes/Counter', JSON.stringify({ title: title, url: url, time: 1}))
+                .done(function () {
+                  var $element = $(document.getElementById(url));
+                  $element.find('.leancloud-visitors-count').text(1);
+                })
+                .fail(function () {
+                  console.log('Failed to create');
+                });
+            
+          }
+        })
+      .fail(function ({ responseJSON }) {
+        console.log('LeanCloud Counter Error:' + responseJSON.code + " " + responseJSON.error);
+      });
+    }
+    
+
+    $(function() {
+      $.get('https://app-router.leancloud.cn/2/route?appId=' + "no3Ip4mNLc3JyF1AeTy8LrAm-gzGzoHsz")
+        .done(function ({ api_server }) {
+          var Counter = function (method, url, data) {
+            return $.ajax({
+              method: method,
+              url: `https://${api_server}/1.1${url}`,
+              headers: {
+                'X-LC-Id': "no3Ip4mNLc3JyF1AeTy8LrAm-gzGzoHsz",
+                'X-LC-Key': "UvlYMzpJKw0Jrw61V5BA5ifU",
+                'Content-Type': 'application/json',
+              },
+              data: data,
+            });
+          };
+          
+          addCount(Counter);
+          
+        })
+    });
+  </script>
+
+
+
+  
+
+  
+
+  
+
+  
+  
+
+  
+  
+
+  
+
+
+  
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+  <style>
+    .copy-btn {
+      display: inline-block;
+      padding: 6px 12px;
+      font-size: 13px;
+      font-weight: 700;
+      line-height: 20px;
+      color: #333;
+      white-space: nowrap;
+      vertical-align: middle;
+      cursor: pointer;
+      background-color: #eee;
+      background-image: linear-gradient(#fcfcfc, #eee);
+      border: 1px solid #d5d5d5;
+      border-radius: 3px;
+      user-select: none;
+      outline: 0;
+    }
+
+    .highlight-wrap .copy-btn {
+      transition: opacity .3s ease-in-out;
+      opacity: 0;
+      padding: 2px 6px;
+      position: absolute;
+      right: 4px;
+      top: 8px;
+    }
+
+    .highlight-wrap:hover .copy-btn,
+    .highlight-wrap .copy-btn:focus {
+      opacity: 1
+    }
+
+    .highlight-wrap {
+      position: relative;
+    }
+  </style>
+  <script>
+    $('.highlight').each(function (i, e) {
+      var $wrap = $('<div>').addClass('highlight-wrap')
+      $(e).after($wrap)
+      $wrap.append($('<button>').addClass('copy-btn').append('复制').on('click', function (e) {
+        var code = $(this).parent().find('.code').find('.line').map(function (i, e) {
+          return $(e).text()
+        }).toArray().join('\n')
+        var ta = document.createElement('textarea')
+        document.body.appendChild(ta)
+        ta.style.position = 'absolute'
+        ta.style.top = '0px'
+        ta.style.left = '0px'
+        ta.value = code
+        ta.select()
+        ta.focus()
+        var result = document.execCommand('copy')
+        document.body.removeChild(ta)
+        
+        $(this).blur()
+      })).on('mouseleave', function (e) {
+        var $b = $(this).find('.copy-btn')
+        setTimeout(function () {
+          $b.text('复制')
+        }, 300)
+      }).append(e)
+    })
+  </script>
+
+
+  
+
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-backstretch/2.0.4/jquery.backstretch.min.js"></script>;
+  <script>
+  //$("body").backstretch("/images/background.jpg");
+  </script>
+  
+  <script type="text/javascript" src="//cdn.bootcss.com/canvas-nest.js/1.0.0/canvas-nest.min.js"></script>
+  
+<script src="/live2dw/lib/L2Dwidget.min.js?0c58a1486de42ac6cc1c59c7d98ae887"></script><script>L2Dwidget.init({"pluginRootPath":"live2dw/","pluginJsPath":"lib/","pluginModelPath":"assets/","tagMode":false,"debug":false,"model":{"jsonPath":"/live2dw/assets/koharu.model.json"},"display":{"position":"right","width":150,"height":300},"mobile":{"show":false},"log":false});</script><!-- hexo-inject:begin --><!-- hexo-inject:end --></body>
+</html>

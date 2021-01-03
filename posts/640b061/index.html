@@ -137,7 +137,7 @@
 <meta property="og:image" content="https://hitworld.github.io/png/2021-01-03-16-40-26.png">
 <meta property="og:image" content="https://hitworld.github.io/png/2021-01-03-17-05-33.png">
 <meta property="og:image" content="https://hitworld.github.io/png/2021-01-03-17-14-22.png">
-<meta property="og:updated_time" content="2021-01-03T09:36:26.866Z">
+<meta property="og:updated_time" content="2021-01-03T09:59:31.412Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="IS-pwn-fuzz-theory-present-situation">
 <meta name="twitter:description" content="Survey/Review 本文主要是对相关论文的阅读和摘要。 Fuzzing: Challenges and Reflections 在线pdf. Fuzzing is an automatic bug and vulnerability discovery technique which continuously generates inputs and reports those t">
@@ -660,7 +660,7 @@
 <p>However, since most covered codes may not contain bugs, blindly extending code coverage is less efficient, especially for corner cases.</p>
 <p>Unlike coverage-based fuzzers who extend the code coverage in an undirected manner, a directed fuzzer spends most of its time budget on reaching specific target locations (e.g., the bug-prone zone) without wasting resources stressing unrelated parts.</p>
 <p>Thus, directed greybox fuzzing is particularly suitable for scenarios such as patch testing, bug reproduction, and special bug hunting.</p>
-<p>与盲目扩展路径覆盖范围的基于覆盖范围的模糊测试程序不同，定向模糊测试程序将其大部分时间预算花在到达特定的目标位置（例如，容易出错的区域）上，而不会浪费资源来强调不相关的部分。因此，定向灰盒模糊测试特别适用于补丁测试、bug复制以及与其他工具集成等场景。</p>
+<p>与盲目扩展路径覆盖范围的基于覆盖范围的模糊测试程序不同，定向模糊测试程序将其大部分时间预算花在到达特定的目标位置（例如，容易出错的区域）上，而不会浪费资源来强调不相关的部分。因此，定向灰盒模糊测试特别适用于补丁测试、bug复现以及与其他工具集成等场景。</p>
 <h4 id="introduction">Introduction</h4>
 <p>Traditionally, directed fuzzers are based on symbolic execution, which uses program analysis and constraint solving to generate inputs that exercise different program paths. Such directed fuzzers cast the reachability problem as iterative constraint satisfaction problem. However, since directed symbolic execution relies on heavyweight program analysis and constraint solving, it suffers from scalability and compatibility limitations.</p>
 <p>By specifying a set of target sites in the program under test (PUT) and leveraging lightweight compile-time instrumentation of the PUT, a directed greybox fuzzer calculates the distance between the seed and the target to assist seed selection.</p>
@@ -923,7 +923,12 @@
 <p>Based on the above discussion, we recommend taking into account the relationship among targets when selecting and prioritizing targets. The targets with higher reachability should have higher priority. Targets with a closer relationship should be covered with fewer test runs.</p>
 <p>虽然86%（24/28）的有向模糊测试程序支持多目标，但只有4个关注目标之间的关系。当存在多个目标时，可以通过目标之间的关系来优化DGF。如果它们是不相关的，可以给它们分配权重来区分重要性或概率。否则，可以提取隐藏关系并加以利用，以提高方向性。</p>
 <p>UAFL在利用目标序列寻找UAF漏洞时，考虑了操作序列的顺序。这是因为，要触发这种行为复杂的漏洞，不仅需要覆盖单个边缘，还需要以特定顺序遍历一些长的边缘序列。这种方法可以扩展到检测语义错误，比如double-free和API误用。Berry使用所有路径的执行上下文（即到达目标序列中的节点所需的必要节点）增强目标序列。</p>
-<p>在这里进一步提出以下关系。 1. 空间关系。目标在执行树上的相对位置。假设有两个目标，可以考虑它们之间的关系，包括它们是否在同一个执行路径上，它们共享多少个执行路径，以及哪一个是另一个的前继节点还是后继节点。 2. 有状态的关系。对于涉及程序状态的目标，可以考虑它们在状态空间中的位置。例如，两个目标是否共享相同的状态，以及两个状态是否可以在状态转换映射上相互转换。 3. 交错关系。对于多线程程序，线程调度会影响不同线程中事件的执行顺序。在同一线程交织下可以达到的目标在交织空间中应该是一个密切的关系。</p>
+<p>在这里进一步提出以下关系。</p>
+<ol type="1">
+<li>空间关系。目标在执行树上的相对位置。假设有两个目标，可以考虑它们之间的关系，包括它们是否在同一个执行路径上，它们共享多少个执行路径，以及哪一个是另一个的前继节点还是后继节点。</li>
+<li>有状态的关系。对于涉及程序状态的目标，可以考虑它们在状态空间中的位置。例如，两个目标是否共享相同的状态，以及两个状态是否可以在状态转换映射上相互转换。</li>
+<li>交错关系。对于多线程程序，线程调度会影响不同线程中事件的执行顺序。在同一线程交织下可以达到的目标在交织空间中应该是一个密切的关系。</li>
+</ol>
 <p>基于上述讨论，建议在选择目标和确定目标优先级时考虑目标之间的关系。具有较高可达性的目标应该有更高的优先级。关系更密切的目标应该用更少的测试运行来覆盖。</p>
 <h5 id="technology-integration">Technology Integration</h5>
 <p><img src="/png/2021-01-03-17-05-33.png"></p>
@@ -1958,7 +1963,7 @@
   //$("body").backstretch("/images/background.jpg");
   </script>
   
-  <script type="text/javascript" src="//cdn.bootcss.com/canvas-nest.js/1.0.0/canvas-nest.min.js"></script><!-- hexo-inject:begin --><!-- hexo-inject:end -->
+  <script type="text/javascript" src="//cdn.bootcss.com/canvas-nest.js/1.0.0/canvas-nest.min.js"></script>
   
-<script src="/live2dw/lib/L2Dwidget.min.js?0c58a1486de42ac6cc1c59c7d98ae887"></script><script>L2Dwidget.init({"pluginRootPath":"live2dw/","pluginJsPath":"lib/","pluginModelPath":"assets/","tagMode":false,"debug":false,"model":{"jsonPath":"/live2dw/assets/koharu.model.json"},"display":{"position":"right","width":150,"height":300},"mobile":{"show":false},"log":false});</script></body>
+<script src="/live2dw/lib/L2Dwidget.min.js?0c58a1486de42ac6cc1c59c7d98ae887"></script><script>L2Dwidget.init({"pluginRootPath":"live2dw/","pluginJsPath":"lib/","pluginModelPath":"assets/","tagMode":false,"debug":false,"model":{"jsonPath":"/live2dw/assets/koharu.model.json"},"display":{"position":"right","width":150,"height":300},"mobile":{"show":false},"log":false});</script><!-- hexo-inject:begin --><!-- hexo-inject:end --></body>
 </html>

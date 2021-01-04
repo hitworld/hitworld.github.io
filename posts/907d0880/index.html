@@ -127,7 +127,7 @@
 <meta property="og:site_name" content="w4rd3n">
 <meta property="og:description" content="基础 \(RSA\)加密算法是一种非对称加密算法,\(RSA\)算法的可靠性由极大整数因数分解的难度决定. 首先选取两个素数\(p\),\(q\). 接下来将\(p\)和\(q\)相乘获得模\(m = p * q\).同时也就知道了:\(\phi(m) = \phi(p) * \phi(q) = (p − 1)(q − 1)\). 选取与\(\phi(m)\)互素的整数\(k\),即\(g">
 <meta property="og:locale" content="zh-CN">
-<meta property="og:updated_time" content="2021-01-04T05:46:12.073Z">
+<meta property="og:updated_time" content="2021-01-04T07:47:58.364Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="IS-crypto-非对称加密-RSA">
 <meta name="twitter:description" content="基础 \(RSA\)加密算法是一种非对称加密算法,\(RSA\)算法的可靠性由极大整数因数分解的难度决定. 首先选取两个素数\(p\),\(q\). 接下来将\(p\)和\(q\)相乘获得模\(m = p * q\).同时也就知道了:\(\phi(m) = \phi(p) * \phi(q) = (p − 1)(q − 1)\). 选取与\(\phi(m)\)互素的整数\(k\),即\(g">
@@ -580,6 +580,7 @@ r_n = gcd(k, \phi(m)) = 1 = ku − \phi(m)v\\
 <p><a href="https://github.com/Ganapati/RsaCtfTool" target="_blank" rel="noopener"><code>RsaCtfTool.py</code></a>.</p>
 <p><a href="https://sourceforge.net/projects/rsaconverter/" target="_blank" rel="noopener"><code>RsaConverter.exe</code></a>.</p>
 <figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">#将数转化为AB CD EF格式的字符串.</span></span><br><span class="line">s = hex(N)[<span class="number">2</span>:<span class="number">-1</span>]</span><br><span class="line"><span class="keyword">if</span> len(s) % <span class="number">2</span>:</span><br><span class="line">    s = <span class="string">"0"</span> + s</span><br><span class="line">s2 = <span class="string">""</span></span><br><span class="line"><span class="keyword">for</span> i <span class="keyword">in</span> range(<span class="number">0</span>, len(s), <span class="number">2</span>):</span><br><span class="line">    s2 += s[i:i+<span class="number">2</span>]</span><br><span class="line">    s2 += <span class="string">" "</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">print</span> s2</span><br></pre></td></tr></table></figure>
+<p>素因子分解工具.</p>
 <p><a href="https://sourceforge.net/projects/yafu/" target="_blank" rel="noopener"><code>yafu</code></a>.</p>
 <p><a href="https://sourceforge.net/projects/msieve/" target="_blank" rel="noopener"><code>msieve</code></a>.</p>
 <h2 id="openssl">openssl</h2>

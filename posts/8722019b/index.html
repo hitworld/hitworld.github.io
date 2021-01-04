@@ -119,18 +119,18 @@
 
 
 
-  <meta name="description" content="简介 python沙箱,即以一定的方法模拟python终端.而沙箱逃逸就是绕过python沙箱得限制实现命令执行. python基础 模块导入 1234567import pwnfrom pwn import *#该方法不能永久导入__import__(&apos;pwn&apos;).p64(1111)#导入的模块a中的另一个模块b可以用a.b或者a.__dict__[&quot;b&quot;]间接访问模块b__import">
+  <meta name="description" content="简介 python沙箱,即以一定的方法模拟python终端. 而沙箱逃逸就是绕过python沙箱得限制实现命令执行. python基础 模块导入 1234567import pwnfrom pwn import *#该方法不能永久导入__import__(&apos;pwn&apos;).p64(1111)#导入的模块a中的另一个模块b可以用a.b或者a.__dict__[&quot;b&quot;]间接访问模块b__impo">
 <meta name="keywords" content="escape">
 <meta property="og:type" content="article">
 <meta property="og:title" content="IS-pwn-escape-python沙箱逃逸">
 <meta property="og:url" content="https://hitworld.github.io/posts/8722019b/index.html">
 <meta property="og:site_name" content="w4rd3n">
-<meta property="og:description" content="简介 python沙箱,即以一定的方法模拟python终端.而沙箱逃逸就是绕过python沙箱得限制实现命令执行. python基础 模块导入 1234567import pwnfrom pwn import *#该方法不能永久导入__import__(&apos;pwn&apos;).p64(1111)#导入的模块a中的另一个模块b可以用a.b或者a.__dict__[&quot;b&quot;]间接访问模块b__import">
+<meta property="og:description" content="简介 python沙箱,即以一定的方法模拟python终端. 而沙箱逃逸就是绕过python沙箱得限制实现命令执行. python基础 模块导入 1234567import pwnfrom pwn import *#该方法不能永久导入__import__(&apos;pwn&apos;).p64(1111)#导入的模块a中的另一个模块b可以用a.b或者a.__dict__[&quot;b&quot;]间接访问模块b__impo">
 <meta property="og:locale" content="zh-CN">
-<meta property="og:updated_time" content="2021-01-04T05:46:12.075Z">
+<meta property="og:updated_time" content="2021-01-04T08:04:38.614Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="IS-pwn-escape-python沙箱逃逸">
-<meta name="twitter:description" content="简介 python沙箱,即以一定的方法模拟python终端.而沙箱逃逸就是绕过python沙箱得限制实现命令执行. python基础 模块导入 1234567import pwnfrom pwn import *#该方法不能永久导入__import__(&apos;pwn&apos;).p64(1111)#导入的模块a中的另一个模块b可以用a.b或者a.__dict__[&quot;b&quot;]间接访问模块b__import">
+<meta name="twitter:description" content="简介 python沙箱,即以一定的方法模拟python终端. 而沙箱逃逸就是绕过python沙箱得限制实现命令执行. python基础 模块导入 1234567import pwnfrom pwn import *#该方法不能永久导入__import__(&apos;pwn&apos;).p64(1111)#导入的模块a中的另一个模块b可以用a.b或者a.__dict__[&quot;b&quot;]间接访问模块b__impo">
 
 
 
@@ -538,7 +538,8 @@
 
       
         <h2 id="简介">简介</h2>
-<p><code>python</code>沙箱,即以一定的方法模拟<code>python</code>终端.而沙箱逃逸就是绕过<code>python</code>沙箱得限制实现命令执行.</p>
+<p><code>python</code>沙箱,即以一定的方法模拟<code>python</code>终端.</p>
+<p>而沙箱逃逸就是绕过<code>python</code>沙箱得限制实现命令执行.</p>
 <h2 id="python基础">python基础</h2>
 <h3 id="模块导入">模块导入</h3>
 <figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> pwn</span><br><span class="line"><span class="keyword">from</span> pwn <span class="keyword">import</span> *</span><br><span class="line"></span><br><span class="line"><span class="comment">#该方法不能永久导入</span></span><br><span class="line">__import__(<span class="string">'pwn'</span>).p64(<span class="number">1111</span>)</span><br><span class="line"><span class="comment">#导入的模块a中的另一个模块b可以用a.b或者a.__dict__["b"]间接访问模块b</span></span><br><span class="line">__import__(<span class="string">'pwn'</span>).__dict__[<span class="string">"elf"</span>]</span><br></pre></td></tr></table></figure>

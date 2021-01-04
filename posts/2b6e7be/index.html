@@ -119,18 +119,18 @@
 
 
 
-  <meta name="description" content="简介 虚拟机是指一种特殊的软件,依靠某种环境(操作系统)运行,同时又作为其他软件的运行环境.简单说虚拟机是计算机系统的仿真器,通过软件模拟具有完整硬件系统功能的,运行在一个完全隔离环境中的完整计算机系统,能提供物理计算机的功能. 对于虚拟机逃逸来说,其实就是要攻击虚拟机管理程序hypervisor.通常把主机环境称为host,虚拟机环境称为guest. 常见的漏洞形式 Device 在q">
+  <meta name="description" content="简介 虚拟机是一种特殊的软件,依靠某种环境(操作系统)运行,同时又作为其他软件的运行环境. 简单说虚拟机是计算机系统的仿真器,通过软件模拟具有完整硬件系统功能的,运行在一个完全隔离环境中的完整计算机系统,能提供物理计算机的功能. 对于虚拟机逃逸来说,其实就是要攻击虚拟机管理程序hypervisor.通常把主机环境称为host,虚拟机环境称为guest. 常见的漏洞形式 Device 在">
 <meta name="keywords" content="escape">
 <meta property="og:type" content="article">
 <meta property="og:title" content="IS-pwn-escape-Linux-VM逃逸基础">
 <meta property="og:url" content="https://hitworld.github.io/posts/2b6e7be/index.html">
 <meta property="og:site_name" content="w4rd3n">
-<meta property="og:description" content="简介 虚拟机是指一种特殊的软件,依靠某种环境(操作系统)运行,同时又作为其他软件的运行环境.简单说虚拟机是计算机系统的仿真器,通过软件模拟具有完整硬件系统功能的,运行在一个完全隔离环境中的完整计算机系统,能提供物理计算机的功能. 对于虚拟机逃逸来说,其实就是要攻击虚拟机管理程序hypervisor.通常把主机环境称为host,虚拟机环境称为guest. 常见的漏洞形式 Device 在q">
+<meta property="og:description" content="简介 虚拟机是一种特殊的软件,依靠某种环境(操作系统)运行,同时又作为其他软件的运行环境. 简单说虚拟机是计算机系统的仿真器,通过软件模拟具有完整硬件系统功能的,运行在一个完全隔离环境中的完整计算机系统,能提供物理计算机的功能. 对于虚拟机逃逸来说,其实就是要攻击虚拟机管理程序hypervisor.通常把主机环境称为host,虚拟机环境称为guest. 常见的漏洞形式 Device 在">
 <meta property="og:locale" content="zh-CN">
-<meta property="og:updated_time" content="2021-01-04T05:46:12.074Z">
+<meta property="og:updated_time" content="2021-01-04T08:04:27.831Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="IS-pwn-escape-Linux-VM逃逸基础">
-<meta name="twitter:description" content="简介 虚拟机是指一种特殊的软件,依靠某种环境(操作系统)运行,同时又作为其他软件的运行环境.简单说虚拟机是计算机系统的仿真器,通过软件模拟具有完整硬件系统功能的,运行在一个完全隔离环境中的完整计算机系统,能提供物理计算机的功能. 对于虚拟机逃逸来说,其实就是要攻击虚拟机管理程序hypervisor.通常把主机环境称为host,虚拟机环境称为guest. 常见的漏洞形式 Device 在q">
+<meta name="twitter:description" content="简介 虚拟机是一种特殊的软件,依靠某种环境(操作系统)运行,同时又作为其他软件的运行环境. 简单说虚拟机是计算机系统的仿真器,通过软件模拟具有完整硬件系统功能的,运行在一个完全隔离环境中的完整计算机系统,能提供物理计算机的功能. 对于虚拟机逃逸来说,其实就是要攻击虚拟机管理程序hypervisor.通常把主机环境称为host,虚拟机环境称为guest. 常见的漏洞形式 Device 在">
 
 
 
@@ -538,11 +538,13 @@
 
       
         <h2 id="简介">简介</h2>
-<p>虚拟机是指一种特殊的软件,依靠某种环境(操作系统)运行,同时又作为其他软件的运行环境.简单说虚拟机是计算机系统的仿真器,通过软件模拟具有完整硬件系统功能的,运行在一个完全隔离环境中的完整计算机系统,能提供物理计算机的功能.</p>
+<p>虚拟机是一种特殊的软件,依靠某种环境(操作系统)运行,同时又作为其他软件的运行环境.</p>
+<p>简单说虚拟机是计算机系统的仿真器,通过软件模拟具有完整硬件系统功能的,运行在一个完全隔离环境中的完整计算机系统,能提供物理计算机的功能.</p>
 <p>对于虚拟机逃逸来说,其实就是要攻击虚拟机管理程序<code>hypervisor</code>.通常把主机环境称为<code>host</code>,虚拟机环境称为<code>guest</code>.</p>
 <h2 id="常见的漏洞形式">常见的漏洞形式</h2>
 <h3 id="device">Device</h3>
-<p>在<code>qemu</code>中新实现一种设备并引入漏洞,<code>guest</code>通过与设备进行交互进行漏洞利用.在<code>host</code>上使用<code>qemu-system-x86_64 -device help</code>查看<code>qemu</code>支持的设备.也可以<code>boot</code>到<code>guest</code>之后使用<code>lspci -nvv</code>来查看<code>pci</code>设备的具体信息.</p>
+<p>在<code>qemu</code>中新实现一种设备并引入漏洞,<code>guest</code>通过与设备进行交互进行漏洞利用.</p>
+<p>在<code>host</code>上使用<code>qemu-system-x86_64 -device help</code>查看<code>qemu</code>支持的设备.也可以<code>boot</code>到<code>guest</code>之后使用<code>lspci -nvv</code>来查看<code>pci</code>设备的具体信息.</p>
 <p><code>Linux kernel</code>与设备通信有<code>PIO</code>,<code>MMIO</code>,<code>DMA</code>等形式,通常<code>kernel</code>会实现一套<code>driver</code>并在内核态与<code>device</code>交互,再开放<code>API</code>供用户态程序使用.但其实在用户态也是可以直接访问到设备的.</p>
 <h4 id="pio">PIO</h4>
 <p><code>CPU</code>执行<code>in/out</code>指令来向<code>I/O</code>端口发送数据.<code>cat /proc/ioports</code>能够看到目前<code>port</code>的一些信息和它们对应的设备.</p>

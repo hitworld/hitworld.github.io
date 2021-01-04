@@ -119,22 +119,22 @@
 
 
 
-  <meta name="description" content="简介 AFL是一种Fuzzing测试工具.通过对源码进行编译时插桩(通过注入探针代码来实现程序分析)的方式监测边界(代码)覆盖率,通过算法自动变异新的测试用例来探索二进制程序内部新的执行路径.AFL也支持直接对没有源码的二进制程序进行测试,但需要QEMU的支持. 原理 AFL的一个特点就是基于边界覆盖率的反馈机制,边界覆盖率的统计工作通过插桩完成,然后通过边界覆盖率来进行状态分析.记录输入样">
+  <meta name="description" content="简介 AFL是一种灰盒Fuzzing工具. 通过对源码进行编译时插桩(通过注入探针代码来实现程序分析)的方式监测边界(代码)覆盖率,通过算法自动变异新的测试用例来探索二进制程序内部新的执行路径. AFL也支持直接对没有源码的二进制程序进行测试,但需要QEMU的支持. 原理 AFL的一个特点就是基于边界覆盖率的反馈机制,边界覆盖率的统计工作通过插桩完成,然后通过边界覆盖率来进行状态分析.记">
 <meta name="keywords" content="fuzz">
 <meta property="og:type" content="article">
 <meta property="og:title" content="IS-pwn-fuzz-AFL-基础">
 <meta property="og:url" content="https://hitworld.github.io/posts/48e1ca89/index.html">
 <meta property="og:site_name" content="w4rd3n">
-<meta property="og:description" content="简介 AFL是一种Fuzzing测试工具.通过对源码进行编译时插桩(通过注入探针代码来实现程序分析)的方式监测边界(代码)覆盖率,通过算法自动变异新的测试用例来探索二进制程序内部新的执行路径.AFL也支持直接对没有源码的二进制程序进行测试,但需要QEMU的支持. 原理 AFL的一个特点就是基于边界覆盖率的反馈机制,边界覆盖率的统计工作通过插桩完成,然后通过边界覆盖率来进行状态分析.记录输入样">
+<meta property="og:description" content="简介 AFL是一种灰盒Fuzzing工具. 通过对源码进行编译时插桩(通过注入探针代码来实现程序分析)的方式监测边界(代码)覆盖率,通过算法自动变异新的测试用例来探索二进制程序内部新的执行路径. AFL也支持直接对没有源码的二进制程序进行测试,但需要QEMU的支持. 原理 AFL的一个特点就是基于边界覆盖率的反馈机制,边界覆盖率的统计工作通过插桩完成,然后通过边界覆盖率来进行状态分析.记">
 <meta property="og:locale" content="zh-CN">
-<meta property="og:image" content="https://hitworld.github.io/posts/48e1ca89/2.png">
-<meta property="og:image" content="https://hitworld.github.io/posts/48e1ca89/3.png">
-<meta property="og:image" content="https://hitworld.github.io/posts/48e1ca89/4.png">
-<meta property="og:updated_time" content="2021-01-04T05:46:12.076Z">
+<meta property="og:image" content="https://hitworld.github.io/png/2021-01-04-16-07-05.png">
+<meta property="og:image" content="https://hitworld.github.io/png/2021-01-04-16-07-43.png">
+<meta property="og:image" content="https://hitworld.github.io/png/2021-01-04-16-07-31.png">
+<meta property="og:updated_time" content="2021-01-04T08:08:10.500Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="IS-pwn-fuzz-AFL-基础">
-<meta name="twitter:description" content="简介 AFL是一种Fuzzing测试工具.通过对源码进行编译时插桩(通过注入探针代码来实现程序分析)的方式监测边界(代码)覆盖率,通过算法自动变异新的测试用例来探索二进制程序内部新的执行路径.AFL也支持直接对没有源码的二进制程序进行测试,但需要QEMU的支持. 原理 AFL的一个特点就是基于边界覆盖率的反馈机制,边界覆盖率的统计工作通过插桩完成,然后通过边界覆盖率来进行状态分析.记录输入样">
-<meta name="twitter:image" content="https://hitworld.github.io/posts/48e1ca89/2.png">
+<meta name="twitter:description" content="简介 AFL是一种灰盒Fuzzing工具. 通过对源码进行编译时插桩(通过注入探针代码来实现程序分析)的方式监测边界(代码)覆盖率,通过算法自动变异新的测试用例来探索二进制程序内部新的执行路径. AFL也支持直接对没有源码的二进制程序进行测试,但需要QEMU的支持. 原理 AFL的一个特点就是基于边界覆盖率的反馈机制,边界覆盖率的统计工作通过插桩完成,然后通过边界覆盖率来进行状态分析.记">
+<meta name="twitter:image" content="https://hitworld.github.io/png/2021-01-04-16-07-05.png">
 
 
 
@@ -542,11 +542,14 @@
 
       
         <h2 id="简介">简介</h2>
-<p><code>AFL</code>是一种<code>Fuzzing</code>测试工具.通过对源码进行编译时插桩(通过注入探针代码来实现程序分析)的方式监测边界(代码)覆盖率,通过算法自动变异新的测试用例来探索二进制程序内部新的执行路径.<code>AFL</code>也支持直接对没有源码的二进制程序进行测试,但需要<code>QEMU</code>的支持.</p>
+<p><code>AFL</code>是一种灰盒<code>Fuzzing</code>工具.</p>
+<p>通过对源码进行编译时插桩(通过注入探针代码来实现程序分析)的方式监测边界(代码)覆盖率,通过算法自动变异新的测试用例来探索二进制程序内部新的执行路径.</p>
+<p><code>AFL</code>也支持直接对没有源码的二进制程序进行测试,但需要<code>QEMU</code>的支持.</p>
 <h2 id="原理">原理</h2>
 <p><code>AFL</code>的一个特点就是基于边界覆盖率的反馈机制,边界覆盖率的统计工作通过插桩完成,然后通过边界覆盖率来进行状态分析.记录输入样本的代码覆盖率,从而调整输入样本以提高覆盖率,增加发现漏洞的概率.</p>
 <p><code>fuzz</code>过程中<code>AFL</code>会维护一个语料库队列<code>queue</code>,包含了初始测试用例及变异后有新状态产生的测试用例,变异策略分为确定性策略和随机性策略.</p>
-<p><code>AFL</code>通过跳转指令将程序分为一个个基本块,将源基本块和目的基本块的配对组合称为<code>tuple</code>(元组).通过记录<code>tuple</code>统计边界覆盖率,<code>AFL</code>通过<code>bitmap</code>(以<code>byte</code>为单位从而记录<code>tuple</code>的命中数)来记录这些信息. 出现新<code>tuple</code>或已有<code>tuple</code>中出现的新命中组视为产生新状态(也意味着更新覆盖范围),相应的测试用例将被归入到语料库队列<code>queue</code>中.</p>
+<p><code>AFL</code>通过跳转指令将程序分为一个个基本块,将源基本块和目的基本块的配对组合称为<code>tuple</code>(元组).通过记录<code>tuple</code>统计边界覆盖率,<code>AFL</code>通过<code>bitmap</code>(以<code>byte</code>为单位从而记录<code>tuple</code>的命中数)来记录这些信息.</p>
+<p>出现新<code>tuple</code>或已有<code>tuple</code>中出现的新命中组视为产生新状态(也意味着更新覆盖范围),相应的测试用例将被归入到语料库队列<code>queue</code>中.</p>
 <p>上述过程会一直循环进行,期间触发了<code>crash</code>的文件会被记录下来.</p>
 <h2 id="插桩模块">插桩模块</h2>
 <p><code>AFL</code>有三种不同模式的插桩操作.</p>
@@ -556,7 +559,7 @@
 <li>记录目标程序执行过程中的<code>tuple</code>信息,在每个基本块上都有插入.</li>
 <li>必要的初始操作以及维护一个<code>forkserver</code>循环启动进程.</li>
 </ol>
-<img src="/posts/48e1ca89/2.png" title="p2">
+<p><img src="/png/2021-01-04-16-07-05.png"></p>
 <h3 id="普通模式">普通模式</h3>
 <p><code>gcc</code>的<code>-B prefix</code>用于指定各阶段执行文件的优先查找目录.普通模式下<code>AFL</code>采用的插桩思路是先对<code>gcc</code>做一层简单封装,有一项是设定<code>-B prefix</code>选项并指向封装后的<code>as</code>汇编器所在目录.</p>
 <figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//afl-gcc.c,edit_params.</span></span><br><span class="line">cc_params[cc_par_cnt++] = <span class="string">"-B"</span>;</span><br><span class="line">cc_params[cc_par_cnt++] = as_path;</span><br></pre></td></tr></table></figure>
@@ -566,7 +569,7 @@
 <p>另一分支进行初始操作并维护<code>forkserver</code>,它会将已经初始化好的目标进程暂停在某个地方(例如<code>main</code>函数入口).按需再<code>fork</code>出一个子进程交予<code>fuzzer</code>进行测试.<code>forkserver</code>和<code>fuzzer</code>间是通过<code>pipe</code>管道进行通信的,除了控制命令,<code>fork</code>成功后的<code>PID</code>以及<code>waitpid</code>返回状态都是借由此方式传递.</p>
 <h3 id="llvm模式">llvm模式</h3>
 <p><code>LLVM</code>中代码首先由编译器前端<code>clang</code>处理后得到中间代码<code>IR</code>,再经过各<code>pass</code>工作节点的优化和转换,最终交给编译器后端生成机器码.</p>
-<img src="/posts/48e1ca89/3.png" title="p3">
+<p><img src="/png/2021-01-04-16-07-43.png"></p>
 <p><code>AFL</code>的插桩思路是通过编写<code>pass</code>来实现<code>tuple</code>信息的记录,在此过程中会对每一基本块都插入探针,具体代码在<code>afl-llvm-pass.so.cc</code>文件.而初始化和<code>forkserver</code>操作则通过链接完成,<code>afl-llvm-rt.o.c</code>文件实现了<code>afl-as.h</code>中<code>main_payload</code>的这部分功能.</p>
 <h3 id="qemu模式">qemu模式</h3>
 <p>对于该模式下的插桩,<code>AFL</code>的思路是直接利用<code>QEMU</code>内置的跟踪功能,并通过<code>patch</code>源码的方式来实现<code>afl-as.h</code>中的操作.</p>
@@ -576,7 +579,7 @@
 <h3 id="fuzzing策略">fuzzing策略</h3>
 <p><code>AFL</code>中用到的变异策略分为确定性策略和随机性策略.</p>
 <p>对于各变异操作,基本的处理流程如下.</p>
-<img src="/posts/48e1ca89/4.png" title="p4">
+<p><img src="/png/2021-01-04-16-07-31.png"></p>
 <p>如果一个测试用例在执行完随机性策略后仍未产生新状态,则会将其与另一测试用例随机拼接后再次交由随机性策略处理.而在确定性策略<code>fuzzing</code>过程中,如果发现后续的变异操作已经在前面进行过了,为避免重复将会跳过该操作,如果没有重复则由<code>common_fuzz_stuff</code>函数将变异后的内容写入测试文件并运行目标程序.</p>
 <p>变异的主要类型如下.</p>
 <ul>

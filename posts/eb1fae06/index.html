@@ -119,18 +119,18 @@
 
 
 
-  <meta name="description" content="概念 栈溢出指由于程序使用了不安全的函数或逻辑错误,导致攻击者溢出栈中缓冲区破坏(篡改)其他数据. 可以看到在栈中,位于局部变量(溢出点)后面的有:部分其他局部变量,返回地址,和所有的之前的栈帧.栈溢出可以让攻击者劫持PC register(eip/rip). 有时候要劫持ebp(即被保存的栈指针)来控制栈的位置从而劫持控制流或者调用函数的局部变量值(因为局部变量一般使用ebp相对偏移).">
+  <meta name="description" content="概念 栈溢出指由于程序使用了不安全的函数或逻辑错误,导致攻击者溢出栈中缓冲区破坏(篡改)其他数据. 可以看到在栈中,位于局部变量(溢出点)后面的有:部分其他局部变量,返回地址,和所有的之前的栈帧. 栈溢出可以让攻击者劫持PC register(eip/rip). 有时候要劫持ebp(即被保存的栈指针)来控制栈的位置从而劫持控制流或者调用函数的局部变量值(因为局部变量一般使用ebp相对偏移)">
 <meta name="keywords" content="Linux">
 <meta property="og:type" content="article">
 <meta property="og:title" content="IS-pwn-Linux-栈溢出概览">
 <meta property="og:url" content="https://hitworld.github.io/posts/eb1fae06/index.html">
 <meta property="og:site_name" content="w4rd3n">
-<meta property="og:description" content="概念 栈溢出指由于程序使用了不安全的函数或逻辑错误,导致攻击者溢出栈中缓冲区破坏(篡改)其他数据. 可以看到在栈中,位于局部变量(溢出点)后面的有:部分其他局部变量,返回地址,和所有的之前的栈帧.栈溢出可以让攻击者劫持PC register(eip/rip). 有时候要劫持ebp(即被保存的栈指针)来控制栈的位置从而劫持控制流或者调用函数的局部变量值(因为局部变量一般使用ebp相对偏移).">
+<meta property="og:description" content="概念 栈溢出指由于程序使用了不安全的函数或逻辑错误,导致攻击者溢出栈中缓冲区破坏(篡改)其他数据. 可以看到在栈中,位于局部变量(溢出点)后面的有:部分其他局部变量,返回地址,和所有的之前的栈帧. 栈溢出可以让攻击者劫持PC register(eip/rip). 有时候要劫持ebp(即被保存的栈指针)来控制栈的位置从而劫持控制流或者调用函数的局部变量值(因为局部变量一般使用ebp相对偏移)">
 <meta property="og:locale" content="zh-CN">
-<meta property="og:updated_time" content="2021-01-04T05:46:12.086Z">
+<meta property="og:updated_time" content="2021-01-04T08:52:37.498Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="IS-pwn-Linux-栈溢出概览">
-<meta name="twitter:description" content="概念 栈溢出指由于程序使用了不安全的函数或逻辑错误,导致攻击者溢出栈中缓冲区破坏(篡改)其他数据. 可以看到在栈中,位于局部变量(溢出点)后面的有:部分其他局部变量,返回地址,和所有的之前的栈帧.栈溢出可以让攻击者劫持PC register(eip/rip). 有时候要劫持ebp(即被保存的栈指针)来控制栈的位置从而劫持控制流或者调用函数的局部变量值(因为局部变量一般使用ebp相对偏移).">
+<meta name="twitter:description" content="概念 栈溢出指由于程序使用了不安全的函数或逻辑错误,导致攻击者溢出栈中缓冲区破坏(篡改)其他数据. 可以看到在栈中,位于局部变量(溢出点)后面的有:部分其他局部变量,返回地址,和所有的之前的栈帧. 栈溢出可以让攻击者劫持PC register(eip/rip). 有时候要劫持ebp(即被保存的栈指针)来控制栈的位置从而劫持控制流或者调用函数的局部变量值(因为局部变量一般使用ebp相对偏移)">
 
 
 
@@ -539,12 +539,14 @@
       
         <h2 id="概念">概念</h2>
 <p>栈溢出指由于程序使用了不安全的函数或逻辑错误,导致攻击者溢出栈中缓冲区破坏(篡改)其他数据.</p>
-<p>可以看到在栈中,位于局部变量(溢出点)后面的有:部分其他局部变量,返回地址,和所有的之前的栈帧.栈溢出可以让攻击者劫持<code>PC register(eip/rip)</code>.</p>
+<p>可以看到在栈中,位于局部变量(溢出点)后面的有:部分其他局部变量,返回地址,和所有的之前的栈帧.</p>
+<p>栈溢出可以让攻击者劫持<code>PC register(eip/rip)</code>.</p>
 <p>有时候要劫持<code>ebp</code>(即被保存的栈指针)来控制栈的位置从而劫持控制流或者调用函数的局部变量值(因为局部变量一般使用<code>ebp</code>相对偏移).</p>
 <h2 id="利用方法">利用方法</h2>
 <p>在<code>Intel</code>体系中,内存空间中的数据被权限分为<code>code</code>(<code>rx</code>)和<code>data</code>(<code>rw</code>)(如果没有的权限的话这两者就没有本质上的区别).</p>
 <p>可执行的代码有两种,进程内存空间本身的代码(包括程序代码,动态库代码,甚至错误偏移产生的代码等等)和攻击者写进去的<code>shellcode</code>(如果程序没有开启<code>DEP</code>,也就是<code>NX</code>).</p>
-<p>利用前者的方法也叫做面向返回编程(<code>Return-Oriented Programming</code>,缩写:<code>ROP</code>).即攻击者控制堆栈调用以劫持程序控制流并执行针对性的机器语言指令序列(称为<code>gadget</code>).<code>gadget</code>通常结束于<code>ret</code>指令.对于动态库代码中的<code>gadget</code>需要先泄露<code>libc</code>基址(绕过<code>ASLR</code>).</p>
+<p>利用前者的方法也叫做面向返回编程(<code>Return-Oriented Programming</code>,缩写:<code>ROP</code>).</p>
+<p>即攻击者控制堆栈调用以劫持程序控制流并执行针对性的机器语言指令序列(称为<code>gadget</code>).<code>gadget</code>通常结束于<code>ret</code>指令.对于动态库代码中的<code>gadget</code>需要先泄露<code>libc</code>基址(绕过<code>ASLR</code>).</p>
 <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">ROPgadget --binary [fileName] | grep <span class="string">"pop rdi"</span></span><br><span class="line">ROPgadget --binary [fileName] --string /bin/sh</span><br></pre></td></tr></table></figure>
 <p>根据不同的程序保护机制,要采用不同的漏洞利用方法.(<code>ASLR</code>基本都是默认开启)</p>
 <h3 id="return-2-shellcode">Return-2-Shellcode</h3>
@@ -589,8 +591,11 @@
 <p><code>vdso</code>(<code>Virtual Dynamic Shared Object</code>,虚拟动态共享对象)是指内核和用户空间共享的代码空间,动态分配,地址随机(栈上的环境变量中存在这个地址),提供超过<code>4</code>个系统调用,由<code>glibc</code>库提供功能.</p>
 <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">dumpmem vdso.so 0x00007ffff7ffd000 ​0x00007ffff7fff000</span><br><span class="line"><span class="comment">#vdso映射的是一整个ELF文件</span></span><br></pre></td></tr></table></figure>
 <p>由于使用<code>int 0x80</code>进行系统调用效率低,<code>Intel</code>和<code>AMD</code>分别实现了<code>sysenter/sysexit</code>和<code>syscall/sysret</code>(快速系统调用指令).</p>
-<p>为了兼容这两种快速系统调用指令和未实现快速系统调用指令的<code>CPU</code>,<code>Linux</code>实现了<code>vsyscall</code>,程序调用<code>vsyscall</code>,具体的选择由内核来决定.而<code>vsyscall</code>的实现就在<code>vdso</code>中.<code>vsyscall</code>在每个进程中静态分配在相同的地址,只允许<code>4</code>个系统调用,<code>gettimeofday</code>,<code>time</code>和<code>getcpu</code>.由内核提供功能.</p>
-<p><code>x86_64</code>从<code>AMD</code>引进了<code>syscall</code>指令,但是<code>vdso</code>,<code>vsyscall</code>的机制依旧未变.<code>vsyscall</code>执行时会进行检查,如果不是从函数开头执行的话就会出错,所以一般只能用于平滑跳转,类似于<code>shellcode</code>中<code>nop</code>的作用.<code>vdso</code>常用于寻找系统调用指令或者搭配<code>srop</code>,<code>x86</code>环境下<code>vdso</code>只有一字节是<code>random</code>,也就是<code>1/256</code>的命中率,范围为<code>0xf7700000 ~ 0xf7800000</code>.</p>
+<p>为了兼容这两种快速系统调用指令和未实现快速系统调用指令的<code>CPU</code>,<code>Linux</code>实现了<code>vsyscall</code>,程序调用<code>vsyscall</code>,具体的选择由内核来决定.</p>
+<p>而<code>vsyscall</code>的实现就在<code>vdso</code>中.<code>vsyscall</code>在每个进程中静态分配在相同的地址,只允许<code>4</code>个系统调用,<code>gettimeofday</code>,<code>time</code>和<code>getcpu</code>.由内核提供功能.</p>
+<p><code>x86_64</code>从<code>AMD</code>引进了<code>syscall</code>指令,但是<code>vdso</code>,<code>vsyscall</code>的机制依旧未变.</p>
+<p><code>vsyscall</code>执行时会进行检查,如果不是从函数开头执行的话就会出错,所以一般只能用于平滑跳转,类似于<code>shellcode</code>中<code>nop</code>的作用</p>
+<p>.<code>vdso</code>常用于寻找系统调用指令或者搭配<code>srop</code>,<code>x86</code>环境下<code>vdso</code>只有一字节是<code>random</code>,也就是<code>1/256</code>的命中率,范围为<code>0xf7700000 ~ 0xf7800000</code>.</p>
 
       
     </div>
@@ -1591,7 +1596,7 @@
   //$("body").backstretch("/images/background.jpg");
   </script>
   
-  <script type="text/javascript" src="//cdn.bootcss.com/canvas-nest.js/1.0.0/canvas-nest.min.js"></script>
+  <script type="text/javascript" src="//cdn.bootcss.com/canvas-nest.js/1.0.0/canvas-nest.min.js"></script><!-- hexo-inject:begin --><!-- hexo-inject:end -->
   
-<script src="/live2dw/lib/L2Dwidget.min.js?0c58a1486de42ac6cc1c59c7d98ae887"></script><script>L2Dwidget.init({"pluginRootPath":"live2dw/","pluginJsPath":"lib/","pluginModelPath":"assets/","tagMode":false,"debug":false,"model":{"jsonPath":"/live2dw/assets/koharu.model.json"},"display":{"position":"right","width":150,"height":300},"mobile":{"show":false},"log":false});</script><!-- hexo-inject:begin --><!-- hexo-inject:end --></body>
+<script src="/live2dw/lib/L2Dwidget.min.js?0c58a1486de42ac6cc1c59c7d98ae887"></script><script>L2Dwidget.init({"pluginRootPath":"live2dw/","pluginJsPath":"lib/","pluginModelPath":"assets/","tagMode":false,"debug":false,"model":{"jsonPath":"/live2dw/assets/koharu.model.json"},"display":{"position":"right","width":150,"height":300},"mobile":{"show":false},"log":false});</script></body>
 </html>

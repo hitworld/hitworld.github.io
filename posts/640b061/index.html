@@ -137,7 +137,7 @@
 <meta property="og:image" content="https://hitworld.github.io/png/2021-01-03-16-40-26.png">
 <meta property="og:image" content="https://hitworld.github.io/png/2021-01-03-17-05-33.png">
 <meta property="og:image" content="https://hitworld.github.io/png/2021-01-03-17-14-22.png">
-<meta property="og:updated_time" content="2021-01-03T09:59:31.412Z">
+<meta property="og:updated_time" content="2021-01-04T05:46:12.078Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="IS-pwn-fuzz-theory-present-situation">
 <meta name="twitter:description" content="Survey/Review 本文主要是对相关论文的阅读和摘要。 Fuzzing: Challenges and Reflections 在线pdf. Fuzzing is an automatic bug and vulnerability discovery technique which continuously generates inputs and reports those t">
@@ -660,7 +660,8 @@
 <p>However, since most covered codes may not contain bugs, blindly extending code coverage is less efficient, especially for corner cases.</p>
 <p>Unlike coverage-based fuzzers who extend the code coverage in an undirected manner, a directed fuzzer spends most of its time budget on reaching specific target locations (e.g., the bug-prone zone) without wasting resources stressing unrelated parts.</p>
 <p>Thus, directed greybox fuzzing is particularly suitable for scenarios such as patch testing, bug reproduction, and special bug hunting.</p>
-<p>与盲目扩展路径覆盖范围的基于覆盖范围的模糊测试程序不同，定向模糊测试程序将其大部分时间预算花在到达特定的目标位置（例如，容易出错的区域）上，而不会浪费资源来强调不相关的部分。因此，定向灰盒模糊测试特别适用于补丁测试、bug复现以及与其他工具集成等场景。</p>
+<p>与盲目扩展路径覆盖范围的基于覆盖范围的模糊测试程序不同，定向模糊测试程序将其大部分时间预算花在到达特定的目标位置（例如，容易出bug的区域）上，而不会浪费资源来测试不相关的部分。因此，定向灰盒模糊测试特别适用于补丁测试、bug复现以及与其他工具集成等场景。</p>
+<p>传统的导向模糊测试是基于符号执行，但是这种方法会受到符号执行一些问题而限制（复杂的约束求解和路径爆炸等问题）。</p>
 <h4 id="introduction">Introduction</h4>
 <p>Traditionally, directed fuzzers are based on symbolic execution, which uses program analysis and constraint solving to generate inputs that exercise different program paths. Such directed fuzzers cast the reachability problem as iterative constraint satisfaction problem. However, since directed symbolic execution relies on heavyweight program analysis and constraint solving, it suffers from scalability and compatibility limitations.</p>
 <p>By specifying a set of target sites in the program under test (PUT) and leveraging lightweight compile-time instrumentation of the PUT, a directed greybox fuzzer calculates the distance between the seed and the target to assist seed selection.</p>
@@ -697,8 +698,8 @@
 <p>After doing deterministic strategies, AFL introduces non-deterministic strategies, including the havoc stage and splice stage. In the havoc stage, AFL mutates the seed by randomly choosing a sequence of mutation operators from the deterministic strategies and apply them to random locations in the seed file. As a result, the generated testcase is significantly different from the original seed. Then, AFL uses the splice strategy to randomly choose another seed from the seed queue and recombine it with the current seed to generate a new seed. Then, the havoc strategies are re-implemented to the new seed.</p>
 <p>Power schedule. In the deterministic stage, mutation strategies are involved sequentially, but in the non-deterministic stage, AFL can assign energy to the seed to decide the fuzzing chances of each seed. The energy is assigned according to the performance score of each seed, which is based on coverage (prioritize inputs that cover more paths), execution time (prioritize inputs that execute faster), and discovery time (prioritize inputs discovered later) Particularly, if the test case exercises a new path, AFL will double the assigned energy.</p>
 <p>以AFL为例介绍了覆盖率导向灰盒模糊测试技术。</p>
-<p>AFL使用边缘覆盖替代一般的基本块覆盖。边缘覆盖比基本块覆盖更精细和敏感，因为它考虑了基本块之间的过渡。它也比路径覆盖更具可伸缩性，因为它避免了路径爆炸。AFL在编译时为每个分支跳转插入随机数，并在运行时从寄存器收集这些随机数获知跳转信息，统计边缘覆盖。</p>
-<p>AFL偏爱出发新路径的输入种子，AFL通过一个位图记录每个种子的优先级，对于优先级高的种子，AFL给予更多的模糊机会，也就是后面说的能量。</p>
+<p>AFL使用上下文不敏感的边缘覆盖替代一般的基本块覆盖。边缘覆盖比基本块覆盖更精细和敏感，因为它考虑了基本块之间的过渡，边缘覆盖比路径覆盖更具可伸缩性，因为它避免了路径爆炸。AFL在编译时为每个分支跳转插入随机数，并在运行时从寄存器收集这些随机数获知跳转信息，统计边缘覆盖。</p>
+<p>AFL偏爱触发新路径的输入种子，AFL通过一个位图记录每个种子的优先级，对于优先级高的种子，AFL给予更多的模糊机会，也就是后面说的能量。</p>
 <p>AFL有两类变异策略：确定性策略和非确定性策略。AFL首先采用确定性策略，利用基于位翻转、算术、令牌、字典和兴趣值的变异器依次变异不同粒度的种子。在进行确定性策略之后，AFL就会进行非确定性策略，包括havoc阶段和拼接阶段。在havoc阶段，AFL通过从确定性策略中随机选择一系列变异算子对种子进行变异，并将其应用于种子文件中的随机位置。因此，生成的testcase与原始种子有很大的不同。然后，AFL使用剪接策略从种子队列中随机选择另一个种子，并将其与当前种子重新组合以生成新的种子。最后，对新种子重新实施破坏策略。</p>
 <p>AFL通过能量调度来分配一轮模糊测试的时间。在确定性阶段，变异策略依次参与，而在非确定性阶段，AFL可以给种子分配能量来决定每个种子的模糊机会。能量是根据每个种子的性能得分来分配的，这是基于覆盖率（优先考虑覆盖更多路径的输入）、执行情况时间（对执行速度更快的输入进行优先级排序）和发现时间（对稍后发现的输入进行优先级排序）。特别的，如果测试用例执行一条新路径，AFL将加倍分配的能量。</p>
 <h5 id="directed-greybox-fuzzing">Directed Greybox Fuzzing</h5>
@@ -1963,7 +1964,7 @@
   //$("body").backstretch("/images/background.jpg");
   </script>
   
-  <script type="text/javascript" src="//cdn.bootcss.com/canvas-nest.js/1.0.0/canvas-nest.min.js"></script>
+  <script type="text/javascript" src="//cdn.bootcss.com/canvas-nest.js/1.0.0/canvas-nest.min.js"></script><!-- hexo-inject:begin --><!-- hexo-inject:end -->
   
-<script src="/live2dw/lib/L2Dwidget.min.js?0c58a1486de42ac6cc1c59c7d98ae887"></script><script>L2Dwidget.init({"pluginRootPath":"live2dw/","pluginJsPath":"lib/","pluginModelPath":"assets/","tagMode":false,"debug":false,"model":{"jsonPath":"/live2dw/assets/koharu.model.json"},"display":{"position":"right","width":150,"height":300},"mobile":{"show":false},"log":false});</script><!-- hexo-inject:begin --><!-- hexo-inject:end --></body>
+<script src="/live2dw/lib/L2Dwidget.min.js?0c58a1486de42ac6cc1c59c7d98ae887"></script><script>L2Dwidget.init({"pluginRootPath":"live2dw/","pluginJsPath":"lib/","pluginModelPath":"assets/","tagMode":false,"debug":false,"model":{"jsonPath":"/live2dw/assets/koharu.model.json"},"display":{"position":"right","width":150,"height":300},"mobile":{"show":false},"log":false});</script></body>
 </html>

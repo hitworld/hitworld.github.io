@@ -26,7 +26,8 @@ for file in files:
                     if(not os.path.exists("B:/blog-hexo/source" + l[4:-2])):
                         print("Not find B:/blog-hexo/source" + l[4:-2])
                     else:
-                        pngs.remove(l[9:-2])
+                        if l[9:-2] in pngs:
+                            pngs.remove(l[9:-2])
                 if file[:-3] in l:
                     flag = 1
                 w.write(l)

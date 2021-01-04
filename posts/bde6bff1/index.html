@@ -119,18 +119,18 @@
 
 
 
-  <meta name="description" content="磁盘连接方式 个人计算机常见磁盘接口有IDE和SATA,后者是现在主流. 一个IDE扁平电缆可以连接两个IDE设备(区分为主设备和从设备),通常主机会提供两个IDE接口IDE1(primary)和IDE2(secondary). 12345+----------------------------------+|IDE\Jumper  |  Master  |  Slave   ||IDE1">
+  <meta name="description" content="常见磁盘接口 个人计算机常见磁盘接口有IDE和SATA,后者是现在主流. 一个IDE扁平电缆可以连接两个IDE设备(区分为主设备和从设备),通常主机会提供两个IDE接口IDE1(primary)和IDE2(secondary). 12345+----------------------------------+|IDE\Jumper  |  Master  |  Slave   ||IDE1">
 <meta name="keywords" content="Linux">
 <meta property="og:type" content="article">
 <meta property="og:title" content="CS-operations-Linux-磁盘分区">
 <meta property="og:url" content="https://hitworld.github.io/posts/bde6bff1/index.html">
 <meta property="og:site_name" content="w4rd3n">
-<meta property="og:description" content="磁盘连接方式 个人计算机常见磁盘接口有IDE和SATA,后者是现在主流. 一个IDE扁平电缆可以连接两个IDE设备(区分为主设备和从设备),通常主机会提供两个IDE接口IDE1(primary)和IDE2(secondary). 12345+----------------------------------+|IDE\Jumper  |  Master  |  Slave   ||IDE1">
+<meta property="og:description" content="常见磁盘接口 个人计算机常见磁盘接口有IDE和SATA,后者是现在主流. 一个IDE扁平电缆可以连接两个IDE设备(区分为主设备和从设备),通常主机会提供两个IDE接口IDE1(primary)和IDE2(secondary). 12345+----------------------------------+|IDE\Jumper  |  Master  |  Slave   ||IDE1">
 <meta property="og:locale" content="zh-CN">
-<meta property="og:updated_time" content="2021-01-04T05:46:12.068Z">
+<meta property="og:updated_time" content="2021-01-04T07:15:31.809Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="CS-operations-Linux-磁盘分区">
-<meta name="twitter:description" content="磁盘连接方式 个人计算机常见磁盘接口有IDE和SATA,后者是现在主流. 一个IDE扁平电缆可以连接两个IDE设备(区分为主设备和从设备),通常主机会提供两个IDE接口IDE1(primary)和IDE2(secondary). 12345+----------------------------------+|IDE\Jumper  |  Master  |  Slave   ||IDE1">
+<meta name="twitter:description" content="常见磁盘接口 个人计算机常见磁盘接口有IDE和SATA,后者是现在主流. 一个IDE扁平电缆可以连接两个IDE设备(区分为主设备和从设备),通常主机会提供两个IDE接口IDE1(primary)和IDE2(secondary). 12345+----------------------------------+|IDE\Jumper  |  Master  |  Slave   ||IDE1">
 
 
 
@@ -537,7 +537,7 @@
       
 
       
-        <h2 id="磁盘连接方式">磁盘连接方式</h2>
+        <h2 id="常见磁盘接口">常见磁盘接口</h2>
 <p>个人计算机常见磁盘接口有<code>IDE</code>和<code>SATA</code>,后者是现在主流.</p>
 <p>一个<code>IDE</code>扁平电缆可以连接两个<code>IDE</code>设备(区分为主设备和从设备),通常主机会提供两个<code>IDE</code>接口<code>IDE1</code>(<code>primary</code>)和<code>IDE2</code>(<code>secondary</code>).</p>
 <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">+----------------------------------+</span><br><span class="line">|IDE\Jumper  |  Master  |  Slave   |</span><br><span class="line">|IDE1        | /dev/hda | /dev/hdb |</span><br><span class="line">|IDE2        | /dev/hdc | /dev/hdd |</span><br><span class="line">+----------------------------------+</span><br></pre></td></tr></table></figure>
@@ -896,7 +896,7 @@
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#磁盘连接方式"><span class="nav-number">1.</span> <span class="nav-text">磁盘连接方式</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#主引导分区和分区表"><span class="nav-number">2.</span> <span class="nav-text">主引导分区和分区表</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#磁盘分区表"><span class="nav-number">2.1.</span> <span class="nav-text">磁盘分区表</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#开机流程"><span class="nav-number">3.</span> <span class="nav-text">开机流程</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#磁盘分区选择"><span class="nav-number">4.</span> <span class="nav-text">磁盘分区选择</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#linux支持的文件系统类型"><span class="nav-number">5.</span> <span class="nav-text">Linux支持的文件系统类型</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#常用分区方案"><span class="nav-number">6.</span> <span class="nav-text">常用分区方案</span></a></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#常见磁盘接口"><span class="nav-number">1.</span> <span class="nav-text">常见磁盘接口</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#主引导分区和分区表"><span class="nav-number">2.</span> <span class="nav-text">主引导分区和分区表</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#磁盘分区表"><span class="nav-number">2.1.</span> <span class="nav-text">磁盘分区表</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#开机流程"><span class="nav-number">3.</span> <span class="nav-text">开机流程</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#磁盘分区选择"><span class="nav-number">4.</span> <span class="nav-text">磁盘分区选择</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#linux支持的文件系统类型"><span class="nav-number">5.</span> <span class="nav-text">Linux支持的文件系统类型</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#常用分区方案"><span class="nav-number">6.</span> <span class="nav-text">常用分区方案</span></a></li></ol></div>
             
 
           </div>
@@ -1586,7 +1586,7 @@
   //$("body").backstretch("/images/background.jpg");
   </script>
   
-  <script type="text/javascript" src="//cdn.bootcss.com/canvas-nest.js/1.0.0/canvas-nest.min.js"></script>
+  <script type="text/javascript" src="//cdn.bootcss.com/canvas-nest.js/1.0.0/canvas-nest.min.js"></script><!-- hexo-inject:begin --><!-- hexo-inject:end -->
   
-<script src="/live2dw/lib/L2Dwidget.min.js?0c58a1486de42ac6cc1c59c7d98ae887"></script><script>L2Dwidget.init({"pluginRootPath":"live2dw/","pluginJsPath":"lib/","pluginModelPath":"assets/","tagMode":false,"debug":false,"model":{"jsonPath":"/live2dw/assets/koharu.model.json"},"display":{"position":"right","width":150,"height":300},"mobile":{"show":false},"log":false});</script><!-- hexo-inject:begin --><!-- hexo-inject:end --></body>
+<script src="/live2dw/lib/L2Dwidget.min.js?0c58a1486de42ac6cc1c59c7d98ae887"></script><script>L2Dwidget.init({"pluginRootPath":"live2dw/","pluginJsPath":"lib/","pluginModelPath":"assets/","tagMode":false,"debug":false,"model":{"jsonPath":"/live2dw/assets/koharu.model.json"},"display":{"position":"right","width":150,"height":300},"mobile":{"show":false},"log":false});</script></body>
 </html>

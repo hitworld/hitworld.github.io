@@ -119,18 +119,18 @@
 
 
 
-  <meta name="description" content="demo 123456#!/bin/shcd ~for (i = 0;i &amp;lt; 10;i++); do	echo $idone 以#开头的行是注释,会被解释器忽略,#!用于告诉操作系统要用什么程序来执行这个脚本. 变量 定义变量时,变量名不加$,变量名和等号之间不能有空格,已定义的变量可以被重新定义. 12name=&quot;w4rd3n&quot;name=&quot;hitworld&quot; 除了显式地直接赋值">
+  <meta name="description" content="基础 123456#!/bin/shcd ~for (i = 0;i &amp;lt; 10;i++); do	echo $idone 以#开头的行是注释,会被解释器忽略,#!用于告诉操作系统要用什么程序来执行这个脚本. 变量 定义变量时,变量名不加$,变量名和等号之间不能有空格,已定义的变量可以被重新定义. 12name=&quot;w4rd3n&quot;name=&quot;hitworld&quot; 除了显式地直接赋值,还">
 <meta name="keywords" content="Linux">
 <meta property="og:type" content="article">
 <meta property="og:title" content="CS-operations-Linux-shell脚本">
 <meta property="og:url" content="https://hitworld.github.io/posts/adc042af/index.html">
 <meta property="og:site_name" content="w4rd3n">
-<meta property="og:description" content="demo 123456#!/bin/shcd ~for (i = 0;i &amp;lt; 10;i++); do	echo $idone 以#开头的行是注释,会被解释器忽略,#!用于告诉操作系统要用什么程序来执行这个脚本. 变量 定义变量时,变量名不加$,变量名和等号之间不能有空格,已定义的变量可以被重新定义. 12name=&quot;w4rd3n&quot;name=&quot;hitworld&quot; 除了显式地直接赋值">
+<meta property="og:description" content="基础 123456#!/bin/shcd ~for (i = 0;i &amp;lt; 10;i++); do	echo $idone 以#开头的行是注释,会被解释器忽略,#!用于告诉操作系统要用什么程序来执行这个脚本. 变量 定义变量时,变量名不加$,变量名和等号之间不能有空格,已定义的变量可以被重新定义. 12name=&quot;w4rd3n&quot;name=&quot;hitworld&quot; 除了显式地直接赋值,还">
 <meta property="og:locale" content="zh-CN">
-<meta property="og:updated_time" content="2021-01-04T05:46:12.067Z">
+<meta property="og:updated_time" content="2021-01-04T07:17:17.440Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="CS-operations-Linux-shell脚本">
-<meta name="twitter:description" content="demo 123456#!/bin/shcd ~for (i = 0;i &amp;lt; 10;i++); do	echo $idone 以#开头的行是注释,会被解释器忽略,#!用于告诉操作系统要用什么程序来执行这个脚本. 变量 定义变量时,变量名不加$,变量名和等号之间不能有空格,已定义的变量可以被重新定义. 12name=&quot;w4rd3n&quot;name=&quot;hitworld&quot; 除了显式地直接赋值">
+<meta name="twitter:description" content="基础 123456#!/bin/shcd ~for (i = 0;i &amp;lt; 10;i++); do	echo $idone 以#开头的行是注释,会被解释器忽略,#!用于告诉操作系统要用什么程序来执行这个脚本. 变量 定义变量时,变量名不加$,变量名和等号之间不能有空格,已定义的变量可以被重新定义. 12name=&quot;w4rd3n&quot;name=&quot;hitworld&quot; 除了显式地直接赋值,还">
 
 
 
@@ -503,7 +503,7 @@
                 
                   <span class="post-meta-item-text">本文字数：</span>
                 
-                <span title="本文字数">635</span>
+                <span title="本文字数">633</span>
               
 
               
@@ -537,21 +537,21 @@
       
 
       
-        <h2 id="demo">demo</h2>
+        <h2 id="基础">基础</h2>
 <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#!/bin/sh</span></span><br><span class="line"><span class="built_in">cd</span> ~</span><br><span class="line"></span><br><span class="line"><span class="keyword">for</span> (i = 0;i &lt; 10;i++); <span class="keyword">do</span></span><br><span class="line">	<span class="built_in">echo</span> <span class="variable">$i</span></span><br><span class="line"><span class="keyword">done</span></span><br></pre></td></tr></table></figure>
 <p>以<code>#</code>开头的行是注释,会被解释器忽略,<code>#!</code>用于告诉操作系统要用什么程序来执行这个脚本.</p>
-<h2 id="变量">变量</h2>
+<h3 id="变量">变量</h3>
 <p>定义变量时,变量名不加<code>$</code>,变量名和等号之间不能有空格,已定义的变量可以被重新定义.</p>
 <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">name=<span class="string">"w4rd3n"</span></span><br><span class="line">name=<span class="string">"hitworld"</span></span><br></pre></td></tr></table></figure>
 <p>除了显式地直接赋值,还可以用语句给变量赋值.</p>
 <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">for</span> file <span class="keyword">in</span> `ls`</span><br></pre></td></tr></table></figure>
 <p>使用变量要在变量名前面加<code>$</code>,变量名外面的花括号是可选的,加花括号是为了帮助解释器识别变量的边界.</p>
 <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">name=<span class="string">"w4rd3n"</span></span><br><span class="line"><span class="built_in">echo</span> <span class="variable">$name</span></span><br><span class="line"><span class="built_in">echo</span> <span class="variable">$&#123;name&#125;</span></span><br></pre></td></tr></table></figure>
-<h2 id="字符串">字符串</h2>
+<h3 id="字符串">字符串</h3>
 <p>字符串的定义可以用单引号,也可以用双引号,也可以不用引号.</p>
 <p>单引号字符串里的任何字符都会原样输出,包括单引号和转义符.</p>
 <p>双引号字符串里可以使用变量和转义字符.</p>
-<h3 id="字符串操作">字符串操作</h3>
+<h4 id="字符串操作">字符串操作</h4>
 <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">name=<span class="string">"w4rd3n"</span></span><br><span class="line">greeting=<span class="string">"hello, "</span><span class="variable">$name</span><span class="string">"!\n"</span></span><br><span class="line">greeting_1=<span class="string">"hello2, <span class="variable">$name</span>!\n"</span></span><br><span class="line"></span><br><span class="line"><span class="built_in">echo</span> <span class="variable">$greeting</span><span class="variable">$greeting_1</span></span><br><span class="line"><span class="built_in">echo</span> <span class="variable">$greeting</span> <span class="variable">$greeting_1</span></span><br><span class="line"></span><br><span class="line"><span class="built_in">echo</span> <span class="variable">$&#123;#name&#125;</span></span><br><span class="line"><span class="comment"># 获取字符串长度</span></span><br><span class="line"><span class="built_in">echo</span> <span class="variable">$&#123;greeting:1:4&#125;</span></span><br><span class="line"><span class="comment"># 提取子字符串</span></span><br></pre></td></tr></table></figure>
 
       
@@ -863,7 +863,7 @@
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#demo"><span class="nav-number">1.</span> <span class="nav-text">demo</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#变量"><span class="nav-number">2.</span> <span class="nav-text">变量</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#字符串"><span class="nav-number">3.</span> <span class="nav-text">字符串</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#字符串操作"><span class="nav-number">3.1.</span> <span class="nav-text">字符串操作</span></a></li></ol></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#基础"><span class="nav-number">1.</span> <span class="nav-text">基础</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#变量"><span class="nav-number">1.1.</span> <span class="nav-text">变量</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#字符串"><span class="nav-number">1.2.</span> <span class="nav-text">字符串</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#字符串操作"><span class="nav-number">1.2.1.</span> <span class="nav-text">字符串操作</span></a></li></ol></li></ol></li></ol></div>
             
 
           </div>
@@ -1553,7 +1553,7 @@
   //$("body").backstretch("/images/background.jpg");
   </script>
   
-  <script type="text/javascript" src="//cdn.bootcss.com/canvas-nest.js/1.0.0/canvas-nest.min.js"></script>
+  <script type="text/javascript" src="//cdn.bootcss.com/canvas-nest.js/1.0.0/canvas-nest.min.js"></script><!-- hexo-inject:begin --><!-- hexo-inject:end -->
   
-<script src="/live2dw/lib/L2Dwidget.min.js?0c58a1486de42ac6cc1c59c7d98ae887"></script><script>L2Dwidget.init({"pluginRootPath":"live2dw/","pluginJsPath":"lib/","pluginModelPath":"assets/","tagMode":false,"debug":false,"model":{"jsonPath":"/live2dw/assets/koharu.model.json"},"display":{"position":"right","width":150,"height":300},"mobile":{"show":false},"log":false});</script><!-- hexo-inject:begin --><!-- hexo-inject:end --></body>
+<script src="/live2dw/lib/L2Dwidget.min.js?0c58a1486de42ac6cc1c59c7d98ae887"></script><script>L2Dwidget.init({"pluginRootPath":"live2dw/","pluginJsPath":"lib/","pluginModelPath":"assets/","tagMode":false,"debug":false,"model":{"jsonPath":"/live2dw/assets/koharu.model.json"},"display":{"position":"right","width":150,"height":300},"mobile":{"show":false},"log":false});</script></body>
 </html>

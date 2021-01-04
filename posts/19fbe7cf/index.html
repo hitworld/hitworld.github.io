@@ -119,18 +119,18 @@
 
 
 
-  <meta name="description" content="前言 基于glibc-2.27. 对应结构体 tcache_entry.类似于fastbin,tcache也是以单向链表连接. 123typedef struct tcache_entry &amp;#123;  struct tcache_entry *next;&amp;#125; tcache_entry; tcache_perthread_struct.每个线程使用一个tcache_perthr">
+  <meta name="description" content="前言 基于glibc-2.27. 对应结构体 tcache_entry.类似于fastbin,tcache也是以单向链表连接. 初始化时会分配多个tcache_entry在最开始的堆块用于管理tcache chunk. 123typedef struct tcache_entry &amp;#123;  struct tcache_entry *next;&amp;#125; tcache_entry;">
 <meta name="keywords" content="Linux">
 <meta property="og:type" content="article">
 <meta property="og:title" content="CS-RTFSC-Linux-glibc-2.27-tcache">
 <meta property="og:url" content="https://hitworld.github.io/posts/19fbe7cf/index.html">
 <meta property="og:site_name" content="w4rd3n">
-<meta property="og:description" content="前言 基于glibc-2.27. 对应结构体 tcache_entry.类似于fastbin,tcache也是以单向链表连接. 123typedef struct tcache_entry &amp;#123;  struct tcache_entry *next;&amp;#125; tcache_entry; tcache_perthread_struct.每个线程使用一个tcache_perthr">
+<meta property="og:description" content="前言 基于glibc-2.27. 对应结构体 tcache_entry.类似于fastbin,tcache也是以单向链表连接. 初始化时会分配多个tcache_entry在最开始的堆块用于管理tcache chunk. 123typedef struct tcache_entry &amp;#123;  struct tcache_entry *next;&amp;#125; tcache_entry;">
 <meta property="og:locale" content="zh-CN">
-<meta property="og:updated_time" content="2021-01-04T05:46:12.070Z">
+<meta property="og:updated_time" content="2021-01-04T07:25:23.688Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="CS-RTFSC-Linux-glibc-2.27-tcache">
-<meta name="twitter:description" content="前言 基于glibc-2.27. 对应结构体 tcache_entry.类似于fastbin,tcache也是以单向链表连接. 123typedef struct tcache_entry &amp;#123;  struct tcache_entry *next;&amp;#125; tcache_entry; tcache_perthread_struct.每个线程使用一个tcache_perthr">
+<meta name="twitter:description" content="前言 基于glibc-2.27. 对应结构体 tcache_entry.类似于fastbin,tcache也是以单向链表连接. 初始化时会分配多个tcache_entry在最开始的堆块用于管理tcache chunk. 123typedef struct tcache_entry &amp;#123;  struct tcache_entry *next;&amp;#125; tcache_entry;">
 
 
 
@@ -541,6 +541,7 @@
 <p>基于<code>glibc-2.27</code>.</p>
 <h2 id="对应结构体">对应结构体</h2>
 <p><code>tcache_entry</code>.类似于<code>fastbin</code>,<code>tcache</code>也是以单向链表连接.</p>
+<p>初始化时会分配多个<code>tcache_entry</code>在最开始的堆块用于管理<code>tcache chunk</code>.</p>
 <figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">typedef</span> <span class="class"><span class="keyword">struct</span> <span class="title">tcache_entry</span> &#123;</span></span><br><span class="line">  <span class="class"><span class="keyword">struct</span> <span class="title">tcache_entry</span> *<span class="title">next</span>;</span></span><br><span class="line">&#125; tcache_entry;</span><br></pre></td></tr></table></figure>
 <p><code>tcache_perthread_struct</code>.每个线程使用一个<code>tcache_perthread_struct</code>管理当前线程的<code>tcache</code>.</p>
 <figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">typedef</span> <span class="class"><span class="keyword">struct</span> <span class="title">tcache_perthread_struct</span> &#123;</span></span><br><span class="line">  <span class="keyword">char</span> counts[TCACHE_MAX_BINS];<span class="comment">//记录对应单向链表保存的tcache的数量,默认最大值为7</span></span><br><span class="line">  tcache_entry *entries[TCACHE_MAX_BINS];<span class="comment">//对应的单向链表</span></span><br><span class="line">&#125; tcache_perthread_struct;</span><br></pre></td></tr></table></figure>
@@ -1567,7 +1568,7 @@
   //$("body").backstretch("/images/background.jpg");
   </script>
   
-  <script type="text/javascript" src="//cdn.bootcss.com/canvas-nest.js/1.0.0/canvas-nest.min.js"></script>
+  <script type="text/javascript" src="//cdn.bootcss.com/canvas-nest.js/1.0.0/canvas-nest.min.js"></script><!-- hexo-inject:begin --><!-- hexo-inject:end -->
   
-<script src="/live2dw/lib/L2Dwidget.min.js?0c58a1486de42ac6cc1c59c7d98ae887"></script><script>L2Dwidget.init({"pluginRootPath":"live2dw/","pluginJsPath":"lib/","pluginModelPath":"assets/","tagMode":false,"debug":false,"model":{"jsonPath":"/live2dw/assets/koharu.model.json"},"display":{"position":"right","width":150,"height":300},"mobile":{"show":false},"log":false});</script><!-- hexo-inject:begin --><!-- hexo-inject:end --></body>
+<script src="/live2dw/lib/L2Dwidget.min.js?0c58a1486de42ac6cc1c59c7d98ae887"></script><script>L2Dwidget.init({"pluginRootPath":"live2dw/","pluginJsPath":"lib/","pluginModelPath":"assets/","tagMode":false,"debug":false,"model":{"jsonPath":"/live2dw/assets/koharu.model.json"},"display":{"position":"right","width":150,"height":300},"mobile":{"show":false},"log":false});</script></body>
 </html>

@@ -146,7 +146,7 @@
 <meta property="og:image" content="https://hitworld.github.io/png/2021-01-04-21-40-42.png">
 <meta property="og:image" content="https://hitworld.github.io/png/2021-01-04-21-37-08.png">
 <meta property="og:image" content="https://hitworld.github.io/png/2021-01-04-21-37-33.png">
-<meta property="og:updated_time" content="2021-01-04T13:54:34.546Z">
+<meta property="og:updated_time" content="2021-01-04T14:02:31.992Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="CS-BASIC-compiler-principles-语法分析">
 <meta name="twitter:description" content="概览  语法分析是编译过程的核心,它的任务是在词法分析识别出单词符号串的基础上,分析并判断程序的语法结构是否符合语法规则. 编译器采用正规式和有限自动机描述和识别语言的单词符号,用上下文无关文法来描述语法规则. 所以语法分析器的工作本质就是按文法的产生式,识别输入符号串是否是一个句子.  自上而下分析 从推导的角度看,自上而下分析是从文法的开始符号出发,试图推导出与输入符号串相同的符">
@@ -523,7 +523,7 @@
                 
                   <span class="post-meta-item-text">本文字数：</span>
                 
-                <span title="本文字数">810</span>
+                <span title="本文字数">899</span>
               
 
               
@@ -584,7 +584,7 @@
 <p>所以把产生式候选的所有推导出来的句子中的首个终结符加入一个集合来进行判断,这个集合就是产生式第一个字符的<code>FIRST</code>集合.</p>
 <p><img src="/png/2021-01-04-20-58-10.png"></p>
 <p><img src="/png/2021-01-04-21-23-02.png"></p>
-<p>可以通过提取左公因子把每个非终结符(包括新引进的终结符)的所有<code>FIRST</code>集变成两两不相交的.</p>
+<p>可以通过提取左公因子把每个非终结符(包括新引进的终结符)的所有<code>FIRST</code>集变成两两不相交的(注意不一定能到达该条件,只能确保靠近,还需要提取后验证).</p>
 <p><img src="/png/2021-01-04-21-25-16.png"></p>
 <p>此时还有一个问题,当产生式候选的首字符的<code>FIRST</code>集合中有<code>ε</code>,则实际上可以将首字符推导为<code>ε</code>,此时要分析的就是后面字符.</p>
 <p>此时需要知道首字符的<code>FOLLOW</code>集合.</p>
@@ -597,6 +597,7 @@
 <p><img src="/png/2021-01-04-21-40-27.png"></p>
 <p><img src="/png/2021-01-04-21-40-42.png"></p>
 <h3 id="ll1文法">LL(1)文法</h3>
+<p><code>LL(1)</code>文法:第一个<code>L</code>指从左到右扫描字符串,第二个<code>L</code>指分析过程是最左推导,<code>(1)</code>表示每一步只需要向前查看一个符号.</p>
 <p><img src="/png/2021-01-04-21-37-08.png"></p>
 <p><img src="/png/2021-01-04-21-37-33.png"></p>
 <h2 id="自下而上分析">自下而上分析</h2>

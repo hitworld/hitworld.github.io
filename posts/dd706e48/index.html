@@ -119,18 +119,18 @@
 
 
 
-  <meta name="description" content="概览 可加载内核模块(LKM)是Linux内核运行时加载和移除代码的机制.可加载内核模块在运行时加载,不运行在用户空间,本质上是内核的一部分. 编写简单内核模块 首先要安装Linux内核头文件. 12apt-cache search linux-headers-$(uname -r)sudo apt-get install linux-headers-$(uname -r) 内核模块不是">
+  <meta name="description" content="概览 可加载内核模块(LKM)是Linux内核运行时加载和移除代码的机制. 可加载内核模块在运行时加载,不运行在用户空间,本质上是内核的一部分. 编写简单内核模块 首先要安装Linux内核头文件. 12apt-cache search linux-headers-$(uname -r)sudo apt-get install linux-headers-$(uname -r) 内核模块">
 <meta name="keywords" content="Linux">
 <meta property="og:type" content="article">
 <meta property="og:title" content="CS-develop-Linux-LKM-入门">
 <meta property="og:url" content="https://hitworld.github.io/posts/dd706e48/index.html">
 <meta property="og:site_name" content="w4rd3n">
-<meta property="og:description" content="概览 可加载内核模块(LKM)是Linux内核运行时加载和移除代码的机制.可加载内核模块在运行时加载,不运行在用户空间,本质上是内核的一部分. 编写简单内核模块 首先要安装Linux内核头文件. 12apt-cache search linux-headers-$(uname -r)sudo apt-get install linux-headers-$(uname -r) 内核模块不是">
+<meta property="og:description" content="概览 可加载内核模块(LKM)是Linux内核运行时加载和移除代码的机制. 可加载内核模块在运行时加载,不运行在用户空间,本质上是内核的一部分. 编写简单内核模块 首先要安装Linux内核头文件. 12apt-cache search linux-headers-$(uname -r)sudo apt-get install linux-headers-$(uname -r) 内核模块">
 <meta property="og:locale" content="zh-CN">
-<meta property="og:updated_time" content="2021-01-04T05:46:12.061Z">
+<meta property="og:updated_time" content="2021-01-04T06:51:00.581Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="CS-develop-Linux-LKM-入门">
-<meta name="twitter:description" content="概览 可加载内核模块(LKM)是Linux内核运行时加载和移除代码的机制.可加载内核模块在运行时加载,不运行在用户空间,本质上是内核的一部分. 编写简单内核模块 首先要安装Linux内核头文件. 12apt-cache search linux-headers-$(uname -r)sudo apt-get install linux-headers-$(uname -r) 内核模块不是">
+<meta name="twitter:description" content="概览 可加载内核模块(LKM)是Linux内核运行时加载和移除代码的机制. 可加载内核模块在运行时加载,不运行在用户空间,本质上是内核的一部分. 编写简单内核模块 首先要安装Linux内核头文件. 12apt-cache search linux-headers-$(uname -r)sudo apt-get install linux-headers-$(uname -r) 内核模块">
 
 
 
@@ -538,11 +538,12 @@
 
       
         <h2 id="概览">概览</h2>
-<p>可加载内核模块(<code>LKM</code>)是<code>Linux</code>内核运行时加载和移除代码的机制.可加载内核模块在运行时加载,不运行在用户空间,本质上是内核的一部分.</p>
+<p>可加载内核模块(<code>LKM</code>)是<code>Linux</code>内核运行时加载和移除代码的机制.</p>
+<p>可加载内核模块在运行时加载,不运行在用户空间,本质上是内核的一部分.</p>
 <h2 id="编写简单内核模块">编写简单内核模块</h2>
 <p>首先要安装<code>Linux</code>内核头文件.</p>
 <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">apt-cache search linux-headers-$(uname -r)</span><br><span class="line">sudo apt-get install linux-headers-$(uname -r)</span><br></pre></td></tr></table></figure>
-<p>内核模块不是应用程序,没有<code>main()</code>函数.其类似于共享库.其有以下特点.</p>
+<p>内核模块不是应用程序,没有<code>main()</code>函数.其类似于共享库,有以下特点.</p>
 <ul>
 <li>非顺序执行,内核模块使用初始化函数将自身注册.内核模块处理的请求在模块代码中定义.这与事件驱动编程模型类似.</li>
 <li>无自动清理,任何由内核模块申请的内存,必须在模块卸载时手动释放.</li>
@@ -567,7 +568,7 @@
 <figure class="highlight makefile"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">obj-m := mychar.o</span><br><span class="line"></span><br><span class="line"><span class="section">all:</span></span><br><span class="line">	make -C /lib/modules/<span class="variable">$(<span class="built_in">shell</span> uname -r)</span>/build/ M=<span class="variable">$(PWD)</span> modules</span><br><span class="line"><span class="section">clean:</span></span><br><span class="line">	make -C /lib/modules/<span class="variable">$(<span class="built_in">shell</span> uname -r)</span>/build/ M=<span class="variable">$(PWD)</span> clean</span><br></pre></td></tr></table></figure>
 <p>该内核模块加载后就可以作为一个字符设备被打开.</p>
 <figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//test.c</span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span><span class="meta-string">&lt;stdio.h&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span><span class="meta-string">&lt;stdlib.h&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span><span class="meta-string">&lt;errno.h&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span><span class="meta-string">&lt;fcntl.h&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span><span class="meta-string">&lt;string.h&gt;</span></span></span><br><span class="line"></span><br><span class="line"><span class="keyword">static</span> <span class="keyword">char</span> receive[<span class="number">256</span>];</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">()</span></span>&#123;</span><br><span class="line">  <span class="keyword">int</span> ret, fd;</span><br><span class="line">  <span class="keyword">char</span> stringToSend[<span class="number">256</span>];</span><br><span class="line"></span><br><span class="line">  fd = open(<span class="string">"/dev/mychar"</span>, O_RDWR);</span><br><span class="line">  <span class="keyword">if</span> (fd &lt; <span class="number">0</span>) &#123;</span><br><span class="line">    perror(<span class="string">"Failed to open the device..."</span>);</span><br><span class="line">    <span class="keyword">return</span> errno;</span><br><span class="line">  &#125;</span><br><span class="line">  <span class="built_in">printf</span>(<span class="string">"Type in a short string to send to the kernel module:\n"</span>);</span><br><span class="line">  <span class="built_in">scanf</span>(<span class="string">"%[^\n]%*c"</span>, stringToSend);</span><br><span class="line">  <span class="built_in">printf</span>(<span class="string">"Writing message to the device [%s].\n"</span>, stringToSend);</span><br><span class="line">  ret = write(fd, stringToSend, <span class="built_in">strlen</span>(stringToSend));</span><br><span class="line">  <span class="keyword">if</span> (ret &lt; <span class="number">0</span>) &#123;</span><br><span class="line">    perror(<span class="string">"Failed to write the message to the device."</span>);</span><br><span class="line">    <span class="keyword">return</span> errno;</span><br><span class="line">  &#125;</span><br><span class="line">  <span class="built_in">printf</span>(<span class="string">"Press ENTER to read back from the device...\n"</span>);</span><br><span class="line">  getchar();</span><br><span class="line">  <span class="built_in">printf</span>(<span class="string">"Reading from the device...\n"</span>);</span><br><span class="line">  ret = read(fd, receive, <span class="number">256</span>);</span><br><span class="line">  <span class="keyword">if</span> (ret &lt; <span class="number">0</span>) &#123;</span><br><span class="line">    perror(<span class="string">"Failed to read the message from the device."</span>);</span><br><span class="line">    <span class="keyword">return</span> errno;</span><br><span class="line">  &#125;</span><br><span class="line">  <span class="built_in">printf</span>(<span class="string">"The received message is: [%s]\n"</span>, receive);</span><br><span class="line"></span><br><span class="line">  <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<p><code>scanf</code>参数表示读取到第一个<code>\n</code>字符为止.</p>
+<p><code>scanf</code>函数的参数参数表示读取到第一个<code>\n</code>字符为止.</p>
 <p>此时的驱动设备还存在权限问题和竞争问题,权限问题可以通过修改设备权限解决,竞争问题可以通过互斥锁解决.</p>
 
       
@@ -1569,7 +1570,7 @@
   //$("body").backstretch("/images/background.jpg");
   </script>
   
-  <script type="text/javascript" src="//cdn.bootcss.com/canvas-nest.js/1.0.0/canvas-nest.min.js"></script><!-- hexo-inject:begin --><!-- hexo-inject:end -->
+  <script type="text/javascript" src="//cdn.bootcss.com/canvas-nest.js/1.0.0/canvas-nest.min.js"></script>
   
-<script src="/live2dw/lib/L2Dwidget.min.js?0c58a1486de42ac6cc1c59c7d98ae887"></script><script>L2Dwidget.init({"pluginRootPath":"live2dw/","pluginJsPath":"lib/","pluginModelPath":"assets/","tagMode":false,"debug":false,"model":{"jsonPath":"/live2dw/assets/koharu.model.json"},"display":{"position":"right","width":150,"height":300},"mobile":{"show":false},"log":false});</script></body>
+<script src="/live2dw/lib/L2Dwidget.min.js?0c58a1486de42ac6cc1c59c7d98ae887"></script><script>L2Dwidget.init({"pluginRootPath":"live2dw/","pluginJsPath":"lib/","pluginModelPath":"assets/","tagMode":false,"debug":false,"model":{"jsonPath":"/live2dw/assets/koharu.model.json"},"display":{"position":"right","width":150,"height":300},"mobile":{"show":false},"log":false});</script><!-- hexo-inject:begin --><!-- hexo-inject:end --></body>
 </html>

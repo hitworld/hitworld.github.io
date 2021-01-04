@@ -127,7 +127,7 @@
 <meta property="og:site_name" content="w4rd3n">
 <meta property="og:description" content="usermode-helper usermode-helper API中的核心函数. 12345678910call_usermodehelper_setup	#准备user-land调用call_usermodehelper_setkeys#设置helper的会话密钥call_usermodehelper_setcleanup#为helper设置一个清空函数call_usermodehelp">
 <meta property="og:locale" content="zh-CN">
-<meta property="og:updated_time" content="2021-01-04T05:46:12.062Z">
+<meta property="og:updated_time" content="2021-01-04T06:48:53.389Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="CS-develop-Linux-LKM-内核API">
 <meta name="twitter:description" content="usermode-helper usermode-helper API中的核心函数. 12345678910call_usermodehelper_setup	#准备user-land调用call_usermodehelper_setkeys#设置helper的会话密钥call_usermodehelper_setcleanup#为helper设置一个清空函数call_usermodehelp">
@@ -543,9 +543,11 @@
 <p>还有一些简化函数,它们封装了的几个内核函数.</p>
 <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">call_usermodehelper</span><br><span class="line"><span class="comment">#准备并调用user-land</span></span><br><span class="line">call_usermodehelper_pipe</span><br><span class="line"><span class="comment">#使用stdin管道调用user-land</span></span><br><span class="line">call_usermodehelper_keys</span><br><span class="line"><span class="comment">#使用会话密钥调用user-land</span></span><br></pre></td></tr></table></figure>
 <p>核心<code>API</code>使用了一个称为<code>subprocess_info</code>结构的处理函数引用进行操作,该结构(<code>./kernel/kmod.c</code>)集合了给定的<code>usermode-helper</code>实例的所有必需元.</p>
-<p>该结构引用从<code>call_usermodehelper_setup</code>调用返回,在<code>call_usermodehelper_setkey</code>,<code>call_usermodehelper_setcleanup</code>以及<code>call_usermodehelper_stdinpipe</code>的调用中进一步配置.通过调用<code>call_usermodehelper_exec</code>来调用配置好的用户模式应用程序.</p>
+<p>该结构引用从<code>call_usermodehelper_setup</code>调用返回,在<code>call_usermodehelper_setkey</code>,<code>call_usermodehelper_setcleanup</code>以及<code>call_usermodehelper_stdinpipe</code>的调用中进一步配置.</p>
+<p>通过调用<code>call_usermodehelper_exec</code>来调用配置好的用户模式应用程序.</p>
 <figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">static</span> <span class="keyword">int</span> <span class="title">umh_test</span><span class="params">( <span class="keyword">void</span> )</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">  <span class="class"><span class="keyword">struct</span> <span class="title">subprocess_info</span> * <span class="title">sub_info</span>;</span></span><br><span class="line">  <span class="keyword">char</span> * argv[] = &#123;<span class="string">"/usr/bin/logger"</span>, <span class="string">"help!"</span>, <span class="literal">NULL</span>&#125;;</span><br><span class="line">  <span class="keyword">static</span> <span class="keyword">char</span> * envp[] = &#123;</span><br><span class="line">    <span class="string">"HOME=/"</span>,</span><br><span class="line">    <span class="string">"TERM=linux"</span>,</span><br><span class="line">    <span class="string">"PATH=/sbin:/bin:/usr/sbin:/usr/bin"</span>,</span><br><span class="line">    <span class="literal">NULL</span></span><br><span class="line">  &#125;;</span><br><span class="line"></span><br><span class="line">  <span class="comment">//return call_usermodehelper( argv[0], argv, envp, UMH_WAIT_PROC );</span></span><br><span class="line"> </span><br><span class="line">  sub_info = call_usermodehelper_setup(argv[<span class="number">0</span>], argv, envp, GFP_ATOMIC);</span><br><span class="line">  <span class="keyword">if</span> (sub_info == <span class="literal">NULL</span>) <span class="keyword">return</span> -ENOMEM;</span><br><span class="line"> </span><br><span class="line">  <span class="keyword">return</span> call_usermodehelper_exec(sub_info, UMH_WAIT_PROC);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<p>最直接的<code>usermode-helper API</code>应用程序是从内核空间加载内核模块,<code>request_module</code>函数封装对应功能并提供了简单的接口.内核指定一个设备或所需服务并调用<code>request_module</code>来加载模块.通过使用<code>usermode-helper API</code>,模块通过<code>modprobe</code>加载到内核(应用程序通过<code>request_module</code>在用户空间被调用).</p>
+<p>最直接的<code>usermode-helper API</code>应用程序是从内核空间加载内核模块,<code>request_module</code>函数封装对应功能并提供了简单的接口.</p>
+<p>内核指定一个设备或所需服务并调用<code>request_module</code>来加载模块.通过使用<code>usermode-helper API</code>,模块通过<code>modprobe</code>加载到内核(应用程序通过<code>request_module</code>在用户空间被调用).</p>
 
       
     </div>
@@ -1546,7 +1548,7 @@
   //$("body").backstretch("/images/background.jpg");
   </script>
   
-  <script type="text/javascript" src="//cdn.bootcss.com/canvas-nest.js/1.0.0/canvas-nest.min.js"></script><!-- hexo-inject:begin --><!-- hexo-inject:end -->
+  <script type="text/javascript" src="//cdn.bootcss.com/canvas-nest.js/1.0.0/canvas-nest.min.js"></script>
   
-<script src="/live2dw/lib/L2Dwidget.min.js?0c58a1486de42ac6cc1c59c7d98ae887"></script><script>L2Dwidget.init({"pluginRootPath":"live2dw/","pluginJsPath":"lib/","pluginModelPath":"assets/","tagMode":false,"debug":false,"model":{"jsonPath":"/live2dw/assets/koharu.model.json"},"display":{"position":"right","width":150,"height":300},"mobile":{"show":false},"log":false});</script></body>
+<script src="/live2dw/lib/L2Dwidget.min.js?0c58a1486de42ac6cc1c59c7d98ae887"></script><script>L2Dwidget.init({"pluginRootPath":"live2dw/","pluginJsPath":"lib/","pluginModelPath":"assets/","tagMode":false,"debug":false,"model":{"jsonPath":"/live2dw/assets/koharu.model.json"},"display":{"position":"right","width":150,"height":300},"mobile":{"show":false},"log":false});</script><!-- hexo-inject:begin --><!-- hexo-inject:end --></body>
 </html>

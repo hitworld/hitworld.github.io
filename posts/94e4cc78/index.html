@@ -127,14 +127,14 @@
 <meta property="og:site_name" content="w4rd3n">
 <meta property="og:description" content="动态链接数据基础 程序分为静态链接跟动态链接,在处理动态链接程序时会采取延迟绑定(lazy binding)的技术.即位于动态链接库的函数被调用时才会确定函数在进程中的位置. 下面用一个x86程序分析. 123456789101112131415161718w4rd3n@cws:~/temp$ readelf -S pwn共有 31 个节头，从偏移量 0x17f0 开始：节头：  [Nr]">
 <meta property="og:locale" content="zh-CN">
-<meta property="og:image" content="https://hitworld.github.io/posts/94e4cc78/1.png">
-<meta property="og:image" content="https://hitworld.github.io/posts/94e4cc78/2.png">
-<meta property="og:image" content="https://hitworld.github.io/posts/94e4cc78/3.png">
-<meta property="og:updated_time" content="2021-01-05T12:30:24.005Z">
+<meta property="og:image" content="https://hitworld.github.io/png/2021-01-05-21-37-59.png">
+<meta property="og:image" content="https://hitworld.github.io/png/2021-01-05-21-38-19.png">
+<meta property="og:image" content="https://hitworld.github.io/png/2021-01-05-21-38-37.png">
+<meta property="og:updated_time" content="2021-01-05T13:39:44.106Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="IS-pwn-Linux-ret2dl_resolve">
 <meta name="twitter:description" content="动态链接数据基础 程序分为静态链接跟动态链接,在处理动态链接程序时会采取延迟绑定(lazy binding)的技术.即位于动态链接库的函数被调用时才会确定函数在进程中的位置. 下面用一个x86程序分析. 123456789101112131415161718w4rd3n@cws:~/temp$ readelf -S pwn共有 31 个节头，从偏移量 0x17f0 开始：节头：  [Nr]">
-<meta name="twitter:image" content="https://hitworld.github.io/posts/94e4cc78/1.png">
+<meta name="twitter:image" content="https://hitworld.github.io/png/2021-01-05-21-37-59.png">
 
 
 
@@ -559,13 +559,13 @@
 <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">w4rd3n@cws:~/temp$ readelf -s pwn</span><br><span class="line"></span><br><span class="line">Symbol table <span class="string">'.dynsym'</span> contains 5 entries:</span><br><span class="line">   Num:    Value  Size Type    Bind   Vis      Ndx Name</span><br><span class="line">     0: 00000000     0 NOTYPE  LOCAL  DEFAULT  UND</span><br><span class="line">     1: 00000000     0 FUNC    GLOBAL DEFAULT  UND <span class="built_in">read</span>@GLIBC_2.0 (2)</span><br><span class="line">     ...</span><br><span class="line"></span><br><span class="line">Symbol table <span class="string">'.symtab'</span> contains 70 entries:</span><br><span class="line"><span class="comment">#.symtab包含大量linker,debugger需要的数据;.dynsym包含.symtab的一个子集,比如共享库需要的动态链接加载的函数对应的symbols.</span></span><br></pre></td></tr></table></figure>
 <p>符号对应的符号表信息<code>.dynsym[num]</code>中的<code>num</code>是通过<code>((r_info)&gt;&gt;8)</code>索引的,<code>r_info</code>为<code>.rel.plt</code>或<code>.rel.dyn</code>中的信息项的值.</p>
 <p>例如:<code>.dynsym</code>的地址为<code>0x80481cc</code>,<code>read</code>函数对应的<code>num</code>为<code>1</code>,查看一下<code>ndx name</code>为<code>read</code>处的内存.</p>
-<img src="/posts/94e4cc78/1.png" width="1">
+<p><img src="/png/2021-01-05-21-37-59.png"></p>
 <h2 id="动态链接函数执行流程">动态链接函数执行流程</h2>
 <p>以<code>read</code>函数为例.<code>read</code>函数内容为.</p>
-<img src="/posts/94e4cc78/2.png" width="2">
+<p><img src="/png/2021-01-05-21-38-19.png"></p>
 <p><code>read</code>第一次调用时<code>0x804a00c</code>(对应的<code>.got.plt</code>表项)的值为<code>read@plt + 6</code>的地址.</p>
 <p>跳转后先将<code>0×0</code>压栈(即相对<code>.rel.plt</code>的偏移,因为<code>read</code>在<code>.rel.plt</code>中时第一个,所以偏移为<code>0</code>),又跳转到<code>0x80482d0</code>.</p>
-<img src="/posts/94e4cc78/3.png" width="3">
+<p><img src="/png/2021-01-05-21-38-37.png"></p>
 <p><code>0x804a004</code>为一个指向内部<code>link_map</code>结构的指针,在动态装载器内部使用.</p>
 <p><code>0x804a008</code>处为函数<code>dl_runtime_resolve(struct link_map *l, ElfW(Word) rel_offset)</code>.即调用函数<code>dl_runtime_resolve(link_map, 0×0)</code>,解析出地址,然后写到对应<code>.got.plt</code>并跳转执行.</p>
 <p><code>dl_runtime_resolve</code>调用<code>_dl_fixup</code>函数实现具体逻辑,最后解析出来的函数地址保存在<code>rel_addr = (void *)(l-&gt;l_addr + reloc-&gt;r_offset);</code>.</p>

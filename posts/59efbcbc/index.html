@@ -146,7 +146,17 @@
 <meta property="og:image" content="https://hitworld.github.io/png/2021-01-04-21-40-42.png">
 <meta property="og:image" content="https://hitworld.github.io/png/2021-01-04-21-37-08.png">
 <meta property="og:image" content="https://hitworld.github.io/png/2021-01-04-21-37-33.png">
-<meta property="og:updated_time" content="2021-01-04T14:02:31.992Z">
+<meta property="og:image" content="https://hitworld.github.io/png/2021-01-05-20-02-24.png">
+<meta property="og:image" content="https://hitworld.github.io/png/2021-01-05-20-02-34.png">
+<meta property="og:image" content="https://hitworld.github.io/png/2021-01-05-20-02-47.png">
+<meta property="og:image" content="https://hitworld.github.io/png/2021-01-05-20-03-00.png">
+<meta property="og:image" content="https://hitworld.github.io/png/2021-01-05-20-03-36.png">
+<meta property="og:image" content="https://hitworld.github.io/png/2021-01-05-20-03-54.png">
+<meta property="og:image" content="https://hitworld.github.io/png/2021-01-05-20-04-14.png">
+<meta property="og:image" content="https://hitworld.github.io/png/2021-01-05-20-04-45.png">
+<meta property="og:image" content="https://hitworld.github.io/png/2021-01-05-20-04-56.png">
+<meta property="og:image" content="https://hitworld.github.io/png/2021-01-05-20-05-14.png">
+<meta property="og:updated_time" content="2021-01-05T12:05:38.545Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="CS-BASIC-compiler-principles-语法分析">
 <meta name="twitter:description" content="概览  语法分析是编译过程的核心,它的任务是在词法分析识别出单词符号串的基础上,分析并判断程序的语法结构是否符合语法规则. 编译器采用正规式和有限自动机描述和识别语言的单词符号,用上下文无关文法来描述语法规则. 所以语法分析器的工作本质就是按文法的产生式,识别输入符号串是否是一个句子.  自上而下分析 从推导的角度看,自上而下分析是从文法的开始符号出发,试图推导出与输入符号串相同的符">
@@ -523,7 +533,7 @@
                 
                   <span class="post-meta-item-text">本文字数：</span>
                 
-                <span title="本文字数">899</span>
+                <span title="本文字数">931</span>
               
 
               
@@ -565,7 +575,7 @@
 <p><img src="/png/2021-01-04-17-10-13.png"></p>
 <h2 id="自上而下分析">自上而下分析</h2>
 <p>从推导的角度看,自上而下分析是从文法的开始符号出发,试图推导出与输入符号串相同的符号串.一般来讲,构造出的推导是最左推导.</p>
-<p>从语法树的角度看,从根节点,试图向下构造一颗语法树,其端末节点从左到右连接起来的串正好与输入符号串相同.</p>
+<p>从语法树的角度看,从根节点,试图自上而下的构造一颗语法树,其端末节点从左到右连接起来的串正好与输入符号串相同.</p>
 <h3 id="回溯问题">回溯问题</h3>
 <p>自上而下分析需要用带回朔的反复试探过程来解决多个产生式候选的问题,但是这种方法使得系统实现时的效率存在极大的问题,甚至不能进行.</p>
 <h3 id="文法左递归问题">文法左递归问题</h3>
@@ -600,6 +610,17 @@
 <p><code>LL(1)</code>文法:第一个<code>L</code>指从左到右扫描字符串,第二个<code>L</code>指分析过程是最左推导,<code>(1)</code>表示每一步只需要向前查看一个符号.</p>
 <p><img src="/png/2021-01-04-21-37-08.png"></p>
 <p><img src="/png/2021-01-04-21-37-33.png"></p>
+<h3 id="递归下降分析器">递归下降分析器</h3>
+<p><img src="/png/2021-01-05-20-02-24.png"></p>
+<p><img src="/png/2021-01-05-20-02-34.png"></p>
+<p><img src="/png/2021-01-05-20-02-47.png"></p>
+<p><img src="/png/2021-01-05-20-03-00.png"></p>
+<p><img src="/png/2021-01-05-20-03-36.png"></p>
+<p><img src="/png/2021-01-05-20-03-54.png"></p>
+<p><img src="/png/2021-01-05-20-04-14.png"></p>
+<p><img src="/png/2021-01-05-20-04-45.png"></p>
+<p><img src="/png/2021-01-05-20-04-56.png"></p>
+<p><img src="/png/2021-01-05-20-05-14.png"></p>
 <h2 id="自下而上分析">自下而上分析</h2>
 
       
@@ -911,7 +932,7 @@
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#概览"><span class="nav-number">1.</span> <span class="nav-text">概览</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#自上而下分析"><span class="nav-number">2.</span> <span class="nav-text">自上而下分析</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#回溯问题"><span class="nav-number">2.1.</span> <span class="nav-text">回溯问题</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#文法左递归问题"><span class="nav-number">2.2.</span> <span class="nav-text">文法左递归问题</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#消除文法的左递归"><span class="nav-number">2.3.</span> <span class="nav-text">消除文法的左递归</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#消除回溯"><span class="nav-number">2.4.</span> <span class="nav-text">消除回溯</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#first和follow集合的构造"><span class="nav-number">2.5.</span> <span class="nav-text">FIRST和FOLLOW集合的构造</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#ll1文法"><span class="nav-number">2.6.</span> <span class="nav-text">LL(1)文法</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#自下而上分析"><span class="nav-number">3.</span> <span class="nav-text">自下而上分析</span></a></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#概览"><span class="nav-number">1.</span> <span class="nav-text">概览</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#自上而下分析"><span class="nav-number">2.</span> <span class="nav-text">自上而下分析</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#回溯问题"><span class="nav-number">2.1.</span> <span class="nav-text">回溯问题</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#文法左递归问题"><span class="nav-number">2.2.</span> <span class="nav-text">文法左递归问题</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#消除文法的左递归"><span class="nav-number">2.3.</span> <span class="nav-text">消除文法的左递归</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#消除回溯"><span class="nav-number">2.4.</span> <span class="nav-text">消除回溯</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#first和follow集合的构造"><span class="nav-number">2.5.</span> <span class="nav-text">FIRST和FOLLOW集合的构造</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#ll1文法"><span class="nav-number">2.6.</span> <span class="nav-text">LL(1)文法</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#递归下降分析器"><span class="nav-number">2.7.</span> <span class="nav-text">递归下降分析器</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#自下而上分析"><span class="nav-number">3.</span> <span class="nav-text">自下而上分析</span></a></li></ol></div>
             
 
           </div>

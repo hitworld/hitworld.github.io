@@ -127,13 +127,13 @@
 <meta property="og:site_name" content="w4rd3n">
 <meta property="og:description" content="Code_Interpreter 程序逻辑为读取code文件里的数据流,然后根据关键函数操作.  跟踪数据流得出表达式获得flag.  Steak delete函数存在uaf,edit存在overlop.直接unlink使buf = buf - 0x18. 利用copy函数任意读写将stdout置于可控区域,修改stdout的_IO_write_base指针到想泄露的内存区域. 开">
 <meta property="og:locale" content="zh-CN">
-<meta property="og:image" content="https://hitworld.github.io/posts/659cbaf1/2.png">
-<meta property="og:image" content="https://hitworld.github.io/posts/659cbaf1/1.png">
-<meta property="og:updated_time" content="2021-01-05T12:30:24.055Z">
+<meta property="og:image" content="https://hitworld.github.io/png/2021-01-10-15-47-50.png">
+<meta property="og:image" content="https://hitworld.github.io/png/2021-01-10-15-47-32.png">
+<meta property="og:updated_time" content="2021-01-10T08:09:11.928Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="writeup-xnuca-2018-quals">
 <meta name="twitter:description" content="Code_Interpreter 程序逻辑为读取code文件里的数据流,然后根据关键函数操作.  跟踪数据流得出表达式获得flag.  Steak delete函数存在uaf,edit存在overlop.直接unlink使buf = buf - 0x18. 利用copy函数任意读写将stdout置于可控区域,修改stdout的_IO_write_base指针到想泄露的内存区域. 开">
-<meta name="twitter:image" content="https://hitworld.github.io/posts/659cbaf1/2.png">
+<meta name="twitter:image" content="https://hitworld.github.io/png/2021-01-10-15-47-50.png">
 
 
 
@@ -535,9 +535,9 @@
       
         <h2 id="code_interpreter">Code_Interpreter</h2>
 <p>程序逻辑为读取<code>code</code>文件里的数据流,然后根据关键函数操作.</p>
-<img src="/posts/659cbaf1/2.png" title="关键函数">
+<p><img src="/png/2021-01-10-15-47-50.png"></p>
 <p>跟踪数据流得出表达式获得<code>flag</code>.</p>
-<img src="/posts/659cbaf1/1.png" title="表达式">
+<p><img src="/png/2021-01-10-15-47-32.png"></p>
 <h2 id="steak">Steak</h2>
 <p><code>delete</code>函数存在<code>uaf</code>,<code>edit</code>存在<code>overlop</code>.直接<code>unlink</code>使<code>buf = buf - 0x18</code>.</p>
 <p>利用<code>copy</code>函数任意读写将<code>stdout</code>置于可控区域,修改<code>stdout</code>的<code>_IO_write_base</code>指针到想泄露的内存区域.</p>
@@ -666,7 +666,7 @@
                 
                   <a href="/archives/">
                 
-                    <span class="site-state-item-count">168</span>
+                    <span class="site-state-item-count">167</span>
                     <span class="site-state-item-name">日志</span>
                   </a>
                 </div>
@@ -802,9 +802,7 @@
                     
                       
                     
-                      
-                    
-                    <span class="site-state-item-count">40</span>
+                    <span class="site-state-item-count">39</span>
                     <span class="site-state-item-name">标签</span>
                   </a>
                 </div>
@@ -886,7 +884,7 @@
       <i class="fa fa-area-chart"></i>
     </span>
     
-    <span title="站点总字数">882k</span>
+    <span title="站点总字数">880k</span>
   
 
   
@@ -895,7 +893,7 @@
       <i class="fa fa-coffee"></i>
     </span>
     
-    <span title="站点阅读时长">13:22</span>
+    <span title="站点阅读时长">13:20</span>
   
 </div>
 
@@ -1544,7 +1542,7 @@
   //$("body").backstretch("/images/background.jpg");
   </script>
   
-  <script type="text/javascript" src="//cdn.bootcss.com/canvas-nest.js/1.0.0/canvas-nest.min.js"></script>
+  <script type="text/javascript" src="//cdn.bootcss.com/canvas-nest.js/1.0.0/canvas-nest.min.js"></script><!-- hexo-inject:begin --><!-- hexo-inject:end -->
   
-<script src="/live2dw/lib/L2Dwidget.min.js?0c58a1486de42ac6cc1c59c7d98ae887"></script><script>L2Dwidget.init({"pluginRootPath":"live2dw/","pluginJsPath":"lib/","pluginModelPath":"assets/","tagMode":false,"debug":false,"model":{"jsonPath":"/live2dw/assets/koharu.model.json"},"display":{"position":"right","width":150,"height":300},"mobile":{"show":false},"log":false});</script><!-- hexo-inject:begin --><!-- hexo-inject:end --></body>
+<script src="/live2dw/lib/L2Dwidget.min.js?0c58a1486de42ac6cc1c59c7d98ae887"></script><script>L2Dwidget.init({"pluginRootPath":"live2dw/","pluginJsPath":"lib/","pluginModelPath":"assets/","tagMode":false,"debug":false,"model":{"jsonPath":"/live2dw/assets/koharu.model.json"},"display":{"position":"right","width":150,"height":300},"mobile":{"show":false},"log":false});</script></body>
 </html>

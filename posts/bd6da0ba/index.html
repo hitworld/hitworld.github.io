@@ -127,7 +127,7 @@
 <meta property="og:site_name" content="w4rd3n">
 <meta property="og:description" content="基础环境 apt换源 修改配置文件. 123sudo gedit /etc/apt/sources.listsudo apt-get update#sudo apt-get upgrade sources.list. 123456789101112131415161718#ubuntu16deb http://mirrors.ustc.edu.cn/ubuntu/ xenial main">
 <meta property="og:locale" content="zh-CN">
-<meta property="og:updated_time" content="2021-01-05T12:30:24.036Z">
+<meta property="og:updated_time" content="2021-01-07T16:44:06.030Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="w4rd3n-ubuntu虚拟机环境搭建">
 <meta name="twitter:description" content="基础环境 apt换源 修改配置文件. 123sudo gedit /etc/apt/sources.listsudo apt-get update#sudo apt-get upgrade sources.list. 123456789101112131415161718#ubuntu16deb http://mirrors.ustc.edu.cn/ubuntu/ xenial main">
@@ -496,7 +496,7 @@
                 
                   <span class="post-meta-item-text">本文字数：</span>
                 
-                <span title="本文字数">6.5k</span>
+                <span title="本文字数">6.6k</span>
               
 
               
@@ -569,7 +569,7 @@
 <p>有些老版本内核使用新版本<code>gcc</code>可能编译不过.</p>
 <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">sudo apt-get install gcc-4.7</span><br><span class="line">sudo update-alternatives --install /usr/bin/gcc gcc /usr/bin/gcc-4.7 40</span><br><span class="line">sudo update-alternatives --install /usr/bin/gcc gcc /usr/bin/gcc-5 50</span><br><span class="line">sudo update-alternatives --config gcc</span><br></pre></td></tr></table></figure>
 <h3 id="常用工具">常用工具</h3>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">#sudo add-apt-repository ppa:brightbox/ruby-ng</span></span><br><span class="line"><span class="comment">#删除:sudo add-apt-repository -r ppa:brightbox/ruby-ng</span></span><br><span class="line"><span class="comment">#sudo apt-get update</span></span><br><span class="line"><span class="comment">#sudo apt-get install ruby2.6 ruby2.6-dev</span></span><br><span class="line">sudo apt-get install ruby ruby-dev</span><br><span class="line">sudo gem install one_gadget seccomp-tools</span><br><span class="line"></span><br><span class="line">sudo pip install setuptools --upgrade</span><br><span class="line"></span><br><span class="line">sudo pip3 install setuptools --upgrade</span><br><span class="line">sudo pip3 install lief</span><br><span class="line"></span><br><span class="line">sudo apt-get install binwalk</span><br><span class="line">sudo apt install musl-tools</span><br><span class="line"></span><br><span class="line">git <span class="built_in">clone</span> https://github.com/niklasb/libc-database.git</span><br><span class="line"></span><br><span class="line">git <span class="built_in">clone</span> https://github.com/maroueneboubakri/lscan.git</span><br></pre></td></tr></table></figure>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">#sudo add-apt-repository ppa:brightbox/ruby-ng</span></span><br><span class="line"><span class="comment">#删除:sudo add-apt-repository -r ppa:brightbox/ruby-ng</span></span><br><span class="line"><span class="comment">#sudo apt-get update</span></span><br><span class="line"><span class="comment">#sudo apt-get install ruby2.6 ruby2.6-dev</span></span><br><span class="line">sudo apt-get install ruby ruby-dev</span><br><span class="line">gem sources --add https://mirrors.tuna.tsinghua.edu.cn/rubygems/ --remove https://rubygems.org/</span><br><span class="line">sudo gem install one_gadget seccomp-tools</span><br><span class="line"></span><br><span class="line">sudo pip install setuptools --upgrade</span><br><span class="line"></span><br><span class="line">sudo pip3 install setuptools --upgrade</span><br><span class="line">sudo pip3 install lief</span><br><span class="line"></span><br><span class="line">sudo apt-get install binwalk</span><br><span class="line">sudo apt install musl-tools</span><br><span class="line"></span><br><span class="line">git <span class="built_in">clone</span> https://github.com/niklasb/libc-database.git</span><br><span class="line"></span><br><span class="line">git <span class="built_in">clone</span> https://github.com/maroueneboubakri/lscan.git</span><br></pre></td></tr></table></figure>
 <h3 id="多架构">多架构</h3>
 <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">sudo apt-get install <span class="string">"binfmt*"</span></span><br><span class="line"><span class="comment">#binfmt用来识别多架构文件类型</span></span><br><span class="line">sudo apt-get install gcc-arm-linux-gnueabi g++-arm-linux-gnueabi gcc-aarch64-linux-gnu g++-aarch64-linux-gnu gcc-arm-linux-gnueabihf g++-arm-linux-gnueabihf</span><br><span class="line"><span class="comment">#ARM/AARCH64运行环境+交叉编译链</span></span><br><span class="line">sudo apt-get install linux-libc-dev-mips-cross libc6-mips-cross libc6-dev-mips-cross binutils-mips-linux-gnu gcc-mips-linux-gnu g++-mips-linux-gnu</span><br><span class="line"><span class="comment">#MIPS运行环境+交叉编译链</span></span><br></pre></td></tr></table></figure>
 <h3 id="v8环境配置">v8环境配置</h3>
@@ -713,7 +713,7 @@
                 
                   <a href="/archives/">
                 
-                    <span class="site-state-item-count">168</span>
+                    <span class="site-state-item-count">167</span>
                     <span class="site-state-item-name">日志</span>
                   </a>
                 </div>
@@ -849,9 +849,7 @@
                     
                       
                     
-                      
-                    
-                    <span class="site-state-item-count">40</span>
+                    <span class="site-state-item-count">39</span>
                     <span class="site-state-item-name">标签</span>
                   </a>
                 </div>
@@ -933,7 +931,7 @@
       <i class="fa fa-area-chart"></i>
     </span>
     
-    <span title="站点总字数">882k</span>
+    <span title="站点总字数">880k</span>
   
 
   
@@ -942,7 +940,7 @@
       <i class="fa fa-coffee"></i>
     </span>
     
-    <span title="站点阅读时长">13:22</span>
+    <span title="站点阅读时长">13:20</span>
   
 </div>
 
@@ -1591,7 +1589,7 @@
   //$("body").backstretch("/images/background.jpg");
   </script>
   
-  <script type="text/javascript" src="//cdn.bootcss.com/canvas-nest.js/1.0.0/canvas-nest.min.js"></script>
+  <script type="text/javascript" src="//cdn.bootcss.com/canvas-nest.js/1.0.0/canvas-nest.min.js"></script><!-- hexo-inject:begin --><!-- hexo-inject:end -->
   
-<script src="/live2dw/lib/L2Dwidget.min.js?0c58a1486de42ac6cc1c59c7d98ae887"></script><script>L2Dwidget.init({"pluginRootPath":"live2dw/","pluginJsPath":"lib/","pluginModelPath":"assets/","tagMode":false,"debug":false,"model":{"jsonPath":"/live2dw/assets/koharu.model.json"},"display":{"position":"right","width":150,"height":300},"mobile":{"show":false},"log":false});</script><!-- hexo-inject:begin --><!-- hexo-inject:end --></body>
+<script src="/live2dw/lib/L2Dwidget.min.js?0c58a1486de42ac6cc1c59c7d98ae887"></script><script>L2Dwidget.init({"pluginRootPath":"live2dw/","pluginJsPath":"lib/","pluginModelPath":"assets/","tagMode":false,"debug":false,"model":{"jsonPath":"/live2dw/assets/koharu.model.json"},"display":{"position":"right","width":150,"height":300},"mobile":{"show":false},"log":false});</script></body>
 </html>

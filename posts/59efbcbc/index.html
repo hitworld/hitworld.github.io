@@ -119,13 +119,13 @@
 
 
 
-  <meta name="description" content="概览  语法分析是编译过程的核心,它的任务是在词法分析识别出单词符号串的基础上,分析并判断程序的语法结构是否符合语法规则. 编译器采用正规式和有限自动机描述和识别语言的单词符号,用上下文无关文法来描述语法规则. 所以语法分析器的工作本质就是按文法的产生式,识别输入符号串是否是一个句子.  自上而下分析 从推导的角度看,自上而下分析是从文法的开始符号出发,试图推导出与输入符号串相同的符">
+  <meta name="description" content="概览  语法分析是编译过程的核心,它的任务是在词法分析识别出单词符号串的基础上,分析并判断程序的语法结构是否符合语法规则. 编译器采用正规式和有限自动机描述和识别语言的单词符号,用上下文无关文法来描述语法规则. 所以语法分析器的工作本质就是按文法的产生式,识别输入符号串是否是一个句子.  计算思维的典型方法:知识与控制的分离,自动化. 自上而下分析 从推导的角度看,自上而下分析是从">
 <meta name="keywords" content="compiler-principles">
 <meta property="og:type" content="article">
 <meta property="og:title" content="CS-BASIC-compiler-principles-语法分析">
 <meta property="og:url" content="https://hitworld.github.io/posts/59efbcbc/index.html">
 <meta property="og:site_name" content="w4rd3n">
-<meta property="og:description" content="概览  语法分析是编译过程的核心,它的任务是在词法分析识别出单词符号串的基础上,分析并判断程序的语法结构是否符合语法规则. 编译器采用正规式和有限自动机描述和识别语言的单词符号,用上下文无关文法来描述语法规则. 所以语法分析器的工作本质就是按文法的产生式,识别输入符号串是否是一个句子.  自上而下分析 从推导的角度看,自上而下分析是从文法的开始符号出发,试图推导出与输入符号串相同的符">
+<meta property="og:description" content="概览  语法分析是编译过程的核心,它的任务是在词法分析识别出单词符号串的基础上,分析并判断程序的语法结构是否符合语法规则. 编译器采用正规式和有限自动机描述和识别语言的单词符号,用上下文无关文法来描述语法规则. 所以语法分析器的工作本质就是按文法的产生式,识别输入符号串是否是一个句子.  计算思维的典型方法:知识与控制的分离,自动化. 自上而下分析 从推导的角度看,自上而下分析是从">
 <meta property="og:locale" content="zh-CN">
 <meta property="og:image" content="https://hitworld.github.io/png/2021-01-04-17-09-34.png">
 <meta property="og:image" content="https://hitworld.github.io/png/2021-01-04-17-10-13.png">
@@ -201,10 +201,26 @@
 <meta property="og:image" content="https://hitworld.github.io/png/2021-01-11-23-37-10.png">
 <meta property="og:image" content="https://hitworld.github.io/png/2021-01-11-23-39-03.png">
 <meta property="og:image" content="https://hitworld.github.io/png/2021-01-11-23-39-17.png">
-<meta property="og:updated_time" content="2021-01-11T15:39:17.710Z">
+<meta property="og:image" content="https://hitworld.github.io/png/2021-01-12-00-44-48.png">
+<meta property="og:image" content="https://hitworld.github.io/png/2021-01-12-00-45-26.png">
+<meta property="og:image" content="https://hitworld.github.io/png/2021-01-12-00-47-20.png">
+<meta property="og:image" content="https://hitworld.github.io/png/2021-01-12-00-49-08.png">
+<meta property="og:image" content="https://hitworld.github.io/png/2021-01-12-00-49-27.png">
+<meta property="og:image" content="https://hitworld.github.io/png/2021-01-12-01-13-18.png">
+<meta property="og:image" content="https://hitworld.github.io/png/2021-01-12-00-44-12.png">
+<meta property="og:image" content="https://hitworld.github.io/png/2021-01-12-01-14-08.png">
+<meta property="og:image" content="https://hitworld.github.io/png/2021-01-12-01-16-21.png">
+<meta property="og:image" content="https://hitworld.github.io/png/2021-01-12-01-18-19.png">
+<meta property="og:image" content="https://hitworld.github.io/png/2021-01-12-01-18-33.png">
+<meta property="og:image" content="https://hitworld.github.io/png/2021-01-12-01-18-45.png">
+<meta property="og:image" content="https://hitworld.github.io/png/2021-01-12-01-18-59.png">
+<meta property="og:image" content="https://hitworld.github.io/png/2021-01-12-01-20-30.png">
+<meta property="og:image" content="https://hitworld.github.io/png/2021-01-12-01-23-01.png">
+<meta property="og:image" content="https://hitworld.github.io/png/2021-01-12-01-23-37.png">
+<meta property="og:updated_time" content="2021-01-11T17:29:02.076Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="CS-BASIC-compiler-principles-语法分析">
-<meta name="twitter:description" content="概览  语法分析是编译过程的核心,它的任务是在词法分析识别出单词符号串的基础上,分析并判断程序的语法结构是否符合语法规则. 编译器采用正规式和有限自动机描述和识别语言的单词符号,用上下文无关文法来描述语法规则. 所以语法分析器的工作本质就是按文法的产生式,识别输入符号串是否是一个句子.  自上而下分析 从推导的角度看,自上而下分析是从文法的开始符号出发,试图推导出与输入符号串相同的符">
+<meta name="twitter:description" content="概览  语法分析是编译过程的核心,它的任务是在词法分析识别出单词符号串的基础上,分析并判断程序的语法结构是否符合语法规则. 编译器采用正规式和有限自动机描述和识别语言的单词符号,用上下文无关文法来描述语法规则. 所以语法分析器的工作本质就是按文法的产生式,识别输入符号串是否是一个句子.  计算思维的典型方法:知识与控制的分离,自动化. 自上而下分析 从推导的角度看,自上而下分析是从">
 <meta name="twitter:image" content="https://hitworld.github.io/png/2021-01-04-17-09-34.png">
 
 
@@ -578,7 +594,7 @@
                 
                   <span class="post-meta-item-text">本文字数：</span>
                 
-                <span title="本文字数">2k</span>
+                <span title="本文字数">2.2k</span>
               
 
               
@@ -618,6 +634,7 @@
 <p>编译器采用正规式和有限自动机描述和识别语言的单词符号,用上下文无关文法来描述语法规则.</p>
 <p>所以语法分析器的工作本质就是按文法的产生式,识别输入符号串是否是一个句子.</p>
 <p><img src="/png/2021-01-04-17-10-13.png"></p>
+<p>计算思维的典型方法:知识与控制的分离,自动化.</p>
 <h2 id="自上而下分析">自上而下分析</h2>
 <p>从推导的角度看,自上而下分析是从文法的开始符号出发,试图推导出与输入符号串相同的符号串.一般来讲,构造出的推导是最左推导.</p>
 <p>从语法树的角度看,从根节点,试图自上而下的构造一颗语法树,其端末节点从左到右连接起来的串正好与输入符号串相同.</p>
@@ -746,6 +763,37 @@
 <p>对于文法的句子来说,它的算符优先分析的结果是分析树,不一定是语法树,因为其中非终结符的比较并不严谨,所以分析结果可能有误.</p>
 <p><img src="/png/2021-01-11-23-39-03.png"></p>
 <p><img src="/png/2021-01-11-23-39-17.png"></p>
+<h3 id="句柄和规范归约">句柄和规范归约</h3>
+<p>短语,直接短语和句柄.</p>
+<p><img src="/png/2021-01-12-00-44-48.png"></p>
+<p><img src="/png/2021-01-12-00-45-26.png"></p>
+<p>用句柄归约.</p>
+<p><img src="/png/2021-01-12-00-47-20.png"></p>
+<p>规范归约.</p>
+<p><img src="/png/2021-01-12-00-49-08.png"></p>
+<p><img src="/png/2021-01-12-00-49-27.png"></p>
+<p>规范归约得到的就是语法树.</p>
+<p>规范归约是最左归约,其逆过程就是最右推导,所以最右推导也称为规范推导.</p>
+<p>由规范推导推出的句型称为规范句型.</p>
+<p><img src="/png/2021-01-12-01-13-18.png"></p>
+<h3 id="lr分析法">LR分析法</h3>
+<p><code>L</code>指从左到右扫描输入串,<code>R</code>表示自下而上进行归约.</p>
+<p><img src="/png/2021-01-12-00-44-12.png"></p>
+<p><code>LR</code>分析器的结构.</p>
+<p><img src="/png/2021-01-12-01-14-08.png"></p>
+<p><code>LR</code>分析器的核心是一张分析表.</p>
+<p><img src="/png/2021-01-12-01-16-21.png"></p>
+<p><img src="/png/2021-01-12-01-18-19.png"></p>
+<p><img src="/png/2021-01-12-01-18-33.png"></p>
+<p><img src="/png/2021-01-12-01-18-45.png"></p>
+<p><img src="/png/2021-01-12-01-18-59.png"></p>
+<h4 id="lr分析过程">LR分析过程</h4>
+<p><img src="/png/2021-01-12-01-20-30.png"></p>
+<p><img src="/png/2021-01-12-01-23-01.png"></p>
+<p>归约那一步的详细变化过程.</p>
+<p><img src="/png/2021-01-12-01-23-37.png"></p>
+<p>如果是空白则直接报错.</p>
+<h4 id="section"></h4>
 
       
     </div>
@@ -1054,7 +1102,7 @@
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#概览"><span class="nav-number">1.</span> <span class="nav-text">概览</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#自上而下分析"><span class="nav-number">2.</span> <span class="nav-text">自上而下分析</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#回溯问题"><span class="nav-number">2.1.</span> <span class="nav-text">回溯问题</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#文法左递归问题"><span class="nav-number">2.2.</span> <span class="nav-text">文法左递归问题</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#消除文法的左递归"><span class="nav-number">2.3.</span> <span class="nav-text">消除文法的左递归</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#消除回溯"><span class="nav-number">2.4.</span> <span class="nav-text">消除回溯</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#first和follow集合的构造"><span class="nav-number">2.5.</span> <span class="nav-text">FIRST和FOLLOW集合的构造</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#ll1文法"><span class="nav-number">2.6.</span> <span class="nav-text">LL(1)文法</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#递归下降分析器"><span class="nav-number">2.7.</span> <span class="nav-text">递归下降分析器</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#扩充的巴科斯范式和语法图"><span class="nav-number">2.8.</span> <span class="nav-text">扩充的巴科斯范式和语法图</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#javacc"><span class="nav-number">2.9.</span> <span class="nav-text">JavaCC</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#预测分析程序"><span class="nav-number">2.10.</span> <span class="nav-text">预测分析程序</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#ll1文法与二义性"><span class="nav-number">2.11.</span> <span class="nav-text">LL(1)文法与二义性</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#自下而上分析"><span class="nav-number">3.</span> <span class="nav-text">自下而上分析</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#短语和直接短语"><span class="nav-number">3.1.</span> <span class="nav-text">短语和直接短语</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#分析过程描述"><span class="nav-number">3.2.</span> <span class="nav-text">分析过程描述</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#算符优先文法"><span class="nav-number">3.3.</span> <span class="nav-text">算符优先文法</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#构造优先关系表"><span class="nav-number">3.4.</span> <span class="nav-text">构造优先关系表</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#构造集合firstvtp的算法"><span class="nav-number">3.4.1.</span> <span class="nav-text">构造集合FIRSTVT(P)的算法</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#构造集合lastvtp的算法"><span class="nav-number">3.4.2.</span> <span class="nav-text">构造集合LASTVT(P)的算法</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#构造集合firstvtp和lastvtp的例子"><span class="nav-number">3.4.3.</span> <span class="nav-text">构造集合FIRSTVT(P)和LASTVT(P)的例子</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#构造优先关系表的算法"><span class="nav-number">3.4.4.</span> <span class="nav-text">构造优先关系表的算法</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#算符优先分析算法"><span class="nav-number">3.5.</span> <span class="nav-text">算符优先分析算法</span></a></li></ol></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#概览"><span class="nav-number">1.</span> <span class="nav-text">概览</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#自上而下分析"><span class="nav-number">2.</span> <span class="nav-text">自上而下分析</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#回溯问题"><span class="nav-number">2.1.</span> <span class="nav-text">回溯问题</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#文法左递归问题"><span class="nav-number">2.2.</span> <span class="nav-text">文法左递归问题</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#消除文法的左递归"><span class="nav-number">2.3.</span> <span class="nav-text">消除文法的左递归</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#消除回溯"><span class="nav-number">2.4.</span> <span class="nav-text">消除回溯</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#first和follow集合的构造"><span class="nav-number">2.5.</span> <span class="nav-text">FIRST和FOLLOW集合的构造</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#ll1文法"><span class="nav-number">2.6.</span> <span class="nav-text">LL(1)文法</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#递归下降分析器"><span class="nav-number">2.7.</span> <span class="nav-text">递归下降分析器</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#扩充的巴科斯范式和语法图"><span class="nav-number">2.8.</span> <span class="nav-text">扩充的巴科斯范式和语法图</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#javacc"><span class="nav-number">2.9.</span> <span class="nav-text">JavaCC</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#预测分析程序"><span class="nav-number">2.10.</span> <span class="nav-text">预测分析程序</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#ll1文法与二义性"><span class="nav-number">2.11.</span> <span class="nav-text">LL(1)文法与二义性</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#自下而上分析"><span class="nav-number">3.</span> <span class="nav-text">自下而上分析</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#短语和直接短语"><span class="nav-number">3.1.</span> <span class="nav-text">短语和直接短语</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#分析过程描述"><span class="nav-number">3.2.</span> <span class="nav-text">分析过程描述</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#算符优先文法"><span class="nav-number">3.3.</span> <span class="nav-text">算符优先文法</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#构造优先关系表"><span class="nav-number">3.4.</span> <span class="nav-text">构造优先关系表</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#构造集合firstvtp的算法"><span class="nav-number">3.4.1.</span> <span class="nav-text">构造集合FIRSTVT(P)的算法</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#构造集合lastvtp的算法"><span class="nav-number">3.4.2.</span> <span class="nav-text">构造集合LASTVT(P)的算法</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#构造集合firstvtp和lastvtp的例子"><span class="nav-number">3.4.3.</span> <span class="nav-text">构造集合FIRSTVT(P)和LASTVT(P)的例子</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#构造优先关系表的算法"><span class="nav-number">3.4.4.</span> <span class="nav-text">构造优先关系表的算法</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#算符优先分析算法"><span class="nav-number">3.5.</span> <span class="nav-text">算符优先分析算法</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#句柄和规范归约"><span class="nav-number">3.6.</span> <span class="nav-text">句柄和规范归约</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#lr分析法"><span class="nav-number">3.7.</span> <span class="nav-text">LR分析法</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#lr分析过程"><span class="nav-number">3.7.1.</span> <span class="nav-text">LR分析过程</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#section"><span class="nav-number">3.7.2.</span> <span class="nav-text"></span></a></li></ol></li></ol></li></ol></div>
             
 
           </div>

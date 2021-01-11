@@ -169,7 +169,16 @@
 <meta property="og:image" content="https://hitworld.github.io/png/2021-01-05-20-25-46.png">
 <meta property="og:image" content="https://hitworld.github.io/png/2021-01-05-20-26-50.png">
 <meta property="og:image" content="https://hitworld.github.io/png/2021-01-05-20-27-05.png">
-<meta property="og:updated_time" content="2021-01-05T13:51:02.835Z">
+<meta property="og:image" content="https://hitworld.github.io/png/2021-01-11-16-27-03.png">
+<meta property="og:image" content="https://hitworld.github.io/png/2021-01-11-17-52-29.png">
+<meta property="og:image" content="https://hitworld.github.io/png/2021-01-11-17-52-41.png">
+<meta property="og:image" content="https://hitworld.github.io/png/2021-01-11-17-55-11.png">
+<meta property="og:image" content="https://hitworld.github.io/png/2021-01-11-18-56-37.png">
+<meta property="og:image" content="https://hitworld.github.io/png/2021-01-11-18-58-13.png">
+<meta property="og:image" content="https://hitworld.github.io/png/2021-01-11-19-00-05.png">
+<meta property="og:image" content="https://hitworld.github.io/png/2021-01-11-19-02-08.png">
+<meta property="og:image" content="https://hitworld.github.io/png/2021-01-11-19-02-49.png">
+<meta property="og:updated_time" content="2021-01-11T11:07:24.174Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="CS-BASIC-compiler-principles-语法分析">
 <meta name="twitter:description" content="概览  语法分析是编译过程的核心,它的任务是在词法分析识别出单词符号串的基础上,分析并判断程序的语法结构是否符合语法规则. 编译器采用正规式和有限自动机描述和识别语言的单词符号,用上下文无关文法来描述语法规则. 所以语法分析器的工作本质就是按文法的产生式,识别输入符号串是否是一个句子.  自上而下分析 从推导的角度看,自上而下分析是从文法的开始符号出发,试图推导出与输入符号串相同的符">
@@ -546,7 +555,7 @@
                 
                   <span class="post-meta-item-text">本文字数：</span>
                 
-                <span title="本文字数">1.1k</span>
+                <span title="本文字数">1.5k</span>
               
 
               
@@ -589,6 +598,7 @@
 <h2 id="自上而下分析">自上而下分析</h2>
 <p>从推导的角度看,自上而下分析是从文法的开始符号出发,试图推导出与输入符号串相同的符号串.一般来讲,构造出的推导是最左推导.</p>
 <p>从语法树的角度看,从根节点,试图自上而下的构造一颗语法树,其端末节点从左到右连接起来的串正好与输入符号串相同.</p>
+<p>自上而下分析的一般过程,扫描输入字符串,通过识别到的字符判断需要用到的产生式,对于有多个候选产生式,就需要进行试探.</p>
 <h3 id="回溯问题">回溯问题</h3>
 <p>自上而下分析需要用带回朔的反复试探过程来解决多个产生式候选的问题,但是这种方法使得系统实现时的效率存在极大的问题,甚至不能进行.</p>
 <h3 id="文法左递归问题">文法左递归问题</h3>
@@ -656,6 +666,26 @@
 <p><img src="/png/2021-01-05-20-27-05.png"></p>
 <p><code>else</code>悬挂问题是很多程序语言都有的,一般都是程序语言规定就近匹配(大部分,如<code>C</code>语言)或就远匹配.</p>
 <h2 id="自下而上分析">自下而上分析</h2>
+<p>从推导的角度看,自下而上分析是从输入字符串开始,逐步进行规约,直到获得文法的开始符号.</p>
+<p>从分析树的角度看,从树的叶节点开始逐步向上长,自下而上的获得根结点.</p>
+<p>自下而上分析采用移进-归约的思想,用一个栈存储符号,按顺序将输入符号压栈,当栈顶形成某个产生式的候选式时就把栈顶这一部分归约为该产生式的左部符号.</p>
+<p>自下而上分析同样面临着产生式候选的问题.</p>
+<h3 id="短语和直接短语">短语和直接短语</h3>
+<p><img src="/png/2021-01-11-16-27-03.png"></p>
+<p><img src="/png/2021-01-11-17-52-29.png"></p>
+<p><img src="/png/2021-01-11-17-52-41.png"></p>
+<h3 id="分析过程描述">分析过程描述</h3>
+<p><img src="/png/2021-01-11-17-55-11.png"></p>
+<h3 id="算符优先分析方法">算符优先分析方法</h3>
+<p>按照算符的优先关系和结合性质进行语法分析,适合于分析表达式.</p>
+<p><img src="/png/2021-01-11-18-56-37.png"></p>
+<p><img src="/png/2021-01-11-18-58-13.png"></p>
+<p>算符的优先关系,优先关系式左右位置敏感的,也就是结合性.优先级高先归约.</p>
+<p><img src="/png/2021-01-11-19-00-05.png"></p>
+<p>算符文法.</p>
+<p><img src="/png/2021-01-11-19-02-08.png"></p>
+<p><img src="/png/2021-01-11-19-02-49.png"></p>
+<p>算符优先文法是算符文法的特例,其蕴含了算符的优先性和结合性.</p>
 
       
     </div>
@@ -964,7 +994,7 @@
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#概览"><span class="nav-number">1.</span> <span class="nav-text">概览</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#自上而下分析"><span class="nav-number">2.</span> <span class="nav-text">自上而下分析</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#回溯问题"><span class="nav-number">2.1.</span> <span class="nav-text">回溯问题</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#文法左递归问题"><span class="nav-number">2.2.</span> <span class="nav-text">文法左递归问题</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#消除文法的左递归"><span class="nav-number">2.3.</span> <span class="nav-text">消除文法的左递归</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#消除回溯"><span class="nav-number">2.4.</span> <span class="nav-text">消除回溯</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#first和follow集合的构造"><span class="nav-number">2.5.</span> <span class="nav-text">FIRST和FOLLOW集合的构造</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#ll1文法"><span class="nav-number">2.6.</span> <span class="nav-text">LL(1)文法</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#递归下降分析器"><span class="nav-number">2.7.</span> <span class="nav-text">递归下降分析器</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#扩充的巴科斯范式和语法图"><span class="nav-number">2.8.</span> <span class="nav-text">扩充的巴科斯范式和语法图</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#javacc"><span class="nav-number">2.9.</span> <span class="nav-text">JavaCC</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#预测分析程序"><span class="nav-number">2.10.</span> <span class="nav-text">预测分析程序</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#ll1文法与二义性"><span class="nav-number">2.11.</span> <span class="nav-text">LL(1)文法与二义性</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#自下而上分析"><span class="nav-number">3.</span> <span class="nav-text">自下而上分析</span></a></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#概览"><span class="nav-number">1.</span> <span class="nav-text">概览</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#自上而下分析"><span class="nav-number">2.</span> <span class="nav-text">自上而下分析</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#回溯问题"><span class="nav-number">2.1.</span> <span class="nav-text">回溯问题</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#文法左递归问题"><span class="nav-number">2.2.</span> <span class="nav-text">文法左递归问题</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#消除文法的左递归"><span class="nav-number">2.3.</span> <span class="nav-text">消除文法的左递归</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#消除回溯"><span class="nav-number">2.4.</span> <span class="nav-text">消除回溯</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#first和follow集合的构造"><span class="nav-number">2.5.</span> <span class="nav-text">FIRST和FOLLOW集合的构造</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#ll1文法"><span class="nav-number">2.6.</span> <span class="nav-text">LL(1)文法</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#递归下降分析器"><span class="nav-number">2.7.</span> <span class="nav-text">递归下降分析器</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#扩充的巴科斯范式和语法图"><span class="nav-number">2.8.</span> <span class="nav-text">扩充的巴科斯范式和语法图</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#javacc"><span class="nav-number">2.9.</span> <span class="nav-text">JavaCC</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#预测分析程序"><span class="nav-number">2.10.</span> <span class="nav-text">预测分析程序</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#ll1文法与二义性"><span class="nav-number">2.11.</span> <span class="nav-text">LL(1)文法与二义性</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#自下而上分析"><span class="nav-number">3.</span> <span class="nav-text">自下而上分析</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#短语和直接短语"><span class="nav-number">3.1.</span> <span class="nav-text">短语和直接短语</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#分析过程描述"><span class="nav-number">3.2.</span> <span class="nav-text">分析过程描述</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#算符优先分析方法"><span class="nav-number">3.3.</span> <span class="nav-text">算符优先分析方法</span></a></li></ol></li></ol></div>
             
 
           </div>
@@ -996,7 +1026,7 @@
       <i class="fa fa-area-chart"></i>
     </span>
     
-    <span title="站点总字数">880k</span>
+    <span title="站点总字数">881k</span>
   
 
   
@@ -1005,7 +1035,7 @@
       <i class="fa fa-coffee"></i>
     </span>
     
-    <span title="站点阅读时长">13:20</span>
+    <span title="站点阅读时长">13:21</span>
   
 </div>
 

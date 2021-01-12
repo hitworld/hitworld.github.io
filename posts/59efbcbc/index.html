@@ -246,7 +246,30 @@
 <meta property="og:image" content="https://hitworld.github.io/png/2021-01-12-18-53-00.png">
 <meta property="og:image" content="https://hitworld.github.io/png/2021-01-12-18-53-19.png">
 <meta property="og:image" content="https://hitworld.github.io/png/2021-01-12-18-54-09.png">
-<meta property="og:updated_time" content="2021-01-12T10:57:26.802Z">
+<meta property="og:image" content="https://hitworld.github.io/png/2021-01-12-21-03-59.png">
+<meta property="og:image" content="https://hitworld.github.io/png/2021-01-12-21-07-37.png">
+<meta property="og:image" content="https://hitworld.github.io/png/2021-01-12-21-08-45.png">
+<meta property="og:image" content="https://hitworld.github.io/png/2021-01-12-21-10-53.png">
+<meta property="og:image" content="https://hitworld.github.io/png/2021-01-12-21-11-18.png">
+<meta property="og:image" content="https://hitworld.github.io/png/2021-01-12-21-11-32.png">
+<meta property="og:image" content="https://hitworld.github.io/png/2021-01-12-21-11-49.png">
+<meta property="og:image" content="https://hitworld.github.io/png/2021-01-12-21-25-23.png">
+<meta property="og:image" content="https://hitworld.github.io/png/2021-01-12-21-31-56.png">
+<meta property="og:image" content="https://hitworld.github.io/png/2021-01-12-21-36-59.png">
+<meta property="og:image" content="https://hitworld.github.io/png/2021-01-12-21-37-30.png">
+<meta property="og:image" content="https://hitworld.github.io/png/2021-01-12-21-38-34.png">
+<meta property="og:image" content="https://hitworld.github.io/png/2021-01-12-21-42-23.png">
+<meta property="og:image" content="https://hitworld.github.io/png/2021-01-12-21-45-29.png">
+<meta property="og:image" content="https://hitworld.github.io/png/2021-01-12-21-45-58.png">
+<meta property="og:image" content="https://hitworld.github.io/png/2021-01-12-21-46-36.png">
+<meta property="og:image" content="https://hitworld.github.io/png/2021-01-12-21-46-59.png">
+<meta property="og:image" content="https://hitworld.github.io/png/2021-01-12-21-47-11.png">
+<meta property="og:image" content="https://hitworld.github.io/png/2021-01-12-21-47-26.png">
+<meta property="og:image" content="https://hitworld.github.io/png/2021-01-12-21-48-05.png">
+<meta property="og:image" content="https://hitworld.github.io/png/2021-01-12-21-48-59.png">
+<meta property="og:image" content="https://hitworld.github.io/png/2021-01-12-21-49-21.png">
+<meta property="og:image" content="https://hitworld.github.io/png/2021-01-12-21-49-33.png">
+<meta property="og:updated_time" content="2021-01-12T13:50:48.700Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="CS-BASIC-compiler-principles-语法分析">
 <meta name="twitter:description" content="概览  语法分析是编译过程的核心,它的任务是在词法分析识别出单词符号串的基础上,分析并判断程序的语法结构是否符合语法规则. 编译器采用正规式和有限自动机描述和识别语言的单词符号,用上下文无关文法来描述语法规则. 所以语法分析器的工作本质就是按文法的产生式,识别输入符号串是否是一个句子.  计算思维的典型方法:知识与控制的分离,自动化. 自上而下分析 从推导的角度看,自上而下分析是从">
@@ -623,7 +646,7 @@
                 
                   <span class="post-meta-item-text">本文字数：</span>
                 
-                <span title="本文字数">2.5k</span>
+                <span title="本文字数">2.9k</span>
               
 
               
@@ -637,7 +660,7 @@
                 
                   <span class="post-meta-item-text">阅读时长 &asymp;</span>
                 
-                <span title="阅读时长">2 分钟</span>
+                <span title="阅读时长">3 分钟</span>
               
             </div>
           
@@ -868,6 +891,51 @@
 <p><img src="/png/2021-01-12-18-53-19.png"></p>
 <p>示例.</p>
 <p><img src="/png/2021-01-12-18-54-09.png"></p>
+<h3 id="slr1分析法">SLR(1)分析法</h3>
+<p>移进-归约冲突.</p>
+<p><img src="/png/2021-01-12-21-03-59.png"></p>
+<p>可以通过<code>FOLLOW</code>集和当前单词选择移进项目或归约项目.</p>
+<p>根据上面的原理,下面给出一个解决冲突的方法.</p>
+<p><img src="/png/2021-01-12-21-07-37.png"></p>
+<p>将上面的方法一般化,也就得到了<code>SLR(1)</code>的冲突解决方法.</p>
+<p><img src="/png/2021-01-12-21-08-45.png"></p>
+<h4 id="构造slr1分析表的方法">构造SLR(1)分析表的方法</h4>
+<p><img src="/png/2021-01-12-21-10-53.png"></p>
+<p><img src="/png/2021-01-12-21-11-18.png"></p>
+<p><img src="/png/2021-01-12-21-11-32.png"></p>
+<p><img src="/png/2021-01-12-21-11-49.png"></p>
+<h4 id="slr1分析表构造示例">SLR(1)分析表构造示例</h4>
+<p><img src="/png/2021-01-12-21-25-23.png"></p>
+<h3 id="lr1分析法">LR(1)分析法</h3>
+<p><code>SLR</code>冲突消解存在的问题:<code>FOLLOW</code>集合计算得到的超前符号集合可能大于实际可能出现的超前符号集合.</p>
+<p><img src="/png/2021-01-12-21-31-56.png"></p>
+<h4 id="构造lr1分析表">构造LR(1)分析表</h4>
+<p><img src="/png/2021-01-12-21-36-59.png"></p>
+<p><code>LR(k)</code>项目.</p>
+<p><img src="/png/2021-01-12-21-37-30.png"></p>
+<p>有效项目.</p>
+<p><img src="/png/2021-01-12-21-38-34.png"></p>
+<p>有效项目的性质.</p>
+<p><img src="/png/2021-01-12-21-42-23.png"></p>
+<p>构造<code>LR(1)</code>项目集规范族.</p>
+<p>首先是项目集的闭包<code>CLOSURE</code>.</p>
+<p><img src="/png/2021-01-12-21-45-29.png"></p>
+<p>然后是项目集的转换函数<code>GO</code>.</p>
+<p><img src="/png/2021-01-12-21-45-58.png"></p>
+<p><code>LR(1)</code>项目集规范族的构造算法.</p>
+<p><img src="/png/2021-01-12-21-46-36.png"></p>
+<p><code>LR(1)</code>分析表的构造算法.</p>
+<p><img src="/png/2021-01-12-21-46-59.png"></p>
+<p><img src="/png/2021-01-12-21-47-11.png"></p>
+<p><img src="/png/2021-01-12-21-47-26.png"></p>
+<p><code>LR(1)</code>分析表和<code>LR(1)</code>文法.</p>
+<p><img src="/png/2021-01-12-21-48-05.png"></p>
+<h4 id="lr1分析表构造和分析示例">LR(1)分析表构造和分析示例</h4>
+<p><img src="/png/2021-01-12-21-48-59.png"></p>
+<p><img src="/png/2021-01-12-21-49-21.png"></p>
+<p><img src="/png/2021-01-12-21-49-33.png"></p>
+<h3 id="yacc">YACC</h3>
+<p><code>YACC</code>:分析器产生工具.</p>
 
       
     </div>
@@ -1176,7 +1244,7 @@
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#概览"><span class="nav-number">1.</span> <span class="nav-text">概览</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#自上而下分析"><span class="nav-number">2.</span> <span class="nav-text">自上而下分析</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#回溯问题"><span class="nav-number">2.1.</span> <span class="nav-text">回溯问题</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#文法左递归问题"><span class="nav-number">2.2.</span> <span class="nav-text">文法左递归问题</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#消除文法的左递归"><span class="nav-number">2.3.</span> <span class="nav-text">消除文法的左递归</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#消除回溯"><span class="nav-number">2.4.</span> <span class="nav-text">消除回溯</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#first和follow集合的构造"><span class="nav-number">2.5.</span> <span class="nav-text">FIRST和FOLLOW集合的构造</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#ll1文法"><span class="nav-number">2.6.</span> <span class="nav-text">LL(1)文法</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#递归下降分析器"><span class="nav-number">2.7.</span> <span class="nav-text">递归下降分析器</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#扩充的巴科斯范式和语法图"><span class="nav-number">2.8.</span> <span class="nav-text">扩充的巴科斯范式和语法图</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#javacc"><span class="nav-number">2.9.</span> <span class="nav-text">JavaCC</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#预测分析程序"><span class="nav-number">2.10.</span> <span class="nav-text">预测分析程序</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#ll1文法与二义性"><span class="nav-number">2.11.</span> <span class="nav-text">LL(1)文法与二义性</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#自下而上分析"><span class="nav-number">3.</span> <span class="nav-text">自下而上分析</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#短语和直接短语"><span class="nav-number">3.1.</span> <span class="nav-text">短语和直接短语</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#分析过程描述"><span class="nav-number">3.2.</span> <span class="nav-text">分析过程描述</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#算符优先文法"><span class="nav-number">3.3.</span> <span class="nav-text">算符优先文法</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#构造优先关系表"><span class="nav-number">3.4.</span> <span class="nav-text">构造优先关系表</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#构造集合firstvtp的算法"><span class="nav-number">3.4.1.</span> <span class="nav-text">构造集合FIRSTVT(P)的算法</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#构造集合lastvtp的算法"><span class="nav-number">3.4.2.</span> <span class="nav-text">构造集合LASTVT(P)的算法</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#构造集合firstvtp和lastvtp的例子"><span class="nav-number">3.4.3.</span> <span class="nav-text">构造集合FIRSTVT(P)和LASTVT(P)的例子</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#构造优先关系表的算法"><span class="nav-number">3.4.4.</span> <span class="nav-text">构造优先关系表的算法</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#算符优先分析算法"><span class="nav-number">3.5.</span> <span class="nav-text">算符优先分析算法</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#句柄和规范归约"><span class="nav-number">3.6.</span> <span class="nav-text">句柄和规范归约</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#lr分析法"><span class="nav-number">3.7.</span> <span class="nav-text">LR分析法</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#lr分析过程"><span class="nav-number">3.7.1.</span> <span class="nav-text">LR分析过程</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#lr文法"><span class="nav-number">3.7.2.</span> <span class="nav-text">LR文法</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#活前缀"><span class="nav-number">3.8.</span> <span class="nav-text">活前缀</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#构造识别活前缀的dfa"><span class="nav-number">3.9.</span> <span class="nav-text">构造识别活前缀的DFA</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#有效项目"><span class="nav-number">3.9.1.</span> <span class="nav-text">有效项目</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#lr0项目集规范族的构造"><span class="nav-number">3.9.2.</span> <span class="nav-text">LR(0)项目集规范族的构造</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#构造lr0分析表"><span class="nav-number">3.10.</span> <span class="nav-text">构造LR(0)分析表</span></a></li></ol></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#概览"><span class="nav-number">1.</span> <span class="nav-text">概览</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#自上而下分析"><span class="nav-number">2.</span> <span class="nav-text">自上而下分析</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#回溯问题"><span class="nav-number">2.1.</span> <span class="nav-text">回溯问题</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#文法左递归问题"><span class="nav-number">2.2.</span> <span class="nav-text">文法左递归问题</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#消除文法的左递归"><span class="nav-number">2.3.</span> <span class="nav-text">消除文法的左递归</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#消除回溯"><span class="nav-number">2.4.</span> <span class="nav-text">消除回溯</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#first和follow集合的构造"><span class="nav-number">2.5.</span> <span class="nav-text">FIRST和FOLLOW集合的构造</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#ll1文法"><span class="nav-number">2.6.</span> <span class="nav-text">LL(1)文法</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#递归下降分析器"><span class="nav-number">2.7.</span> <span class="nav-text">递归下降分析器</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#扩充的巴科斯范式和语法图"><span class="nav-number">2.8.</span> <span class="nav-text">扩充的巴科斯范式和语法图</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#javacc"><span class="nav-number">2.9.</span> <span class="nav-text">JavaCC</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#预测分析程序"><span class="nav-number">2.10.</span> <span class="nav-text">预测分析程序</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#ll1文法与二义性"><span class="nav-number">2.11.</span> <span class="nav-text">LL(1)文法与二义性</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#自下而上分析"><span class="nav-number">3.</span> <span class="nav-text">自下而上分析</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#短语和直接短语"><span class="nav-number">3.1.</span> <span class="nav-text">短语和直接短语</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#分析过程描述"><span class="nav-number">3.2.</span> <span class="nav-text">分析过程描述</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#算符优先文法"><span class="nav-number">3.3.</span> <span class="nav-text">算符优先文法</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#构造优先关系表"><span class="nav-number">3.4.</span> <span class="nav-text">构造优先关系表</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#构造集合firstvtp的算法"><span class="nav-number">3.4.1.</span> <span class="nav-text">构造集合FIRSTVT(P)的算法</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#构造集合lastvtp的算法"><span class="nav-number">3.4.2.</span> <span class="nav-text">构造集合LASTVT(P)的算法</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#构造集合firstvtp和lastvtp的例子"><span class="nav-number">3.4.3.</span> <span class="nav-text">构造集合FIRSTVT(P)和LASTVT(P)的例子</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#构造优先关系表的算法"><span class="nav-number">3.4.4.</span> <span class="nav-text">构造优先关系表的算法</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#算符优先分析算法"><span class="nav-number">3.5.</span> <span class="nav-text">算符优先分析算法</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#句柄和规范归约"><span class="nav-number">3.6.</span> <span class="nav-text">句柄和规范归约</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#lr分析法"><span class="nav-number">3.7.</span> <span class="nav-text">LR分析法</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#lr分析过程"><span class="nav-number">3.7.1.</span> <span class="nav-text">LR分析过程</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#lr文法"><span class="nav-number">3.7.2.</span> <span class="nav-text">LR文法</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#活前缀"><span class="nav-number">3.8.</span> <span class="nav-text">活前缀</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#构造识别活前缀的dfa"><span class="nav-number">3.9.</span> <span class="nav-text">构造识别活前缀的DFA</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#有效项目"><span class="nav-number">3.9.1.</span> <span class="nav-text">有效项目</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#lr0项目集规范族的构造"><span class="nav-number">3.9.2.</span> <span class="nav-text">LR(0)项目集规范族的构造</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#构造lr0分析表"><span class="nav-number">3.10.</span> <span class="nav-text">构造LR(0)分析表</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#slr1分析法"><span class="nav-number">3.11.</span> <span class="nav-text">SLR(1)分析法</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#构造slr1分析表的方法"><span class="nav-number">3.11.1.</span> <span class="nav-text">构造SLR(1)分析表的方法</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#slr1分析表构造示例"><span class="nav-number">3.11.2.</span> <span class="nav-text">SLR(1)分析表构造示例</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#lr1分析法"><span class="nav-number">3.12.</span> <span class="nav-text">LR(1)分析法</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#构造lr1分析表"><span class="nav-number">3.12.1.</span> <span class="nav-text">构造LR(1)分析表</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#lr1分析表构造和分析示例"><span class="nav-number">3.12.2.</span> <span class="nav-text">LR(1)分析表构造和分析示例</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#yacc"><span class="nav-number">3.13.</span> <span class="nav-text">YACC</span></a></li></ol></li></ol></div>
             
 
           </div>
@@ -1217,7 +1285,7 @@
       <i class="fa fa-coffee"></i>
     </span>
     
-    <span title="站点阅读时长">13:21</span>
+    <span title="站点阅读时长">13:22</span>
   
 </div>
 
@@ -1866,7 +1934,7 @@
   //$("body").backstretch("/images/background.jpg");
   </script>
   
-  <script type="text/javascript" src="//cdn.bootcss.com/canvas-nest.js/1.0.0/canvas-nest.min.js"></script><!-- hexo-inject:begin --><!-- hexo-inject:end -->
+  <script type="text/javascript" src="//cdn.bootcss.com/canvas-nest.js/1.0.0/canvas-nest.min.js"></script>
   
-<script src="/live2dw/lib/L2Dwidget.min.js?0c58a1486de42ac6cc1c59c7d98ae887"></script><script>L2Dwidget.init({"pluginRootPath":"live2dw/","pluginJsPath":"lib/","pluginModelPath":"assets/","tagMode":false,"debug":false,"model":{"jsonPath":"/live2dw/assets/koharu.model.json"},"display":{"position":"right","width":150,"height":300},"mobile":{"show":false},"log":false});</script></body>
+<script src="/live2dw/lib/L2Dwidget.min.js?0c58a1486de42ac6cc1c59c7d98ae887"></script><script>L2Dwidget.init({"pluginRootPath":"live2dw/","pluginJsPath":"lib/","pluginModelPath":"assets/","tagMode":false,"debug":false,"model":{"jsonPath":"/live2dw/assets/koharu.model.json"},"display":{"position":"right","width":150,"height":300},"mobile":{"show":false},"log":false});</script><!-- hexo-inject:begin --><!-- hexo-inject:end --></body>
 </html>

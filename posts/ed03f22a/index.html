@@ -175,8 +175,22 @@
 <meta property="og:image" content="https://hitworld.github.io/png/2021-01-13-00-58-17.png">
 <meta property="og:image" content="https://hitworld.github.io/png/2021-01-13-00-58-27.png">
 <meta property="og:image" content="https://hitworld.github.io/png/2021-01-13-00-58-53.png">
+<meta property="og:image" content="https://hitworld.github.io/png/2021-01-13-01-03-55.png">
 <meta property="og:image" content="https://hitworld.github.io/png/2021-01-13-00-59-07.png">
-<meta property="og:updated_time" content="2021-01-12T16:59:08.145Z">
+<meta property="og:image" content="https://hitworld.github.io/png/2021-01-13-01-06-17.png">
+<meta property="og:image" content="https://hitworld.github.io/png/2021-01-13-01-07-10.png">
+<meta property="og:image" content="https://hitworld.github.io/png/2021-01-13-01-08-45.png">
+<meta property="og:image" content="https://hitworld.github.io/png/2021-01-13-01-09-10.png">
+<meta property="og:image" content="https://hitworld.github.io/png/2021-01-13-01-09-29.png">
+<meta property="og:image" content="https://hitworld.github.io/png/2021-01-13-01-12-34.png">
+<meta property="og:image" content="https://hitworld.github.io/png/2021-01-13-01-12-58.png">
+<meta property="og:image" content="https://hitworld.github.io/png/2021-01-13-01-13-12.png">
+<meta property="og:image" content="https://hitworld.github.io/png/2021-01-13-01-13-30.png">
+<meta property="og:image" content="https://hitworld.github.io/png/2021-01-13-01-13-42.png">
+<meta property="og:image" content="https://hitworld.github.io/png/2021-01-13-01-14-08.png">
+<meta property="og:image" content="https://hitworld.github.io/png/2021-01-13-01-14-25.png">
+<meta property="og:image" content="https://hitworld.github.io/png/2021-01-13-01-14-50.png">
+<meta property="og:updated_time" content="2021-01-12T17:14:51.677Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="CS-BASIC-compiler-principles-属性文法和语法制导翻译">
 <meta name="twitter:description" content="属性文法 属性文法也称为属性翻译文法,其以上下文无关文法为基础,为每个文法符号配备若干相关的值(也就是属性),代表与文法符号相关的信息,如:类型,值,代码序列,符号表内容等. 同时属性文法对于文法的每个产生式都配备了一组属性的语义规则,对属性进行计算和传递.  综合属性:用于自下而上的传递信息.  继承属性:用于自上而下的传递信息.  所有语义规则都可以写成对某些属性进行函数变换,">
@@ -553,7 +567,7 @@
                 
                   <span class="post-meta-item-text">本文字数：</span>
                 
-                <span title="本文字数">887</span>
+                <span title="本文字数">1k</span>
               
 
               
@@ -681,8 +695,31 @@
 <h3 id="消除翻译模式中的左递归">消除翻译模式中的左递归</h3>
 <p><img src="/png/2021-01-13-00-58-17.png"></p>
 <p><img src="/png/2021-01-13-00-58-27.png"></p>
+<p>消除左递归,构造新的翻译模式.</p>
 <p><img src="/png/2021-01-13-00-58-53.png"></p>
+<p><img src="/png/2021-01-13-01-03-55.png"></p>
+<p>示例.</p>
 <p><img src="/png/2021-01-13-00-59-07.png"></p>
+<h3 id="消除翻译模式中的左递归的一般方法">消除翻译模式中的左递归的一般方法</h3>
+<p><img src="/png/2021-01-13-01-06-17.png"></p>
+<p>它的每个文法符号都有一个综合属性,用小写字母表示,<code>g</code>和<code>f</code>是任意函数.</p>
+<p><img src="/png/2021-01-13-01-07-10.png"></p>
+<p>示例.</p>
+<p><img src="/png/2021-01-13-01-08-45.png"></p>
+<p>抽象语法树的翻译模式.</p>
+<p><img src="/png/2021-01-13-01-09-10.png"></p>
+<p>示例.</p>
+<p><img src="/png/2021-01-13-01-09-29.png"></p>
+<h2 id="递归下降翻译器的设计">递归下降翻译器的设计</h2>
+<p><img src="/png/2021-01-13-01-12-34.png"></p>
+<p><img src="/png/2021-01-13-01-12-58.png"></p>
+<p><img src="/png/2021-01-13-01-13-12.png"></p>
+<p><img src="/png/2021-01-13-01-13-30.png"></p>
+<p><img src="/png/2021-01-13-01-13-42.png"></p>
+<p>抽象语法树的翻译模式.</p>
+<p><img src="/png/2021-01-13-01-14-08.png"></p>
+<p><img src="/png/2021-01-13-01-14-25.png"></p>
+<p><img src="/png/2021-01-13-01-14-50.png"></p>
 
       
     </div>
@@ -987,7 +1024,7 @@
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#属性文法"><span class="nav-number">1.</span> <span class="nav-text">属性文法</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#属性依赖"><span class="nav-number">1.1.</span> <span class="nav-text">属性依赖</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#带注释的语法树"><span class="nav-number">1.2.</span> <span class="nav-text">带注释的语法树</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#属性计算"><span class="nav-number">2.</span> <span class="nav-text">属性计算</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#依赖图"><span class="nav-number">2.1.</span> <span class="nav-text">依赖图</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#树遍历"><span class="nav-number">2.2.</span> <span class="nav-text">树遍历</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#一边扫描"><span class="nav-number">2.3.</span> <span class="nav-text">一边扫描</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#s-属性文法"><span class="nav-number">3.</span> <span class="nav-text">S-属性文法</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#l-属性文法"><span class="nav-number">4.</span> <span class="nav-text">L-属性文法</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#翻译模式"><span class="nav-number">5.</span> <span class="nav-text">翻译模式</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#翻译模式示例"><span class="nav-number">5.1.</span> <span class="nav-text">翻译模式示例</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#语义动作的执行时机统一"><span class="nav-number">5.2.</span> <span class="nav-text">语义动作的执行时机统一</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#消除翻译模式中的左递归"><span class="nav-number">5.3.</span> <span class="nav-text">消除翻译模式中的左递归</span></a></li></ol></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#属性文法"><span class="nav-number">1.</span> <span class="nav-text">属性文法</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#属性依赖"><span class="nav-number">1.1.</span> <span class="nav-text">属性依赖</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#带注释的语法树"><span class="nav-number">1.2.</span> <span class="nav-text">带注释的语法树</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#属性计算"><span class="nav-number">2.</span> <span class="nav-text">属性计算</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#依赖图"><span class="nav-number">2.1.</span> <span class="nav-text">依赖图</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#树遍历"><span class="nav-number">2.2.</span> <span class="nav-text">树遍历</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#一边扫描"><span class="nav-number">2.3.</span> <span class="nav-text">一边扫描</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#s-属性文法"><span class="nav-number">3.</span> <span class="nav-text">S-属性文法</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#l-属性文法"><span class="nav-number">4.</span> <span class="nav-text">L-属性文法</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#翻译模式"><span class="nav-number">5.</span> <span class="nav-text">翻译模式</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#翻译模式示例"><span class="nav-number">5.1.</span> <span class="nav-text">翻译模式示例</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#语义动作的执行时机统一"><span class="nav-number">5.2.</span> <span class="nav-text">语义动作的执行时机统一</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#消除翻译模式中的左递归"><span class="nav-number">5.3.</span> <span class="nav-text">消除翻译模式中的左递归</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#消除翻译模式中的左递归的一般方法"><span class="nav-number">5.4.</span> <span class="nav-text">消除翻译模式中的左递归的一般方法</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#递归下降翻译器的设计"><span class="nav-number">6.</span> <span class="nav-text">递归下降翻译器的设计</span></a></li></ol></div>
             
 
           </div>

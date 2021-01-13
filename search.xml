@@ -3,7 +3,7 @@
   <entry>
     <title><![CDATA[CS-BASIC-compiler-principles-运行时存储空间组织]]></title>
     <url>%2Fposts%2F2815f842%2F</url>
-    <content type="text"><![CDATA[参数传递 参数传递方式:传地址,得结果,传值,传名. 传地址 得结果 传值 传名 目标程序运行时的活动]]></content>
+    <content type="text"><![CDATA[参数传递 参数传递方式:传地址,得结果,传值,传名. 传地址 得结果 传值 传名 目标程序运行时的活动 动态存储管理]]></content>
       <categories>
         <category>CS</category>
         <category>BASIC</category>

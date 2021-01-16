@@ -119,13 +119,13 @@
 
 
 
-  <meta name="description" content="Survey/Review 本文主要是对相关论文的阅读和摘要。 Fuzzing: Challenges and Reflections 在线pdf. Fuzzing is an automatic bug and vulnerability discovery technique which continuously generates inputs and reports those t">
+  <meta name="description" content="Survey/Review 本文主要是对相关论文的阅读和摘要。 Fuzzing: Challenges and Reflections 在线pdf. Fuzzing是一个自动化漏洞发现技术---通过持续不断地生成输入并报告程序的crash。 现在有三种主要的fuzzing技术和工具：黑盒，灰盒和白盒fuzzing。 Blackbox fuzzing 黑盒fuzzing不需要任何关于程">
 <meta name="keywords" content="fuzz">
 <meta property="og:type" content="article">
 <meta property="og:title" content="IS-pwn-fuzz-theory-present-situation">
 <meta property="og:url" content="https://hitworld.github.io/posts/640b061/index.html">
 <meta property="og:site_name" content="w4rd3n">
-<meta property="og:description" content="Survey/Review 本文主要是对相关论文的阅读和摘要。 Fuzzing: Challenges and Reflections 在线pdf. Fuzzing is an automatic bug and vulnerability discovery technique which continuously generates inputs and reports those t">
+<meta property="og:description" content="Survey/Review 本文主要是对相关论文的阅读和摘要。 Fuzzing: Challenges and Reflections 在线pdf. Fuzzing是一个自动化漏洞发现技术---通过持续不断地生成输入并报告程序的crash。 现在有三种主要的fuzzing技术和工具：黑盒，灰盒和白盒fuzzing。 Blackbox fuzzing 黑盒fuzzing不需要任何关于程">
 <meta property="og:locale" content="zh-CN">
 <meta property="og:image" content="https://hitworld.github.io/png/2021-01-02-21-17-13.png">
 <meta property="og:image" content="https://hitworld.github.io/png/2021-01-02-22-46-04.png">
@@ -137,10 +137,10 @@
 <meta property="og:image" content="https://hitworld.github.io/png/2021-01-03-16-40-26.png">
 <meta property="og:image" content="https://hitworld.github.io/png/2021-01-03-17-05-33.png">
 <meta property="og:image" content="https://hitworld.github.io/png/2021-01-03-17-14-22.png">
-<meta property="og:updated_time" content="2021-01-13T02:47:39.766Z">
+<meta property="og:updated_time" content="2021-01-16T11:57:39.352Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="IS-pwn-fuzz-theory-present-situation">
-<meta name="twitter:description" content="Survey/Review 本文主要是对相关论文的阅读和摘要。 Fuzzing: Challenges and Reflections 在线pdf. Fuzzing is an automatic bug and vulnerability discovery technique which continuously generates inputs and reports those t">
+<meta name="twitter:description" content="Survey/Review 本文主要是对相关论文的阅读和摘要。 Fuzzing: Challenges and Reflections 在线pdf. Fuzzing是一个自动化漏洞发现技术---通过持续不断地生成输入并报告程序的crash。 现在有三种主要的fuzzing技术和工具：黑盒，灰盒和白盒fuzzing。 Blackbox fuzzing 黑盒fuzzing不需要任何关于程">
 <meta name="twitter:image" content="https://hitworld.github.io/png/2021-01-02-21-17-13.png">
 
 
@@ -514,7 +514,7 @@
                 
                   <span class="post-meta-item-text">本文字数：</span>
                 
-                <span title="本文字数">85k</span>
+                <span title="本文字数">77k</span>
               
 
               
@@ -528,7 +528,7 @@
                 
                   <span class="post-meta-item-text">阅读时长 &asymp;</span>
                 
-                <span title="阅读时长">1:17</span>
+                <span title="阅读时长">1:10</span>
               
             </div>
           
@@ -552,95 +552,72 @@
 <p>本文主要是对相关论文的阅读和摘要。</p>
 <h3 id="fuzzing-challenges-and-reflections">Fuzzing: Challenges and Reflections</h3>
 <p><a href="https://www.comp.nus.edu.sg/~abhik/pdf/IEEE-SW-Fuzzing.pdf" target="_blank" rel="noopener">在线pdf</a>.</p>
-<p>Fuzzing is an automatic bug and vulnerability discovery technique which continuously generates inputs and reports those that crash the program.</p>
-<p>There are three main categories of fuzzing tools and techniques: blackbox, greybox and whitebox fuzzing.</p>
-<p>自动化漏洞发现技术---通过持续不断地生成输入并报告程序crash。</p>
+<p>Fuzzing是一个自动化漏洞发现技术---通过持续不断地生成输入并报告程序的crash。</p>
+<p>现在有三种主要的fuzzing技术和工具：黑盒，灰盒和白盒fuzzing。</p>
 <h4 id="blackbox-fuzzing">Blackbox fuzzing</h4>
-<p>Blackbox fuzzing generates inputs without any knowledge of the program.</p>
-<p>There are two main variants of blackbox fuzzing: mutational and generational.</p>
-<p>In mutational blackbox fuzzing, the fuzz campaign starts with one or more seed inputs. These seeds are modified to generate new inputs. Random mutations are applied to random locations in the input. For instance, a file fuzzer may flip random bits in a seed file. The process continues until a time budget is exhausted.</p>
-<p>In generational blackbox fuzzing, inputs are generated from scratch. If a structural specification of the input format is provided, new inputs are generated that meet the grammar.</p>
-<p>Peach (http://community.peachfuzzer.com) is one popular blackbox fuzzer.</p>
-<p>两种黑盒模糊测试区别在于前者通过初始语料库开始变异，后者通过提供的输入格式进行生成。</p>
+<p>黑盒fuzzing不需要任何关于程序的先验知识。</p>
+<p>黑盒fuzzing主要有两种的variants：突变和生成。</p>
+<p>前者通过初始语料库(seed inputs)开始变异，通过对随机位置的随机突变来生成新的输入。</p>
+<p>后者是从头开始生成的，通过提供的输入格式来生成满足所提供语法的新的输入。</p>
+<p>黑盒fuzzing工具：Peach (http://community.peachfuzzer.com)。</p>
 <h4 id="greybox-fuzzing">Greybox fuzzing</h4>
-<p>Greybox fuzzing leverages program instrumentation to get lightweight feedback which is used to steer the fuzzer.</p>
-<p>Typically, a few control locations in the program are instrumented at compile time and an initial seed corpus is provided.</p>
-<p>Seed inputs are mutated to generate new inputs. Generated inputs that cover new control locations, and thus increase code coverage, are added to the seed corpus.</p>
-<p>The coverage feedback allows a greybox fuzzer to gradually reach deeper into the code.</p>
-<p>In order to identify bugs and vulnerabilities, sanitizers inject assertions into the program.</p>
-<p>Existing greybox fuzzing tools include AFL (https://lcamtuf.coredump.cx/afl/), LibFuzzer (https://llvm.org/docs/LibFuzzer.html), and Honggfuzz (https://github.com/google/honggfuzz).</p>
-<p>灰盒模糊测试通过在编译时对一些位置（例如代码块跳转点）进行插桩来获取运行时反馈，从而更好的筛选语料进入语料库，获取更好的覆盖率，深入代码发现漏洞。</p>
+<p>灰盒fuzzing通过在编译时对一些位置（例如代码块跳转点）进行插桩来获取轻量级的运行时反馈从而引导fuzzer。</p>
+<p>通常，程序会在代码块交界处被插桩，并且一些初始的语料库会被提供，初始的种子输入会被用于突变产生新的输入，那些覆盖了新的代码块或者其他增加了代码覆盖的输入将被加入语料库。</p>
+<p>所以随着这种覆盖反馈fuzzer的运行，输入会逐渐深入程序的深处。</p>
+<p>sanitizers还会注入断言到程序中来判断漏洞的种类。</p>
+<p>灰盒fuzzing工具：AFL (https://lcamtuf.coredump.cx/afl/), LibFuzzer (https://llvm.org/docs/LibFuzzer.html), and Honggfuzz (https://github.com/google/honggfuzz)。</p>
 <h4 id="whitebox-fuzzing">Whitebox fuzzing</h4>
-<p>Whitebox fuzzing is based on a technique called symbolic execution, which uses program analysis and constraint solvers to systematically enumerate interesting program paths. The constraint solvers used as the back-end in whitebox fuzzing are Satisfiability Modulo Theory (SMT) solvers, which allow for reasoning about (quantifier free) first-order logic formulas with equality and function/predicate symbols drawn from different background theories.</p>
-<p>Whitebox fuzzers calculate the path condition of an input i—the set of inputs which traverse the same path as i. The path condition is represented as an SMTformula, e.g. i[0] = 42 ∧ i[0] − i[1] &gt; 7.</p>
-<p>Given a seed input s, the path condition is calculated and mutated (as opposed to mutating the program input). The mutated path condition is then sent to a constraint solver to generate new inputs.</p>
-<p>The main benefit of this technique is that by carefully keeping track of path conditions of all inputs seen so far, it always generates an input traversing a new path (new control flow).</p>
-<p>Existing whitebox fuzzing tools include KLEE (https://klee. github.io/) and SAGE.</p>
-<p>基于符号执行的白盒模糊测试，通过变异路径条件，然后利用约束求解器生成新的输入，这种方式总是能生成一个经过新的路径（深入代码）的输入。</p>
+<p>基于符号执行的白盒fuzzing使用程序分析和约束求解器来系统地枚举感兴趣的程序路径，其中用作后端的约束求解器是Satisfiability Modulo Theory (SMT)求解器。</p>
+<p>白盒fuzzing通过分析与i经过同一路径的输入集合来计算i经过的路径的条件，路径条件用SMT表示，例如i[0] = 42 ∧ i[0] − i[1] &gt; 7。</p>
+<p>白盒fuzzer对于给定的种子输入s，计算并改变路径条件而不是改变程序输入，然后将改变后的路径条件发送到一个约束解算器来产生新的输入。</p>
+<p>白盒fuzzing会跟踪到目前为止获取的所有输入的路径状况，所以始终能够生成一个经过新路径的输入。</p>
+<p>白盒fuzzing工具：KLEE (https://klee. github.io/) and SAGE。</p>
 <h4 id="other-fuzzing-tools">Other fuzzing tools</h4>
-<p>DeepState, a unit testing framework that allows developers to fuzz the various units of their system (https://github. com/trailofbits/deepstate).</p>
+<p>DeepState (https://github.com/trailofbits/deepstate)：一个单元测试框架.</p>
 <p>The Mayhem system. --- Sang Kil Cha, Thanassis Avgerinos, Alexandre Rebert, David Brumley. 2012. Unleashing Mayhem on Binary Code. IEEE Symposium on Security and Privacy (S&amp;P’12).</p>
 <h4 id="challenges">Challenges</h4>
-<p>现阶段模糊测试的挑战。</p>
+<p>fuzzing技术现在面临的问题与挑战。</p>
 <h5 id="automation">Automation</h5>
-<p>自动化模糊测试方面的挑战。</p>
+<p>自动化方面的挑战。</p>
 <h6 id="c.1-more-software.-how-can-we-fuzz-efficiently-more-types-of-software-systems">[C.1] More Software. How can we fuzz efficiently more types of software systems?</h6>
-<p>How to fuzz programs that take highly-structured inputs, such as file parsers or object-oriented programs.</p>
-<p>Fuzzing cyber-physical systems, which interact with the environment as part of their execution, or machine learning systems, whose behavior is determined by their training data, is an under-explored area.</p>
-<p>How do we fuzz stateful software, such as protocol implementations, which can produce different outputs for the same input?</p>
-<p>How do we fuzz polyglot software which is written in several languages?</p>
-<p>How do we fuzz GUI-based programs that take as inputs a sequence of events executed on a user interface?</p>
-<p>Given a program whose input domain is defined by a grammar and/or protocol, how can a symbolic execution tool effectively formulate constraints on such ,,structured” input domains?</p>
-<p>如何扩展能够进行模糊测试的领域和范围。</p>
+<p>如何扩展能够fuzzing的领域和范围？</p>
+<p>现在的fuzzer基本上都是生成不规则的输入，而对于文件解析器和面对对象程序来说，需要的是高度结构化的输入。</p>
+<p>还有网络程序，机器学习系统的fuzzing方式应该是怎么样的？</p>
+<p>对于那些有状态的软件，它们对于相同的输入会产生不同的输出，应该如何进行fuzz？还有多语言构建的软件和GUI软件。</p>
+<p>给定一个程序，它的输入域是由语法/协议定义的，那么符号执行工具如何对这种结构化的输入域制定约束?</p>
 <h6 id="c.2-more-bug-types.-how-can-the-fuzzer-identify-more-types-of-vulnerabilities">[C.2] More Bug Types. How can the fuzzer identify more types of vulnerabilities?</h6>
-<p>Vulnerabilities are often encoded as assertions on the program state.</p>
-<p>Using such assertions, we already know how we can discover memory- or concurrency related errors.</p>
-<p>The discovery of side-channel vulnerabilities, such as information leaks or timing, cache, or energy-related side-channels is currently an active research topic.</p>
-<p>Going forward, we should invent techniques to automatically detect and invoke privilege escalation, remote code execution, and other types of critical security flaws, not only in C/C++ but also in other programming languages.</p>
-<p>如何扩展模糊测试发现的漏洞类型？现在已经可以利用断言检测程序运行状态发现内存和并发漏洞。侧信道漏洞发现已经成为热门，未来应该着眼于其他的关键性安全漏洞，包括其他编程语言中的。</p>
+<p>如何扩展fuzzing发现的漏洞类型？</p>
+<p>现在已经可以利用断言检测程序运行状态发现内存和并发漏洞。</p>
+<p>侧信道漏洞发现已经成为热门，未来应该着眼于其他的关键性安全漏洞，包括其他编程语言中的。</p>
 <h6 id="c.3-more-difficult-bugs.-how-can-we-find-deep-bugs-for-which-efficient-oracles-exist-but-which-nevertheless-evade-detection">[C.3] More Difficult Bugs. How can we find “deep bugs” for which efficient oracles exist, but which nevertheless evade detection?</h6>
-<p>Are there certain kinds of deep bugs that can be found efficiently with specialized approaches? Structure-aware and grammar-based fuzzing as well as the integration of static analysis and symbolic execution with greybox fuzzing are promising directions.</p>
-<p>Software also changes all the time—techniques that can target software patches will prove essential for finding bugs as they are introduced.</p>
-<p>We should investigate strategies to boost fault finding, such as AFLFast which enables faster crash detection in greybox fuzzers, and study the utility of GPUs and other means of efficient parallelization to maximize the number of executions per unit time.</p>
-<p>Ranking bugs in terms of their importance can also improve the effectiveness of fuzzing in practice.</p>
-<p>如何发现更深层次的漏洞？</p>
+<p>fuzzing如何发现更深层次的漏洞？</p>
 <ol type="1">
-<li>结构感知和基于语法的模糊测试，以及静态分析和符号执行与灰盒模糊测试的结合是很有前途的方向。</li>
-<li>针对软件补丁的技术可能是发现错误的关键。</li>
-<li>应该研究促进故障发现的策略。</li>
+<li>结构感知和基于语法的fuzzing，以及静态分析和符号执行与灰盒fuzzing的结合是很有前途的方向。</li>
+<li>针对软件补丁的技术对于发现软件补丁引入的错误是至关重要的。</li>
+<li>应该研究促进bug发现的策略。例如AFLFast，它可以在灰盒fuzzing中更快地检测崩溃，并通过研究gpu的效用和其他有效的并行化方法以最大限度地增加单位时间内的执行次数。</li>
 </ol>
 <h6 id="c.4-more-empirical-studies.-what-is-the-nature-of-vulnerabilities-that-have-evaded-discovery-despite-long-fuzzing-campaigns">[C.4] More Empirical Studies. What is the nature of vulnerabilities that have evaded discovery despite long fuzzing campaigns?</h6>
-<p>Why have they evaded discovery? We need empirical studies to understand the nature and distribution of security vulnerabilities in source code.</p>
 <p>需要实证研究来了解源代码中安全漏洞的性质和分布。</p>
 <h5 id="the-human-component">The Human Component</h5>
-<p>模糊测试中的人工成分。</p>
+<p>fuzzing中的人。</p>
 <h6 id="c.5-human-in-the-loop.-how-can-fuzzers-leverage-the-ingenuity-of-the-auditor">[C.5] Human-In-The-Loop. How can fuzzers leverage the ingenuity of the auditor?</h6>
-<p>During our meeting, Ned Williamson, a prolific security researcher at Google, demonstrated his semi-automated approach to vulnerability discovery.</p>
-<p>Ned would first audit the code to identify units that may contain a security flaw.</p>
-<p>He would prepare the unit for fuzzing, run the fuzzer for a while, and identify roadblocks for the fuzzer.</p>
-<p>Ned would manually patch out the roadblock to help the fuzzer make better progress.</p>
-<p>If the fuzzer spends more time fuzzing less relevant portions of the code, Ned would adjust the test driver and re-focus the fuzzer.</p>
-<p>Once a potential vulnerability is found, he would backtrack, add each roadblock back, and adjust the vulnerability-exposing input accordingly.</p>
-<p>This semi-automated process raises several research questions. How can we facilitate a more effective communication between fuzzer and security auditor? How can the security auditor dynamically direct the fuzzer? How can the fuzzer explain what prevents it from progressing, and how can the auditor instruct the fuzzer to overcome the roadblock?</p>
-<p>人在模糊测试中能起到的作用，也就是什么才是最合理的半自动化模糊测试方案？</p>
+<p>人在模糊测试中能起到的作用，也就是什么才是最合理的半自动化fuzzing方案？</p>
+<p>Ned Williamson给出了下面这种方法。</p>
+<ol type="1">
+<li>首先审核代码，以识别可能存在安全漏洞的代码区域。</li>
+<li>为设备准备fuzzing，运行fuzzing一段时间，并确定fuzzing的遇到的障碍和问题。</li>
+<li>手动修补遇到的障碍和问题。</li>
+<li>如果fuzzer花费很多时间来测试代码中不重要的部分，对fuzzer进行调整。</li>
+<li>一旦发现了一个潜在的漏洞，就要回溯并之前修补的部分，并相应地调整输入再次触发漏洞。</li>
+</ol>
 <h6 id="c.6-usability.-how-can-we-improve-the-usability-of-fuzzing-tools">[C.6] Usability. How can we improve the usability of fuzzing tools?</h6>
-<p>如何提高模糊工具的可用性？</p>
+<p>如何提高模糊工具的可用性？也就是说如何让一个技术人员快速掌握并使用。</p>
 <h5 id="fuzzing-theory">Fuzzing Theory</h5>
-<p>Why do some fuzzers work so much better than others? What are their limitations? We want to be able to explain interesting phenomena that we have observed empirically, make predictions and extrapolate from these observations.</p>
-<p>To do this, we need a sound theoretical model of the fuzzing process.</p>
+<p>需要一个可靠的Fuzzing Theory。</p>
 <h6 id="c.7-how-can-we-assess-residual-security-risk-if-the-fuzzing-campaign-was-unsuccessful">[C.7] How can we assess residual security risk if the fuzzing campaign was unsuccessful?</h6>
-<p>Blackbox and whitebox fuzzing sit on two ends of a spectrum.</p>
-<p>A whitebox fuzzer might provide a formal guarantee about the absence of detectable vulnerabilities. If we assume that a symbolic execution engine can enumerate all paths in piece of code and the oracle is encoded as assertions, then whitebox fuzzing can formally verify the absence of bugs.</p>
-<p>If it can enumerate only some paths in reasonable time, we can still provide partial guarantees.</p>
-<p>To make symbolic execution applicable in practice, correctness or completeness are traded for scalability. How does this trade-off affect the guarantees?</p>
-<p>In contrast, a blackbox fuzzer can never guarantee the absence of vulnerabilities for all inputs.</p>
-<p>What is the residual risk that at the end of a fuzzing campaign a bug still exists in the program that has not been found? If we model blackbox fuzzing as a random sampling from the program’s input space, we can leverage methods from applied statistics to estimate the residual risk.</p>
-<p>A greybox fuzzer uses program feedback to boost the efficiency of finding errors. However, this program feedback introduces an adaptive bias. How do we account for this adaptive bias when assessing residual risk? To answer such questions, we should develop statistical and probabilistic frameworks, and methodologies for sound estimation with quantifiable accuracy.</p>
 <p>除了白盒模糊测试，灰盒模糊测试和黑盒模糊测试都不能保证没有未发现的漏洞。白盒模糊测试受限于时间和可扩展性也无法完全保证，灰盒模糊测试存在适应性偏差，黑盒模糊测试存在剩余风险。</p>
 <h6 id="c.8-what-are-the-theoretical-limitations-of-blackbox-greybox-and-whitebox-fuzzing">[C.8] What are the theoretical limitations of blackbox, greybox, and whitebox fuzzing?</h6>
-<p>Given a program and a time budget, how can we select that fuzzing technique, or combination of techniques, which finds the most vulnerabilities within the time budget?</p>
-<p>How do program size and complexity affect the scalability and performance of each technique?</p>
-<p>How much more efficient is an attacker that has an order of magnitude more computational resources?</p>
+<p>给定程序和时间预算，什么是能在时间预算内找到最多漏洞的模糊技术或技术组合程序的大小和复杂性如何影响可伸缩性和性能？计算资源对程序效率的影响程度？</p>
 <h5 id="evaluation-and-benchmarks">Evaluation and Benchmarks</h5>
 <p>[C.9] How can we evaluate specialized fuzzers?</p>
 <p>[C.10] How can we prevent overfitting to a specific benchmark?</p>
@@ -649,10 +626,6 @@
 <p>[C.13] Is coverage a good measure of fuzzer effectiveness?</p>
 <p>[C.14] What is a fair choice of time budget?</p>
 <p>[C.15] How do we evaluate techniques instead of implementations?</p>
-<h4 id="survey">Survey</h4>
-<p>The survey participants marked improving automation (71%), building a theory of fuzzing (63%), and finding valid measures of fuzzer performance (63%) as their Top-3 most important challenges.</p>
-<p>While practitioners and researchers were mostly in agreement, practitioners demonstrated a particularly greater interest in the development of human-in-the-loop approaches (+0.8 Likert points).</p>
-<p>On average, a respondent marked all identified challenges as important or very important on a 5-point Likert-scale.</p>
 <h3 id="sok-the-progress-challenges-and-perspectives-of-directed-greybox-fuzzing">SoK: The Progress, Challenges, and Perspectives of Directed Greybox Fuzzing</h3>
 <p><a href="https://wcventure.github.io/FuzzingPaper/Paper/Arxiv20_SoK.pdf" target="_blank" rel="noopener">在线pdf</a>.</p>
 <p>Abstract—Greybox fuzzing has been the most scalable and practical approach to software testing.</p>
@@ -935,7 +908,7 @@
 <p><img src="/png/2021-01-03-17-05-33.png"></p>
 <p>Owing to that, DGF depends on the random mutation to generate test inputs, it can hardly reach deep targets and is less effective at triggering deep bugs along complex paths. In order to enhance the directedness of reaching corner cases and flaky bugs, various program analysis techniques, such as static analysis, control-flow analysis, data-flow analysis, machine learning, semantic analysis, and symbolic execution, have been adopted (statistics are shown in Table 4). Among the tools we investigate, 75% of them rely on control-flow analysis to evaluate seeds and determine the reachability to the targets; 46% of them leverage static analysis to automatically identify targets and extract information from PUT; 32% use data-flow analysis (mainly taint analysis) to identify the relationship between the input and the critical program variables and optimize mutation strategy scheduling; 11% use machine learning to predict vulnerable code and filter out unreachable inputs; 18% adopt semantic analysis to identify vulnerable targets automatically and learn input fields semantics to optimize mutation; finally, 18% integrate symbolic (concolic) execution to solve complex path constraints. In a personal view, directed hybrid fuzzing is a promising direction that can leverage the precision of symbolic execution and the scalability of DGF to mitigate individual weaknesses. Directed fuzzing can prioritize and schedule input mutation to get closer to the targets rapidly, and directed symbolic execution can help to reach more in-depth code guarded by sophisticated checks on the execution traces from program entry to the targets. Nevertheless, we should be aware that anti-fuzzing techniques can insert fake paths, add delays in error-handling code, and obfuscate codes to slow down dynamic analyses such as symbolic execution and taint analysis.</p>
 <p>正因为如此，DGF依赖于随机变异来产生测试输入，它很难到达深层目标，并且在复杂路径上触发深层缺陷的效果较差。为了增强到达角落案例和片状缺陷的方向性，采用了各种程序分析技术，如静态分析、控制流分析、数据流分析、机器学习、语义分析和符号执行（统计数据如表4所示）。</p>
-<p>在我们调查的工具中，75%的工具依赖于控制流分析来评估种子并确定对目标的可达性；46%的工具利用静态分析来自动识别目标[30]，并从PUT中提取信息[12，42]；32%的工具使用数据流分析（主要是污点分析）来识别目标之间的关系输入和关键程序变量[27，44，47]，优化变异策略调度[28，46]；11%使用机器学习预测易受攻击的代码[32]，过滤掉无法到达的输入[54]；18%采用语义分析自动识别易受攻击目标[25，26，50]，学习输入字段语义优化变异；最后，18%集成符号（concolic）执行来解决复杂的路径约束[24，26，30，44]。在个人看来，定向混合模糊是一个很有前途的方向，它可以利用符号执行的精确性和DGF的可伸缩性来缓解个人的弱点。有向模糊化可以对输入变异进行排序和调度，使其快速接近目标，而有向符号执行可以通过对从程序进入到目标的执行轨迹进行复杂的检查，帮助获得更深入的代码。然而，我们应该意识到，反模糊技术[65，66]可以插入假路径，在错误处理代码中增加延迟，并模糊代码以减慢动态分析，如符号执行和污染分析[51]。</p>
+<p>在我们调查的工具中，75%的工具依赖于控制流分析来评估种子并确定对目标的可达性；46%的工具利用静态分析来自动识别目标，并从PUT中提取信息；32%的工具使用数据流分析（主要是污点分析）来识别目标之间的关系输入和关键程序变量，优化变异策略调度；11%使用机器学习预测易受攻击的代码，过滤掉无法到达的输入；18%采用语义分析自动识别易受攻击目标，学习输入字段语义优化变异；最后，18%集成符号（concolic）执行来解决复杂的路径约束。在个人看来，定向混合模糊是一个很有前途的方向，它可以利用符号执行的精确性和DGF的可伸缩性来缓解个人的弱点。有向模糊化可以对输入变异进行排序和调度，使其快速接近目标，而有向符号执行可以通过对从程序进入到目标的执行轨迹进行复杂的检查，帮助获得更深入的代码。然而，我们应该意识到，反模糊技术可以插入假路径，在错误处理代码中增加延迟，并模糊代码以减慢动态分析，如符号执行和污染分析。</p>
 <h5 id="implementation-limitation">Implementation Limitation</h5>
 <p><img src="/png/2021-01-03-17-14-22.png"></p>
 <p>According to Table I, about 57% (16/28) of the tools are implemented on top of AFL. Thus, the performance is, to some extent, limited by the implementation of AFL. We illustrate such limitation from two aspects.</p>
@@ -947,7 +920,7 @@
 <h5 id="efficiency-improvement">Efficiency Improvement</h5>
 <p>As we have discussed in last subsection, in order to realize directedness in fuzzing, most researchers use additional instrumentation and data analysis. However, such additional analysis inevitably incurs performance deduction. For the evaluation, researchers usually focus on the ability to reach targets, using metric such as Time-to-Exposure (the length of the fuzzing campaign until the first testcase that exposes a given error) to measure the performance of directed greybox fuzzers, while ignoring the run-time overhead. However, for a given fuzzing time budget, higher efficiency means more fuzzing executions and, consequently, more chance to reach the target. Thus, optimize fuzzing efficiency is another direction to improve the directedness.</p>
 <p>One solution is moving the execution-independent computation from run-time to compile-time. For example, AFLGo measures the distance between each basic block and a target location by parsing the call graph and intra-procedure control-flow graph of the PUT. Since both parsing graphs and calculating distances are very time consuming, AFLGo moves most of the program analysis to the instrumentation phase at compile-time in exchange for efficiency at run-time.</p>
-<p>Another optimization is at the implementation level. Since most of the data we use during the analysis is graph-based, how such metadata is stored and accessed is vital to the efficiency. We can design an optimized data structure to store such data, which should facilitate the frequent and quick access to the data when searching based on the topological structure of the graph. For example, using the graph database model. Finally, we can leverage parallel computing to improve efficiency further. Prior works [69, 70] have successfully applied parallelism to CGF but not yet to DGF. For DGF, we can use a central node to maintain a seed queue that holds and prioritizes all the seeds for DGF. Then, distributing the seeds to parallel fuzzing instances on computational nodes to test the PUT and collect feedback information.</p>
+<p>Another optimization is at the implementation level. Since most of the data we use during the analysis is graph-based, how such metadata is stored and accessed is vital to the efficiency. We can design an optimized data structure to store such data, which should facilitate the frequent and quick access to the data when searching based on the topological structure of the graph. For example, using the graph database model. Finally, we can leverage parallel computing to improve efficiency further. Prior works have successfully applied parallelism to CGF but not yet to DGF. For DGF, we can use a central node to maintain a seed queue that holds and prioritizes all the seeds for DGF. Then, distributing the seeds to parallel fuzzing instances on computational nodes to test the PUT and collect feedback information.</p>
 <p>为了实现模糊化的方向性，大多数研究人员使用额外的工具和数据分析。然而，这种额外的分析不可避免地会导致性能降低。对于性能的评估，研究人员通常侧重于达到目标的能力，使用诸如暴露时间（暴露给定错误的第一个测试用例之前的模糊测试实践长度）等来衡量定向灰盒模糊程序的性能，而忽略了运行时开销。然而，对于给定的模糊时间预算，更高的效率意味着更多的模糊执行，因此，更多的机会达到目标。因此，优化模糊化效率是提高方向性的另一个方向。</p>
 <p>一种解决方案是将与执行无关的计算从运行时转移到编译时。例如，AFLGo通过解析PUT的调用图和过程内控制流图来度量每个基本块与目标位置之间的距离。由于解析图和计算距离都非常耗时，AFLGo在编译时将大部分程序分析转移到插桩阶段，以换取运行时的效率。</p>
 <p>另一个优化是在实现级别。由于在分析过程中使用的大多数数据都是基于图形的，因此如何存储和访问此类元数据对效率至关重要。可以设计一个优化的数据结构来存储这些数据，这样在基于图的拓扑结构进行搜索时就可以方便地频繁、快速地访问这些数据。例如，使用图形数据库模型。最后，可以利用并行计算来进一步提高效率。以前的工作已经成功地将并行性应用于CGF，但尚未应用于DGF。对于DGF，可以使用一个中心节点来维护一个种子队列，该队列保存DGF的所有种子并对其进行优先级排序。然后，将种子分发到计算节点上的并行模糊实例中，测试PUT并收集反馈信息。</p>
@@ -968,6 +941,7 @@
 <p>The modern DGF has evolved from reaching target locations to hunting complex deep behavioral bugs.</p>
 <p>However, DGF still faces challenges, including binary code support, automatic target identification, differentiated weight metric, global optimum deviation, missing indirect calls, and exploration-exploitation coordination.</p>
 <p>According to the assessment, we suggest paying more attention to apply differentiated weight in seed prioritization, to overcome the global optimum deviation, to exploit the relationship among targets, and to coordinate the splitting of the exploration phase and the exploitation phase. We also point out research directions for future work.</p>
+<h3 id="fuzzing-hack-art-and-science-cacm-2020">Fuzzing: Hack, Art, and Science (CACM 2020)</h3>
 
       
     </div>
@@ -1276,7 +1250,7 @@
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#surveyreview"><span class="nav-number">1.</span> <span class="nav-text">Survey/Review</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#fuzzing-challenges-and-reflections"><span class="nav-number">1.1.</span> <span class="nav-text">Fuzzing: Challenges and Reflections</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#blackbox-fuzzing"><span class="nav-number">1.1.1.</span> <span class="nav-text">Blackbox fuzzing</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#greybox-fuzzing"><span class="nav-number">1.1.2.</span> <span class="nav-text">Greybox fuzzing</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#whitebox-fuzzing"><span class="nav-number">1.1.3.</span> <span class="nav-text">Whitebox fuzzing</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#other-fuzzing-tools"><span class="nav-number">1.1.4.</span> <span class="nav-text">Other fuzzing tools</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#challenges"><span class="nav-number">1.1.5.</span> <span class="nav-text">Challenges</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#automation"><span class="nav-number">1.1.5.1.</span> <span class="nav-text">Automation</span></a><ol class="nav-child"><li class="nav-item nav-level-6"><a class="nav-link" href="#c.1-more-software.-how-can-we-fuzz-efficiently-more-types-of-software-systems"><span class="nav-number">1.1.5.1.1.</span> <span class="nav-text">[C.1] More Software. How can we fuzz efficiently more types of software systems?</span></a></li><li class="nav-item nav-level-6"><a class="nav-link" href="#c.2-more-bug-types.-how-can-the-fuzzer-identify-more-types-of-vulnerabilities"><span class="nav-number">1.1.5.1.2.</span> <span class="nav-text">[C.2] More Bug Types. How can the fuzzer identify more types of vulnerabilities?</span></a></li><li class="nav-item nav-level-6"><a class="nav-link" href="#c.3-more-difficult-bugs.-how-can-we-find-deep-bugs-for-which-efficient-oracles-exist-but-which-nevertheless-evade-detection"><span class="nav-number">1.1.5.1.3.</span> <span class="nav-text">[C.3] More Difficult Bugs. How can we find “deep bugs” for which efficient oracles exist, but which nevertheless evade detection?</span></a></li><li class="nav-item nav-level-6"><a class="nav-link" href="#c.4-more-empirical-studies.-what-is-the-nature-of-vulnerabilities-that-have-evaded-discovery-despite-long-fuzzing-campaigns"><span class="nav-number">1.1.5.1.4.</span> <span class="nav-text">[C.4] More Empirical Studies. What is the nature of vulnerabilities that have evaded discovery despite long fuzzing campaigns?</span></a></li></ol></li><li class="nav-item nav-level-5"><a class="nav-link" href="#the-human-component"><span class="nav-number">1.1.5.2.</span> <span class="nav-text">The Human Component</span></a><ol class="nav-child"><li class="nav-item nav-level-6"><a class="nav-link" href="#c.5-human-in-the-loop.-how-can-fuzzers-leverage-the-ingenuity-of-the-auditor"><span class="nav-number">1.1.5.2.1.</span> <span class="nav-text">[C.5] Human-In-The-Loop. How can fuzzers leverage the ingenuity of the auditor?</span></a></li><li class="nav-item nav-level-6"><a class="nav-link" href="#c.6-usability.-how-can-we-improve-the-usability-of-fuzzing-tools"><span class="nav-number">1.1.5.2.2.</span> <span class="nav-text">[C.6] Usability. How can we improve the usability of fuzzing tools?</span></a></li></ol></li><li class="nav-item nav-level-5"><a class="nav-link" href="#fuzzing-theory"><span class="nav-number">1.1.5.3.</span> <span class="nav-text">Fuzzing Theory</span></a><ol class="nav-child"><li class="nav-item nav-level-6"><a class="nav-link" href="#c.7-how-can-we-assess-residual-security-risk-if-the-fuzzing-campaign-was-unsuccessful"><span class="nav-number">1.1.5.3.1.</span> <span class="nav-text">[C.7] How can we assess residual security risk if the fuzzing campaign was unsuccessful?</span></a></li><li class="nav-item nav-level-6"><a class="nav-link" href="#c.8-what-are-the-theoretical-limitations-of-blackbox-greybox-and-whitebox-fuzzing"><span class="nav-number">1.1.5.3.2.</span> <span class="nav-text">[C.8] What are the theoretical limitations of blackbox, greybox, and whitebox fuzzing?</span></a></li></ol></li><li class="nav-item nav-level-5"><a class="nav-link" href="#evaluation-and-benchmarks"><span class="nav-number">1.1.5.4.</span> <span class="nav-text">Evaluation and Benchmarks</span></a></li></ol></li><li class="nav-item nav-level-4"><a class="nav-link" href="#survey"><span class="nav-number">1.1.6.</span> <span class="nav-text">Survey</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#sok-the-progress-challenges-and-perspectives-of-directed-greybox-fuzzing"><span class="nav-number">1.2.</span> <span class="nav-text">SoK: The Progress, Challenges, and Perspectives of Directed Greybox Fuzzing</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#introduction"><span class="nav-number">1.2.1.</span> <span class="nav-text">Introduction</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#background"><span class="nav-number">1.2.2.</span> <span class="nav-text">Background</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#terminology"><span class="nav-number">1.2.2.1.</span> <span class="nav-text">Terminology</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#coverage-guide-greybox-fuzzing"><span class="nav-number">1.2.2.2.</span> <span class="nav-text">Coverage-guide Greybox Fuzzing</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#directed-greybox-fuzzing"><span class="nav-number">1.2.2.3.</span> <span class="nav-text">Directed Greybox Fuzzing</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#difference-between-cgf-and-dgf"><span class="nav-number">1.2.2.4.</span> <span class="nav-text">Difference between CGF and DGF</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#application-of-dgf"><span class="nav-number">1.2.2.5.</span> <span class="nav-text">Application of DGF</span></a></li></ol></li><li class="nav-item nav-level-4"><a class="nav-link" href="#assessment-of-the-state-of-the-art-works"><span class="nav-number">1.2.3.</span> <span class="nav-text">Assessment of the-state-of-the-art Works</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#directed-type"><span class="nav-number">1.2.3.1.</span> <span class="nav-text">Directed Type</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#input-optimization"><span class="nav-number">1.2.3.2.</span> <span class="nav-text">Input Optimization</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#seed-prioritization"><span class="nav-number">1.2.3.3.</span> <span class="nav-text">Seed Prioritization</span></a><ol class="nav-child"><li class="nav-item nav-level-6"><a class="nav-link" href="#distance"><span class="nav-number">1.2.3.3.1.</span> <span class="nav-text">Distance</span></a></li><li class="nav-item nav-level-6"><a class="nav-link" href="#similarity-coverage"><span class="nav-number">1.2.3.3.2.</span> <span class="nav-text">Similarity &amp; Coverage</span></a></li><li class="nav-item nav-level-6"><a class="nav-link" href="#probability"><span class="nav-number">1.2.3.3.3.</span> <span class="nav-text">Probability</span></a></li></ol></li><li class="nav-item nav-level-5"><a class="nav-link" href="#power-assignment"><span class="nav-number">1.2.3.4.</span> <span class="nav-text">Power Assignment</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#mutator-scheduling"><span class="nav-number">1.2.3.5.</span> <span class="nav-text">Mutator Scheduling</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#data-flow-analysis"><span class="nav-number">1.2.3.6.</span> <span class="nav-text">Data-flow Analysis</span></a></li></ol></li><li class="nav-item nav-level-4"><a class="nav-link" href="#challenges-and-solutions"><span class="nav-number">1.2.4.</span> <span class="nav-text">Challenges and Solutions</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#binary-code-support"><span class="nav-number">1.2.4.1.</span> <span class="nav-text">Binary Code Support</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#automatic-target-identification"><span class="nav-number">1.2.4.2.</span> <span class="nav-text">Automatic target identification</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#differentiated-weight-metric"><span class="nav-number">1.2.4.3.</span> <span class="nav-text">Differentiated weight metric</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#global-optimum-deviation"><span class="nav-number">1.2.4.4.</span> <span class="nav-text">Global Optimum Deviation</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#missing-indirect-calls"><span class="nav-number">1.2.4.5.</span> <span class="nav-text">Missing Indirect Calls</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#exploration-exploitation-coordination"><span class="nav-number">1.2.4.6.</span> <span class="nav-text">Exploration-exploitation coordination</span></a></li></ol></li><li class="nav-item nav-level-4"><a class="nav-link" href="#discussion"><span class="nav-number">1.2.5.</span> <span class="nav-text">Discussion</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#multi-targets-relationship-exploitation"><span class="nav-number">1.2.5.1.</span> <span class="nav-text">Multi-targets Relationship Exploitation</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#technology-integration"><span class="nav-number">1.2.5.2.</span> <span class="nav-text">Technology Integration</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#implementation-limitation"><span class="nav-number">1.2.5.3.</span> <span class="nav-text">Implementation Limitation</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#efficiency-improvement"><span class="nav-number">1.2.5.4.</span> <span class="nav-text">Efficiency Improvement</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#future-research-suggestions"><span class="nav-number">1.2.5.5.</span> <span class="nav-text">Future research suggestions</span></a></li></ol></li><li class="nav-item nav-level-4"><a class="nav-link" href="#conclusions"><span class="nav-number">1.2.6.</span> <span class="nav-text">Conclusions</span></a></li></ol></li></ol></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#surveyreview"><span class="nav-number">1.</span> <span class="nav-text">Survey/Review</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#fuzzing-challenges-and-reflections"><span class="nav-number">1.1.</span> <span class="nav-text">Fuzzing: Challenges and Reflections</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#blackbox-fuzzing"><span class="nav-number">1.1.1.</span> <span class="nav-text">Blackbox fuzzing</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#greybox-fuzzing"><span class="nav-number">1.1.2.</span> <span class="nav-text">Greybox fuzzing</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#whitebox-fuzzing"><span class="nav-number">1.1.3.</span> <span class="nav-text">Whitebox fuzzing</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#other-fuzzing-tools"><span class="nav-number">1.1.4.</span> <span class="nav-text">Other fuzzing tools</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#challenges"><span class="nav-number">1.1.5.</span> <span class="nav-text">Challenges</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#automation"><span class="nav-number">1.1.5.1.</span> <span class="nav-text">Automation</span></a><ol class="nav-child"><li class="nav-item nav-level-6"><a class="nav-link" href="#c.1-more-software.-how-can-we-fuzz-efficiently-more-types-of-software-systems"><span class="nav-number">1.1.5.1.1.</span> <span class="nav-text">[C.1] More Software. How can we fuzz efficiently more types of software systems?</span></a></li><li class="nav-item nav-level-6"><a class="nav-link" href="#c.2-more-bug-types.-how-can-the-fuzzer-identify-more-types-of-vulnerabilities"><span class="nav-number">1.1.5.1.2.</span> <span class="nav-text">[C.2] More Bug Types. How can the fuzzer identify more types of vulnerabilities?</span></a></li><li class="nav-item nav-level-6"><a class="nav-link" href="#c.3-more-difficult-bugs.-how-can-we-find-deep-bugs-for-which-efficient-oracles-exist-but-which-nevertheless-evade-detection"><span class="nav-number">1.1.5.1.3.</span> <span class="nav-text">[C.3] More Difficult Bugs. How can we find “deep bugs” for which efficient oracles exist, but which nevertheless evade detection?</span></a></li><li class="nav-item nav-level-6"><a class="nav-link" href="#c.4-more-empirical-studies.-what-is-the-nature-of-vulnerabilities-that-have-evaded-discovery-despite-long-fuzzing-campaigns"><span class="nav-number">1.1.5.1.4.</span> <span class="nav-text">[C.4] More Empirical Studies. What is the nature of vulnerabilities that have evaded discovery despite long fuzzing campaigns?</span></a></li></ol></li><li class="nav-item nav-level-5"><a class="nav-link" href="#the-human-component"><span class="nav-number">1.1.5.2.</span> <span class="nav-text">The Human Component</span></a><ol class="nav-child"><li class="nav-item nav-level-6"><a class="nav-link" href="#c.5-human-in-the-loop.-how-can-fuzzers-leverage-the-ingenuity-of-the-auditor"><span class="nav-number">1.1.5.2.1.</span> <span class="nav-text">[C.5] Human-In-The-Loop. How can fuzzers leverage the ingenuity of the auditor?</span></a></li><li class="nav-item nav-level-6"><a class="nav-link" href="#c.6-usability.-how-can-we-improve-the-usability-of-fuzzing-tools"><span class="nav-number">1.1.5.2.2.</span> <span class="nav-text">[C.6] Usability. How can we improve the usability of fuzzing tools?</span></a></li></ol></li><li class="nav-item nav-level-5"><a class="nav-link" href="#fuzzing-theory"><span class="nav-number">1.1.5.3.</span> <span class="nav-text">Fuzzing Theory</span></a><ol class="nav-child"><li class="nav-item nav-level-6"><a class="nav-link" href="#c.7-how-can-we-assess-residual-security-risk-if-the-fuzzing-campaign-was-unsuccessful"><span class="nav-number">1.1.5.3.1.</span> <span class="nav-text">[C.7] How can we assess residual security risk if the fuzzing campaign was unsuccessful?</span></a></li><li class="nav-item nav-level-6"><a class="nav-link" href="#c.8-what-are-the-theoretical-limitations-of-blackbox-greybox-and-whitebox-fuzzing"><span class="nav-number">1.1.5.3.2.</span> <span class="nav-text">[C.8] What are the theoretical limitations of blackbox, greybox, and whitebox fuzzing?</span></a></li></ol></li><li class="nav-item nav-level-5"><a class="nav-link" href="#evaluation-and-benchmarks"><span class="nav-number">1.1.5.4.</span> <span class="nav-text">Evaluation and Benchmarks</span></a></li></ol></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#sok-the-progress-challenges-and-perspectives-of-directed-greybox-fuzzing"><span class="nav-number">1.2.</span> <span class="nav-text">SoK: The Progress, Challenges, and Perspectives of Directed Greybox Fuzzing</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#introduction"><span class="nav-number">1.2.1.</span> <span class="nav-text">Introduction</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#background"><span class="nav-number">1.2.2.</span> <span class="nav-text">Background</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#terminology"><span class="nav-number">1.2.2.1.</span> <span class="nav-text">Terminology</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#coverage-guide-greybox-fuzzing"><span class="nav-number">1.2.2.2.</span> <span class="nav-text">Coverage-guide Greybox Fuzzing</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#directed-greybox-fuzzing"><span class="nav-number">1.2.2.3.</span> <span class="nav-text">Directed Greybox Fuzzing</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#difference-between-cgf-and-dgf"><span class="nav-number">1.2.2.4.</span> <span class="nav-text">Difference between CGF and DGF</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#application-of-dgf"><span class="nav-number">1.2.2.5.</span> <span class="nav-text">Application of DGF</span></a></li></ol></li><li class="nav-item nav-level-4"><a class="nav-link" href="#assessment-of-the-state-of-the-art-works"><span class="nav-number">1.2.3.</span> <span class="nav-text">Assessment of the-state-of-the-art Works</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#directed-type"><span class="nav-number">1.2.3.1.</span> <span class="nav-text">Directed Type</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#input-optimization"><span class="nav-number">1.2.3.2.</span> <span class="nav-text">Input Optimization</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#seed-prioritization"><span class="nav-number">1.2.3.3.</span> <span class="nav-text">Seed Prioritization</span></a><ol class="nav-child"><li class="nav-item nav-level-6"><a class="nav-link" href="#distance"><span class="nav-number">1.2.3.3.1.</span> <span class="nav-text">Distance</span></a></li><li class="nav-item nav-level-6"><a class="nav-link" href="#similarity-coverage"><span class="nav-number">1.2.3.3.2.</span> <span class="nav-text">Similarity &amp; Coverage</span></a></li><li class="nav-item nav-level-6"><a class="nav-link" href="#probability"><span class="nav-number">1.2.3.3.3.</span> <span class="nav-text">Probability</span></a></li></ol></li><li class="nav-item nav-level-5"><a class="nav-link" href="#power-assignment"><span class="nav-number">1.2.3.4.</span> <span class="nav-text">Power Assignment</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#mutator-scheduling"><span class="nav-number">1.2.3.5.</span> <span class="nav-text">Mutator Scheduling</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#data-flow-analysis"><span class="nav-number">1.2.3.6.</span> <span class="nav-text">Data-flow Analysis</span></a></li></ol></li><li class="nav-item nav-level-4"><a class="nav-link" href="#challenges-and-solutions"><span class="nav-number">1.2.4.</span> <span class="nav-text">Challenges and Solutions</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#binary-code-support"><span class="nav-number">1.2.4.1.</span> <span class="nav-text">Binary Code Support</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#automatic-target-identification"><span class="nav-number">1.2.4.2.</span> <span class="nav-text">Automatic target identification</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#differentiated-weight-metric"><span class="nav-number">1.2.4.3.</span> <span class="nav-text">Differentiated weight metric</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#global-optimum-deviation"><span class="nav-number">1.2.4.4.</span> <span class="nav-text">Global Optimum Deviation</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#missing-indirect-calls"><span class="nav-number">1.2.4.5.</span> <span class="nav-text">Missing Indirect Calls</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#exploration-exploitation-coordination"><span class="nav-number">1.2.4.6.</span> <span class="nav-text">Exploration-exploitation coordination</span></a></li></ol></li><li class="nav-item nav-level-4"><a class="nav-link" href="#discussion"><span class="nav-number">1.2.5.</span> <span class="nav-text">Discussion</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#multi-targets-relationship-exploitation"><span class="nav-number">1.2.5.1.</span> <span class="nav-text">Multi-targets Relationship Exploitation</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#technology-integration"><span class="nav-number">1.2.5.2.</span> <span class="nav-text">Technology Integration</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#implementation-limitation"><span class="nav-number">1.2.5.3.</span> <span class="nav-text">Implementation Limitation</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#efficiency-improvement"><span class="nav-number">1.2.5.4.</span> <span class="nav-text">Efficiency Improvement</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#future-research-suggestions"><span class="nav-number">1.2.5.5.</span> <span class="nav-text">Future research suggestions</span></a></li></ol></li><li class="nav-item nav-level-4"><a class="nav-link" href="#conclusions"><span class="nav-number">1.2.6.</span> <span class="nav-text">Conclusions</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#fuzzing-hack-art-and-science-cacm-2020"><span class="nav-number">1.3.</span> <span class="nav-text">Fuzzing: Hack, Art, and Science (CACM 2020)</span></a></li></ol></li></ol></div>
             
 
           </div>
@@ -1308,7 +1282,7 @@
       <i class="fa fa-area-chart"></i>
     </span>
     
-    <span title="站点总字数">885k</span>
+    <span title="站点总字数">877k</span>
   
 
   
@@ -1317,7 +1291,7 @@
       <i class="fa fa-coffee"></i>
     </span>
     
-    <span title="站点阅读时长">13:24</span>
+    <span title="站点阅读时长">13:18</span>
   
 </div>
 
@@ -1966,7 +1940,7 @@
   //$("body").backstretch("/images/background.jpg");
   </script>
   
-  <script type="text/javascript" src="//cdn.bootcss.com/canvas-nest.js/1.0.0/canvas-nest.min.js"></script>
+  <script type="text/javascript" src="//cdn.bootcss.com/canvas-nest.js/1.0.0/canvas-nest.min.js"></script><!-- hexo-inject:begin --><!-- hexo-inject:end -->
   
-<script src="/live2dw/lib/L2Dwidget.min.js?0c58a1486de42ac6cc1c59c7d98ae887"></script><script>L2Dwidget.init({"pluginRootPath":"live2dw/","pluginJsPath":"lib/","pluginModelPath":"assets/","tagMode":false,"debug":false,"model":{"jsonPath":"/live2dw/assets/koharu.model.json"},"display":{"position":"right","width":150,"height":300},"mobile":{"show":false},"log":false});</script><!-- hexo-inject:begin --><!-- hexo-inject:end --></body>
+<script src="/live2dw/lib/L2Dwidget.min.js?0c58a1486de42ac6cc1c59c7d98ae887"></script><script>L2Dwidget.init({"pluginRootPath":"live2dw/","pluginJsPath":"lib/","pluginModelPath":"assets/","tagMode":false,"debug":false,"model":{"jsonPath":"/live2dw/assets/koharu.model.json"},"display":{"position":"right","width":150,"height":300},"mobile":{"show":false},"log":false});</script></body>
 </html>

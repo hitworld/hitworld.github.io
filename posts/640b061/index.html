@@ -135,7 +135,7 @@
 <meta property="og:image" content="https://hitworld.github.io/png/2021-01-03-16-40-26.png">
 <meta property="og:image" content="https://hitworld.github.io/png/2021-01-03-17-05-33.png">
 <meta property="og:image" content="https://hitworld.github.io/png/2021-01-03-17-14-22.png">
-<meta property="og:updated_time" content="2021-01-16T15:29:17.952Z">
+<meta property="og:updated_time" content="2021-01-16T15:40:11.174Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="IS-pwn-fuzz-theory-present-situation">
 <meta name="twitter:description" content="Survey/Review 本文主要是对fuzz相关论文的笔记。 Fuzzing: Challenges and Reflections 在线pdf. Fuzzing是一种自动化漏洞发现技术---通过持续不断地生成输入并报告程序的crash。 现在有三种主要的fuzzing技术和工具：黑盒，灰盒和白盒fuzzing。 Blackbox fuzzing 黑盒fuzzing不需要任何关于">
@@ -849,6 +849,11 @@
 <li>最后，分阶段模糊测试是一种可行的方法，可以进一步用于DGF。通过将到达目标的路径划分为连续的多个阶段，分阶段定向模糊算法可以在每个阶段到达子目标，逐步到达目标。此外，可以利用不同的模糊策略来满足不同阶段的需求。例如，TOFU对命令行标志使用语法模糊，对主要输入文件使用语义模糊。因此，分阶段模糊化可以降低模糊化各个阶段输入空间的维数，提高模糊化效率。</li>
 </ul>
 <h3 id="fuzzing-hack-art-and-science-cacm-2020">Fuzzing: Hack, Art, and Science (CACM 2020)</h3>
+<p><a href="https://wcventure.github.io/FuzzingPaper/Paper/CACM20_Fuzzing.pdf" target="_blank" rel="noopener">在线pdf</a>.</p>
+<p>三种检测软件中安全漏洞的方法。</p>
+<p>静态程序分析器：能够自动检查代码并标记错误的代码模式，它们可以标记出许多浅显的错误，但是工具也容易发出虚假的警报。</p>
+<p>人工代码审计：包括发布之前的peer-reviewing和渗透测试，这个步骤可以检测很多问题，包括安全漏洞，设计缺陷和编码错误等超出了自动化工具的范围的问题。</p>
+<p>然后就是模糊测试：</p>
 
       
     </div>

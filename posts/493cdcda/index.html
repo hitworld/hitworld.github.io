@@ -119,21 +119,17 @@
 
 
 
-  <meta name="description" content="语言处理器 常见的语言处理器有编译器和解释器. 编译器是一个读取以源语言编写的程序并把其翻译为一个等价的使用目标语言编写的程序(产生目标代码程序). 解释器是一个读取以源语言编写的程序并逐个语句的执行(不产生目标代码程序,只产生运行结果). 也有一些即时编译器(JIT)在运行中处理输入的前一刻将字节码翻译成目标语言再执行. 编译过程  词法分析 编译过程第一个步骤称为词法分析或扫描">
+  <meta name="description" content="语言处理器 常见的语言处理器有编译器/编译程序和解释器/解释程序. 编译器是一个读取以源语言编写的程序并把其翻译为一个等价的使用目标语言编写的程序(产生目标代码程序). 解释器是一个读取以源语言编写的程序并逐个语句的执行(不产生目标代码程序,只产生运行结果). 也有一些即时编译器(JIT)在运行中处理输入的前一刻将字节码翻译成目标语言再执行. 计算思维 利用计算机科学的基础概念去求解问">
 <meta name="keywords" content="compiler-principles">
 <meta property="og:type" content="article">
 <meta property="og:title" content="CS-BASIC-compiler-principles-基础">
 <meta property="og:url" content="https://hitworld.github.io/posts/493cdcda/index.html">
 <meta property="og:site_name" content="w4rd3n">
-<meta property="og:description" content="语言处理器 常见的语言处理器有编译器和解释器. 编译器是一个读取以源语言编写的程序并把其翻译为一个等价的使用目标语言编写的程序(产生目标代码程序). 解释器是一个读取以源语言编写的程序并逐个语句的执行(不产生目标代码程序,只产生运行结果). 也有一些即时编译器(JIT)在运行中处理输入的前一刻将字节码翻译成目标语言再执行. 编译过程  词法分析 编译过程第一个步骤称为词法分析或扫描">
+<meta property="og:description" content="语言处理器 常见的语言处理器有编译器/编译程序和解释器/解释程序. 编译器是一个读取以源语言编写的程序并把其翻译为一个等价的使用目标语言编写的程序(产生目标代码程序). 解释器是一个读取以源语言编写的程序并逐个语句的执行(不产生目标代码程序,只产生运行结果). 也有一些即时编译器(JIT)在运行中处理输入的前一刻将字节码翻译成目标语言再执行. 计算思维 利用计算机科学的基础概念去求解问">
 <meta property="og:locale" content="zh-CN">
-<meta property="og:image" content="https://hitworld.github.io/png/2020-12-29-01-54-08.png">
 <meta property="og:image" content="https://hitworld.github.io/png/2020-12-29-01-54-28.png">
-<meta property="og:image" content="https://hitworld.github.io/png/2020-12-29-16-26-32.png">
 <meta property="og:image" content="https://hitworld.github.io/png/2020-12-29-16-44-56.png">
-<meta property="og:image" content="https://hitworld.github.io/png/2020-12-29-16-41-44.png">
 <meta property="og:image" content="https://hitworld.github.io/png/2020-12-29-16-46-25.png">
-<meta property="og:image" content="https://hitworld.github.io/png/2020-12-29-16-47-39.png">
 <meta property="og:image" content="https://hitworld.github.io/png/2020-12-29-16-48-13.png">
 <meta property="og:image" content="https://hitworld.github.io/png/2020-12-29-16-48-51.png">
 <meta property="og:image" content="https://hitworld.github.io/png/2020-12-29-17-08-58.png">
@@ -145,11 +141,11 @@
 <meta property="og:image" content="https://hitworld.github.io/png/2020-12-29-01-56-45.png">
 <meta property="og:image" content="https://hitworld.github.io/png/2020-12-29-01-57-05.png">
 <meta property="og:image" content="https://hitworld.github.io/png/2020-12-29-01-57-24.png">
-<meta property="og:updated_time" content="2021-01-17T12:54:43.468Z">
+<meta property="og:updated_time" content="2021-01-19T13:27:34.844Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="CS-BASIC-compiler-principles-基础">
-<meta name="twitter:description" content="语言处理器 常见的语言处理器有编译器和解释器. 编译器是一个读取以源语言编写的程序并把其翻译为一个等价的使用目标语言编写的程序(产生目标代码程序). 解释器是一个读取以源语言编写的程序并逐个语句的执行(不产生目标代码程序,只产生运行结果). 也有一些即时编译器(JIT)在运行中处理输入的前一刻将字节码翻译成目标语言再执行. 编译过程  词法分析 编译过程第一个步骤称为词法分析或扫描">
-<meta name="twitter:image" content="https://hitworld.github.io/png/2020-12-29-01-54-08.png">
+<meta name="twitter:description" content="语言处理器 常见的语言处理器有编译器/编译程序和解释器/解释程序. 编译器是一个读取以源语言编写的程序并把其翻译为一个等价的使用目标语言编写的程序(产生目标代码程序). 解释器是一个读取以源语言编写的程序并逐个语句的执行(不产生目标代码程序,只产生运行结果). 也有一些即时编译器(JIT)在运行中处理输入的前一刻将字节码翻译成目标语言再执行. 计算思维 利用计算机科学的基础概念去求解问">
+<meta name="twitter:image" content="https://hitworld.github.io/png/2020-12-29-01-54-28.png">
 
 
 
@@ -522,7 +518,7 @@
                 
                   <span class="post-meta-item-text">本文字数：</span>
                 
-                <span title="本文字数">3.7k</span>
+                <span title="本文字数">3.8k</span>
               
 
               
@@ -557,25 +553,36 @@
 
       
         <h2 id="语言处理器">语言处理器</h2>
-<p>常见的语言处理器有编译器和解释器.</p>
+<p>常见的语言处理器有编译器/编译程序和解释器/解释程序.</p>
 <p>编译器是一个读取以源语言编写的程序并把其翻译为一个等价的使用目标语言编写的程序(产生目标代码程序).</p>
 <p>解释器是一个读取以源语言编写的程序并逐个语句的执行(不产生目标代码程序,只产生运行结果).</p>
 <p>也有一些即时编译器(<code>JIT</code>)在运行中处理输入的前一刻将字节码翻译成目标语言再执行.</p>
+<h2 id="计算思维">计算思维</h2>
+<p>利用计算机科学的基础概念去求解问题,设计系统和理解人类的行为.</p>
+<p>包括了一系列广泛的计算机科学的思维方法:抽象,自动化,分治,递归,权衡和其他的,而前五者都在编译原理当中有所体现.</p>
 <h2 id="编译过程">编译过程</h2>
-<p><img src="/png/2020-12-29-01-54-08.png"></p>
+<p>编译过程可以划分为五个阶段.</p>
+<ol type="1">
+<li>词法分析(识别出文章中一个个单词).</li>
+<li>语法分析(分析句子的语法结构,如单词的词性和所作的成分).</li>
+<li>中间代码产生(根据之前的结果进行初步的翻译).</li>
+<li>中间代码优化(对译文进行修饰).</li>
+<li>目标代码生成(写出最后的译文,要求别人能理解(等价于目标机器能运行)).</li>
+</ol>
 <h3 id="词法分析">词法分析</h3>
-<p>编译过程第一个步骤称为词法分析或扫描,词法分析器根据词法规则将源代码解析成有意义的词素的序列并生成对应的符号表.常用的词法规则用有限自动机描述.</p>
-<p>对于每个词素,词法分析器输出形如<code>&lt;token-name, attribute-value&gt;</code>的词法单元,<code>token-name</code>是该词法单元的类型(如基本字/保留字,标识符,常数,算符和界符/分隔符),<code>attribute-value</code>是对应的符号或指向对应的符号(某些词法单元无属性值,例如:<code>=</code>).</p>
+<p>词法分析根据词法规则将源代码解析成有意义的词素的序列并生成对应的符号表,词法规则使用有限自动机描述.</p>
+<p>对于每个词素,词法分析器输出形如<code>&lt;token-name, attribute-value&gt;</code>的词法单元.</p>
+<p><code>token-name</code>是该词法单元的类型(如基本字/保留字,标识符,常数,算符和界符/分隔符),<code>attribute-value</code>是对应的符号或指向对应的符号(某些词法单元无属性值,例如:<code>=</code>).</p>
 <h3 id="语法分析">语法分析</h3>
-<p>编译过程第二个步骤称为语法分析或解析,语法分析根据语法规则(利用有限自动机描述),把单词符号串分解成各类语法单位,如短语,子句,句子和程序等.常用的语法规则用上下文无关文法描述.</p>
-<p>通过语法分析,确定整个输入串是否构成语法上正确的程序.同时产生一个语法树.</p>
+<p>语法分析根据语法规则把单词符号串分解成各类语法单位,如短语,子句,句子和程序等.语法规则使用上下文无关文法描述.</p>
+<p>通过语法分析,确定整个输入串是否构成语法上正确的程序.同时会产生一颗语法树.</p>
 <p>词法分析是一种线性分析,而语法分析是一种层次结构的分析.</p>
 <h3 id="语义分析-中间代码生成">语义分析 &amp; 中间代码生成</h3>
-<p>语义分析器使用语法树和符号表来检查语义,同时会收集类型信息来进行类型检查.</p>
-<p>在编译的过程中编译器会产生多个中间表示形式,例如语法树和中间代码,中间代码是一种含义明确,便于处理的记号系统.</p>
-<p>语义分析的同时会根据语义规则产生中间代码,典型的有四元式,三地址代码,间接三地址代码,逆波兰式,树形表示等.常用的语义规则用属性文法描述.</p>
-<h3 id="中间代码的优化和目标代码生成">中间代码的优化和目标代码生成</h3>
+<p>语义分析根据语义规则对各类语法单位按语言的语义进行初步翻译产生中间代码,语义规则使用属性文法描述.</p>
+<p>中间代码一般的形式为三元式,四元式,抽象语法树等.</p>
+<h3 id="优化">优化</h3>
 <p>编译器还会依据程序的等价变换原则对中间代码进行优化(公共子表达式的提取,强度削弱,删除无用代码),产生时间或空间上更良好的中间代码.</p>
+<h3 id="目标代码生成">目标代码生成</h3>
 <p>依赖于硬件系统结构和机器指令的含义将中间代码映射为目标代码.</p>
 <p>目标代码有三种形式:汇编指令代码(需要进行汇编),绝对指令代码(可直接运行),可重新定位指令代码(需要链接).</p>
 <h2 id="编译程序的结构">编译程序的结构</h2>
@@ -583,10 +590,9 @@
 <p>编译程序由两部分组成:分析部分(前端)和综合部分(后端).</p>
 <p>分析部分是与源语言有关但与目标机无关的那些部分,主要进行词法分析,语法分析,语义分析,中间代码生成和中间代码与目标机无关的优化,这个过程中也会产生相应的中间表示形式,并生成符号表.</p>
 <p>综合部份根据中间代码生成目标程序,主要包括编译程序中与目标机有关的那些部分,也就是中间代码与目标机有关的优化和目标代码生成.</p>
-<h3 id="符号表-纠错">符号表 &amp; 纠错</h3>
+<h3 id="符号表-出错处理-遍">符号表 &amp; 出错处理 &amp; 遍</h3>
 <p>符号表一直存在,用于记录变量的名字和信息,同时在编译的过程中不断补充类型等信息.</p>
 <p>编译程序在各个阶段应诊断和报告源程序中的错误,包括词法错误,语法错误,语义错误等.编译程序应报告出错地点,并给出简明准确的提示信息.</p>
-<h3 id="遍">遍</h3>
 <p>遍是对源程序或源程序的中间表示从头到尾扫描一次,一遍可以由若干个阶段完成,一个阶段也可以分为若干遍.</p>
 <h2 id="编译程序的生成">编译程序的生成</h2>
 <ol type="1">
@@ -597,20 +603,21 @@
 <li>编译程序自动生成:<code>LEX</code>,<code>YACC</code>.</li>
 </ol>
 <h2 id="程序设计语言">程序设计语言</h2>
-<p>图灵奖的获得者<code>Alan J. Perlis</code>曾说:<code>A language that doesn't affect the way you think about programming, is not worth knowing</code>.</p>
+<blockquote>
+<p>A language that doesn't affect the way you think about programming, is not worth knowing.</p>
+</blockquote>
 <p>程序本质上是一定字符集上的字符串,主要是由语法和语义两方面定义(实际上包括三个方面:语法,语义,语用).</p>
 <p>语法:一组规则,用它可以形成和产生一个合式(<code>well-formed</code>)的程序.这些规则一部分称为词法规则,另一部分称为语法规则.词法规则定义了单词符号的形成规则,而语法规则定义了语法单位的形成规则.</p>
 <p>语义:一组规则,用它可以定义一个程序的意义,也就是定义了语言的单词符号和语法单位的意义.语义规则的形式描述方法:操作语义,指称语义,代数语义.</p>
 <p>程序本质上是描述一定数据的处理过程,所以程序设计语言的基本功能是描述数据和对数据的运算.</p>
-<p><img src="/png/2020-12-29-16-26-32.png"></p>
 <p>数据类型通常包括三要素.</p>
 <ol type="1">
 <li>用于区别这种类型数据对象的属性.</li>
 <li>这种类型的数据对象可以具有的值.</li>
 <li>可以作用于这种类型的数据对象的操作.</li>
 </ol>
-<h3 id="符号串">符号串</h3>
-<p>字母表是符号的非空有穷集合.任何程序语言都有自己的字母表,一个程序语言只使用一个有限字符集作为字母表,用<code>∑</code>表示.</p>
+<h2 id="符号串">符号串</h2>
+<p>字母表是符号的非空有穷集合,任何程序语言都有自己的字母表,一个程序语言只使用一个有限字符集作为字母表,用<code>∑</code>表示.</p>
 <p><code>∑</code>上的一个符号串(字)是指由<code>∑</code>中的符号所构成的一个有穷序列.</p>
 <ul>
 <li>空字<code>ε</code>是<code>∑</code>上的一个符号串,空字<code>ε</code>是不包含任何符号的序列.</li>
@@ -638,7 +645,6 @@
 <p>闭包与正规闭包的区别在于,如果<code>V</code>中原来没有空字,则正规闭包会少一个空字.</p>
 <h2 id="文法">文法</h2>
 <p>文法是一种形式规则,程序语言的语法规则是用文法来描述的,目前的程序语言一般用上下文无关的文法来描述.</p>
-<p><img src="/png/2020-12-29-16-41-44.png"></p>
 <p>几个基本概念.</p>
 <ul>
 <li>非终结符:需进一步定义的符号,只是一个中间产物.</li>
@@ -648,7 +654,6 @@
 </ul>
 <h3 id="上下文无关文法">上下文无关文法</h3>
 <p><img src="/png/2020-12-29-16-46-25.png"></p>
-<p><img src="/png/2020-12-29-16-47-39.png"></p>
 <h3 id="推导">推导</h3>
 <p><img src="/png/2020-12-29-16-48-13.png"></p>
 <p><img src="/png/2020-12-29-16-48-51.png"></p>
@@ -674,7 +679,7 @@
 <p><img src="/png/2020-12-29-17-12-59.png"></p>
 <p><img src="/png/2020-12-29-17-46-46.png"></p>
 <p><img src="/png/2020-12-29-17-13-43.png"></p>
-<p>由于四种文法是按照将产生式做进一步限制而定义的,所以它们之间是逐级包含的关系,由四种文法产生的语言也是逐级包含的关系.<code>ps</code>:<code>0</code>型语言除外,从其中删去或往其中添加一个空串并不改变其语言类.</p>
+<p>由于四种文法是按照将产生式做进一步限制而定义的,所以它们之间是逐级包含的关系,由四种文法产生的语言也是逐级包含的关系.</p>
 <p>在程序语言中,与词法有关的规则属于正规文法;与局部语法有关的规则属于上下文无关文法;而与全局语法和语义有关的部分往往要用上下文有关文法来描述.</p>
 <p><img src="/png/2020-12-29-01-56-45.png"></p>
 <p>自嵌套的文法.</p>
@@ -989,7 +994,7 @@
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#语言处理器"><span class="nav-number">1.</span> <span class="nav-text">语言处理器</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#编译过程"><span class="nav-number">2.</span> <span class="nav-text">编译过程</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#词法分析"><span class="nav-number">2.1.</span> <span class="nav-text">词法分析</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#语法分析"><span class="nav-number">2.2.</span> <span class="nav-text">语法分析</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#语义分析-中间代码生成"><span class="nav-number">2.3.</span> <span class="nav-text">语义分析 &amp; 中间代码生成</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#中间代码的优化和目标代码生成"><span class="nav-number">2.4.</span> <span class="nav-text">中间代码的优化和目标代码生成</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#编译程序的结构"><span class="nav-number">3.</span> <span class="nav-text">编译程序的结构</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#符号表-纠错"><span class="nav-number">3.1.</span> <span class="nav-text">符号表 &amp; 纠错</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#遍"><span class="nav-number">3.2.</span> <span class="nav-text">遍</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#编译程序的生成"><span class="nav-number">4.</span> <span class="nav-text">编译程序的生成</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#程序设计语言"><span class="nav-number">5.</span> <span class="nav-text">程序设计语言</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#符号串"><span class="nav-number">5.1.</span> <span class="nav-text">符号串</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#文法"><span class="nav-number">6.</span> <span class="nav-text">文法</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#上下文无关文法"><span class="nav-number">6.1.</span> <span class="nav-text">上下文无关文法</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#推导"><span class="nav-number">6.2.</span> <span class="nav-text">推导</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#句型句子和语言"><span class="nav-number">6.3.</span> <span class="nav-text">句型,句子和语言</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#语法树"><span class="nav-number">6.4.</span> <span class="nav-text">语法树</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#二义性"><span class="nav-number">6.5.</span> <span class="nav-text">二义性</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#文法的分类"><span class="nav-number">6.6.</span> <span class="nav-text">文法的分类</span></a></li></ol></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#语言处理器"><span class="nav-number">1.</span> <span class="nav-text">语言处理器</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#计算思维"><span class="nav-number">2.</span> <span class="nav-text">计算思维</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#编译过程"><span class="nav-number">3.</span> <span class="nav-text">编译过程</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#词法分析"><span class="nav-number">3.1.</span> <span class="nav-text">词法分析</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#语法分析"><span class="nav-number">3.2.</span> <span class="nav-text">语法分析</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#语义分析-中间代码生成"><span class="nav-number">3.3.</span> <span class="nav-text">语义分析 &amp; 中间代码生成</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#优化"><span class="nav-number">3.4.</span> <span class="nav-text">优化</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#目标代码生成"><span class="nav-number">3.5.</span> <span class="nav-text">目标代码生成</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#编译程序的结构"><span class="nav-number">4.</span> <span class="nav-text">编译程序的结构</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#符号表-出错处理-遍"><span class="nav-number">4.1.</span> <span class="nav-text">符号表 &amp; 出错处理 &amp; 遍</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#编译程序的生成"><span class="nav-number">5.</span> <span class="nav-text">编译程序的生成</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#程序设计语言"><span class="nav-number">6.</span> <span class="nav-text">程序设计语言</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#符号串"><span class="nav-number">7.</span> <span class="nav-text">符号串</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#文法"><span class="nav-number">8.</span> <span class="nav-text">文法</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#上下文无关文法"><span class="nav-number">8.1.</span> <span class="nav-text">上下文无关文法</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#推导"><span class="nav-number">8.2.</span> <span class="nav-text">推导</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#句型句子和语言"><span class="nav-number">8.3.</span> <span class="nav-text">句型,句子和语言</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#语法树"><span class="nav-number">8.4.</span> <span class="nav-text">语法树</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#二义性"><span class="nav-number">8.5.</span> <span class="nav-text">二义性</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#文法的分类"><span class="nav-number">8.6.</span> <span class="nav-text">文法的分类</span></a></li></ol></li></ol></div>
             
 
           </div>

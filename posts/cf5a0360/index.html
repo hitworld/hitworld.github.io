@@ -127,7 +127,7 @@
 <meta property="og:site_name" content="w4rd3n">
 <meta property="og:description" content="前言 随机试验的结果未必是数量的,为了数学处理的方便以及理论研究的需要,将随机试验的结果与实数对应起来,引入随机变量的概念. 随机变量作一个从样本空间到实数集的映射(函数),使样本从语言描述变成实数变量,从而将实验结果数量化. 针对实践中人们关心随机变量落入某个区间的概率,定义了分布函数的概念. 由分布函数的连续积分表达式定义出连续型随机变量的概率密度,使概率的求解转化为概率密度的定积分的">
 <meta property="og:locale" content="zh-CN">
-<meta property="og:updated_time" content="2021-01-17T12:54:43.539Z">
+<meta property="og:updated_time" content="2021-01-19T09:46:31.272Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Math-probability-theory-随机变量及其分布">
 <meta name="twitter:description" content="前言 随机试验的结果未必是数量的,为了数学处理的方便以及理论研究的需要,将随机试验的结果与实数对应起来,引入随机变量的概念. 随机变量作一个从样本空间到实数集的映射(函数),使样本从语言描述变成实数变量,从而将实验结果数量化. 针对实践中人们关心随机变量落入某个区间的概率,定义了分布函数的概念. 由分布函数的连续积分表达式定义出连续型随机变量的概率密度,使概率的求解转化为概率密度的定积分的">
@@ -536,11 +536,12 @@
 <p>针对实践中人们关心随机变量落入某个区间的概率,定义了分布函数的概念.</p>
 <p>由分布函数的连续积分表达式定义出连续型随机变量的概率密度,使概率的求解转化为概率密度的定积分的计算.</p>
 <h2 id="随机变量">随机变量</h2>
-<p>设随机试验<span class="math inline">\(E\)</span>的样本空间是<span class="math inline">\(S\)</span>,若对于每一个<span class="math inline">\(e\)</span>属于<span class="math inline">\(S\)</span>,有一个实数<span class="math inline">\(X(e)\)</span>与之对应,即<span class="math inline">\(X(e)\)</span>是定义在<span class="math inline">\(S\)</span>上的单值实函数,也称为随机变量(简记为<span class="math inline">\(r.v.\)</span>).可用随机变量<span class="math inline">\(X\)</span>描述事件.</p>
+<p>设随机试验<span class="math inline">\(E\)</span>的样本空间是<span class="math inline">\(S\)</span>,若对于每一个<span class="math inline">\(e\)</span>属于<span class="math inline">\(S\)</span>,有一个实数<span class="math inline">\(X(e)\)</span>与之对应,即<span class="math inline">\(X(e)\)</span>是定义在<span class="math inline">\(S\)</span>上的单值实函数,也称为随机变量(简记为<span class="math inline">\(r.v.\)</span>).</p>
+<p>可用随机变量<span class="math inline">\(X\)</span>描述事件.</p>
 <p>随机变量随着试验的结果而取不同的值,在试验之前不能确切知道它取什么值,但是随机变量的取值有一定的统计规律性,即概率分布.</p>
 <p>随机变量可分为离散型随机变量和非离散型随机变量.</p>
 <h2 id="离散型随机变量及其分布律">离散型随机变量及其分布律</h2>
-<p>若随机变量全部可能取到的值是有限多个或可列无限多个(即可数集,指能与自然数集<span class="math inline">\(N\)</span>一一对应的集合),则称为离散型随机变量.</p>
+<p>若随机变量全部可能取到的值是有限多个或可列无限多个(即可数集/可列集,指能与自然数集<span class="math inline">\(N\)</span>一一对应的集合),则称为离散型随机变量.</p>
 <p>设离散型随机变量<span class="math inline">\(X\)</span>所有可能取值为<span class="math inline">\(x_k\)</span>(<span class="math inline">\(k = 1, 2, \cdots\)</span>),<span class="math inline">\(P(X = x_k) = p_k\)</span>(<span class="math inline">\(k = 1, 2, \cdots\)</span>).</p>
 <ul>
 <li>任意<span class="math inline">\(p_k\)</span>大于等于<span class="math inline">\(0\)</span>且所有<span class="math inline">\(p_k\)</span>之和为<span class="math inline">\(1\)</span>.</li>
@@ -606,8 +607,8 @@ X = X(e) =
 <p><span class="math inline">\(P(X=k)=p(1-p)^{k-1},k=1,2,3,\cdots\)</span>.</p>
 <p>其中<span class="math inline">\(0 &lt; p &lt; 1\)</span>,称<span class="math inline">\(X\)</span>服从参数为<span class="math inline">\(p\)</span>的几何分布,记为<span class="math inline">\(X \sim Geom(p)\)</span>.</p>
 <h2 id="随机变量的分布函数">随机变量的分布函数</h2>
-<p>对于非离散型<span class="math inline">\(r.v.\)</span>,不能用分布律来描述它,需要考虑<span class="math inline">\(r.v.\)</span>的取值落入一个区间的概率.如:<span class="math inline">\(P\{X &lt;= x\}\)</span>,<span class="math inline">\(P\{x1 &lt;= X &lt;= x2\}\)</span>.为此引入随机变量的分布函数.</p>
-<p>定义:设随机变量<span class="math inline">\(X\)</span>,<span class="math inline">\(x\)</span>为任意实数,则<span class="math inline">\(F(x) = P\{X &lt;= x\}\)</span>称为<span class="math inline">\(X\)</span>的分布函数.</p>
+<p>对于非离散型<span class="math inline">\(r.v.\)</span>,不能用分布律来描述它,需要考虑<span class="math inline">\(r.v.\)</span>的取值落入一个区间的概率.如:<span class="math inline">\(P\{X \le x\}\)</span>,<span class="math inline">\(P\{x1 \le X \le x2\}\)</span>.为此引入随机变量的分布函数.</p>
+<p>定义:设随机变量<span class="math inline">\(X\)</span>,<span class="math inline">\(x\)</span>为任意实数,则<span class="math inline">\(F(x) = P\{X \le x\}\)</span>称为<span class="math inline">\(X\)</span>的分布函数.</p>
 <p>分布函数可以给出随机变量落入任意一个范围的可能性.</p>
 <p><span class="math inline">\(X\)</span>的分布函数<span class="math inline">\(F(x)\)</span>,<span class="math inline">\(a,b\)</span>为两个实数,<span class="math inline">\(a &lt; b\)</span>,则</p>
 <p><span class="math display">\[
@@ -735,7 +736,7 @@ f(x) =
 <p>正态分布(也称为高斯分布,误差分布)的性质.</p>
 <ol type="1">
 <li><span class="math inline">\(\mu\)</span>--位置参数,<span class="math inline">\(f(x)\)</span>的图形关于<span class="math inline">\(x = \mu\)</span>对称.</li>
-<li><span class="math inline">\(\sigma\)</span>--影响<span class="math inline">\(f(x)\)</span>的曲线的最大值<span class="math inline">\(f_max = \frac{1}{\sqrt{2\pi}\sigma}\)</span>及图形的形状拐点(<span class="math inline">\(x \pm \sigma,f(x \pm \sigma)\)</span>).</li>
+<li><span class="math inline">\(\sigma\)</span>--影响<span class="math inline">\(f(x)\)</span>的曲线的最大值<span class="math inline">\(f_{max} = \frac{1}{\sqrt{2\pi}\sigma}\)</span>及图形的形状拐点(<span class="math inline">\(x \pm \sigma,f(x \pm \sigma)\)</span>).</li>
 <li>若<span class="math inline">\(X \sim N(\mu,\sigma^2)\)</span>,则<span class="math inline">\(Z = \frac{X - \mu}{\sigma} \sim N(0,1)\)</span>.</li>
 <li><span class="math inline">\(\phi(-x) + \phi(x) = 1 \Rightarrow \phi(-x) = 1 - \phi(x) \Rightarrow \phi(x) - \phi(-x) = 2\phi(x) - 1\)</span>.</li>
 <li>服从正态分布<span class="math inline">\(N(\mu,\sigma^2)\)</span>的随机变量<span class="math inline">\(X\)</span>的值几乎全部落入<span class="math inline">\([\mu - 3\sigma,\mu + 3\sigma]\)</span>内,称为<span class="math inline">\(3\sigma\)</span>原则.</li>
@@ -747,7 +748,7 @@ f(x) =
 <p>令<span class="math inline">\(s = \frac{t - \mu}{\sigma}\)</span>,则<span class="math inline">\(\frac{(t - \mu)^2}{2\sigma^2} = \frac{s^2}{2},{d}s = \frac{1}{\sigma}{d}t\)</span>.</p>
 <p>原式<span class="math inline">\(=\int_{-\infty}^{z} \frac{1}{\sqrt{2\pi}}e^{-\frac{s^2}{2}}{d}s = \phi(z)\)</span>.</p>
 <p>由此可知,当<span class="math inline">\(X \sim N(\mu,\sigma^2)\)</span>时,对于任意实数<span class="math inline">\(a\)</span>,<span class="math inline">\(F_X(a)=P(X \le a)=P(\frac{X - \mu}{\sigma} \le \frac{a - \mu}{\sigma})=\phi(\frac{a - \mu}{\sigma})\)</span>.</p>
-<p>设<span class="math inline">\(X \sim N(0,1)\)</span>,若<span class="math inline">\(z_{\alpha}\)</span>满足<span class="math inline">\(P{X &gt; z_{\alpha}} = \alpha,0 &lt; \alpha &lt; 1\)</span>.则称点<span class="math inline">\(z_{\alpha}\)</span>为标准正态分布的上<span class="math inline">\({\alpha}\)</span>分位点.</p>
+<p>设<span class="math inline">\(X \sim N(0,1)\)</span>,若<span class="math inline">\(z_{\alpha}\)</span>满足<span class="math inline">\(P\{X &gt; z_{\alpha}\} = \alpha,0 &lt; \alpha &lt; 1\)</span>.则称点<span class="math inline">\(z_{\alpha}\)</span>为标准正态分布的上<span class="math inline">\({\alpha}\)</span>分位点.</p>
 <h2 id="随机变量的函数的分布">随机变量的函数的分布</h2>
 <p>由已知的<span class="math inline">\(r.v.X\)</span>的分布,去求得它的函数<span class="math inline">\(Y = g(X)\)</span>的分布(<span class="math inline">\(g(.)\)</span>是已知的连续函数).</p>
 <p>若<span class="math inline">\(X\)</span>为离散型随机变量,则先写出Y的可能取值:<span class="math inline">\(y_1,y_2,\cdots,y_j,\cdots\)</span>.再找出<span class="math inline">\(\{Y = y_j\}\)</span>的等价事件{X D},则<span class="math inline">\(P(Y = y_j) = P(X \in D)\)</span>.</p>

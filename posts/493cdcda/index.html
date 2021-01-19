@@ -141,7 +141,7 @@
 <meta property="og:image" content="https://hitworld.github.io/png/2020-12-29-01-56-45.png">
 <meta property="og:image" content="https://hitworld.github.io/png/2020-12-29-01-57-05.png">
 <meta property="og:image" content="https://hitworld.github.io/png/2020-12-29-01-57-24.png">
-<meta property="og:updated_time" content="2021-01-19T13:27:34.844Z">
+<meta property="og:updated_time" content="2021-01-19T13:55:06.036Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="CS-BASIC-compiler-principles-基础">
 <meta name="twitter:description" content="语言处理器 常见的语言处理器有编译器/编译程序和解释器/解释程序. 编译器是一个读取以源语言编写的程序并把其翻译为一个等价的使用目标语言编写的程序(产生目标代码程序). 解释器是一个读取以源语言编写的程序并逐个语句的执行(不产生目标代码程序,只产生运行结果). 也有一些即时编译器(JIT)在运行中处理输入的前一刻将字节码翻译成目标语言再执行. 计算思维 利用计算机科学的基础概念去求解问">
@@ -518,7 +518,7 @@
                 
                   <span class="post-meta-item-text">本文字数：</span>
                 
-                <span title="本文字数">3.8k</span>
+                <span title="本文字数">3.9k</span>
               
 
               
@@ -532,7 +532,7 @@
                 
                   <span class="post-meta-item-text">阅读时长 &asymp;</span>
                 
-                <span title="阅读时长">3 分钟</span>
+                <span title="阅读时长">4 分钟</span>
               
             </div>
           
@@ -575,10 +575,11 @@
 <p><code>token-name</code>是该词法单元的类型(如基本字/保留字,标识符,常数,算符和界符/分隔符),<code>attribute-value</code>是对应的符号或指向对应的符号(某些词法单元无属性值,例如:<code>=</code>).</p>
 <h3 id="语法分析">语法分析</h3>
 <p>语法分析根据语法规则把单词符号串分解成各类语法单位,如短语,子句,句子和程序等.语法规则使用上下文无关文法描述.</p>
-<p>通过语法分析,确定整个输入串是否构成语法上正确的程序.同时会产生一颗语法树.</p>
+<p>通过语法分析,确定整个输入串是否构成语法上正确的程序,同时会产生一颗语法树.</p>
 <p>词法分析是一种线性分析,而语法分析是一种层次结构的分析.</p>
 <h3 id="语义分析-中间代码生成">语义分析 &amp; 中间代码生成</h3>
 <p>语义分析根据语义规则对各类语法单位按语言的语义进行初步翻译产生中间代码,语义规则使用属性文法描述.</p>
+<p>语义分析的一个重要部分就是类型检查.</p>
 <p>中间代码一般的形式为三元式,四元式,抽象语法树等.</p>
 <h3 id="优化">优化</h3>
 <p>编译器还会依据程序的等价变换原则对中间代码进行优化(公共子表达式的提取,强度削弱,删除无用代码),产生时间或空间上更良好的中间代码.</p>
@@ -591,7 +592,7 @@
 <p>分析部分是与源语言有关但与目标机无关的那些部分,主要进行词法分析,语法分析,语义分析,中间代码生成和中间代码与目标机无关的优化,这个过程中也会产生相应的中间表示形式,并生成符号表.</p>
 <p>综合部份根据中间代码生成目标程序,主要包括编译程序中与目标机有关的那些部分,也就是中间代码与目标机有关的优化和目标代码生成.</p>
 <h3 id="符号表-出错处理-遍">符号表 &amp; 出错处理 &amp; 遍</h3>
-<p>符号表一直存在,用于记录变量的名字和信息,同时在编译的过程中不断补充类型等信息.</p>
+<p>符号表一直存在,用于记录变量的名字和信息(包括存储分配,类型,作用域等),同时在编译的过程中不断补充类型等信息.</p>
 <p>编译程序在各个阶段应诊断和报告源程序中的错误,包括词法错误,语法错误,语义错误等.编译程序应报告出错地点,并给出简明准确的提示信息.</p>
 <p>遍是对源程序或源程序的中间表示从头到尾扫描一次,一遍可以由若干个阶段完成,一个阶段也可以分为若干遍.</p>
 <h2 id="编译程序的生成">编译程序的生成</h2>
@@ -600,7 +601,7 @@
 <li>利用已经有的高级语言为工具实现目标语言的编译器.</li>
 <li>移植即把一种机器上的编译程序移植到另一种机器上.</li>
 <li>自编译方式.</li>
-<li>编译程序自动生成:<code>LEX</code>,<code>YACC</code>.</li>
+<li>编译程序构造工具.</li>
 </ol>
 <h2 id="程序设计语言">程序设计语言</h2>
 <blockquote>
@@ -616,6 +617,7 @@
 <li>这种类型的数据对象可以具有的值.</li>
 <li>可以作用于这种类型的数据对象的操作.</li>
 </ol>
+<p>静态与动态:一个静态策略指在编译时刻决定,而一个动态策略指在运行时刻决定.</p>
 <h2 id="符号串">符号串</h2>
 <p>字母表是符号的非空有穷集合,任何程序语言都有自己的字母表,一个程序语言只使用一个有限字符集作为字母表,用<code>∑</code>表示.</p>
 <p><code>∑</code>上的一个符号串(字)是指由<code>∑</code>中的符号所构成的一个有穷序列.</p>
@@ -672,6 +674,7 @@
 <p><img src="/png/2020-12-29-17-10-52.png"></p>
 <p><img src="/png/2020-12-29-17-43-57.png"></p>
 <p>如果一个文法的句子存在两棵不同的分析树,那么该句子是二义性的.如果一个文法包含二义性的句子,则称这个文法是二义性的;否则,该文法是无二义性的.</p>
+<p>最容易产生二义性的就是左右结合性和算符优先性,这些都可以通过合理的语法产生式来避免.</p>
 <p>二义文法生成的语言<code>L(G)</code>不一定是二义的.因为对于一个语言来说,可以由多个文法生成,只要有一个生成该语言的文法不是二义的,该语言就不是二义的.</p>
 <p>对于任意一个上下文无关文法,不存在一个算法,能够在有限的步骤内判定它是无二义性的;但能给出一组充分条件,满足这组充分条件的文法是无二义性的.</p>
 <h3 id="文法的分类">文法的分类</h3>
@@ -1684,7 +1687,7 @@
   //$("body").backstretch("/images/background.jpg");
   </script>
   
-  <script type="text/javascript" src="//cdn.bootcss.com/canvas-nest.js/1.0.0/canvas-nest.min.js"></script>
+  <script type="text/javascript" src="//cdn.bootcss.com/canvas-nest.js/1.0.0/canvas-nest.min.js"></script><!-- hexo-inject:begin --><!-- hexo-inject:end -->
   
-<script src="/live2dw/lib/L2Dwidget.min.js?0c58a1486de42ac6cc1c59c7d98ae887"></script><script>L2Dwidget.init({"pluginRootPath":"live2dw/","pluginJsPath":"lib/","pluginModelPath":"assets/","tagMode":false,"debug":false,"model":{"jsonPath":"/live2dw/assets/koharu.model.json"},"display":{"position":"right","width":150,"height":300},"mobile":{"show":false},"log":false});</script><!-- hexo-inject:begin --><!-- hexo-inject:end --></body>
+<script src="/live2dw/lib/L2Dwidget.min.js?0c58a1486de42ac6cc1c59c7d98ae887"></script><script>L2Dwidget.init({"pluginRootPath":"live2dw/","pluginJsPath":"lib/","pluginModelPath":"assets/","tagMode":false,"debug":false,"model":{"jsonPath":"/live2dw/assets/koharu.model.json"},"display":{"position":"right","width":150,"height":300},"mobile":{"show":false},"log":false});</script></body>
 </html>

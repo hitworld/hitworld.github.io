@@ -130,7 +130,7 @@
 <meta property="og:image" content="https://hitworld.github.io/png/2021-01-05-21-28-36.png">
 <meta property="og:image" content="https://hitworld.github.io/png/2021-01-05-21-28-50.png">
 <meta property="og:image" content="https://hitworld.github.io/png/2021-01-05-21-29-04.png">
-<meta property="og:updated_time" content="2021-01-17T12:57:34.007Z">
+<meta property="og:updated_time" content="2021-01-20T12:36:18.840Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="IS-pwn-Linux-kernel-调试">
 <meta name="twitter:description" content="安装内核 123456uname -r#查看本机的内核sudo apt-get install linux-headers-version-generic linux-image-version-generic linux-image-extra-version-generic#安装对应版本内核sudo dpkg --list | grep linux-image#查看已安装的内核版本 编译内">
@@ -507,7 +507,7 @@
                 
                   <span class="post-meta-item-text">本文字数：</span>
                 
-                <span title="本文字数">5.4k</span>
+                <span title="本文字数">7k</span>
               
 
               
@@ -521,7 +521,7 @@
                 
                   <span class="post-meta-item-text">阅读时长 &asymp;</span>
                 
-                <span title="阅读时长">5 分钟</span>
+                <span title="阅读时长">6 分钟</span>
               
             </div>
           
@@ -545,7 +545,8 @@
 <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">uname -r</span><br><span class="line"><span class="comment">#查看本机的内核</span></span><br><span class="line">sudo apt-get install linux-headers-version-generic linux-image-version-generic linux-image-extra-version-generic</span><br><span class="line"><span class="comment">#安装对应版本内核</span></span><br><span class="line">sudo dpkg --list | grep linux-image</span><br><span class="line"><span class="comment">#查看已安装的内核版本</span></span><br></pre></td></tr></table></figure>
 <h2 id="编译内核">编译内核</h2>
 <p><code>linux</code>内核源代码下载:<code>https://mirrors.tuna.tsinghua.edu.cn/kernel/</code>.</p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">make mrproper</span><br><span class="line">make menuconfig</span><br></pre></td></tr></table></figure>
+<p>对于<code>kernel 3.18.2</code>,需要修改<code>Makefile</code>将<code>-O3</code>改为<code>-O1</code>,这样编译出的内核会包含调试信息且能被<code>gdb</code>调试.</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">make mrproper</span><br><span class="line"><span class="comment">#清除旧的编译信息</span></span><br><span class="line">make menuconfig</span><br><span class="line"><span class="comment">#进行编译配置</span></span><br></pre></td></tr></table></figure>
 <p>重点配置(有些配置可能因为版本不同而不一样).</p>
 <ul>
 <li>取消<code>KernelHacking --&gt; Write protect kernel read-only data structures</code>.</li>
@@ -563,6 +564,12 @@
 <p>启用<code>deb-src</code>源,然后<code>sudo apt-get update</code>更新.</p>
 <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">apt-cache search linux-source</span><br><span class="line">sudo apt-get install linux-source-4.15.0</span><br><span class="line"><span class="comment">#安装4.15.0内核的源代码</span></span><br></pre></td></tr></table></figure>
 <p>源代码的压缩包会被放在<code>/usr/src</code>目录下的同名文件夹下.</p>
+<h2 id="重新编译gdb">重新编译gdb</h2>
+<p>如果直接用默认安装的<code>gdb</code>将会出现如下错误.</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">Remote <span class="string">'g'</span> packet reply is too long:<span class="comment">#...</span></span><br></pre></td></tr></table></figure>
+<p>下载最新版的<code>gdb</code>,修改代码.</p>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br></pre></td><td class="code"><pre><span class="line">--- gdb/remote.c.orig <span class="number">2019</span><span class="number">-01</span><span class="number">-23</span> <span class="number">16</span>:<span class="number">57</span>:<span class="number">32.269656791</span> +<span class="number">0800</span></span><br><span class="line">+++ gdb/remote.c <span class="number">2019</span><span class="number">-01</span><span class="number">-23</span> <span class="number">17</span>:<span class="number">00</span>:<span class="number">21.097013850</span> +<span class="number">0800</span></span><br><span class="line">@@ <span class="number">-8034</span>,<span class="number">10</span> +<span class="number">8034</span>,<span class="number">22</span> @@ remote_target::process_g_packet (struct</span><br><span class="line">   buf_len = <span class="built_in">strlen</span> (rs-&gt;buf);</span><br><span class="line"> </span><br><span class="line">   <span class="comment">/* Further sanity checks, with knowledge of the architecture. */</span></span><br><span class="line">- <span class="keyword">if</span> (buf_len &gt; <span class="number">2</span> * rsa-&gt;sizeof_g_packet)</span><br><span class="line">- error (_(<span class="string">"Remote 'g' packet reply is too long (expected %ld bytes, got %d "</span></span><br><span class="line">- <span class="string">"bytes): %s"</span>), rsa-&gt;sizeof_g_packet, buf_len / <span class="number">2</span>, rs-&gt;buf);</span><br><span class="line">-</span><br><span class="line">+ <span class="comment">//if (buf_len &gt; 2 * rsa-&gt;sizeof_g_packet)</span></span><br><span class="line">+ <span class="comment">// error (_("Remote 'g' packet reply is too long (expected %ld bytes, got %d "</span></span><br><span class="line">+ <span class="comment">// "bytes): %s"), rsa-&gt;sizeof_g_packet, buf_len / 2, rs-&gt;buf);</span></span><br><span class="line">+ <span class="keyword">if</span> (buf_len &gt; <span class="number">2</span> * rsa-&gt;sizeof_g_packet)</span><br><span class="line">+ &#123;</span><br><span class="line">+ rsa-&gt;sizeof_g_packet = buf_len;</span><br><span class="line">+ <span class="keyword">for</span> (i = <span class="number">0</span>; i &lt; gdbarch_num_regs(gdbarch); i++)</span><br><span class="line">+ &#123;</span><br><span class="line">+ <span class="keyword">if</span> (rsa-&gt;regs[i].pnum == <span class="number">-1</span>)</span><br><span class="line">+ <span class="keyword">continue</span>;</span><br><span class="line">+ <span class="keyword">if</span> (rsa-&gt;regs[i].offset &gt;= rsa-&gt;sizeof_g_packet)</span><br><span class="line">+ rsa-&gt;regs[i].in_g_packet = <span class="number">0</span>;</span><br><span class="line">+ <span class="keyword">else</span></span><br><span class="line">+ rsa-&gt;regs[i].in_g_packet = <span class="number">1</span>;</span><br><span class="line">+ &#125;</span><br><span class="line">+ &#125;</span><br><span class="line">   <span class="comment">/* Save the size of the packet sent to us by the target. It is used</span></span><br><span class="line"><span class="comment">      as a heuristic when determining the max size of packets that the</span></span><br><span class="line"><span class="comment">      target can safely receive. */</span></span><br></pre></td></tr></table></figure>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">./configure --prefix=/home/w4rd3n/gdb/install</span><br><span class="line">make </span><br><span class="line">sudo apt install -y texinfo</span><br><span class="line">make install</span><br><span class="line">sudo ln -s /home/w4rd3n/gdb/install/bin/gdb /usr/bin/gdb</span><br></pre></td></tr></table></figure>
 <h2 id="qemu-gdb">qemu + gdb</h2>
 <h3 id="busybox">busybox</h3>
 <p>用<code>busybox</code>来生成文件系统,编译配置(有些配置可能因为版本不同而不一样).</p>
@@ -582,7 +589,7 @@
 <h3 id="调试">调试</h3>
 <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">qemu-system-x86_64 -kernel bzImage -initrd rootfs.img -append <span class="string">"console=ttyS0 root=/dev/ram rdinit=/sbin/init"</span> -smp cores=1,threads=1 -cpu kvm64,+smep,+smap --nographic -gdb tcp::1234</span><br><span class="line"><span class="comment">#-cpu kvm64,+smep,+smap.设置CPU的安全选项.开启smap和smep.</span></span><br><span class="line"><span class="comment">#-kernel.设置内核bzImage文件的路径.</span></span><br><span class="line"><span class="comment">#-initrd.设置内核启动的文件系统.</span></span><br><span class="line"><span class="comment">#-gdb tcp::1234.设置gdb的调试端口.</span></span><br><span class="line"><span class="comment">#-append.附加选项,指定no kaslr可以关闭随机偏移.</span></span><br><span class="line"><span class="comment">#-m.指定内存大小</span></span><br><span class="line"><span class="comment">#-smp.设置内核数和线程数</span></span><br><span class="line"><span class="comment">#--nographic和console=ttyS0一起使用启动的界面就会变成当前终端</span></span><br></pre></td></tr></table></figure>
 <p><code>gdb</code>调试.</p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">sudo gdb -q ./vmlinux</span><br><span class="line"><span class="comment">#加载vmlinux符号文件.</span></span><br><span class="line">gdb&gt; target remote :1234</span><br><span class="line">gdb&gt; add-symbol-file ./test.ko &lt;addr of test.ko&gt;</span><br><span class="line"><span class="comment">#addr of test.ko可以通过cat /proc/modules | grep test.ko获得.需要root权限,修改init文件获得.</span></span><br></pre></td></tr></table></figure>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">sudo gdb -q ./vmlinux</span><br><span class="line"><span class="comment">#加载vmlinux符号文件.</span></span><br><span class="line">gdb&gt; target remote :1234</span><br><span class="line">gdb&gt; b start_kernel</span><br><span class="line">gdb&gt; add-symbol-file ./test.ko &lt;text addr&gt; -s .data &lt;data addr&gt; -s .bss &lt;bss addr&gt;</span><br><span class="line"><span class="comment">#addr of test.ko可以通过cat /proc/modules | grep test.ko获得.需要root权限,修改init文件获得.</span></span><br></pre></td></tr></table></figure>
 <h2 id="双机调试">双机调试</h2>
 <h3 id="虚拟机配置">虚拟机配置</h3>
 <p>首先移除打印机,然后配置双机的串口.</p>
@@ -729,7 +736,7 @@
                 
                   <a href="/archives/">
                 
-                    <span class="site-state-item-count">172</span>
+                    <span class="site-state-item-count">173</span>
                     <span class="site-state-item-name">日志</span>
                   </a>
                 </div>
@@ -774,7 +781,9 @@
                     
                       
                     
-                    <span class="site-state-item-count">16</span>
+                      
+                    
+                    <span class="site-state-item-count">17</span>
                     <span class="site-state-item-name">分类</span>
                   </a>
                 </div>
@@ -865,7 +874,9 @@
                     
                       
                     
-                    <span class="site-state-item-count">39</span>
+                      
+                    
+                    <span class="site-state-item-count">40</span>
                     <span class="site-state-item-name">标签</span>
                   </a>
                 </div>
@@ -915,7 +926,7 @@
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#安装内核"><span class="nav-number">1.</span> <span class="nav-text">安装内核</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#编译内核"><span class="nav-number">2.</span> <span class="nav-text">编译内核</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#安装符号文件"><span class="nav-number">3.</span> <span class="nav-text">安装符号文件</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#安装源代码"><span class="nav-number">4.</span> <span class="nav-text">安装源代码</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#qemu-gdb"><span class="nav-number">5.</span> <span class="nav-text">qemu + gdb</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#busybox"><span class="nav-number">5.1.</span> <span class="nav-text">busybox</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#调试"><span class="nav-number">5.2.</span> <span class="nav-text">调试</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#双机调试"><span class="nav-number">6.</span> <span class="nav-text">双机调试</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#虚拟机配置"><span class="nav-number">6.1.</span> <span class="nav-text">虚拟机配置</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#配置target"><span class="nav-number">6.2.</span> <span class="nav-text">配置target</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#配置host"><span class="nav-number">6.3.</span> <span class="nav-text">配置host</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#调试-1"><span class="nav-number">6.4.</span> <span class="nav-text">调试</span></a></li></ol></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#安装内核"><span class="nav-number">1.</span> <span class="nav-text">安装内核</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#编译内核"><span class="nav-number">2.</span> <span class="nav-text">编译内核</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#安装符号文件"><span class="nav-number">3.</span> <span class="nav-text">安装符号文件</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#安装源代码"><span class="nav-number">4.</span> <span class="nav-text">安装源代码</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#重新编译gdb"><span class="nav-number">5.</span> <span class="nav-text">重新编译gdb</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#qemu-gdb"><span class="nav-number">6.</span> <span class="nav-text">qemu + gdb</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#busybox"><span class="nav-number">6.1.</span> <span class="nav-text">busybox</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#调试"><span class="nav-number">6.2.</span> <span class="nav-text">调试</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#双机调试"><span class="nav-number">7.</span> <span class="nav-text">双机调试</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#虚拟机配置"><span class="nav-number">7.1.</span> <span class="nav-text">虚拟机配置</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#配置target"><span class="nav-number">7.2.</span> <span class="nav-text">配置target</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#配置host"><span class="nav-number">7.3.</span> <span class="nav-text">配置host</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#调试-1"><span class="nav-number">7.4.</span> <span class="nav-text">调试</span></a></li></ol></li></ol></div>
             
 
           </div>
@@ -947,7 +958,7 @@
       <i class="fa fa-area-chart"></i>
     </span>
     
-    <span title="站点总字数">824k</span>
+    <span title="站点总字数">827k</span>
   
 
   
@@ -956,7 +967,7 @@
       <i class="fa fa-coffee"></i>
     </span>
     
-    <span title="站点阅读时长">12:29</span>
+    <span title="站点阅读时长">12:32</span>
   
 </div>
 
@@ -1605,7 +1616,7 @@
   //$("body").backstretch("/images/background.jpg");
   </script>
   
-  <script type="text/javascript" src="//cdn.bootcss.com/canvas-nest.js/1.0.0/canvas-nest.min.js"></script><!-- hexo-inject:begin --><!-- hexo-inject:end -->
+  <script type="text/javascript" src="//cdn.bootcss.com/canvas-nest.js/1.0.0/canvas-nest.min.js"></script>
   
-<script src="/live2dw/lib/L2Dwidget.min.js?0c58a1486de42ac6cc1c59c7d98ae887"></script><script>L2Dwidget.init({"pluginRootPath":"live2dw/","pluginJsPath":"lib/","pluginModelPath":"assets/","tagMode":false,"debug":false,"model":{"jsonPath":"/live2dw/assets/koharu.model.json"},"display":{"position":"right","width":150,"height":300},"mobile":{"show":false},"log":false});</script></body>
+<script src="/live2dw/lib/L2Dwidget.min.js?0c58a1486de42ac6cc1c59c7d98ae887"></script><script>L2Dwidget.init({"pluginRootPath":"live2dw/","pluginJsPath":"lib/","pluginModelPath":"assets/","tagMode":false,"debug":false,"model":{"jsonPath":"/live2dw/assets/koharu.model.json"},"display":{"position":"right","width":150,"height":300},"mobile":{"show":false},"log":false});</script><!-- hexo-inject:begin --><!-- hexo-inject:end --></body>
 </html>

@@ -127,7 +127,7 @@
 <meta property="og:site_name" content="w4rd3n">
 <meta property="og:description" content="栈漏洞利用 12int commit_creds(struct cred * new);struct cred * prepare_kernel_cred(struct task_struct * daemon); 通过栈溢出漏洞写入ROP链调用commit_creds(prepare_kernel_cred(0))等函数进行提权,这种攻击方法首先要泄露内核基址. 与用户态栈溢出不同的是这里">
 <meta property="og:locale" content="zh-CN">
-<meta property="og:updated_time" content="2021-01-17T12:57:34.006Z">
+<meta property="og:updated_time" content="2021-01-20T12:50:12.548Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="IS-pwn-Linux-kernel-常见漏洞利用">
 <meta name="twitter:description" content="栈漏洞利用 12int commit_creds(struct cred * new);struct cred * prepare_kernel_cred(struct task_struct * daemon); 通过栈溢出漏洞写入ROP链调用commit_creds(prepare_kernel_cred(0))等函数进行提权,这种攻击方法首先要泄露内核基址. 与用户态栈溢出不同的是这里">
@@ -503,7 +503,7 @@
                 
                   <span class="post-meta-item-text">本文字数：</span>
                 
-                <span title="本文字数">3.6k</span>
+                <span title="本文字数">3.8k</span>
               
 
               
@@ -565,9 +565,11 @@
 <h3 id="uaf">UAF</h3>
 <p>内核态的堆管理机制不太一样,但原理类似.</p>
 <p>由于<code>cred</code>结构体是使用<code>kmem_cache_alloc</code>分配的,所以可以通过申请相同大小的内存获取<code>cred</code>从而篡改<code>cred</code>.</p>
-<p>对<code>tty</code>驱动分配的设备节点调用<code>open</code>时,<code>tty</code>核心使用一个指向分配给这个设备的<code>tty_struct</code>结构的指针调用它,也就是说对驱动设备调用<code>open</code>函数后内核会通过<code>kmalloc</code>申请一个<code>tty_struct</code>结构体.而<code>tty_struct</code>结构体有一个成员:<code>const struct tty_operations *ops;</code>,是一个存放函数指针的结构体(类似虚函数表).</p>
+<p>对<code>tty</code>驱动分配的设备节点调用<code>open</code>时,<code>tty</code>核心使用一个指向分配给这个设备的<code>tty_struct</code>结构的指针调用它(<code>ptmx</code>设备是一种<code>tty</code>设备),也就是说对驱动设备调用<code>open</code>函数后内核会通过<code>kmalloc</code>申请一个<code>tty_struct</code>结构体.而<code>tty_struct</code>结构体有一个成员:<code>const struct tty_operations *ops;</code>,是一个存放函数指针的结构体(类似虚函数表).</p>
 <p>这里使用的分配机制为<code>slub</code>,所以可以通过<code>UAF</code>控制<code>tty_struct</code>结构体来指向伪造的<code>tty_operations</code>,从而劫持控制流.</p>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">struct</span> <span class="title">tty_struct</span> &#123;</span></span><br><span class="line">    <span class="keyword">int</span> magic;</span><br><span class="line">    <span class="class"><span class="keyword">struct</span> <span class="title">kref</span> <span class="title">kref</span>;</span></span><br><span class="line">    <span class="class"><span class="keyword">struct</span> <span class="title">device</span> *<span class="title">dev</span>;</span></span><br><span class="line">    <span class="class"><span class="keyword">struct</span> <span class="title">tty_driver</span> *<span class="title">driver</span>;</span></span><br><span class="line">    <span class="keyword">const</span> <span class="class"><span class="keyword">struct</span> <span class="title">tty_operations</span> *<span class="title">ops</span>;</span></span><br><span class="line">    <span class="comment">//...</span></span><br></pre></td></tr></table></figure>
 <figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">struct</span> <span class="title">tty_operations</span> &#123;</span></span><br><span class="line">    <span class="class"><span class="keyword">struct</span> <span class="title">tty_struct</span> * (*<span class="title">lookup</span>)(<span class="title">struct</span> <span class="title">tty_driver</span> *<span class="title">driver</span>, <span class="title">struct</span> <span class="title">file</span> *<span class="title">filp</span>, <span class="title">int</span> <span class="title">idx</span>);</span></span><br><span class="line">    <span class="keyword">int</span>  (*install)(struct tty_driver *driver, struct tty_struct *tty);</span><br><span class="line">    <span class="keyword">void</span> (*remove)(struct tty_driver *driver, struct tty_struct *tty);</span><br><span class="line">    <span class="keyword">int</span>  (*open)(struct tty_struct * tty, struct file * filp);</span><br><span class="line">    <span class="keyword">void</span> (*close)(struct tty_struct * tty, struct file * filp);</span><br><span class="line">    <span class="keyword">void</span> (*shutdown)(struct tty_struct *tty);</span><br><span class="line">    <span class="keyword">void</span> (*cleanup)(struct tty_struct *tty);</span><br><span class="line">    <span class="keyword">int</span>  (*write)(struct tty_struct * tty, <span class="keyword">const</span> <span class="keyword">unsigned</span> <span class="keyword">char</span> *buf, <span class="keyword">int</span> count);</span><br><span class="line">	<span class="comment">//more</span></span><br><span class="line">&#125; __randomize_layout;</span><br></pre></td></tr></table></figure>
+<p>可以修改<code>tty_operations</code>结构体的<code>write</code>函数指针,然后对设备进行<code>write</code>操作实现控制流的劫持.</p>
 <h2 id="其他漏洞">其他漏洞</h2>
 <h3 id="thread_info-addr_limit">thread_info-&gt;addr_limit</h3>
 <p><code>thread_info-&gt;addr_limit</code>用于限制用户态程序能访问的地址的最大值,如果把它修改成<code>0xffffffffffffffff</code>就可以利用<code>pipe</code>读写整个内存空间,包括内核空间.</p>
@@ -697,7 +699,7 @@
                 
                   <a href="/archives/">
                 
-                    <span class="site-state-item-count">172</span>
+                    <span class="site-state-item-count">173</span>
                     <span class="site-state-item-name">日志</span>
                   </a>
                 </div>
@@ -742,7 +744,9 @@
                     
                       
                     
-                    <span class="site-state-item-count">16</span>
+                      
+                    
+                    <span class="site-state-item-count">17</span>
                     <span class="site-state-item-name">分类</span>
                   </a>
                 </div>
@@ -833,7 +837,9 @@
                     
                       
                     
-                    <span class="site-state-item-count">39</span>
+                      
+                    
+                    <span class="site-state-item-count">40</span>
                     <span class="site-state-item-name">标签</span>
                   </a>
                 </div>
@@ -915,7 +921,7 @@
       <i class="fa fa-area-chart"></i>
     </span>
     
-    <span title="站点总字数">824k</span>
+    <span title="站点总字数">827k</span>
   
 
   
@@ -924,7 +930,7 @@
       <i class="fa fa-coffee"></i>
     </span>
     
-    <span title="站点阅读时长">12:29</span>
+    <span title="站点阅读时长">12:32</span>
   
 </div>
 
@@ -1573,7 +1579,7 @@
   //$("body").backstretch("/images/background.jpg");
   </script>
   
-  <script type="text/javascript" src="//cdn.bootcss.com/canvas-nest.js/1.0.0/canvas-nest.min.js"></script><!-- hexo-inject:begin --><!-- hexo-inject:end -->
+  <script type="text/javascript" src="//cdn.bootcss.com/canvas-nest.js/1.0.0/canvas-nest.min.js"></script>
   
-<script src="/live2dw/lib/L2Dwidget.min.js?0c58a1486de42ac6cc1c59c7d98ae887"></script><script>L2Dwidget.init({"pluginRootPath":"live2dw/","pluginJsPath":"lib/","pluginModelPath":"assets/","tagMode":false,"debug":false,"model":{"jsonPath":"/live2dw/assets/koharu.model.json"},"display":{"position":"right","width":150,"height":300},"mobile":{"show":false},"log":false});</script></body>
+<script src="/live2dw/lib/L2Dwidget.min.js?0c58a1486de42ac6cc1c59c7d98ae887"></script><script>L2Dwidget.init({"pluginRootPath":"live2dw/","pluginJsPath":"lib/","pluginModelPath":"assets/","tagMode":false,"debug":false,"model":{"jsonPath":"/live2dw/assets/koharu.model.json"},"display":{"position":"right","width":150,"height":300},"mobile":{"show":false},"log":false});</script><!-- hexo-inject:begin --><!-- hexo-inject:end --></body>
 </html>

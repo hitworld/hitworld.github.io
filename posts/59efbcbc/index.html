@@ -148,38 +148,13 @@
 <meta property="og:image" content="https://hitworld.github.io/png/2021-01-12-01-34-00.png">
 <meta property="og:image" content="https://hitworld.github.io/png/2021-01-12-16-03-46.png">
 <meta property="og:image" content="https://hitworld.github.io/png/2021-01-12-16-04-09.png">
-<meta property="og:image" content="https://hitworld.github.io/png/2021-01-12-18-44-31.png">
 <meta property="og:image" content="https://hitworld.github.io/png/2021-01-12-18-46-38.png">
-<meta property="og:image" content="https://hitworld.github.io/png/2021-01-12-18-48-17.png">
-<meta property="og:image" content="https://hitworld.github.io/png/2021-01-12-18-48-44.png">
-<meta property="og:image" content="https://hitworld.github.io/png/2021-01-12-18-52-03.png">
-<meta property="og:image" content="https://hitworld.github.io/png/2021-01-12-18-53-00.png">
-<meta property="og:image" content="https://hitworld.github.io/png/2021-01-12-18-53-19.png">
 <meta property="og:image" content="https://hitworld.github.io/png/2021-01-12-18-54-09.png">
-<meta property="og:image" content="https://hitworld.github.io/png/2021-01-12-21-03-59.png">
-<meta property="og:image" content="https://hitworld.github.io/png/2021-01-12-21-07-37.png">
-<meta property="og:image" content="https://hitworld.github.io/png/2021-01-12-21-08-45.png">
-<meta property="og:image" content="https://hitworld.github.io/png/2021-01-12-21-10-53.png">
-<meta property="og:image" content="https://hitworld.github.io/png/2021-01-12-21-11-18.png">
-<meta property="og:image" content="https://hitworld.github.io/png/2021-01-12-21-11-32.png">
-<meta property="og:image" content="https://hitworld.github.io/png/2021-01-12-21-11-49.png">
 <meta property="og:image" content="https://hitworld.github.io/png/2021-01-12-21-25-23.png">
-<meta property="og:image" content="https://hitworld.github.io/png/2021-01-12-21-31-56.png">
-<meta property="og:image" content="https://hitworld.github.io/png/2021-01-12-21-36-59.png">
-<meta property="og:image" content="https://hitworld.github.io/png/2021-01-12-21-37-30.png">
-<meta property="og:image" content="https://hitworld.github.io/png/2021-01-12-21-38-34.png">
-<meta property="og:image" content="https://hitworld.github.io/png/2021-01-12-21-42-23.png">
-<meta property="og:image" content="https://hitworld.github.io/png/2021-01-12-21-45-29.png">
-<meta property="og:image" content="https://hitworld.github.io/png/2021-01-12-21-45-58.png">
-<meta property="og:image" content="https://hitworld.github.io/png/2021-01-12-21-46-36.png">
-<meta property="og:image" content="https://hitworld.github.io/png/2021-01-12-21-46-59.png">
-<meta property="og:image" content="https://hitworld.github.io/png/2021-01-12-21-47-11.png">
-<meta property="og:image" content="https://hitworld.github.io/png/2021-01-12-21-47-26.png">
-<meta property="og:image" content="https://hitworld.github.io/png/2021-01-12-21-48-05.png">
 <meta property="og:image" content="https://hitworld.github.io/png/2021-01-12-21-48-59.png">
 <meta property="og:image" content="https://hitworld.github.io/png/2021-01-12-21-49-21.png">
 <meta property="og:image" content="https://hitworld.github.io/png/2021-01-12-21-49-33.png">
-<meta property="og:updated_time" content="2021-01-21T16:03:28.885Z">
+<meta property="og:updated_time" content="2021-01-21T17:39:52.289Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="CS-BASIC-compiler-principles-语法分析">
 <meta name="twitter:description" content="概览  语法分析是编译过程的核心,它的任务是在词法分析识别出单词符号串的基础上,分析并判断程序的语法结构是否符合语法规则. 编译器采用正规式和有限自动机描述和识别语言的单词符号,用上下文无关文法来描述语法规则. 所以语法分析器的工作本质就是按文法的产生式,识别输入符号串是否是一个句子. 自上而下分析 从推导的角度看,自上而下分析是从文法的开始符号出发,试图推导出与输入符号串相同的符号串">
@@ -556,7 +531,7 @@
                 
                   <span class="post-meta-item-text">本文字数：</span>
                 
-                <span title="本文字数">9k</span>
+                <span title="本文字数">12k</span>
               
 
               
@@ -570,7 +545,7 @@
                 
                   <span class="post-meta-item-text">阅读时长 &asymp;</span>
                 
-                <span title="阅读时长">8 分钟</span>
+                <span title="阅读时长">11 分钟</span>
               
             </div>
           
@@ -810,7 +785,7 @@
 <p><code>LR</code>文法不是二义的,<code>LR</code>文法是无二义文法的真子集.</p>
 <h3 id="构造识别活前缀的dfa">构造识别活前缀的DFA</h3>
 <p>文法的拓广:保证文法的开始符号的定义只有一个产生式.</p>
-<p>将<code>G</code>扩广为<code>G'</code>,包含了整个<code>G</code>,引入了非终结符<code>S'</code>和产生式<code>S'-&gt;S</code>,<code>S'</code>变为<code>G'</code>的开始符号.</p>
+<p>将<code>G</code>拓广为<code>G'</code>,包含了整个<code>G</code>,引入了非终结符<code>S'</code>和产生式<code>S'-&gt;S</code>,<code>S'</code>变为<code>G'</code>的开始符号.</p>
 <p><code>LR(0)</code>项目:在每个产生式的右部的任意一个空隙插入一个点表示匹配到此处,不同的空隙就对应一个项目.</p>
 <ul>
 <li>形如<code>A-&gt;α.</code>称为规约项目.</li>
@@ -834,64 +809,105 @@
 <p>在任何时候,分析栈中的活前缀<code>X1X2...Xm</code>的有效项目集正是从识别活前缀的<code>DFA</code>的初态出发,读出<code>X1X2...Xm</code>后到达的那个项目集(状态).</p>
 <p>若项目<code>A-&gt;αBβ</code>对活前缀<code>oα</code>是有效的且<code>B-&gt;γ</code>是一个产生式,则项目<code>B-&gt;*γ</code>对<code>oα</code>也是有效的.</p>
 <h4 id="lr0项目集规范族的构造">LR(0)项目集规范族的构造</h4>
-<p>首先将文法<code>G</code>扩广为<code>G'</code>.</p>
-<p>假定<code>I</code>是文法<code>G'</code>的任一,<code>I</code>的闭包<code>CLOSURE(I)</code>如下.</p>
+<p>首先将文法<code>G</code>拓广为<code>G'</code>.</p>
+<p>假定<code>I</code>是文法<code>G'</code>的任一项目集,<code>I</code>的闭包<code>CLOSURE(I)</code>如下.</p>
 <ul>
-<li></li>
+<li><code>I</code>的任何项目都属于<code>CLOSURE(I)</code>.</li>
+<li>若<code>A-&gt;α*Bβ</code>属于<code>CLOSURE(I)</code>,则任何关于<code>B</code>的产生式<code>B-&gt;γ</code>,项目<code>B-&gt;*γ</code>也属于<code>CLOSURE(I)</code>.</li>
+<li>重复上述步骤直至<code>CLOSURE(I)</code>不再增大.</li>
 </ul>
-<p>状态转化函数.</p>
-<p><img src="/png/2021-01-12-18-44-31.png"></p>
+<p>为了识别活前缀,定义状态转换函数<code>GO</code>,<code>I</code>是一个项目集,<code>X</code>是一个文法符号.</p>
+<p><code>GO(I,X)=CLOSURE(J)</code>,其中<code>J={任何形如A-&gt;αX*β的项目|A-&gt;α*Xβ属于I}</code>.</p>
+<p>直观上说:若<code>I</code>是对某个活前缀<code>γ</code>有效的项目集,则<code>GO(I,X)</code>就是对<code>γX</code>有效的项目集.</p>
 <p>示例.</p>
 <p><img src="/png/2021-01-12-18-46-38.png"></p>
-<p>LR(0)项目集规范族的构造算法.</p>
-<p><img src="/png/2021-01-12-18-48-17.png"></p>
-<p><img src="/png/2021-01-12-18-48-44.png"></p>
+<p><code>LR(0)</code>项目集规范族的构造算法.</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">PROCEDURE ITEMSETS(G&apos;);</span><br><span class="line">BEGIN</span><br><span class="line">  C:=&#123;CLOSURE(&#123;S&apos;-&gt;*S&#125;)&#125;</span><br><span class="line">  REPEAT</span><br><span class="line">    FOR C中每个项目集I和G&apos;的每个符号X DO</span><br><span class="line">      IF GO(I,X)非空且不属于C THEN</span><br><span class="line">        把GO(I,X)放入C族中;</span><br><span class="line">  UNTIL C不再增大</span><br><span class="line">END</span><br></pre></td></tr></table></figure>
+<p>两种构造识别活前缀的<code>DFA</code>的方法.</p>
+<ol type="1">
+<li>项目 -&gt; <code>NFA</code> -&gt; <code>DFA</code>.</li>
+<li><code>CLOSURE</code> -&gt; <code>GO</code> -&gt; <code>DFA</code>.</li>
+</ol>
 <h3 id="构造lr0分析表">构造LR(0)分析表</h3>
-<p><img src="/png/2021-01-12-18-52-03.png"></p>
+<p>如果文法<code>G</code>的拓广文法<code>G'</code>的活前缀识别自动机的每个状态(项目集)不存在以下情况.</p>
+<ul>
+<li>既含有移进项目,又含有归约项目.</li>
+<li>含有多个归约项目.</li>
+</ul>
+<p>则称<code>G</code>是一个<code>LR(0)</code>文法.</p>
 <p>构造<code>LR(0)</code>分析表的算法.</p>
-<p><img src="/png/2021-01-12-18-53-00.png"></p>
-<p><img src="/png/2021-01-12-18-53-19.png"></p>
+<p>首先令每个项目集<code>Ik</code>的下标<code>k</code>作为分析器的状态,包含项目<code>S'-&gt;S</code>的集合<code>Ii</code>下标<code>i</code>作为初态.</p>
+<p>构造<code>LR(0)</code>分析表的<code>ACTION</code>和<code>GOTO</code>子表过程如下.</p>
+<ol type="1">
+<li>若项目<code>A-&gt;α*aβ</code>属于<code>Ik</code>且<code>GO(Ik,a)=Ij</code>,<code>a</code>为终结符,则置<code>ACTION[k,a]</code>为<code>sj</code>.</li>
+<li>若项目<code>A-&gt;α*</code>属于<code>Ik</code>,那么对任何终结符或结束符<code>a</code>置<code>ACTION[k,a]</code>为<code>rj</code>(这里的<code>j</code>是产生式的序号).</li>
+<li>若项目<code>S'-&gt;S</code>属于<code>Ik</code>,则置<code>ACTION[k,#]</code>为<code>acc</code>.</li>
+<li>若<code>GO(Ik,A)=Ij</code>,<code>A</code>为非终结符,则置<code>GOTO[k,A]</code>为<code>j</code>.</li>
+<li>剩余的空白格填上报错标志.</li>
+</ol>
 <p>示例.</p>
 <p><img src="/png/2021-01-12-18-54-09.png"></p>
 <h3 id="slr1分析法">SLR(1)分析法</h3>
-<p>移进-归约冲突.</p>
-<p><img src="/png/2021-01-12-21-03-59.png"></p>
+<p>如果某些项目集存在移进-归约冲突,则不能使用<code>LR(0)</code>分析.</p>
 <p>可以通过<code>FOLLOW</code>集和当前单词选择移进项目或归约项目.</p>
-<p>根据上面的原理,下面给出一个解决冲突的方法.</p>
-<p><img src="/png/2021-01-12-21-07-37.png"></p>
-<p>将上面的方法一般化,也就得到了<code>SLR(1)</code>的冲突解决方法.</p>
-<p><img src="/png/2021-01-12-21-08-45.png"></p>
+<p>经过调整就得到了<code>SLR(1)</code>的冲突解决方法.</p>
+<p>如果每个项目集中存在多个规约项目和移进项目,只要多个规约项目对应的非终结符的<code>FOLLOW</code>集,还有所有移进项目待移进的终结符组成的集合,这些集合两两不相交.</p>
+<p>则可以通过向前查询一个字符来判断下一步行动.</p>
 <h4 id="构造slr1分析表的方法">构造SLR(1)分析表的方法</h4>
-<p><img src="/png/2021-01-12-21-10-53.png"></p>
-<p><img src="/png/2021-01-12-21-11-18.png"></p>
-<p><img src="/png/2021-01-12-21-11-32.png"></p>
-<p><img src="/png/2021-01-12-21-11-49.png"></p>
+<p>首先将文法<code>G</code>拓广为<code>G'</code>.</p>
+<p>对<code>G'</code>构造<code>LR(0)</code>项目集规范族<code>C</code>和活前缀识别自动机的状态转换函数<code>GO</code>.</p>
+<p>使用<code>C</code>和<code>GO</code>构造<code>SLR</code>分析表.</p>
+<p>首先令每个项目集<code>Ik</code>的下标<code>k</code>作为分析器的状态,包含项目<code>S'-&gt;S</code>的集合<code>Ii</code>下标<code>i</code>作为初态.</p>
+<p>构造<code>SLR(1)</code>分析表的<code>ACTION</code>和<code>GOTO</code>子表过程如下.</p>
+<ol type="1">
+<li>若项目<code>A-&gt;α*aβ</code>属于<code>Ik</code>且<code>GO(Ik,a)=Ij</code>,<code>a</code>为终结符,则置<code>ACTION[k,a]</code>为<code>sj</code>.</li>
+<li>若项目<code>A-&gt;α*</code>属于<code>Ik</code>,对于<code>FOLLOW(A)</code>中的所有终结符<code>a</code>,置<code>ACTION[k,a]</code>为<code>rj</code>(这里的<code>j</code>是产生式的序号).</li>
+<li>若项目<code>S'-&gt;S</code>属于<code>Ik</code>,则置<code>ACTION[k,#]</code>为<code>acc</code>.</li>
+<li>若<code>GO(Ik,A)=Ij</code>,<code>A</code>为非终结符,则置<code>GOTO[k,A]</code>为<code>j</code>.</li>
+<li>剩余的空白格填上报错标志.</li>
+</ol>
+<p>可以看出与<code>LR(0)</code>只有第<code>2</code>条规则有所区别,归约操作更加的合理了.</p>
+<p>按上述方法构造出的<code>ACTION</code>和<code>GOTO</code>子表如果不含多重入口,则称该文法为<code>SLR(1)</code>文法.</p>
+<p>使用<code>SLR</code>分析表的分析器叫做一个<code>SLR</code>分析器.</p>
+<p>每个<code>SLR(1)</code>文法都是无二义的.<code>LR(0) ⊂ SLR(1) ⊂ 无二义文法</code>.</p>
 <h4 id="slr1分析表构造示例">SLR(1)分析表构造示例</h4>
 <p><img src="/png/2021-01-12-21-25-23.png"></p>
 <h3 id="lr1分析法">LR(1)分析法</h3>
 <p><code>SLR</code>冲突消解存在的问题:<code>FOLLOW</code>集合计算得到的超前符号集合可能大于实际可能出现的超前符号集合.</p>
-<p><img src="/png/2021-01-12-21-31-56.png"></p>
+<p>当状态<code>i</code>显现于栈顶时,当前字符<code>a</code>,如果项目集<code>Ii</code>含项目<code>A-&gt;α*</code>且<code>a∈FOLLOW(A)</code>,则<code>SLR(1)</code>会将其归约,但是栈中的活前缀<code>βα</code>未必允许把<code>α</code>归约成<code>A</code>,因为可能并不存在形如<code>βAa</code>的规范句型.</p>
+<p>此时就要使用<code>LR(1)</code>分析法.</p>
 <h4 id="构造lr1分析表">构造LR(1)分析表</h4>
-<p><img src="/png/2021-01-12-21-36-59.png"></p>
-<p><code>LR(k)</code>项目.</p>
-<p><img src="/png/2021-01-12-21-37-30.png"></p>
-<p>有效项目.</p>
-<p><img src="/png/2021-01-12-21-38-34.png"></p>
-<p>有效项目的性质.</p>
-<p><img src="/png/2021-01-12-21-42-23.png"></p>
-<p>构造<code>LR(1)</code>项目集规范族.</p>
-<p>首先是项目集的闭包<code>CLOSURE</code>.</p>
-<p><img src="/png/2021-01-12-21-45-29.png"></p>
-<p>然后是项目集的转换函数<code>GO</code>.</p>
-<p><img src="/png/2021-01-12-21-45-58.png"></p>
+<p>首先将文法<code>G</code>拓广为<code>G'</code>.</p>
+<p>对<code>G'</code>构造<code>LR(0)</code>项目集规范族<code>C</code>和活前缀识别自动机的状态转换函数<code>GO</code>.</p>
+<p>使用<code>C</code>和<code>GO</code>构造<code>LR(1)</code>分析表.</p>
+<p><code>LR(k)</code>项目:扩展<code>LR(0)</code>项目,附带有<code>k</code>个终结符,如<code>[A-&gt;α*β,a1a2...ak]</code>,其中<code>a1a2...ak</code>称为向前搜索符串(或展望串).</p>
+<p>向前搜索符串只对规约项目有用:只有栈顶为所属状态且后续<code>k</code>个输入符号为<code>a1a2...ak</code>时才可以把栈顶上的<code>α</code>归约成<code>A</code>.</p>
+<p>对于一个<code>LR(1)</code>项目<code>[A-&gt;α*β,a]</code>和活前缀<code>γ</code>,如果<code>S'</code>可以规范推导出<code>oAw</code>,且<code>γ=oα</code>,<code>a</code>是<code>w</code>的第一个符号,或者<code>a</code>为<code>#</code>而<code>w</code>为<code>ε</code>.则说该项目对于该活前缀是有效的.</p>
+<p><code>[A-&gt;α*Bβ,a]</code>对活前缀<code>γ=oα</code>是有效的,则对于每个形如<code>B-&gt;X</code>的产生式,对于任何<code>b∈FIRST(βa)</code>,<code>[B-&gt;*X,b]</code>对<code>γ</code>也是有效的.</p>
+<p>假定<code>I</code>是文法<code>G'</code>的任一项目集,<code>I</code>的闭包<code>CLOSURE(I)</code>如下.</p>
+<ul>
+<li><code>I</code>的任何项目都属于<code>CLOSURE(I)</code>.</li>
+<li>若<code>[A-&gt;α*Bβ,a]</code>属于<code>CLOSURE(I)</code>,则任何关于<code>B</code>的产生式<code>B-&gt;γ</code>,对于<code>FIRST(βa)</code>中每个终结符<code>b</code>,<code>[B-&gt;*γ,b]</code>也属于<code>CLOSURE(I)</code>.</li>
+<li>重复上述步骤直至<code>CLOSURE(I)</code>不再增大.</li>
+</ul>
+<p>定义状态转换函数<code>GO</code>,<code>I</code>是一个项目集,<code>X</code>是一个文法符号.</p>
+<p><code>GO(I,X)=CLOSURE(J)</code>,其中<code>J={任何形如[A-&gt;αX*β,a]的项目|[A-&gt;αX*β,a]属于I}</code></p>
 <p><code>LR(1)</code>项目集规范族的构造算法.</p>
-<p><img src="/png/2021-01-12-21-46-36.png"></p>
-<p><code>LR(1)</code>分析表的构造算法.</p>
-<p><img src="/png/2021-01-12-21-46-59.png"></p>
-<p><img src="/png/2021-01-12-21-47-11.png"></p>
-<p><img src="/png/2021-01-12-21-47-26.png"></p>
-<p><code>LR(1)</code>分析表和<code>LR(1)</code>文法.</p>
-<p><img src="/png/2021-01-12-21-48-05.png"></p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">PROCEDURE ITEMSETS(G&apos;);</span><br><span class="line">BEGIN</span><br><span class="line">  C:=&#123;CLOSURE(&#123;[S&apos;-&gt;*S,#]&#125;)&#125;;</span><br><span class="line">  REPEAT</span><br><span class="line">    FOR C中每个项目集I和G&apos;的每个符号X DO</span><br><span class="line">      IF GO(I,X)非空且不属于C THEN</span><br><span class="line">        把GO(I,X)放入C中;</span><br><span class="line">  UNTIL C不再增大</span><br><span class="line">END</span><br></pre></td></tr></table></figure>
+<p><code>LR(1)</code>分析表的构造算法:首先将文法<code>G</code>拓广为<code>G'</code>.对<code>G'</code>构造<code>LR(0)</code>项目集规范族<code>C</code>和活前缀识别自动机的状态转换函数<code>GO</code>.使用<code>C</code>和<code>GO</code>构造<code>LR(1)</code>分析表.</p>
+<p>首先令每个项目集<code>Ik</code>的下标<code>k</code>作为分析器的状态,包含项目<code>[S'-&gt;*S,#]</code>的集合<code>Ii</code>下标<code>i</code>作为初态.</p>
+<p>构造<code>LR(1)</code>分析表的<code>ACTION</code>和<code>GOTO</code>子表过程如下.</p>
+<ol type="1">
+<li>若项目<code>[A-&gt;α*aβ,b]</code>属于<code>Ik</code>且<code>GO(Ik,a)=Ij</code>,<code>a</code>为终结符,则置<code>ACTION[k,a]</code>为<code>sj</code>.</li>
+<li>若项目<code>[A-&gt;α*,a]</code>属于<code>Ik</code>,置<code>ACTION[k,a]</code>为<code>rj</code>(这里的<code>j</code>是产生式的序号).</li>
+<li>若项目<code>[S'-&gt;*S,#]</code>属于<code>Ik</code>,则置<code>ACTION[k,#]</code>为<code>acc</code>.</li>
+<li>若<code>GO(Ik,A)=Ij</code>,<code>A</code>为非终结符,则置<code>GOTO[k,A]</code>为<code>j</code>.</li>
+<li>剩余的空白格填上报错标志.</li>
+</ol>
+<p>可以看出与<code>SLR(1)</code>只有第<code>2</code>条规则有所区别,归约操作更加的精细.</p>
+<p>按上述方法构造出的<code>ACTION</code>和<code>GOTO</code>子表如果不含多重入口,则称该表为规范的<code>LR(1)</code>分析表,称该文法为<code>LR(1)</code>文法.</p>
+<p>使用<code>LR(1)</code>分析表的分析器叫做规范的<code>LR</code>分析器.</p>
+<p><code>LR(1)</code>状态比<code>SLR(1)</code>多.<code>LR(0) ⊂ SLR(1) ⊂ LR(1) ⊂ 无二义文法</code>.</p>
 <h4 id="lr1分析表构造和分析示例">LR(1)分析表构造和分析示例</h4>
 <p><img src="/png/2021-01-12-21-48-59.png"></p>
 <p><img src="/png/2021-01-12-21-49-21.png"></p>
@@ -1242,7 +1258,7 @@
       <i class="fa fa-area-chart"></i>
     </span>
     
-    <span title="站点总字数">836k</span>
+    <span title="站点总字数">839k</span>
   
 
   
@@ -1251,7 +1267,7 @@
       <i class="fa fa-coffee"></i>
     </span>
     
-    <span title="站点阅读时长">12:40</span>
+    <span title="站点阅读时长">12:42</span>
   
 </div>
 
@@ -1900,7 +1916,7 @@
   //$("body").backstretch("/images/background.jpg");
   </script>
   
-  <script type="text/javascript" src="//cdn.bootcss.com/canvas-nest.js/1.0.0/canvas-nest.min.js"></script><!-- hexo-inject:begin --><!-- hexo-inject:end -->
+  <script type="text/javascript" src="//cdn.bootcss.com/canvas-nest.js/1.0.0/canvas-nest.min.js"></script>
   
-<script src="/live2dw/lib/L2Dwidget.min.js?0c58a1486de42ac6cc1c59c7d98ae887"></script><script>L2Dwidget.init({"pluginRootPath":"live2dw/","pluginJsPath":"lib/","pluginModelPath":"assets/","tagMode":false,"debug":false,"model":{"jsonPath":"/live2dw/assets/koharu.model.json"},"display":{"position":"right","width":150,"height":300},"mobile":{"show":false},"log":false});</script></body>
+<script src="/live2dw/lib/L2Dwidget.min.js?0c58a1486de42ac6cc1c59c7d98ae887"></script><script>L2Dwidget.init({"pluginRootPath":"live2dw/","pluginJsPath":"lib/","pluginModelPath":"assets/","tagMode":false,"debug":false,"model":{"jsonPath":"/live2dw/assets/koharu.model.json"},"display":{"position":"right","width":150,"height":300},"mobile":{"show":false},"log":false});</script><!-- hexo-inject:begin --><!-- hexo-inject:end --></body>
 </html>

@@ -129,7 +129,7 @@
 <meta property="og:locale" content="zh-CN">
 <meta property="og:image" content="https://hitworld.github.io/png/2021-01-10-15-45-33.png">
 <meta property="og:image" content="https://hitworld.github.io/png/2021-01-10-15-45-51.png">
-<meta property="og:updated_time" content="2021-01-21T17:39:52.355Z">
+<meta property="og:updated_time" content="2021-01-22T01:55:20.160Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="writeup-pwnable-tw">
 <meta name="twitter:description" content="start  Linux系统调用号表:位于/usr/include/asm/unistd.h,或者网站. read调用(mov al,3;int 80;)存在栈溢出,返回地址偏移为0x14. 返回地址后即为之前push的esp,返回地址溢出为0x8048087再次打印栈内容leak出esp,再次栈溢出跳到栈上执行shellcode. 利用80h中断中的sys_execve：x31xc9x">
@@ -1591,7 +1591,7 @@
   //$("body").backstretch("/images/background.jpg");
   </script>
   
-  <script type="text/javascript" src="//cdn.bootcss.com/canvas-nest.js/1.0.0/canvas-nest.min.js"></script>
+  <script type="text/javascript" src="//cdn.bootcss.com/canvas-nest.js/1.0.0/canvas-nest.min.js"></script><!-- hexo-inject:begin --><!-- hexo-inject:end -->
   
-<script src="/live2dw/lib/L2Dwidget.min.js?0c58a1486de42ac6cc1c59c7d98ae887"></script><script>L2Dwidget.init({"pluginRootPath":"live2dw/","pluginJsPath":"lib/","pluginModelPath":"assets/","tagMode":false,"debug":false,"model":{"jsonPath":"/live2dw/assets/koharu.model.json"},"display":{"position":"right","width":150,"height":300},"mobile":{"show":false},"log":false});</script><!-- hexo-inject:begin --><!-- hexo-inject:end --></body>
+<script src="/live2dw/lib/L2Dwidget.min.js?0c58a1486de42ac6cc1c59c7d98ae887"></script><script>L2Dwidget.init({"pluginRootPath":"live2dw/","pluginJsPath":"lib/","pluginModelPath":"assets/","tagMode":false,"debug":false,"model":{"jsonPath":"/live2dw/assets/koharu.model.json"},"display":{"position":"right","width":150,"height":300},"mobile":{"show":false},"log":false});</script></body>
 </html>

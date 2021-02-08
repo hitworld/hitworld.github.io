@@ -119,26 +119,18 @@
 
 
 
-  <meta name="description" content="属性文法 属性文法也称为属性翻译文法,其以上下文无关文法为基础,为每个文法符号配备若干相关的值(也就是属性),代表与文法符号相关的信息,如:类型,值,代码序列,符号表内容等. 同时属性文法对于文法的每个产生式都配备了一组属性的语义规则,对属性进行计算和传递.  综合属性:用于自下而上的传递信息.  继承属性:用于自上而下的传递信息.  所有语义规则都可以写成对某些属性进行函数变换,">
+  <meta name="description" content="属性文法 属性文法也称为属性翻译文法,其以上下文无关文法为基础,为每个文法符号配备若干相关的值(也就是属性),代表与文法符号相关的信息,如:类型,值,代码序列,符号表内容等. 同时属性文法对于文法的每个产生式都配备了一组属性的语义规则,对属性进行计算和传递. 综合属性:用于自下而上的传递信息. 对于语法规则,根据右部候选式中的符号的属性计算左部被定义符号的综合属性;对于语法树,根据子结点的">
 <meta name="keywords" content="compiler-principles">
 <meta property="og:type" content="article">
 <meta property="og:title" content="CS-BASIC-compiler-principles-属性文法和语法制导翻译">
 <meta property="og:url" content="https://hitworld.github.io/posts/ed03f22a/index.html">
 <meta property="og:site_name" content="w4rd3n">
-<meta property="og:description" content="属性文法 属性文法也称为属性翻译文法,其以上下文无关文法为基础,为每个文法符号配备若干相关的值(也就是属性),代表与文法符号相关的信息,如:类型,值,代码序列,符号表内容等. 同时属性文法对于文法的每个产生式都配备了一组属性的语义规则,对属性进行计算和传递.  综合属性:用于自下而上的传递信息.  继承属性:用于自上而下的传递信息.  所有语义规则都可以写成对某些属性进行函数变换,">
+<meta property="og:description" content="属性文法 属性文法也称为属性翻译文法,其以上下文无关文法为基础,为每个文法符号配备若干相关的值(也就是属性),代表与文法符号相关的信息,如:类型,值,代码序列,符号表内容等. 同时属性文法对于文法的每个产生式都配备了一组属性的语义规则,对属性进行计算和传递. 综合属性:用于自下而上的传递信息. 对于语法规则,根据右部候选式中的符号的属性计算左部被定义符号的综合属性;对于语法树,根据子结点的">
 <meta property="og:locale" content="zh-CN">
-<meta property="og:image" content="https://hitworld.github.io/png/2021-01-12-23-12-33.png">
 <meta property="og:image" content="https://hitworld.github.io/png/2021-01-12-23-14-43.png">
 <meta property="og:image" content="https://hitworld.github.io/png/2021-01-12-23-15-56.png">
-<meta property="og:image" content="https://hitworld.github.io/png/2021-01-12-23-21-52.png">
-<meta property="og:image" content="https://hitworld.github.io/png/2021-01-12-23-22-08.png">
-<meta property="og:image" content="https://hitworld.github.io/png/2021-01-12-23-22-24.png">
-<meta property="og:image" content="https://hitworld.github.io/png/2021-01-12-23-31-28.png">
 <meta property="og:image" content="https://hitworld.github.io/png/2021-01-12-23-31-48.png">
-<meta property="og:image" content="https://hitworld.github.io/png/2021-01-12-23-31-58.png">
 <meta property="og:image" content="https://hitworld.github.io/png/2021-01-12-23-32-11.png">
-<meta property="og:image" content="https://hitworld.github.io/png/2021-01-12-23-33-17.png">
-<meta property="og:image" content="https://hitworld.github.io/png/2021-01-12-23-33-49.png">
 <meta property="og:image" content="https://hitworld.github.io/png/2021-01-12-23-45-03.png">
 <meta property="og:image" content="https://hitworld.github.io/png/2021-01-12-23-45-30.png">
 <meta property="og:image" content="https://hitworld.github.io/png/2021-01-12-23-45-51.png">
@@ -190,11 +182,11 @@
 <meta property="og:image" content="https://hitworld.github.io/png/2021-01-13-01-14-08.png">
 <meta property="og:image" content="https://hitworld.github.io/png/2021-01-13-01-14-25.png">
 <meta property="og:image" content="https://hitworld.github.io/png/2021-01-13-01-14-50.png">
-<meta property="og:updated_time" content="2021-01-22T04:12:00.768Z">
+<meta property="og:updated_time" content="2021-02-08T14:28:48.130Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="CS-BASIC-compiler-principles-属性文法和语法制导翻译">
-<meta name="twitter:description" content="属性文法 属性文法也称为属性翻译文法,其以上下文无关文法为基础,为每个文法符号配备若干相关的值(也就是属性),代表与文法符号相关的信息,如:类型,值,代码序列,符号表内容等. 同时属性文法对于文法的每个产生式都配备了一组属性的语义规则,对属性进行计算和传递.  综合属性:用于自下而上的传递信息.  继承属性:用于自上而下的传递信息.  所有语义规则都可以写成对某些属性进行函数变换,">
-<meta name="twitter:image" content="https://hitworld.github.io/png/2021-01-12-23-12-33.png">
+<meta name="twitter:description" content="属性文法 属性文法也称为属性翻译文法,其以上下文无关文法为基础,为每个文法符号配备若干相关的值(也就是属性),代表与文法符号相关的信息,如:类型,值,代码序列,符号表内容等. 同时属性文法对于文法的每个产生式都配备了一组属性的语义规则,对属性进行计算和传递. 综合属性:用于自下而上的传递信息. 对于语法规则,根据右部候选式中的符号的属性计算左部被定义符号的综合属性;对于语法树,根据子结点的">
+<meta name="twitter:image" content="https://hitworld.github.io/png/2021-01-12-23-14-43.png">
 
 
 
@@ -567,7 +559,7 @@
                 
                   <span class="post-meta-item-text">本文字数：</span>
                 
-                <span title="本文字数">1k</span>
+                <span title="本文字数">1.9k</span>
               
 
               
@@ -581,7 +573,7 @@
                 
                   <span class="post-meta-item-text">阅读时长 &asymp;</span>
                 
-                <span title="阅读时长">1 分钟</span>
+                <span title="阅读时长">2 分钟</span>
               
             </div>
           
@@ -604,26 +596,32 @@
         <h2 id="属性文法">属性文法</h2>
 <p>属性文法也称为属性翻译文法,其以上下文无关文法为基础,为每个文法符号配备若干相关的值(也就是属性),代表与文法符号相关的信息,如:类型,值,代码序列,符号表内容等.</p>
 <p>同时属性文法对于文法的每个产生式都配备了一组属性的语义规则,对属性进行计算和传递.</p>
-<p><img src="/png/2021-01-12-23-12-33.png"></p>
 <p>综合属性:用于自下而上的传递信息.</p>
+<p>对于语法规则,根据右部候选式中的符号的属性计算左部被定义符号的综合属性;对于语法树,根据子结点的属性和父结点自身的属性计算父结点的综合属性.</p>
 <p><img src="/png/2021-01-12-23-14-43.png"></p>
 <p>继承属性:用于自上而下的传递信息.</p>
+<p>对于语法规则,根据右部候选式中的符号的属性和左部被定义符号的属性计算右部候选式中的符号的继承属性;对于语法树,根据父结点和兄弟结点的属性计算子结点的继承属性.</p>
 <p><img src="/png/2021-01-12-23-15-56.png"></p>
 <p>所有语义规则都可以写成对某些属性进行函数变换,然后将变换结果设置为某个属性的值.</p>
 <h3 id="属性依赖">属性依赖</h3>
-<p><img src="/png/2021-01-12-23-21-52.png"></p>
-<p><img src="/png/2021-01-12-23-22-08.png"></p>
+<p>对于每个产生式<code>A-&gt;α</code>都有一套与之相关联的语义规则,每条规则的形式为:<code>b := f(c1, c2, c3, ..., ck)</code>,属性<code>b</code>依赖于属性<code>c1, c2, c3, ..., ck</code>.</p>
+<p><code>b</code>是<code>A</code>的一个综合属性并且<code>c1, c2, c3, ..., ck</code>是产生式右边文法符号的属性.或者<code>b</code>是产生式右边某个文法符号的一个继承属性并且<code>c1, c2, c3, ..., ck</code>是<code>A</code>或产生式右边任意文法符号的属性.</p>
+<p>终结符只有综合属性,由词法分析器提供.非终结符两者都可以有,文法开始符号的所有继承属性作为属性计算前的初始值.</p>
 <p>语义规则所描述的工作可以包括属性计算,静态语义检查,符号表操作,代码生成等.</p>
-<p><img src="/png/2021-01-12-23-22-24.png"></p>
+<p>对出现在产生式右边的继承属性和出现在产生式左边的综合属性都必须提供一个计算规则.属性计算规则中只能使用相应产生式中的文法符号的属性.</p>
+<p>出现在产生式左边的继承属性和出现在产生式右边的综合属性不由所给的产生式的属性计算规则进行计算,由其他产生式的属性计算规则计算或由属性计算器的参数提供.</p>
 <h3 id="带注释的语法树">带注释的语法树</h3>
-<p><img src="/png/2021-01-12-23-31-28.png"></p>
+<p>在语法树中,一个结点的综合属性的值由其子结点和它本身的属性值所确定.使用自底向上的方法在每一个结点处使用语义规则计算综合属性的值.</p>
+<p>仅使用综合属性的属性文法称为S-属性文法.</p>
+<p>在语法树中,一个结点的继承属性由其父结点,其兄弟结点和其本身的某些属性确定.用继承属性来表示程序设计语言结构中的上下文依赖关系很方便.</p>
+<p>带注释的语法树示例.</p>
 <p><img src="/png/2021-01-12-23-31-48.png"></p>
-<p><img src="/png/2021-01-12-23-31-58.png"></p>
 <p><img src="/png/2021-01-12-23-32-11.png"></p>
 <h2 id="属性计算">属性计算</h2>
 <p>基于属性文法的处理方法.</p>
-<p><img src="/png/2021-01-12-23-33-17.png"></p>
-<p><img src="/png/2021-01-12-23-33-49.png"></p>
+<p>语义规则的计算包括:产生代码,在符号表中存放信息,给出错误信息,执行任何其他动作.</p>
+<p>对输入串的翻译就是根据语义规则进行计算.</p>
+<p>由源程序的语法结构所驱动的处理方法就是语法制导翻译法:输入串-&gt;语法树-&gt;按照语义规则计算属性.</p>
 <p>有三种方法:依赖图,树遍历,一遍扫描.</p>
 <h3 id="依赖图">依赖图</h3>
 <p><img src="/png/2021-01-12-23-45-03.png"></p>
@@ -1064,7 +1062,7 @@
       <i class="fa fa-area-chart"></i>
     </span>
     
-    <span title="站点总字数">841k</span>
+    <span title="站点总字数">855k</span>
   
 
   
@@ -1073,7 +1071,7 @@
       <i class="fa fa-coffee"></i>
     </span>
     
-    <span title="站点阅读时长">12:44</span>
+    <span title="站点阅读时长">12:57</span>
   
 </div>
 

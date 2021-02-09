@@ -139,34 +139,20 @@
 <meta property="og:image" content="https://hitworld.github.io/png/2021-01-13-00-10-31.png">
 <meta property="og:image" content="https://hitworld.github.io/png/2021-01-13-00-15-28.png">
 <meta property="og:image" content="https://hitworld.github.io/png/2021-01-13-00-17-58.png">
-<meta property="og:image" content="https://hitworld.github.io/png/2021-01-13-00-38-15.png">
 <meta property="og:image" content="https://hitworld.github.io/png/2021-01-13-00-39-02.png">
-<meta property="og:image" content="https://hitworld.github.io/png/2021-01-13-00-39-59.png">
-<meta property="og:image" content="https://hitworld.github.io/png/2021-01-13-00-41-45.png">
-<meta property="og:image" content="https://hitworld.github.io/png/2021-01-13-00-42-11.png">
+<meta property="og:image" content="https://hitworld.github.io/png/2021-02-09-18-15-46.png">
+<meta property="og:image" content="https://hitworld.github.io/png/2021-02-09-18-18-54.png">
 <meta property="og:image" content="https://hitworld.github.io/png/2021-01-13-00-48-43.png">
 <meta property="og:image" content="https://hitworld.github.io/png/2021-01-13-00-48-55.png">
 <meta property="og:image" content="https://hitworld.github.io/png/2021-01-13-00-49-12.png">
 <meta property="og:image" content="https://hitworld.github.io/png/2021-01-13-00-57-24.png">
-<meta property="og:image" content="https://hitworld.github.io/png/2021-01-13-00-58-17.png">
-<meta property="og:image" content="https://hitworld.github.io/png/2021-01-13-00-58-27.png">
-<meta property="og:image" content="https://hitworld.github.io/png/2021-01-13-00-58-53.png">
-<meta property="og:image" content="https://hitworld.github.io/png/2021-01-13-01-03-55.png">
-<meta property="og:image" content="https://hitworld.github.io/png/2021-01-13-00-59-07.png">
-<meta property="og:image" content="https://hitworld.github.io/png/2021-01-13-01-06-17.png">
-<meta property="og:image" content="https://hitworld.github.io/png/2021-01-13-01-07-10.png">
 <meta property="og:image" content="https://hitworld.github.io/png/2021-01-13-01-08-45.png">
 <meta property="og:image" content="https://hitworld.github.io/png/2021-01-13-01-09-10.png">
 <meta property="og:image" content="https://hitworld.github.io/png/2021-01-13-01-09-29.png">
-<meta property="og:image" content="https://hitworld.github.io/png/2021-01-13-01-12-34.png">
-<meta property="og:image" content="https://hitworld.github.io/png/2021-01-13-01-12-58.png">
-<meta property="og:image" content="https://hitworld.github.io/png/2021-01-13-01-13-12.png">
-<meta property="og:image" content="https://hitworld.github.io/png/2021-01-13-01-13-30.png">
-<meta property="og:image" content="https://hitworld.github.io/png/2021-01-13-01-13-42.png">
 <meta property="og:image" content="https://hitworld.github.io/png/2021-01-13-01-14-08.png">
 <meta property="og:image" content="https://hitworld.github.io/png/2021-01-13-01-14-25.png">
 <meta property="og:image" content="https://hitworld.github.io/png/2021-01-13-01-14-50.png">
-<meta property="og:updated_time" content="2021-02-09T09:55:11.088Z">
+<meta property="og:updated_time" content="2021-02-09T11:38:24.074Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="CS-BASIC-compiler-principles-属性文法和语法制导翻译">
 <meta name="twitter:description" content="属性文法 属性文法也称为属性翻译文法,其以上下文无关文法为基础,为每个文法符号配备若干相关的值(也就是属性),代表与文法符号相关的信息,如:类型,值,代码序列,符号表内容等. 同时属性文法对于文法的每个产生式都配备了一组属性的语义规则,对属性进行计算和传递. 综合属性:用于自下而上的传递信息. 对于语法规则,根据右部候选式中的符号的属性计算左部被定义符号的综合属性;对于语法树,根据子结点的">
@@ -543,7 +529,7 @@
                 
                   <span class="post-meta-item-text">本文字数：</span>
                 
-                <span title="本文字数">3.2k</span>
+                <span title="本文字数">4.4k</span>
               
 
               
@@ -557,7 +543,7 @@
                 
                   <span class="post-meta-item-text">阅读时长 &asymp;</span>
                 
-                <span title="阅读时长">3 分钟</span>
+                <span title="阅读时长">4 分钟</span>
               
             </div>
           
@@ -653,14 +639,17 @@
 <p><code>L</code>-属性文法适合一遍扫描的自上而下分析.</p>
 <p><code>L</code>-属性文法和自顶向下翻译:与<code>LL(1)</code>自上而下分析方法结合,深度优先建立语法树,按照语义规则计算属性.</p>
 <h2 id="翻译模式">翻译模式</h2>
-<p><img src="/png/2021-01-13-00-38-15.png"></p>
-<p>示例.</p>
+<p>语义规则:给出了属性计算的定义,没有属性计算的次序等实现细节.</p>
+<p>翻译模式:给出使用语义规则进行计算的次序,把实现细节补充了.</p>
+<p>在翻译模式中,和文法符号相关的属性和语义规则(也称语义动作)用花括号括起来,插入到产生式右部的合适位置上.</p>
 <p><img src="/png/2021-01-13-00-39-02.png"></p>
-<p>设计翻译模式的原则.</p>
-<p><img src="/png/2021-01-13-00-39-59.png"></p>
-<p>建立翻译模式.</p>
-<p><img src="/png/2021-01-13-00-41-45.png"></p>
-<p><img src="/png/2021-01-13-00-42-11.png"></p>
+<p>设计翻译模式的原则:必须保证当某个动作引用一个属性时该属性已被定义.</p>
+<p><code>L</code>-属性文法本身就能保证每个动作不会引用尚未被计算出来的属性.</p>
+<p>建立翻译模式的过程.</p>
+<p>当只需要综合属性时:为每一个语义规则建立一个包含赋值的动作,并把这个动作放在相应产生式右边的末尾.</p>
+<p><img src="/png/2021-02-09-18-15-46.png"></p>
+<p>如果既有综合属性又有继承属性,就要保证:产生式右部符号的继承属性必须在该符号以前的动作计算出来;一个动作不能引用该动作右边的符号的综合属性;产生式左边非终结符的综合属性只有在它所引用的所有属性都计算出来后才能计算,计算这种属性的动作通常可放在产生式右端的末尾.</p>
+<p><img src="/png/2021-02-09-18-18-54.png"></p>
 <h3 id="翻译模式示例">翻译模式示例</h3>
 <p>广义上来讲,任何对信息的变换,从一种形式到另一种形式都能称之为翻译.</p>
 <p>例如:数学格式语言<code>EQN</code>.</p>
@@ -668,19 +657,18 @@
 <p><img src="/png/2021-01-13-00-48-55.png"></p>
 <p><img src="/png/2021-01-13-00-49-12.png"></p>
 <h3 id="语义动作的执行时机统一">语义动作的执行时机统一</h3>
+<p>可以把所有的语义动作都放在产生式的末尾从而语义动作的执行时机统一.</p>
+<p>对于本身不能放在产生式末尾的语义动作的转换方法:加入新的产生式<code>M -&gt; ε</code>,把嵌入在产生式的每个语义动作用不同的非终结符<code>M</code>代替,并把这个动作放在产生式<code>M -&gt; ε</code>的末尾.</p>
 <p><img src="/png/2021-01-13-00-57-24.png"></p>
 <h3 id="消除翻译模式中的左递归">消除翻译模式中的左递归</h3>
-<p><img src="/png/2021-01-13-00-58-17.png"></p>
-<p><img src="/png/2021-01-13-00-58-27.png"></p>
-<p>消除左递归,构造新的翻译模式.</p>
-<p><img src="/png/2021-01-13-00-58-53.png"></p>
-<p><img src="/png/2021-01-13-01-03-55.png"></p>
-<p>示例.</p>
-<p><img src="/png/2021-01-13-00-59-07.png"></p>
-<h3 id="消除翻译模式中的左递归的一般方法">消除翻译模式中的左递归的一般方法</h3>
-<p><img src="/png/2021-01-13-01-06-17.png"></p>
+<p>语义动作是在相同位置上的符号被展开时(匹配成功)执行的.</p>
+<p>为了构造不带回溯的自顶向下语法分析,必须消除文法中的左递归.当消除一个翻译模式的基本文法的左递归时同时考虑属性计算,这适合带综合属性的翻译模式.</p>
+<p>假设有翻译模式.</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">A -&gt; A1Y &#123;A.a:=g(A1.a, Y.y)&#125;</span><br><span class="line">A -&gt; X &#123;A.a:=f(X.x)&#125;</span><br></pre></td></tr></table></figure>
 <p>它的每个文法符号都有一个综合属性,用小写字母表示,<code>g</code>和<code>f</code>是任意函数.</p>
-<p><img src="/png/2021-01-13-01-07-10.png"></p>
+<p>文法消除左递归后变成:<code>A -&gt; XR, R -&gt; YR | ε</code>.</p>
+<p>对应翻译变为.</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">A -&gt; X &#123;R.i:=f(X.x)&#125;</span><br><span class="line">     R &#123;A.a:=R.s&#125;</span><br><span class="line">R -&gt; Y &#123;R1.i:=g(R.i, Y.y)&#125; R1 &#123;R.s:=R1.s&#125;</span><br><span class="line">R -&gt; ε &#123;R.s:=R.i&#125;</span><br></pre></td></tr></table></figure>
 <p>示例.</p>
 <p><img src="/png/2021-01-13-01-08-45.png"></p>
 <p>抽象语法树的翻译模式.</p>
@@ -688,12 +676,21 @@
 <p>示例.</p>
 <p><img src="/png/2021-01-13-01-09-29.png"></p>
 <h2 id="递归下降翻译器的设计">递归下降翻译器的设计</h2>
-<p><img src="/png/2021-01-13-01-12-34.png"></p>
-<p><img src="/png/2021-01-13-01-12-58.png"></p>
-<p><img src="/png/2021-01-13-01-13-12.png"></p>
-<p><img src="/png/2021-01-13-01-13-30.png"></p>
-<p><img src="/png/2021-01-13-01-13-42.png"></p>
-<p>抽象语法树的翻译模式.</p>
+<p>分析程序由一组递归子程序组成,每个非终结符对应一个子程序.</p>
+<p>对每个非终结符<code>A</code>构造一个函数过程.</p>
+<ul>
+<li>继承属性:对<code>A</code>的每个继承属性设置为函数的一个形式参数.</li>
+<li>综合属性:实现为函数的返回值.若有多个综合属性,作为结构返回.</li>
+<li><code>A</code>的产生式中的每一个文法符号的每一个属性实现为局部变量.</li>
+</ul>
+<p>函数功能:非终结符<code>A</code>对应的函数过程中,根据当前的输入符号决定使用哪个产生式候选.</p>
+<p>函数代码按照产生式右部从左到右的顺序实现.</p>
+<ul>
+<li>对于带有综合属性<code>x</code>的终结符<code>X</code>,把<code>x</code>的值存入为<code>X.x</code>设置的变量中,然后产生一个匹配<code>X</code>的调用,并继续读入一个输入符号.</li>
+<li>对于每个非终结符<code>B</code>,产生一个右边带有函数调用的赋值语句<code>c=B(b1,b2,...,bk)</code>,其中,<code>b1,b2,...,bk</code>是为<code>B</code>的继承属性设置的变量,<code>c</code>是为<code>B</code>的综合属性设置的变量.</li>
+<li>对于语义动作,把动作的代码抄进分析器中,用代表属性的变量来代替对属性的每一次引用.</li>
+</ul>
+<p>抽象语法树的翻译模式示例.</p>
 <p><img src="/png/2021-01-13-01-14-08.png"></p>
 <p><img src="/png/2021-01-13-01-14-25.png"></p>
 <p><img src="/png/2021-01-13-01-14-50.png"></p>
@@ -1009,7 +1006,7 @@
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#属性文法"><span class="nav-number">1.</span> <span class="nav-text">属性文法</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#属性依赖"><span class="nav-number">1.1.</span> <span class="nav-text">属性依赖</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#带注释的语法树"><span class="nav-number">1.2.</span> <span class="nav-text">带注释的语法树</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#属性计算"><span class="nav-number">2.</span> <span class="nav-text">属性计算</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#依赖图"><span class="nav-number">2.1.</span> <span class="nav-text">依赖图</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#树遍历"><span class="nav-number">2.2.</span> <span class="nav-text">树遍历</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#一边扫描"><span class="nav-number">2.3.</span> <span class="nav-text">一边扫描</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#s-属性文法"><span class="nav-number">3.</span> <span class="nav-text">S-属性文法</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#l-属性文法"><span class="nav-number">4.</span> <span class="nav-text">L-属性文法</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#翻译模式"><span class="nav-number">5.</span> <span class="nav-text">翻译模式</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#翻译模式示例"><span class="nav-number">5.1.</span> <span class="nav-text">翻译模式示例</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#语义动作的执行时机统一"><span class="nav-number">5.2.</span> <span class="nav-text">语义动作的执行时机统一</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#消除翻译模式中的左递归"><span class="nav-number">5.3.</span> <span class="nav-text">消除翻译模式中的左递归</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#消除翻译模式中的左递归的一般方法"><span class="nav-number">5.4.</span> <span class="nav-text">消除翻译模式中的左递归的一般方法</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#递归下降翻译器的设计"><span class="nav-number">6.</span> <span class="nav-text">递归下降翻译器的设计</span></a></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#属性文法"><span class="nav-number">1.</span> <span class="nav-text">属性文法</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#属性依赖"><span class="nav-number">1.1.</span> <span class="nav-text">属性依赖</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#带注释的语法树"><span class="nav-number">1.2.</span> <span class="nav-text">带注释的语法树</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#属性计算"><span class="nav-number">2.</span> <span class="nav-text">属性计算</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#依赖图"><span class="nav-number">2.1.</span> <span class="nav-text">依赖图</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#树遍历"><span class="nav-number">2.2.</span> <span class="nav-text">树遍历</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#一边扫描"><span class="nav-number">2.3.</span> <span class="nav-text">一边扫描</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#s-属性文法"><span class="nav-number">3.</span> <span class="nav-text">S-属性文法</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#l-属性文法"><span class="nav-number">4.</span> <span class="nav-text">L-属性文法</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#翻译模式"><span class="nav-number">5.</span> <span class="nav-text">翻译模式</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#翻译模式示例"><span class="nav-number">5.1.</span> <span class="nav-text">翻译模式示例</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#语义动作的执行时机统一"><span class="nav-number">5.2.</span> <span class="nav-text">语义动作的执行时机统一</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#消除翻译模式中的左递归"><span class="nav-number">5.3.</span> <span class="nav-text">消除翻译模式中的左递归</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#递归下降翻译器的设计"><span class="nav-number">6.</span> <span class="nav-text">递归下降翻译器的设计</span></a></li></ol></div>
             
 
           </div>
@@ -1041,7 +1038,7 @@
       <i class="fa fa-area-chart"></i>
     </span>
     
-    <span title="站点总字数">856k</span>
+    <span title="站点总字数">858k</span>
   
 
   
@@ -1050,7 +1047,7 @@
       <i class="fa fa-coffee"></i>
     </span>
     
-    <span title="站点阅读时长">12:59</span>
+    <span title="站点阅读时长">13:01</span>
   
 </div>
 
@@ -1699,7 +1696,7 @@
   //$("body").backstretch("/images/background.jpg");
   </script>
   
-  <script type="text/javascript" src="//cdn.bootcss.com/canvas-nest.js/1.0.0/canvas-nest.min.js"></script><!-- hexo-inject:begin --><!-- hexo-inject:end -->
+  <script type="text/javascript" src="//cdn.bootcss.com/canvas-nest.js/1.0.0/canvas-nest.min.js"></script>
   
-<script src="/live2dw/lib/L2Dwidget.min.js?0c58a1486de42ac6cc1c59c7d98ae887"></script><script>L2Dwidget.init({"pluginRootPath":"live2dw/","pluginJsPath":"lib/","pluginModelPath":"assets/","tagMode":false,"debug":false,"model":{"jsonPath":"/live2dw/assets/koharu.model.json"},"display":{"position":"right","width":150,"height":300},"mobile":{"show":false},"log":false});</script></body>
+<script src="/live2dw/lib/L2Dwidget.min.js?0c58a1486de42ac6cc1c59c7d98ae887"></script><script>L2Dwidget.init({"pluginRootPath":"live2dw/","pluginJsPath":"lib/","pluginModelPath":"assets/","tagMode":false,"debug":false,"model":{"jsonPath":"/live2dw/assets/koharu.model.json"},"display":{"position":"right","width":150,"height":300},"mobile":{"show":false},"log":false});</script><!-- hexo-inject:begin --><!-- hexo-inject:end --></body>
 </html>

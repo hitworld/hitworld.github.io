@@ -146,7 +146,7 @@
 <meta property="og:image" content="https://hitworld.github.io/png/2021-02-23-21-17-18.png">
 <meta property="og:image" content="https://hitworld.github.io/png/2021-02-23-21-19-03.png">
 <meta property="og:image" content="https://hitworld.github.io/png/2021-02-26-20-55-03.png">
-<meta property="og:updated_time" content="2021-03-02T12:09:27.408Z">
+<meta property="og:updated_time" content="2021-03-02T14:53:24.663Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="IS-pwn-fuzz-theory-present-situation">
 <meta name="twitter:description" content="Survey/Review 本文主要是对fuzz相关论文的笔记。 Fuzzing: Challenges and Reflections 在线pdf. Fuzzing是一种自动化漏洞发现技术---通过持续不断地生成输入并报告程序的crash。 现在有三种主要的fuzzing技术和工具：黑盒，灰盒和白盒fuzzing。 Blackbox fuzzing 黑盒fuzzing不需要任何关于">
@@ -523,7 +523,7 @@
                 
                   <span class="post-meta-item-text">本文字数：</span>
                 
-                <span title="本文字数">54k</span>
+                <span title="本文字数">53k</span>
               
 
               
@@ -537,7 +537,7 @@
                 
                   <span class="post-meta-item-text">阅读时长 &asymp;</span>
                 
-                <span title="阅读时长">49 分钟</span>
+                <span title="阅读时长">48 分钟</span>
               
             </div>
           
@@ -1198,14 +1198,14 @@
 <h4 id="input-generation">INPUT GENERATION</h4>
 <p>输入生成是模糊测试一个非常重要的过程，可以分为Model-based (Generation-based) Fuzzers，Model-less (Mutation-based) Fuzzers和White-box Fuzzers。</p>
 <h5 id="model-based-generation-based-fuzzers">Model-based (Generation-based) Fuzzers</h5>
-<p>基于模型的模糊器基于描述PUT可能接受的输入或执行的给定模型生成测试用例，例如精确描述输入格式的语法或不太精确的约束，例如标识文件类型的魔法值。</p>
-<p>5.1.1预定义模型 一些模糊程序使用一个可以由用户配置的模型。例如，Peach[79]、PROTOS[124]和Dharma[5]接受了用户提供的规范。</p>
-<p>Autodafe[224]、Sulley[19]、SPIKE[16]、SPIKEfile[211]、´和LibFuzzer[6]、[12]公开了允许分析师创建自己的输入模型的API。Tavor[250]还接受以扩展的Backus-Naur形式（EBNF）编写的输入规范，并生成符合相应语法的测试用例。类似地，PROTOS[124]、SNOOZE[32]、KiF[15]和TFuzz[118]等网络协议模糊器也从用户那里获取协议规范。内核API模糊器[119]、[226]、[163]、[168]、[231]以系统调用模板的形式定义输入模型。这些模板通常指定系统调用期望作为输入的参数的数量和类型。在内核模糊化中使用模型的想法起源于Koopman等人的开创性工作[132]，他们将操作系统的健壮性与为系统调用手动选择的有限测试用例集进行了比较。Nautilus[25]使用基于语法的输入生成进行通用模糊处理，并使用其语法进行种子修剪（见§3.3）。</p>
-<p>其他基于模型的模糊器以特定的语言或语法为目标，这种语言的模型构建在模糊器本身中。例如，cross fuzz[242]和DOMfuzz[195]生成随机文档对象模型（DOM）对象。同样地，jsfuzz[195]基于自己的语法模型生成随机但语法正确的JavaScript代码。QuickFuzz[97]利用现有的Haskell库来描述生成测试用例时的文件格式。一些网络协议模糊器，如Frankencerts[44]、TLS-Attacker[203]、tlsfuzzer[128]和llfuzzer[207]，是用特定网络协议（如TLS和NFC）的模型设计的。杜威等人[72]，[73]提出了一种方法，通过利用约束逻辑编程来生成不仅语法正确，而且语义多样的测试用例。LangFuzz[109]通过解析作为输入的一组种子来生成代码片段。然后，它随机组合片段，并将种子与片段突变，以生成测试用例。因为它提供了语法，所以它总是产生语法正确的代码。虽然LangFuzz应用于JavaScript和PHP，但BlendFuzz[239]以XML和正则表达式解析器为目标，基于与LangFuzz类似的思想。</p>
-<p>5.1.2推断模型 推断模型而不是依赖于预定义的或用户提供的模型最近得到了广泛的关注。尽管已经有大量关于自动输入格式和协议逆向工程的研究发表[69]、[48]、[146]、[66]、[31]，但是只有少数模糊程序利用这些技术。与插装（§3.1）类似，模型推理可以在预处理或混淆更新中发生。</p>
-<p>5.1.2.1预处理中的模型推理：一些模糊程序将模型作为预处理步骤进行推理。TestMiner[70]搜索PUT中可用的数据，如文字，以预测合适的输入。给定一组种子和一个语法，Skyfire[227]使用数据驱动的方法来推断概率上下文敏感语法，然后使用它来生成一组新的种子。与以前的工作不同，它侧重于生成语义上有效的输入。IMF[103]通过分析系统API日志学习内核API模型，并生成C代码，该代码使用推断出的模型调用一系列API调用。CodeAlchemist[104]将JavaScript代码分解为“代码块”并计算组装约束，这些约束描述了何时可以将不同的代码块组装或合并在一起以生成语义上有效的测试用例。使用静态和动态分析计算这些约束。Neural[65]和Learn&amp;Fuzz[94]使用基于神经网络的机器学习技术从一组给定的测试文件中学习模型，然后从推断的模型中生成测试用例。Liu等人[147]提出了一种类似的方法，专门针对文本输入。</p>
-<p>5.1.2.2 CONFUPDATE中的模型推理：其他模糊程序可能在每次模糊迭代后更新其模型。PULSAR[88]从程序生成的一组捕获的网络数据包中自动推断出网络协议模型。学习的网络协议，然后用于模糊程序。PULSAR在内部构建一个状态机，并映射哪个消息令牌与一个状态相关。这些信息稍后用于生成覆盖状态机中更多状态的测试用例。Doupe等人[76]提出了一种通过观察I/O行为来推断web服务状态机的方法。然后使用推断出的模型来扫描web漏洞。Ruiter等人[187]的工作类似，但它以TLS为目标，并以LearnLib[181]为实现基础。GLADE[33]从一组I/O样本中合成一个上下文无关语法，并使用推断的语法模糊PUT。gofuzz[225]是一个灰盒fuzzer，它为添加到其种子库中的每个种子建立一个模型。此模型用于从该种子生成新的输入。为了克服符号执行的局限性，Shen等人[201]使用神经网络来解决困难的分支条件。</p>
-<p>5.1.3编码器型号 模糊化通常用于测试解析某种文件格式的解码器程序。许多文件格式都有相应的编码程序，可以看作是文件格式的隐式模型。诱变剂[127]利用编码器程序中包含的隐式模型来生成新的测试用例。与大多数基于变异的模糊程序不同，它变异现有的测试用例（见§5.2）来生成测试用例，诱变剂变异编码器程序。具体来说，为了产生一个新的测试用例，诱变剂计算编码器程序的动态程序片并运行它。其基本思想是，程序片段将略微改变编码器程序的行为，从而生成格式稍微不正确的测试用例。</p>
+<p>基于模型的fuzzer基于给定模型生成测试用例，例如描述输入格式的语法或不太精确的约束。</p>
+<p>一些fuzzer可以由用户自定义模型，例如Peach、PROTOS和Dharma。Autodafe、Sulley、SPIKE、SPIKEfile和LibFuzzer也公开了创建自定义输入模型的API。Tavor接受以Extended Backus-Naur form（EBNF）编写的输入规范。类似地，PROTOS、SNOOZE、KiF和TFuzz等网络协议fuzzer也由用户配置协议规范。Kernel API fuzzers通常以系统调用模板的形式定义输入模型，通过指定系统调用的参数的数量和类型生成测试用例。Nautilus使用基于语法的输入生成，并使用语法进行种子修剪。</p>
+<p>其他基于模型的fuzzer以特定的语言或语法为目标，其模型包含在fuzzer中。例如，cross fuzz和DOMfuzz生成随机文档对象模型（DOM）对象。jsfuzz基于语法模型生成随机但语法正确的JavaScript代码。QuickFuzz利用现有的Haskell库来描述生成测试用例时的文件格式。网络协议模糊器Frankencerts、TLS-Attacker、tlsfuzzer和llfuzzer是根据特定网络协议（如TLS和NFC）的模型设计的。</p>
+<p>LangFuzz通过解析输入种子来生成代码片段，其随机的组合这些片段，并将种子与片段突变，以生成测试用例，LangFuzz应用于JavaScript和PHP。而BlendFuzz基于与LangFuzz类似的思想，以XML和正则表达式解析器为目标。</p>
+<p>模型推理可以在PREPROCESS或CONFUPDATE中发生。</p>
+<p>PREPROCESS中的模型推理：TestMiner搜索PUT中可用的数据，如文字，以预测合适的输入。给定一组种子和一个语法，Skyfire使用数据驱动的方法来推断probabilistic context-sensitive grammar，然后使用它来生成语义上有效的输入。IMF通过分析系统API日志学习内核API模型，并生成C代码，该代码使用推断出的模型调用一系列API调用。CodeAlchemist将JavaScript代码分解为代码块并计算组装约束，这些约束描述了何时可以将不同的代码块组装或合并在一起以生成语义上有效的测试用例。使用静态和动态分析计算这些约束。Neural和Learn&amp;Fuzz使用基于神经网络的机器学习技术从一组给定的测试文件中学习模型，然后从推断的模型中生成测试用例。Liu等人提出了一种类似的方法，专门针对文本输入。</p>
+<p>CONFUPDATE中的模型推理：PULSAR从捕获的网络数据包中自动推断出网络协议模型，然后用于模糊程序，PULSAR在内部构建一个状态机，并判断哪个消息令牌与一个状态相关，这些信息稍后用于生成覆盖状态机中更多状态的测试用例。Doupe等人提出了一种通过观察I/O行为来推断web服务状态机的方法，然后使用推断出的模型来扫描web漏洞。Ruiter等人]的工作类似，但它以TLS为目标，并以LearnLib为实现基础。GLADE从一组I/O样本中合成一个上下文无关语法，并使用推断的语法模糊PUT。gofuzz是一个灰盒fuzzer，它为添加到其种子库中的每个种子建立一个模型。此模型用于从该种子生成新的输入。为了克服符号执行的局限性，Shen等人使用神经网络来解决困难的分支条件。</p>
+<p>fuzz的对象通常是解析某种文件格式的解码器程序。许多文件格式都有相应的编码程序，可以看作是文件格式的隐式模型。MutaGen利用编码器程序中包含的隐式模型来生成新的测试用例。与大多数基于变异的fuzzer不同，MutaGen变异编码器程序。Specifically, to produce a new test case MutaGen computes a dynamic program slice of the encoder program and runs it. The underlying idea is that the program slices will slightly change the behavior of the encoder program so that it produces test cases that are slightly malformed.</p>
 <h5 id="model-less-mutation-based-fuzzers">Model-less (Mutation-based) Fuzzers</h5>
 <p>经典随机测试[23]，[102]在生成满足特定路径条件的测试用例时效率不高。假设有一个简单的C语句：if（input==42）。如果输入是32位整数，则随机猜测正确输入值的概率为1/232。当我们考虑结构良好的输入（如MP3文件）时，情况会变得更糟。实际上，随机测试不太可能在任何合理的时间内生成有效的MP3文件作为测试用例。因此，MP3播放器很可能会在解析阶段拒绝随机测试生成的测试用例，然后再访问程序的更深层部分。</p>
 <p>这个问题促使使用基于种子的输入生成和白盒输入生成（见§5.3）。大多数无模型模糊器使用种子，这是PUT的一个输入，以便通过修改种子来生成测试用例。种子通常是PUT支持的类型的结构良好的输入：文件、网络包或UI事件序列。通过只对有效文件的一小部分进行变异，通常可以生成一个新的测试用例，该测试用例大部分是有效的，但也包含异常值以触发PUT崩溃。有各种各样的方法可以用来突变种子，下面我们将介绍常见的方法。</p>
@@ -1568,7 +1568,7 @@
       <i class="fa fa-area-chart"></i>
     </span>
     
-    <span title="站点总字数">874k</span>
+    <span title="站点总字数">873k</span>
   
 
   

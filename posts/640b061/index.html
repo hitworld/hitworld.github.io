@@ -119,13 +119,13 @@
 
 
 
-  <meta name="description" content="Fuzzing: Challenges and Reflections 在线pdf. Fuzzing是一种自动化漏洞发现技术---通过持续不断地生成输入并报告程序的crash。 现在有三种主要的fuzzing技术和工具：黑盒，灰盒和白盒fuzzing。 Blackbox fuzzing 黑盒fuzzing不需要任何关于程序的先验知识。 黑盒fuzzing主要有两种的variants：突">
+  <meta name="description" content="Fuzzing: Challenges and Reflections 在线pdf. Blackbox fuzzing Blackbox fuzzing不需要任何关于程序的先验知识，主要有两种的测试用例的生成方式：突变和生成。 前者通过初始语料库(seed inputs)开始变异，通过对随机位置的随机突变来生成新的测试用例。后者则通过提供的输入格式来生成新的测试用例。 Blackbox">
 <meta name="keywords" content="fuzz">
 <meta property="og:type" content="article">
 <meta property="og:title" content="IS-pwn-fuzz-theory-present-situation">
 <meta property="og:url" content="https://hitworld.github.io/posts/640b061/index.html">
 <meta property="og:site_name" content="w4rd3n">
-<meta property="og:description" content="Fuzzing: Challenges and Reflections 在线pdf. Fuzzing是一种自动化漏洞发现技术---通过持续不断地生成输入并报告程序的crash。 现在有三种主要的fuzzing技术和工具：黑盒，灰盒和白盒fuzzing。 Blackbox fuzzing 黑盒fuzzing不需要任何关于程序的先验知识。 黑盒fuzzing主要有两种的variants：突">
+<meta property="og:description" content="Fuzzing: Challenges and Reflections 在线pdf. Blackbox fuzzing Blackbox fuzzing不需要任何关于程序的先验知识，主要有两种的测试用例的生成方式：突变和生成。 前者通过初始语料库(seed inputs)开始变异，通过对随机位置的随机突变来生成新的测试用例。后者则通过提供的输入格式来生成新的测试用例。 Blackbox">
 <meta property="og:locale" content="zh-CN">
 <meta property="og:image" content="https://hitworld.github.io/png/2021-01-02-21-17-13.png">
 <meta property="og:image" content="https://hitworld.github.io/png/2021-01-02-22-46-04.png">
@@ -151,10 +151,10 @@
 <meta property="og:image" content="https://hitworld.github.io/png/2021-03-03-18-30-10.png">
 <meta property="og:image" content="https://hitworld.github.io/png/2021-03-03-21-47-15.png">
 <meta property="og:image" content="https://hitworld.github.io/png/2021-03-03-22-21-41.png">
-<meta property="og:updated_time" content="2021-03-03T14:55:48.808Z">
+<meta property="og:updated_time" content="2021-03-07T08:50:48.422Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="IS-pwn-fuzz-theory-present-situation">
-<meta name="twitter:description" content="Fuzzing: Challenges and Reflections 在线pdf. Fuzzing是一种自动化漏洞发现技术---通过持续不断地生成输入并报告程序的crash。 现在有三种主要的fuzzing技术和工具：黑盒，灰盒和白盒fuzzing。 Blackbox fuzzing 黑盒fuzzing不需要任何关于程序的先验知识。 黑盒fuzzing主要有两种的variants：突">
+<meta name="twitter:description" content="Fuzzing: Challenges and Reflections 在线pdf. Blackbox fuzzing Blackbox fuzzing不需要任何关于程序的先验知识，主要有两种的测试用例的生成方式：突变和生成。 前者通过初始语料库(seed inputs)开始变异，通过对随机位置的随机突变来生成新的测试用例。后者则通过提供的输入格式来生成新的测试用例。 Blackbox">
 <meta name="twitter:image" content="https://hitworld.github.io/png/2021-01-02-21-17-13.png">
 
 
@@ -564,33 +564,23 @@
       
         <h2 id="fuzzing-challenges-and-reflections">Fuzzing: Challenges and Reflections</h2>
 <p><a href="https://www.comp.nus.edu.sg/~abhik/pdf/IEEE-SW-Fuzzing.pdf" target="_blank" rel="noopener">在线pdf</a>.</p>
-<p>Fuzzing是一种自动化漏洞发现技术---通过持续不断地生成输入并报告程序的crash。</p>
-<p>现在有三种主要的fuzzing技术和工具：黑盒，灰盒和白盒fuzzing。</p>
 <h3 id="blackbox-fuzzing">Blackbox fuzzing</h3>
-<p>黑盒fuzzing不需要任何关于程序的先验知识。</p>
-<p>黑盒fuzzing主要有两种的variants：突变和生成。</p>
-<p>前者通过初始语料库(seed inputs)开始变异，通过对随机位置的随机突变来生成新的输入。</p>
-<p>后者是从头开始生成的，通过提供的输入格式来生成满足所提供语法的新的输入。</p>
-<p>黑盒fuzzing工具：Peach (http://community.peachfuzzer.com)。</p>
+<p>Blackbox fuzzing不需要任何关于程序的先验知识，主要有两种的测试用例的生成方式：突变和生成。</p>
+<p>前者通过初始语料库(seed inputs)开始变异，通过对随机位置的随机突变来生成新的测试用例。后者则通过提供的输入格式来生成新的测试用例。</p>
+<p>Blackbox fuzzing工具：Peach(http://community.peachfuzzer.com)。</p>
 <h3 id="greybox-fuzzing">Greybox fuzzing</h3>
-<p>灰盒fuzzing通过在编译时对一些位置（例如代码块跳转点）进行插桩来获取轻量级的运行时反馈从而引导fuzzer。</p>
-<p>通常，程序会在代码块交界处被插桩，并且一些初始的语料库会被提供，初始的种子输入会被用于突变产生新的输入，那些覆盖了新的代码块或者其他增加了代码覆盖的输入将被加入语料库。</p>
-<p>所以随着这种覆盖反馈fuzzer的运行，输入会逐渐深入程序的深处。</p>
-<p>sanitizers还会注入断言到程序中来判断漏洞的种类。</p>
-<p>灰盒fuzzing工具：AFL (https://lcamtuf.coredump.cx/afl/), LibFuzzer (https://llvm.org/docs/LibFuzzer.html), and Honggfuzz (https://github.com/google/honggfuzz)。</p>
+<p>Greybox fuzzing通过在编译时对一些位置（例如代码块交界处）进行插桩来获取运行时状态从而引导fuzzing的进行。</p>
+<p>通常一些初始语料库会被提供，并被用于突变产生新的输入，那些增加了代码覆盖率的输入（优质的输入）将被加入语料库，随着覆盖率反馈fuzzer的运行，输入会逐渐深入程序的深处。还可以通过sanitizers注入断言到程序中来判断漏洞的种类。</p>
+<p>Greybox fuzzing工具：AFL(https://lcamtuf.coredump.cx/afl/)，LibFuzzer(https://llvm.org/docs/LibFuzzer.html)，Honggfuzz(https://github.com/google/honggfuzz)。</p>
 <h3 id="whitebox-fuzzing">Whitebox fuzzing</h3>
-<p>基于符号执行的白盒fuzzing使用程序分析和约束求解器来系统地枚举感兴趣的程序路径，其中用作后端的约束求解器是Satisfiability Modulo Theory (SMT)求解器。</p>
-<p>白盒fuzzing通过分析与i经过同一路径的输入集合来计算i经过的路径的条件，路径条件用SMT表示，例如：i[0] = 42 ∧ i[0] − i[1] &gt; 7。</p>
-<p>白盒fuzzer对于给定的种子输入s，计算并改变路径条件而不是改变程序输入，然后将改变后的路径条件发送到一个约束解算器来产生新的输入。</p>
-<p>白盒fuzzing会跟踪到目前为止获取的所有输入的路径状况，所以始终能够生成一个经过新路径的输入。</p>
-<p>白盒fuzzing工具：KLEE (https://klee.github.io/) and SAGE。</p>
+<p>基于符号执行的Whitebox fuzzing使用程序分析和约束求解器Satisfiability Modulo Theory(SMT)来系统地枚举感兴趣的程序路径。</p>
+<p>Whitebox fuzzing对于给定的种子输入s，计算并改变路径条件而不是改变程序输入，然后将改变后的路径条件发送到约束解算器来产生新的输入。因为Whitebox fuzzing会跟踪到目前为止获取的所有输入的路径状况，所以始终能够生成一个经过新路径的输入。</p>
+<p>Whitebox fuzzing工具：KLEE(https://klee.github.io/)，SAGE。</p>
 <h3 id="other-fuzzing-tools">Other fuzzing tools</h3>
-<p>DeepState (https://github.com/trailofbits/deepstate)：一个单元测试框架.</p>
+<p>DeepState(https://github.com/trailofbits/deepstate)：一个单元测试框架。</p>
 <p>The Mayhem system. --- Sang Kil Cha, Thanassis Avgerinos, Alexandre Rebert, David Brumley. 2012. Unleashing Mayhem on Binary Code. IEEE Symposium on Security and Privacy (S&amp;P’12).</p>
 <h3 id="challenges">Challenges</h3>
-<p>fuzzing技术现在面临的问题与挑战。</p>
 <h4 id="automation">Automation</h4>
-<p>自动化方面的挑战。</p>
 <h5 id="c.1-more-software.-how-can-we-fuzz-efficiently-more-types-of-software-systems">[C.1] More Software. How can we fuzz efficiently more types of software systems?</h5>
 <p>如何扩展能够fuzzing的领域和范围？</p>
 <p>现在的fuzzer基本上都是生成不规则的输入，而对于文件解析器和面对对象程序来说，需要的是高度结构化的输入。</p>
@@ -1557,7 +1547,7 @@
                 
                   <a href="/archives/">
                 
-                    <span class="site-state-item-count">173</span>
+                    <span class="site-state-item-count">174</span>
                     <span class="site-state-item-name">日志</span>
                   </a>
                 </div>

@@ -129,7 +129,7 @@
 <meta property="og:locale" content="zh-CN">
 <meta property="og:image" content="https://hitworld.github.io/png/2021-01-04-16-33-37.png">
 <meta property="og:image" content="https://hitworld.github.io/png/2021-01-04-16-34-09.png">
-<meta property="og:updated_time" content="2021-02-09T11:39:26.800Z">
+<meta property="og:updated_time" content="2021-03-06T14:37:04.132Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="IS-pwn-Linux-基础">
 <meta name="twitter:description" content="概述 漏洞是在硬件,软件,协议的具体实现或系统安全策略上存在的缺陷,从而可以使攻击者能够在未授权的情况下访问或破坏系统.二进制漏洞就是指机器代码层面的漏洞. pwn即二进制漏洞利用,通过漏洞来提升权限或得到shell或达到某种目的. Linux进程内存布局 Linux系统在装载elf格式的程序文件时,会调用loader把可执行文件中的各个段依次载入到从某一地址开始的空间中,载入地址取决li">
@@ -506,7 +506,7 @@
                 
                   <span class="post-meta-item-text">本文字数：</span>
                 
-                <span title="本文字数">6.8k</span>
+                <span title="本文字数">6.9k</span>
               
 
               
@@ -628,6 +628,8 @@
 <p>由于二进制漏洞日益增多,相应的产生了很多保护机制.</p>
 <p>使用<code>checksec</code>检测程序保护措施.</p>
 <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">checksec [fileName]</span><br></pre></td></tr></table></figure>
+<p>###AddressSanitizer</p>
+<p><code>gcc</code>编译使用<code>-fsanitize=address</code>选项激活<code>AddressSanitizer</code>,可以检测基于堆栈的缓冲区溢出.</p>
 <h3 id="aslr">ASLR</h3>
 <p><code>Address Space Layout Randomization</code>(地址空间随机化).</p>
 <p>随机生成进程地址空间(例如栈,库和基于<code>brk</code>的堆)的关键部分的起始地址.</p>
@@ -789,7 +791,7 @@
                 
                   <a href="/archives/">
                 
-                    <span class="site-state-item-count">173</span>
+                    <span class="site-state-item-count">174</span>
                     <span class="site-state-item-name">日志</span>
                   </a>
                 </div>

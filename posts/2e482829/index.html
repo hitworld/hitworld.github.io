@@ -1,0 +1,1571 @@
+<!DOCTYPE html>
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+
+<html class="theme-next mist use-motion" lang="zh-CN">
+<head><meta name="generator" content="Hexo 3.8.0">
+  <!-- hexo-inject:begin --><!-- hexo-inject:end --><meta charset="UTF-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+
+
+
+
+
+
+  
+  
+    
+    
+  <script src="/lib/pace/pace.min.js?v=1.0.2"></script>
+  <link href="/lib/pace/pace-theme-minimal.min.css?v=1.0.2" rel="stylesheet">
+
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform">
+<meta http-equiv="Cache-Control" content="no-siteapp">
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css">
+
+<link href="/css/main.css?v=6.5.0" rel="stylesheet" type="text/css">
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon.png?v=6.5.0">
+
+
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32.png?v=6.5.0">
+
+
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16.png?v=6.5.0">
+
+
+  <link rel="mask-icon" href="/images/safari_pinned_tab.svg?v=6.5.0" color="#222">
+
+
+  <link rel="manifest" href="/images/manifest.json">
+
+
+  <meta name="msapplication-config" content="/images/browserconfig.xml">
+
+
+
+
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Mist',
+    version: '6.5.0',
+    sidebar: {"position":"left","display":"post","offset":12,"b2t":false,"scrollpercent":true,"onmobile":true},
+    fancybox: false,
+    fastclick: false,
+    lazyload: false,
+    tabs: true,
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+  
+
+
+
+
+  <meta name="description" content="前言 基于afl 2.57b. afl-gcc.c 12345678910111213141516171819int main(int argc, char** argv) &amp;#123;  if (isatty(2) &amp;amp;&amp;amp; !getenv(&quot;AFL_QUIET&quot;)) &amp;#123;    SAYF(cCYA &quot;afl-cc &quot; cBRI VERSION cRST &quot; by &amp;l">
+<meta name="keywords" content="fuzz">
+<meta property="og:type" content="article">
+<meta property="og:title" content="CS-RTFSC-fuzz-AFL">
+<meta property="og:url" content="https://hitworld.github.io/posts/2e482829/index.html">
+<meta property="og:site_name" content="w4rd3n">
+<meta property="og:description" content="前言 基于afl 2.57b. afl-gcc.c 12345678910111213141516171819int main(int argc, char** argv) &amp;#123;  if (isatty(2) &amp;amp;&amp;amp; !getenv(&quot;AFL_QUIET&quot;)) &amp;#123;    SAYF(cCYA &quot;afl-cc &quot; cBRI VERSION cRST &quot; by &amp;l">
+<meta property="og:locale" content="zh-CN">
+<meta property="og:updated_time" content="2021-03-16T13:43:57.659Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="CS-RTFSC-fuzz-AFL">
+<meta name="twitter:description" content="前言 基于afl 2.57b. afl-gcc.c 12345678910111213141516171819int main(int argc, char** argv) &amp;#123;  if (isatty(2) &amp;amp;&amp;amp; !getenv(&quot;AFL_QUIET&quot;)) &amp;#123;    SAYF(cCYA &quot;afl-cc &quot; cBRI VERSION cRST &quot; by &amp;l">
+
+
+
+
+
+
+  <link rel="canonical" href="https://hitworld.github.io/posts/2e482829/">
+
+
+
+<script type="text/javascript" id="page.configurations">
+  CONFIG.page = {
+    sidebar: "",
+  };
+</script>
+
+  <title>CS-RTFSC-fuzz-AFL | w4rd3n</title>
+  
+
+
+
+
+
+
+
+
+
+
+
+  <noscript>
+  <style type="text/css">
+    .use-motion .motion-element,
+    .use-motion .brand,
+    .use-motion .menu-item,
+    .sidebar-inner,
+    .use-motion .post-block,
+    .use-motion .pagination,
+    .use-motion .comments,
+    .use-motion .post-header,
+    .use-motion .post-body,
+    .use-motion .collection-title { opacity: initial; }
+
+    .use-motion .logo,
+    .use-motion .site-title,
+    .use-motion .site-subtitle {
+      opacity: initial;
+      top: initial;
+    }
+
+    .use-motion {
+      .logo-line-before i { left: initial; }
+      .logo-line-after i { right: initial; }
+    }
+  </style>
+</noscript><!-- hexo-inject:begin --><!-- hexo-inject:end -->
+
+</head>
+
+<body itemscope="" itemtype="http://schema.org/WebPage" lang="zh-CN">
+
+  
+  
+    
+  
+
+  <!-- hexo-inject:begin --><!-- hexo-inject:end --><div class="container sidebar-position-left page-post-detail">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope="" itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/" class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">w4rd3n</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+    
+      
+        <p class="site-subtitle">混吃等死</p>
+      
+    
+  </div>
+
+  <div class="site-nav-toggle">
+    <button aria-label="切换导航栏">
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+
+
+<nav class="site-nav">
+  
+    <ul id="menu" class="menu">
+      
+        
+        
+        
+          
+          <li class="menu-item menu-item-home">
+
+    
+    
+    
+      
+    
+
+    
+
+    <a href="/" rel="section"><i class="menu-item-icon fa fa-fw fa-home"></i> <br>首页</a>
+
+  </li>
+        
+        
+        
+          
+          <li class="menu-item menu-item-about">
+
+    
+    
+    
+      
+    
+
+    
+
+    <a href="/about/" rel="section"><i class="menu-item-icon fa fa-fw fa-user"></i> <br>友链</a>
+
+  </li>
+        
+        
+        
+          
+          <li class="menu-item menu-item-tags">
+
+    
+    
+    
+      
+    
+
+    
+
+    <a href="/tags/" rel="section"><i class="menu-item-icon fa fa-fw fa-tags"></i> <br>标签</a>
+
+  </li>
+        
+        
+        
+          
+          <li class="menu-item menu-item-categories">
+
+    
+    
+    
+      
+    
+
+    
+
+    <a href="/categories/" rel="section"><i class="menu-item-icon fa fa-fw fa-th"></i> <br>分类</a>
+
+  </li>
+        
+        
+        
+          
+          <li class="menu-item menu-item-archives">
+
+    
+    
+    
+      
+    
+
+    
+
+    <a href="/archives/" rel="section"><i class="menu-item-icon fa fa-fw fa-archive"></i> <br>归档</a>
+
+  </li>
+
+      
+      
+        <li class="menu-item menu-item-search">
+          
+            <a href="javascript:;" class="popup-trigger">
+          
+            
+              <i class="menu-item-icon fa fa-search fa-fw"></i> <br>搜索</a>
+        </li>
+      
+    </ul>
+  
+
+  
+    
+
+  
+
+  
+    <div class="site-search">
+      
+  <div class="popup search-popup local-search-popup">
+  <div class="local-search-header clearfix">
+    <span class="search-icon">
+      <i class="fa fa-search"></i>
+    </span>
+    <span class="popup-btn-close">
+      <i class="fa fa-times-circle"></i>
+    </span>
+    <div class="local-search-input-wrapper">
+      <input autocomplete="off" placeholder="搜索..." spellcheck="false" type="text" id="local-search-input">
+    </div>
+  </div>
+  <div id="local-search-result"></div>
+</div>
+
+
+
+    </div>
+  
+</nav>
+
+
+
+  
+
+
+
+</div>
+    </header>
+
+    
+
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  
+
+  <article class="post post-type-normal" itemscope="" itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="https://hitworld.github.io/posts/2e482829/">
+
+    <span hidden itemprop="author" itemscope="" itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="w4rd3n">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/apple-touch-icon.png">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope="" itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="w4rd3n">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">CS-RTFSC-fuzz-AFL
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+
+            
+            
+            
+
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+
+              
+                
+              
+
+              <time title="创建时间：2021-03-14 17:25:25" itemprop="dateCreated datePublished" datetime="2021-03-14T17:25:25+08:00">2021-03-14</time>
+            
+
+            
+          </span>
+
+          
+            <span class="post-category">
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope="" itemtype="http://schema.org/Thing"><a href="/categories/CS/" itemprop="url" rel="index"><span itemprop="name">CS</span></a></span>
+
+                
+                
+                  ，
+                
+              
+                <span itemprop="about" itemscope="" itemtype="http://schema.org/Thing"><a href="/categories/CS/RTFSC/" itemprop="url" rel="index"><span itemprop="name">RTFSC</span></a></span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+             <span id="/posts/2e482829/" class="leancloud_visitors" data-flag-title="CS-RTFSC-fuzz-AFL">
+               <span class="post-meta-divider">|</span>
+               <span class="post-meta-item-icon">
+                 <i class="fa fa-eye"></i>
+               </span>
+               
+                 <span class="post-meta-item-text">热度：</span>
+               
+                 <span class="leancloud-visitors-count"></span>
+                 <span>℃</span>
+             </span>
+          
+
+          
+
+          
+            <div class="post-symbolscount">
+              
+
+              
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-file-word-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">本文字数：</span>
+                
+                <span title="本文字数">37k</span>
+              
+
+              
+                <span class="post-meta-divider">|</span>
+              
+
+              
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-clock-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">阅读时长 &asymp;</span>
+                
+                <span title="阅读时长">34 分钟</span>
+              
+            </div>
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <h2 id="前言">前言</h2>
+<p>基于<code>afl 2.57b</code>.</p>
+<h2 id="afl-gcc.c">afl-gcc.c</h2>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">(<span class="keyword">int</span> argc, <span class="keyword">char</span>** argv)</span> </span>&#123;</span><br><span class="line">  <span class="keyword">if</span> (isatty(<span class="number">2</span>) &amp;&amp; !getenv(<span class="string">"AFL_QUIET"</span>)) &#123;</span><br><span class="line">    SAYF(cCYA <span class="string">"afl-cc "</span> cBRI VERSION cRST <span class="string">" by &lt;lcamtuf@google.com&gt;\n"</span>);</span><br><span class="line">  &#125; <span class="keyword">else</span> be_quiet = <span class="number">1</span>;</span><br><span class="line">  <span class="keyword">if</span> (argc &lt; <span class="number">2</span>) &#123;</span><br><span class="line">    <span class="comment">//..</span></span><br><span class="line">    <span class="built_in">exit</span>(<span class="number">1</span>);</span><br><span class="line">  &#125;</span><br><span class="line"></span><br><span class="line">  <span class="comment">/* 在AFL_PATH和当前目录下寻找as文件，找到后将目录路径赋给as_path，都没找到则abort */</span></span><br><span class="line">  find_as(argv[<span class="number">0</span>]);</span><br><span class="line">  <span class="comment">/* 通过argv[0]判断编译器CC的类型，然后根据后面argv参数进行参数设置，结果保存在cc_params。 */</span></span><br><span class="line">  edit_params(argc, argv);</span><br><span class="line">  <span class="comment">/* 运行CC */</span></span><br><span class="line">  execvp(cc_params[<span class="number">0</span>], (<span class="keyword">char</span>**)cc_params);</span><br><span class="line">  FATAL(<span class="string">"Oops, failed to execute '%s' - check your PATH"</span>, cc_params[<span class="number">0</span>]);</span><br><span class="line"></span><br><span class="line">  <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h2 id="afl-as.c">afl-as.c</h2>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">(<span class="keyword">int</span> argc, <span class="keyword">char</span>** argv)</span> </span>&#123;</span><br><span class="line">  s32 pid;</span><br><span class="line">  u32 rand_seed;</span><br><span class="line">  <span class="keyword">int</span> status;</span><br><span class="line">  u8* inst_ratio_str = getenv(<span class="string">"AFL_INST_RATIO"</span>);</span><br><span class="line">  <span class="class"><span class="keyword">struct</span> <span class="title">timeval</span> <span class="title">tv</span>;</span></span><br><span class="line">  <span class="class"><span class="keyword">struct</span> <span class="title">timezone</span> <span class="title">tz</span>;</span></span><br><span class="line"></span><br><span class="line">  clang_mode = !!getenv(CLANG_ENV_VAR);</span><br><span class="line">  <span class="keyword">if</span> (isatty(<span class="number">2</span>) &amp;&amp; !getenv(<span class="string">"AFL_QUIET"</span>)) &#123;</span><br><span class="line">    SAYF(cCYA <span class="string">"afl-as "</span> cBRI VERSION cRST <span class="string">" by &lt;lcamtuf@google.com&gt;\n"</span>);</span><br><span class="line">  &#125; <span class="keyword">else</span> be_quiet = <span class="number">1</span>;</span><br><span class="line">  <span class="keyword">if</span> (argc &lt; <span class="number">2</span>) &#123;</span><br><span class="line">    <span class="comment">//..</span></span><br><span class="line">    <span class="built_in">exit</span>(<span class="number">1</span>);</span><br><span class="line">  &#125;</span><br><span class="line"></span><br><span class="line">  gettimeofday(&amp;tv, &amp;tz);</span><br><span class="line">  rand_seed = tv.tv_sec ^ tv.tv_usec ^ getpid();</span><br><span class="line">  srandom(rand_seed);</span><br><span class="line">  <span class="comment">/* 检查并修改参数以传递给as_params */</span></span><br><span class="line">  edit_params(argc, argv);</span><br><span class="line"></span><br><span class="line">  <span class="keyword">if</span> (inst_ratio_str) &#123;</span><br><span class="line">    <span class="keyword">if</span> (<span class="built_in">sscanf</span>(inst_ratio_str, <span class="string">"%u"</span>, &amp;inst_ratio) != <span class="number">1</span> || inst_ratio &gt; <span class="number">100</span>) </span><br><span class="line">      FATAL(<span class="string">"Bad value of AFL_INST_RATIO (must be between 0 and 100)"</span>);</span><br><span class="line">  &#125;</span><br><span class="line">  <span class="keyword">if</span> (getenv(AS_LOOP_ENV_VAR))</span><br><span class="line">    FATAL(<span class="string">"Endless loop when calling 'as' (remove '.' from your PATH)"</span>);</span><br><span class="line">  setenv(AS_LOOP_ENV_VAR, <span class="string">"1"</span>, <span class="number">1</span>);</span><br><span class="line">  <span class="comment">/* 对由于开启了ASAN/MSAN产生的问题（对其插入的代码进行插桩）进行处理 */</span></span><br><span class="line">  <span class="keyword">if</span> (getenv(<span class="string">"AFL_USE_ASAN"</span>) || getenv(<span class="string">"AFL_USE_MSAN"</span>)) &#123;</span><br><span class="line">    sanitizer = <span class="number">1</span>;</span><br><span class="line">    inst_ratio /= <span class="number">3</span>;</span><br><span class="line">  &#125;</span><br><span class="line">  <span class="keyword">if</span> (!just_version)</span><br><span class="line">    <span class="comment">/* 处理输入文件，生成modified_file，将instrumentation插入所有适当的位置。 */</span></span><br><span class="line">    add_instrumentation();</span><br><span class="line"></span><br><span class="line">  <span class="keyword">if</span> (!(pid = fork())) &#123;</span><br><span class="line">    execvp(as_params[<span class="number">0</span>], (<span class="keyword">char</span>**)as_params);</span><br><span class="line">    FATAL(<span class="string">"Oops, failed to execute '%s' - check your PATH"</span>, as_params[<span class="number">0</span>]);</span><br><span class="line">  &#125;</span><br><span class="line">  <span class="keyword">if</span> (pid &lt; <span class="number">0</span>) PFATAL(<span class="string">"fork() failed"</span>);</span><br><span class="line">  <span class="keyword">if</span> (waitpid(pid, &amp;status, <span class="number">0</span>) &lt;= <span class="number">0</span>) PFATAL(<span class="string">"waitpid() failed"</span>);</span><br><span class="line">  <span class="keyword">if</span> (!getenv(<span class="string">"AFL_KEEP_ASSEMBLY"</span>)) unlink(modified_file);</span><br><span class="line">  <span class="built_in">exit</span>(WEXITSTATUS(status));</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h3 id="add_instrumentation">add_instrumentation</h3>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br><span class="line">89</span><br><span class="line">90</span><br><span class="line">91</span><br><span class="line">92</span><br><span class="line">93</span><br><span class="line">94</span><br><span class="line">95</span><br><span class="line">96</span><br><span class="line">97</span><br><span class="line">98</span><br><span class="line">99</span><br><span class="line">100</span><br><span class="line">101</span><br><span class="line">102</span><br><span class="line">103</span><br><span class="line">104</span><br><span class="line">105</span><br><span class="line">106</span><br><span class="line">107</span><br><span class="line">108</span><br><span class="line">109</span><br><span class="line">110</span><br><span class="line">111</span><br><span class="line">112</span><br><span class="line">113</span><br><span class="line">114</span><br><span class="line">115</span><br><span class="line">116</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">static</span> <span class="keyword">void</span> <span class="title">add_instrumentation</span><span class="params">(<span class="keyword">void</span>)</span> </span>&#123;</span><br><span class="line">  <span class="keyword">static</span> u8 line[MAX_LINE];</span><br><span class="line">  FILE* inf;</span><br><span class="line">  FILE* outf;</span><br><span class="line">  s32 outfd;</span><br><span class="line">  u32 ins_lines = <span class="number">0</span>;</span><br><span class="line">  u8  instr_ok = <span class="number">0</span>, skip_csect = <span class="number">0</span>, skip_next_label = <span class="number">0</span>, skip_intel = <span class="number">0</span>, skip_app = <span class="number">0</span>, instrument_next = <span class="number">0</span>;</span><br><span class="line"><span class="meta">#<span class="meta-keyword">ifdef</span> __APPLE__</span></span><br><span class="line">  u8* colon_pos;</span><br><span class="line"><span class="meta">#<span class="meta-keyword">endif</span> <span class="comment">/* __APPLE__ */</span></span></span><br><span class="line"></span><br><span class="line">  <span class="keyword">if</span> (input_file) &#123;</span><br><span class="line">    inf = fopen(input_file, <span class="string">"r"</span>);</span><br><span class="line">    <span class="keyword">if</span> (!inf) PFATAL(<span class="string">"Unable to read '%s'"</span>, input_file);</span><br><span class="line">  &#125; <span class="keyword">else</span> inf = <span class="built_in">stdin</span>;</span><br><span class="line">  outfd = open(modified_file, O_WRONLY | O_EXCL | O_CREAT, <span class="number">0600</span>);</span><br><span class="line">  <span class="keyword">if</span> (outfd &lt; <span class="number">0</span>) PFATAL(<span class="string">"Unable to write to '%s'"</span>, modified_file);</span><br><span class="line">  outf = fdopen(outfd, <span class="string">"w"</span>);</span><br><span class="line">  <span class="keyword">if</span> (!outf) PFATAL(<span class="string">"fdopen() failed"</span>);  </span><br><span class="line"></span><br><span class="line">  <span class="comment">/* 对input_file内容进行逐行处理 */</span></span><br><span class="line">  <span class="keyword">while</span> (fgets(line, MAX_LINE, inf)) &#123;</span><br><span class="line">    <span class="keyword">if</span> (!pass_thru &amp;&amp; !skip_intel &amp;&amp; !skip_app &amp;&amp; !skip_csect &amp;&amp; instr_ok &amp;&amp; instrument_next &amp;&amp; line[<span class="number">0</span>] == <span class="string">'\t'</span> &amp;&amp; <span class="built_in">isalpha</span>(line[<span class="number">1</span>])) &#123;</span><br><span class="line">      <span class="comment">/* 如果满足上述条件则进行一次插桩，R是实现为rand的宏 */</span></span><br><span class="line">      <span class="built_in">fprintf</span>(outf, use_64bit ? trampoline_fmt_64 : trampoline_fmt_32, R(MAP_SIZE));</span><br><span class="line">      instrument_next = <span class="number">0</span>;</span><br><span class="line">      ins_lines++;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="built_in">fputs</span>(line, outf);</span><br><span class="line">    <span class="keyword">if</span> (pass_thru) <span class="keyword">continue</span>;</span><br><span class="line"></span><br><span class="line">    <span class="comment">/* 通过instr_ok标识现在是否处于.text段 */</span></span><br><span class="line">    <span class="keyword">if</span> (line[<span class="number">0</span>] == <span class="string">'\t'</span> &amp;&amp; line[<span class="number">1</span>] == <span class="string">'.'</span>) &#123;</span><br><span class="line">      <span class="comment">/* OpenBSD将跳转表直接内联到代码中，且使用一种特定的p2align指令格式，通过这个进行识别 */</span></span><br><span class="line">      <span class="keyword">if</span> (!clang_mode &amp;&amp; instr_ok &amp;&amp; !<span class="built_in">strncmp</span>(line + <span class="number">2</span>, <span class="string">"p2align "</span>, <span class="number">8</span>) &amp;&amp; <span class="built_in">isdigit</span>(line[<span class="number">10</span>]) &amp;&amp; line[<span class="number">11</span>] == <span class="string">'\n'</span>) skip_next_label = <span class="number">1</span>;</span><br><span class="line">      <span class="comment">/* 识别当前区域是否是text段 */</span></span><br><span class="line">      <span class="keyword">if</span> (!<span class="built_in">strncmp</span>(line + <span class="number">2</span>, <span class="string">"text\n"</span>, <span class="number">5</span>) || !<span class="built_in">strncmp</span>(line + <span class="number">2</span>, <span class="string">"section\t.text"</span>, <span class="number">13</span>) || !<span class="built_in">strncmp</span>(line + <span class="number">2</span>, <span class="string">"section\t__TEXT,__text"</span>, <span class="number">21</span>) || !<span class="built_in">strncmp</span>(line + <span class="number">2</span>, <span class="string">"section __TEXT,__text"</span>, <span class="number">21</span>)) &#123;</span><br><span class="line">        instr_ok = <span class="number">1</span>;</span><br><span class="line">        <span class="keyword">continue</span>; </span><br><span class="line">      &#125;</span><br><span class="line">      <span class="keyword">if</span> (!<span class="built_in">strncmp</span>(line + <span class="number">2</span>, <span class="string">"section\t"</span>, <span class="number">8</span>) || !<span class="built_in">strncmp</span>(line + <span class="number">2</span>, <span class="string">"section "</span>, <span class="number">8</span>) || !<span class="built_in">strncmp</span>(line + <span class="number">2</span>, <span class="string">"bss\n"</span>, <span class="number">4</span>) || !<span class="built_in">strncmp</span>(line + <span class="number">2</span>, <span class="string">"data\n"</span>, <span class="number">5</span>)) &#123;</span><br><span class="line">        instr_ok = <span class="number">0</span>;</span><br><span class="line">        <span class="keyword">continue</span>;</span><br><span class="line">      &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="comment">/* 检测off-flavor assembly（gdb中出现的罕见情况），遇见则设置skip_csect，直到遇到相反的指令。此时不进行插桩 */</span></span><br><span class="line">    <span class="keyword">if</span> (<span class="built_in">strstr</span>(line, <span class="string">".code"</span>)) &#123;</span><br><span class="line">      <span class="keyword">if</span> (<span class="built_in">strstr</span>(line, <span class="string">".code32"</span>)) skip_csect = use_64bit;</span><br><span class="line">      <span class="keyword">if</span> (<span class="built_in">strstr</span>(line, <span class="string">".code64"</span>)) skip_csect = !use_64bit;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="comment">/* 检测intel与att之间的语法切换，跳过intel，对att进行插桩 */</span></span><br><span class="line">    <span class="keyword">if</span> (<span class="built_in">strstr</span>(line, <span class="string">".intel_syntax"</span>)) skip_intel = <span class="number">1</span>;</span><br><span class="line">    <span class="keyword">if</span> (<span class="built_in">strstr</span>(line, <span class="string">".att_syntax"</span>)) skip_intel = <span class="number">0</span>;</span><br><span class="line">    <span class="comment">/* 检测并跳过临时__asm__块 */</span></span><br><span class="line">    <span class="keyword">if</span> (line[<span class="number">0</span>] == <span class="string">'#'</span> || line[<span class="number">1</span>] == <span class="string">'#'</span>) &#123;</span><br><span class="line">      <span class="keyword">if</span> (<span class="built_in">strstr</span>(line, <span class="string">"#APP"</span>)) skip_app = <span class="number">1</span>;</span><br><span class="line">      <span class="keyword">if</span> (<span class="built_in">strstr</span>(line, <span class="string">"#NO_APP"</span>)) skip_app = <span class="number">0</span>;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="comment">/* 跳转指令示例:</span></span><br><span class="line"><span class="comment">         ^main:      - function entry point (always instrumented)</span></span><br><span class="line"><span class="comment">         ^.L0:       - GCC branch label</span></span><br><span class="line"><span class="comment">         ^.LBB0_0:   - clang branch label (but only in clang mode)</span></span><br><span class="line"><span class="comment">         ^\tjnz foo  - conditional branches</span></span><br><span class="line"><span class="comment">       非跳转指令示例:</span></span><br><span class="line"><span class="comment">         ^# BB#0:    - clang comments</span></span><br><span class="line"><span class="comment">         ^ # BB#0:   - ditto</span></span><br><span class="line"><span class="comment">         ^.Ltmp0:    - clang non-branch labels</span></span><br><span class="line"><span class="comment">         ^.LC0       - GCC non-branch labels</span></span><br><span class="line"><span class="comment">         ^.LBB0_0:   - ditto (when in GCC mode)</span></span><br><span class="line"><span class="comment">         ^\tjmp foo  - non-conditional jumps</span></span><br><span class="line"><span class="comment">    */</span></span><br><span class="line">    <span class="comment">/* 对不插桩的情况进行跳过 */</span></span><br><span class="line">    <span class="keyword">if</span> (skip_intel || skip_app || skip_csect || !instr_ok || line[<span class="number">0</span>] == <span class="string">'#'</span> || line[<span class="number">0</span>] == <span class="string">' '</span>) <span class="keyword">continue</span>;</span><br><span class="line">    <span class="comment">/* 对于条件分支指令，在分支之后（用于检测未采用的路径）和分支目标标签（稍后处理）进行插桩。 */</span></span><br><span class="line">    <span class="keyword">if</span> (line[<span class="number">0</span>] == <span class="string">'\t'</span>) &#123;</span><br><span class="line">      <span class="keyword">if</span> (line[<span class="number">1</span>] == <span class="string">'j'</span> &amp;&amp; line[<span class="number">2</span>] != <span class="string">'m'</span> &amp;&amp; R(<span class="number">100</span>) &lt; inst_ratio) &#123;</span><br><span class="line">        <span class="built_in">fprintf</span>(outf, use_64bit ? trampoline_fmt_64 : trampoline_fmt_32, R(MAP_SIZE));</span><br><span class="line">        ins_lines++;</span><br><span class="line">      &#125;</span><br><span class="line">      <span class="keyword">continue</span>;</span><br><span class="line">    &#125;</span><br><span class="line"><span class="meta">#<span class="meta-keyword">ifdef</span> __APPLE__</span></span><br><span class="line">    <span class="comment">/* Apple: L&lt;whatever&gt;&lt;digit&gt;: */</span></span><br><span class="line">    <span class="keyword">if</span> ((colon_pos = <span class="built_in">strstr</span>(line, <span class="string">":"</span>))) &#123;</span><br><span class="line">      <span class="keyword">if</span> (line[<span class="number">0</span>] == <span class="string">'L'</span> &amp;&amp; <span class="built_in">isdigit</span>(*(colon_pos - <span class="number">1</span>))) &#123;</span><br><span class="line"><span class="meta">#<span class="meta-keyword">else</span></span></span><br><span class="line">    <span class="comment">/* Everybody else: .L&lt;whatever&gt;: */</span></span><br><span class="line">    <span class="keyword">if</span> (<span class="built_in">strstr</span>(line, <span class="string">":"</span>)) &#123;</span><br><span class="line">      <span class="keyword">if</span> (line[<span class="number">0</span>] == <span class="string">'.'</span>) &#123;</span><br><span class="line"><span class="meta">#<span class="meta-keyword">endif</span> <span class="comment">/* __APPLE__ */</span></span></span><br><span class="line">        <span class="comment">/* .L0: or LBB0_0: style jump destination */</span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">ifdef</span> __APPLE__</span></span><br><span class="line">        <span class="comment">/* Apple: L&lt;num&gt; / LBB&lt;num&gt; */</span></span><br><span class="line">        <span class="keyword">if</span> ((<span class="built_in">isdigit</span>(line[<span class="number">1</span>]) || (clang_mode &amp;&amp; !<span class="built_in">strncmp</span>(line, <span class="string">"LBB"</span>, <span class="number">3</span>))) &amp;&amp; R(<span class="number">100</span>) &lt; inst_ratio) &#123;</span><br><span class="line"><span class="meta">#<span class="meta-keyword">else</span></span></span><br><span class="line">        <span class="comment">/* Everybody: .L&lt;num&gt; / .LBB&lt;num&gt; */</span></span><br><span class="line">        <span class="keyword">if</span> ((<span class="built_in">isdigit</span>(line[<span class="number">2</span>]) || (clang_mode &amp;&amp; !<span class="built_in">strncmp</span>(line + <span class="number">1</span>, <span class="string">"LBB"</span>, <span class="number">3</span>))) &amp;&amp; R(<span class="number">100</span>) &lt; inst_ratio) &#123;</span><br><span class="line"><span class="meta">#<span class="meta-keyword">endif</span> <span class="comment">/* __APPLE__ */</span></span></span><br><span class="line">          <span class="comment">/* 根据skip_next_label决定是否跳过此次插桩 */</span></span><br><span class="line">          <span class="keyword">if</span> (!skip_next_label) instrument_next = <span class="number">1</span>; <span class="keyword">else</span> skip_next_label = <span class="number">0</span>;</span><br><span class="line">        &#125;</span><br><span class="line">      &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">        <span class="comment">/* 识别为函数，进行插桩。 */</span></span><br><span class="line">        instrument_next = <span class="number">1</span>;</span><br><span class="line">      &#125;</span><br><span class="line">    &#125;</span><br><span class="line">  &#125;</span><br><span class="line">  <span class="comment">/* 插桩计数器ins_lines不为0，则写入对应的main_payload */</span></span><br><span class="line">  <span class="keyword">if</span> (ins_lines) <span class="built_in">fputs</span>(use_64bit ? main_payload_64 : main_payload_32, outf);</span><br><span class="line">  <span class="keyword">if</span> (input_file) fclose(inf);</span><br><span class="line">  fclose(outf);</span><br><span class="line">  <span class="keyword">if</span> (!be_quiet) &#123;</span><br><span class="line">    <span class="keyword">if</span> (!ins_lines) WARNF(<span class="string">"No instrumentation targets found%s."</span>, pass_thru ? <span class="string">" (pass-thru mode)"</span> : <span class="string">""</span>);</span><br><span class="line">    <span class="keyword">else</span> OKF(<span class="string">"Instrumented %u locations (%s-bit, %s mode, ratio %u%%)."</span>, ins_lines, use_64bit ? <span class="string">"64"</span> : <span class="string">"32"</span>, getenv(<span class="string">"AFL_HARDEN"</span>) ? <span class="string">"hardened"</span> : (sanitizer ? <span class="string">"ASAN/MSAN"</span> : <span class="string">"non-hardened"</span>), inst_ratio);</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h2 id="afl-fast-clang.c">afl-fast-clang.c</h2>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">(<span class="keyword">int</span> argc, <span class="keyword">char</span>** argv)</span> </span>&#123;</span><br><span class="line">  <span class="keyword">if</span> (isatty(<span class="number">2</span>) &amp;&amp; !getenv(<span class="string">"AFL_QUIET"</span>)) &#123;</span><br><span class="line"><span class="meta">#<span class="meta-keyword">ifdef</span> USE_TRACE_PC</span></span><br><span class="line">    SAYF(cCYA <span class="string">"afl-clang-fast [tpcg] "</span> cBRI VERSION  cRST <span class="string">" by &lt;lszekeres@google.com&gt;\n"</span>);</span><br><span class="line"><span class="meta">#<span class="meta-keyword">else</span></span></span><br><span class="line">    SAYF(cCYA <span class="string">"afl-clang-fast "</span> cBRI VERSION  cRST <span class="string">" by &lt;lszekeres@google.com&gt;\n"</span>);</span><br><span class="line"><span class="meta">#<span class="meta-keyword">endif</span> <span class="comment">/* ^USE_TRACE_PC */</span></span></span><br><span class="line">  &#125;</span><br><span class="line">  <span class="keyword">if</span> (argc &lt; <span class="number">2</span>) &#123;</span><br><span class="line">    <span class="comment">//..</span></span><br><span class="line">    <span class="built_in">exit</span>(<span class="number">1</span>);</span><br><span class="line">  &#125;</span><br><span class="line"></span><br><span class="line"><span class="meta">#<span class="meta-keyword">ifndef</span> __ANDROID__</span></span><br><span class="line">  <span class="comment">/* 在AFL_PATH和当前目录寻找afl-llvm-rt.o/afl-llvm-pass.so，找到后赋值给obj_path */</span></span><br><span class="line">  find_obj(argv[<span class="number">0</span>]);</span><br><span class="line"><span class="meta">#<span class="meta-keyword">endif</span></span></span><br><span class="line">  <span class="comment">/* 处理命令行参数，结果保存在cc_params，默认情况通过afl-llvm-pass.so来注入instrumentation，也支持trace-pc-guard模式，参考：http://clang.llvm.org/docs/SanitizerCoverage.html#tracing-pcs-with-guards) */</span></span><br><span class="line">  edit_params(argc, argv);</span><br><span class="line">  execvp(cc_params[<span class="number">0</span>], (<span class="keyword">char</span>**)cc_params);</span><br><span class="line">  FATAL(<span class="string">"Oops, failed to execute '%s' - check your PATH"</span>, cc_params[<span class="number">0</span>]);</span><br><span class="line">  <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h2 id="afl-llvm-pass.so.cc">afl-llvm-pass.so.cc</h2>
+<p><code>llvm</code>中<code>Module</code>相当于你的程序,里面包含所有<code>Function</code>和全局变量,而<code>Function</code>里包含所有<code>BasicBlock</code>和函数参数,<code>BasicBlock</code>里包含所有<code>Instruction</code>,<code>Instruction</code>包含<code>Opcode</code>和<code>Operands</code>.</p>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> llvm;</span><br><span class="line"></span><br><span class="line"><span class="keyword">namespace</span> &#123;</span><br><span class="line">  <span class="class"><span class="keyword">class</span> <span class="title">AFLCoverage</span> :</span> <span class="keyword">public</span> ModulePass &#123;</span><br><span class="line">    <span class="keyword">public</span>:</span><br><span class="line">      <span class="keyword">static</span> <span class="keyword">char</span> ID;</span><br><span class="line">      AFLCoverage() : ModulePass(ID) &#123; &#125;</span><br><span class="line">      <span class="function"><span class="keyword">bool</span> <span class="title">runOnModule</span><span class="params">(Module &amp;M)</span> override</span>;</span><br><span class="line">  &#125;;</span><br><span class="line">&#125;</span><br><span class="line"><span class="keyword">char</span> AFLCoverage::ID = <span class="number">0</span>;</span><br><span class="line"></span><br><span class="line"><span class="keyword">bool</span> AFLCoverage::runOnModule(Module &amp;M) &#123;</span><br><span class="line">  <span class="comment">/* 获取LLVMContext，其保存了整个程序里分配的类型和常量信息。 */</span></span><br><span class="line">  LLVMContext &amp;C = M.getContext();</span><br><span class="line">  <span class="comment">/* 获取Type实例Int8Ty和Int32Ty */</span></span><br><span class="line">  IntegerType *Int8Ty  = IntegerType::getInt8Ty(C);</span><br><span class="line">  IntegerType *Int32Ty = IntegerType::getInt32Ty(C);</span><br><span class="line"></span><br><span class="line">  <span class="keyword">char</span> be_quiet = <span class="number">0</span>;</span><br><span class="line">  <span class="keyword">if</span> (isatty(<span class="number">2</span>) &amp;&amp; !getenv(<span class="string">"AFL_QUIET"</span>)) &#123;</span><br><span class="line">    SAYF(cCYA <span class="string">"afl-llvm-pass "</span> cBRI VERSION cRST <span class="string">" by &lt;lszekeres@google.com&gt;\n"</span>);</span><br><span class="line">  &#125; <span class="keyword">else</span> be_quiet = <span class="number">1</span>;</span><br><span class="line">  <span class="comment">/* 获取插桩概率 */</span></span><br><span class="line">  <span class="keyword">char</span>* inst_ratio_str = getenv(<span class="string">"AFL_INST_RATIO"</span>);</span><br><span class="line">  <span class="keyword">unsigned</span> <span class="keyword">int</span> inst_ratio = <span class="number">100</span>;</span><br><span class="line">  <span class="keyword">if</span> (inst_ratio_str) &#123;</span><br><span class="line">    <span class="keyword">if</span> (<span class="built_in">sscanf</span>(inst_ratio_str, <span class="string">"%u"</span>, &amp;inst_ratio) != <span class="number">1</span> || !inst_ratio || inst_ratio &gt; <span class="number">100</span>)</span><br><span class="line">      FATAL(<span class="string">"Bad value of AFL_INST_RATIO (must be between 1 and 100)"</span>);</span><br><span class="line">  &#125;</span><br><span class="line"></span><br><span class="line">  <span class="comment">/* 获取SHM区域的指针 */</span></span><br><span class="line">  GlobalVariable *AFLMapPtr = <span class="keyword">new</span> GlobalVariable(M, PointerType::get(Int8Ty, <span class="number">0</span>), <span class="literal">false</span>, GlobalValue::ExternalLinkage, <span class="number">0</span>, <span class="string">"__afl_area_ptr"</span>);</span><br><span class="line">  <span class="comment">/* 获取上一个location的编号，注意__afl_prev_loc是thread-local的 */</span></span><br><span class="line">  GlobalVariable *AFLPrevLoc = <span class="keyword">new</span> GlobalVariable(M, Int32Ty, <span class="literal">false</span>, GlobalValue::ExternalLinkage, <span class="number">0</span>, <span class="string">"__afl_prev_loc"</span>, <span class="number">0</span>, GlobalVariable::GeneralDynamicTLSModel, <span class="number">0</span>, <span class="literal">false</span>);</span><br><span class="line"></span><br><span class="line">  <span class="comment">/* 遍历所有基本块进行插桩 */</span></span><br><span class="line">  <span class="keyword">int</span> inst_blocks = <span class="number">0</span>;</span><br><span class="line">  <span class="keyword">for</span> (<span class="keyword">auto</span> &amp;F : M)</span><br><span class="line">    <span class="keyword">for</span> (<span class="keyword">auto</span> &amp;BB : F) &#123;</span><br><span class="line">      BasicBlock::iterator IP = BB.getFirstInsertionPt();</span><br><span class="line">      IRBuilder&lt;&gt; IRB(&amp;(*IP));</span><br><span class="line">      <span class="keyword">if</span> (AFL_R(<span class="number">100</span>) &gt;= inst_ratio) <span class="keyword">continue</span>;</span><br><span class="line">      <span class="comment">/* Make up cur_loc */</span></span><br><span class="line">      <span class="keyword">unsigned</span> <span class="keyword">int</span> cur_loc = AFL_R(MAP_SIZE);</span><br><span class="line">      ConstantInt *CurLoc = ConstantInt::get(Int32Ty, cur_loc);</span><br><span class="line">      <span class="comment">/* Load prev_loc */</span></span><br><span class="line">      LoadInst *PrevLoc = IRB.CreateLoad(AFLPrevLoc);</span><br><span class="line">      PrevLoc-&gt;setMetadata(M.getMDKindID(<span class="string">"nosanitize"</span>), MDNode::get(C, None));</span><br><span class="line">      Value *PrevLocCasted = IRB.CreateZExt(PrevLoc, IRB.getInt32Ty());</span><br><span class="line">      <span class="comment">/* Load SHM pointer */</span></span><br><span class="line">      LoadInst *MapPtr = IRB.CreateLoad(AFLMapPtr);</span><br><span class="line">      MapPtr-&gt;setMetadata(M.getMDKindID(<span class="string">"nosanitize"</span>), MDNode::get(C, None));</span><br><span class="line">      Value *MapPtrIdx = IRB.CreateGEP(MapPtr, IRB.CreateXor(PrevLocCasted, CurLoc));</span><br><span class="line">      <span class="comment">/* Update bitmap */</span></span><br><span class="line">      LoadInst *Counter = IRB.CreateLoad(MapPtrIdx);</span><br><span class="line">      Counter-&gt;setMetadata(M.getMDKindID(<span class="string">"nosanitize"</span>), MDNode::get(C, None));</span><br><span class="line">      Value *Incr = IRB.CreateAdd(Counter, ConstantInt::get(Int8Ty, <span class="number">1</span>));</span><br><span class="line">      IRB.CreateStore(Incr, MapPtrIdx) -&gt;setMetadata(M.getMDKindID(<span class="string">"nosanitize"</span>), MDNode::get(C, None));</span><br><span class="line">      <span class="comment">/* Set prev_loc to cur_loc &gt;&gt; 1 */</span></span><br><span class="line">      StoreInst *Store = IRB.CreateStore(ConstantInt::get(Int32Ty, cur_loc &gt;&gt; <span class="number">1</span>), AFLPrevLoc);</span><br><span class="line">      Store-&gt;setMetadata(M.getMDKindID(<span class="string">"nosanitize"</span>), MDNode::get(C, None));</span><br><span class="line">      inst_blocks++;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">  <span class="keyword">if</span> (!be_quiet) &#123;</span><br><span class="line">    <span class="keyword">if</span> (!inst_blocks) WARNF(<span class="string">"No instrumentation targets found."</span>);</span><br><span class="line">    <span class="keyword">else</span> OKF(<span class="string">"Instrumented %u locations (%s mode, ratio %u%%)."</span>, inst_blocks, getenv(<span class="string">"AFL_HARDEN"</span>) ? <span class="string">"hardened"</span> : ((getenv(<span class="string">"AFL_USE_ASAN"</span>) || getenv(<span class="string">"AFL_USE_MSAN"</span>)) ? <span class="string">"ASAN/MSAN"</span> : <span class="string">"non-hardened"</span>), inst_ratio);</span><br><span class="line">  &#125;</span><br><span class="line"></span><br><span class="line">  <span class="keyword">return</span> <span class="literal">true</span>;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">/* 向PassManager来注册新的pass，每个pass彼此独立，通过PM统一注册和调度 */</span></span><br><span class="line"><span class="function"><span class="keyword">static</span> <span class="keyword">void</span> <span class="title">registerAFLPass</span><span class="params">(<span class="keyword">const</span> PassManagerBuilder &amp;, legacy::PassManagerBase &amp;PM)</span> </span>&#123;</span><br><span class="line">  PM.add(<span class="keyword">new</span> AFLCoverage());</span><br><span class="line">&#125;</span><br><span class="line"><span class="function"><span class="keyword">static</span> RegisterStandardPasses <span class="title">RegisterAFLPass</span><span class="params">(PassManagerBuilder::EP_ModuleOptimizerEarly, registerAFLPass)</span></span>;</span><br><span class="line"><span class="function"><span class="keyword">static</span> RegisterStandardPasses <span class="title">RegisterAFLPass0</span><span class="params">(PassManagerBuilder::EP_EnabledOnOptLevel0, registerAFLPass)</span></span>;</span><br></pre></td></tr></table></figure>
+<h2 id="afl-llvm-rt.o.c">afl-llvm-rt.o.c</h2>
+<p><code>LLVM_Mode</code>中存在着三个特殊的功能,其实现就位于<code>afl-llvm-rt.o.c</code>.</p>
+<p><code>deferred forkserver mode</code>:<code>AFL</code>可以通过仅执行一次目标二进制文件来优化性能,它会暂停控制流,然后不断复制该主进程进行<code>fuzz</code>,该功能在某些情况下可以减少操作系统,链接与<code>libc</code>内部执行程序的成本.</p>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">ifdef</span> __AFL_HAVE_MANUAL_CONTROL</span></span><br><span class="line">  <span class="comment">/* __AFL_INIT()内部调用__afl_manual_init函数 */</span></span><br><span class="line">  __AFL_INIT();</span><br><span class="line"><span class="meta">#<span class="meta-keyword">endif</span></span></span><br><span class="line"><span class="comment">//...</span></span><br><span class="line"><span class="keyword">void</span> __afl_manual_init(<span class="keyword">void</span>) &#123;</span><br><span class="line">  <span class="keyword">static</span> u8 init_done;</span><br><span class="line">  <span class="keyword">if</span> (!init_done) &#123;</span><br><span class="line">    __afl_map_shm();</span><br><span class="line">    __afl_start_forkserver();</span><br><span class="line">    init_done = <span class="number">1</span>;</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p><code>persistent mode</code>:认为当前正在<code>fuzz</code>的<code>API</code>是无状态的,将<code>API</code>重置后就可以重复使用一个进程.</p>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">/* 使用方法举例 */</span></span><br><span class="line"><span class="keyword">while</span> (__AFL_LOOP(<span class="number">1000</span>)) &#123;</span><br><span class="line">  <span class="comment">/* Read input data. */</span></span><br><span class="line">  <span class="comment">/* Call library code to be fuzzed. */</span></span><br><span class="line">  <span class="comment">/* Reset state. */</span></span><br><span class="line">&#125;</span><br><span class="line"><span class="comment">/* Exit normally */</span></span><br></pre></td></tr></table></figure>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br><span class="line">89</span><br><span class="line">90</span><br><span class="line">91</span><br><span class="line">92</span><br><span class="line">93</span><br><span class="line">94</span><br><span class="line">95</span><br><span class="line">96</span><br><span class="line">97</span><br><span class="line">98</span><br><span class="line">99</span><br><span class="line">100</span><br><span class="line">101</span><br><span class="line">102</span><br><span class="line">103</span><br><span class="line">104</span><br><span class="line">105</span><br><span class="line">106</span><br><span class="line">107</span><br><span class="line">108</span><br><span class="line">109</span><br><span class="line">110</span><br><span class="line">111</span><br><span class="line">112</span><br><span class="line">113</span><br><span class="line">114</span><br><span class="line">115</span><br><span class="line">116</span><br><span class="line">117</span><br><span class="line">118</span><br><span class="line">119</span><br><span class="line">120</span><br><span class="line">121</span><br><span class="line">122</span><br><span class="line">123</span><br><span class="line">124</span><br><span class="line">125</span><br><span class="line">126</span><br><span class="line">127</span><br><span class="line">128</span><br><span class="line">129</span><br><span class="line">130</span><br><span class="line">131</span><br><span class="line">132</span><br><span class="line">133</span><br><span class="line">134</span><br><span class="line">135</span><br><span class="line">136</span><br><span class="line">137</span><br><span class="line">138</span><br><span class="line">139</span><br><span class="line">140</span><br><span class="line">141</span><br><span class="line">142</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">/* 需要确保forkserver在LLVM生成的运行时初始化阶段之后初始化，而不是之前 */</span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">ifdef</span> USE_TRACE_PC</span></span><br><span class="line"><span class="meta">#  <span class="meta-keyword">define</span> CONST_PRIO 5</span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">else</span></span></span><br><span class="line"><span class="meta">#  <span class="meta-keyword">define</span> CONST_PRIO 0</span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">endif</span> <span class="comment">/* ^USE_TRACE_PC */</span></span></span><br><span class="line"><span class="comment">/* 插桩用到的全局变量，__afl_area_initial区域用于在__afl_map_shm()运行之前使用，处理无用数据，最终这部分将变成.comm节 */</span></span><br><span class="line">u8  __afl_area_initial[MAP_SIZE];</span><br><span class="line">u8* __afl_area_ptr = __afl_area_initial;</span><br><span class="line">__thread u32 __afl_prev_loc;</span><br><span class="line"></span><br><span class="line"><span class="keyword">static</span> u8 is_persistent;</span><br><span class="line"></span><br><span class="line"><span class="comment">/* 进行SHM配置 */</span></span><br><span class="line"><span class="keyword">static</span> <span class="keyword">void</span> __afl_map_shm(<span class="keyword">void</span>) &#123;</span><br><span class="line">  u8 *id_str = getenv(SHM_ENV_VAR);</span><br><span class="line">  <span class="keyword">if</span> (id_str) &#123;</span><br><span class="line">    u32 shm_id = atoi(id_str);</span><br><span class="line">    <span class="comment">/* 替代__afl_area_initial区域 */</span></span><br><span class="line">    __afl_area_ptr = shmat(shm_id, <span class="literal">NULL</span>, <span class="number">0</span>);</span><br><span class="line">    </span><br><span class="line">    <span class="keyword">if</span> (__afl_area_ptr == (<span class="keyword">void</span> *)<span class="number">-1</span>) _exit(<span class="number">1</span>);</span><br><span class="line">    <span class="comment">/* 将一些内容写入位图 */</span></span><br><span class="line">    __afl_area_ptr[<span class="number">0</span>] = <span class="number">1</span>;</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">static</span> <span class="keyword">void</span> __afl_start_forkserver(<span class="keyword">void</span>) &#123;</span><br><span class="line">  <span class="keyword">static</span> u8 tmp[<span class="number">4</span>];</span><br><span class="line">  s32 child_pid;</span><br><span class="line">  u8  child_stopped = <span class="number">0</span>;</span><br><span class="line">  <span class="comment">/* 向状态管道(FORKSRV_FD + 1)写入4个字节，告知AFL fuzz已经准备好了 */</span></span><br><span class="line">  <span class="keyword">if</span> (write(FORKSRV_FD + <span class="number">1</span>, tmp, <span class="number">4</span>) != <span class="number">4</span>) <span class="keyword">return</span>;</span><br><span class="line"></span><br><span class="line">  <span class="keyword">while</span> (<span class="number">1</span>) &#123;</span><br><span class="line">    u32 was_killed;</span><br><span class="line">    <span class="keyword">int</span> status;</span><br><span class="line">    <span class="comment">/* 等待AFL的指令，然后进行forkserver */</span></span><br><span class="line">    <span class="keyword">if</span> (read(FORKSRV_FD, &amp;was_killed, <span class="number">4</span>) != <span class="number">4</span>) _exit(<span class="number">1</span>);</span><br><span class="line">    <span class="comment">/* 如果在persistent模式下暂停了子进程，但是出现了条件竞争且afl-fuzz已经结束，结束这个旧进程 */</span></span><br><span class="line">    <span class="keyword">if</span> (child_stopped &amp;&amp; was_killed) &#123;</span><br><span class="line">      child_stopped = <span class="number">0</span>;</span><br><span class="line">      <span class="keyword">if</span> (waitpid(child_pid, &amp;status, <span class="number">0</span>) &lt; <span class="number">0</span>) _exit(<span class="number">1</span>);</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="comment">/* 直接fork出一个子进程去进行fuzz，子进程会关闭控制管道和状态管道的fd，然后return跳出fuzz loop，恢复正常执行 */</span></span><br><span class="line">    <span class="keyword">if</span> (!child_stopped) &#123;</span><br><span class="line">      child_pid = fork();</span><br><span class="line">      <span class="keyword">if</span> (child_pid &lt; <span class="number">0</span>) _exit(<span class="number">1</span>);</span><br><span class="line">      <span class="keyword">if</span> (!child_pid) &#123;</span><br><span class="line">        close(FORKSRV_FD);</span><br><span class="line">        close(FORKSRV_FD + <span class="number">1</span>);</span><br><span class="line">        <span class="keyword">return</span>;</span><br><span class="line">      &#125;</span><br><span class="line">    &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">      <span class="comment">/* 在persistent模式下暂停了子进程且没有之前的问题，就会重启子进程 */</span></span><br><span class="line">      kill(child_pid, SIGCONT);</span><br><span class="line">      child_stopped = <span class="number">0</span>;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="comment">/* 向状态管道写入子进程的pid，然后等待子进程结束 */</span></span><br><span class="line">    <span class="keyword">if</span> (write(FORKSRV_FD + <span class="number">1</span>, &amp;child_pid, <span class="number">4</span>) != <span class="number">4</span>) _exit(<span class="number">1</span>);</span><br><span class="line">    <span class="comment">/* 对于persistent mode，会设置waitpid的第三个参数为WUNTRACED，代表若子进程进入暂停状态，则马上返回 */</span></span><br><span class="line">    <span class="keyword">if</span> (waitpid(child_pid, &amp;status, is_persistent ? WUNTRACED : <span class="number">0</span>) &lt; <span class="number">0</span>)</span><br><span class="line">      _exit(<span class="number">1</span>);</span><br><span class="line">    <span class="comment">/* WIFSTOPPED(status)宏确定返回值是否对应于一个暂停子进程 */</span></span><br><span class="line">    <span class="keyword">if</span> (WIFSTOPPED(status)) child_stopped = <span class="number">1</span>;</span><br><span class="line">    <span class="comment">/* 通知AFL这次执行结束 */</span></span><br><span class="line">    <span class="keyword">if</span> (write(FORKSRV_FD + <span class="number">1</span>, &amp;status, <span class="number">4</span>) != <span class="number">4</span>) _exit(<span class="number">1</span>);</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">int</span> __afl_persistent_loop(<span class="keyword">unsigned</span> <span class="keyword">int</span> max_cnt) &#123;</span><br><span class="line">  <span class="keyword">static</span> u8  first_pass = <span class="number">1</span>;</span><br><span class="line">  <span class="keyword">static</span> u32 cycle_cnt;</span><br><span class="line">  <span class="keyword">if</span> (first_pass) &#123;</span><br><span class="line">    <span class="comment">/* 为了确保__AFL_LOOP()的每次迭代都以干净的方式开始，进行第一次迭代前的处理 */</span></span><br><span class="line">    <span class="keyword">if</span> (is_persistent) &#123;</span><br><span class="line">      <span class="built_in">memset</span>(__afl_area_ptr, <span class="number">0</span>, MAP_SIZE);</span><br><span class="line">      __afl_area_ptr[<span class="number">0</span>] = <span class="number">1</span>;</span><br><span class="line">      __afl_prev_loc = <span class="number">0</span>;</span><br><span class="line">    &#125;</span><br><span class="line">    cycle_cnt  = max_cnt;</span><br><span class="line">    first_pass = <span class="number">0</span>;</span><br><span class="line">    <span class="keyword">return</span> <span class="number">1</span>;</span><br><span class="line">  &#125;</span><br><span class="line">  <span class="keyword">if</span> (is_persistent) &#123;</span><br><span class="line">    <span class="keyword">if</span> (--cycle_cnt) &#123;</span><br><span class="line">      raise(SIGSTOP);</span><br><span class="line">      __afl_area_ptr[<span class="number">0</span>] = <span class="number">1</span>;</span><br><span class="line">      __afl_prev_loc = <span class="number">0</span>;</span><br><span class="line">      <span class="keyword">return</span> <span class="number">1</span>;</span><br><span class="line">    &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">      <span class="comment">/* 为了确保__AFL_LOOP()执行完后后续代码是不被跟踪的，要回到__afl_area_initial区域 */</span></span><br><span class="line">      __afl_area_ptr = __afl_area_initial;</span><br><span class="line">    &#125;</span><br><span class="line">  &#125;</span><br><span class="line">  <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">/* deferred forkserver mode时调用 */</span></span><br><span class="line"><span class="keyword">void</span> __afl_manual_init(<span class="keyword">void</span>) &#123;</span><br><span class="line">  <span class="keyword">static</span> u8 init_done;</span><br><span class="line">  <span class="keyword">if</span> (!init_done) &#123;</span><br><span class="line">    __afl_map_shm();</span><br><span class="line">    __afl_start_forkserver();</span><br><span class="line">    init_done = <span class="number">1</span>;</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">/* 在main函数执行前进行初始化 */</span></span><br><span class="line">__attribute__((constructor(CONST_PRIO))) <span class="keyword">void</span> __afl_auto_init(<span class="keyword">void</span>) &#123;</span><br><span class="line">  is_persistent = !!getenv(PERSIST_ENV_VAR);</span><br><span class="line">  <span class="comment">/* __afl_auto_init和deferred instrumentation不能同时使用 */</span></span><br><span class="line">  <span class="keyword">if</span> (getenv(DEFER_ENV_VAR)) <span class="keyword">return</span>;</span><br><span class="line">  __afl_manual_init();</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">/* 通过AFL_TRACE_PC=1来定义DUSE_TRACE_PC宏，从而在执行afl-clang-fast时传入-fsanitize-coverage=trace-pc-guard参数开启该功能 */</span></span><br><span class="line"><span class="keyword">void</span> __sanitizer_cov_trace_pc_guard(<span class="keyword">uint32_t</span>* guard) &#123;</span><br><span class="line">  <span class="comment">/* 将在每个edge调用，该函数利用函数参数guard指针所指向的uint32值来确定共享内存上所对应的地址 */</span></span><br><span class="line">  __afl_area_ptr[*guard]++;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">/* 进行guard指针的初始化，llvm会设置guard其首末分别为start和stop */</span></span><br><span class="line"><span class="keyword">void</span> __sanitizer_cov_trace_pc_guard_init(<span class="keyword">uint32_t</span>* start, <span class="keyword">uint32_t</span>* stop) &#123;</span><br><span class="line">  u32 inst_ratio = <span class="number">100</span>;</span><br><span class="line">  u8* x;</span><br><span class="line">  <span class="keyword">if</span> (start == stop || *start) <span class="keyword">return</span>;</span><br><span class="line">  x = getenv(<span class="string">"AFL_INST_RATIO"</span>);</span><br><span class="line">  <span class="keyword">if</span> (x) inst_ratio = atoi(x);</span><br><span class="line">  <span class="keyword">if</span> (!inst_ratio || inst_ratio &gt; <span class="number">100</span>) &#123;</span><br><span class="line">    <span class="built_in">fprintf</span>(<span class="built_in">stderr</span>, <span class="string">"[-] ERROR: Invalid AFL_INST_RATIO (must be 1-100).\n"</span>);</span><br><span class="line">    <span class="built_in">abort</span>();</span><br><span class="line">  &#125;</span><br><span class="line">  *(start++) = R(MAP_SIZE - <span class="number">1</span>) + <span class="number">1</span>;</span><br><span class="line">  <span class="comment">/* 从第一个guard开始向后遍历，设置guard指向的值，如果edge足够多，而MAP_SIZE不够大，就有可能重复 */</span></span><br><span class="line">  <span class="keyword">while</span> (start &lt; stop) &#123;</span><br><span class="line">    <span class="comment">/* 加一是因为这里会把0当成一个特殊的值，其代表对这个edge不进行插桩 */</span></span><br><span class="line">    <span class="keyword">if</span> (R(<span class="number">100</span>) &lt; inst_ratio) *start = R(MAP_SIZE - <span class="number">1</span>) + <span class="number">1</span>;</span><br><span class="line">    <span class="keyword">else</span> *start = <span class="number">0</span>;</span><br><span class="line">    start++;</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h2 id="afl-fuzz.c">afl-fuzz.c</h2>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br><span class="line">89</span><br><span class="line">90</span><br><span class="line">91</span><br><span class="line">92</span><br><span class="line">93</span><br><span class="line">94</span><br><span class="line">95</span><br><span class="line">96</span><br><span class="line">97</span><br><span class="line">98</span><br><span class="line">99</span><br><span class="line">100</span><br><span class="line">101</span><br><span class="line">102</span><br><span class="line">103</span><br><span class="line">104</span><br><span class="line">105</span><br><span class="line">106</span><br><span class="line">107</span><br><span class="line">108</span><br><span class="line">109</span><br><span class="line">110</span><br><span class="line">111</span><br><span class="line">112</span><br><span class="line">113</span><br><span class="line">114</span><br><span class="line">115</span><br><span class="line">116</span><br><span class="line">117</span><br><span class="line">118</span><br><span class="line">119</span><br><span class="line">120</span><br><span class="line">121</span><br><span class="line">122</span><br><span class="line">123</span><br><span class="line">124</span><br><span class="line">125</span><br><span class="line">126</span><br><span class="line">127</span><br><span class="line">128</span><br><span class="line">129</span><br><span class="line">130</span><br><span class="line">131</span><br><span class="line">132</span><br><span class="line">133</span><br><span class="line">134</span><br><span class="line">135</span><br><span class="line">136</span><br><span class="line">137</span><br><span class="line">138</span><br><span class="line">139</span><br><span class="line">140</span><br><span class="line">141</span><br><span class="line">142</span><br><span class="line">143</span><br><span class="line">144</span><br><span class="line">145</span><br><span class="line">146</span><br><span class="line">147</span><br><span class="line">148</span><br><span class="line">149</span><br><span class="line">150</span><br><span class="line">151</span><br><span class="line">152</span><br><span class="line">153</span><br><span class="line">154</span><br><span class="line">155</span><br><span class="line">156</span><br><span class="line">157</span><br><span class="line">158</span><br><span class="line">159</span><br><span class="line">160</span><br><span class="line">161</span><br><span class="line">162</span><br><span class="line">163</span><br><span class="line">164</span><br><span class="line">165</span><br><span class="line">166</span><br><span class="line">167</span><br><span class="line">168</span><br><span class="line">169</span><br><span class="line">170</span><br><span class="line">171</span><br><span class="line">172</span><br><span class="line">173</span><br><span class="line">174</span><br><span class="line">175</span><br><span class="line">176</span><br><span class="line">177</span><br><span class="line">178</span><br><span class="line">179</span><br><span class="line">180</span><br><span class="line">181</span><br><span class="line">182</span><br><span class="line">183</span><br><span class="line">184</span><br><span class="line">185</span><br><span class="line">186</span><br><span class="line">187</span><br><span class="line">188</span><br><span class="line">189</span><br><span class="line">190</span><br><span class="line">191</span><br><span class="line">192</span><br><span class="line">193</span><br><span class="line">194</span><br><span class="line">195</span><br><span class="line">196</span><br><span class="line">197</span><br><span class="line">198</span><br><span class="line">199</span><br><span class="line">200</span><br><span class="line">201</span><br><span class="line">202</span><br><span class="line">203</span><br><span class="line">204</span><br><span class="line">205</span><br><span class="line">206</span><br><span class="line">207</span><br><span class="line">208</span><br><span class="line">209</span><br><span class="line">210</span><br><span class="line">211</span><br><span class="line">212</span><br><span class="line">213</span><br><span class="line">214</span><br><span class="line">215</span><br><span class="line">216</span><br><span class="line">217</span><br><span class="line">218</span><br><span class="line">219</span><br><span class="line">220</span><br><span class="line">221</span><br><span class="line">222</span><br><span class="line">223</span><br><span class="line">224</span><br><span class="line">225</span><br><span class="line">226</span><br><span class="line">227</span><br><span class="line">228</span><br><span class="line">229</span><br><span class="line">230</span><br><span class="line">231</span><br><span class="line">232</span><br><span class="line">233</span><br><span class="line">234</span><br><span class="line">235</span><br><span class="line">236</span><br><span class="line">237</span><br><span class="line">238</span><br><span class="line">239</span><br><span class="line">240</span><br><span class="line">241</span><br><span class="line">242</span><br><span class="line">243</span><br><span class="line">244</span><br><span class="line">245</span><br><span class="line">246</span><br><span class="line">247</span><br><span class="line">248</span><br><span class="line">249</span><br><span class="line">250</span><br><span class="line">251</span><br><span class="line">252</span><br><span class="line">253</span><br><span class="line">254</span><br><span class="line">255</span><br><span class="line">256</span><br><span class="line">257</span><br><span class="line">258</span><br><span class="line">259</span><br><span class="line">260</span><br><span class="line">261</span><br><span class="line">262</span><br><span class="line">263</span><br><span class="line">264</span><br><span class="line">265</span><br><span class="line">266</span><br><span class="line">267</span><br><span class="line">268</span><br><span class="line">269</span><br><span class="line">270</span><br><span class="line">271</span><br><span class="line">272</span><br><span class="line">273</span><br><span class="line">274</span><br><span class="line">275</span><br><span class="line">276</span><br><span class="line">277</span><br><span class="line">278</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">ifndef</span> AFL_LIB</span></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">(<span class="keyword">int</span> argc, <span class="keyword">char</span>** argv)</span> </span>&#123;</span><br><span class="line">  s32 opt;</span><br><span class="line">  u64 prev_queued = <span class="number">0</span>;</span><br><span class="line">  u32 sync_interval_cnt = <span class="number">0</span>, seek_to;</span><br><span class="line">  u8  *extras_dir = <span class="number">0</span>;</span><br><span class="line">  u8  mem_limit_given = <span class="number">0</span>;</span><br><span class="line">  u8  exit_1 = !!getenv(<span class="string">"AFL_BENCH_JUST_ONE"</span>);</span><br><span class="line">  <span class="keyword">char</span>** use_argv;</span><br><span class="line">  <span class="class"><span class="keyword">struct</span> <span class="title">timeval</span> <span class="title">tv</span>;</span></span><br><span class="line">  <span class="class"><span class="keyword">struct</span> <span class="title">timezone</span> <span class="title">tz</span>;</span></span><br><span class="line"></span><br><span class="line">  SAYF(cCYA <span class="string">"afl-fuzz "</span> cBRI VERSION cRST <span class="string">" by &lt;lcamtuf@google.com&gt;\n"</span>);</span><br><span class="line">  doc_path = access(DOC_PATH, F_OK) ? <span class="string">"docs"</span> : DOC_PATH;</span><br><span class="line">  gettimeofday(&amp;tv, &amp;tz);</span><br><span class="line">  srandom(tv.tv_sec ^ tv.tv_usec ^ getpid());</span><br><span class="line">  <span class="comment">/* 循环处理命令行参数 */</span></span><br><span class="line">  <span class="keyword">while</span> ((opt = getopt(argc, argv, <span class="string">"+i:o:f:m:b:t:T:dnCB:S:M:x:QV"</span>)) &gt; <span class="number">0</span>)</span><br><span class="line">    <span class="keyword">switch</span> (opt) &#123;</span><br><span class="line">      <span class="keyword">case</span> <span class="string">'i'</span>: <span class="comment">/* input dir */</span></span><br><span class="line">        <span class="keyword">if</span> (in_dir) FATAL(<span class="string">"Multiple -i options not supported"</span>);</span><br><span class="line">        in_dir = optarg;</span><br><span class="line">        <span class="keyword">if</span> (!<span class="built_in">strcmp</span>(in_dir, <span class="string">"-"</span>)) in_place_resume = <span class="number">1</span>;</span><br><span class="line">        <span class="keyword">break</span>;</span><br><span class="line">      <span class="keyword">case</span> <span class="string">'o'</span>: <span class="comment">/* output dir */</span></span><br><span class="line">        <span class="keyword">if</span> (out_dir) FATAL(<span class="string">"Multiple -o options not supported"</span>);</span><br><span class="line">        out_dir = optarg;</span><br><span class="line">        <span class="keyword">break</span>;</span><br><span class="line">      <span class="keyword">case</span> <span class="string">'M'</span>: &#123; <span class="comment">/* master sync ID */</span></span><br><span class="line">          u8* c;</span><br><span class="line">          <span class="keyword">if</span> (sync_id) FATAL(<span class="string">"Multiple -S or -M options not supported"</span>);</span><br><span class="line">          sync_id = ck_strdup(optarg);</span><br><span class="line">          <span class="keyword">if</span> ((c = <span class="built_in">strchr</span>(sync_id, <span class="string">':'</span>))) &#123;</span><br><span class="line">            *c = <span class="number">0</span>;</span><br><span class="line">            <span class="keyword">if</span> (<span class="built_in">sscanf</span>(c + <span class="number">1</span>, <span class="string">"%u/%u"</span>, &amp;master_id, &amp;master_max) != <span class="number">2</span> || !master_id || !master_max || master_id &gt; master_max || master_max &gt; <span class="number">1000000</span>) FATAL(<span class="string">"Bogus master ID passed to -M"</span>);</span><br><span class="line">          &#125;</span><br><span class="line">          force_deterministic = <span class="number">1</span>;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">break</span>;</span><br><span class="line">      <span class="keyword">case</span> <span class="string">'S'</span>: </span><br><span class="line">        <span class="keyword">if</span> (sync_id) FATAL(<span class="string">"Multiple -S or -M options not supported"</span>);</span><br><span class="line">        sync_id = ck_strdup(optarg);</span><br><span class="line">        <span class="keyword">break</span>;</span><br><span class="line">      <span class="keyword">case</span> <span class="string">'f'</span>: <span class="comment">/* target file */</span></span><br><span class="line">        <span class="keyword">if</span> (out_file) FATAL(<span class="string">"Multiple -f options not supported"</span>);</span><br><span class="line">        out_file = optarg;</span><br><span class="line">        <span class="keyword">break</span>;</span><br><span class="line">      <span class="keyword">case</span> <span class="string">'x'</span>: <span class="comment">/* dictionary */</span></span><br><span class="line">        <span class="keyword">if</span> (extras_dir) FATAL(<span class="string">"Multiple -x options not supported"</span>);</span><br><span class="line">        extras_dir = optarg;</span><br><span class="line">        <span class="keyword">break</span>;</span><br><span class="line">      <span class="keyword">case</span> <span class="string">'t'</span>: &#123; <span class="comment">/* timeout */</span></span><br><span class="line">          u8 suffix = <span class="number">0</span>;</span><br><span class="line">          <span class="keyword">if</span> (timeout_given) FATAL(<span class="string">"Multiple -t options not supported"</span>);</span><br><span class="line">          <span class="keyword">if</span> (<span class="built_in">sscanf</span>(optarg, <span class="string">"%u%c"</span>, &amp;exec_tmout, &amp;suffix) &lt; <span class="number">1</span> || optarg[<span class="number">0</span>] == <span class="string">'-'</span>) FATAL(<span class="string">"Bad syntax used for -t"</span>);</span><br><span class="line">          <span class="keyword">if</span> (exec_tmout &lt; <span class="number">5</span>) FATAL(<span class="string">"Dangerously low value of -t"</span>);</span><br><span class="line">          <span class="keyword">if</span> (suffix == <span class="string">'+'</span>) timeout_given = <span class="number">2</span>; <span class="keyword">else</span> timeout_given = <span class="number">1</span>;</span><br><span class="line">          <span class="keyword">break</span>;</span><br><span class="line">      &#125;</span><br><span class="line">      <span class="keyword">case</span> <span class="string">'m'</span>: &#123; <span class="comment">/* mem limit */</span></span><br><span class="line">          u8 suffix = <span class="string">'M'</span>;</span><br><span class="line">          <span class="keyword">if</span> (mem_limit_given) FATAL(<span class="string">"Multiple -m options not supported"</span>);</span><br><span class="line">          mem_limit_given = <span class="number">1</span>;</span><br><span class="line">          <span class="keyword">if</span> (!<span class="built_in">strcmp</span>(optarg, <span class="string">"none"</span>)) &#123;</span><br><span class="line">            mem_limit = <span class="number">0</span>;</span><br><span class="line">            <span class="keyword">break</span>;</span><br><span class="line">          &#125;</span><br><span class="line">          <span class="keyword">if</span> (<span class="built_in">sscanf</span>(optarg, <span class="string">"%llu%c"</span>, &amp;mem_limit, &amp;suffix) &lt; <span class="number">1</span> || optarg[<span class="number">0</span>] == <span class="string">'-'</span>) FATAL(<span class="string">"Bad syntax used for -m"</span>);</span><br><span class="line">          <span class="keyword">switch</span> (suffix) &#123;</span><br><span class="line">            <span class="keyword">case</span> <span class="string">'T'</span>: mem_limit *= <span class="number">1024</span> * <span class="number">1024</span>; <span class="keyword">break</span>;</span><br><span class="line">            <span class="keyword">case</span> <span class="string">'G'</span>: mem_limit *= <span class="number">1024</span>; <span class="keyword">break</span>;</span><br><span class="line">            <span class="keyword">case</span> <span class="string">'k'</span>: mem_limit /= <span class="number">1024</span>; <span class="keyword">break</span>;</span><br><span class="line">            <span class="keyword">case</span> <span class="string">'M'</span>: <span class="keyword">break</span>;</span><br><span class="line">            <span class="keyword">default</span>:  FATAL(<span class="string">"Unsupported suffix or bad syntax for -m"</span>);</span><br><span class="line">          &#125;</span><br><span class="line">          <span class="keyword">if</span> (mem_limit &lt; <span class="number">5</span>) FATAL(<span class="string">"Dangerously low value of -m"</span>);</span><br><span class="line">          <span class="keyword">if</span> (<span class="keyword">sizeof</span>(<span class="keyword">rlim_t</span>) == <span class="number">4</span> &amp;&amp; mem_limit &gt; <span class="number">2000</span>)</span><br><span class="line">            FATAL(<span class="string">"Value of -m out of range on 32-bit systems"</span>);</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">break</span>;</span><br><span class="line">      <span class="keyword">case</span> <span class="string">'b'</span>: &#123; <span class="comment">/* bind CPU core */</span></span><br><span class="line">          <span class="keyword">if</span> (cpu_to_bind_given) FATAL(<span class="string">"Multiple -b options not supported"</span>);</span><br><span class="line">          cpu_to_bind_given = <span class="number">1</span>;</span><br><span class="line">          <span class="keyword">if</span> (<span class="built_in">sscanf</span>(optarg, <span class="string">"%u"</span>, &amp;cpu_to_bind) &lt; <span class="number">1</span> || optarg[<span class="number">0</span>] == <span class="string">'-'</span>) FATAL(<span class="string">"Bad syntax used for -b"</span>);</span><br><span class="line">          <span class="keyword">break</span>;</span><br><span class="line">      &#125;</span><br><span class="line">      <span class="keyword">case</span> <span class="string">'d'</span>: <span class="comment">/* skip deterministic */</span></span><br><span class="line">        <span class="keyword">if</span> (skip_deterministic) FATAL(<span class="string">"Multiple -d options not supported"</span>);</span><br><span class="line">        skip_deterministic = <span class="number">1</span>;</span><br><span class="line">        use_splicing = <span class="number">1</span>;</span><br><span class="line">        <span class="keyword">break</span>;</span><br><span class="line">      <span class="keyword">case</span> <span class="string">'B'</span>: <span class="comment">/* load bitmap */</span></span><br><span class="line">        <span class="comment">/* 如果在正常的模糊测试过程中发现了一个有趣的测试用例，并且想要在不重新发现其他测试用例的情况下对其进行变异，就使用此选项。 通过-B指向之前运行生成的fuzz_bitmap来获得完全相同的二进制文件。 */</span></span><br><span class="line">        <span class="keyword">if</span> (in_bitmap) FATAL(<span class="string">"Multiple -B options not supported"</span>);</span><br><span class="line">        in_bitmap = optarg;</span><br><span class="line">        read_bitmap(in_bitmap);</span><br><span class="line">        <span class="keyword">break</span>;</span><br><span class="line">      <span class="keyword">case</span> <span class="string">'C'</span>: <span class="comment">/* crash mode */</span></span><br><span class="line">        <span class="keyword">if</span> (crash_mode) FATAL(<span class="string">"Multiple -C options not supported"</span>);</span><br><span class="line">        crash_mode = FAULT_CRASH;</span><br><span class="line">        <span class="keyword">break</span>;</span><br><span class="line">      <span class="keyword">case</span> <span class="string">'n'</span>: <span class="comment">/* dumb mode */</span></span><br><span class="line">        <span class="keyword">if</span> (dumb_mode) FATAL(<span class="string">"Multiple -n options not supported"</span>);</span><br><span class="line">        <span class="keyword">if</span> (getenv(<span class="string">"AFL_DUMB_FORKSRV"</span>)) dumb_mode = <span class="number">2</span>; <span class="keyword">else</span> dumb_mode = <span class="number">1</span>;</span><br><span class="line">        <span class="keyword">break</span>;</span><br><span class="line">      <span class="keyword">case</span> <span class="string">'T'</span>: <span class="comment">/* banner */</span></span><br><span class="line">        <span class="keyword">if</span> (use_banner) FATAL(<span class="string">"Multiple -T options not supported"</span>);</span><br><span class="line">        use_banner = optarg;</span><br><span class="line">        <span class="keyword">break</span>;</span><br><span class="line">      <span class="keyword">case</span> <span class="string">'Q'</span>: <span class="comment">/* QEMU mode */</span></span><br><span class="line">        <span class="keyword">if</span> (qemu_mode) FATAL(<span class="string">"Multiple -Q options not supported"</span>);</span><br><span class="line">        qemu_mode = <span class="number">1</span>;</span><br><span class="line">        <span class="keyword">if</span> (!mem_limit_given) mem_limit = MEM_LIMIT_QEMU;</span><br><span class="line">        <span class="keyword">break</span>;</span><br><span class="line">      <span class="keyword">case</span> <span class="string">'V'</span>: <span class="comment">/* Show version number */</span></span><br><span class="line">        <span class="built_in">exit</span>(<span class="number">0</span>);</span><br><span class="line">      <span class="keyword">default</span>:</span><br><span class="line">        usage(argv[<span class="number">0</span>]);</span><br><span class="line">    &#125;</span><br><span class="line">  <span class="comment">/* 循环结束，检测是否有未设置的必需参数 */</span></span><br><span class="line">  <span class="keyword">if</span> (optind == argc || !in_dir || !out_dir) usage(argv[<span class="number">0</span>]);</span><br><span class="line">  <span class="comment">/* 设置信号处理函数 */</span></span><br><span class="line">  setup_signal_handlers();</span><br><span class="line">  <span class="comment">/* 检测asan选项 */</span></span><br><span class="line">  check_asan_opts();</span><br><span class="line">  <span class="comment">/* 使用-S指定了sync_id时验证并修复out_dir和sync_dir */</span></span><br><span class="line">  <span class="keyword">if</span> (sync_id) fix_up_sync();</span><br><span class="line"></span><br><span class="line">  <span class="keyword">if</span> (!<span class="built_in">strcmp</span>(in_dir, out_dir)) FATAL(<span class="string">"Input and output directories can't be the same"</span>);</span><br><span class="line">  <span class="keyword">if</span> (dumb_mode) &#123;</span><br><span class="line">    <span class="keyword">if</span> (crash_mode) FATAL(<span class="string">"-C and -n are mutually exclusive"</span>);</span><br><span class="line">    <span class="keyword">if</span> (qemu_mode)  FATAL(<span class="string">"-Q and -n are mutually exclusive"</span>);</span><br><span class="line">  &#125;</span><br><span class="line">  <span class="keyword">if</span> (getenv(<span class="string">"AFL_NO_FORKSRV"</span>))    no_forkserver    = <span class="number">1</span>;</span><br><span class="line">  <span class="keyword">if</span> (getenv(<span class="string">"AFL_NO_CPU_RED"</span>))    no_cpu_meter_red = <span class="number">1</span>;</span><br><span class="line">  <span class="keyword">if</span> (getenv(<span class="string">"AFL_NO_ARITH"</span>))      no_arith         = <span class="number">1</span>;</span><br><span class="line">  <span class="keyword">if</span> (getenv(<span class="string">"AFL_SHUFFLE_QUEUE"</span>)) shuffle_queue    = <span class="number">1</span>;</span><br><span class="line">  <span class="keyword">if</span> (getenv(<span class="string">"AFL_FAST_CAL"</span>))      fast_cal         = <span class="number">1</span>;</span><br><span class="line">  <span class="keyword">if</span> (getenv(<span class="string">"AFL_HANG_TMOUT"</span>)) &#123;</span><br><span class="line">    hang_tmout = atoi(getenv(<span class="string">"AFL_HANG_TMOUT"</span>));</span><br><span class="line">    <span class="keyword">if</span> (!hang_tmout) FATAL(<span class="string">"Invalid value of AFL_HANG_TMOUT"</span>);</span><br><span class="line">  &#125;</span><br><span class="line">  <span class="keyword">if</span> (dumb_mode == <span class="number">2</span> &amp;&amp; no_forkserver) FATAL(<span class="string">"AFL_DUMB_FORKSRV and AFL_NO_FORKSRV are mutually exclusive"</span>);</span><br><span class="line">  <span class="keyword">if</span> (getenv(<span class="string">"AFL_PRELOAD"</span>)) &#123;</span><br><span class="line">    setenv(<span class="string">"LD_PRELOAD"</span>, getenv(<span class="string">"AFL_PRELOAD"</span>), <span class="number">1</span>);</span><br><span class="line">    setenv(<span class="string">"DYLD_INSERT_LIBRARIES"</span>, getenv(<span class="string">"AFL_PRELOAD"</span>), <span class="number">1</span>);</span><br><span class="line">  &#125;</span><br><span class="line">  <span class="keyword">if</span> (getenv(<span class="string">"AFL_LD_PRELOAD"</span>)) FATAL(<span class="string">"Use AFL_PRELOAD instead of AFL_LD_PRELOAD"</span>);</span><br><span class="line">  <span class="comment">/* 拷贝当前的命令行参数 */</span></span><br><span class="line">  save_cmdline(argc, argv);</span><br><span class="line">  <span class="comment">/* 生成banner */</span></span><br><span class="line">  fix_up_banner(argv[optind]);</span><br><span class="line">  <span class="comment">/* 检查是否在tty终端上面运行 */</span></span><br><span class="line">  check_if_tty();</span><br><span class="line">  <span class="comment">/* 计算logical CPU cores数量 */</span></span><br><span class="line">  get_core_count();</span><br><span class="line"><span class="meta">#<span class="meta-keyword">ifdef</span> HAVE_AFFINITY</span></span><br><span class="line">  <span class="comment">/* 建立绑定到特定CPU core的进程列表，如果什么都找不到，则返回-1。假定上限为4k。 */</span></span><br><span class="line">  bind_to_free_cpu();</span><br><span class="line"><span class="meta">#<span class="meta-keyword">endif</span> <span class="comment">/* HAVE_AFFINITY */</span></span></span><br><span class="line">  <span class="comment">/* 确保能获取到crash */</span></span><br><span class="line">  check_crash_handling();</span><br><span class="line">  <span class="comment">/* 检查CPU governor */</span></span><br><span class="line">  check_cpu_governor();</span><br><span class="line">  <span class="comment">/* 加载postprocessor，如果有 */</span></span><br><span class="line">  setup_post();</span><br><span class="line">  <span class="comment">/* 配置shm和virgin_bits，在启动时被调用 */</span></span><br><span class="line">  setup_shm();</span><br><span class="line">  <span class="comment">/* 初始化count_class_lookup16 */</span></span><br><span class="line">  init_count_class16();</span><br><span class="line">  <span class="comment">/* 准备输出文件夹和fd */</span></span><br><span class="line">  setup_dirs_fds();</span><br><span class="line">  <span class="comment">/* 从输入文件夹中读取所有文件，然后将它们按顺序加入队列 */</span></span><br><span class="line">  read_testcases();</span><br><span class="line">  <span class="comment">/* 加载自动生成的extras */</span></span><br><span class="line">  load_auto();</span><br><span class="line">  <span class="comment">/* 在输出目录中为输入测试用例创建硬链接，通过名称进行对应的操作 */</span></span><br><span class="line">  pivot_inputs();</span><br><span class="line">  <span class="comment">/* 从extras_dir读取extras到extras数组里，并按size排序 */</span></span><br><span class="line">  <span class="keyword">if</span> (extras_dir) load_extras(extras_dir);</span><br><span class="line">  <span class="comment">/* 没有-t指定timeout，则通过其他文件设置timeout */</span></span><br><span class="line">  <span class="keyword">if</span> (!timeout_given) find_timeout();</span><br><span class="line">  <span class="comment">/* 检测参数中是否有@@，有则自动设置输出文件夹 */</span></span><br><span class="line">  detect_file_args(argv + optind + <span class="number">1</span>);</span><br><span class="line">  <span class="comment">/* 如果没用-f，则删除原本的输出文件夹，创建一个新的 */</span></span><br><span class="line">  <span class="keyword">if</span> (!out_file) setup_stdio_file();</span><br><span class="line">  <span class="comment">/* 寻找并检测目标二进制文件 */</span></span><br><span class="line">  check_binary(argv[optind]);</span><br><span class="line">  start_time = get_cur_time();</span><br><span class="line">  <span class="keyword">if</span> (qemu_mode)</span><br><span class="line">    use_argv = get_qemu_argv(argv[<span class="number">0</span>], argv + optind, argc - optind);</span><br><span class="line">  <span class="keyword">else</span></span><br><span class="line">    use_argv = argv + optind;</span><br><span class="line">  <span class="comment">/* 执行一次所有初始测试用例，以检查程序是否按预期工作 */</span></span><br><span class="line">  perform_dry_run(use_argv);</span><br><span class="line">  cull_queue();</span><br><span class="line">  show_init_stats();</span><br><span class="line">  seek_to = find_start_position();</span><br><span class="line">  write_stats_file(<span class="number">0</span>, <span class="number">0</span>, <span class="number">0</span>);</span><br><span class="line">  save_auto();</span><br><span class="line">  <span class="keyword">if</span> (stop_soon) <span class="keyword">goto</span> stop_fuzzing;</span><br><span class="line">  <span class="comment">/* Woop woop woop */</span></span><br><span class="line">  <span class="keyword">if</span> (!not_on_tty) &#123;</span><br><span class="line">    sleep(<span class="number">4</span>);</span><br><span class="line">    start_time += <span class="number">4000</span>;</span><br><span class="line">    <span class="keyword">if</span> (stop_soon) <span class="keyword">goto</span> stop_fuzzing;</span><br><span class="line">  &#125;</span><br><span class="line">  <span class="keyword">while</span> (<span class="number">1</span>) &#123;</span><br><span class="line">    u8 skipped_fuzz;</span><br><span class="line">    cull_queue();</span><br><span class="line">    <span class="keyword">if</span> (!queue_cur) &#123;</span><br><span class="line">      queue_cycle++;</span><br><span class="line">      current_entry     = <span class="number">0</span>;</span><br><span class="line">      cur_skipped_paths = <span class="number">0</span>;</span><br><span class="line">      queue_cur         = <span class="built_in">queue</span>;</span><br><span class="line">      <span class="keyword">while</span> (seek_to) &#123;</span><br><span class="line">        current_entry++;</span><br><span class="line">        seek_to--;</span><br><span class="line">        queue_cur = queue_cur-&gt;next;</span><br><span class="line">      &#125;</span><br><span class="line">      show_stats();</span><br><span class="line">      <span class="keyword">if</span> (not_on_tty) &#123;</span><br><span class="line">        ACTF(<span class="string">"Entering queue cycle %llu."</span>, queue_cycle);</span><br><span class="line">        fflush(<span class="built_in">stdout</span>);</span><br><span class="line">      &#125;</span><br><span class="line">      <span class="comment">/* If we had a full queue cycle with no new finds, try</span></span><br><span class="line"><span class="comment">         recombination strategies next. */</span></span><br><span class="line">      <span class="keyword">if</span> (queued_paths == prev_queued) &#123;</span><br><span class="line">        <span class="keyword">if</span> (use_splicing) cycles_wo_finds++; <span class="keyword">else</span> use_splicing = <span class="number">1</span>;</span><br><span class="line">      &#125; <span class="keyword">else</span> cycles_wo_finds = <span class="number">0</span>;</span><br><span class="line">      prev_queued = queued_paths;</span><br><span class="line">      <span class="keyword">if</span> (sync_id &amp;&amp; queue_cycle == <span class="number">1</span> &amp;&amp; getenv(<span class="string">"AFL_IMPORT_FIRST"</span>))</span><br><span class="line">        sync_fuzzers(use_argv);</span><br><span class="line">    &#125;</span><br><span class="line">    skipped_fuzz = fuzz_one(use_argv);</span><br><span class="line">    <span class="keyword">if</span> (!stop_soon &amp;&amp; sync_id &amp;&amp; !skipped_fuzz) &#123;</span><br><span class="line">      <span class="keyword">if</span> (!(sync_interval_cnt++ % SYNC_INTERVAL))</span><br><span class="line">        sync_fuzzers(use_argv);</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">if</span> (!stop_soon &amp;&amp; exit_1) stop_soon = <span class="number">2</span>;</span><br><span class="line">    <span class="keyword">if</span> (stop_soon) <span class="keyword">break</span>;</span><br><span class="line">    queue_cur = queue_cur-&gt;next;</span><br><span class="line">    current_entry++;</span><br><span class="line">  &#125;</span><br><span class="line">  <span class="keyword">if</span> (queue_cur) show_stats();</span><br><span class="line">  <span class="comment">/* If we stopped programmatically, we kill the forkserver and the current runner. </span></span><br><span class="line"><span class="comment">     If we stopped manually, this is done by the signal handler. */</span></span><br><span class="line">  <span class="keyword">if</span> (stop_soon == <span class="number">2</span>) &#123;</span><br><span class="line">      <span class="keyword">if</span> (child_pid &gt; <span class="number">0</span>) kill(child_pid, SIGKILL);</span><br><span class="line">      <span class="keyword">if</span> (forksrv_pid &gt; <span class="number">0</span>) kill(forksrv_pid, SIGKILL);</span><br><span class="line">  &#125;</span><br><span class="line">  <span class="comment">/* Now that we've killed the forkserver, we wait for it to be able to get rusage stats. */</span></span><br><span class="line">  <span class="keyword">if</span> (waitpid(forksrv_pid, <span class="literal">NULL</span>, <span class="number">0</span>) &lt;= <span class="number">0</span>) &#123;</span><br><span class="line">    WARNF(<span class="string">"error waitpid\n"</span>);</span><br><span class="line">  &#125;</span><br><span class="line">  write_bitmap();</span><br><span class="line">  write_stats_file(<span class="number">0</span>, <span class="number">0</span>, <span class="number">0</span>);</span><br><span class="line">  save_auto();</span><br><span class="line">stop_fuzzing:</span><br><span class="line">  SAYF(CURSOR_SHOW cLRD <span class="string">"\n\n+++ Testing aborted %s +++\n"</span> cRST,</span><br><span class="line">       stop_soon == <span class="number">2</span> ? <span class="string">"programmatically"</span> : <span class="string">"by user"</span>);</span><br><span class="line">  <span class="comment">/* Running for more than 30 minutes but still doing first cycle? */</span></span><br><span class="line">  <span class="keyword">if</span> (queue_cycle == <span class="number">1</span> &amp;&amp; get_cur_time() - start_time &gt; <span class="number">30</span> * <span class="number">60</span> * <span class="number">1000</span>) &#123;</span><br><span class="line">    SAYF(<span class="string">"\n"</span> cYEL <span class="string">"[!] "</span> cRST</span><br><span class="line">           <span class="string">"Stopped during the first cycle, results may be incomplete.\n"</span></span><br><span class="line">           <span class="string">"    (For info on resuming, see %s/README.)\n"</span>, doc_path);</span><br><span class="line">  &#125;</span><br><span class="line">  fclose(plot_file);</span><br><span class="line">  destroy_queue();</span><br><span class="line">  destroy_extras();</span><br><span class="line">  ck_free(target_path);</span><br><span class="line">  ck_free(sync_id);</span><br><span class="line">  alloc_report();</span><br><span class="line">  OKF(<span class="string">"We're done here. Have a nice day!\n"</span>);</span><br><span class="line"></span><br><span class="line">  <span class="built_in">exit</span>(<span class="number">0</span>);</span><br><span class="line">&#125;</span><br><span class="line"><span class="meta">#<span class="meta-keyword">endif</span> <span class="comment">/* !AFL_LIB */</span></span></span><br></pre></td></tr></table></figure>
+<h3 id="setup_signal_handlers">setup_signal_handlers</h3>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">/* Handle stop signal (Ctrl-C, etc). */</span></span><br><span class="line"><span class="function"><span class="keyword">static</span> <span class="keyword">void</span> <span class="title">handle_stop_sig</span><span class="params">(<span class="keyword">int</span> sig)</span> </span>&#123;</span><br><span class="line">  stop_soon = <span class="number">1</span>; </span><br><span class="line">  <span class="keyword">if</span> (child_pid &gt; <span class="number">0</span>) kill(child_pid, SIGKILL);</span><br><span class="line">  <span class="keyword">if</span> (forksrv_pid &gt; <span class="number">0</span>) kill(forksrv_pid, SIGKILL);</span><br><span class="line">&#125;</span><br><span class="line"><span class="comment">/* Handle skip request (SIGUSR1). */</span></span><br><span class="line"><span class="function"><span class="keyword">static</span> <span class="keyword">void</span> <span class="title">handle_skipreq</span><span class="params">(<span class="keyword">int</span> sig)</span> </span>&#123;</span><br><span class="line">  skip_requested = <span class="number">1</span>;</span><br><span class="line">&#125;</span><br><span class="line"><span class="comment">/* Handle timeout (SIGALRM). */</span></span><br><span class="line"><span class="function"><span class="keyword">static</span> <span class="keyword">void</span> <span class="title">handle_timeout</span><span class="params">(<span class="keyword">int</span> sig)</span> </span>&#123;</span><br><span class="line">  <span class="keyword">if</span> (child_pid &gt; <span class="number">0</span>) &#123;</span><br><span class="line">    child_timed_out = <span class="number">1</span>; </span><br><span class="line">    kill(child_pid, SIGKILL);</span><br><span class="line">  &#125; <span class="keyword">else</span> <span class="keyword">if</span> (child_pid == <span class="number">-1</span> &amp;&amp; forksrv_pid &gt; <span class="number">0</span>) &#123;</span><br><span class="line">    child_timed_out = <span class="number">1</span>; </span><br><span class="line">    kill(forksrv_pid, SIGKILL);</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br><span class="line"><span class="comment">/* Handle screen resize (SIGWINCH). */</span></span><br><span class="line"><span class="function"><span class="keyword">static</span> <span class="keyword">void</span> <span class="title">handle_resize</span><span class="params">(<span class="keyword">int</span> sig)</span> </span>&#123;</span><br><span class="line">  clear_screen = <span class="number">1</span>;</span><br><span class="line">&#125;</span><br><span class="line"><span class="comment">//...</span></span><br><span class="line"><span class="function">EXP_ST <span class="keyword">void</span> <span class="title">setup_signal_handlers</span><span class="params">(<span class="keyword">void</span>)</span> </span>&#123;</span><br><span class="line">  <span class="class"><span class="keyword">struct</span> <span class="title">sigaction</span> <span class="title">sa</span>;</span></span><br><span class="line">  sa.sa_handler   = <span class="literal">NULL</span>;</span><br><span class="line">  sa.sa_flags     = SA_RESTART;</span><br><span class="line">  sa.sa_sigaction = <span class="literal">NULL</span>;</span><br><span class="line"></span><br><span class="line">  sigemptyset(&amp;sa.sa_mask);</span><br><span class="line">  <span class="comment">/* 将多种信号设置为停止，交由AFL进程处理 */</span></span><br><span class="line">  sa.sa_handler = handle_stop_sig;</span><br><span class="line">  sigaction(SIGHUP, &amp;sa, <span class="literal">NULL</span>);</span><br><span class="line">  sigaction(SIGINT, &amp;sa, <span class="literal">NULL</span>);</span><br><span class="line">  sigaction(SIGTERM, &amp;sa, <span class="literal">NULL</span>);</span><br><span class="line">  <span class="comment">/* 超时信号 */</span></span><br><span class="line">  sa.sa_handler = handle_timeout;</span><br><span class="line">  sigaction(SIGALRM, &amp;sa, <span class="literal">NULL</span>);</span><br><span class="line">  <span class="comment">/* 窗口大小的变化信号 */</span></span><br><span class="line">  sa.sa_handler = handle_resize;</span><br><span class="line">  sigaction(SIGWINCH, &amp;sa, <span class="literal">NULL</span>);</span><br><span class="line">  <span class="comment">/* 用户自定义的信号 */</span></span><br><span class="line">  sa.sa_handler = handle_skipreq;</span><br><span class="line">  sigaction(SIGUSR1, &amp;sa, <span class="literal">NULL</span>);</span><br><span class="line">  <span class="comment">/* 忽略这部分信号 */</span></span><br><span class="line">  sa.sa_handler = SIG_IGN;</span><br><span class="line">  sigaction(SIGTSTP, &amp;sa, <span class="literal">NULL</span>);</span><br><span class="line">  sigaction(SIGPIPE, &amp;sa, <span class="literal">NULL</span>);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h3 id="setup_shm">setup_shm</h3>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line"><span class="function">EXP_ST <span class="keyword">void</span> <span class="title">setup_shm</span><span class="params">(<span class="keyword">void</span>)</span> </span>&#123;</span><br><span class="line">  u8* shm_str;</span><br><span class="line">  <span class="keyword">if</span> (!in_bitmap) <span class="built_in">memset</span>(virgin_bits, <span class="number">255</span>, MAP_SIZE);</span><br><span class="line">  <span class="built_in">memset</span>(virgin_tmout, <span class="number">255</span>, MAP_SIZE);</span><br><span class="line">  <span class="built_in">memset</span>(virgin_crash, <span class="number">255</span>, MAP_SIZE);</span><br><span class="line">  <span class="comment">/* 调用shmget分配一块共享内存，将返回的共享内存标识符保存到shm_id */</span></span><br><span class="line">  shm_id = shmget(IPC_PRIVATE, MAP_SIZE, IPC_CREAT | IPC_EXCL | <span class="number">0600</span>);</span><br><span class="line"></span><br><span class="line">  <span class="keyword">if</span> (shm_id &lt; <span class="number">0</span>) PFATAL(<span class="string">"shmget() failed"</span>);</span><br><span class="line">  <span class="comment">/* 注册atexit handler为remove_shm，即退出前释放共享内存 */</span></span><br><span class="line">  atexit(remove_shm);</span><br><span class="line">  shm_str = alloc_printf(<span class="string">"%d"</span>, shm_id);</span><br><span class="line">  <span class="keyword">if</span> (!dumb_mode) setenv(SHM_ENV_VAR, shm_str, <span class="number">1</span>);</span><br><span class="line">  ck_free(shm_str);</span><br><span class="line">  <span class="comment">/* 通过shmat启动对共享内存的访问，并把共享内存连接到当前进程的地址空间，返回地址空间首地址 */</span></span><br><span class="line">  trace_bits = shmat(shm_id, <span class="literal">NULL</span>, <span class="number">0</span>);</span><br><span class="line">  <span class="keyword">if</span> (trace_bits == (<span class="keyword">void</span> *)<span class="number">-1</span>) PFATAL(<span class="string">"shmat() failed"</span>);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h3 id="perform_dry_run">perform_dry_run</h3>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">static</span> <span class="keyword">void</span> <span class="title">perform_dry_run</span><span class="params">(<span class="keyword">char</span>** argv)</span> </span>&#123;</span><br><span class="line">  <span class="class"><span class="keyword">struct</span> <span class="title">queue_entry</span>* <span class="title">q</span> = <span class="title">queue</span>;</span></span><br><span class="line">  <span class="comment">/* 测试用例运行失败的次数 */</span></span><br><span class="line">  u32 cal_failures = <span class="number">0</span>;</span><br><span class="line">  u8* skip_crashes = getenv(<span class="string">"AFL_SKIP_CRASHES"</span>);</span><br><span class="line"></span><br><span class="line">  <span class="comment">/* 遍历queue */</span></span><br><span class="line">  <span class="keyword">while</span> (q) &#123;</span><br><span class="line">    u8* use_mem;</span><br><span class="line">    u8  res;</span><br><span class="line">    s32 fd;</span><br><span class="line">    u8* fn = <span class="built_in">strrchr</span>(q-&gt;fname, <span class="string">'/'</span>) + <span class="number">1</span>;</span><br><span class="line">    ACTF(<span class="string">"Attempting dry run with '%s'..."</span>, fn);</span><br><span class="line">    fd = open(q-&gt;fname, O_RDONLY);</span><br><span class="line">    <span class="keyword">if</span> (fd &lt; <span class="number">0</span>) PFATAL(<span class="string">"Unable to open '%s'"</span>, q-&gt;fname);</span><br><span class="line">    use_mem = ck_alloc_nozero(q-&gt;len);</span><br><span class="line">    <span class="keyword">if</span> (read(fd, use_mem, q-&gt;len) != q-&gt;len) FATAL(<span class="string">"Short read from '%s'"</span>, q-&gt;fname);</span><br><span class="line">    close(fd);</span><br><span class="line">    <span class="comment">/* 检测测试用例是否异常（如多次执行发现的路径不同），通常对input文件夹和发现新路径的测试用例使用 */</span></span><br><span class="line">    res = calibrate_case(argv, q, use_mem, <span class="number">0</span>, <span class="number">1</span>);</span><br><span class="line">    ck_free(use_mem);</span><br><span class="line">    <span class="keyword">if</span> (stop_soon) <span class="keyword">return</span>;</span><br><span class="line">    <span class="keyword">if</span> (res == crash_mode || res == FAULT_NOBITS)</span><br><span class="line">      SAYF(cGRA <span class="string">"    len = %u, map size = %u, exec speed = %llu us\n"</span> cRST, q-&gt;len, q-&gt;bitmap_size, q-&gt;exec_us);</span><br><span class="line">    <span class="keyword">switch</span> (res) &#123;</span><br><span class="line">      <span class="keyword">case</span> FAULT_NONE:</span><br><span class="line">        <span class="comment">/* 如果为第一个测试用例，则调用check_map_coverage评估覆盖率</span></span><br><span class="line"><span class="comment">           check_map_coverage会通过trace_bits计算发现的路径数，小于100就直接返回。然后检测trace_bits的数组后半段，如果有值就直接返回。否则抛出错误：认为插桩数量太少，需要重新编译 */</span></span><br><span class="line">        <span class="keyword">if</span> (q == <span class="built_in">queue</span>) check_map_coverage();</span><br><span class="line">        <span class="keyword">if</span> (crash_mode) FATAL(<span class="string">"Test case '%s' does *NOT* crash"</span>, fn);</span><br><span class="line">        <span class="keyword">break</span>;</span><br><span class="line">      <span class="keyword">case</span> FAULT_TMOUT:</span><br><span class="line">        <span class="keyword">if</span> (timeout_given) &#123;</span><br><span class="line">          <span class="keyword">if</span> (timeout_given &gt; <span class="number">1</span>) &#123;</span><br><span class="line">            <span class="comment">/* timeout_given大于1则容忍并跳过超时的测试用例 */</span></span><br><span class="line">            WARNF(<span class="string">"Test case results in a timeout (skipping)"</span>);</span><br><span class="line">            q-&gt;cal_failed = CAL_CHANCES;</span><br><span class="line">            cal_failures++;</span><br><span class="line">            <span class="keyword">break</span>;</span><br><span class="line">          &#125;</span><br><span class="line">          <span class="comment">//...</span></span><br><span class="line">          FATAL(<span class="string">"Test case '%s' results in a timeout"</span>, fn);</span><br><span class="line">        &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">          <span class="comment">//...</span></span><br><span class="line">          FATAL(<span class="string">"Test case '%s' results in a timeout"</span>, fn);</span><br><span class="line">        &#125;</span><br><span class="line">      <span class="keyword">case</span> FAULT_CRASH:  </span><br><span class="line">        <span class="keyword">if</span> (crash_mode) <span class="keyword">break</span>;</span><br><span class="line">        <span class="keyword">if</span> (skip_crashes) &#123;</span><br><span class="line">          WARNF(<span class="string">"Test case results in a crash (skipping)"</span>);</span><br><span class="line">          q-&gt;cal_failed = CAL_CHANCES;</span><br><span class="line">          cal_failures++;</span><br><span class="line">          <span class="keyword">break</span>;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">if</span> (mem_limit) &#123;</span><br><span class="line">          <span class="comment">//...</span></span><br><span class="line">        &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">          <span class="comment">/* 没有指定mem_limit，抛出建议增加内存的建议 */</span></span><br><span class="line">          <span class="comment">//...</span></span><br><span class="line">        &#125;</span><br><span class="line">        FATAL(<span class="string">"Test case '%s' results in a crash"</span>, fn);</span><br><span class="line">      <span class="keyword">case</span> FAULT_ERROR:</span><br><span class="line">        FATAL(<span class="string">"Unable to execute target application ('%s')"</span>, argv[<span class="number">0</span>]);</span><br><span class="line">      <span class="keyword">case</span> FAULT_NOINST:</span><br><span class="line">        <span class="comment">/* 这个样例运行没有出现任何路径信息 */</span></span><br><span class="line">        FATAL(<span class="string">"No instrumentation detected"</span>);</span><br><span class="line">      <span class="keyword">case</span> FAULT_NOBITS: </span><br><span class="line">        <span class="comment">/* 没有任何新路径，无用测试用例加一 */</span></span><br><span class="line">        useless_at_start++;</span><br><span class="line">        <span class="keyword">if</span> (!in_bitmap &amp;&amp; !shuffle_queue) WARNF(<span class="string">"No new instrumentation output, test case may be useless."</span>);</span><br><span class="line">        <span class="keyword">break</span>;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="comment">/* 出现了奇怪行为，多次运行路径不一样 */</span></span><br><span class="line">    <span class="keyword">if</span> (q-&gt;var_behavior) WARNF(<span class="string">"Instrumentation output varies across runs."</span>);</span><br><span class="line">    q = q-&gt;next;</span><br><span class="line">  &#125;</span><br><span class="line">  <span class="keyword">if</span> (cal_failures) &#123;</span><br><span class="line">    <span class="keyword">if</span> (cal_failures == queued_paths) FATAL(<span class="string">"All test cases time out%s, giving up!"</span>, skip_crashes ? <span class="string">" or crash"</span> : <span class="string">""</span>);</span><br><span class="line">    WARNF(<span class="string">"Skipped %u test cases (%0.02f%%) due to timeouts%s."</span>, cal_failures, ((<span class="keyword">double</span>)cal_failures) * <span class="number">100</span> / queued_paths, skip_crashes ? <span class="string">" or crashes"</span> : <span class="string">""</span>);</span><br><span class="line">    <span class="keyword">if</span> (cal_failures * <span class="number">5</span> &gt; queued_paths) WARNF(cLRD <span class="string">"High percentage of rejected test cases, check settings!"</span>);</span><br><span class="line">  &#125;</span><br><span class="line">  OKF(<span class="string">"All test cases processed."</span>);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h3 id="calibrate_case">calibrate_case</h3>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br><span class="line">89</span><br><span class="line">90</span><br><span class="line">91</span><br><span class="line">92</span><br><span class="line">93</span><br><span class="line">94</span><br><span class="line">95</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">static</span> u8 <span class="title">calibrate_case</span><span class="params">(<span class="keyword">char</span>** argv, struct queue_entry* q, u8* use_mem, u32 handicap, u8 from_queue)</span> </span>&#123;</span><br><span class="line">  <span class="keyword">static</span> u8 first_trace[MAP_SIZE];</span><br><span class="line">  u8  fault = <span class="number">0</span>, new_bits = <span class="number">0</span>, var_detected = <span class="number">0</span>, hnb = <span class="number">0</span>, first_run = (q-&gt;exec_cksum == <span class="number">0</span>);</span><br><span class="line">  u64 start_us, stop_us;</span><br><span class="line">  s32 old_sc = stage_cur, old_sm = stage_max;</span><br><span class="line">  u32 use_tmout = exec_tmout;</span><br><span class="line">  u8* old_sn = stage_name;</span><br><span class="line"></span><br><span class="line">  <span class="comment">/* Be a bit more generous about timeouts when resuming sessions, or when</span></span><br><span class="line"><span class="comment">     trying to calibrate already-added finds. This helps avoid trouble due</span></span><br><span class="line"><span class="comment">     to intermittent latency. */</span></span><br><span class="line">  <span class="keyword">if</span> (!from_queue || resuming_fuzz)</span><br><span class="line">    use_tmout = MAX(exec_tmout + CAL_TMOUT_ADD, exec_tmout * CAL_TMOUT_PERC / <span class="number">100</span>);</span><br><span class="line">  q-&gt;cal_failed++;</span><br><span class="line">  stage_name = <span class="string">"calibration"</span>;</span><br><span class="line">  stage_max  = fast_cal ? <span class="number">3</span> : CAL_CYCLES;</span><br><span class="line">  <span class="comment">/* Make sure the forkserver is up before we do anything, and let's not</span></span><br><span class="line"><span class="comment">     count its spin-up time toward binary calibration. */</span></span><br><span class="line">  <span class="keyword">if</span> (dumb_mode != <span class="number">1</span> &amp;&amp; !no_forkserver &amp;&amp; !forksrv_pid)</span><br><span class="line">    init_forkserver(argv);</span><br><span class="line">  <span class="keyword">if</span> (q-&gt;exec_cksum) &#123;</span><br><span class="line">    <span class="built_in">memcpy</span>(first_trace, trace_bits, MAP_SIZE);</span><br><span class="line">    hnb = has_new_bits(virgin_bits);</span><br><span class="line">    <span class="keyword">if</span> (hnb &gt; new_bits) new_bits = hnb;</span><br><span class="line">  &#125;</span><br><span class="line">  start_us = get_cur_time_us();</span><br><span class="line">  <span class="keyword">for</span> (stage_cur = <span class="number">0</span>; stage_cur &lt; stage_max; stage_cur++) &#123;</span><br><span class="line">    u32 cksum;</span><br><span class="line">    <span class="keyword">if</span> (!first_run &amp;&amp; !(stage_cur % stats_update_freq)) show_stats();</span><br><span class="line">    write_to_testcase(use_mem, q-&gt;len);</span><br><span class="line">    fault = run_target(argv, use_tmout);</span><br><span class="line">    <span class="comment">/* stop_soon is set by the handler for Ctrl+C. When it's pressed,</span></span><br><span class="line"><span class="comment">       we want to bail out quickly. */</span></span><br><span class="line">    <span class="keyword">if</span> (stop_soon || fault != crash_mode) <span class="keyword">goto</span> abort_calibration;</span><br><span class="line">    <span class="keyword">if</span> (!dumb_mode &amp;&amp; !stage_cur &amp;&amp; !count_bytes(trace_bits)) &#123;</span><br><span class="line">      fault = FAULT_NOINST;</span><br><span class="line">      <span class="keyword">goto</span> abort_calibration;</span><br><span class="line">    &#125;</span><br><span class="line">    cksum = hash32(trace_bits, MAP_SIZE, HASH_CONST);</span><br><span class="line">    <span class="keyword">if</span> (q-&gt;exec_cksum != cksum) &#123;</span><br><span class="line">      hnb = has_new_bits(virgin_bits);</span><br><span class="line">      <span class="keyword">if</span> (hnb &gt; new_bits) new_bits = hnb;</span><br><span class="line">      <span class="keyword">if</span> (q-&gt;exec_cksum) &#123;</span><br><span class="line">        u32 i;</span><br><span class="line">        <span class="keyword">for</span> (i = <span class="number">0</span>; i &lt; MAP_SIZE; i++) &#123;</span><br><span class="line">          <span class="keyword">if</span> (!var_bytes[i] &amp;&amp; first_trace[i] != trace_bits[i]) &#123;</span><br><span class="line">            var_bytes[i] = <span class="number">1</span>;</span><br><span class="line">            stage_max    = CAL_CYCLES_LONG;</span><br><span class="line">          &#125;</span><br><span class="line">        &#125;</span><br><span class="line">        var_detected = <span class="number">1</span>;</span><br><span class="line">      &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">        q-&gt;exec_cksum = cksum;</span><br><span class="line">        <span class="built_in">memcpy</span>(first_trace, trace_bits, MAP_SIZE);</span><br><span class="line">      &#125;</span><br><span class="line">    &#125;</span><br><span class="line">  &#125;</span><br><span class="line">  stop_us = get_cur_time_us();</span><br><span class="line">  total_cal_us     += stop_us - start_us;</span><br><span class="line">  total_cal_cycles += stage_max;</span><br><span class="line"></span><br><span class="line">  <span class="comment">/* OK, let's collect some stats about the performance of this test case.</span></span><br><span class="line"><span class="comment">     This is used for fuzzing air time calculations in calculate_score(). */</span></span><br><span class="line">  q-&gt;exec_us     = (stop_us - start_us) / stage_max;</span><br><span class="line">  q-&gt;bitmap_size = count_bytes(trace_bits);</span><br><span class="line">  q-&gt;handicap    = handicap;</span><br><span class="line">  q-&gt;cal_failed  = <span class="number">0</span>;</span><br><span class="line">  total_bitmap_size += q-&gt;bitmap_size;</span><br><span class="line">  total_bitmap_entries++;</span><br><span class="line">  update_bitmap_score(q);</span><br><span class="line">  <span class="comment">/* If this case didn't result in new output from the instrumentation, tell</span></span><br><span class="line"><span class="comment">     parent. This is a non-critical problem, but something to warn the user</span></span><br><span class="line"><span class="comment">     about. */</span></span><br><span class="line">  <span class="keyword">if</span> (!dumb_mode &amp;&amp; first_run &amp;&amp; !fault &amp;&amp; !new_bits) fault = FAULT_NOBITS;</span><br><span class="line">abort_calibration:</span><br><span class="line">  <span class="keyword">if</span> (new_bits == <span class="number">2</span> &amp;&amp; !q-&gt;has_new_cov) &#123;</span><br><span class="line">    q-&gt;has_new_cov = <span class="number">1</span>;</span><br><span class="line">    queued_with_cov++;</span><br><span class="line">  &#125;</span><br><span class="line">  <span class="comment">/* Mark variable paths. */</span></span><br><span class="line">  <span class="keyword">if</span> (var_detected) &#123;</span><br><span class="line">    var_byte_count = count_bytes(var_bytes);</span><br><span class="line">    <span class="keyword">if</span> (!q-&gt;var_behavior) &#123;</span><br><span class="line">      mark_as_variable(q);</span><br><span class="line">      queued_variable++;</span><br><span class="line">    &#125;</span><br><span class="line">  &#125;</span><br><span class="line"></span><br><span class="line">  stage_name = old_sn;</span><br><span class="line">  stage_cur  = old_sc;</span><br><span class="line">  stage_max  = old_sm;</span><br><span class="line">  <span class="keyword">if</span> (!first_run) show_stats();</span><br><span class="line">  </span><br><span class="line">  <span class="keyword">return</span> fault;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+      
+    </div>
+
+    
+
+    
+    
+    
+
+    
+
+    
+       
+    
+    
+
+    
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/fuzz/" rel="tag"><i class="fa fa-tag"></i> fuzz</a>
+          
+        </div>
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/posts/2a736740/" rel="next" title="IS-pwn-fuzz-theory-android-situation">
+                <i class="fa fa-chevron-left"></i> IS-pwn-fuzz-theory-android-situation
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+  </div>
+
+
+          </div>
+          
+
+  
+
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    
+      <div id="sidebar-dimmer"></div>
+    
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview-wrap sidebar-panel">
+        <div class="site-overview">
+          <div class="site-author motion-element" itemprop="author" itemscope="" itemtype="http://schema.org/Person">
+            
+              <img class="site-author-image" itemprop="image" src="/images/apple-touch-icon.png" alt="w4rd3n">
+            
+              <p class="site-author-name" itemprop="name">w4rd3n</p>
+              <p class="site-description motion-element" itemprop="description"></p>
+          </div>
+
+          
+            <nav class="site-state motion-element">
+              
+                <div class="site-state-item site-state-posts">
+                
+                  <a href="/archives/">
+                
+                    <span class="site-state-item-count">176</span>
+                    <span class="site-state-item-name">日志</span>
+                  </a>
+                </div>
+              
+
+              
+                
+                
+                <div class="site-state-item site-state-categories">
+                  <a href="/categories/index.html">
+                    
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                    <span class="site-state-item-count">17</span>
+                    <span class="site-state-item-name">分类</span>
+                  </a>
+                </div>
+              
+
+              
+                
+                
+                <div class="site-state-item site-state-tags">
+                  <a href="/tags/index.html">
+                    
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                    <span class="site-state-item-count">40</span>
+                    <span class="site-state-item-name">标签</span>
+                  </a>
+                </div>
+              
+            </nav>
+          
+
+          
+
+          
+            <div class="links-of-author motion-element">
+              
+                <span class="links-of-author-item">
+                  
+                  
+                    
+                  
+                  
+                    
+                  
+                  <a href="https://github.com/hitworld" title="GitHub &rarr; https://github.com/hitworld" rel="noopener" target="_blank"><i class="fa fa-fw fa-github"></i>GitHub</a>
+                </span>
+              
+            </div>
+          
+
+          
+
+          
+          
+
+          
+            
+          
+          
+
+        </div>
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#前言"><span class="nav-number">1.</span> <span class="nav-text">前言</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#afl-gcc.c"><span class="nav-number">2.</span> <span class="nav-text">afl-gcc.c</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#afl-as.c"><span class="nav-number">3.</span> <span class="nav-text">afl-as.c</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#add_instrumentation"><span class="nav-number">3.1.</span> <span class="nav-text">add_instrumentation</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#afl-fast-clang.c"><span class="nav-number">4.</span> <span class="nav-text">afl-fast-clang.c</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#afl-llvm-pass.so.cc"><span class="nav-number">5.</span> <span class="nav-text">afl-llvm-pass.so.cc</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#afl-llvm-rt.o.c"><span class="nav-number">6.</span> <span class="nav-text">afl-llvm-rt.o.c</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#afl-fuzz.c"><span class="nav-number">7.</span> <span class="nav-text">afl-fuzz.c</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#setup_signal_handlers"><span class="nav-number">7.1.</span> <span class="nav-text">setup_signal_handlers</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#setup_shm"><span class="nav-number">7.2.</span> <span class="nav-text">setup_shm</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#perform_dry_run"><span class="nav-number">7.3.</span> <span class="nav-text">perform_dry_run</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#calibrate_case"><span class="nav-number">7.4.</span> <span class="nav-text">calibrate_case</span></a></li></ol></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright">&copy; <span itemprop="copyrightYear">2021</span>
+  <span class="with-love" id="animate">
+    <i class="fa fa-gg-circle"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">w4rd3n</span>
+
+  
+    <span class="post-meta-divider">|</span>
+    <span class="post-meta-item-icon">
+      <i class="fa fa-area-chart"></i>
+    </span>
+    
+    <span title="站点总字数">921k</span>
+  
+
+  
+    <span class="post-meta-divider">|</span>
+    <span class="post-meta-item-icon">
+      <i class="fa fa-coffee"></i>
+    </span>
+    
+    <span title="站点阅读时长">13:58</span>
+  
+</div>
+
+
+
+
+
+
+
+
+
+        
+<div class="busuanzi-count">
+  <script async src="https://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+  
+    <span class="site-uv" title="总访客量">
+      <i class="fa fa-user"></i>
+      <span class="busuanzi-value" id="busuanzi_value_site_uv"></span>
+    </span>
+  
+
+  
+    <span class="site-pv" title="总访问量">
+      <i class="fa fa-eye"></i>
+      <span class="busuanzi-value" id="busuanzi_value_site_pv"></span>
+    </span>
+  
+</div>
+
+
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+          <span id="scrollpercent"><span>0</span>%</span>
+        
+      </div>
+    
+
+    
+	
+    
+
+    
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+    
+      
+  
+  <script type="text/javascript" color="0,0,255" opacity="0.5" zindex="-1" count="99" src="/lib/canvas-nest/canvas-nest.min.js"></script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+  
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=6.5.0"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=6.5.0"></script>
+
+
+
+  
+  
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=6.5.0"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=6.5.0"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=6.5.0"></script>
+
+
+
+  
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+  
+
+  <script type="text/javascript">
+    // Popup Window;
+    var isfetched = false;
+    var isXml = true;
+    // Search DB path;
+    var search_path = "search.xml";
+    if (search_path.length === 0) {
+      search_path = "search.xml";
+    } else if (/json$/i.test(search_path)) {
+      isXml = false;
+    }
+    var path = "/" + search_path;
+    // monitor main search box;
+
+    var onPopupClose = function (e) {
+      $('.popup').hide();
+      $('#local-search-input').val('');
+      $('.search-result-list').remove();
+      $('#no-result').remove();
+      $(".local-search-pop-overlay").remove();
+      $('body').css('overflow', '');
+    }
+
+    function proceedsearch() {
+      $("body")
+        .append('<div class="search-popup-overlay local-search-pop-overlay"></div>')
+        .css('overflow', 'hidden');
+      $('.search-popup-overlay').click(onPopupClose);
+      $('.popup').toggle();
+      var $localSearchInput = $('#local-search-input');
+      $localSearchInput.attr("autocapitalize", "none");
+      $localSearchInput.attr("autocorrect", "off");
+      $localSearchInput.focus();
+    }
+
+    // search function;
+    var searchFunc = function(path, search_id, content_id) {
+      'use strict';
+
+      // start loading animation
+      $("body")
+        .append('<div class="search-popup-overlay local-search-pop-overlay">' +
+          '<div id="search-loading-icon">' +
+          '<i class="fa fa-spinner fa-pulse fa-5x fa-fw"></i>' +
+          '</div>' +
+          '</div>')
+        .css('overflow', 'hidden');
+      $("#search-loading-icon").css('margin', '20% auto 0 auto').css('text-align', 'center');
+
+      
+
+      $.ajax({
+        url: path,
+        dataType: isXml ? "xml" : "json",
+        async: true,
+        success: function(res) {
+          // get the contents from search data
+          isfetched = true;
+          $('.popup').detach().appendTo('.header-inner');
+          var datas = isXml ? $("entry", res).map(function() {
+            return {
+              title: $("title", this).text(),
+              content: $("content",this).text(),
+              url: $("url" , this).text()
+            };
+          }).get() : res;
+          var input = document.getElementById(search_id);
+          var resultContent = document.getElementById(content_id);
+          var inputEventFunction = function() {
+            var searchText = input.value.trim().toLowerCase();
+            var keywords = searchText.split(/[\s\-]+/);
+            if (keywords.length > 1) {
+              keywords.push(searchText);
+            }
+            var resultItems = [];
+            if (searchText.length > 0) {
+              // perform local searching
+              datas.forEach(function(data) {
+                var isMatch = false;
+                var hitCount = 0;
+                var searchTextCount = 0;
+                var title = data.title.trim();
+                var titleInLowerCase = title.toLowerCase();
+                var content = data.content.trim().replace(/<[^>]+>/g,"");
+                
+                var contentInLowerCase = content.toLowerCase();
+                var articleUrl = decodeURIComponent(data.url);
+                var indexOfTitle = [];
+                var indexOfContent = [];
+                // only match articles with not empty titles
+                if(title != '') {
+                  keywords.forEach(function(keyword) {
+                    function getIndexByWord(word, text, caseSensitive) {
+                      var wordLen = word.length;
+                      if (wordLen === 0) {
+                        return [];
+                      }
+                      var startPosition = 0, position = [], index = [];
+                      if (!caseSensitive) {
+                        text = text.toLowerCase();
+                        word = word.toLowerCase();
+                      }
+                      while ((position = text.indexOf(word, startPosition)) > -1) {
+                        index.push({position: position, word: word});
+                        startPosition = position + wordLen;
+                      }
+                      return index;
+                    }
+
+                    indexOfTitle = indexOfTitle.concat(getIndexByWord(keyword, titleInLowerCase, false));
+                    indexOfContent = indexOfContent.concat(getIndexByWord(keyword, contentInLowerCase, false));
+                  });
+                  if (indexOfTitle.length > 0 || indexOfContent.length > 0) {
+                    isMatch = true;
+                    hitCount = indexOfTitle.length + indexOfContent.length;
+                  }
+                }
+
+                // show search results
+
+                if (isMatch) {
+                  // sort index by position of keyword
+
+                  [indexOfTitle, indexOfContent].forEach(function (index) {
+                    index.sort(function (itemLeft, itemRight) {
+                      if (itemRight.position !== itemLeft.position) {
+                        return itemRight.position - itemLeft.position;
+                      } else {
+                        return itemLeft.word.length - itemRight.word.length;
+                      }
+                    });
+                  });
+
+                  // merge hits into slices
+
+                  function mergeIntoSlice(text, start, end, index) {
+                    var item = index[index.length - 1];
+                    var position = item.position;
+                    var word = item.word;
+                    var hits = [];
+                    var searchTextCountInSlice = 0;
+                    while (position + word.length <= end && index.length != 0) {
+                      if (word === searchText) {
+                        searchTextCountInSlice++;
+                      }
+                      hits.push({position: position, length: word.length});
+                      var wordEnd = position + word.length;
+
+                      // move to next position of hit
+
+                      index.pop();
+                      while (index.length != 0) {
+                        item = index[index.length - 1];
+                        position = item.position;
+                        word = item.word;
+                        if (wordEnd > position) {
+                          index.pop();
+                        } else {
+                          break;
+                        }
+                      }
+                    }
+                    searchTextCount += searchTextCountInSlice;
+                    return {
+                      hits: hits,
+                      start: start,
+                      end: end,
+                      searchTextCount: searchTextCountInSlice
+                    };
+                  }
+
+                  var slicesOfTitle = [];
+                  if (indexOfTitle.length != 0) {
+                    slicesOfTitle.push(mergeIntoSlice(title, 0, title.length, indexOfTitle));
+                  }
+
+                  var slicesOfContent = [];
+                  while (indexOfContent.length != 0) {
+                    var item = indexOfContent[indexOfContent.length - 1];
+                    var position = item.position;
+                    var word = item.word;
+                    // cut out 100 characters
+                    var start = position - 20;
+                    var end = position + 80;
+                    if(start < 0){
+                      start = 0;
+                    }
+                    if (end < position + word.length) {
+                      end = position + word.length;
+                    }
+                    if(end > content.length){
+                      end = content.length;
+                    }
+                    slicesOfContent.push(mergeIntoSlice(content, start, end, indexOfContent));
+                  }
+
+                  // sort slices in content by search text's count and hits' count
+
+                  slicesOfContent.sort(function (sliceLeft, sliceRight) {
+                    if (sliceLeft.searchTextCount !== sliceRight.searchTextCount) {
+                      return sliceRight.searchTextCount - sliceLeft.searchTextCount;
+                    } else if (sliceLeft.hits.length !== sliceRight.hits.length) {
+                      return sliceRight.hits.length - sliceLeft.hits.length;
+                    } else {
+                      return sliceLeft.start - sliceRight.start;
+                    }
+                  });
+
+                  // select top N slices in content
+
+                  var upperBound = parseInt('1');
+                  if (upperBound >= 0) {
+                    slicesOfContent = slicesOfContent.slice(0, upperBound);
+                  }
+
+                  // highlight title and content
+
+                  function highlightKeyword(text, slice) {
+                    var result = '';
+                    var prevEnd = slice.start;
+                    slice.hits.forEach(function (hit) {
+                      result += text.substring(prevEnd, hit.position);
+                      var end = hit.position + hit.length;
+                      result += '<b class="search-keyword">' + text.substring(hit.position, end) + '</b>';
+                      prevEnd = end;
+                    });
+                    result += text.substring(prevEnd, slice.end);
+                    return result;
+                  }
+
+                  var resultItem = '';
+
+                  if (slicesOfTitle.length != 0) {
+                    resultItem += "<li><a href='" + articleUrl + "' class='search-result-title'>" + highlightKeyword(title, slicesOfTitle[0]) + "</a>";
+                  } else {
+                    resultItem += "<li><a href='" + articleUrl + "' class='search-result-title'>" + title + "</a>";
+                  }
+
+                  slicesOfContent.forEach(function (slice) {
+                    resultItem += "<a href='" + articleUrl + "'>" +
+                      "<p class=\"search-result\">" + highlightKeyword(content, slice) +
+                      "...</p>" + "</a>";
+                  });
+
+                  resultItem += "</li>";
+                  resultItems.push({
+                    item: resultItem,
+                    searchTextCount: searchTextCount,
+                    hitCount: hitCount,
+                    id: resultItems.length
+                  });
+                }
+              })
+            };
+            if (keywords.length === 1 && keywords[0] === "") {
+              resultContent.innerHTML = '<div id="no-result"><i class="fa fa-search fa-5x" /></div>'
+            } else if (resultItems.length === 0) {
+              resultContent.innerHTML = '<div id="no-result"><i class="fa fa-frown-o fa-5x" /></div>'
+            } else {
+              resultItems.sort(function (resultLeft, resultRight) {
+                if (resultLeft.searchTextCount !== resultRight.searchTextCount) {
+                  return resultRight.searchTextCount - resultLeft.searchTextCount;
+                } else if (resultLeft.hitCount !== resultRight.hitCount) {
+                  return resultRight.hitCount - resultLeft.hitCount;
+                } else {
+                  return resultRight.id - resultLeft.id;
+                }
+              });
+              var searchResultList = '<ul class=\"search-result-list\">';
+              resultItems.forEach(function (result) {
+                searchResultList += result.item;
+              })
+              searchResultList += "</ul>";
+              resultContent.innerHTML = searchResultList;
+            }
+          }
+
+          if ('auto' === 'auto') {
+            input.addEventListener('input', inputEventFunction);
+          } else {
+            $('.search-icon').click(inputEventFunction);
+            input.addEventListener('keypress', function (event) {
+              if (event.keyCode === 13) {
+                inputEventFunction();
+              }
+            });
+          }
+
+          // remove loading animation
+          $(".local-search-pop-overlay").remove();
+          $('body').css('overflow', '');
+
+          proceedsearch();
+        }
+      });
+    }
+
+    // handle and trigger popup window;
+    $('.popup-trigger').click(function(e) {
+      e.stopPropagation();
+      if (isfetched === false) {
+        searchFunc(path, 'local-search-input', 'local-search-result');
+      } else {
+        proceedsearch();
+      };
+    });
+
+    $('.popup-btn-close').click(onPopupClose);
+    $('.popup').click(function(e){
+      e.stopPropagation();
+    });
+    $(document).on('keyup', function (event) {
+      var shouldDismissSearchPopup = event.which === 27 &&
+        $('.search-popup').is(':visible');
+      if (shouldDismissSearchPopup) {
+        onPopupClose();
+      }
+    });
+  </script>
+
+
+
+
+
+  
+
+  
+  <script>
+    
+    function addCount(Counter) {
+      var $visitors = $(".leancloud_visitors");
+      var url = $visitors.attr('id').trim();
+      var title = $visitors.attr('data-flag-title').trim();
+
+      Counter('get', '/classes/Counter', { where: JSON.stringify({ url }) })
+        .done(function ({ results }) {
+          if (results.length > 0) {
+            var counter = results[0];
+            
+            Counter('put', `/classes/Counter/${counter.objectId}`, JSON.stringify({ time: { "__op":"Increment", "amount":1 } }))
+            
+            .done(function () {
+                  var $element = $(document.getElementById(url));
+                  $element.find('.leancloud-visitors-count').text(counter.time + 1);
+            })
+            
+            .fail(function ({ responseJSON }) {
+                console.log('Failed to save Visitor num, with error message: ' + responseJSON.error);
+            })
+          } else {
+            
+              Counter('post', '/classes/Counter', JSON.stringify({ title: title, url: url, time: 1}))
+                .done(function () {
+                  var $element = $(document.getElementById(url));
+                  $element.find('.leancloud-visitors-count').text(1);
+                })
+                .fail(function () {
+                  console.log('Failed to create');
+                });
+            
+          }
+        })
+      .fail(function ({ responseJSON }) {
+        console.log('LeanCloud Counter Error:' + responseJSON.code + " " + responseJSON.error);
+      });
+    }
+    
+
+    $(function() {
+      $.get('https://app-router.leancloud.cn/2/route?appId=' + "no3Ip4mNLc3JyF1AeTy8LrAm-gzGzoHsz")
+        .done(function ({ api_server }) {
+          var Counter = function (method, url, data) {
+            return $.ajax({
+              method: method,
+              url: `https://${api_server}/1.1${url}`,
+              headers: {
+                'X-LC-Id': "no3Ip4mNLc3JyF1AeTy8LrAm-gzGzoHsz",
+                'X-LC-Key': "UvlYMzpJKw0Jrw61V5BA5ifU",
+                'Content-Type': 'application/json',
+              },
+              data: data,
+            });
+          };
+          
+          addCount(Counter);
+          
+        })
+    });
+  </script>
+
+
+
+  
+
+  
+
+  
+
+  
+  
+
+  
+  
+
+  
+
+
+  
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+  <style>
+    .copy-btn {
+      display: inline-block;
+      padding: 6px 12px;
+      font-size: 13px;
+      font-weight: 700;
+      line-height: 20px;
+      color: #333;
+      white-space: nowrap;
+      vertical-align: middle;
+      cursor: pointer;
+      background-color: #eee;
+      background-image: linear-gradient(#fcfcfc, #eee);
+      border: 1px solid #d5d5d5;
+      border-radius: 3px;
+      user-select: none;
+      outline: 0;
+    }
+
+    .highlight-wrap .copy-btn {
+      transition: opacity .3s ease-in-out;
+      opacity: 0;
+      padding: 2px 6px;
+      position: absolute;
+      right: 4px;
+      top: 8px;
+    }
+
+    .highlight-wrap:hover .copy-btn,
+    .highlight-wrap .copy-btn:focus {
+      opacity: 1
+    }
+
+    .highlight-wrap {
+      position: relative;
+    }
+  </style>
+  <script>
+    $('.highlight').each(function (i, e) {
+      var $wrap = $('<div>').addClass('highlight-wrap')
+      $(e).after($wrap)
+      $wrap.append($('<button>').addClass('copy-btn').append('复制').on('click', function (e) {
+        var code = $(this).parent().find('.code').find('.line').map(function (i, e) {
+          return $(e).text()
+        }).toArray().join('\n')
+        var ta = document.createElement('textarea')
+        document.body.appendChild(ta)
+        ta.style.position = 'absolute'
+        ta.style.top = '0px'
+        ta.style.left = '0px'
+        ta.value = code
+        ta.select()
+        ta.focus()
+        var result = document.execCommand('copy')
+        document.body.removeChild(ta)
+        
+        $(this).blur()
+      })).on('mouseleave', function (e) {
+        var $b = $(this).find('.copy-btn')
+        setTimeout(function () {
+          $b.text('复制')
+        }, 300)
+      }).append(e)
+    })
+  </script>
+
+
+  
+
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-backstretch/2.0.4/jquery.backstretch.min.js"></script>;
+  <script>
+  //$("body").backstretch("/images/background.jpg");
+  </script>
+  
+  <script type="text/javascript" src="//cdn.bootcss.com/canvas-nest.js/1.0.0/canvas-nest.min.js"></script><!-- hexo-inject:begin --><!-- hexo-inject:end -->
+  
+<script src="/live2dw/lib/L2Dwidget.min.js?0c58a1486de42ac6cc1c59c7d98ae887"></script><script>L2Dwidget.init({"pluginRootPath":"live2dw/","pluginJsPath":"lib/","pluginModelPath":"assets/","tagMode":false,"debug":false,"model":{"jsonPath":"/live2dw/assets/koharu.model.json"},"display":{"position":"right","width":150,"height":300},"mobile":{"show":false},"log":false});</script></body>
+</html>

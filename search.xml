@@ -14,7 +14,7 @@
   </entry>
   <entry>
     <title><![CDATA[IS-pwn-fuzz-theory-android-situation]]></title>
-    <url>%2Fposts%2F2a736740%2F</url>
+    <url>%2Fposts%2F13777ef5%2F</url>
     <content type="text"><![CDATA[FANS: Fuzzing Android Native System Services via Automated Interface Analysis 在线pdf. Abstract Fuzzing在应用于Android Native System Services时面临着一些挑战：这些服务是进程间通信(IPC)机制binder通过特定接口调用的，因此fuzzer必须识别所有接口并自动生成特定的测试用例；有效的测试用例应该满足每个接口的接口模型；测试用例还应该满足语义需求，包括变量依赖和接口依赖。 论文作者提出了一个通过自动分析接口来对Android Native System Services进行Fuzzing的系统--FANS，它首先收集目标服务中的所有接口，并且揭示要测试的深层次接口，然后从目标接口的AST中自动提取接口模型，包括可行的事务代码、变量名和事务数据中的类型。此外，它通过变量名和类型知识推断事务中的变量依赖关系，并通过生成和使用关系推断接口依赖关系。最后，利用接口模型和依赖知识生成具有有效格式和语义的事务序列，对目标服务的接口进行测试。 Introduction BinderCracker通过记录30个流行应用程序发出的请求来捕获目标服务的输入模型，缺点是无法恢复精确的输入语义，而且由于测试不完整，它将错过很少使用或深度嵌套的接口；Chizpurfle利用Java反射来获取接口的参数类型，以测试供应商实现的Java服务，但是不能用于检索Android本地系统服务的输入模型。 在Android中，系统服务注册到服务管理器，用户应用程序查询管理器以获得目标服务的接口（封装在代理Binder对象中），然后通过RPC接口调用该接口提供的不同事务：IBinder::transact(code,data,reply,flags)。 其中code确定要调用的目标事务，并且将事务的输入编组到序列化的parcel object data，因此可以利用这种统一的IPC方法来测试所有的系统服务，有三个挑战需要解决： 多级接口识别：除了在服务管理器中注册的（顶级）接口之外，还有嵌套的多级接口，可以通过顶级接口检索这些接口并由用户应用程序调用，还有许多接口定义在Android接口定义语言(AIDL)而不是C++中，并且是在编译期间动态生成。 接口模型提取：对于每个接口，需要获得要测试的code的列表，然后提供输入数据来调用每个事务。为了提高模糊化的有效性，输入数据应该遵循目标接口的语法要求，从大量Android源代码中自动提取这些知识也是一项挑战。 语义正确的输入生成：Android本身对输入数据执行许多健全性检查（例如，大小检查），识别这样的语义需求并相应地生成输入是具有挑战性。 FANS首先通过扫描服务注册操作来识别所有顶级接口，并利用调用特殊方法writeStrongBinder生成深层接口的事实来识别多级接口；由于Android系统服务总是使用一组特定的反序列化方法（例如readInt32）来解析输入数据。通过识别这些方法的调用序列可以推断有效输入的语法。为了保留变量名称和类型的知识，选择从抽象语法树（AST）中提取反序列化序列（即输入语法）；然后利用从AST中提取的变量名称和类型知识来生成适当的输入，并识别事务内变量依赖关系。此外，依赖事务将反序列化由依赖事务序列化的数据，以识别事务间变量依赖关系。所以可以从依赖接口之间的生成和使用关系来推断它们的依赖关系。]]></content>
       <categories>
         <category>IS</category>

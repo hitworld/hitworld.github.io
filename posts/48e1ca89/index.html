@@ -119,21 +119,21 @@
 
 
 
-  <meta name="description" content="简介 AFL是一种灰盒Fuzzing工具.通过对源码进行编译时插桩(通过注入探针代码来实现程序分析)的方式监测边界(代码)覆盖率,通过算法自动变异新的测试用例来探索二进制程序内部新的执行路径.AFL也支持直接对没有源码的二进制程序进行测试,但需要QEMU的支持. 原理 AFL的一个特点就是基于边界覆盖率的反馈机制,边界覆盖率的统计工作通过插桩完成,然后通过边界覆盖率来进行状态分析.记录输入样">
+  <meta name="description" content="简介 AFL是一种灰盒Fuzzing工具. 通过对源码进行编译时插桩(通过注入探针代码来实现程序分析)的方式监测边界(代码)覆盖率,通过算法自动变异新的测试用例来探索二进制程序内部新的执行路径. AFL也支持直接对没有源码的二进制程序进行测试,但需要QEMU的支持. AFL的一个特点就是基于边界覆盖率的反馈机制,边界覆盖率的统计工作通过插桩完成,然后通过边界覆盖率来进行状态分析.通过分析输">
 <meta name="keywords" content="fuzz">
 <meta property="og:type" content="article">
 <meta property="og:title" content="IS-pwn-fuzz-AFL-基础">
 <meta property="og:url" content="https://hitworld.github.io/posts/48e1ca89/index.html">
 <meta property="og:site_name" content="w4rd3n">
-<meta property="og:description" content="简介 AFL是一种灰盒Fuzzing工具.通过对源码进行编译时插桩(通过注入探针代码来实现程序分析)的方式监测边界(代码)覆盖率,通过算法自动变异新的测试用例来探索二进制程序内部新的执行路径.AFL也支持直接对没有源码的二进制程序进行测试,但需要QEMU的支持. 原理 AFL的一个特点就是基于边界覆盖率的反馈机制,边界覆盖率的统计工作通过插桩完成,然后通过边界覆盖率来进行状态分析.记录输入样">
+<meta property="og:description" content="简介 AFL是一种灰盒Fuzzing工具. 通过对源码进行编译时插桩(通过注入探针代码来实现程序分析)的方式监测边界(代码)覆盖率,通过算法自动变异新的测试用例来探索二进制程序内部新的执行路径. AFL也支持直接对没有源码的二进制程序进行测试,但需要QEMU的支持. AFL的一个特点就是基于边界覆盖率的反馈机制,边界覆盖率的统计工作通过插桩完成,然后通过边界覆盖率来进行状态分析.通过分析输">
 <meta property="og:locale" content="zh-CN">
 <meta property="og:image" content="https://hitworld.github.io/png/2021-01-04-16-07-05.png">
 <meta property="og:image" content="https://hitworld.github.io/png/2021-01-04-16-07-43.png">
 <meta property="og:image" content="https://hitworld.github.io/png/2021-01-04-16-07-31.png">
-<meta property="og:updated_time" content="2021-03-16T13:43:24.686Z">
+<meta property="og:updated_time" content="2021-03-17T11:36:38.911Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="IS-pwn-fuzz-AFL-基础">
-<meta name="twitter:description" content="简介 AFL是一种灰盒Fuzzing工具.通过对源码进行编译时插桩(通过注入探针代码来实现程序分析)的方式监测边界(代码)覆盖率,通过算法自动变异新的测试用例来探索二进制程序内部新的执行路径.AFL也支持直接对没有源码的二进制程序进行测试,但需要QEMU的支持. 原理 AFL的一个特点就是基于边界覆盖率的反馈机制,边界覆盖率的统计工作通过插桩完成,然后通过边界覆盖率来进行状态分析.记录输入样">
+<meta name="twitter:description" content="简介 AFL是一种灰盒Fuzzing工具. 通过对源码进行编译时插桩(通过注入探针代码来实现程序分析)的方式监测边界(代码)覆盖率,通过算法自动变异新的测试用例来探索二进制程序内部新的执行路径. AFL也支持直接对没有源码的二进制程序进行测试,但需要QEMU的支持. AFL的一个特点就是基于边界覆盖率的反馈机制,边界覆盖率的统计工作通过插桩完成,然后通过边界覆盖率来进行状态分析.通过分析输">
 <meta name="twitter:image" content="https://hitworld.github.io/png/2021-01-04-16-07-05.png">
 
 
@@ -542,13 +542,14 @@
 
       
         <h2 id="简介">简介</h2>
-<p><code>AFL</code>是一种灰盒<code>Fuzzing</code>工具.通过对源码进行编译时插桩(通过注入探针代码来实现程序分析)的方式监测边界(代码)覆盖率,通过算法自动变异新的测试用例来探索二进制程序内部新的执行路径.<code>AFL</code>也支持直接对没有源码的二进制程序进行测试,但需要<code>QEMU</code>的支持.</p>
-<h2 id="原理">原理</h2>
-<p><code>AFL</code>的一个特点就是基于边界覆盖率的反馈机制,边界覆盖率的统计工作通过插桩完成,然后通过边界覆盖率来进行状态分析.记录输入样本的代码覆盖率,从而调整输入样本以提高覆盖率,增加发现漏洞的概率.</p>
-<p><code>fuzz</code>过程中<code>AFL</code>会维护一个语料库队列<code>queue</code>,包含了初始测试用例及变异后有新状态产生的测试用例,变异策略分为确定性策略和随机性策略.</p>
-<p><code>AFL</code>通过跳转指令将程序分为一个个基本块,将源基本块和目的基本块的配对组合称为<code>tuple</code>(元组).通过记录<code>tuple</code>统计边界覆盖率,<code>AFL</code>通过<code>bitmap</code>(以<code>byte</code>为单位从而记录<code>tuple</code>的命中数)来记录这些信息.</p>
-<p>出现新<code>tuple</code>或已有<code>tuple</code>中出现的新命中组视为产生新状态(也意味着更新覆盖范围),相应的测试用例将被归入到语料库队列<code>queue</code>中.</p>
-<p>上述过程会一直循环进行,期间触发了<code>crash</code>的文件会被记录下来.</p>
+<p><code>AFL</code>是一种灰盒<code>Fuzzing</code>工具.</p>
+<p>通过对源码进行编译时插桩(通过注入探针代码来实现程序分析)的方式监测边界(代码)覆盖率,通过算法自动变异新的测试用例来探索二进制程序内部新的执行路径.</p>
+<p><code>AFL</code>也支持直接对没有源码的二进制程序进行测试,但需要<code>QEMU</code>的支持.</p>
+<p><code>AFL</code>的一个特点就是基于边界覆盖率的反馈机制,边界覆盖率的统计工作通过插桩完成,然后通过边界覆盖率来进行状态分析.通过分析输入样本的运行时状态调整输入样本以提高覆盖率,增加发现漏洞的概率.</p>
+<p><code>fuzz</code>过程中<code>AFL</code>会维护一个测试用例队列<code>queue</code>,包含了初始测试用例及变异后有新状态产生的测试用例,变异策略分为确定性策略和随机性策略.</p>
+<p><code>AFL</code>通过跳转指令将程序分为一个个基本块,将源基本块和目的基本块的配对组合称为<code>tuple</code>.通过记录<code>tuple</code>的命中次数统计边界覆盖率,<code>AFL</code>通过<code>bitmap</code>(以<code>byte</code>为单位)来记录这些信息.</p>
+<p>出现新<code>tuple</code>或已有<code>tuple</code>中出现的新命中组(按命中次数划分)视为产生新状态(也意味着更新覆盖范围),相应的测试用例将被插入<code>queue</code>中.</p>
+<p>上述过程会循环多次进行,期间触发了<code>crash</code>的文件会被记录下来.</p>
 <h2 id="插桩模块">插桩模块</h2>
 <p><code>AFL</code>有三种不同模式的插桩操作.</p>
 <p>其中普通模式和<code>llvm</code>模式是针对目标程序提供源码的情况,相较汇编级的普通模式插桩,编译级的<code>llvm</code>模式插桩包含更多优化.对仅提供二进制文件的目标程序则需借助<code>qemu</code>模式,其性能最低.</p>
@@ -601,7 +602,8 @@
 <li><code>bitflip 32/8</code>,每次翻转相邻的<code>32</code>个<code>bit</code>,按照每<code>8</code>个<code>bit</code>的步长从头开始,即依次对每个<code>dword</code>做翻转.</li>
 </ul>
 <p>在上述过程中<code>AFL</code>巧妙地嵌入了一些对文件格式的启发式判断.</p>
-<p>自动检测<code>token</code>:在进行<code>bitflip 1/1</code>变异时,对于每个<code>byte</code>的最低位翻转还进行了额外的处理:如果连续多个<code>bytes</code>的最低位被翻转后.程序的执行路径都未变化.而且与原始执行路径不一致,那么就把这一段连续的<code>bytes</code>判断是一条<code>token</code>. 为了控制这样自动生成的<code>token</code>的大小和数量,<code>AFL</code>在<code>config.h</code>中通过宏定义限制.</p>
+<p>自动检测<code>token</code>:在进行<code>bitflip 1/1</code>变异时,对于每个<code>byte</code>的最低位翻转还进行了额外的处理:如果连续多个<code>bytes</code>的最低位被翻转后.程序的执行路径都未变化.而且与原始执行路径不一致,那么就把这一段连续的<code>bytes</code>判断是一条<code>token</code>.</p>
+<p>为了控制这样自动生成的<code>token</code>的大小和数量,<code>AFL</code>在<code>config.h</code>中通过宏定义限制.</p>
 <figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">define</span> MIN_AUTO_EXTRA      3</span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">define</span> MAX_AUTO_EXTRA      32</span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">define</span> USE_AUTO_EXTRAS     10</span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">define</span> MAX_AUTO_EXTRAS     (USE_AUTO_EXTRAS * 10)</span></span><br></pre></td></tr></table></figure>
 <p>生成<code>effector map</code>:在进行<code>bitflip 8/8</code>变异时,<code>AFL</code>还生成了一个非常重要的信息:<code>effector map</code>.具体地,在对每个<code>byte</code>进行翻转时,如果其造成执行路径与原始路径不一致,就将该<code>byte</code>在<code>effector map</code>中标记为<code>1</code>,即有效的,否则标记为<code>0</code>.</p>
 <p>如果一个<code>byte</code>完全翻转,都无法带来执行路径的变化,那么这个<code>byte</code>很有可能是属于<code>data</code>而非<code>metadata</code>,对整个<code>fuzzing</code>的意义不大.</p>
@@ -976,7 +978,7 @@
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#简介"><span class="nav-number">1.</span> <span class="nav-text">简介</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#原理"><span class="nav-number">2.</span> <span class="nav-text">原理</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#插桩模块"><span class="nav-number">3.</span> <span class="nav-text">插桩模块</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#普通模式"><span class="nav-number">3.1.</span> <span class="nav-text">普通模式</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#llvm模式"><span class="nav-number">3.2.</span> <span class="nav-text">llvm模式</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#qemu模式"><span class="nav-number">3.3.</span> <span class="nav-text">qemu模式</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#fuzzer模块"><span class="nav-number">4.</span> <span class="nav-text">fuzzer模块</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#fuzzing策略"><span class="nav-number">4.1.</span> <span class="nav-text">fuzzing策略</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#bitflip"><span class="nav-number">4.1.1.</span> <span class="nav-text">bitflip</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#arithmetic"><span class="nav-number">4.1.2.</span> <span class="nav-text">arithmetic</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#interest"><span class="nav-number">4.1.3.</span> <span class="nav-text">interest</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#dictionary"><span class="nav-number">4.1.4.</span> <span class="nav-text">dictionary</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#havoc"><span class="nav-number">4.1.5.</span> <span class="nav-text">havoc</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#splice"><span class="nav-number">4.1.6.</span> <span class="nav-text">splice</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#cycle"><span class="nav-number">4.1.7.</span> <span class="nav-text">cycle</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#语料库更迭"><span class="nav-number">4.2.</span> <span class="nav-text">语料库更迭</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#崩溃去重"><span class="nav-number">4.3.</span> <span class="nav-text">崩溃去重</span></a></li></ol></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#简介"><span class="nav-number">1.</span> <span class="nav-text">简介</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#插桩模块"><span class="nav-number">2.</span> <span class="nav-text">插桩模块</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#普通模式"><span class="nav-number">2.1.</span> <span class="nav-text">普通模式</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#llvm模式"><span class="nav-number">2.2.</span> <span class="nav-text">llvm模式</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#qemu模式"><span class="nav-number">2.3.</span> <span class="nav-text">qemu模式</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#fuzzer模块"><span class="nav-number">3.</span> <span class="nav-text">fuzzer模块</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#fuzzing策略"><span class="nav-number">3.1.</span> <span class="nav-text">fuzzing策略</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#bitflip"><span class="nav-number">3.1.1.</span> <span class="nav-text">bitflip</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#arithmetic"><span class="nav-number">3.1.2.</span> <span class="nav-text">arithmetic</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#interest"><span class="nav-number">3.1.3.</span> <span class="nav-text">interest</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#dictionary"><span class="nav-number">3.1.4.</span> <span class="nav-text">dictionary</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#havoc"><span class="nav-number">3.1.5.</span> <span class="nav-text">havoc</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#splice"><span class="nav-number">3.1.6.</span> <span class="nav-text">splice</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#cycle"><span class="nav-number">3.1.7.</span> <span class="nav-text">cycle</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#语料库更迭"><span class="nav-number">3.2.</span> <span class="nav-text">语料库更迭</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#崩溃去重"><span class="nav-number">3.3.</span> <span class="nav-text">崩溃去重</span></a></li></ol></li></ol></div>
             
 
           </div>
@@ -1008,7 +1010,7 @@
       <i class="fa fa-area-chart"></i>
     </span>
     
-    <span title="站点总字数">921k</span>
+    <span title="站点总字数">978k</span>
   
 
   
@@ -1017,7 +1019,7 @@
       <i class="fa fa-coffee"></i>
     </span>
     
-    <span title="站点阅读时长">13:58</span>
+    <span title="站点阅读时长">14:49</span>
   
 </div>
 
@@ -1666,7 +1668,7 @@
   //$("body").backstretch("/images/background.jpg");
   </script>
   
-  <script type="text/javascript" src="//cdn.bootcss.com/canvas-nest.js/1.0.0/canvas-nest.min.js"></script><!-- hexo-inject:begin --><!-- hexo-inject:end -->
+  <script type="text/javascript" src="//cdn.bootcss.com/canvas-nest.js/1.0.0/canvas-nest.min.js"></script>
   
-<script src="/live2dw/lib/L2Dwidget.min.js?0c58a1486de42ac6cc1c59c7d98ae887"></script><script>L2Dwidget.init({"pluginRootPath":"live2dw/","pluginJsPath":"lib/","pluginModelPath":"assets/","tagMode":false,"debug":false,"model":{"jsonPath":"/live2dw/assets/koharu.model.json"},"display":{"position":"right","width":150,"height":300},"mobile":{"show":false},"log":false});</script></body>
+<script src="/live2dw/lib/L2Dwidget.min.js?0c58a1486de42ac6cc1c59c7d98ae887"></script><script>L2Dwidget.init({"pluginRootPath":"live2dw/","pluginJsPath":"lib/","pluginModelPath":"assets/","tagMode":false,"debug":false,"model":{"jsonPath":"/live2dw/assets/koharu.model.json"},"display":{"position":"right","width":150,"height":300},"mobile":{"show":false},"log":false});</script><!-- hexo-inject:begin --><!-- hexo-inject:end --></body>
 </html>

@@ -130,7 +130,7 @@
 <meta property="og:image" content="https://hitworld.github.io/png/2021-01-04-16-07-05.png">
 <meta property="og:image" content="https://hitworld.github.io/png/2021-01-04-16-07-43.png">
 <meta property="og:image" content="https://hitworld.github.io/png/2021-01-04-16-07-31.png">
-<meta property="og:updated_time" content="2021-03-17T11:36:38.911Z">
+<meta property="og:updated_time" content="2021-03-18T14:24:31.887Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="IS-pwn-fuzz-AFL-基础">
 <meta name="twitter:description" content="简介 AFL是一种灰盒Fuzzing工具. 通过对源码进行编译时插桩(通过注入探针代码来实现程序分析)的方式监测边界(代码)覆盖率,通过算法自动变异新的测试用例来探索二进制程序内部新的执行路径. AFL也支持直接对没有源码的二进制程序进行测试,但需要QEMU的支持. AFL的一个特点就是基于边界覆盖率的反馈机制,边界覆盖率的统计工作通过插桩完成,然后通过边界覆盖率来进行状态分析.通过分析输">
@@ -562,15 +562,17 @@
 <h3 id="普通模式">普通模式</h3>
 <p><code>gcc</code>的<code>-B prefix</code>用于指定各阶段执行文件的优先查找目录.普通模式下<code>AFL</code>采用的插桩思路是先对<code>gcc</code>做一层简单封装,有一项是设定<code>-B prefix</code>选项并指向封装后的<code>as</code>汇编器所在目录.</p>
 <figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//afl-gcc.c,edit_params.</span></span><br><span class="line">cc_params[cc_par_cnt++] = <span class="string">"-B"</span>;</span><br><span class="line">cc_params[cc_par_cnt++] = as_path;</span><br></pre></td></tr></table></figure>
-<p>由封装后的<code>as</code>汇编器来处理汇编文件,实际操作为在各控制转移指令处插入跳板<code>trampoline_fmt_32／trampoline_fmt_64</code>后再交由真正的<code>as</code>汇编器处理.分析可知跳板的作用是跳转到具体的实现部分<code>main_payload_32／main_payload_64</code>,此部分指令只会插入一次.其中一个分支是用于记录目标程序执行过程中的<code>tuple</code>信息.</p>
+<p>由封装后的<code>as</code>汇编器来处理汇编文件,实际操作为在各控制转移指令处插入跳板<code>trampoline_fmt_32／trampoline_fmt_64</code>后再交由真正的<code>as</code>汇编器处理.</p>
+<p>分析可知跳板的作用是跳转到具体的实现部分<code>main_payload_32／main_payload_64</code>,此部分指令只会插入一次.其中一个分支是用于记录目标程序执行过程中的<code>tuple</code>信息.</p>
 <figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">cur_location = &lt;COMPILE_TIME_RANDOM&gt;;</span><br><span class="line"><span class="comment">//目的基本快位置,随机化生成.</span></span><br><span class="line">shared_mem[cur_location ^ prev_location]++;</span><br><span class="line"><span class="comment">//记录tuple信息的bitmap.</span></span><br><span class="line">prev_location = cur_location &gt;&gt; <span class="number">1</span>;</span><br><span class="line"><span class="comment">//新的源基本块位置,移位操作是为了保留元组的方向性.</span></span><br></pre></td></tr></table></figure>
 <p>另一分支进行初始操作并维护<code>forkserver</code>,它会将已经初始化好的目标进程暂停在某个地方(例如<code>main</code>函数入口).</p>
-<p>按需再<code>fork</code>出一个子进程交予<code>fuzzer</code>进行测试.<code>forkserver</code>和<code>fuzzer</code>间是通过<code>pipe</code>管道进行通信的,除了控制命令,<code>fork</code>成功后的<code>PID</code>以及<code>waitpid</code>返回状态都是借由此方式传递.</p>
+<p>然后按需<code>fork</code>出一个子进程交予<code>fuzzer</code>进行测试.<code>forkserver</code>和<code>fuzzer</code>间是通过<code>pipe</code>管道进行通信的,除了控制命令,<code>fork</code>成功后的<code>PID</code>以及<code>waitpid</code>返回状态都是借由此方式传递.</p>
 <p><code>fuzz</code>的进程只进行一次<code>execve()</code>,连接,库初始化,新的<code>fuzz</code>进程通过<code>copy-on-write</code>的方式从已停止的<code>fuzz</code>进程中<code>clone</code>下来.</p>
 <h3 id="llvm模式">llvm模式</h3>
 <p><code>LLVM</code>中代码首先由编译器前端<code>clang</code>处理后得到中间代码<code>IR</code>,再经过各<code>pass</code>工作节点的优化和转换,最终交给编译器后端生成机器码.</p>
 <p><img src="/png/2021-01-04-16-07-43.png"></p>
-<p><code>AFL</code>的插桩思路是通过编写<code>pass</code>来实现<code>tuple</code>信息的记录,在此过程中会对每一基本块都插入探针,具体代码在<code>afl-llvm-pass.so.cc</code>文件.而初始化和<code>forkserver</code>操作则通过链接完成,<code>afl-llvm-rt.o.c</code>文件实现了<code>afl-as.h</code>中<code>main_payload</code>的这部分功能.</p>
+<p><code>AFL</code>的插桩思路是通过编写<code>pass</code>来实现<code>tuple</code>信息的记录,在此过程中会对每一基本块都插入探针,具体代码在<code>afl-llvm-pass.so.cc</code>文件.</p>
+<p>而初始化和<code>forkserver</code>操作则通过链接完成,<code>afl-llvm-rt.o.c</code>文件实现了<code>afl-as.h</code>中<code>main_payload</code>的这部分功能.</p>
 <h3 id="qemu模式">qemu模式</h3>
 <p>对于该模式下的插桩,<code>AFL</code>的思路是直接利用<code>QEMU</code>内置的跟踪功能,并通过<code>patch</code>源码的方式来实现<code>afl-as.h</code>中的操作.</p>
 <h2 id="fuzzer模块">fuzzer模块</h2>
@@ -605,7 +607,8 @@
 <p>自动检测<code>token</code>:在进行<code>bitflip 1/1</code>变异时,对于每个<code>byte</code>的最低位翻转还进行了额外的处理:如果连续多个<code>bytes</code>的最低位被翻转后.程序的执行路径都未变化.而且与原始执行路径不一致,那么就把这一段连续的<code>bytes</code>判断是一条<code>token</code>.</p>
 <p>为了控制这样自动生成的<code>token</code>的大小和数量,<code>AFL</code>在<code>config.h</code>中通过宏定义限制.</p>
 <figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">define</span> MIN_AUTO_EXTRA      3</span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">define</span> MAX_AUTO_EXTRA      32</span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">define</span> USE_AUTO_EXTRAS     10</span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">define</span> MAX_AUTO_EXTRAS     (USE_AUTO_EXTRAS * 10)</span></span><br></pre></td></tr></table></figure>
-<p>生成<code>effector map</code>:在进行<code>bitflip 8/8</code>变异时,<code>AFL</code>还生成了一个非常重要的信息:<code>effector map</code>.具体地,在对每个<code>byte</code>进行翻转时,如果其造成执行路径与原始路径不一致,就将该<code>byte</code>在<code>effector map</code>中标记为<code>1</code>,即有效的,否则标记为<code>0</code>.</p>
+<p>在进行<code>bitflip 8/8</code>变异时,<code>AFL</code>还生成了一个非常重要的信息:<code>effector map</code>.</p>
+<p>具体地,在对每个<code>byte</code>进行翻转时,如果其造成执行路径与原始路径不一致,就将该<code>byte</code>在<code>effector map</code>中标记为<code>1</code>,即有效的,否则标记为<code>0</code>.</p>
 <p>如果一个<code>byte</code>完全翻转,都无法带来执行路径的变化,那么这个<code>byte</code>很有可能是属于<code>data</code>而非<code>metadata</code>,对整个<code>fuzzing</code>的意义不大.</p>
 <h4 id="arithmetic">arithmetic</h4>
 <p>在<code>bitflip</code>变异全部进行完成后,便进入<code>arithmetic</code>.<code>arithmetic</code>根据目标大小的不同,也分为了多个子阶段.</p>
@@ -658,7 +661,8 @@
 <figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">static</span> <span class="keyword">const</span> u8 count_class_lookup8[<span class="number">256</span>] = &#123;</span><br><span class="line">  [<span class="number">0</span>]           = <span class="number">0</span>,</span><br><span class="line">  [<span class="number">1</span>]           = <span class="number">1</span>,</span><br><span class="line">  [<span class="number">2</span>]           = <span class="number">2</span>,</span><br><span class="line">  [<span class="number">3</span>]           = <span class="number">4</span>,</span><br><span class="line">  [<span class="number">4</span> ... <span class="number">7</span>]     = <span class="number">8</span>,</span><br><span class="line">  [<span class="number">8</span> ... <span class="number">15</span>]    = <span class="number">16</span>,</span><br><span class="line">  [<span class="number">16</span> ... <span class="number">31</span>]   = <span class="number">32</span>,</span><br><span class="line">  [<span class="number">32</span> ... <span class="number">127</span>]  = <span class="number">64</span>,</span><br><span class="line">  [<span class="number">128</span> ... <span class="number">255</span>] = <span class="number">128</span></span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
 <p>只需将执行完归组操作后的<code>trace_bits</code>和<code>virgin_bits</code>做个比对就能判断出是否有新状态产生,同时,采用位运算也是为了提高代码执行的速率.</p>
 <p>后续合成的一些测试用例的边覆盖可能是之前测试用例的代码覆盖的超集.为了优化<code>fuzzing</code>,<code>AFL</code>周期性的重新评估队列.使用一种快速算法选择仍然能覆盖每一个元组,但有更小的测试用例的子集.</p>
-<p>算法通过指定每一个队列入口,根据执行延迟和文件大小分配一个分值比例.然后为每一个元组选择最低分值作为候选构造最小覆盖集.生成的<code>favored entries</code>的语料与初始数据集相比,在体积上通常要小<code>5-10x</code>倍.<code>Non-favored entries</code>将不会被丢弃,但当在队列中遇到的时候,它们会被不同的概率跳过.</p>
+<p>算法通过指定每一个队列入口,根据执行延迟和文件大小分配一个分值比例.然后为每一个元组选择最低分值作为候选构造最小覆盖集.</p>
+<p>生成的<code>favored entries</code>的语料与初始数据集相比,在体积上通常要小<code>5-10</code>倍.<code>Non-favored entries</code>将不会被丢弃,但当在队列中遇到的时候,它们会被不同的概率跳过.</p>
 <ol type="1">
 <li>如果在队列中有新的<code>favored entries</code>,<code>99%</code>的<code>non-favored entries</code>将被跳过.</li>
 <li>如果没有新的<code>favored entries</code>,且当前<code>non-favored entry</code>是之前被<code>fuzzed</code>过得,它将被以<code>95%</code>的概率跳过.</li>
@@ -1010,7 +1014,7 @@
       <i class="fa fa-area-chart"></i>
     </span>
     
-    <span title="站点总字数">978k</span>
+    <span title="站点总字数">988k</span>
   
 
   
@@ -1019,7 +1023,7 @@
       <i class="fa fa-coffee"></i>
     </span>
     
-    <span title="站点阅读时长">14:49</span>
+    <span title="站点阅读时长">14:58</span>
   
 </div>
 

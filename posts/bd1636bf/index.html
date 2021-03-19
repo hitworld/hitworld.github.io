@@ -127,7 +127,7 @@
 <meta property="og:site_name" content="w4rd3n">
 <meta property="og:description" content="概览 目前Android主流的hook框架有:Xposed,Substrate和frida. Xposed Xposed是一个在andoid平台上比较成熟的hook框架,可以完美的在dalvik虚拟机上做到hook任意java方法. Android系统中所有的app进程都是有Zygote进程孵化而来的,而Zygote进程是由Init进程启动的,Zygote进程在启动时会创建一个Dalvik">
 <meta property="og:locale" content="zh-CN">
-<meta property="og:updated_time" content="2021-03-14T11:51:36.308Z">
+<meta property="og:updated_time" content="2021-03-18T14:24:31.888Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="IS-reverse-Android-hook">
 <meta name="twitter:description" content="概览 目前Android主流的hook框架有:Xposed,Substrate和frida. Xposed Xposed是一个在andoid平台上比较成熟的hook框架,可以完美的在dalvik虚拟机上做到hook任意java方法. Android系统中所有的app进程都是有Zygote进程孵化而来的,而Zygote进程是由Init进程启动的,Zygote进程在启动时会创建一个Dalvik">
@@ -570,9 +570,10 @@
 </ul>
 <p><code>DBI</code>功能:访问进程的内存;在应用程序运行时覆盖一些功能;从导入的类中调用函数;在堆上查找对象实例并使用这些对象实例;<code>Hook</code>,跟踪和拦截函数等等.</p>
 <h3 id="使用">使用</h3>
-<p>首先在本地安装<code>frida</code>:<code>pip3 install frida</code>.</p>
+<p>首先在本地安装<code>frida</code>:<code>pip3 install frida</code>(<code>mac</code>还要运行<code>pip3 install frida-tools</code>).</p>
 <p>然后下载对应平台的程序:<code>https://github.com/frida/frida/releases</code>.可以看到除了<code>server</code>外还有其他类型的程序,用于不同的情况.</p>
 <h4 id="frida-server">frida-server</h4>
+<p>最基础的模块,用于<code>PC</code>和手机通信.</p>
 <h3 id="hook对抗">hook对抗</h3>
 <p>遍历进程,判断<code>frida-server</code>是否运行.</p>
 <figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">boolean</span> <span class="title">checkRunningProcesses</span><span class="params">()</span> </span>&#123;</span><br><span class="line">  <span class="keyword">boolean</span> returnValue = <span class="keyword">false</span>;</span><br><span class="line">  List&lt;RunningServiceInfo&gt; list = manager.getRunningServices(<span class="number">300</span>);</span><br><span class="line">  <span class="keyword">if</span>(list != <span class="keyword">null</span>)&#123;</span><br><span class="line">    String tempName;</span><br><span class="line">    <span class="keyword">for</span>(<span class="keyword">int</span> i=<span class="number">0</span>;i&lt;list.size();++i)&#123;</span><br><span class="line">      tempName = list.get(i).process;</span><br><span class="line">      <span class="keyword">if</span>(tempName.contains(<span class="string">"fridaserver"</span>)) &#123;</span><br><span class="line">        returnValue = <span class="keyword">true</span>;</span><br><span class="line">      &#125;</span><br><span class="line">    &#125;</span><br><span class="line">  &#125;</span><br><span class="line">  <span class="keyword">return</span> returnValue;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
@@ -931,7 +932,7 @@
       <i class="fa fa-area-chart"></i>
     </span>
     
-    <span title="站点总字数">978k</span>
+    <span title="站点总字数">988k</span>
   
 
   
@@ -940,7 +941,7 @@
       <i class="fa fa-coffee"></i>
     </span>
     
-    <span title="站点阅读时长">14:49</span>
+    <span title="站点阅读时长">14:58</span>
   
 </div>
 

@@ -128,7 +128,7 @@
 <meta property="og:description" content="APK APK是一种归档文件,实质就是一个特殊的zip.内容主要有:应用模块,也就是源代码,资源文件,aidl接口文件.还有就是依赖模块即第三方依赖库,aar,jar,so文件.  首先打包资源文件生成R.java,编译aidl生成java接口文件,将源代码编译成dex(Dalvik Executable,Android系统为每一个APP创建一个Dalvik虚拟机)文件,最后将编译后的文件打">
 <meta property="og:locale" content="zh-CN">
 <meta property="og:image" content="https://hitworld.github.io/png/2021-01-05-21-48-45.png">
-<meta property="og:updated_time" content="2021-03-17T16:39:24.763Z">
+<meta property="og:updated_time" content="2021-03-25T13:33:35.916Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="IS-reverse-Android-基础">
 <meta name="twitter:description" content="APK APK是一种归档文件,实质就是一个特殊的zip.内容主要有:应用模块,也就是源代码,资源文件,aidl接口文件.还有就是依赖模块即第三方依赖库,aar,jar,so文件.  首先打包资源文件生成R.java,编译aidl生成java接口文件,将源代码编译成dex(Dalvik Executable,Android系统为每一个APP创建一个Dalvik虚拟机)文件,最后将编译后的文件打">
@@ -505,7 +505,7 @@
                 
                   <span class="post-meta-item-text">本文字数：</span>
                 
-                <span title="本文字数">1.8k</span>
+                <span title="本文字数">2.2k</span>
               
 
               
@@ -565,6 +565,14 @@
 <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">jdb -connect com.sun.jdi.SocketAttach:port=8700,hostname=localhost</span><br></pre></td></tr></table></figure>
 <p>此时可以开始调试了,在<code>Modules</code>找到要调试的<code>so</code>,双击获得符号表(没有的话右键分析也可以获取函数列表),选择目标函数下断点进行调试即可.</p>
 <p>反调试大多数情况会在<code>init_array</code>或者<code>JNI_Onload</code>开启线程检测<code>TracePid</code>或者端口<code>23946</code>之类的,因为程序启动的时候<code>JNI_Onload</code>和<code>init_array</code>是在主界面启动之前响应.</p>
+<h2 id="插桩">插桩</h2>
+<p>源代码插桩<code>Source Code Instrumentation(SCI)</code>:在程序源代码上增加额外的代码,从而达到预期目的或者功能.</p>
+<p>二进制插桩<code>(Binary Instrumentation)</code>:将二进制代码注入到二进制文件,通过修改汇编地址,改变运行轨迹,运行后再返回到原来程序运行点,从而实现程序的额外功能.</p>
+<ul>
+<li>静态二进制插桩<code>Static Binary Instrumentation(SBI</code>):在程序执行前插入额外的代码和数据,生成一个永久改变的可执行文件.</li>
+<li>动态二进制插桩<code>Dynamic Binary Instrumentation(DBI)</code>:在程序运行时实时地插入额外代码和数据,对可执行文件没有任何永久改变.</li>
+</ul>
+<p><code>DBI</code>功能:访问进程的内存;在应用程序运行时覆盖一些功能;从导入的类中调用函数;在堆上查找对象实例并使用这些对象实例;<code>Hook</code>,跟踪和拦截函数等等.</p>
 
       
     </div>
@@ -687,7 +695,7 @@
                 
                   <a href="/archives/">
                 
-                    <span class="site-state-item-count">176</span>
+                    <span class="site-state-item-count">177</span>
                     <span class="site-state-item-name">日志</span>
                   </a>
                 </div>
@@ -877,7 +885,7 @@
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#apk"><span class="nav-number">1.</span> <span class="nav-text">APK</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#逆向apk"><span class="nav-number">2.</span> <span class="nav-text">逆向APK</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#动态调试"><span class="nav-number">3.</span> <span class="nav-text">动态调试</span></a></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#apk"><span class="nav-number">1.</span> <span class="nav-text">APK</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#逆向apk"><span class="nav-number">2.</span> <span class="nav-text">逆向APK</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#动态调试"><span class="nav-number">3.</span> <span class="nav-text">动态调试</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#插桩"><span class="nav-number">4.</span> <span class="nav-text">插桩</span></a></li></ol></div>
             
 
           </div>
@@ -909,7 +917,7 @@
       <i class="fa fa-area-chart"></i>
     </span>
     
-    <span title="站点总字数">988k</span>
+    <span title="站点总字数">992k</span>
   
 
   
@@ -918,7 +926,7 @@
       <i class="fa fa-coffee"></i>
     </span>
     
-    <span title="站点阅读时长">14:58</span>
+    <span title="站点阅读时长">15:02</span>
   
 </div>
 

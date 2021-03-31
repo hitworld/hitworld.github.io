@@ -1,0 +1,1570 @@
+<!DOCTYPE html>
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+
+<html class="theme-next mist use-motion" lang="zh-CN">
+<head><meta name="generator" content="Hexo 3.8.0">
+  <!-- hexo-inject:begin --><!-- hexo-inject:end --><meta charset="UTF-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+
+
+
+
+
+
+  
+  
+    
+    
+  <script src="/lib/pace/pace.min.js?v=1.0.2"></script>
+  <link href="/lib/pace/pace-theme-minimal.min.css?v=1.0.2" rel="stylesheet">
+
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform">
+<meta http-equiv="Cache-Control" content="no-siteapp">
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css">
+
+<link href="/css/main.css?v=6.5.0" rel="stylesheet" type="text/css">
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon.png?v=6.5.0">
+
+
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32.png?v=6.5.0">
+
+
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16.png?v=6.5.0">
+
+
+  <link rel="mask-icon" href="/images/safari_pinned_tab.svg?v=6.5.0" color="#222">
+
+
+  <link rel="manifest" href="/images/manifest.json">
+
+
+  <meta name="msapplication-config" content="/images/browserconfig.xml">
+
+
+
+
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Mist',
+    version: '6.5.0',
+    sidebar: {"position":"left","display":"post","offset":12,"b2t":false,"scrollpercent":true,"onmobile":true},
+    fancybox: false,
+    fastclick: false,
+    lazyload: false,
+    tabs: true,
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+  
+
+
+
+
+  <meta name="description" content="概览 Unicorn是一款基于QEMU模拟器的模拟执行框架,支持多种架构,支持多种语言,使用虚拟内存,支持多线程. QEMU通过引入一层中间语言TCG来实现在主机上模拟执行不同架构的代码,QEMU会先以基本块为单位,将MIPS指令经由TCG这一层翻译成x86代码,得到TB(Translation Block),然后执行. QEMU通过缓存TB来减少下次执行时的翻译开销,并通过TB链接机制,也">
+<meta name="keywords" content="unicorn">
+<meta property="og:type" content="article">
+<meta property="og:title" content="IS-reverse-unicorn-基础">
+<meta property="og:url" content="https://hitworld.github.io/posts/58dd6bb5/index.html">
+<meta property="og:site_name" content="w4rd3n">
+<meta property="og:description" content="概览 Unicorn是一款基于QEMU模拟器的模拟执行框架,支持多种架构,支持多种语言,使用虚拟内存,支持多线程. QEMU通过引入一层中间语言TCG来实现在主机上模拟执行不同架构的代码,QEMU会先以基本块为单位,将MIPS指令经由TCG这一层翻译成x86代码,得到TB(Translation Block),然后执行. QEMU通过缓存TB来减少下次执行时的翻译开销,并通过TB链接机制,也">
+<meta property="og:locale" content="zh-CN">
+<meta property="og:updated_time" content="2021-03-31T11:30:57.225Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="IS-reverse-unicorn-基础">
+<meta name="twitter:description" content="概览 Unicorn是一款基于QEMU模拟器的模拟执行框架,支持多种架构,支持多种语言,使用虚拟内存,支持多线程. QEMU通过引入一层中间语言TCG来实现在主机上模拟执行不同架构的代码,QEMU会先以基本块为单位,将MIPS指令经由TCG这一层翻译成x86代码,得到TB(Translation Block),然后执行. QEMU通过缓存TB来减少下次执行时的翻译开销,并通过TB链接机制,也">
+
+
+
+
+
+
+  <link rel="canonical" href="https://hitworld.github.io/posts/58dd6bb5/">
+
+
+
+<script type="text/javascript" id="page.configurations">
+  CONFIG.page = {
+    sidebar: "",
+  };
+</script>
+
+  <title>IS-reverse-unicorn-基础 | w4rd3n</title>
+  
+
+
+
+
+
+
+
+
+
+
+
+  <noscript>
+  <style type="text/css">
+    .use-motion .motion-element,
+    .use-motion .brand,
+    .use-motion .menu-item,
+    .sidebar-inner,
+    .use-motion .post-block,
+    .use-motion .pagination,
+    .use-motion .comments,
+    .use-motion .post-header,
+    .use-motion .post-body,
+    .use-motion .collection-title { opacity: initial; }
+
+    .use-motion .logo,
+    .use-motion .site-title,
+    .use-motion .site-subtitle {
+      opacity: initial;
+      top: initial;
+    }
+
+    .use-motion {
+      .logo-line-before i { left: initial; }
+      .logo-line-after i { right: initial; }
+    }
+  </style>
+</noscript><!-- hexo-inject:begin --><!-- hexo-inject:end -->
+
+</head>
+
+<body itemscope="" itemtype="http://schema.org/WebPage" lang="zh-CN">
+
+  
+  
+    
+  
+
+  <!-- hexo-inject:begin --><!-- hexo-inject:end --><div class="container sidebar-position-left page-post-detail">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope="" itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/" class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">w4rd3n</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+    
+      
+        <p class="site-subtitle">混吃等死</p>
+      
+    
+  </div>
+
+  <div class="site-nav-toggle">
+    <button aria-label="切换导航栏">
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+
+
+<nav class="site-nav">
+  
+    <ul id="menu" class="menu">
+      
+        
+        
+        
+          
+          <li class="menu-item menu-item-home">
+
+    
+    
+    
+      
+    
+
+    
+
+    <a href="/" rel="section"><i class="menu-item-icon fa fa-fw fa-home"></i> <br>首页</a>
+
+  </li>
+        
+        
+        
+          
+          <li class="menu-item menu-item-about">
+
+    
+    
+    
+      
+    
+
+    
+
+    <a href="/about/" rel="section"><i class="menu-item-icon fa fa-fw fa-user"></i> <br>友链</a>
+
+  </li>
+        
+        
+        
+          
+          <li class="menu-item menu-item-tags">
+
+    
+    
+    
+      
+    
+
+    
+
+    <a href="/tags/" rel="section"><i class="menu-item-icon fa fa-fw fa-tags"></i> <br>标签</a>
+
+  </li>
+        
+        
+        
+          
+          <li class="menu-item menu-item-categories">
+
+    
+    
+    
+      
+    
+
+    
+
+    <a href="/categories/" rel="section"><i class="menu-item-icon fa fa-fw fa-th"></i> <br>分类</a>
+
+  </li>
+        
+        
+        
+          
+          <li class="menu-item menu-item-archives">
+
+    
+    
+    
+      
+    
+
+    
+
+    <a href="/archives/" rel="section"><i class="menu-item-icon fa fa-fw fa-archive"></i> <br>归档</a>
+
+  </li>
+
+      
+      
+        <li class="menu-item menu-item-search">
+          
+            <a href="javascript:;" class="popup-trigger">
+          
+            
+              <i class="menu-item-icon fa fa-search fa-fw"></i> <br>搜索</a>
+        </li>
+      
+    </ul>
+  
+
+  
+    
+
+  
+
+  
+    <div class="site-search">
+      
+  <div class="popup search-popup local-search-popup">
+  <div class="local-search-header clearfix">
+    <span class="search-icon">
+      <i class="fa fa-search"></i>
+    </span>
+    <span class="popup-btn-close">
+      <i class="fa fa-times-circle"></i>
+    </span>
+    <div class="local-search-input-wrapper">
+      <input autocomplete="off" placeholder="搜索..." spellcheck="false" type="text" id="local-search-input">
+    </div>
+  </div>
+  <div id="local-search-result"></div>
+</div>
+
+
+
+    </div>
+  
+</nav>
+
+
+
+  
+
+
+
+</div>
+    </header>
+
+    
+
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  
+
+  <article class="post post-type-normal" itemscope="" itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="https://hitworld.github.io/posts/58dd6bb5/">
+
+    <span hidden itemprop="author" itemscope="" itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="w4rd3n">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/apple-touch-icon.png">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope="" itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="w4rd3n">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">IS-reverse-unicorn-基础
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+
+            
+            
+            
+
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+
+              
+                
+              
+
+              <time title="创建时间：2021-03-26 14:12:13" itemprop="dateCreated datePublished" datetime="2021-03-26T14:12:13+08:00">2021-03-26</time>
+            
+
+            
+          </span>
+
+          
+            <span class="post-category">
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope="" itemtype="http://schema.org/Thing"><a href="/categories/IS/" itemprop="url" rel="index"><span itemprop="name">IS</span></a></span>
+
+                
+                
+                  ，
+                
+              
+                <span itemprop="about" itemscope="" itemtype="http://schema.org/Thing"><a href="/categories/IS/reverse/" itemprop="url" rel="index"><span itemprop="name">reverse</span></a></span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+             <span id="/posts/58dd6bb5/" class="leancloud_visitors" data-flag-title="IS-reverse-unicorn-基础">
+               <span class="post-meta-divider">|</span>
+               <span class="post-meta-item-icon">
+                 <i class="fa fa-eye"></i>
+               </span>
+               
+                 <span class="post-meta-item-text">热度：</span>
+               
+                 <span class="leancloud-visitors-count"></span>
+                 <span>℃</span>
+             </span>
+          
+
+          
+
+          
+            <div class="post-symbolscount">
+              
+
+              
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-file-word-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">本文字数：</span>
+                
+                <span title="本文字数">8.9k</span>
+              
+
+              
+                <span class="post-meta-divider">|</span>
+              
+
+              
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-clock-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">阅读时长 &asymp;</span>
+                
+                <span title="阅读时长">8 分钟</span>
+              
+            </div>
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <h2 id="概览">概览</h2>
+<p><code>Unicorn</code>是一款基于<code>QEMU</code>模拟器的模拟执行框架,支持多种架构,支持多种语言,使用虚拟内存,支持多线程.</p>
+<p><code>QEMU</code>通过引入一层中间语言<code>TCG</code>来实现在主机上模拟执行不同架构的代码,<code>QEMU</code>会先以基本块为单位,将<code>MIPS</code>指令经由TCG这一层翻译成<code>x86</code>代码,得到<code>TB</code>(<code>Translation Block</code>),然后执行.</p>
+<p><code>QEMU</code>通过缓存<code>TB</code>来减少下次执行时的翻译开销,并通过<code>TB</code>链接机制,也就是把原始代码基本块之间的跳转关系,映射到<code>TB</code>之间.从而尽可能地减少查找缓存的次数和相关的上下文切换.</p>
+<p><code>Unicorn</code>所提供的<code>hook</code>功能,就是在目标代码翻译成<code>TCG</code>时,插入相关的<code>TCG</code>指令,由于<code>TCG</code>指令和架构无关,因此添加的<code>TCG</code>指令可以直接适用于不同架构.</p>
+<h2 id="hook机制">Hook机制</h2>
+<p><code>Unicorn</code>支持多种不同类型的<code>Hook</code>,通过调用<code>hook_add</code>函数添加<code>Hook</code>.<code>Unicorn</code>的<code>Hook</code>是链式的,可以添加多个同类型的<code>Hook</code>,<code>Unicorn</code>会依次调用每一个<code>callback</code>.<code>callback</code>是有作用范围的.</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">hook_add</span><span class="params">(self, htype, callback, user_data = None, begin = <span class="number">1</span>, end = <span class="number">0</span>, arg1 = <span class="number">0</span>)</span>:</span></span><br><span class="line">    <span class="keyword">pass</span></span><br><span class="line"><span class="string">'''</span></span><br><span class="line"><span class="string">htype是Hook的类型</span></span><br><span class="line"><span class="string">callback是Hook的handler指针,不同类型的hook,其handler的参数定义也是不同的</span></span><br><span class="line"><span class="string">user_data是附加参数,所有的handler都有一个user_data参数</span></span><br><span class="line"><span class="string">begin,hook作用范围起始地址</span></span><br><span class="line"><span class="string">end,hook作用范围结束地址</span></span><br><span class="line"><span class="string">只有回调的地址在[begin, end]中才会调用回调,如果begin &gt; end,每当触发此hook类型时都会调用回调</span></span><br><span class="line"><span class="string">'''</span></span><br></pre></td></tr></table></figure>
+<p><code>handler</code>部分定义.</p>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//UC_HOOK_CODE &amp; UC_HOOK_BLOCK</span></span><br><span class="line"><span class="function"><span class="keyword">typedef</span> <span class="title">void</span> <span class="params">(*<span class="keyword">uc_cb_hookcode_t</span>)</span><span class="params">(uc_engine *uc, <span class="keyword">uint64_t</span> address, <span class="keyword">uint32_t</span> size, <span class="keyword">void</span> *user_data)</span></span>;</span><br><span class="line"><span class="comment">//READ, WRITE &amp; FETCH</span></span><br><span class="line"><span class="function"><span class="keyword">typedef</span> <span class="title">void</span> <span class="params">(*<span class="keyword">uc_cb_hookmem_t</span>)</span><span class="params">(uc_engine *uc, uc_mem_type type, <span class="keyword">uint64_t</span> address, <span class="keyword">int</span> size, <span class="keyword">int64_t</span> value, <span class="keyword">void</span> *user_data)</span></span>;</span><br><span class="line"><span class="comment">//invalid memory access events (UNMAPPED and PROT events)</span></span><br><span class="line"><span class="function"><span class="keyword">typedef</span> <span class="title">bool</span> <span class="params">(*<span class="keyword">uc_cb_eventmem_t</span>)</span><span class="params">(uc_engine *uc, uc_mem_type type, <span class="keyword">uint64_t</span> address, <span class="keyword">int</span> size, <span class="keyword">int64_t</span> value, <span class="keyword">void</span> *user_data)</span></span>;</span><br></pre></td></tr></table></figure>
+<h2 id="rtfsc">RTFSC</h2>
+<h3 id="uc_hook_type">uc_hook_type</h3>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">typedef</span> <span class="keyword">enum</span> uc_hook_type &#123;</span><br><span class="line">    UC_HOOK_INTR = <span class="number">1</span> &lt;&lt; <span class="number">0</span>, <span class="comment">// Hook 所有中断/syscall 事件</span></span><br><span class="line">    UC_HOOK_INSN = <span class="number">1</span> &lt;&lt; <span class="number">1</span>, <span class="comment">// Hook 一条特定的指令 - 只支持非常小的指令子集</span></span><br><span class="line">    UC_HOOK_CODE = <span class="number">1</span> &lt;&lt; <span class="number">2</span>, <span class="comment">// Hook 一段代码</span></span><br><span class="line">    UC_HOOK_BLOCK = <span class="number">1</span> &lt;&lt; <span class="number">3</span>, <span class="comment">// Hook 基本块</span></span><br><span class="line">    UC_HOOK_MEM_READ_UNMAPPED = <span class="number">1</span> &lt;&lt; <span class="number">4</span>, <span class="comment">// 用于在未映射的内存上读取内存的Hook</span></span><br><span class="line">    UC_HOOK_MEM_WRITE_UNMAPPED = <span class="number">1</span> &lt;&lt; <span class="number">5</span>, <span class="comment">// Hook 无效的内存写事件</span></span><br><span class="line">    UC_HOOK_MEM_FETCH_UNMAPPED = <span class="number">1</span> &lt;&lt; <span class="number">6</span>, <span class="comment">// Hook 执行事件的无效内存</span></span><br><span class="line">    UC_HOOK_MEM_READ_PROT = <span class="number">1</span> &lt;&lt; <span class="number">7</span>, <span class="comment">// Hook 读保护的内存</span></span><br><span class="line">    UC_HOOK_MEM_WRITE_PROT = <span class="number">1</span> &lt;&lt; <span class="number">8</span>, <span class="comment">// Hook 写保护的内存</span></span><br><span class="line">    UC_HOOK_MEM_FETCH_PROT = <span class="number">1</span> &lt;&lt; <span class="number">9</span>, <span class="comment">// Hook 不可执行内存上的内存</span></span><br><span class="line">    UC_HOOK_MEM_READ = <span class="number">1</span> &lt;&lt; <span class="number">10</span>, <span class="comment">// Hook 内存读取事件</span></span><br><span class="line">    UC_HOOK_MEM_WRITE = <span class="number">1</span> &lt;&lt; <span class="number">11</span>, <span class="comment">// Hook 内存写入事件</span></span><br><span class="line">    UC_HOOK_MEM_FETCH = <span class="number">1</span> &lt;&lt; <span class="number">12</span>, <span class="comment">// Hook 内存获取执行事件</span></span><br><span class="line">    UC_HOOK_MEM_READ_AFTER = <span class="number">1</span> &lt;&lt; <span class="number">13</span>, <span class="comment">// Hook 内存读取事件, 只允许能成功访问的地址, 成功读取后将触发回调</span></span><br><span class="line">    UC_HOOK_INSN_INVALID = <span class="number">1</span> &lt;&lt; <span class="number">14</span>, <span class="comment">// Hook 无效指令异常</span></span><br><span class="line">&#125; uc_hook_type;</span><br></pre></td></tr></table></figure>
+<h3 id="uc_err">uc_err</h3>
+<p><code>uc_errno</code>会返回告最后的错误号,一旦被访问,<code>uc_errno</code>可能不会保留原来的值.</p>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">typedef</span> <span class="keyword">enum</span> uc_err &#123;</span><br><span class="line">    UC_ERR_OK = <span class="number">0</span>, <span class="comment">// 无错误</span></span><br><span class="line">    UC_ERR_NOMEM, <span class="comment">// 内存不足: uc_open(), uc_emulate()</span></span><br><span class="line">    UC_ERR_ARCH, <span class="comment">// 不支持的架构: uc_open()</span></span><br><span class="line">    UC_ERR_HANDLE, <span class="comment">// 不可用句柄</span></span><br><span class="line">    UC_ERR_MODE, <span class="comment">// 不可用/不支持架构: uc_open()</span></span><br><span class="line">    UC_ERR_VERSION, <span class="comment">// 不支持版本 (中间件)</span></span><br><span class="line">    UC_ERR_READ_UNMAPPED, <span class="comment">// 由于在未映射的内存上读取而退出模拟: uc_emu_start()</span></span><br><span class="line">    UC_ERR_WRITE_UNMAPPED, <span class="comment">// 由于在未映射的内存上写入而退出模拟: uc_emu_start()</span></span><br><span class="line">    UC_ERR_FETCH_UNMAPPED, <span class="comment">// 由于在未映射的内存中获取数据而退出模拟: uc_emu_start()</span></span><br><span class="line">    UC_ERR_HOOK, <span class="comment">// 无效的hook类型: uc_hook_add()</span></span><br><span class="line">    UC_ERR_INSN_INVALID, <span class="comment">// 由于指令无效而退出模拟: uc_emu_start()</span></span><br><span class="line">    UC_ERR_MAP, <span class="comment">// 无效的内存映射: uc_mem_map()</span></span><br><span class="line">    UC_ERR_WRITE_PROT, <span class="comment">// 由于UC_MEM_WRITE_PROT冲突而停止模拟: uc_emu_start()</span></span><br><span class="line">    UC_ERR_READ_PROT, <span class="comment">// 由于UC_MEM_READ_PROT冲突而停止模拟: uc_emu_start()</span></span><br><span class="line">    UC_ERR_FETCH_PROT, <span class="comment">// 由于UC_MEM_FETCH_PROT冲突而停止模拟: uc_emu_start()</span></span><br><span class="line">    UC_ERR_ARG, <span class="comment">// 提供给uc_xxx函数的无效参数</span></span><br><span class="line">    UC_ERR_READ_UNALIGNED, <span class="comment">// 未对齐读取</span></span><br><span class="line">    UC_ERR_WRITE_UNALIGNED, <span class="comment">// 未对齐写入</span></span><br><span class="line">    UC_ERR_FETCH_UNALIGNED, <span class="comment">// 未对齐的提取</span></span><br><span class="line">    UC_ERR_HOOK_EXIST, <span class="comment">// 此事件的钩子已经存在</span></span><br><span class="line">    UC_ERR_RESOURCE, <span class="comment">// 资源不足: uc_emu_start()</span></span><br><span class="line">    UC_ERR_EXCEPTION, <span class="comment">// 未处理的CPU异常</span></span><br><span class="line">    UC_ERR_TIMEOUT <span class="comment">// 模拟超时</span></span><br><span class="line">&#125; uc_err;</span><br></pre></td></tr></table></figure>
+<h3 id="c-api">C API</h3>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br></pre></td><td class="code"><pre><span class="line"><span class="function">uc_err <span class="title">uc_hook_add</span><span class="params">(uc_engine *uc, uc_hook *hh, <span class="keyword">int</span> type, <span class="keyword">void</span> *callback, <span class="keyword">void</span> *user_data, <span class="keyword">uint64_t</span> begin, <span class="keyword">uint64_t</span> end, ...)</span></span>;</span><br><span class="line"><span class="function">uc_err <span class="title">uc_hook_del</span><span class="params">(uc_engine *uc, uc_hook hh)</span></span>;</span><br><span class="line"><span class="function">uc_err <span class="title">uc_mem_map</span><span class="params">(uc_engine *uc, <span class="keyword">uint64_t</span> address, <span class="keyword">size_t</span> size, <span class="keyword">uint32_t</span> perms)</span></span>;</span><br><span class="line"><span class="function">uc_err <span class="title">uc_mem_map_ptr</span><span class="params">(uc_engine *uc, <span class="keyword">uint64_t</span> address, <span class="keyword">size_t</span> size, <span class="keyword">uint32_t</span> perms, <span class="keyword">void</span> *ptr)</span></span>;</span><br><span class="line"><span class="function">uc_err <span class="title">uc_mem_unmap</span><span class="params">(uc_engine *uc, <span class="keyword">uint64_t</span> address, <span class="keyword">size_t</span> size)</span></span>;</span><br><span class="line"><span class="function">uc_err <span class="title">uc_mem_protect</span><span class="params">(uc_engine *uc, <span class="keyword">uint64_t</span> address, <span class="keyword">size_t</span> size, <span class="keyword">uint32_t</span> perms)</span></span>;</span><br><span class="line"><span class="function">uc_err <span class="title">uc_mem_regions</span><span class="params">(uc_engine *uc, uc_mem_region **regions, <span class="keyword">uint32_t</span> *count)</span></span>;</span><br><span class="line"><span class="function">uc_err <span class="title">uc_free</span><span class="params">(<span class="keyword">void</span> *mem)</span></span>;</span><br><span class="line"><span class="function">uc_err <span class="title">uc_context_alloc</span><span class="params">(uc_engine *uc, uc_context **context)</span></span>;</span><br><span class="line"><span class="function">uc_err <span class="title">uc_context_save</span><span class="params">(uc_engine *uc, uc_context *context)</span></span>;</span><br><span class="line"><span class="function">uc_err <span class="title">uc_context_restore</span><span class="params">(uc_engine *uc, uc_context *context)</span></span>;</span><br><span class="line"><span class="keyword">size_t</span> uc_context_size(uc_engine *uc);</span><br><span class="line"><span class="function"><span class="keyword">unsigned</span> <span class="keyword">int</span> <span class="title">uc_version</span><span class="params">(<span class="keyword">unsigned</span> <span class="keyword">int</span> *major, <span class="keyword">unsigned</span> <span class="keyword">int</span> *minor)</span></span>;</span><br><span class="line"><span class="function"><span class="keyword">bool</span> <span class="title">uc_arch_supported</span><span class="params">(uc_arch arch)</span></span>;</span><br><span class="line"><span class="function">uc_err <span class="title">uc_open</span><span class="params">(uc_arch arch, uc_mode mode, uc_engine **uc)</span></span>;</span><br><span class="line"><span class="function">uc_err <span class="title">uc_close</span><span class="params">(uc_engine *uc)</span></span>;</span><br><span class="line"><span class="function">uc_err <span class="title">uc_query</span><span class="params">(uc_engine *uc, uc_query_type type, <span class="keyword">size_t</span> *result)</span></span>;</span><br><span class="line"><span class="function">uc_err <span class="title">uc_errno</span><span class="params">(uc_engine *uc)</span></span>;</span><br><span class="line"><span class="function"><span class="keyword">const</span> <span class="keyword">char</span> *<span class="title">uc_strerror</span><span class="params">(uc_err code)</span></span>;</span><br><span class="line"><span class="function">uc_err <span class="title">uc_reg_write</span><span class="params">(uc_engine *uc, <span class="keyword">int</span> regid, <span class="keyword">const</span> <span class="keyword">void</span> *value)</span></span>;</span><br><span class="line"><span class="function">uc_err <span class="title">uc_reg_read</span><span class="params">(uc_engine *uc, <span class="keyword">int</span> regid, <span class="keyword">void</span> *value)</span></span>;</span><br><span class="line"><span class="function">uc_err <span class="title">uc_reg_write_batch</span><span class="params">(uc_engine *uc, <span class="keyword">int</span> *regs, <span class="keyword">void</span> *<span class="keyword">const</span> *vals, <span class="keyword">int</span> count)</span></span>;</span><br><span class="line"><span class="function">uc_err <span class="title">uc_reg_read_batch</span><span class="params">(uc_engine *uc, <span class="keyword">int</span> *regs, <span class="keyword">void</span> **vals, <span class="keyword">int</span> count)</span></span>;</span><br><span class="line"><span class="function">uc_err <span class="title">uc_mem_write</span><span class="params">(uc_engine *uc, <span class="keyword">uint64_t</span> address, <span class="keyword">const</span> <span class="keyword">void</span> *bytes, <span class="keyword">size_t</span> size)</span></span>;</span><br><span class="line"><span class="function">uc_err <span class="title">uc_mem_read</span><span class="params">(uc_engine *uc, <span class="keyword">uint64_t</span> address, <span class="keyword">void</span> *bytes, <span class="keyword">size_t</span> size)</span></span>;</span><br><span class="line"><span class="function">uc_err <span class="title">uc_emu_start</span><span class="params">(uc_engine *uc, <span class="keyword">uint64_t</span> begin, <span class="keyword">uint64_t</span> until, <span class="keyword">uint64_t</span> timeout, <span class="keyword">size_t</span> count)</span></span>;</span><br><span class="line"><span class="function">uc_err <span class="title">uc_emu_stop</span><span class="params">(uc_engine *uc)</span></span>;</span><br></pre></td></tr></table></figure>
+<h2 id="使用">使用</h2>
+<h3 id="demo">Demo</h3>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">from</span> unicorn <span class="keyword">import</span> *</span><br><span class="line"><span class="keyword">from</span> unicorn.arm_const <span class="keyword">import</span> *</span><br><span class="line"></span><br><span class="line">ARM_CODE = <span class="string">b"\x37\x00\xa0\xe3\x03\x10\x42\xe0"</span></span><br><span class="line"><span class="comment"># mov r0, #0x37;</span></span><br><span class="line"><span class="comment"># sub r1, r2, r3</span></span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">hook_code</span><span class="params">(uc, address, size, user_data)</span>:</span></span><br><span class="line">    print(<span class="string">"&gt;&gt;&gt; Tracing instruction at 0x%x, instruction size = 0x%x"</span> % (address, size))</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">test_arm</span><span class="params">()</span>:</span></span><br><span class="line">    <span class="keyword">try</span>:</span><br><span class="line">        <span class="comment"># Initialize emulator in ARM mode</span></span><br><span class="line">        mu = Uc(UC_ARCH_ARM, UC_MODE_THUMB)</span><br><span class="line"> </span><br><span class="line">        <span class="comment"># map 2MB memory for this emulation</span></span><br><span class="line">        ADDRESS = <span class="number">0x10000</span></span><br><span class="line">        mu.mem_map(ADDRESS, <span class="number">2</span> * <span class="number">0x10000</span>)</span><br><span class="line">        mu.mem_write(ADDRESS, ARM_CODE)</span><br><span class="line"> </span><br><span class="line">        mu.reg_write(UC_ARM_REG_R0, <span class="number">0x1234</span>)</span><br><span class="line">        mu.reg_write(UC_ARM_REG_R2, <span class="number">0x6789</span>)</span><br><span class="line">        mu.reg_write(UC_ARM_REG_R3, <span class="number">0x3333</span>)</span><br><span class="line"> </span><br><span class="line">        mu.hook_add(UC_HOOK_CODE, hook_code, begin = ADDRESS, end = ADDRESS)</span><br><span class="line">        <span class="comment"># emulate machine code in infinite time</span></span><br><span class="line">        mu.emu_start(ADDRESS, ADDRESS + len(ARM_CODE))</span><br><span class="line">        r0 = mu.reg_read(UC_ARM_REG_R0)</span><br><span class="line">        r1 = mu.reg_read(UC_ARM_REG_R1)</span><br><span class="line">        print(<span class="string">"&gt;&gt;&gt; R0 = 0x%x"</span> % r0)</span><br><span class="line">        print(<span class="string">"&gt;&gt;&gt; R1 = 0x%x"</span> % r1)</span><br><span class="line">        mu.reg_write(UC_ARM_REG_R1, <span class="number">0x2333</span>)</span><br><span class="line">        data = mu.mem_read(ADDRESS, len(ARM_CODE))</span><br><span class="line">    <span class="keyword">except</span> UcError <span class="keyword">as</span> e:</span><br><span class="line">        print(<span class="string">"ERROR: %s"</span> % e)</span><br><span class="line"></span><br><span class="line">test_arm()</span><br></pre></td></tr></table></figure>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">define</span> CODEADDR 0x10000</span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">define</span> STACKADDR 0x20000</span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">define</span> X86_CODE32 <span class="meta-string">"\x31\xc9\xf7\xe1\x51\x68\x2f\x2f\x73\x68\x68\x2f\x62\x69\x6e\x89\xe3\xb0\x0b\xcd\x80"</span></span></span><br><span class="line"></span><br><span class="line">uc_engine *uc;</span><br><span class="line"></span><br><span class="line">uc_open(UC_ARCH_X86, UC_MODE_32, &amp;uc);</span><br><span class="line">uc_mem_map(uc, CODEADDR, <span class="number">2</span> * <span class="number">1024</span> * <span class="number">1024</span>, UC_PROT_ALL);</span><br><span class="line">uc_mem_map(uc, STACKADDR, <span class="number">2</span> * <span class="number">1024</span> * <span class="number">1024</span>, UC_PROT_ALL);</span><br><span class="line">uc_mem_write(uc, CODEADDR, X86_CODE32, <span class="keyword">sizeof</span>(X86_CODE32) - <span class="number">1</span>);</span><br><span class="line">*addr = STACKADDR;</span><br><span class="line">uc_reg_write(uc, UC_X86_REG_ESP, addr);</span><br><span class="line">uc_hook_add(uc, &amp;code_hook, UC_HOOK_CODE, hook_code, <span class="literal">NULL</span>, CODEADDR, CODEADDR + <span class="keyword">sizeof</span>(X86_CODE32));</span><br><span class="line"><span class="comment">//uc_hook_del(uc, &amp;code_hook);</span></span><br><span class="line">uc_emu_start(uc, CODEADDR, CODEADDR + <span class="keyword">sizeof</span>(X86_CODE32), <span class="number">0</span>, <span class="number">0</span>);</span><br><span class="line">uc_reg_read(uc, UC_X86_REG_ESP, addr);</span><br><span class="line">uc_mem_unmap(uc, STACKADDR, <span class="number">2</span> * <span class="number">1024</span> * <span class="number">1024</span>);</span><br><span class="line"></span><br><span class="line">uc_close(uc);</span><br></pre></td></tr></table></figure>
+<h3 id="capstone">capstone</h3>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">from</span> capstone <span class="keyword">import</span> *</span><br><span class="line"><span class="keyword">from</span> capstone.arm <span class="keyword">import</span> *</span><br><span class="line"> </span><br><span class="line">CODE = <span class="string">b"\xf1\x02\x03\x0e\x00\x00\xa0\xe3\x02\x30\xc1\xe7\x00\x00\x53\xe3"</span></span><br><span class="line"> </span><br><span class="line">md = Cs(CS_ARCH_ARM, CS_MODE_ARM)</span><br><span class="line"><span class="keyword">for</span> i <span class="keyword">in</span> md.disasm(CODE, <span class="number">0x1000</span>):</span><br><span class="line">    print(<span class="string">"%x:\t%s\t%s"</span> % (i.address, i.mnemonic, i.op_str))</span><br></pre></td></tr></table></figure>
+<h3 id="运行so">运行so</h3>
+<p>最简单的一种方法就是<code>dump</code>内存中已经载入的<code>so</code>(<code>https://github.com/lasting-yang/frida_dump</code>).</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br></pre></td><td class="code"><pre><span class="line">uc = unicorn.Uc(unicorn.UC_ARCH_ARM64,unicorn.UC_MODE_ARM)</span><br><span class="line"><span class="comment">#从内存中dump下来so的基址</span></span><br><span class="line">code_addr = <span class="number">0x7eae047000</span></span><br><span class="line">code_size = <span class="number">8</span> * <span class="number">0x1000</span> * <span class="number">0x1000</span></span><br><span class="line">uc.mem_map(code_addr, code_size)</span><br><span class="line"><span class="comment">#栈空间</span></span><br><span class="line">stack_addr = code_addr + code_size</span><br><span class="line">stack_size = <span class="number">0x1000</span></span><br><span class="line">stack_top = stack_addr + stack_size - <span class="number">0x8</span></span><br><span class="line">uc.mem_map(stack_addr , stack_size)</span><br><span class="line"><span class="comment">#参数空间</span></span><br><span class="line">args_addr = stack_addr + stack_size</span><br><span class="line">args_size = <span class="number">0x1000</span></span><br><span class="line">uc.mem_map(args_addr, args_size)</span><br><span class="line"><span class="comment">#设置每句汇编执行都会调用hook_code</span></span><br><span class="line">uc.hook_add(unicorn.UC_HOOK_CODE, hook_code)</span><br><span class="line"><span class="comment">#读取so</span></span><br><span class="line"><span class="keyword">with</span> open(<span class="string">"./libnative-lib.so_0x7eae047000_0x38000.so"</span>, <span class="string">"rb"</span>) <span class="keyword">as</span> f:</span><br><span class="line">    sodata = f.read()</span><br><span class="line">    uc.mem_write(code_addr, sodata)</span><br><span class="line">    <span class="comment">#要执行的代码开始位置</span></span><br><span class="line">    start_addr = code_addr + <span class="number">0xFCB4</span></span><br><span class="line">    <span class="comment">#要执行的代码结束位置</span></span><br><span class="line">    end_addr = code_addr + <span class="number">0xFF2C</span></span><br><span class="line">    <span class="comment">#随机生成一个参数</span></span><br><span class="line">    input_str = ranstr(<span class="number">36</span>)</span><br><span class="line">    print(<span class="string">"input:%s input_addr:0x%x"</span> % (input_str, args_addr))</span><br><span class="line">    input_byte = str.encode(input_str)</span><br><span class="line">    uc.mem_write(args_addr, input_byte)</span><br><span class="line">    <span class="comment">#设置参数寄存器和栈寄存器</span></span><br><span class="line">    uc.reg_write(unicorn.arm64_const.UC_ARM64_REG_X0, args_addr)</span><br><span class="line">    uc.reg_write(unicorn.arm64_const.UC_ARM64_REG_X1, len(input_str))</span><br><span class="line">    uc.reg_write(unicorn.arm64_const.UC_ARM64_REG_SP, stack_top)</span><br><span class="line">    <span class="comment">#开始执行</span></span><br><span class="line">    uc.emu_start(start_addr, end_addr)</span><br><span class="line">    <span class="comment">#读取返回值</span></span><br><span class="line">    result = uc.mem_read(args_addr, args_size)</span><br><span class="line">    print(<span class="string">"result:"</span>, result.decode(encoding = <span class="string">"utf-8"</span>))</span><br><span class="line"><span class="comment">#释放内存</span></span><br><span class="line">uc.mem_unmap(args_addr, args_size)</span><br><span class="line">uc.mem_unmap(stack_addr,stack_size)</span><br><span class="line">uc.mem_unmap(code_addr,code_size)</span><br></pre></td></tr></table></figure>
+
+      
+    </div>
+
+    
+
+    
+    
+    
+
+    
+
+    
+       
+    
+    
+
+    
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/unicorn/" rel="tag"><i class="fa fa-tag"></i> unicorn</a>
+          
+        </div>
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/posts/dc9fdbf5/" rel="next" title="IS-reverse-Android-hook-frida">
+                <i class="fa fa-chevron-left"></i> IS-reverse-Android-hook-frida
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+  </div>
+
+
+          </div>
+          
+
+  
+
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    
+      <div id="sidebar-dimmer"></div>
+    
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview-wrap sidebar-panel">
+        <div class="site-overview">
+          <div class="site-author motion-element" itemprop="author" itemscope="" itemtype="http://schema.org/Person">
+            
+              <img class="site-author-image" itemprop="image" src="/images/apple-touch-icon.png" alt="w4rd3n">
+            
+              <p class="site-author-name" itemprop="name">w4rd3n</p>
+              <p class="site-description motion-element" itemprop="description"></p>
+          </div>
+
+          
+            <nav class="site-state motion-element">
+              
+                <div class="site-state-item site-state-posts">
+                
+                  <a href="/archives/">
+                
+                    <span class="site-state-item-count">178</span>
+                    <span class="site-state-item-name">日志</span>
+                  </a>
+                </div>
+              
+
+              
+                
+                
+                <div class="site-state-item site-state-categories">
+                  <a href="/categories/index.html">
+                    
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                    <span class="site-state-item-count">17</span>
+                    <span class="site-state-item-name">分类</span>
+                  </a>
+                </div>
+              
+
+              
+                
+                
+                <div class="site-state-item site-state-tags">
+                  <a href="/tags/index.html">
+                    
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                    <span class="site-state-item-count">41</span>
+                    <span class="site-state-item-name">标签</span>
+                  </a>
+                </div>
+              
+            </nav>
+          
+
+          
+
+          
+            <div class="links-of-author motion-element">
+              
+                <span class="links-of-author-item">
+                  
+                  
+                    
+                  
+                  
+                    
+                  
+                  <a href="https://github.com/hitworld" title="GitHub &rarr; https://github.com/hitworld" rel="noopener" target="_blank"><i class="fa fa-fw fa-github"></i>GitHub</a>
+                </span>
+              
+            </div>
+          
+
+          
+
+          
+          
+
+          
+            
+          
+          
+
+        </div>
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#概览"><span class="nav-number">1.</span> <span class="nav-text">概览</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#hook机制"><span class="nav-number">2.</span> <span class="nav-text">Hook机制</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#rtfsc"><span class="nav-number">3.</span> <span class="nav-text">RTFSC</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#uc_hook_type"><span class="nav-number">3.1.</span> <span class="nav-text">uc_hook_type</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#uc_err"><span class="nav-number">3.2.</span> <span class="nav-text">uc_err</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#c-api"><span class="nav-number">3.3.</span> <span class="nav-text">C API</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#使用"><span class="nav-number">4.</span> <span class="nav-text">使用</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#demo"><span class="nav-number">4.1.</span> <span class="nav-text">Demo</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#capstone"><span class="nav-number">4.2.</span> <span class="nav-text">capstone</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#运行so"><span class="nav-number">4.3.</span> <span class="nav-text">运行so</span></a></li></ol></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright">&copy; <span itemprop="copyrightYear">2021</span>
+  <span class="with-love" id="animate">
+    <i class="fa fa-gg-circle"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">w4rd3n</span>
+
+  
+    <span class="post-meta-divider">|</span>
+    <span class="post-meta-item-icon">
+      <i class="fa fa-area-chart"></i>
+    </span>
+    
+    <span title="站点总字数">1m</span>
+  
+
+  
+    <span class="post-meta-divider">|</span>
+    <span class="post-meta-item-icon">
+      <i class="fa fa-coffee"></i>
+    </span>
+    
+    <span title="站点阅读时长">15:10</span>
+  
+</div>
+
+
+
+
+
+
+
+
+
+        
+<div class="busuanzi-count">
+  <script async src="https://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+  
+    <span class="site-uv" title="总访客量">
+      <i class="fa fa-user"></i>
+      <span class="busuanzi-value" id="busuanzi_value_site_uv"></span>
+    </span>
+  
+
+  
+    <span class="site-pv" title="总访问量">
+      <i class="fa fa-eye"></i>
+      <span class="busuanzi-value" id="busuanzi_value_site_pv"></span>
+    </span>
+  
+</div>
+
+
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+          <span id="scrollpercent"><span>0</span>%</span>
+        
+      </div>
+    
+
+    
+	
+    
+
+    
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+    
+      
+  
+  <script type="text/javascript" color="0,0,255" opacity="0.5" zindex="-1" count="99" src="/lib/canvas-nest/canvas-nest.min.js"></script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+  
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=6.5.0"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=6.5.0"></script>
+
+
+
+  
+  
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=6.5.0"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=6.5.0"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=6.5.0"></script>
+
+
+
+  
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+  
+
+  <script type="text/javascript">
+    // Popup Window;
+    var isfetched = false;
+    var isXml = true;
+    // Search DB path;
+    var search_path = "search.xml";
+    if (search_path.length === 0) {
+      search_path = "search.xml";
+    } else if (/json$/i.test(search_path)) {
+      isXml = false;
+    }
+    var path = "/" + search_path;
+    // monitor main search box;
+
+    var onPopupClose = function (e) {
+      $('.popup').hide();
+      $('#local-search-input').val('');
+      $('.search-result-list').remove();
+      $('#no-result').remove();
+      $(".local-search-pop-overlay").remove();
+      $('body').css('overflow', '');
+    }
+
+    function proceedsearch() {
+      $("body")
+        .append('<div class="search-popup-overlay local-search-pop-overlay"></div>')
+        .css('overflow', 'hidden');
+      $('.search-popup-overlay').click(onPopupClose);
+      $('.popup').toggle();
+      var $localSearchInput = $('#local-search-input');
+      $localSearchInput.attr("autocapitalize", "none");
+      $localSearchInput.attr("autocorrect", "off");
+      $localSearchInput.focus();
+    }
+
+    // search function;
+    var searchFunc = function(path, search_id, content_id) {
+      'use strict';
+
+      // start loading animation
+      $("body")
+        .append('<div class="search-popup-overlay local-search-pop-overlay">' +
+          '<div id="search-loading-icon">' +
+          '<i class="fa fa-spinner fa-pulse fa-5x fa-fw"></i>' +
+          '</div>' +
+          '</div>')
+        .css('overflow', 'hidden');
+      $("#search-loading-icon").css('margin', '20% auto 0 auto').css('text-align', 'center');
+
+      
+
+      $.ajax({
+        url: path,
+        dataType: isXml ? "xml" : "json",
+        async: true,
+        success: function(res) {
+          // get the contents from search data
+          isfetched = true;
+          $('.popup').detach().appendTo('.header-inner');
+          var datas = isXml ? $("entry", res).map(function() {
+            return {
+              title: $("title", this).text(),
+              content: $("content",this).text(),
+              url: $("url" , this).text()
+            };
+          }).get() : res;
+          var input = document.getElementById(search_id);
+          var resultContent = document.getElementById(content_id);
+          var inputEventFunction = function() {
+            var searchText = input.value.trim().toLowerCase();
+            var keywords = searchText.split(/[\s\-]+/);
+            if (keywords.length > 1) {
+              keywords.push(searchText);
+            }
+            var resultItems = [];
+            if (searchText.length > 0) {
+              // perform local searching
+              datas.forEach(function(data) {
+                var isMatch = false;
+                var hitCount = 0;
+                var searchTextCount = 0;
+                var title = data.title.trim();
+                var titleInLowerCase = title.toLowerCase();
+                var content = data.content.trim().replace(/<[^>]+>/g,"");
+                
+                var contentInLowerCase = content.toLowerCase();
+                var articleUrl = decodeURIComponent(data.url);
+                var indexOfTitle = [];
+                var indexOfContent = [];
+                // only match articles with not empty titles
+                if(title != '') {
+                  keywords.forEach(function(keyword) {
+                    function getIndexByWord(word, text, caseSensitive) {
+                      var wordLen = word.length;
+                      if (wordLen === 0) {
+                        return [];
+                      }
+                      var startPosition = 0, position = [], index = [];
+                      if (!caseSensitive) {
+                        text = text.toLowerCase();
+                        word = word.toLowerCase();
+                      }
+                      while ((position = text.indexOf(word, startPosition)) > -1) {
+                        index.push({position: position, word: word});
+                        startPosition = position + wordLen;
+                      }
+                      return index;
+                    }
+
+                    indexOfTitle = indexOfTitle.concat(getIndexByWord(keyword, titleInLowerCase, false));
+                    indexOfContent = indexOfContent.concat(getIndexByWord(keyword, contentInLowerCase, false));
+                  });
+                  if (indexOfTitle.length > 0 || indexOfContent.length > 0) {
+                    isMatch = true;
+                    hitCount = indexOfTitle.length + indexOfContent.length;
+                  }
+                }
+
+                // show search results
+
+                if (isMatch) {
+                  // sort index by position of keyword
+
+                  [indexOfTitle, indexOfContent].forEach(function (index) {
+                    index.sort(function (itemLeft, itemRight) {
+                      if (itemRight.position !== itemLeft.position) {
+                        return itemRight.position - itemLeft.position;
+                      } else {
+                        return itemLeft.word.length - itemRight.word.length;
+                      }
+                    });
+                  });
+
+                  // merge hits into slices
+
+                  function mergeIntoSlice(text, start, end, index) {
+                    var item = index[index.length - 1];
+                    var position = item.position;
+                    var word = item.word;
+                    var hits = [];
+                    var searchTextCountInSlice = 0;
+                    while (position + word.length <= end && index.length != 0) {
+                      if (word === searchText) {
+                        searchTextCountInSlice++;
+                      }
+                      hits.push({position: position, length: word.length});
+                      var wordEnd = position + word.length;
+
+                      // move to next position of hit
+
+                      index.pop();
+                      while (index.length != 0) {
+                        item = index[index.length - 1];
+                        position = item.position;
+                        word = item.word;
+                        if (wordEnd > position) {
+                          index.pop();
+                        } else {
+                          break;
+                        }
+                      }
+                    }
+                    searchTextCount += searchTextCountInSlice;
+                    return {
+                      hits: hits,
+                      start: start,
+                      end: end,
+                      searchTextCount: searchTextCountInSlice
+                    };
+                  }
+
+                  var slicesOfTitle = [];
+                  if (indexOfTitle.length != 0) {
+                    slicesOfTitle.push(mergeIntoSlice(title, 0, title.length, indexOfTitle));
+                  }
+
+                  var slicesOfContent = [];
+                  while (indexOfContent.length != 0) {
+                    var item = indexOfContent[indexOfContent.length - 1];
+                    var position = item.position;
+                    var word = item.word;
+                    // cut out 100 characters
+                    var start = position - 20;
+                    var end = position + 80;
+                    if(start < 0){
+                      start = 0;
+                    }
+                    if (end < position + word.length) {
+                      end = position + word.length;
+                    }
+                    if(end > content.length){
+                      end = content.length;
+                    }
+                    slicesOfContent.push(mergeIntoSlice(content, start, end, indexOfContent));
+                  }
+
+                  // sort slices in content by search text's count and hits' count
+
+                  slicesOfContent.sort(function (sliceLeft, sliceRight) {
+                    if (sliceLeft.searchTextCount !== sliceRight.searchTextCount) {
+                      return sliceRight.searchTextCount - sliceLeft.searchTextCount;
+                    } else if (sliceLeft.hits.length !== sliceRight.hits.length) {
+                      return sliceRight.hits.length - sliceLeft.hits.length;
+                    } else {
+                      return sliceLeft.start - sliceRight.start;
+                    }
+                  });
+
+                  // select top N slices in content
+
+                  var upperBound = parseInt('1');
+                  if (upperBound >= 0) {
+                    slicesOfContent = slicesOfContent.slice(0, upperBound);
+                  }
+
+                  // highlight title and content
+
+                  function highlightKeyword(text, slice) {
+                    var result = '';
+                    var prevEnd = slice.start;
+                    slice.hits.forEach(function (hit) {
+                      result += text.substring(prevEnd, hit.position);
+                      var end = hit.position + hit.length;
+                      result += '<b class="search-keyword">' + text.substring(hit.position, end) + '</b>';
+                      prevEnd = end;
+                    });
+                    result += text.substring(prevEnd, slice.end);
+                    return result;
+                  }
+
+                  var resultItem = '';
+
+                  if (slicesOfTitle.length != 0) {
+                    resultItem += "<li><a href='" + articleUrl + "' class='search-result-title'>" + highlightKeyword(title, slicesOfTitle[0]) + "</a>";
+                  } else {
+                    resultItem += "<li><a href='" + articleUrl + "' class='search-result-title'>" + title + "</a>";
+                  }
+
+                  slicesOfContent.forEach(function (slice) {
+                    resultItem += "<a href='" + articleUrl + "'>" +
+                      "<p class=\"search-result\">" + highlightKeyword(content, slice) +
+                      "...</p>" + "</a>";
+                  });
+
+                  resultItem += "</li>";
+                  resultItems.push({
+                    item: resultItem,
+                    searchTextCount: searchTextCount,
+                    hitCount: hitCount,
+                    id: resultItems.length
+                  });
+                }
+              })
+            };
+            if (keywords.length === 1 && keywords[0] === "") {
+              resultContent.innerHTML = '<div id="no-result"><i class="fa fa-search fa-5x" /></div>'
+            } else if (resultItems.length === 0) {
+              resultContent.innerHTML = '<div id="no-result"><i class="fa fa-frown-o fa-5x" /></div>'
+            } else {
+              resultItems.sort(function (resultLeft, resultRight) {
+                if (resultLeft.searchTextCount !== resultRight.searchTextCount) {
+                  return resultRight.searchTextCount - resultLeft.searchTextCount;
+                } else if (resultLeft.hitCount !== resultRight.hitCount) {
+                  return resultRight.hitCount - resultLeft.hitCount;
+                } else {
+                  return resultRight.id - resultLeft.id;
+                }
+              });
+              var searchResultList = '<ul class=\"search-result-list\">';
+              resultItems.forEach(function (result) {
+                searchResultList += result.item;
+              })
+              searchResultList += "</ul>";
+              resultContent.innerHTML = searchResultList;
+            }
+          }
+
+          if ('auto' === 'auto') {
+            input.addEventListener('input', inputEventFunction);
+          } else {
+            $('.search-icon').click(inputEventFunction);
+            input.addEventListener('keypress', function (event) {
+              if (event.keyCode === 13) {
+                inputEventFunction();
+              }
+            });
+          }
+
+          // remove loading animation
+          $(".local-search-pop-overlay").remove();
+          $('body').css('overflow', '');
+
+          proceedsearch();
+        }
+      });
+    }
+
+    // handle and trigger popup window;
+    $('.popup-trigger').click(function(e) {
+      e.stopPropagation();
+      if (isfetched === false) {
+        searchFunc(path, 'local-search-input', 'local-search-result');
+      } else {
+        proceedsearch();
+      };
+    });
+
+    $('.popup-btn-close').click(onPopupClose);
+    $('.popup').click(function(e){
+      e.stopPropagation();
+    });
+    $(document).on('keyup', function (event) {
+      var shouldDismissSearchPopup = event.which === 27 &&
+        $('.search-popup').is(':visible');
+      if (shouldDismissSearchPopup) {
+        onPopupClose();
+      }
+    });
+  </script>
+
+
+
+
+
+  
+
+  
+  <script>
+    
+    function addCount(Counter) {
+      var $visitors = $(".leancloud_visitors");
+      var url = $visitors.attr('id').trim();
+      var title = $visitors.attr('data-flag-title').trim();
+
+      Counter('get', '/classes/Counter', { where: JSON.stringify({ url }) })
+        .done(function ({ results }) {
+          if (results.length > 0) {
+            var counter = results[0];
+            
+            Counter('put', `/classes/Counter/${counter.objectId}`, JSON.stringify({ time: { "__op":"Increment", "amount":1 } }))
+            
+            .done(function () {
+                  var $element = $(document.getElementById(url));
+                  $element.find('.leancloud-visitors-count').text(counter.time + 1);
+            })
+            
+            .fail(function ({ responseJSON }) {
+                console.log('Failed to save Visitor num, with error message: ' + responseJSON.error);
+            })
+          } else {
+            
+              Counter('post', '/classes/Counter', JSON.stringify({ title: title, url: url, time: 1}))
+                .done(function () {
+                  var $element = $(document.getElementById(url));
+                  $element.find('.leancloud-visitors-count').text(1);
+                })
+                .fail(function () {
+                  console.log('Failed to create');
+                });
+            
+          }
+        })
+      .fail(function ({ responseJSON }) {
+        console.log('LeanCloud Counter Error:' + responseJSON.code + " " + responseJSON.error);
+      });
+    }
+    
+
+    $(function() {
+      $.get('https://app-router.leancloud.cn/2/route?appId=' + "no3Ip4mNLc3JyF1AeTy8LrAm-gzGzoHsz")
+        .done(function ({ api_server }) {
+          var Counter = function (method, url, data) {
+            return $.ajax({
+              method: method,
+              url: `https://${api_server}/1.1${url}`,
+              headers: {
+                'X-LC-Id': "no3Ip4mNLc3JyF1AeTy8LrAm-gzGzoHsz",
+                'X-LC-Key': "UvlYMzpJKw0Jrw61V5BA5ifU",
+                'Content-Type': 'application/json',
+              },
+              data: data,
+            });
+          };
+          
+          addCount(Counter);
+          
+        })
+    });
+  </script>
+
+
+
+  
+
+  
+
+  
+
+  
+  
+
+  
+  
+
+  
+
+
+  
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+  <style>
+    .copy-btn {
+      display: inline-block;
+      padding: 6px 12px;
+      font-size: 13px;
+      font-weight: 700;
+      line-height: 20px;
+      color: #333;
+      white-space: nowrap;
+      vertical-align: middle;
+      cursor: pointer;
+      background-color: #eee;
+      background-image: linear-gradient(#fcfcfc, #eee);
+      border: 1px solid #d5d5d5;
+      border-radius: 3px;
+      user-select: none;
+      outline: 0;
+    }
+
+    .highlight-wrap .copy-btn {
+      transition: opacity .3s ease-in-out;
+      opacity: 0;
+      padding: 2px 6px;
+      position: absolute;
+      right: 4px;
+      top: 8px;
+    }
+
+    .highlight-wrap:hover .copy-btn,
+    .highlight-wrap .copy-btn:focus {
+      opacity: 1
+    }
+
+    .highlight-wrap {
+      position: relative;
+    }
+  </style>
+  <script>
+    $('.highlight').each(function (i, e) {
+      var $wrap = $('<div>').addClass('highlight-wrap')
+      $(e).after($wrap)
+      $wrap.append($('<button>').addClass('copy-btn').append('复制').on('click', function (e) {
+        var code = $(this).parent().find('.code').find('.line').map(function (i, e) {
+          return $(e).text()
+        }).toArray().join('\n')
+        var ta = document.createElement('textarea')
+        document.body.appendChild(ta)
+        ta.style.position = 'absolute'
+        ta.style.top = '0px'
+        ta.style.left = '0px'
+        ta.value = code
+        ta.select()
+        ta.focus()
+        var result = document.execCommand('copy')
+        document.body.removeChild(ta)
+        
+        $(this).blur()
+      })).on('mouseleave', function (e) {
+        var $b = $(this).find('.copy-btn')
+        setTimeout(function () {
+          $b.text('复制')
+        }, 300)
+      }).append(e)
+    })
+  </script>
+
+
+  
+
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-backstretch/2.0.4/jquery.backstretch.min.js"></script>;
+  <script>
+  //$("body").backstretch("/images/background.jpg");
+  </script>
+  
+  <script type="text/javascript" src="//cdn.bootcss.com/canvas-nest.js/1.0.0/canvas-nest.min.js"></script><!-- hexo-inject:begin --><!-- hexo-inject:end -->
+  
+<script src="/live2dw/lib/L2Dwidget.min.js?0c58a1486de42ac6cc1c59c7d98ae887"></script><script>L2Dwidget.init({"pluginRootPath":"live2dw/","pluginJsPath":"lib/","pluginModelPath":"assets/","tagMode":false,"debug":false,"model":{"jsonPath":"/live2dw/assets/koharu.model.json"},"display":{"position":"right","width":150,"height":300},"mobile":{"show":false},"log":false});</script></body>
+</html>

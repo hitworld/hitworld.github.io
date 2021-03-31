@@ -129,7 +129,7 @@
 <meta property="og:locale" content="zh-CN">
 <meta property="og:image" content="https://hitworld.github.io/png/2021-01-10-15-45-33.png">
 <meta property="og:image" content="https://hitworld.github.io/png/2021-01-10-15-45-51.png">
-<meta property="og:updated_time" content="2021-03-17T16:39:24.790Z">
+<meta property="og:updated_time" content="2021-03-29T02:32:12.649Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="writeup-pwnable-tw">
 <meta name="twitter:description" content="start  Linux系统调用号表:位于/usr/include/asm/unistd.h,或者网站. read调用(mov al,3;int 80;)存在栈溢出,返回地址偏移为0x14. 返回地址后即为之前push的esp,返回地址溢出为0x8048087再次打印栈内容leak出esp,再次栈溢出跳到栈上执行shellcode. 利用80h中断中的sys_execve：x31xc9x">
@@ -711,7 +711,7 @@
                 
                   <a href="/archives/">
                 
-                    <span class="site-state-item-count">177</span>
+                    <span class="site-state-item-count">178</span>
                     <span class="site-state-item-name">日志</span>
                   </a>
                 </div>
@@ -851,7 +851,9 @@
                     
                       
                     
-                    <span class="site-state-item-count">40</span>
+                      
+                    
+                    <span class="site-state-item-count">41</span>
                     <span class="site-state-item-name">标签</span>
                   </a>
                 </div>
@@ -933,7 +935,7 @@
       <i class="fa fa-area-chart"></i>
     </span>
     
-    <span title="站点总字数">992k</span>
+    <span title="站点总字数">1m</span>
   
 
   
@@ -942,7 +944,7 @@
       <i class="fa fa-coffee"></i>
     </span>
     
-    <span title="站点阅读时长">15:02</span>
+    <span title="站点阅读时长">15:10</span>
   
 </div>
 

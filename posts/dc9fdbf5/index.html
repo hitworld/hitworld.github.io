@@ -127,7 +127,7 @@
 <meta property="og:site_name" content="w4rd3n">
 <meta property="og:description" content="hook方法 普通函数 12345target_class.func.implementation = function(p1, p2) &amp;#123;    var req = this.func(p1, p2);    console.log(req);    return req;&amp;#125;; 重载函数 12345target_class.func.overload(&quot;java.la">
 <meta property="og:locale" content="zh-CN">
-<meta property="og:updated_time" content="2021-03-25T13:33:35.908Z">
+<meta property="og:updated_time" content="2021-03-29T02:32:11.649Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="IS-reverse-Android-hook-frida">
 <meta name="twitter:description" content="hook方法 普通函数 12345target_class.func.implementation = function(p1, p2) &amp;#123;    var req = this.func(p1, p2);    console.log(req);    return req;&amp;#125;; 重载函数 12345target_class.func.overload(&quot;java.la">
@@ -503,7 +503,7 @@
                 
                   <span class="post-meta-item-text">本文字数：</span>
                 
-                <span title="本文字数">3.2k</span>
+                <span title="本文字数">3.3k</span>
               
 
               
@@ -563,7 +563,7 @@
 <h3 id="memory">Memory</h3>
 <figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//Memory.scan用于搜索内存数据</span></span><br><span class="line"><span class="keyword">var</span> <span class="built_in">module</span> = Process.findModuleByName(<span class="string">"libhello.so"</span>);</span><br><span class="line"><span class="keyword">var</span> pattern = <span class="string">"03 49 ?? 50 20 44"</span>;</span><br><span class="line"><span class="keyword">var</span> res = Memory.scan(<span class="built_in">module</span>.base, <span class="built_in">module</span>.size, pattern, &#123;</span><br><span class="line">    onMatch: <span class="function"><span class="keyword">function</span>(<span class="params">address, size</span>)</span>&#123;</span><br><span class="line">        <span class="built_in">console</span>.log(<span class="string">'搜索到 '</span> + pattern + <span class="string">" 地址是:"</span> + address.toString());  </span><br><span class="line">    &#125;, </span><br><span class="line">    onError: <span class="function"><span class="keyword">function</span>(<span class="params">reason</span>)</span>&#123;</span><br><span class="line">        <span class="built_in">console</span>.log(<span class="string">'搜索失败'</span>);</span><br><span class="line">    &#125;,</span><br><span class="line">    onComplete: <span class="function"><span class="keyword">function</span>(<span class="params"></span>)</span></span><br><span class="line"><span class="function">    </span>&#123;</span><br><span class="line">        <span class="built_in">console</span>.log(<span class="string">"搜索完毕"</span>)</span><br><span class="line">    &#125;</span><br><span class="line">&#125;);</span><br><span class="line"><span class="comment">//Memory.scanSync功能与Memory.scan一样,但是会返回多个匹配到条件的数据</span></span><br><span class="line"></span><br><span class="line"><span class="comment">//Memory.alloc用于内存分配</span></span><br><span class="line"><span class="keyword">const</span> r = Memory.alloc(<span class="number">10</span>);</span><br><span class="line"><span class="comment">//Memory.allocUtf8String(str)分配utf字符串,Memory.allocUtf16String分配utf16字符串,Memory.allocAnsiString分配ansi字符串</span></span><br><span class="line"></span><br><span class="line"><span class="comment">//Memory.copy用于内存复制</span></span><br><span class="line">Memory.copy(r, <span class="built_in">module</span>.base, <span class="number">10</span>);</span><br><span class="line"></span><br><span class="line"><span class="comment">//Memory.writeByteArray用于写入内存</span></span><br><span class="line">Memory.writeByteArray(r, arr);</span><br><span class="line"></span><br><span class="line"><span class="comment">//Memory.readByteArray用于读入内存</span></span><br><span class="line"><span class="keyword">var</span> buffer = Memory.readByteArray(r, arr.length);</span><br></pre></td></tr></table></figure>
 <h3 id="打印java调用栈">打印Java调用栈</h3>
-<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">target_class.implementation = <span class="function"><span class="keyword">function</span>(<span class="params">param</span>)</span>&#123;</span><br><span class="line">    <span class="keyword">var</span> e = Java.use(<span class="string">"java.lang.Exception"</span>).$<span class="keyword">new</span>(<span class="string">""</span>);</span><br><span class="line">    <span class="keyword">var</span> log = Java.use(<span class="string">"android.util.Log"</span>).$<span class="keyword">new</span>();</span><br><span class="line">    <span class="built_in">console</span>.log(log.getStackTraceString(e));</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">target_class.func.implementation = <span class="function"><span class="keyword">function</span>(<span class="params">param</span>)</span>&#123;</span><br><span class="line">    <span class="keyword">var</span> e = Java.use(<span class="string">"java.lang.Exception"</span>).$<span class="keyword">new</span>(<span class="string">""</span>);</span><br><span class="line">    <span class="keyword">var</span> log = Java.use(<span class="string">"android.util.Log"</span>).$<span class="keyword">new</span>();</span><br><span class="line">    <span class="built_in">console</span>.log(log.getStackTraceString(e));</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
 
       
     </div>
@@ -609,6 +609,10 @@
           <span class="post-nav-divider"></span>
 
           <div class="post-nav-prev post-nav-item">
+            
+              <a href="/posts/58dd6bb5/" rel="prev" title="IS-reverse-unicorn-基础">
+                IS-reverse-unicorn-基础 <i class="fa fa-chevron-right"></i>
+              </a>
             
           </div>
         </div>
@@ -682,7 +686,7 @@
                 
                   <a href="/archives/">
                 
-                    <span class="site-state-item-count">177</span>
+                    <span class="site-state-item-count">178</span>
                     <span class="site-state-item-name">日志</span>
                   </a>
                 </div>
@@ -822,7 +826,9 @@
                     
                       
                     
-                    <span class="site-state-item-count">40</span>
+                      
+                    
+                    <span class="site-state-item-count">41</span>
                     <span class="site-state-item-name">标签</span>
                   </a>
                 </div>
@@ -904,7 +910,7 @@
       <i class="fa fa-area-chart"></i>
     </span>
     
-    <span title="站点总字数">992k</span>
+    <span title="站点总字数">1m</span>
   
 
   
@@ -913,7 +919,7 @@
       <i class="fa fa-coffee"></i>
     </span>
     
-    <span title="站点阅读时长">15:02</span>
+    <span title="站点阅读时长">15:10</span>
   
 </div>
 

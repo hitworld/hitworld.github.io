@@ -119,36 +119,18 @@
 
 
 
-  <meta name="description" content="符号表的作用与组织 符号表的作用.  符号表的组织.      符号表的整理与查找 线性查找  二分查找  杂凑查找(HASH技术)  符号的内容  PL语言 PL语言简介.  PL语言编译程序的符号表.  利用符号表分析名字的作用域">
+  <meta name="description" content="符号表的作用与组织 符号表的作用:登记各类名字的信息,进行一致性检查和作用域分析,辅助代码生成. 符号表的组织.  每一项分为主键(也就是标识符)和属性值(类型,类型值等). 按符号的类型分开建立多张符号表,如常数表,变量名表,过程名表等.  对符号表的操作有常见的增删改查,对符号表操作的时机就是出现符号时,如定义或者使用. 符号表的存放可以通过多张固定大小的表来存放对应属性或者标">
 <meta name="keywords" content="compiler-principles">
 <meta property="og:type" content="article">
 <meta property="og:title" content="CS-BASIC-compiler-principles-符号表">
 <meta property="og:url" content="https://hitworld.github.io/posts/6e52c297/index.html">
 <meta property="og:site_name" content="w4rd3n">
-<meta property="og:description" content="符号表的作用与组织 符号表的作用.  符号表的组织.      符号表的整理与查找 线性查找  二分查找  杂凑查找(HASH技术)  符号的内容  PL语言 PL语言简介.  PL语言编译程序的符号表.  利用符号表分析名字的作用域">
+<meta property="og:description" content="符号表的作用与组织 符号表的作用:登记各类名字的信息,进行一致性检查和作用域分析,辅助代码生成. 符号表的组织.  每一项分为主键(也就是标识符)和属性值(类型,类型值等). 按符号的类型分开建立多张符号表,如常数表,变量名表,过程名表等.  对符号表的操作有常见的增删改查,对符号表操作的时机就是出现符号时,如定义或者使用. 符号表的存放可以通过多张固定大小的表来存放对应属性或者标">
 <meta property="og:locale" content="zh-CN">
-<meta property="og:image" content="https://hitworld.github.io/png/2021-01-13-09-22-12.png">
-<meta property="og:image" content="https://hitworld.github.io/png/2021-01-13-09-22-30.png">
-<meta property="og:image" content="https://hitworld.github.io/png/2021-01-13-09-23-10.png">
-<meta property="og:image" content="https://hitworld.github.io/png/2021-01-13-09-23-22.png">
-<meta property="og:image" content="https://hitworld.github.io/png/2021-01-13-09-23-34.png">
-<meta property="og:image" content="https://hitworld.github.io/png/2021-01-13-09-23-58.png">
-<meta property="og:image" content="https://hitworld.github.io/png/2021-01-13-09-24-34.png">
-<meta property="og:image" content="https://hitworld.github.io/png/2021-01-13-09-24-56.png">
-<meta property="og:image" content="https://hitworld.github.io/png/2021-01-13-09-25-38.png">
-<meta property="og:image" content="https://hitworld.github.io/png/2021-01-13-09-26-03.png">
-<meta property="og:image" content="https://hitworld.github.io/png/2021-01-13-09-26-25.png">
-<meta property="og:image" content="https://hitworld.github.io/png/2021-01-13-09-26-35.png">
-<meta property="og:image" content="https://hitworld.github.io/png/2021-01-13-09-30-46.png">
-<meta property="og:image" content="https://hitworld.github.io/png/2021-01-13-09-31-31.png">
-<meta property="og:image" content="https://hitworld.github.io/png/2021-01-13-09-31-42.png">
-<meta property="og:image" content="https://hitworld.github.io/png/2021-01-13-09-32-11.png">
-<meta property="og:image" content="https://hitworld.github.io/png/2021-01-13-09-32-25.png">
-<meta property="og:updated_time" content="2021-03-29T02:32:10.476Z">
+<meta property="og:updated_time" content="2021-06-12T23:08:05.197Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="CS-BASIC-compiler-principles-符号表">
-<meta name="twitter:description" content="符号表的作用与组织 符号表的作用.  符号表的组织.      符号表的整理与查找 线性查找  二分查找  杂凑查找(HASH技术)  符号的内容  PL语言 PL语言简介.  PL语言编译程序的符号表.  利用符号表分析名字的作用域">
-<meta name="twitter:image" content="https://hitworld.github.io/png/2021-01-13-09-22-12.png">
+<meta name="twitter:description" content="符号表的作用与组织 符号表的作用:登记各类名字的信息,进行一致性检查和作用域分析,辅助代码生成. 符号表的组织.  每一项分为主键(也就是标识符)和属性值(类型,类型值等). 按符号的类型分开建立多张符号表,如常数表,变量名表,过程名表等.  对符号表的操作有常见的增删改查,对符号表操作的时机就是出现符号时,如定义或者使用. 符号表的存放可以通过多张固定大小的表来存放对应属性或者标">
 
 
 
@@ -521,7 +503,7 @@
                 
                   <span class="post-meta-item-text">本文字数：</span>
                 
-                <span title="本文字数">152</span>
+                <span title="本文字数">678</span>
               
 
               
@@ -556,34 +538,30 @@
 
       
         <h2 id="符号表的作用与组织">符号表的作用与组织</h2>
-<p>符号表的作用.</p>
-<p><img src="/png/2021-01-13-09-22-12.png"></p>
+<p>符号表的作用:登记各类名字的信息,进行一致性检查和作用域分析,辅助代码生成.</p>
 <p>符号表的组织.</p>
-<p><img src="/png/2021-01-13-09-22-30.png"></p>
-<p><img src="/png/2021-01-13-09-23-10.png"></p>
-<p><img src="/png/2021-01-13-09-23-22.png"></p>
-<p><img src="/png/2021-01-13-09-23-34.png"></p>
-<p><img src="/png/2021-01-13-09-23-58.png"></p>
+<ol type="1">
+<li>每一项分为主键(也就是标识符)和属性值(类型,类型值等).</li>
+<li>按符号的类型分开建立多张符号表,如常数表,变量名表,过程名表等.</li>
+</ol>
+<p>对符号表的操作有常见的增删改查,对符号表操作的时机就是出现符号时,如定义或者使用.</p>
+<p>符号表的存放可以通过多张固定大小的表来存放对应属性或者标识符的索引来构成.</p>
 <h2 id="符号表的整理与查找">符号表的整理与查找</h2>
 <h3 id="线性查找">线性查找</h3>
-<p><img src="/png/2021-01-13-09-24-34.png"></p>
+<p>按标识符出现顺序填写各项,使插入简单化,但是查找效率偏低.</p>
 <h3 id="二分查找">二分查找</h3>
-<p><img src="/png/2021-01-13-09-24-56.png"></p>
+<p>按全序关系填写各项,在插入进行操作,增加查找效率.</p>
 <h3 id="杂凑查找hash技术">杂凑查找(HASH技术)</h3>
-<p><img src="/png/2021-01-13-09-25-38.png"></p>
+<p>利用<code>HASH</code>函数,插入查找都快,但需要合适且快速的算法.</p>
 <h2 id="符号的内容">符号的内容</h2>
-<p><img src="/png/2021-01-13-09-26-03.png"></p>
+<p>符号表的信息栏登记了每个符号的有关属性:数据类型(整型,浮点型),符号类型(变量,过程,函数),存储大小,相对地址.</p>
 <h3 id="pl语言">PL语言</h3>
-<p><code>PL</code>语言简介.</p>
-<p><img src="/png/2021-01-13-09-26-25.png"></p>
-<p><code>PL</code>语言编译程序的符号表.</p>
-<p><img src="/png/2021-01-13-09-26-35.png"></p>
+<p><code>PL</code>语言中过程允许嵌套,过程调用允许递归,过程参数可以为值参数和变量参数.</p>
+<p><code>PL</code>语言编译程序的符号表:名字表,程序体表,层次显示表,数组信息表,中间代码表.</p>
 <h2 id="利用符号表分析名字的作用域">利用符号表分析名字的作用域</h2>
-<p><img src="/png/2021-01-13-09-30-46.png"></p>
-<p><img src="/png/2021-01-13-09-31-31.png"></p>
-<p><img src="/png/2021-01-13-09-31-42.png"></p>
-<p><img src="/png/2021-01-13-09-32-11.png"></p>
-<p><img src="/png/2021-01-13-09-32-25.png"></p>
+<p>关于作用域有两种程序体结构:<code>FORTRAN</code>的并列结构;<code>PASCAL</code>,<code>PL</code>的嵌套结构.</p>
+<p><code>FORTRAN</code>中不同程序段(过程,函数)中的变量名相互独立,同一标识符代表不同的名字(可以想象成<code>C++</code>的名称空间).</p>
+<p><code>PASCAL</code>中如果<code>A</code>调用了<code>B</code>,则<code>A</code>中变量在<code>B</code>中仍然可以用相同标识符访问,但是如果<code>B</code>中重新定义了同一个变量则会在<code>B</code>过程中覆盖该变量定义.</p>
 
       
     </div>

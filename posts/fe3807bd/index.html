@@ -119,18 +119,18 @@
 
 
 
-  <meta name="description" content="概念 存储管理的主要功能:内存分配和回收,共享,保护和扩充. 装载与链接 程序的装入和链接 将一个用户源程序变为一个可在内存中执行的程序,通常要经过:编译,链接,装入. 将一个装入模块装入内存时,可采用三种方式. 绝对装入方式:装入模块中用实际地址,装入预定地方,适用于单道环境. 可重定位方式:装入模块中为相对地址,由可重定位装入程序在装入时一次修改为绝对地址,适用于多道环境,地址变">
+  <meta name="description" content="概念 存储管理的主要功能:内存分配和回收,共享,保护和扩充. 链接与装入 程序的链接 链接程序的功能,是将经过编译或汇编后所得到的一组目标模块以及它们所需要的库函数,装配成一个完整的装入模块. 实现链接的方法有三种:静态链接,装入时动态链接和运行时动态链接. 动态链接库的优点:节省内存;DLL中的函数改变时,不需要重新编译链接;用运行时动态链接可以使本次不用的函数不链接. 程序的装入">
 <meta name="keywords" content="operating-system">
 <meta property="og:type" content="article">
 <meta property="og:title" content="CS-BASIC-operating-system-存储器管理">
 <meta property="og:url" content="https://hitworld.github.io/posts/fe3807bd/index.html">
 <meta property="og:site_name" content="w4rd3n">
-<meta property="og:description" content="概念 存储管理的主要功能:内存分配和回收,共享,保护和扩充. 装载与链接 程序的装入和链接 将一个用户源程序变为一个可在内存中执行的程序,通常要经过:编译,链接,装入. 将一个装入模块装入内存时,可采用三种方式. 绝对装入方式:装入模块中用实际地址,装入预定地方,适用于单道环境. 可重定位方式:装入模块中为相对地址,由可重定位装入程序在装入时一次修改为绝对地址,适用于多道环境,地址变">
+<meta property="og:description" content="概念 存储管理的主要功能:内存分配和回收,共享,保护和扩充. 链接与装入 程序的链接 链接程序的功能,是将经过编译或汇编后所得到的一组目标模块以及它们所需要的库函数,装配成一个完整的装入模块. 实现链接的方法有三种:静态链接,装入时动态链接和运行时动态链接. 动态链接库的优点:节省内存;DLL中的函数改变时,不需要重新编译链接;用运行时动态链接可以使本次不用的函数不链接. 程序的装入">
 <meta property="og:locale" content="zh-CN">
-<meta property="og:updated_time" content="2021-03-29T02:32:10.730Z">
+<meta property="og:updated_time" content="2021-06-12T23:08:05.254Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="CS-BASIC-operating-system-存储器管理">
-<meta name="twitter:description" content="概念 存储管理的主要功能:内存分配和回收,共享,保护和扩充. 装载与链接 程序的装入和链接 将一个用户源程序变为一个可在内存中执行的程序,通常要经过:编译,链接,装入. 将一个装入模块装入内存时,可采用三种方式. 绝对装入方式:装入模块中用实际地址,装入预定地方,适用于单道环境. 可重定位方式:装入模块中为相对地址,由可重定位装入程序在装入时一次修改为绝对地址,适用于多道环境,地址变">
+<meta name="twitter:description" content="概念 存储管理的主要功能:内存分配和回收,共享,保护和扩充. 链接与装入 程序的链接 链接程序的功能,是将经过编译或汇编后所得到的一组目标模块以及它们所需要的库函数,装配成一个完整的装入模块. 实现链接的方法有三种:静态链接,装入时动态链接和运行时动态链接. 动态链接库的优点:节省内存;DLL中的函数改变时,不需要重新编译链接;用运行时动态链接可以使本次不用的函数不链接. 程序的装入">
 
 
 
@@ -503,7 +503,7 @@
                 
                   <span class="post-meta-item-text">本文字数：</span>
                 
-                <span title="本文字数">4.3k</span>
+                <span title="本文字数">3.5k</span>
               
 
               
@@ -517,7 +517,7 @@
                 
                   <span class="post-meta-item-text">阅读时长 &asymp;</span>
                 
-                <span title="阅读时长">4 分钟</span>
+                <span title="阅读时长">3 分钟</span>
               
             </div>
           
@@ -539,20 +539,13 @@
       
         <h2 id="概念">概念</h2>
 <p>存储管理的主要功能:内存分配和回收,共享,保护和扩充.</p>
-<h2 id="装载与链接">装载与链接</h2>
-<h3 id="程序的装入和链接">程序的装入和链接</h3>
-<p>将一个用户源程序变为一个可在内存中执行的程序,通常要经过:编译,链接,装入.</p>
-<p>将一个装入模块装入内存时,可采用三种方式.</p>
-<p>绝对装入方式:装入模块中用实际地址,装入预定地方,适用于单道环境.</p>
-<p>可重定位方式:装入模块中为相对地址,由可重定位装入程序在装入时一次修改为绝对地址,适用于多道环境,地址变换通常是在装入时一次完成的,以后不再改变该地址,此变换过程称为静态重定位.</p>
-<p>动态运行时装入方式:可重定位方式,不允许程序运行时在内存中移动位置,但实际运行中,程序在内存中的位置可能要改变.动态运行时的装入程序,在把装入模块装入内存后,并不立即把装入模块中的相对地址转换为绝对地址,而是把这种地址转换推迟到程序要真正执行时才进行,动态地址重定位.装入内存后的所有地址都仍是相对地址,为使地址转换不影响指令的执行速度,这种方式需要一定的特殊硬件的支持.</p>
+<h2 id="链接与装入">链接与装入</h2>
 <h3 id="程序的链接">程序的链接</h3>
 <p>链接程序的功能,是将经过编译或汇编后所得到的一组目标模块以及它们所需要的库函数,装配成一个完整的装入模块.</p>
 <p>实现链接的方法有三种:静态链接,装入时动态链接和运行时动态链接.</p>
-<p>静态链接:在将这几个目标模块装配成一个装入模块时,须对相对地址进行修改,变换外部调用符号.链接时,把各目标模块的相对地址修改为统一的以<code>0</code>为始址的线性地址或多维地址空间,外部调用变为相对地址.</p>
-<p>装入时动态链接:便于修改和更新,便于实现对目标模块的共享.应用程序在运行时,每次运行的模块无法预计,采用装入时动态链接只能将所有可能要运行的模块全部装入内存.</p>
-<p>运行时动态链接:动态链接方式,是将对模块的链接推迟到执行时才执行,亦即,在执行过程中,当发现一个被调用模块尚未装入内存时,立即由<code>OS</code>去找到该模块并将之装入内存,把它链接到调用者模块上.凡在执行过程中未被用到的目标模块,都不会被调入内存和被链接到装入模块上,这样不仅可加快程序的装入过程,而且可节省大量的内存空间.</p>
 <p>动态链接库的优点:节省内存;<code>DLL</code>中的函数改变时,不需要重新编译链接;用运行时动态链接可以使本次不用的函数不链接.</p>
+<h3 id="程序的装入">程序的装入</h3>
+<p>将一个目标代码程序装入内存时,可采用三种方式:绝对装入方式,可重定位方式,动态运行时装入方式.</p>
 <h2 id="连续分配存储管理方式">连续分配存储管理方式</h2>
 <p>连续分配是指为一个用户程序分配一个连续的内存空间.</p>
 <h3 id="单一连续分配">单一连续分配</h3>
@@ -560,17 +553,19 @@
 <p>内存分为以下两个分区:系统区,仅提供给操作系统使用,它可以驻留在内存的低址部分,也可驻留在内存的高址部分,由于中断向量通常驻留在低址部分,故<code>OS</code>通常也驻留在内存的低址部分;用户区,指除系统区以外的全部内存空间,提供给用户使用.</p>
 <p>编程时可将作业分成四个段:即代码段,数据段,供程序使用的栈段,以及作为用户工作区的附加段.这几个段的地址空间可以邻接或分开,也可部分或全部重叠.由段寄存器左移<code>4</code>位加偏移值形成物理地址.</p>
 <h3 id="固定分区分配">固定分区分配</h3>
-<p>固定分区式分配,是最早使用的一种可运行多道程序的存储管理方式.将内存空间划分为若干个固定大小的区域,每个分区大小可相同,也可不同.<code>OS</code>占一区,其余每个分区中可以装入一道作业.为了便于内存分配,系统需建立一张分区使用表.当有一用户程序要装入时,从表中找出一个能满足要求的,尚未分配的分区分配给该程序,然后修改分区使用表.</p>
+<p>固定分区式分配,是最早使用的一种可运行多道程序的存储管理方式.将内存空间划分为若干个固定大小的区域,每个分区大小可相同,也可不同.<code>OS</code>占一区,其余每个分区中可以装入一道作业.</p>
+<p>为了便于内存分配,系统需建立一张分区使用表.当有一用户程序要装入时,从表中找出一个能满足要求的,尚未分配的分区分配给该程序,然后修改分区使用表.</p>
 <p>内存分配:将分区从小到大排队,建立一张分区使用表.当有程序要装入时,检索该表,找出能满足大小的分区,修改分配位.若未找到则失败.</p>
 <h3 id="动态分区分配">动态分区分配</h3>
 <p>装入和处理过程中建立分区,使其大小和作业大小相等.分区数和大小都可变.</p>
 <p>常用数据结构:空闲分区表,内存中每个尚未分配出去的分区设置一个表项(分区号,大小,起始地址,状态);空闲分区链,每个分区首尾,设置一些用于控制分区分配的信息,以及用于链接各分区的指针.状态位<code>0</code>未分配,<code>1</code>已分配.</p>
 <h3 id="分区分配算法">分区分配算法</h3>
-<p>首次适应算法<code>FF</code>:空闲分区以地址递增的次序链接,分配时,从链首开始顺序查找,找到后,再按照作业的大小,从该分区中划出一块内存空间分配给请求者,余下的空闲分区仍留在空闲链中.优点:先利用内存中低址部分,故留下高址部分的大空闲区.缺点:低址部分留下许多无用留碎片,而每次查找又都从低址部分开始.</p>
-<p>循环首次适应算法:是<code>FF</code>的改进,从上次找到的空闲分区的下一个开始查找.优点:该算法能使内存中的空闲分区分布比较均匀,从而减少查找空闲分区的时间.缺点:会缺乏大的空闲分区.</p>
-<p>最佳适应算法:空闲分区按其从小到大的顺序链接,顺链找第一个满足要求的空闲区.缺点:会在留下许多难以利用的小空闲块.</p>
-<h3 id="分区分配操作">分区分配操作</h3>
-<p>用某种分配算法,从空闲分区链(表)中找到所需的分区,若该分区大分为两部分,一部分分配出去,余下的部分仍留在空闲分区链或空闲分区表中,并修改空闲分区链(表),将分配区的首址返回给调用者.</p>
+<p>首次适应算法<code>FF</code>:空闲分区以地址递增的次序链接,分配时,从链首开始顺序查找,找到后,再按照作业的大小,从该分区中划出一块内存空间分配给请求者,余下的空闲分区仍留在空闲链中.</p>
+<p>优点:先利用内存中低址部分,故留下高址部分的大空闲区.缺点:低址部分留下许多无用留碎片,而每次查找又都从低址部分开始.</p>
+<p>循环首次适应算法:是<code>FF</code>的改进,从上次找到的空闲分区的下一个开始查找.</p>
+<p>优点:该算法能使内存中的空闲分区分布比较均匀,从而减少查找空闲分区的时间.缺点:会缺乏大的空闲分区.</p>
+<p>最佳适应算法:空闲分区按其从小到大的顺序链接,顺链找第一个满足要求的空闲区.</p>
+<p>缺点:会在留下许多难以利用的小空闲块.</p>
 <h3 id="回收内存">回收内存</h3>
 <p>当一个作业运行完毕释放内存时,系统根据释放区的首地址,从空闲区说明表中找到相应的插入点.</p>
 <p>此时可能出现下列四种情况.</p>
@@ -581,8 +576,7 @@
 <li>回收区与前后两个空闲分区都相连时,合并三个分区,用前一个空闲分区表目的起址作为新空闲区的起址,修改其大小为三块分区之和,最后取消后一个空闲分区的表目.</li>
 </ol>
 <h3 id="动态重定位分区分配">动态重定位分区分配</h3>
-<p>在系统不断地分配和回收中,必定会出现一些不连续的小的空闲区,称为外零头.虽然可能所有零头的总和超过某一个作业的要求,但是由于不连续而无法分配.</p>
-<p>解决零头的方法是拼接,即向一个方向移动已分配的作业,使那些零散的小空闲区在另一方向连成一片.分区的拼接技术,一方面是要求能够对作业进行重定位,另一方面系统在拼接时要耗费较多的时间.</p>
+<p>在系统不断地分配和回收中,必定会出现一些不连续的小的空闲区,解决零头的方法是拼接,即向一个方向移动已分配的作业,使那些零散的小空闲区连成一片.分区的拼接技术,一方面是要求能够对作业进行重定位,另一方面系统在拼接时要耗费较多的时间.</p>
 <p>动态重定位:允许作业在内存中移动必须硬件(重定位寄存器)支持,执行时,访问的内存地址是相对地址与重定位寄存器中的地址相加而形成的.地址变换过程是在程序执行期间,随着对每条指令和数据的访问而自动进行的,故称为动态重定位.</p>
 <p>动态重定位分区分配算法:当请求分配模块找不到足够大的自由分区分给用户时进行紧缩,判断空闲分区总和是否大于请求的大小,是则进行紧凑形成连续空闲区并修改相关数据结构,然后继续正常分配.</p>
 <h3 id="分区的存储保护">分区的存储保护</h3>
@@ -607,7 +601,6 @@
 <h3 id="地址变换机构">地址变换机构</h3>
 <p>通过逻辑地址的高位获得页号<code>X</code>,通过页表寄存器获取页表的起始地址,访问对应的表项获得块号组成物理地址.</p>
 <p>由于页表每次要从磁盘访问,所以有了常驻内存的快表,快表缓存一部分页表项(包括页号和对应的块号),通过输入寄存器获得快表地址.</p>
-<h2 id="分段存储管理">分段存储管理</h2>
 
       
     </div>
@@ -922,7 +915,7 @@
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#概念"><span class="nav-number">1.</span> <span class="nav-text">概念</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#装载与链接"><span class="nav-number">2.</span> <span class="nav-text">装载与链接</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#程序的装入和链接"><span class="nav-number">2.1.</span> <span class="nav-text">程序的装入和链接</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#程序的链接"><span class="nav-number">2.2.</span> <span class="nav-text">程序的链接</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#连续分配存储管理方式"><span class="nav-number">3.</span> <span class="nav-text">连续分配存储管理方式</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#单一连续分配"><span class="nav-number">3.1.</span> <span class="nav-text">单一连续分配</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#固定分区分配"><span class="nav-number">3.2.</span> <span class="nav-text">固定分区分配</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#动态分区分配"><span class="nav-number">3.3.</span> <span class="nav-text">动态分区分配</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#分区分配算法"><span class="nav-number">3.4.</span> <span class="nav-text">分区分配算法</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#分区分配操作"><span class="nav-number">3.5.</span> <span class="nav-text">分区分配操作</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#回收内存"><span class="nav-number">3.6.</span> <span class="nav-text">回收内存</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#动态重定位分区分配"><span class="nav-number">3.7.</span> <span class="nav-text">动态重定位分区分配</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#分区的存储保护"><span class="nav-number">3.8.</span> <span class="nav-text">分区的存储保护</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#对换"><span class="nav-number">3.9.</span> <span class="nav-text">对换</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#基本分页存储管理方式"><span class="nav-number">4.</span> <span class="nav-text">基本分页存储管理方式</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#页面与页表"><span class="nav-number">4.1.</span> <span class="nav-text">页面与页表</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#地址结构"><span class="nav-number">4.2.</span> <span class="nav-text">地址结构</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#地址变换机构"><span class="nav-number">4.3.</span> <span class="nav-text">地址变换机构</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#分段存储管理"><span class="nav-number">5.</span> <span class="nav-text">分段存储管理</span></a></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#概念"><span class="nav-number">1.</span> <span class="nav-text">概念</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#链接与装入"><span class="nav-number">2.</span> <span class="nav-text">链接与装入</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#程序的链接"><span class="nav-number">2.1.</span> <span class="nav-text">程序的链接</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#程序的装入"><span class="nav-number">2.2.</span> <span class="nav-text">程序的装入</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#连续分配存储管理方式"><span class="nav-number">3.</span> <span class="nav-text">连续分配存储管理方式</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#单一连续分配"><span class="nav-number">3.1.</span> <span class="nav-text">单一连续分配</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#固定分区分配"><span class="nav-number">3.2.</span> <span class="nav-text">固定分区分配</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#动态分区分配"><span class="nav-number">3.3.</span> <span class="nav-text">动态分区分配</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#分区分配算法"><span class="nav-number">3.4.</span> <span class="nav-text">分区分配算法</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#回收内存"><span class="nav-number">3.5.</span> <span class="nav-text">回收内存</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#动态重定位分区分配"><span class="nav-number">3.6.</span> <span class="nav-text">动态重定位分区分配</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#分区的存储保护"><span class="nav-number">3.7.</span> <span class="nav-text">分区的存储保护</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#对换"><span class="nav-number">3.8.</span> <span class="nav-text">对换</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#基本分页存储管理方式"><span class="nav-number">4.</span> <span class="nav-text">基本分页存储管理方式</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#页面与页表"><span class="nav-number">4.1.</span> <span class="nav-text">页面与页表</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#地址结构"><span class="nav-number">4.2.</span> <span class="nav-text">地址结构</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#地址变换机构"><span class="nav-number">4.3.</span> <span class="nav-text">地址变换机构</span></a></li></ol></li></ol></div>
             
 
           </div>

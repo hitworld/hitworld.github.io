@@ -127,7 +127,7 @@
 <meta property="og:site_name" content="w4rd3n">
 <meta property="og:description" content="概览 BIOS支持基本的键盘,鼠标等输入设备,也支持基本的显示输出和打印操作,还有读写外部存储设备. 键位与扫描码 键盘上的键可以分为五类:字符键(字母,数字,标点等),功能键(如F1,PgUp等),控制键(Ctrl,Alt和左右Shift),双态键(如Num Lock和Caps Lock等),特殊请求键(如Print Screen等).其中字符键有对应的ASCII码,其他的键没有.每个键都">
 <meta property="og:locale" content="zh-CN">
-<meta property="og:updated_time" content="2021-03-29T02:32:09.574Z">
+<meta property="og:updated_time" content="2021-06-12T23:08:05.190Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="CS-BASIC-assembly-IA32-BIOS编程">
 <meta name="twitter:description" content="概览 BIOS支持基本的键盘,鼠标等输入设备,也支持基本的显示输出和打印操作,还有读写外部存储设备. 键位与扫描码 键盘上的键可以分为五类:字符键(字母,数字,标点等),功能键(如F1,PgUp等),控制键(Ctrl,Alt和左右Shift),双态键(如Num Lock和Caps Lock等),特殊请求键(如Print Screen等).其中字符键有对应的ASCII码,其他的键没有.每个键都">
@@ -569,7 +569,7 @@
 <p><code>MBR</code>是位于启动磁盘首个扇区(<code>LBA</code>编址逻辑块号为<code>0</code>,<code>CHS</code>编址<code>0 0 1</code>的扇区)的引导程序(<code>512</code>字节,由主引导程序<code>446</code>字节,磁盘分区表<code>64</code>字节,标记<code>2</code>字节(<code>55</code>,<code>AA</code>)组成).</p>
 <p><code>PC</code>启动完成加电自检后,<code>BIOS</code>将按照预定的启动顺序读取<code>MBR</code>到<code>0000:7C00H</code>内存区域,并转到主引导程序执行.</p>
 <p><code>MBR</code>通常负责将操作系统的引导程序装载到内存,并转到操作系统的引导程序,由操作系统完成自举.</p>
-<p>主引导程序执行的主要步骤.</p>
+<p>主引导程序执行的步骤.</p>
 <ol type="1">
 <li>自身腾挪.由于操作系统的引导程序将占据<code>0000:7C00H</code>,所以<code>MBR</code>要先移动自己的代码.</li>
 <li>识别活动分区.根据磁盘分区表找到要启动的操作系统所在的分区.</li>

@@ -119,22 +119,22 @@
 
 
 
-  <meta name="description" content="简介 ARM架构是一个精简指令集RISC处理器架构家族,拥有一套精简的指令集以及比CISC处理器更多的通用寄存器. ARM指令只处理寄存器中的数据,只有load/store指令可以读/写存储器. ARM架构的优势是指令可以被更快的执行,同时RISC处理器通过引入流水线机制,减少每个指令的占用的CPU的时钟周期来缩短执行时间. 工作状态 ARM处理器有两种工作状态ARM和Thumb. 两">
+  <meta name="description" content="简介 ARM架构是一个RISC处理器架构家族,拥有一套精简的指令集以及比CISC处理器更多的通用寄存器. ARM指令只处理寄存器中的数据,只有load/store指令可以读/写存储器. ARM架构的优势是指令可以被更快的执行,同时RISC处理器通过引入流水线机制,减少每个指令的占用的CPU的时钟周期来缩短执行时间. 工作状态 ARM处理器有两种工作状态ARM和Thumb. 两种工作状态">
 <meta name="keywords" content="assembly">
 <meta property="og:type" content="article">
 <meta property="og:title" content="CS-BASIC-assembly-ARM-基础">
 <meta property="og:url" content="https://hitworld.github.io/posts/f6dfed73/index.html">
 <meta property="og:site_name" content="w4rd3n">
-<meta property="og:description" content="简介 ARM架构是一个精简指令集RISC处理器架构家族,拥有一套精简的指令集以及比CISC处理器更多的通用寄存器. ARM指令只处理寄存器中的数据,只有load/store指令可以读/写存储器. ARM架构的优势是指令可以被更快的执行,同时RISC处理器通过引入流水线机制,减少每个指令的占用的CPU的时钟周期来缩短执行时间. 工作状态 ARM处理器有两种工作状态ARM和Thumb. 两">
+<meta property="og:description" content="简介 ARM架构是一个RISC处理器架构家族,拥有一套精简的指令集以及比CISC处理器更多的通用寄存器. ARM指令只处理寄存器中的数据,只有load/store指令可以读/写存储器. ARM架构的优势是指令可以被更快的执行,同时RISC处理器通过引入流水线机制,减少每个指令的占用的CPU的时钟周期来缩短执行时间. 工作状态 ARM处理器有两种工作状态ARM和Thumb. 两种工作状态">
 <meta property="og:locale" content="zh-CN">
 <meta property="og:image" content="https://hitworld.github.io/png/2020-12-29-01-46-48.png">
 <meta property="og:image" content="https://hitworld.github.io/png/2020-12-29-01-47-48.png">
 <meta property="og:image" content="https://hitworld.github.io/png/2020-12-29-01-48-21.png">
 <meta property="og:image" content="https://hitworld.github.io/png/2020-12-29-01-49-07.png">
-<meta property="og:updated_time" content="2021-03-29T02:32:09.526Z">
+<meta property="og:updated_time" content="2021-06-12T23:08:05.189Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="CS-BASIC-assembly-ARM-基础">
-<meta name="twitter:description" content="简介 ARM架构是一个精简指令集RISC处理器架构家族,拥有一套精简的指令集以及比CISC处理器更多的通用寄存器. ARM指令只处理寄存器中的数据,只有load/store指令可以读/写存储器. ARM架构的优势是指令可以被更快的执行,同时RISC处理器通过引入流水线机制,减少每个指令的占用的CPU的时钟周期来缩短执行时间. 工作状态 ARM处理器有两种工作状态ARM和Thumb. 两">
+<meta name="twitter:description" content="简介 ARM架构是一个RISC处理器架构家族,拥有一套精简的指令集以及比CISC处理器更多的通用寄存器. ARM指令只处理寄存器中的数据,只有load/store指令可以读/写存储器. ARM架构的优势是指令可以被更快的执行,同时RISC处理器通过引入流水线机制,减少每个指令的占用的CPU的时钟周期来缩短执行时间. 工作状态 ARM处理器有两种工作状态ARM和Thumb. 两种工作状态">
 <meta name="twitter:image" content="https://hitworld.github.io/png/2020-12-29-01-46-48.png">
 
 
@@ -543,7 +543,7 @@
 
       
         <h2 id="简介">简介</h2>
-<p><code>ARM</code>架构是一个精简指令集<code>RISC</code>处理器架构家族,拥有一套精简的指令集以及比<code>CISC</code>处理器更多的通用寄存器.</p>
+<p><code>ARM</code>架构是一个<code>RISC</code>处理器架构家族,拥有一套精简的指令集以及比<code>CISC</code>处理器更多的通用寄存器.</p>
 <p><code>ARM</code>指令只处理寄存器中的数据,只有<code>load/store</code>指令可以读/写存储器.</p>
 <p><code>ARM</code>架构的优势是指令可以被更快的执行,同时<code>RISC</code>处理器通过引入流水线机制,减少每个指令的占用的<code>CPU</code>的时钟周期来缩短执行时间.</p>
 <h2 id="工作状态">工作状态</h2>
@@ -588,7 +588,6 @@
 <p><code>CPSR</code>包含条件码标志,中断禁止位,当前处理器模式以及其它状态和控制信息.<code>CPSR</code>在每种异常模式下都有一个对应的程序状态保存寄存器<code>SPSR</code>.</p>
 <p>当异常出现时,<code>SPSR</code>用于保存<code>CPSR</code>的值,以便异常返回后恢复工作状态.</p>
 <p><img src="/png/2020-12-29-01-47-48.png"></p>
-<p><img src="/png/2020-12-29-01-48-21.png"></p>
 <h2 id="指令集">指令集</h2>
 <p><code>ARM</code>在不同工作状态下有不同的指令集,但助记符不变.</p>
 <h3 id="数据处理指令">数据处理指令</h3>
@@ -617,6 +616,7 @@
 <p>调用号:<code>https://elixir.bootlin.com/linux/v2.6.32/source/arch/arm/include/asm/unistd.h</code>.</p>
 <p>异常处理函数(<code>SWI</code>向量)使用下面指令获取<code>24</code>位调用号:<code>LDR R0, [LR, #-4]; BIC R0, R0, #0xFF000000</code>.通过对<code>SPSR</code>访问确定软中断的<code>SWI</code>指令是<code>ARM</code>指令还是<code>Thumb</code>指令.</p>
 <h3 id="条件代码">条件代码</h3>
+<p><img src="/png/2020-12-29-01-48-21.png"></p>
 <p><code>ARM</code>对所有指令提供了条件执行,条件代码如下.</p>
 <ul>
 <li><code>EQ</code>:等于,如果设置了<code>Z</code>标志.</li>

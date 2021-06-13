@@ -130,7 +130,7 @@
 <meta property="og:image" content="https://hitworld.github.io/png/2021-01-04-16-07-05.png">
 <meta property="og:image" content="https://hitworld.github.io/png/2021-01-04-16-07-43.png">
 <meta property="og:image" content="https://hitworld.github.io/png/2021-01-04-16-07-31.png">
-<meta property="og:updated_time" content="2021-03-29T02:32:11.229Z">
+<meta property="og:updated_time" content="2021-06-12T23:08:05.290Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="IS-pwn-fuzz-AFL-基础">
 <meta name="twitter:description" content="简介 AFL是一种灰盒Fuzzing工具. 通过对源码进行编译时插桩(通过注入探针代码来实现程序分析)的方式监测边界(代码)覆盖率,通过算法自动变异新的测试用例来探索二进制程序内部新的执行路径. AFL也支持直接对没有源码的二进制程序进行测试,但需要QEMU的支持. AFL的一个特点就是基于边界覆盖率的反馈机制,边界覆盖率的统计工作通过插桩完成,然后通过边界覆盖率来进行状态分析.通过分析输">
@@ -604,7 +604,7 @@
 <li><code>bitflip 32/8</code>,每次翻转相邻的<code>32</code>个<code>bit</code>,按照每<code>8</code>个<code>bit</code>的步长从头开始,即依次对每个<code>dword</code>做翻转.</li>
 </ul>
 <p>在上述过程中<code>AFL</code>巧妙地嵌入了一些对文件格式的启发式判断.</p>
-<p>自动检测<code>token</code>:在进行<code>bitflip 1/1</code>变异时,对于每个<code>byte</code>的最低位翻转还进行了额外的处理:如果连续多个<code>bytes</code>的最低位被翻转后.程序的执行路径都未变化.而且与原始执行路径不一致,那么就把这一段连续的<code>bytes</code>判断是一条<code>token</code>.</p>
+<p>自动检测<code>token</code>:在进行<code>bitflip 1/1</code>变异时,对于每个<code>byte</code>的最低位翻转还进行了额外的处理:如果连续多个<code>bytes</code>的最低位被翻转后.程序的执行路径都未变化.而且与原始执行路径不一致,那么就把这一段连续的<code>bytes</code>判断是一个<code>token</code>.</p>
 <p>为了控制这样自动生成的<code>token</code>的大小和数量,<code>AFL</code>在<code>config.h</code>中通过宏定义限制.</p>
 <figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">define</span> MIN_AUTO_EXTRA      3</span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">define</span> MAX_AUTO_EXTRA      32</span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">define</span> USE_AUTO_EXTRAS     10</span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">define</span> MAX_AUTO_EXTRAS     (USE_AUTO_EXTRAS * 10)</span></span><br></pre></td></tr></table></figure>
 <p>在进行<code>bitflip 8/8</code>变异时,<code>AFL</code>还生成了一个非常重要的信息:<code>effector map</code>.</p>

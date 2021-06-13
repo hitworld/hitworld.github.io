@@ -119,27 +119,16 @@
 
 
 
-  <meta name="description" content="基本概念    示例 消除公共子表达式后.     复写传播后.        删除无用赋值.   强度削弱.   删除归纳变量.   局部优化 基本块  划分基本块.  划分基本块的算法.    划分基本块示例.   流图   基本块的DAG表示   四元式的DAG表示.     基本块的优化算法">
+  <meta name="description" content="基本概念 优化:对程序进行等价变换,删去多余的操作和冗余的变量,从而生成更有效的目标代码. 遵循三个原则:等价原则,有效原则,合算原则. 这里的等价指不改变程序的运行结果,有效指占用更小的存储空间和运行更短的时间,合算指优化本身的代价不宜太大. 优化的级别分为:局部优化,循环优化,全局优化. 优化的种类分为:删除多余运算,合并已知量,复写传播,删除无用赋值,代码外提,强度消弱,变换循环控">
 <meta name="keywords" content="compiler-principles">
 <meta property="og:type" content="article">
 <meta property="og:title" content="CS-BASIC-compiler-principles-优化">
 <meta property="og:url" content="https://hitworld.github.io/posts/d94006ce/index.html">
 <meta property="og:site_name" content="w4rd3n">
-<meta property="og:description" content="基本概念    示例 消除公共子表达式后.     复写传播后.        删除无用赋值.   强度削弱.   删除归纳变量.   局部优化 基本块  划分基本块.  划分基本块的算法.    划分基本块示例.   流图   基本块的DAG表示   四元式的DAG表示.     基本块的优化算法">
+<meta property="og:description" content="基本概念 优化:对程序进行等价变换,删去多余的操作和冗余的变量,从而生成更有效的目标代码. 遵循三个原则:等价原则,有效原则,合算原则. 这里的等价指不改变程序的运行结果,有效指占用更小的存储空间和运行更短的时间,合算指优化本身的代价不宜太大. 优化的级别分为:局部优化,循环优化,全局优化. 优化的种类分为:删除多余运算,合并已知量,复写传播,删除无用赋值,代码外提,强度消弱,变换循环控">
 <meta property="og:locale" content="zh-CN">
-<meta property="og:image" content="https://hitworld.github.io/png/2021-01-13-10-10-09.png">
-<meta property="og:image" content="https://hitworld.github.io/png/2021-01-13-10-10-20.png">
-<meta property="og:image" content="https://hitworld.github.io/png/2021-01-13-10-10-37.png">
 <meta property="og:image" content="https://hitworld.github.io/png/2021-01-13-10-11-19.png">
-<meta property="og:image" content="https://hitworld.github.io/png/2021-01-13-10-11-34.png">
-<meta property="og:image" content="https://hitworld.github.io/png/2021-01-13-10-11-50.png">
 <meta property="og:image" content="https://hitworld.github.io/png/2021-01-13-10-12-14.png">
-<meta property="og:image" content="https://hitworld.github.io/png/2021-01-13-10-13-33.png">
-<meta property="og:image" content="https://hitworld.github.io/png/2021-01-13-10-14-28.png">
-<meta property="og:image" content="https://hitworld.github.io/png/2021-01-13-10-14-43.png">
-<meta property="og:image" content="https://hitworld.github.io/png/2021-01-13-10-14-58.png">
-<meta property="og:image" content="https://hitworld.github.io/png/2021-01-13-10-15-21.png">
-<meta property="og:image" content="https://hitworld.github.io/png/2021-01-13-10-15-39.png">
 <meta property="og:image" content="https://hitworld.github.io/png/2021-01-13-10-15-55.png">
 <meta property="og:image" content="https://hitworld.github.io/png/2021-01-13-10-16-45.png">
 <meta property="og:image" content="https://hitworld.github.io/png/2021-01-13-10-16-57.png">
@@ -188,11 +177,11 @@
 <meta property="og:image" content="https://hitworld.github.io/png/2021-01-13-10-45-04.png">
 <meta property="og:image" content="https://hitworld.github.io/png/2021-01-13-10-45-18.png">
 <meta property="og:image" content="https://hitworld.github.io/png/2021-01-13-10-45-31.png">
-<meta property="og:updated_time" content="2021-03-29T02:32:10.024Z">
+<meta property="og:updated_time" content="2021-06-12T23:08:05.194Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="CS-BASIC-compiler-principles-优化">
-<meta name="twitter:description" content="基本概念    示例 消除公共子表达式后.     复写传播后.        删除无用赋值.   强度削弱.   删除归纳变量.   局部优化 基本块  划分基本块.  划分基本块的算法.    划分基本块示例.   流图   基本块的DAG表示   四元式的DAG表示.     基本块的优化算法">
-<meta name="twitter:image" content="https://hitworld.github.io/png/2021-01-13-10-10-09.png">
+<meta name="twitter:description" content="基本概念 优化:对程序进行等价变换,删去多余的操作和冗余的变量,从而生成更有效的目标代码. 遵循三个原则:等价原则,有效原则,合算原则. 这里的等价指不改变程序的运行结果,有效指占用更小的存储空间和运行更短的时间,合算指优化本身的代价不宜太大. 优化的级别分为:局部优化,循环优化,全局优化. 优化的种类分为:删除多余运算,合并已知量,复写传播,删除无用赋值,代码外提,强度消弱,变换循环控">
+<meta name="twitter:image" content="https://hitworld.github.io/png/2021-01-13-10-11-19.png">
 
 
 
@@ -565,7 +554,7 @@
                 
                   <span class="post-meta-item-text">本文字数：</span>
                 
-                <span title="本文字数">260</span>
+                <span title="本文字数">446</span>
               
 
               
@@ -600,22 +589,17 @@
 
       
         <h2 id="基本概念">基本概念</h2>
-<p><img src="/png/2021-01-13-10-10-09.png"></p>
-<p><img src="/png/2021-01-13-10-10-20.png"></p>
-<p><img src="/png/2021-01-13-10-10-37.png"></p>
-<h2 id="示例">示例</h2>
-<p>消除公共子表达式后.</p>
+<p>优化:对程序进行等价变换,删去多余的操作和冗余的变量,从而生成更有效的目标代码.</p>
+<p>遵循三个原则:等价原则,有效原则,合算原则.</p>
+<p>这里的等价指不改变程序的运行结果,有效指占用更小的存储空间和运行更短的时间,合算指优化本身的代价不宜太大.</p>
+<p>优化的级别分为:局部优化,循环优化,全局优化.</p>
+<p>优化的种类分为:删除多余运算,合并已知量,复写传播,删除无用赋值,代码外提,强度消弱,变换循环控制条件.</p>
+<h2 id="优化示例">优化示例</h2>
+<p>源代码.</p>
 <p><img src="/png/2021-01-13-10-11-19.png"></p>
-<p><img src="/png/2021-01-13-10-11-34.png"></p>
-<p><img src="/png/2021-01-13-10-11-50.png"></p>
+<p>消除公共子表达式后.</p>
 <p><img src="/png/2021-01-13-10-12-14.png"></p>
 <p>复写传播后.</p>
-<p><img src="/png/2021-01-13-10-13-33.png"></p>
-<p><img src="/png/2021-01-13-10-14-28.png"></p>
-<p><img src="/png/2021-01-13-10-14-43.png"></p>
-<p><img src="/png/2021-01-13-10-14-58.png"></p>
-<p><img src="/png/2021-01-13-10-15-21.png"></p>
-<p><img src="/png/2021-01-13-10-15-39.png"></p>
 <p><img src="/png/2021-01-13-10-15-55.png"></p>
 <p>删除无用赋值.</p>
 <p><img src="/png/2021-01-13-10-16-45.png"></p>
@@ -991,7 +975,7 @@
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#基本概念"><span class="nav-number">1.</span> <span class="nav-text">基本概念</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#示例"><span class="nav-number">2.</span> <span class="nav-text">示例</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#局部优化"><span class="nav-number">3.</span> <span class="nav-text">局部优化</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#基本块"><span class="nav-number">3.1.</span> <span class="nav-text">基本块</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#流图"><span class="nav-number">3.2.</span> <span class="nav-text">流图</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#基本块的dag表示"><span class="nav-number">3.3.</span> <span class="nav-text">基本块的DAG表示</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#基本块的优化算法"><span class="nav-number">3.4.</span> <span class="nav-text">基本块的优化算法</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#循环优化"><span class="nav-number">4.</span> <span class="nav-text">循环优化</span></a></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#基本概念"><span class="nav-number">1.</span> <span class="nav-text">基本概念</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#优化示例"><span class="nav-number">2.</span> <span class="nav-text">优化示例</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#局部优化"><span class="nav-number">3.</span> <span class="nav-text">局部优化</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#基本块"><span class="nav-number">3.1.</span> <span class="nav-text">基本块</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#流图"><span class="nav-number">3.2.</span> <span class="nav-text">流图</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#基本块的dag表示"><span class="nav-number">3.3.</span> <span class="nav-text">基本块的DAG表示</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#基本块的优化算法"><span class="nav-number">3.4.</span> <span class="nav-text">基本块的优化算法</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#循环优化"><span class="nav-number">4.</span> <span class="nav-text">循环优化</span></a></li></ol></div>
             
 
           </div>

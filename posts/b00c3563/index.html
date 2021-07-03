@@ -119,18 +119,18 @@
 
 
 
-  <meta name="description" content="Requests 当存在表单提交时可以使用Requests库. 具体json参数数据格式可以通过GET请求的url或者F12看POST的params获得. 12345678910111213import requestsparams = &amp;#123;&apos;key1&apos;:&apos;value1&apos;,&apos;key2&apos;:&apos;value2&apos;,...&amp;#125;r = requests.post(&quot;url&quot;,data =">
+  <meta name="description" content="Requests 使用Requests库进行表单提交,具体json参数数据格式可以通过GET请求的url或者F12看POST的params获得. 12345678910111213import requestsparams = &amp;#123;&apos;key1&apos;:&apos;value1&apos;,&apos;key2&apos;:&apos;value2&apos;,...&amp;#125;r = requests.post(&quot;url&quot;,data = params">
 <meta name="keywords" content="python">
 <meta property="og:type" content="article">
 <meta property="og:title" content="CS-develop-python-scapy-基础">
 <meta property="og:url" content="https://hitworld.github.io/posts/b00c3563/index.html">
 <meta property="og:site_name" content="w4rd3n的笔记">
-<meta property="og:description" content="Requests 当存在表单提交时可以使用Requests库. 具体json参数数据格式可以通过GET请求的url或者F12看POST的params获得. 12345678910111213import requestsparams = &amp;#123;&apos;key1&apos;:&apos;value1&apos;,&apos;key2&apos;:&apos;value2&apos;,...&amp;#125;r = requests.post(&quot;url&quot;,data =">
+<meta property="og:description" content="Requests 使用Requests库进行表单提交,具体json参数数据格式可以通过GET请求的url或者F12看POST的params获得. 12345678910111213import requestsparams = &amp;#123;&apos;key1&apos;:&apos;value1&apos;,&apos;key2&apos;:&apos;value2&apos;,...&amp;#125;r = requests.post(&quot;url&quot;,data = params">
 <meta property="og:locale" content="zh-CN">
-<meta property="og:updated_time" content="2021-07-03T03:30:47.303Z">
+<meta property="og:updated_time" content="2021-07-03T05:40:11.538Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="CS-develop-python-scapy-基础">
-<meta name="twitter:description" content="Requests 当存在表单提交时可以使用Requests库. 具体json参数数据格式可以通过GET请求的url或者F12看POST的params获得. 12345678910111213import requestsparams = &amp;#123;&apos;key1&apos;:&apos;value1&apos;,&apos;key2&apos;:&apos;value2&apos;,...&amp;#125;r = requests.post(&quot;url&quot;,data =">
+<meta name="twitter:description" content="Requests 使用Requests库进行表单提交,具体json参数数据格式可以通过GET请求的url或者F12看POST的params获得. 12345678910111213import requestsparams = &amp;#123;&apos;key1&apos;:&apos;value1&apos;,&apos;key2&apos;:&apos;value2&apos;,...&amp;#125;r = requests.post(&quot;url&quot;,data = params">
 
 
 
@@ -538,8 +538,7 @@
 
       
         <h2 id="requests">Requests</h2>
-<p>当存在表单提交时可以使用<code>Requests</code>库.</p>
-<p>具体<code>json</code>参数数据格式可以通过<code>GET</code>请求的<code>url</code>或者<code>F12</code>看<code>POST</code>的<code>params</code>获得.</p>
+<p>使用<code>Requests</code>库进行表单提交,具体<code>json</code>参数数据格式可以通过<code>GET</code>请求的<code>url</code>或者<code>F12</code>看<code>POST</code>的<code>params</code>获得.</p>
 <figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> requests</span><br><span class="line"></span><br><span class="line">params = &#123;<span class="string">'key1'</span>:<span class="string">'value1'</span>,<span class="string">'key2'</span>:<span class="string">'value2'</span>,...&#125;</span><br><span class="line">r = requests.post(<span class="string">"url"</span>,data = params)</span><br><span class="line">print(r.text)</span><br><span class="line"></span><br><span class="line">file = &#123;<span class="string">'key'</span>:open(<span class="string">'path/filename'</span>,<span class="string">'rb'</span>)&#125;</span><br><span class="line">r = requests.post(<span class="string">"url"</span>,files = file)</span><br><span class="line"></span><br><span class="line">cookies = r.cookies</span><br><span class="line">print(cookies.get_dict())</span><br><span class="line">r = requests.post(<span class="string">"url"</span>,cookies = cookies)</span><br><span class="line"><span class="comment">#使用delete_cookie(),add_cookie(),delete_all_cookie等方法处理会话cookie</span></span><br></pre></td></tr></table></figure>
 <p>由于<code>cookie</code>可能被网站经常更换,所以使用<code>session</code>更为方便.</p>
 <figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> requests</span><br><span class="line"></span><br><span class="line">headers = &#123;...&#125;</span><br><span class="line">session = requests.Session()</span><br><span class="line"></span><br><span class="line">...</span><br><span class="line">s = session.post(<span class="string">"url"</span>,data = params,headers = headers)</span><br><span class="line"><span class="comment">#伪造headers使你看着不像爬虫</span></span><br></pre></td></tr></table></figure>
@@ -698,7 +697,7 @@
                 
                   <a href="/archives/">
                 
-                    <span class="site-state-item-count">161</span>
+                    <span class="site-state-item-count">155</span>
                     <span class="site-state-item-name">日志</span>
                   </a>
                 </div>
@@ -743,9 +742,7 @@
                     
                       
                     
-                      
-                    
-                    <span class="site-state-item-count">17</span>
+                    <span class="site-state-item-count">16</span>
                     <span class="site-state-item-name">分类</span>
                   </a>
                 </div>
@@ -830,9 +827,7 @@
                     
                       
                     
-                      
-                    
-                    <span class="site-state-item-count">37</span>
+                    <span class="site-state-item-count">36</span>
                     <span class="site-state-item-name">标签</span>
                   </a>
                 </div>
@@ -914,7 +909,7 @@
       <i class="fa fa-area-chart"></i>
     </span>
     
-    <span title="站点总字数">904k</span>
+    <span title="站点总字数">898k</span>
   
 
   
@@ -923,7 +918,7 @@
       <i class="fa fa-coffee"></i>
     </span>
     
-    <span title="站点阅读时长">13:42</span>
+    <span title="站点阅读时长">13:36</span>
   
 </div>
 
@@ -1572,7 +1567,7 @@
   //$("body").backstretch("/images/background.jpg");
   </script>
   
-  <script type="text/javascript" src="//cdn.bootcss.com/canvas-nest.js/1.0.0/canvas-nest.min.js"></script><!-- hexo-inject:begin --><!-- hexo-inject:end -->
+  <script type="text/javascript" src="//cdn.bootcss.com/canvas-nest.js/1.0.0/canvas-nest.min.js"></script>
   
-<script src="/live2dw/lib/L2Dwidget.min.js?0c58a1486de42ac6cc1c59c7d98ae887"></script><script>L2Dwidget.init({"pluginRootPath":"live2dw/","pluginJsPath":"lib/","pluginModelPath":"assets/","tagMode":false,"debug":false,"model":{"jsonPath":"/live2dw/assets/koharu.model.json"},"display":{"position":"right","width":150,"height":300},"mobile":{"show":false},"log":false});</script></body>
+<script src="/live2dw/lib/L2Dwidget.min.js?0c58a1486de42ac6cc1c59c7d98ae887"></script><script>L2Dwidget.init({"pluginRootPath":"live2dw/","pluginJsPath":"lib/","pluginModelPath":"assets/","tagMode":false,"debug":false,"model":{"jsonPath":"/live2dw/assets/koharu.model.json"},"display":{"position":"right","width":150,"height":300},"mobile":{"show":false},"log":false});</script><!-- hexo-inject:begin --><!-- hexo-inject:end --></body>
 </html>

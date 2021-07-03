@@ -127,7 +127,7 @@
 <meta property="og:site_name" content="w4rd3n的笔记">
 <meta property="og:description" content="概念 格式化字符串漏洞:当printf等格式化字符串函数的第一个参数用户可控时,即可任意读写. 原理 格式化字符串的格式如下. 1%[parameter][flags][width][.precision][length]type  parameter:n$,使用第n个参数. flags:在width设置后指定可以用来作为填充的内容之类的内容. width:最小输出长度. pre">
 <meta property="og:locale" content="zh-CN">
-<meta property="og:updated_time" content="2021-07-03T03:30:47.328Z">
+<meta property="og:updated_time" content="2021-07-03T05:40:11.564Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="IS-pwn-Linux-格式化字符串漏洞">
 <meta name="twitter:description" content="概念 格式化字符串漏洞:当printf等格式化字符串函数的第一个参数用户可控时,即可任意读写. 原理 格式化字符串的格式如下. 1%[parameter][flags][width][.precision][length]type  parameter:n$,使用第n个参数. flags:在width设置后指定可以用来作为填充的内容之类的内容. width:最小输出长度. pre">
@@ -567,9 +567,10 @@
 </ul>
 <p>常用<code>%p</code>,<code>%x</code>,<code>%n</code>,<code>%s</code>搭配其他限定符读写数据.</p>
 <h2 id="利用">利用</h2>
-<p>这里分两种情况.</p>
-<p>第一种是格式化字符串在调用的格式化字符串函数的栈帧之上(即可以作为格式化控制符解析参数),这种情况基本上可以测出偏移后利用<code>%num$x</code>,<code>%num$n</code>任意读任意写.</p>
-<p>第二种是格式化字符串不可作为解析参数.就只能利用栈上的参数进行读写.</p>
+<ol type="1">
+<li>格式化字符串在调用的格式化字符串函数的栈帧之上(即可以作为格式化控制符解析参数),这种情况基本上可以测出偏移后利用<code>%num$x</code>,<code>%num$n</code>任意读任意写.</li>
+<li>格式化字符串不可作为解析参数(不保存在栈上),就只能利用栈上的参数进行读写.</li>
+</ol>
 <h2 id="fprintf_chk-沙箱逃逸">fprintf_chk &amp; 沙箱逃逸</h2>
 <p><code>fprintf_chk</code>执行<code>%n</code>会报错.</p>
 <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">*** %n <span class="keyword">in</span> writable segment detected ***</span><br></pre></td></tr></table></figure>
@@ -702,7 +703,7 @@
                 
                   <a href="/archives/">
                 
-                    <span class="site-state-item-count">161</span>
+                    <span class="site-state-item-count">155</span>
                     <span class="site-state-item-name">日志</span>
                   </a>
                 </div>
@@ -747,9 +748,7 @@
                     
                       
                     
-                      
-                    
-                    <span class="site-state-item-count">17</span>
+                    <span class="site-state-item-count">16</span>
                     <span class="site-state-item-name">分类</span>
                   </a>
                 </div>
@@ -834,9 +833,7 @@
                     
                       
                     
-                      
-                    
-                    <span class="site-state-item-count">37</span>
+                    <span class="site-state-item-count">36</span>
                     <span class="site-state-item-name">标签</span>
                   </a>
                 </div>
@@ -918,7 +915,7 @@
       <i class="fa fa-area-chart"></i>
     </span>
     
-    <span title="站点总字数">904k</span>
+    <span title="站点总字数">898k</span>
   
 
   
@@ -927,7 +924,7 @@
       <i class="fa fa-coffee"></i>
     </span>
     
-    <span title="站点阅读时长">13:42</span>
+    <span title="站点阅读时长">13:36</span>
   
 </div>
 
@@ -1576,7 +1573,7 @@
   //$("body").backstretch("/images/background.jpg");
   </script>
   
-  <script type="text/javascript" src="//cdn.bootcss.com/canvas-nest.js/1.0.0/canvas-nest.min.js"></script><!-- hexo-inject:begin --><!-- hexo-inject:end -->
+  <script type="text/javascript" src="//cdn.bootcss.com/canvas-nest.js/1.0.0/canvas-nest.min.js"></script>
   
-<script src="/live2dw/lib/L2Dwidget.min.js?0c58a1486de42ac6cc1c59c7d98ae887"></script><script>L2Dwidget.init({"pluginRootPath":"live2dw/","pluginJsPath":"lib/","pluginModelPath":"assets/","tagMode":false,"debug":false,"model":{"jsonPath":"/live2dw/assets/koharu.model.json"},"display":{"position":"right","width":150,"height":300},"mobile":{"show":false},"log":false});</script></body>
+<script src="/live2dw/lib/L2Dwidget.min.js?0c58a1486de42ac6cc1c59c7d98ae887"></script><script>L2Dwidget.init({"pluginRootPath":"live2dw/","pluginJsPath":"lib/","pluginModelPath":"assets/","tagMode":false,"debug":false,"model":{"jsonPath":"/live2dw/assets/koharu.model.json"},"display":{"position":"right","width":150,"height":300},"mobile":{"show":false},"log":false});</script><!-- hexo-inject:begin --><!-- hexo-inject:end --></body>
 </html>

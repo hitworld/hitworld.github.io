@@ -128,7 +128,7 @@
 <meta property="og:description" content="环境 C语言源代码并不能直接运行,而是需要一个编译环境将其从源代码编译成可执行程序,然后再在编译环境对应运行环境中运行. C语言的编译过程可以划分为:预处理,gcc编译器编译(C语言到汇编代码),汇编器汇编(汇编代码到机器代码),链接(目标文件到可执行文件). 词法 C语言作为一门计算机语言,和大部分语言结构是类似的.由空格(或TAB,换行)分隔一个个标记(token,就像英语中的单词),">
 <meta property="og:locale" content="zh-CN">
 <meta property="og:image" content="https://hitworld.github.io/png/2021-01-04-14-30-51.png">
-<meta property="og:updated_time" content="2021-07-03T03:30:47.299Z">
+<meta property="og:updated_time" content="2021-07-03T05:40:11.534Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="CS-develop-C-基础">
 <meta name="twitter:description" content="环境 C语言源代码并不能直接运行,而是需要一个编译环境将其从源代码编译成可执行程序,然后再在编译环境对应运行环境中运行. C语言的编译过程可以划分为:预处理,gcc编译器编译(C语言到汇编代码),汇编器汇编(汇编代码到机器代码),链接(目标文件到可执行文件). 词法 C语言作为一门计算机语言,和大部分语言结构是类似的.由空格(或TAB,换行)分隔一个个标记(token,就像英语中的单词),">
@@ -574,7 +574,6 @@
 <p>使用了<code>const</code>限定符的变量被称为常量变量,其与普通变量的区别在于常量变量必须初始化,且初始化后不能再改变(作为形参的常量变量可以获得实参的值).</p>
 <p>当对指针变量使用<code>const</code>时又有一点区别.<code>int * const p</code>,表示指针<code>p</code>是常量变量,不能对<code>p</code>赋值.<code>int const * p</code>,表示<code>p</code>指向的变量为常量变量.</p>
 <p>其实<code>const</code>的限制只体现在编译器层面,汇编层面常量变量和普通变量是一样的.</p>
-<h2 id="作用域">作用域</h2>
 
       
     </div>
@@ -697,7 +696,7 @@
                 
                   <a href="/archives/">
                 
-                    <span class="site-state-item-count">161</span>
+                    <span class="site-state-item-count">155</span>
                     <span class="site-state-item-name">日志</span>
                   </a>
                 </div>
@@ -742,9 +741,7 @@
                     
                       
                     
-                      
-                    
-                    <span class="site-state-item-count">17</span>
+                    <span class="site-state-item-count">16</span>
                     <span class="site-state-item-name">分类</span>
                   </a>
                 </div>
@@ -829,9 +826,7 @@
                     
                       
                     
-                      
-                    
-                    <span class="site-state-item-count">37</span>
+                    <span class="site-state-item-count">36</span>
                     <span class="site-state-item-name">标签</span>
                   </a>
                 </div>
@@ -881,7 +876,7 @@
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#环境"><span class="nav-number">1.</span> <span class="nav-text">环境</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#词法"><span class="nav-number">2.</span> <span class="nav-text">词法</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#数据"><span class="nav-number">3.</span> <span class="nav-text">数据</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#整型"><span class="nav-number">3.1.</span> <span class="nav-text">整型</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#浮点型"><span class="nav-number">3.2.</span> <span class="nav-text">浮点型</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#指针"><span class="nav-number">3.3.</span> <span class="nav-text">指针</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#tips"><span class="nav-number">3.4.</span> <span class="nav-text">tips</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#声明"><span class="nav-number">4.</span> <span class="nav-text">声明</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#typedef"><span class="nav-number">4.1.</span> <span class="nav-text">typedef</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#const"><span class="nav-number">4.2.</span> <span class="nav-text">const</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#作用域"><span class="nav-number">5.</span> <span class="nav-text">作用域</span></a></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#环境"><span class="nav-number">1.</span> <span class="nav-text">环境</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#词法"><span class="nav-number">2.</span> <span class="nav-text">词法</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#数据"><span class="nav-number">3.</span> <span class="nav-text">数据</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#整型"><span class="nav-number">3.1.</span> <span class="nav-text">整型</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#浮点型"><span class="nav-number">3.2.</span> <span class="nav-text">浮点型</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#指针"><span class="nav-number">3.3.</span> <span class="nav-text">指针</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#tips"><span class="nav-number">3.4.</span> <span class="nav-text">tips</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#声明"><span class="nav-number">4.</span> <span class="nav-text">声明</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#typedef"><span class="nav-number">4.1.</span> <span class="nav-text">typedef</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#const"><span class="nav-number">4.2.</span> <span class="nav-text">const</span></a></li></ol></li></ol></div>
             
 
           </div>
@@ -913,7 +908,7 @@
       <i class="fa fa-area-chart"></i>
     </span>
     
-    <span title="站点总字数">904k</span>
+    <span title="站点总字数">898k</span>
   
 
   
@@ -922,7 +917,7 @@
       <i class="fa fa-coffee"></i>
     </span>
     
-    <span title="站点阅读时长">13:42</span>
+    <span title="站点阅读时长">13:36</span>
   
 </div>
 
@@ -1571,7 +1566,7 @@
   //$("body").backstretch("/images/background.jpg");
   </script>
   
-  <script type="text/javascript" src="//cdn.bootcss.com/canvas-nest.js/1.0.0/canvas-nest.min.js"></script><!-- hexo-inject:begin --><!-- hexo-inject:end -->
+  <script type="text/javascript" src="//cdn.bootcss.com/canvas-nest.js/1.0.0/canvas-nest.min.js"></script>
   
-<script src="/live2dw/lib/L2Dwidget.min.js?0c58a1486de42ac6cc1c59c7d98ae887"></script><script>L2Dwidget.init({"pluginRootPath":"live2dw/","pluginJsPath":"lib/","pluginModelPath":"assets/","tagMode":false,"debug":false,"model":{"jsonPath":"/live2dw/assets/koharu.model.json"},"display":{"position":"right","width":150,"height":300},"mobile":{"show":false},"log":false});</script></body>
+<script src="/live2dw/lib/L2Dwidget.min.js?0c58a1486de42ac6cc1c59c7d98ae887"></script><script>L2Dwidget.init({"pluginRootPath":"live2dw/","pluginJsPath":"lib/","pluginModelPath":"assets/","tagMode":false,"debug":false,"model":{"jsonPath":"/live2dw/assets/koharu.model.json"},"display":{"position":"right","width":150,"height":300},"mobile":{"show":false},"log":false});</script><!-- hexo-inject:begin --><!-- hexo-inject:end --></body>
 </html>

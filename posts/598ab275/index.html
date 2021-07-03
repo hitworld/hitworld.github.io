@@ -127,7 +127,7 @@
 <meta property="og:site_name" content="w4rd3n的笔记">
 <meta property="og:description" content="沙箱机制 沙箱(Sandbox)是一种程序的隔离运行机制,其目的是限制不可信进程或不可信代码运行时的访问权限. seccomp是一种内核中的安全机制,通过seccomp可以在程序中禁用掉某些syscall. seccomp规则的设置可以使用prtcl函数和seccomp函数族. prctl函数 12#include &amp;lt;sys/prctl.h&amp;gt;extern int prctl">
 <meta property="og:locale" content="zh-CN">
-<meta property="og:updated_time" content="2021-07-03T03:30:47.329Z">
+<meta property="og:updated_time" content="2021-07-03T05:40:11.564Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="IS-pwn-Linux-沙箱机制">
 <meta name="twitter:description" content="沙箱机制 沙箱(Sandbox)是一种程序的隔离运行机制,其目的是限制不可信进程或不可信代码运行时的访问权限. seccomp是一种内核中的安全机制,通过seccomp可以在程序中禁用掉某些syscall. seccomp规则的设置可以使用prtcl函数和seccomp函数族. prctl函数 12#include &amp;lt;sys/prctl.h&amp;gt;extern int prctl">
@@ -563,11 +563,7 @@
 <p><code>typedef void *scmp_filter_ctx;</code>,实际上<code>ctx</code>就是个指针.</p>
 <p><code>seccomp_init</code>根据参数返回一个指向规则结构体的指针.</p>
 <figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">define</span> SCMP_ACT_ALLOW 0x7fff0000U</span></span><br><span class="line"><span class="comment">//表示默认允许所有的syscacll</span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">define</span> SCMP_ACT_KILL 0x00000000U</span></span><br><span class="line"><span class="comment">//表示默认禁止所有的syscall</span></span><br></pre></td></tr></table></figure>
-<p><code>seccomp_rule_add</code>根据参数添加规则.</p>
-<p>第二个参数<code>SCMP_ACT_KILL</code>表示禁止,<code>SCMP_ACT_ALLOW</code>表示允许.</p>
-<p>第三个参数指定规则针对的系统调用号.</p>
-<p>第四个参数表示是否限制参数.如:<code>seccomp_rule_add(ctx, SCMP_ACT_KILL, SCMP_SYS(execve), 1, SCMP_A2(SCMP_CMP_EQ, 0));</code>表示禁止第三个参数为<code>0</code>的<code>execve</code>调用.</p>
-<p><code>seccomp_load</code>根据参数应用规则.</p>
+<p><code>seccomp_rule_add</code>根据参数添加规则;第二个参数<code>SCMP_ACT_KILL</code>表示禁止,<code>SCMP_ACT_ALLOW</code>表示允许;第三个参数指定规则针对的系统调用号;第四个参数表示是否限制参数.如:<code>seccomp_rule_add(ctx, SCMP_ACT_KILL, SCMP_SYS(execve), 1, SCMP_A2(SCMP_CMP_EQ, 0));</code>表示禁止第三个参数为<code>0</code>的<code>execve</code>调用.</p>
 
       
     </div>
@@ -690,7 +686,7 @@
                 
                   <a href="/archives/">
                 
-                    <span class="site-state-item-count">161</span>
+                    <span class="site-state-item-count">155</span>
                     <span class="site-state-item-name">日志</span>
                   </a>
                 </div>
@@ -735,9 +731,7 @@
                     
                       
                     
-                      
-                    
-                    <span class="site-state-item-count">17</span>
+                    <span class="site-state-item-count">16</span>
                     <span class="site-state-item-name">分类</span>
                   </a>
                 </div>
@@ -822,9 +816,7 @@
                     
                       
                     
-                      
-                    
-                    <span class="site-state-item-count">37</span>
+                    <span class="site-state-item-count">36</span>
                     <span class="site-state-item-name">标签</span>
                   </a>
                 </div>
@@ -906,7 +898,7 @@
       <i class="fa fa-area-chart"></i>
     </span>
     
-    <span title="站点总字数">904k</span>
+    <span title="站点总字数">898k</span>
   
 
   
@@ -915,7 +907,7 @@
       <i class="fa fa-coffee"></i>
     </span>
     
-    <span title="站点阅读时长">13:42</span>
+    <span title="站点阅读时长">13:36</span>
   
 </div>
 
@@ -1564,7 +1556,7 @@
   //$("body").backstretch("/images/background.jpg");
   </script>
   
-  <script type="text/javascript" src="//cdn.bootcss.com/canvas-nest.js/1.0.0/canvas-nest.min.js"></script><!-- hexo-inject:begin --><!-- hexo-inject:end -->
+  <script type="text/javascript" src="//cdn.bootcss.com/canvas-nest.js/1.0.0/canvas-nest.min.js"></script>
   
-<script src="/live2dw/lib/L2Dwidget.min.js?0c58a1486de42ac6cc1c59c7d98ae887"></script><script>L2Dwidget.init({"pluginRootPath":"live2dw/","pluginJsPath":"lib/","pluginModelPath":"assets/","tagMode":false,"debug":false,"model":{"jsonPath":"/live2dw/assets/koharu.model.json"},"display":{"position":"right","width":150,"height":300},"mobile":{"show":false},"log":false});</script></body>
+<script src="/live2dw/lib/L2Dwidget.min.js?0c58a1486de42ac6cc1c59c7d98ae887"></script><script>L2Dwidget.init({"pluginRootPath":"live2dw/","pluginJsPath":"lib/","pluginModelPath":"assets/","tagMode":false,"debug":false,"model":{"jsonPath":"/live2dw/assets/koharu.model.json"},"display":{"position":"right","width":150,"height":300},"mobile":{"show":false},"log":false});</script><!-- hexo-inject:begin --><!-- hexo-inject:end --></body>
 </html>

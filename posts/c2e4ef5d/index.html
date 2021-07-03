@@ -128,7 +128,7 @@
 <meta property="og:description" content="概览 kvm(kernel-based virtual machine)是一个开源软件,是x86架构硬件支持虚拟化技术(如Intel-VT或AMD-V)的Linux实现,它包含一个为处理器提供底层虚拟化的可加载的核心模块kvm.ko(kvm-intel.ko或kvm-amd.ko). 该内核模块使得Linux变成了一个Hypervisor.Linux-2.6.20以上的内核均包含了kvm核心.">
 <meta property="og:locale" content="zh-CN">
 <meta property="og:image" content="https://hitworld.github.io/png/2021-01-04-14-46-21.png">
-<meta property="og:updated_time" content="2021-07-03T03:30:47.302Z">
+<meta property="og:updated_time" content="2021-07-03T05:40:11.537Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="CS-develop-Linux-kvm-基础">
 <meta name="twitter:description" content="概览 kvm(kernel-based virtual machine)是一个开源软件,是x86架构硬件支持虚拟化技术(如Intel-VT或AMD-V)的Linux实现,它包含一个为处理器提供底层虚拟化的可加载的核心模块kvm.ko(kvm-intel.ko或kvm-amd.ko). 该内核模块使得Linux变成了一个Hypervisor.Linux-2.6.20以上的内核均包含了kvm核心.">
@@ -542,28 +542,8 @@
         <h2 id="概览">概览</h2>
 <p><code>kvm</code>(<code>kernel-based virtual machine</code>)是一个开源软件,是<code>x86</code>架构硬件支持虚拟化技术(如<code>Intel-VT</code>或<code>AMD-V</code>)的<code>Linux</code>实现,它包含一个为处理器提供底层虚拟化的可加载的核心模块<code>kvm.ko</code>(<code>kvm-intel.ko</code>或<code>kvm-amd.ko</code>).</p>
 <p>该内核模块使得<code>Linux</code>变成了一个<code>Hypervisor</code>.<code>Linux-2.6.20</code>以上的内核均包含了<code>kvm</code>核心.</p>
-<p><code>kvm</code>所支持的功能.</p>
-<ul>
-<li><code>CPU</code>和内存超分(<code>Overcommit</code>).</li>
-<li>半虚拟化<code>I/O</code>(<code>virtio</code>).</li>
-<li>热插拔(<code>cpu</code>,块设备,网络设备等).</li>
-<li>对称多处理(<code>Symmetric Multi-Processing</code>,<code>SMP</code>).</li>
-<li>实时迁移(<code>Live Migration</code>).</li>
-<li><code>PCI</code>设备直接分配和单根<code>I/O</code>虚拟化(<code>SR-IOV</code>).</li>
-<li>内核同页合并(<code>KSM</code>).</li>
-<li><code>NUMA</code>(<code>Non-Uniform Memory Access</code>,非一致存储访问结构).</li>
-</ul>
-<p>配合<code>kvm</code>使用的软件.</p>
-<ul>
-<li><code>libvirt</code>:操作和管理<code>kvm</code>虚拟机的虚拟化<code>API</code>,使用<code>C</code>语言编写,可以由<code>Python</code>,<code>Ruby</code>等语言调用.可以操作包括<code>kvm</code>,<code>vmware</code>,<code>XEN</code>,<code>Hyper-v</code>,<code>LXC</code>等<code>Hypervisor</code>.</li>
-<li><code>virsh</code>:基于<code>libvirt</code>的命令行工具(<code>CLI</code>).</li>
-<li><code>virt-Manager</code>:基于<code>libvirt</code>的<code>GUI</code>工具.</li>
-<li><code>virt-v2v</code>:虚拟机格式迁移工具.</li>
-<li><code>virt-install</code>:创建<code>kvm</code>虚拟机的命令行工具.</li>
-<li><code>virt-viewer</code>:连接<code>kvm</code>虚拟机屏幕的工具.</li>
-<li><code>virt-clone</code>:<code>kvm</code>虚拟机克隆工具.</li>
-<li><code>virt-*</code>系列工具.</li>
-</ul>
+<p><code>kvm</code>所支持的功能:<code>CPU</code>和内存超分(<code>Overcommit</code>);半虚拟化<code>I/O</code>(<code>virtio</code>);热插拔(<code>cpu</code>,块设备,网络设备等);对称多处理(<code>Symmetric Multi-Processing</code>,<code>SMP</code>);实时迁移(<code>Live Migration</code>);<code>PCI</code>设备直接分配和单根<code>I/O</code>虚拟化(<code>SR-IOV</code>);内核同页合并(<code>KSM</code>);<code>NUMA</code>(<code>Non-Uniform Memory Access</code>,非一致存储访问结构).</p>
+<p>配合<code>kvm</code>使用的软件:<code>libvirt</code>,操作和管理<code>kvm</code>虚拟机的虚拟化<code>API</code>,使用<code>C</code>语言编写,可以由<code>Python</code>,<code>Ruby</code>等语言调用.可以操作包括<code>kvm</code>,<code>vmware</code>,<code>XEN</code>,<code>Hyper-v</code>,<code>LXC</code>等<code>Hypervisor</code>;<code>virsh</code>,基于<code>libvirt</code>的命令行工具(<code>CLI</code>);<code>virt-Manager</code>,基于<code>libvirt</code>的<code>GUI</code>工具;<code>virt-v2v</code>,虚拟机格式迁移工具;<code>virt-install</code>,创建<code>kvm</code>虚拟机的命令行工具;<code>virt-viewer</code>,连接<code>kvm</code>虚拟机屏幕的工具;<code>virt-clone</code>,<code>kvm</code>虚拟机克隆工具;<code>virt-*</code>系列工具.</p>
 <p><code>kvm</code>不提供硬件虚拟化操作,其<code>I/O</code>操作等都借助<code>qemu</code>来完成.</p>
 <p><img src="/png/2021-01-04-14-46-21.png"></p>
 <h2 id="devkvm">/dev/kvm</h2>
@@ -690,7 +670,7 @@
                 
                   <a href="/archives/">
                 
-                    <span class="site-state-item-count">161</span>
+                    <span class="site-state-item-count">155</span>
                     <span class="site-state-item-name">日志</span>
                   </a>
                 </div>
@@ -735,9 +715,7 @@
                     
                       
                     
-                      
-                    
-                    <span class="site-state-item-count">17</span>
+                    <span class="site-state-item-count">16</span>
                     <span class="site-state-item-name">分类</span>
                   </a>
                 </div>
@@ -822,9 +800,7 @@
                     
                       
                     
-                      
-                    
-                    <span class="site-state-item-count">37</span>
+                    <span class="site-state-item-count">36</span>
                     <span class="site-state-item-name">标签</span>
                   </a>
                 </div>
@@ -906,7 +882,7 @@
       <i class="fa fa-area-chart"></i>
     </span>
     
-    <span title="站点总字数">904k</span>
+    <span title="站点总字数">898k</span>
   
 
   
@@ -915,7 +891,7 @@
       <i class="fa fa-coffee"></i>
     </span>
     
-    <span title="站点阅读时长">13:42</span>
+    <span title="站点阅读时长">13:36</span>
   
 </div>
 
@@ -1564,7 +1540,7 @@
   //$("body").backstretch("/images/background.jpg");
   </script>
   
-  <script type="text/javascript" src="//cdn.bootcss.com/canvas-nest.js/1.0.0/canvas-nest.min.js"></script><!-- hexo-inject:begin --><!-- hexo-inject:end -->
+  <script type="text/javascript" src="//cdn.bootcss.com/canvas-nest.js/1.0.0/canvas-nest.min.js"></script>
   
-<script src="/live2dw/lib/L2Dwidget.min.js?0c58a1486de42ac6cc1c59c7d98ae887"></script><script>L2Dwidget.init({"pluginRootPath":"live2dw/","pluginJsPath":"lib/","pluginModelPath":"assets/","tagMode":false,"debug":false,"model":{"jsonPath":"/live2dw/assets/koharu.model.json"},"display":{"position":"right","width":150,"height":300},"mobile":{"show":false},"log":false});</script></body>
+<script src="/live2dw/lib/L2Dwidget.min.js?0c58a1486de42ac6cc1c59c7d98ae887"></script><script>L2Dwidget.init({"pluginRootPath":"live2dw/","pluginJsPath":"lib/","pluginModelPath":"assets/","tagMode":false,"debug":false,"model":{"jsonPath":"/live2dw/assets/koharu.model.json"},"display":{"position":"right","width":150,"height":300},"mobile":{"show":false},"log":false});</script><!-- hexo-inject:begin --><!-- hexo-inject:end --></body>
 </html>

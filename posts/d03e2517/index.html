@@ -119,18 +119,18 @@
 
 
 
-  <meta name="description" content="概念 一个集合可以被一种等价关系分为多个等价类,比如两个点的相连关系可以将一个点集分为多个相连的点集(连通分量),将这种判断是否连通并更新对应连通分量的问题称为动态连通性问题. 动态连通性问题解决思路:给每一个连通分量选择一个不同的标识符(用于判断等价关系的值),通过检索标识符并判断是否相等来判断连通性. 第一种解决方案:所有同一连通分量中的点都保存标识符,检索过程只需要一次即可,但是合并连">
+  <meta name="description" content="概念 集合可以被一种等价关系分为多个等价类,比如两个点的相连关系可以将一个点集分为多个相连的点集(连通分量),而这种判断是否连通并更新对应连通分量的问题称为动态连通性问题. 动态连通性问题解决思路:给每一个连通分量选择一个不同的标识符(用于判断等价关系的值),通过检索标识符并判断是否相等来判断连通性. 第一种解决方案:所有同一连通分量中的点都保存标识符,检索过程只需要一次即可,但是合并连通分">
 <meta name="keywords" content="algorithm">
 <meta property="og:type" content="article">
 <meta property="og:title" content="CS-BASIC-algorithm-动态连通性">
 <meta property="og:url" content="https://hitworld.github.io/posts/d03e2517/index.html">
 <meta property="og:site_name" content="w4rd3n的笔记">
-<meta property="og:description" content="概念 一个集合可以被一种等价关系分为多个等价类,比如两个点的相连关系可以将一个点集分为多个相连的点集(连通分量),将这种判断是否连通并更新对应连通分量的问题称为动态连通性问题. 动态连通性问题解决思路:给每一个连通分量选择一个不同的标识符(用于判断等价关系的值),通过检索标识符并判断是否相等来判断连通性. 第一种解决方案:所有同一连通分量中的点都保存标识符,检索过程只需要一次即可,但是合并连">
+<meta property="og:description" content="概念 集合可以被一种等价关系分为多个等价类,比如两个点的相连关系可以将一个点集分为多个相连的点集(连通分量),而这种判断是否连通并更新对应连通分量的问题称为动态连通性问题. 动态连通性问题解决思路:给每一个连通分量选择一个不同的标识符(用于判断等价关系的值),通过检索标识符并判断是否相等来判断连通性. 第一种解决方案:所有同一连通分量中的点都保存标识符,检索过程只需要一次即可,但是合并连通分">
 <meta property="og:locale" content="zh-CN">
-<meta property="og:updated_time" content="2021-06-13T01:44:28.605Z">
+<meta property="og:updated_time" content="2021-07-03T03:30:47.283Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="CS-BASIC-algorithm-动态连通性">
-<meta name="twitter:description" content="概念 一个集合可以被一种等价关系分为多个等价类,比如两个点的相连关系可以将一个点集分为多个相连的点集(连通分量),将这种判断是否连通并更新对应连通分量的问题称为动态连通性问题. 动态连通性问题解决思路:给每一个连通分量选择一个不同的标识符(用于判断等价关系的值),通过检索标识符并判断是否相等来判断连通性. 第一种解决方案:所有同一连通分量中的点都保存标识符,检索过程只需要一次即可,但是合并连">
+<meta name="twitter:description" content="概念 集合可以被一种等价关系分为多个等价类,比如两个点的相连关系可以将一个点集分为多个相连的点集(连通分量),而这种判断是否连通并更新对应连通分量的问题称为动态连通性问题. 动态连通性问题解决思路:给每一个连通分量选择一个不同的标识符(用于判断等价关系的值),通过检索标识符并判断是否相等来判断连通性. 第一种解决方案:所有同一连通分量中的点都保存标识符,检索过程只需要一次即可,但是合并连通分">
 
 
 
@@ -538,7 +538,7 @@
 
       
         <h2 id="概念">概念</h2>
-<p>一个集合可以被一种等价关系分为多个等价类,比如两个点的相连关系可以将一个点集分为多个相连的点集(连通分量),将这种判断是否连通并更新对应连通分量的问题称为动态连通性问题.</p>
+<p>集合可以被一种等价关系分为多个等价类,比如两个点的相连关系可以将一个点集分为多个相连的点集(连通分量),而这种判断是否连通并更新对应连通分量的问题称为动态连通性问题.</p>
 <p>动态连通性问题解决思路:给每一个连通分量选择一个不同的标识符(用于判断等价关系的值),通过检索标识符并判断是否相等来判断连通性.</p>
 <p>第一种解决方案:所有同一连通分量中的点都保存标识符,检索过程只需要一次即可,但是合并连通分量时就要遍历点集将每一个点的标识符改变.</p>
 <p>第二种解决方案:如果一个点只保存自己链接的点,初始链接自己,合并只改变一个点的链接,而检索过程只需要沿链接向上找到根链接点(根链接点的标识是链接自己).实际上将关系变成了森林,对于合并时谁作为父节点,通过比较前连通分量的结点数实现加权算法.</p>
@@ -667,7 +667,7 @@
                 
                   <a href="/archives/">
                 
-                    <span class="site-state-item-count">163</span>
+                    <span class="site-state-item-count">161</span>
                     <span class="site-state-item-name">日志</span>
                   </a>
                 </div>
@@ -801,9 +801,7 @@
                     
                       
                     
-                      
-                    
-                    <span class="site-state-item-count">38</span>
+                    <span class="site-state-item-count">37</span>
                     <span class="site-state-item-name">标签</span>
                   </a>
                 </div>
@@ -885,7 +883,7 @@
       <i class="fa fa-area-chart"></i>
     </span>
     
-    <span title="站点总字数">906k</span>
+    <span title="站点总字数">904k</span>
   
 
   
@@ -894,7 +892,7 @@
       <i class="fa fa-coffee"></i>
     </span>
     
-    <span title="站点阅读时长">13:44</span>
+    <span title="站点阅读时长">13:42</span>
   
 </div>
 
@@ -1543,7 +1541,7 @@
   //$("body").backstretch("/images/background.jpg");
   </script>
   
-  <script type="text/javascript" src="//cdn.bootcss.com/canvas-nest.js/1.0.0/canvas-nest.min.js"></script>
+  <script type="text/javascript" src="//cdn.bootcss.com/canvas-nest.js/1.0.0/canvas-nest.min.js"></script><!-- hexo-inject:begin --><!-- hexo-inject:end -->
   
-<script src="/live2dw/lib/L2Dwidget.min.js?0c58a1486de42ac6cc1c59c7d98ae887"></script><script>L2Dwidget.init({"pluginRootPath":"live2dw/","pluginJsPath":"lib/","pluginModelPath":"assets/","tagMode":false,"debug":false,"model":{"jsonPath":"/live2dw/assets/koharu.model.json"},"display":{"position":"right","width":150,"height":300},"mobile":{"show":false},"log":false});</script><!-- hexo-inject:begin --><!-- hexo-inject:end --></body>
+<script src="/live2dw/lib/L2Dwidget.min.js?0c58a1486de42ac6cc1c59c7d98ae887"></script><script>L2Dwidget.init({"pluginRootPath":"live2dw/","pluginJsPath":"lib/","pluginModelPath":"assets/","tagMode":false,"debug":false,"model":{"jsonPath":"/live2dw/assets/koharu.model.json"},"display":{"position":"right","width":150,"height":300},"mobile":{"show":false},"log":false});</script></body>
 </html>

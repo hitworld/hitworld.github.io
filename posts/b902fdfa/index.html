@@ -128,7 +128,7 @@
 <meta property="og:description" content="概览 文件上传漏洞是web安全中经常利用到的一种漏洞形式,属于攻击数据与代码分离原则的一种攻击. 一些web应用程序允许上传图片,文本或者其他资源到指定的位置. 文件上传漏洞就是利用这些可以上传的地方将恶意代码植入到服务器中,再通过url去访问以执行代码. 漏洞成因 上传文件的后缀名没有做限制;上传文件的MIMETYPE没有检查;web server对于上传文件或者指定目录的行为没有做限">
 <meta property="og:locale" content="zh-CN">
 <meta property="og:image" content="https://hitworld.github.io/png/2021-01-10-15-17-41.png">
-<meta property="og:updated_time" content="2021-07-03T05:40:11.581Z">
+<meta property="og:updated_time" content="2021-07-03T07:32:54.725Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="IS-web-文件上传漏洞">
 <meta name="twitter:description" content="概览 文件上传漏洞是web安全中经常利用到的一种漏洞形式,属于攻击数据与代码分离原则的一种攻击. 一些web应用程序允许上传图片,文本或者其他资源到指定的位置. 文件上传漏洞就是利用这些可以上传的地方将恶意代码植入到服务器中,再通过url去访问以执行代码. 漏洞成因 上传文件的后缀名没有做限制;上传文件的MIMETYPE没有检查;web server对于上传文件或者指定目录的行为没有做限">
@@ -505,7 +505,7 @@
                 
                   <span class="post-meta-item-text">本文字数：</span>
                 
-                <span title="本文字数">1.2k</span>
+                <span title="本文字数">1.4k</span>
               
 
               
@@ -568,6 +568,9 @@
 <li>大小上限,<code>WAF</code>对校验的用户数据设置大小上限,此时可以构造一个大文件的木马,前面填充垃圾内容.</li>
 <li>针对早期版本的安全狗,可以多加一个<code>filename</code>来绕过.</li>
 </ul>
+<h2 id="suctf-2018-招新赛-easy_upload">suctf-2018-招新赛-Easy_upload</h2>
+<p>只能传<code>png</code>,尝试修改<code>Content-Type</code>为<code>image/png</code>,成功.<code>php</code>后缀被拉黑名单,尝试<code>php5</code>,成功.</p>
+<p>过滤<code>&lt;?php</code>,使用<code>&lt;script language="pHp"&gt;@eval($_POST['flag'])&lt;/script&gt;</code>.获得<code>webshell</code>.</p>
 <h2 id="upload-labs">upload-labs</h2>
 <p><a href="https://github.com/c0ny1/upload-labs" target="_blank" rel="noopener">upload-labs</a>.</p>
 <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">sudo docker pull c0ny1/upload-labs</span><br><span class="line">sudo docker run -d -p 80:80 c0ny1/upload-labs:latest</span><br></pre></td></tr></table></figure>
@@ -695,7 +698,7 @@
                 
                   <a href="/archives/">
                 
-                    <span class="site-state-item-count">155</span>
+                    <span class="site-state-item-count">121</span>
                     <span class="site-state-item-name">日志</span>
                   </a>
                 </div>
@@ -825,7 +828,9 @@
                     
                       
                     
-                    <span class="site-state-item-count">36</span>
+                      
+                    
+                    <span class="site-state-item-count">37</span>
                     <span class="site-state-item-name">标签</span>
                   </a>
                 </div>
@@ -875,7 +880,7 @@
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#概览"><span class="nav-number">1.</span> <span class="nav-text">概览</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#漏洞成因"><span class="nav-number">1.1.</span> <span class="nav-text">漏洞成因</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#发现"><span class="nav-number">2.</span> <span class="nav-text">发现</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#upload-labs"><span class="nav-number">3.</span> <span class="nav-text">upload-labs</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#pass-01"><span class="nav-number">3.1.</span> <span class="nav-text">Pass-01</span></a></li></ol></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#概览"><span class="nav-number">1.</span> <span class="nav-text">概览</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#漏洞成因"><span class="nav-number">1.1.</span> <span class="nav-text">漏洞成因</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#发现"><span class="nav-number">2.</span> <span class="nav-text">发现</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#suctf-2018-招新赛-easy_upload"><span class="nav-number">3.</span> <span class="nav-text">suctf-2018-招新赛-Easy_upload</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#upload-labs"><span class="nav-number">4.</span> <span class="nav-text">upload-labs</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#pass-01"><span class="nav-number">4.1.</span> <span class="nav-text">Pass-01</span></a></li></ol></li></ol></div>
             
 
           </div>
@@ -907,7 +912,7 @@
       <i class="fa fa-area-chart"></i>
     </span>
     
-    <span title="站点总字数">898k</span>
+    <span title="站点总字数">807k</span>
   
 
   
@@ -916,7 +921,7 @@
       <i class="fa fa-coffee"></i>
     </span>
     
-    <span title="站点阅读时长">13:36</span>
+    <span title="站点阅读时长">12:13</span>
   
 </div>
 

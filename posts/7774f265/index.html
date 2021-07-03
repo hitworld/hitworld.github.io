@@ -127,7 +127,7 @@
 <meta property="og:site_name" content="w4rd3n的笔记">
 <meta property="og:description" content="Cookie窃取和会话劫持 Cookie是浏览器和web系统一起设置的用于对用户进行身份识别和会话追踪的机制.其本质是网站存储在用户机器上的小文本文件. Cookie分存储在硬盘上的持久型Cookie,由浏览器存取,其生存时间由创建时参数决定.和存储在内存中的临时型Cookie,也称为会话Cookie,关闭浏览器则消失.  Set-cookie:http响应头,向客户端发送cookie.">
 <meta property="og:locale" content="zh-CN">
-<meta property="og:updated_time" content="2021-07-03T05:40:11.579Z">
+<meta property="og:updated_time" content="2021-07-03T07:34:07.846Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="IS-web-XSS-利用">
 <meta name="twitter:description" content="Cookie窃取和会话劫持 Cookie是浏览器和web系统一起设置的用于对用户进行身份识别和会话追踪的机制.其本质是网站存储在用户机器上的小文本文件. Cookie分存储在硬盘上的持久型Cookie,由浏览器存取,其生存时间由创建时参数决定.和存储在内存中的临时型Cookie,也称为会话Cookie,关闭浏览器则消失.  Set-cookie:http响应头,向客户端发送cookie.">
@@ -503,7 +503,7 @@
                 
                   <span class="post-meta-item-text">本文字数：</span>
                 
-                <span title="本文字数">3.1k</span>
+                <span title="本文字数">3.2k</span>
               
 
               
@@ -570,6 +570,11 @@
 <p><a href="https://github.com/Arachni/arachni" target="_blank" rel="noopener"><code>Arachni</code></a>. <a href="https://github.com/mozilla/http-observatory/" target="_blank" rel="noopener"><code>mozilla-http-observatory</code></a>. <a href="https://github.com/andresriancho/w3af" target="_blank" rel="noopener"><code>w3af</code></a>. <code>Acunetix Web Vulnerability Scanner</code>.</p>
 <h2 id="xss漏洞利用工具">XSS漏洞利用工具</h2>
 <p><code>AttackAPI</code>,<code>Anehta</code>.</p>
+<h2 id="suctf-2018-招新赛">suctf-2018-招新赛</h2>
+<h3 id="xss1">xss1</h3>
+<p><code>"+alert(1)+"</code>,<code>alert</code>被过滤,使用<code>JSFuck</code>.</p>
+<h3 id="xss2">xss2</h3>
+<p>不准使用<code>()</code>,将括号变成<code>[][+[]]</code>.</p>
 <h2 id="xss-game">xss-game</h2>
 <p><a href="https://xss-game.appspot.com/" target="_blank" rel="noopener"><code>XSS game</code></a> <a href="https://alf.nu/alert1" target="_blank" rel="noopener"><code>alert(1) to win</code></a> <a href="http://prompt.ml/0" target="_blank" rel="noopener"><code>prompt(1) to win</code></a></p>
 <h3 id="xss-game-1">XSS game</h3>
@@ -612,8 +617,8 @@
         <div class="post-nav">
           <div class="post-nav-next post-nav-item">
             
-              <a href="/posts/9dbf0ed8/" rel="next" title="writeup-强网杯-2018-core">
-                <i class="fa fa-chevron-left"></i> writeup-强网杯-2018-core
+              <a href="/posts/709c2bca/" rel="next" title="IS-web-XSS-基础">
+                <i class="fa fa-chevron-left"></i> IS-web-XSS-基础
               </a>
             
           </div>
@@ -698,7 +703,7 @@
                 
                   <a href="/archives/">
                 
-                    <span class="site-state-item-count">155</span>
+                    <span class="site-state-item-count">121</span>
                     <span class="site-state-item-name">日志</span>
                   </a>
                 </div>
@@ -828,7 +833,9 @@
                     
                       
                     
-                    <span class="site-state-item-count">36</span>
+                      
+                    
+                    <span class="site-state-item-count">37</span>
                     <span class="site-state-item-name">标签</span>
                   </a>
                 </div>
@@ -878,7 +885,7 @@
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#cookie窃取和会话劫持"><span class="nav-number">1.</span> <span class="nav-text">Cookie窃取和会话劫持</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#网络钓鱼"><span class="nav-number">2.</span> <span class="nav-text">网络钓鱼</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#history-hack"><span class="nav-number">3.</span> <span class="nav-text">History Hack</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#xss-worm"><span class="nav-number">4.</span> <span class="nav-text">XSS Worm</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#自动扫描工具"><span class="nav-number">5.</span> <span class="nav-text">自动扫描工具</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#xss漏洞利用工具"><span class="nav-number">6.</span> <span class="nav-text">XSS漏洞利用工具</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#xss-game"><span class="nav-number">7.</span> <span class="nav-text">xss-game</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#xss-game-1"><span class="nav-number">7.1.</span> <span class="nav-text">XSS game</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#alert1-to-win"><span class="nav-number">7.2.</span> <span class="nav-text">alert(1) to win</span></a></li></ol></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#cookie窃取和会话劫持"><span class="nav-number">1.</span> <span class="nav-text">Cookie窃取和会话劫持</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#网络钓鱼"><span class="nav-number">2.</span> <span class="nav-text">网络钓鱼</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#history-hack"><span class="nav-number">3.</span> <span class="nav-text">History Hack</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#xss-worm"><span class="nav-number">4.</span> <span class="nav-text">XSS Worm</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#自动扫描工具"><span class="nav-number">5.</span> <span class="nav-text">自动扫描工具</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#xss漏洞利用工具"><span class="nav-number">6.</span> <span class="nav-text">XSS漏洞利用工具</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#suctf-2018-招新赛"><span class="nav-number">7.</span> <span class="nav-text">suctf-2018-招新赛</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#xss1"><span class="nav-number">7.1.</span> <span class="nav-text">xss1</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#xss2"><span class="nav-number">7.2.</span> <span class="nav-text">xss2</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#xss-game"><span class="nav-number">8.</span> <span class="nav-text">xss-game</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#xss-game-1"><span class="nav-number">8.1.</span> <span class="nav-text">XSS game</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#alert1-to-win"><span class="nav-number">8.2.</span> <span class="nav-text">alert(1) to win</span></a></li></ol></li></ol></div>
             
 
           </div>
@@ -910,7 +917,7 @@
       <i class="fa fa-area-chart"></i>
     </span>
     
-    <span title="站点总字数">898k</span>
+    <span title="站点总字数">807k</span>
   
 
   
@@ -919,7 +926,7 @@
       <i class="fa fa-coffee"></i>
     </span>
     
-    <span title="站点阅读时长">13:36</span>
+    <span title="站点阅读时长">12:13</span>
   
 </div>
 

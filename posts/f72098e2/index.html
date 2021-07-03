@@ -127,7 +127,7 @@
 <meta property="og:site_name" content="w4rd3n的笔记">
 <meta property="og:description" content="概览 攻击者通过提交参数并绕过过滤,导致执行了额外的SQL(结构化查询语言)语句从而获取敏感信息或者执行其他恶意操作. 注入检测 通过在应用程序中触发错误和布尔逻辑来检测存在SQL注入的输入点. 布尔注入检测 SQL注入可以按照注入点的参数类型分为数字型注入和字符型注入. 数字型注入没有单引号. 12$id = $_GET[&apos;id&apos;];$sql = &quot;SELECT * FROM us">
 <meta property="og:locale" content="zh-CN">
-<meta property="og:updated_time" content="2021-07-03T05:40:11.578Z">
+<meta property="og:updated_time" content="2021-07-03T07:09:39.739Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="IS-web-SQL注入-基础">
 <meta name="twitter:description" content="概览 攻击者通过提交参数并绕过过滤,导致执行了额外的SQL(结构化查询语言)语句从而获取敏感信息或者执行其他恶意操作. 注入检测 通过在应用程序中触发错误和布尔逻辑来检测存在SQL注入的输入点. 布尔注入检测 SQL注入可以按照注入点的参数类型分为数字型注入和字符型注入. 数字型注入没有单引号. 12$id = $_GET[&apos;id&apos;];$sql = &quot;SELECT * FROM us">
@@ -503,7 +503,7 @@
                 
                   <span class="post-meta-item-text">本文字数：</span>
                 
-                <span title="本文字数">3.5k</span>
+                <span title="本文字数">3.7k</span>
               
 
               
@@ -602,6 +602,10 @@
 <p><code>sys.databases</code>:存放数据库相关的信息.安装<code>SQL Server</code>时,<code>sys.databases</code>包含<code>master</code>,<code>model</code>,<code>msdb</code>,<code>mssqlweb</code>和<code>tempdb</code>数据库的项.该表存储在<code>master</code>数据库中. <code>sys.objects</code>:存放数据库创建的所有对象.如约束,默认值,日志,规则,存储过程等,每个对象在表中占一行.<code>Name</code>,<code>id</code>,<code>xtype</code>,<code>uid</code>,<code>status</code>分别是对象名,对象<code>ID</code>,对象类型,所有者对象的用户<code>ID</code>,对象状态. <code>sys.columns</code>:每个表和视图中的每列在该表中占一行,存储过程中的每个参数在该表中也占一行.<code>name</code>,<code>id</code>,<code>colid</code>分别是字段名称,表<code>ID</code>号,字段<code>ID</code>号.</p>
 <h3 id="报错注入">报错注入</h3>
 <p>利用关系运算符的类型转化:<code>(select top 1 name from sys.databases) &gt; 0</code>,<code>db_name() &gt; 0</code>.</p>
+<h2 id="jarvis-login">Jarvis-Login</h2>
+<p>抓包发现.</p>
+<figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">Hint: <span class="string">"select * from `admin` where password='"</span>.md5($pass,<span class="keyword">true</span>).<span class="string">"'"</span></span><br></pre></td></tr></table></figure>
+<p>需要<code>md5</code>后的值字符形式为<code>' or '</code>类似的万能密码.例如<code>md5(ffifdyop, ture) -&gt; 276f7227... == 'or'...</code>.</p>
 
       
     </div>
@@ -648,8 +652,8 @@
 
           <div class="post-nav-prev post-nav-item">
             
-              <a href="/posts/fc78af35/" rel="prev" title="writeup-kctf-2019-q3">
-                writeup-kctf-2019-q3 <i class="fa fa-chevron-right"></i>
+              <a href="/posts/c17311ac/" rel="prev" title="IS-reverse-tool-IDA-结构体处理">
+                IS-reverse-tool-IDA-结构体处理 <i class="fa fa-chevron-right"></i>
               </a>
             
           </div>
@@ -724,7 +728,7 @@
                 
                   <a href="/archives/">
                 
-                    <span class="site-state-item-count">155</span>
+                    <span class="site-state-item-count">121</span>
                     <span class="site-state-item-name">日志</span>
                   </a>
                 </div>
@@ -854,7 +858,9 @@
                     
                       
                     
-                    <span class="site-state-item-count">36</span>
+                      
+                    
+                    <span class="site-state-item-count">37</span>
                     <span class="site-state-item-name">标签</span>
                   </a>
                 </div>
@@ -904,7 +910,7 @@
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#概览"><span class="nav-number">1.</span> <span class="nav-text">概览</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#注入检测"><span class="nav-number">2.</span> <span class="nav-text">注入检测</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#布尔注入检测"><span class="nav-number">2.1.</span> <span class="nav-text">布尔注入检测</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#数据库类型检测"><span class="nav-number">3.</span> <span class="nav-text">数据库类型检测</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#mysql注入"><span class="nav-number">4.</span> <span class="nav-text">MySQL注入</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#常用函数"><span class="nav-number">4.1.</span> <span class="nav-text">常用函数</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#联合查询注入"><span class="nav-number">4.2.</span> <span class="nav-text">联合查询注入</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#堆叠式注入"><span class="nav-number">4.3.</span> <span class="nav-text">堆叠式注入</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#floor报错注入"><span class="nav-number">4.4.</span> <span class="nav-text">floor报错注入</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#oracle注入"><span class="nav-number">5.</span> <span class="nav-text">Oracle注入</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#sql-server注入"><span class="nav-number">6.</span> <span class="nav-text">SQL Server注入</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#报错注入"><span class="nav-number">6.1.</span> <span class="nav-text">报错注入</span></a></li></ol></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#概览"><span class="nav-number">1.</span> <span class="nav-text">概览</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#注入检测"><span class="nav-number">2.</span> <span class="nav-text">注入检测</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#布尔注入检测"><span class="nav-number">2.1.</span> <span class="nav-text">布尔注入检测</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#数据库类型检测"><span class="nav-number">3.</span> <span class="nav-text">数据库类型检测</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#mysql注入"><span class="nav-number">4.</span> <span class="nav-text">MySQL注入</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#常用函数"><span class="nav-number">4.1.</span> <span class="nav-text">常用函数</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#联合查询注入"><span class="nav-number">4.2.</span> <span class="nav-text">联合查询注入</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#堆叠式注入"><span class="nav-number">4.3.</span> <span class="nav-text">堆叠式注入</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#floor报错注入"><span class="nav-number">4.4.</span> <span class="nav-text">floor报错注入</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#oracle注入"><span class="nav-number">5.</span> <span class="nav-text">Oracle注入</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#sql-server注入"><span class="nav-number">6.</span> <span class="nav-text">SQL Server注入</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#报错注入"><span class="nav-number">6.1.</span> <span class="nav-text">报错注入</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#jarvis-login"><span class="nav-number">7.</span> <span class="nav-text">Jarvis-Login</span></a></li></ol></div>
             
 
           </div>
@@ -936,7 +942,7 @@
       <i class="fa fa-area-chart"></i>
     </span>
     
-    <span title="站点总字数">898k</span>
+    <span title="站点总字数">807k</span>
   
 
   
@@ -945,7 +951,7 @@
       <i class="fa fa-coffee"></i>
     </span>
     
-    <span title="站点阅读时长">13:36</span>
+    <span title="站点阅读时长">12:13</span>
   
 </div>
 

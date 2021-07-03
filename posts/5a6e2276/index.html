@@ -127,7 +127,7 @@
 <meta property="og:site_name" content="w4rd3n的笔记">
 <meta property="og:description" content="概览 PHP弱类型导致的漏洞主要来源于类型转换和内置函数对于传入错误类型的参数时的错误处理. 自动类型转换 在PHP中变量是以C语言的结构体来存储的,空字符串,NULL,false都是以0存储.这个结构体有个zend_uchartype成员变量,用来保存变量的类型. 不同类型的变量进行比较的时候就会存在类型转换比较其值.当其中一个变量为整数时,会把另一个变量强制转化为整数,相当于intva">
 <meta property="og:locale" content="zh-CN">
-<meta property="og:updated_time" content="2021-07-03T05:40:11.577Z">
+<meta property="og:updated_time" content="2021-07-03T07:40:02.425Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="IS-web-PHP-弱类型">
 <meta name="twitter:description" content="概览 PHP弱类型导致的漏洞主要来源于类型转换和内置函数对于传入错误类型的参数时的错误处理. 自动类型转换 在PHP中变量是以C语言的结构体来存储的,空字符串,NULL,false都是以0存储.这个结构体有个zend_uchartype成员变量,用来保存变量的类型. 不同类型的变量进行比较的时候就会存在类型转换比较其值.当其中一个变量为整数时,会把另一个变量强制转化为整数,相当于intva">
@@ -503,7 +503,7 @@
                 
                   <span class="post-meta-item-text">本文字数：</span>
                 
-                <span title="本文字数">583</span>
+                <span title="本文字数">776</span>
               
 
               
@@ -553,6 +553,11 @@
 <li><code>in_array</code>:在<code>strict</code>参数没提供的情况下进行的是松散比较.</li>
 </ul>
 <p>还有其他函数也会在参数传递过程中发送例如字符串与整数间的转化,也可能会导致<code>bypass</code>或其他漏洞.</p>
+<h2 id="bugku-strcmp比较字符串">bugku-strcmp比较字符串</h2>
+<p>此漏洞适用与<code>5.3</code>之前版本的<code>php</code>,当函数<code>strcmp</code>接受到不能与字符串比较的类型的参数就会发生错误,并返回<code>0</code>.</p>
+<h2 id="suctf-2018-招新赛-php-is-no.1">suctf-2018-招新赛-php is No.1</h2>
+<p>当有两个<code>is_numeric</code>判断并用<code>and</code>连接时,<code>and</code>后面的<code>is_numeric</code>可以绕过,<code>=</code>优先级比<code>and</code>高,<code>num='a'</code>绕过.</p>
+<p><code>int()</code>会把<code>4e5</code>理解成<code>4</code>,绕过.</p>
 
       
     </div>
@@ -589,8 +594,8 @@
         <div class="post-nav">
           <div class="post-nav-next post-nav-item">
             
-              <a href="/posts/b0cce827/" rel="next" title="writeup-suctf-2019">
-                <i class="fa fa-chevron-left"></i> writeup-suctf-2019
+              <a href="/posts/d03e2517/" rel="next" title="CS-BASIC-algorithm-动态连通性">
+                <i class="fa fa-chevron-left"></i> CS-BASIC-algorithm-动态连通性
               </a>
             
           </div>
@@ -675,7 +680,7 @@
                 
                   <a href="/archives/">
                 
-                    <span class="site-state-item-count">155</span>
+                    <span class="site-state-item-count">121</span>
                     <span class="site-state-item-name">日志</span>
                   </a>
                 </div>
@@ -805,7 +810,9 @@
                     
                       
                     
-                    <span class="site-state-item-count">36</span>
+                      
+                    
+                    <span class="site-state-item-count">37</span>
                     <span class="site-state-item-name">标签</span>
                   </a>
                 </div>
@@ -855,7 +862,7 @@
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#概览"><span class="nav-number">1.</span> <span class="nav-text">概览</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#自动类型转换"><span class="nav-number">2.</span> <span class="nav-text">自动类型转换</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#内置函数"><span class="nav-number">3.</span> <span class="nav-text">内置函数</span></a></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#概览"><span class="nav-number">1.</span> <span class="nav-text">概览</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#自动类型转换"><span class="nav-number">2.</span> <span class="nav-text">自动类型转换</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#内置函数"><span class="nav-number">3.</span> <span class="nav-text">内置函数</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#bugku-strcmp比较字符串"><span class="nav-number">4.</span> <span class="nav-text">bugku-strcmp比较字符串</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#suctf-2018-招新赛-php-is-no.1"><span class="nav-number">5.</span> <span class="nav-text">suctf-2018-招新赛-php is No.1</span></a></li></ol></div>
             
 
           </div>
@@ -887,7 +894,7 @@
       <i class="fa fa-area-chart"></i>
     </span>
     
-    <span title="站点总字数">898k</span>
+    <span title="站点总字数">807k</span>
   
 
   
@@ -896,7 +903,7 @@
       <i class="fa fa-coffee"></i>
     </span>
     
-    <span title="站点阅读时长">13:36</span>
+    <span title="站点阅读时长">12:13</span>
   
 </div>
 

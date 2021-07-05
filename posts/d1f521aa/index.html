@@ -129,7 +129,7 @@
 <meta property="og:locale" content="zh-CN">
 <meta property="og:image" content="https://hitworld.github.io/png/2021-01-04-16-33-37.png">
 <meta property="og:image" content="https://hitworld.github.io/png/2021-01-04-16-34-09.png">
-<meta property="og:updated_time" content="2021-07-03T07:47:31.151Z">
+<meta property="og:updated_time" content="2021-07-05T04:23:08.567Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="IS-pwn-Linux-基础">
 <meta name="twitter:description" content="概述 pwn即二进制漏洞利用,通过漏洞来提升权限或得到shell或达到某种目的. Linux进程内存布局 Linux系统在装载elf格式的程序文件时,会调用loader把可执行文件中的各个段依次载入到从某一地址开始的空间中,载入地址取决link editor(ld)和机器地址位数. 32位进程内存经典布局.64与之类似.除了载入位置外最大的不同就是Memory Mapping Segmen">
@@ -614,7 +614,7 @@
 <h2 id="线程局部存储">线程局部存储</h2>
 <p><code>TLS</code>是为了避免多个线程同时访存同一全局变量或者静态变量时所导致的冲突,尤其是多个线程同时需要修改这一变量时.</p>
 <p>通过<code>TLS</code>机制为每一个使用该全局变量的线程都提供一个变量值的副本,每一个线程均可以独立地改变自己的副本,而不会和其它线程的副本冲突.这个机制在不同的架构和操作系统上的实现不同.</p>
-<p><code>x86-64</code>的<code>linux</code>中由<code>glibc</code>实现该机制,在<code>glibc</code>实现中,每个线程有一个对应的结构体<code>tcbhead_t</code>,被指向段寄存器<code>fs</code>(<code>x86-64</code>).</p>
+<p><code>x86-64</code>的<code>linux</code>中由<code>glibc</code>实现该机制,在<code>glibc</code>实现中,每个主线程有一个对应的结构体<code>tcbhead_t</code>,被指向段寄存器<code>fs</code>(<code>x86-64</code>).</p>
 <figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">typedef</span> <span class="class"><span class="keyword">struct</span> &#123;</span></span><br><span class="line">  <span class="keyword">void</span> *tcb;</span><br><span class="line">  <span class="keyword">dtv_t</span> *dtv;</span><br><span class="line">  <span class="keyword">void</span> *self;</span><br><span class="line">  <span class="keyword">int</span> multiple_threads;</span><br><span class="line">  <span class="keyword">int</span> gscope_flag;</span><br><span class="line">  <span class="keyword">uintptr_t</span> sysinfo;</span><br><span class="line">  <span class="keyword">uintptr_t</span> stack_guard;</span><br><span class="line">  <span class="keyword">uintptr_t</span> pointer_guard;</span><br><span class="line">  <span class="comment">//...</span></span><br><span class="line">&#125; <span class="keyword">tcbhead_t</span>;</span><br></pre></td></tr></table></figure>
 <p>线程在<code>pthread_create</code>的帮助下创建,然后给这个新线程选择<code>TLS</code>,为栈分配内存后<code>glibc</code>在内存的高地址初始化<code>TLS</code>,在<code>x86-64</code>架构上,栈向下增长,将<code>TLS</code>放在栈顶部.</p>
 <p>从<code>TLS</code>中减去一个特定的常量值得到被新线程的<code>stack register</code>所使用的值.从<code>TLS</code>到<code>pthread_create</code>的函数参数传递栈帧的距离小于一页.</p>
@@ -794,7 +794,7 @@
                 
                   <a href="/archives/">
                 
-                    <span class="site-state-item-count">122</span>
+                    <span class="site-state-item-count">124</span>
                     <span class="site-state-item-name">日志</span>
                   </a>
                 </div>
@@ -1006,7 +1006,7 @@
       <i class="fa fa-area-chart"></i>
     </span>
     
-    <span title="站点总字数">823k</span>
+    <span title="站点总字数">831k</span>
   
 
   
@@ -1015,7 +1015,7 @@
       <i class="fa fa-coffee"></i>
     </span>
     
-    <span title="站点阅读时长">12:28</span>
+    <span title="站点阅读时长">12:36</span>
   
 </div>
 

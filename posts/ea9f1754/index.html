@@ -119,29 +119,25 @@
 
 
 
-  <meta name="description" content="安装内核 123456uname -r#查看本机的内核sudo apt-get install linux-headers-version-generic linux-image-version-generic linux-image-extra-version-generic#安装对应版本内核sudo dpkg --list | grep linux-image#查看已安装的内核版本 编译内">
-<meta name="keywords" content="Linux-kernel">
+  <meta name="description" content="基础环境 apt换源 修改配置文件. 123sudo gedit /etc/apt/sources.listsudo apt-get update#sudo apt-get upgrade sources.list. 123456789101112131415161718#ubuntu16deb http://mirrors.ustc.edu.cn/ubuntu/ xenial main">
+<meta name="keywords" content="environment">
 <meta property="og:type" content="article">
-<meta property="og:title" content="IS-pwn-Linux-kernel-调试">
-<meta property="og:url" content="https://hitworld.github.io/posts/dd3eb0dd/index.html">
+<meta property="og:title" content="w4rd3n-pwn环境搭建">
+<meta property="og:url" content="https://hitworld.github.io/posts/ea9f1754/index.html">
 <meta property="og:site_name" content="w4rd3n的笔记">
-<meta property="og:description" content="安装内核 123456uname -r#查看本机的内核sudo apt-get install linux-headers-version-generic linux-image-version-generic linux-image-extra-version-generic#安装对应版本内核sudo dpkg --list | grep linux-image#查看已安装的内核版本 编译内">
+<meta property="og:description" content="基础环境 apt换源 修改配置文件. 123sudo gedit /etc/apt/sources.listsudo apt-get update#sudo apt-get upgrade sources.list. 123456789101112131415161718#ubuntu16deb http://mirrors.ustc.edu.cn/ubuntu/ xenial main">
 <meta property="og:locale" content="zh-CN">
-<meta property="og:image" content="https://hitworld.github.io/png/2021-01-05-21-28-36.png">
-<meta property="og:image" content="https://hitworld.github.io/png/2021-01-05-21-28-50.png">
-<meta property="og:image" content="https://hitworld.github.io/png/2021-01-05-21-29-04.png">
-<meta property="og:updated_time" content="2021-07-05T09:55:31.023Z">
+<meta property="og:updated_time" content="2021-07-05T16:13:05.448Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="IS-pwn-Linux-kernel-调试">
-<meta name="twitter:description" content="安装内核 123456uname -r#查看本机的内核sudo apt-get install linux-headers-version-generic linux-image-version-generic linux-image-extra-version-generic#安装对应版本内核sudo dpkg --list | grep linux-image#查看已安装的内核版本 编译内">
-<meta name="twitter:image" content="https://hitworld.github.io/png/2021-01-05-21-28-36.png">
+<meta name="twitter:title" content="w4rd3n-pwn环境搭建">
+<meta name="twitter:description" content="基础环境 apt换源 修改配置文件. 123sudo gedit /etc/apt/sources.listsudo apt-get update#sudo apt-get upgrade sources.list. 123456789101112131415161718#ubuntu16deb http://mirrors.ustc.edu.cn/ubuntu/ xenial main">
 
 
 
 
 
 
-  <link rel="canonical" href="https://hitworld.github.io/posts/dd3eb0dd/">
+  <link rel="canonical" href="https://hitworld.github.io/posts/ea9f1754/">
 
 
 
@@ -151,7 +147,7 @@
   };
 </script>
 
-  <title>IS-pwn-Linux-kernel-调试 | w4rd3n的笔记</title>
+  <title>w4rd3n-pwn环境搭建 | w4rd3n的笔记</title>
   
 
 
@@ -400,7 +396,7 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="https://hitworld.github.io/posts/dd3eb0dd/">
+    <link itemprop="mainEntityOfPage" href="https://hitworld.github.io/posts/ea9f1754/">
 
     <span hidden itemprop="author" itemscope="" itemtype="http://schema.org/Person">
       <meta itemprop="name" content="w4rd3n">
@@ -417,7 +413,7 @@
 
         
         
-          <h1 class="post-title" itemprop="name headline">IS-pwn-Linux-kernel-调试
+          <h1 class="post-title" itemprop="name headline">w4rd3n-pwn环境搭建
               
             
           </h1>
@@ -442,7 +438,7 @@
                 
               
 
-              <time title="创建时间：2020-03-22 10:55:03" itemprop="dateCreated datePublished" datetime="2020-03-22T10:55:03+08:00">2020-03-22</time>
+              <time title="创建时间：2021-07-05 20:03:20" itemprop="dateCreated datePublished" datetime="2021-07-05T20:03:20+08:00">2021-07-05</time>
             
 
             
@@ -460,14 +456,7 @@
                 <span class="post-meta-item-text">分类于</span>
               
               
-                <span itemprop="about" itemscope="" itemtype="http://schema.org/Thing"><a href="/categories/IS/" itemprop="url" rel="index"><span itemprop="name">IS</span></a></span>
-
-                
-                
-                  ，
-                
-              
-                <span itemprop="about" itemscope="" itemtype="http://schema.org/Thing"><a href="/categories/IS/pwn/" itemprop="url" rel="index"><span itemprop="name">pwn</span></a></span>
+                <span itemprop="about" itemscope="" itemtype="http://schema.org/Thing"><a href="/categories/w4rd3n/" itemprop="url" rel="index"><span itemprop="name">w4rd3n</span></a></span>
 
                 
                 
@@ -481,7 +470,7 @@
 
           
           
-             <span id="/posts/dd3eb0dd/" class="leancloud_visitors" data-flag-title="IS-pwn-Linux-kernel-调试">
+             <span id="/posts/ea9f1754/" class="leancloud_visitors" data-flag-title="w4rd3n-pwn环境搭建">
                <span class="post-meta-divider">|</span>
                <span class="post-meta-item-icon">
                  <i class="fa fa-eye"></i>
@@ -507,7 +496,7 @@
                 
                   <span class="post-meta-item-text">本文字数：</span>
                 
-                <span title="本文字数">7k</span>
+                <span title="本文字数">5.1k</span>
               
 
               
@@ -521,7 +510,7 @@
                 
                   <span class="post-meta-item-text">阅读时长 &asymp;</span>
                 
-                <span title="阅读时长">6 分钟</span>
+                <span title="阅读时长">5 分钟</span>
               
             </div>
           
@@ -541,79 +530,50 @@
       
 
       
-        <h2 id="安装内核">安装内核</h2>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">uname -r</span><br><span class="line"><span class="comment">#查看本机的内核</span></span><br><span class="line">sudo apt-get install linux-headers-version-generic linux-image-version-generic linux-image-extra-version-generic</span><br><span class="line"><span class="comment">#安装对应版本内核</span></span><br><span class="line">sudo dpkg --list | grep linux-image</span><br><span class="line"><span class="comment">#查看已安装的内核版本</span></span><br></pre></td></tr></table></figure>
-<h2 id="编译内核">编译内核</h2>
-<p><code>linux</code>内核源代码下载:<code>https://mirrors.tuna.tsinghua.edu.cn/kernel/</code>.</p>
-<p>对于<code>kernel 3.18.2</code>,需要修改<code>Makefile</code>将<code>-O3</code>改为<code>-O1</code>,这样编译出的内核会包含调试信息且能被<code>gdb</code>调试.</p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">make mrproper</span><br><span class="line"><span class="comment">#清除旧的编译信息</span></span><br><span class="line">make menuconfig</span><br><span class="line"><span class="comment">#进行编译配置</span></span><br></pre></td></tr></table></figure>
-<p>重点配置(有些配置可能因为版本不同而不一样).</p>
-<ul>
-<li>取消<code>KernelHacking --&gt; Write protect kernel read-only data structures</code>.</li>
-<li>取消<code>Processor type and features --&gt; Paravirtualized guest support</code>.</li>
-<li>选中<code>KernelHacking --&gt; Compile the kernel with debug info</code>.</li>
-<li>选中<code>KernelHacking --&gt; Compile the kernel with frame pointers</code>.</li>
-<li>全选<code>KernelHacking --&gt; KGDB:kernel debugging with remote gdb</code>,其下的全部都选中.</li>
-</ul>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">make bzImage -j8 &amp;&amp; make vmlinux -j8</span><br><span class="line"><span class="comment">#编译基本的内核</span></span><br></pre></td></tr></table></figure>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">make modules -j8</span><br><span class="line">#编译内核模块</span><br><span class="line">sudo make modules_install</span><br><span class="line">#将编译好的模块(.ko文件)拷贝到/lib/modules/liunx-x.xx.x文件夹,内核启动时加载</span><br><span class="line">sudo make install</span><br><span class="line">#编译出来的压缩内核镜像拷贝到/boot/文件夹下,并且修改/boot/grub/grub.cfg这个grub配置文件.</span><br></pre></td></tr></table></figure>
-<h2 id="安装符号文件">安装符号文件</h2>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line">codename=$(lsb_release -c | awk  <span class="string">'&#123;print $2&#125;'</span>)</span><br><span class="line">sudo tee /etc/apt/sources.list.d/ddebs.list &lt;&lt; EOF</span><br><span class="line">deb http://ddebs.ubuntu.com/ <span class="variable">$&#123;codename&#125;</span>      main restricted universe multiverse</span><br><span class="line">deb http://ddebs.ubuntu.com/ <span class="variable">$&#123;codename&#125;</span>-security main restricted universe multiverse</span><br><span class="line">deb http://ddebs.ubuntu.com/ <span class="variable">$&#123;codename&#125;</span>-updates  main restricted universe multiverse</span><br><span class="line">deb http://ddebs.ubuntu.com/ <span class="variable">$&#123;codename&#125;</span>-proposed main restricted universe multiverse</span><br><span class="line">EOF</span><br><span class="line"><span class="comment">#添加源</span></span><br><span class="line">wget -O - http://ddebs.ubuntu.com/dbgsym-release-key.asc | sudo apt-key add -</span><br><span class="line"><span class="comment">#添加访问符号服务器的密钥</span></span><br><span class="line">sudo apt-get update</span><br><span class="line">apt-cache search linux-image | grep dbgsym</span><br><span class="line">sudo apt-get install linux-image-`uname -r`-dbgsym</span><br><span class="line"><span class="comment">#安装当前内核的符号文件</span></span><br></pre></td></tr></table></figure>
-<p>符号文件会被安装到<code>/usr/lib/debug/</code>目录下,最重要的<code>kernel</code>文件在<code>boot</code>子目录下.</p>
-<h2 id="安装源代码">安装源代码</h2>
-<p>启用<code>deb-src</code>源,然后<code>sudo apt-get update</code>更新.</p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">apt-cache search linux-source</span><br><span class="line">sudo apt-get install linux-source-4.15.0</span><br><span class="line"><span class="comment">#安装4.15.0内核的源代码</span></span><br></pre></td></tr></table></figure>
-<p>源代码的压缩包会被放在<code>/usr/src</code>目录下的同名文件夹下.</p>
-<h2 id="重新编译gdb">重新编译gdb</h2>
-<p>如果直接用默认安装的<code>gdb</code>将会出现如下错误.</p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">Remote <span class="string">'g'</span> packet reply is too long:<span class="comment">#...</span></span><br></pre></td></tr></table></figure>
-<p>下载最新版的<code>gdb</code>,修改代码.</p>
-<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br></pre></td><td class="code"><pre><span class="line">--- gdb/remote.c.orig <span class="number">2019</span><span class="number">-01</span><span class="number">-23</span> <span class="number">16</span>:<span class="number">57</span>:<span class="number">32.269656791</span> +<span class="number">0800</span></span><br><span class="line">+++ gdb/remote.c <span class="number">2019</span><span class="number">-01</span><span class="number">-23</span> <span class="number">17</span>:<span class="number">00</span>:<span class="number">21.097013850</span> +<span class="number">0800</span></span><br><span class="line">@@ <span class="number">-8034</span>,<span class="number">10</span> +<span class="number">8034</span>,<span class="number">22</span> @@ remote_target::process_g_packet (struct</span><br><span class="line">   buf_len = <span class="built_in">strlen</span> (rs-&gt;buf);</span><br><span class="line"> </span><br><span class="line">   <span class="comment">/* Further sanity checks, with knowledge of the architecture. */</span></span><br><span class="line">- <span class="keyword">if</span> (buf_len &gt; <span class="number">2</span> * rsa-&gt;sizeof_g_packet)</span><br><span class="line">- error (_(<span class="string">"Remote 'g' packet reply is too long (expected %ld bytes, got %d "</span></span><br><span class="line">- <span class="string">"bytes): %s"</span>), rsa-&gt;sizeof_g_packet, buf_len / <span class="number">2</span>, rs-&gt;buf);</span><br><span class="line">-</span><br><span class="line">+ <span class="comment">//if (buf_len &gt; 2 * rsa-&gt;sizeof_g_packet)</span></span><br><span class="line">+ <span class="comment">// error (_("Remote 'g' packet reply is too long (expected %ld bytes, got %d "</span></span><br><span class="line">+ <span class="comment">// "bytes): %s"), rsa-&gt;sizeof_g_packet, buf_len / 2, rs-&gt;buf);</span></span><br><span class="line">+ <span class="keyword">if</span> (buf_len &gt; <span class="number">2</span> * rsa-&gt;sizeof_g_packet)</span><br><span class="line">+ &#123;</span><br><span class="line">+ rsa-&gt;sizeof_g_packet = buf_len;</span><br><span class="line">+ <span class="keyword">for</span> (i = <span class="number">0</span>; i &lt; gdbarch_num_regs(gdbarch); i++)</span><br><span class="line">+ &#123;</span><br><span class="line">+ <span class="keyword">if</span> (rsa-&gt;regs[i].pnum == <span class="number">-1</span>)</span><br><span class="line">+ <span class="keyword">continue</span>;</span><br><span class="line">+ <span class="keyword">if</span> (rsa-&gt;regs[i].offset &gt;= rsa-&gt;sizeof_g_packet)</span><br><span class="line">+ rsa-&gt;regs[i].in_g_packet = <span class="number">0</span>;</span><br><span class="line">+ <span class="keyword">else</span></span><br><span class="line">+ rsa-&gt;regs[i].in_g_packet = <span class="number">1</span>;</span><br><span class="line">+ &#125;</span><br><span class="line">+ &#125;</span><br><span class="line">   <span class="comment">/* Save the size of the packet sent to us by the target. It is used</span></span><br><span class="line"><span class="comment">      as a heuristic when determining the max size of packets that the</span></span><br><span class="line"><span class="comment">      target can safely receive. */</span></span><br></pre></td></tr></table></figure>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">./configure --prefix=/home/w4rd3n/gdb/install</span><br><span class="line">make </span><br><span class="line">sudo apt install -y texinfo</span><br><span class="line">make install</span><br><span class="line">sudo ln -s /home/w4rd3n/gdb/install/bin/gdb /usr/bin/gdb</span><br></pre></td></tr></table></figure>
-<h2 id="qemu-gdb">qemu + gdb</h2>
-<h3 id="busybox">busybox</h3>
-<p>用<code>busybox</code>来生成文件系统,编译配置(有些配置可能因为版本不同而不一样).</p>
-<ul>
-<li>设置<code>Busybox Settings --&gt; Build Options -&gt; Build Busybox as a static binary</code>.</li>
-<li>关闭<code>Linux System Utilities --&gt; Support mounting NFS file system</code>.</li>
-<li>关闭<code>Networking Utilities --&gt; inetd</code></li>
-</ul>
-<p>编译成<code>x86</code>.在如下两个选项中输入对应的值.</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">(-m32 -march=i386) Additional CFLAGS</span><br><span class="line">(-m32) Additional LDFLAGS</span><br></pre></td></tr></table></figure>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">make menuconfig</span><br><span class="line"><span class="comment">#32位编译需要运行下面两条指令</span></span><br><span class="line"><span class="comment">#cd /usr/include</span></span><br><span class="line"><span class="comment">#sudo ln -s asm-generic/ asm</span></span><br><span class="line">make install -j8</span><br></pre></td></tr></table></figure>
-<p><code>make install</code>后,在<code>busybox</code>源代码目录下有一个<code>_install</code>目录存放编译后的文件.</p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">cd</span> _install</span><br><span class="line">mkdir proc sys dev etc etc/init.d</span><br><span class="line">vim etc/init.d/rcS</span><br><span class="line">chmod +x etc/init.d/rcS</span><br></pre></td></tr></table></figure>
-<p><code>etc/init.d/rcS</code>.</p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#!/bin/sh</span></span><br><span class="line">mount -t proc none /proc</span><br><span class="line">mount -t sysfs none /sys</span><br><span class="line">/sbin/mdev -s</span><br></pre></td></tr></table></figure>
-<p>调用<code>find . | cpio -o --format=newc &gt; ../rootfs.img</code>创建文件系统.</p>
-<h3 id="调试">调试</h3>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">qemu-system-x86_64 -kernel bzImage -initrd rootfs.img -append <span class="string">"console=ttyS0 root=/dev/ram rdinit=/sbin/init"</span> -smp cores=1,threads=1 -cpu kvm64,+smep,+smap --nographic -gdb tcp::1234</span><br><span class="line"><span class="comment">#-cpu kvm64,+smep,+smap.设置CPU的安全选项.开启smap和smep.</span></span><br><span class="line"><span class="comment">#-kernel.设置内核bzImage文件的路径.</span></span><br><span class="line"><span class="comment">#-initrd.设置内核启动的文件系统.</span></span><br><span class="line"><span class="comment">#-gdb tcp::1234.设置gdb的调试端口.</span></span><br><span class="line"><span class="comment">#-append.附加选项,指定no kaslr可以关闭随机偏移.</span></span><br><span class="line"><span class="comment">#-m.指定内存大小</span></span><br><span class="line"><span class="comment">#-smp.设置内核数和线程数</span></span><br><span class="line"><span class="comment">#--nographic和console=ttyS0一起使用启动的界面就会变成当前终端</span></span><br></pre></td></tr></table></figure>
-<p><code>gdb</code>调试.</p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">sudo gdb -q ./vmlinux</span><br><span class="line"><span class="comment">#加载vmlinux符号文件.</span></span><br><span class="line">gdb&gt; target remote :1234</span><br><span class="line">gdb&gt; b start_kernel</span><br><span class="line">gdb&gt; add-symbol-file ./test.ko &lt;text addr&gt; -s .data &lt;data addr&gt; -s .bss &lt;bss addr&gt;</span><br><span class="line"><span class="comment">#addr of test.ko可以通过cat /proc/modules | grep test.ko获得.需要root权限,修改init文件获得.</span></span><br></pre></td></tr></table></figure>
-<h2 id="双机调试">双机调试</h2>
-<h3 id="虚拟机配置">虚拟机配置</h3>
-<p>首先移除打印机,然后配置双机的串口.</p>
-<p><code>host</code>.</p>
-<p><img src="/png/2021-01-05-21-28-36.png"></p>
-<p><code>target</code>.</p>
-<p><img src="/png/2021-01-05-21-28-50.png"></p>
-<h3 id="配置target">配置target</h3>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">sudo vim /etc/grub.d/40_custom</span><br><span class="line">sudo update-grub</span><br></pre></td></tr></table></figure>
-<p><code>/etc/grub.d/40_custom</code>.</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br></pre></td><td class="code"><pre><span class="line">#!/bin/sh</span><br><span class="line">exec tail -n +3 $0</span><br><span class="line"># This file provides an easy way to add custom menu entries.  Simply type the</span><br><span class="line"># menu entries you want to add after this comment.  Be careful not to change</span><br><span class="line"># the &apos;exec tail&apos; line above.</span><br><span class="line">menuentry &apos;KGDB&apos; --class ubuntu --class gnu-linux --class gnu --class os $menuentry_id_option &apos;gnulinux-simple-1dd33836-1426-45f7-8cfb-5667fb92953d&apos; &#123;</span><br><span class="line">	recordfail</span><br><span class="line">	load_video</span><br><span class="line">	gfxmode $linux_gfx_mode</span><br><span class="line">	insmod gzio</span><br><span class="line">	if [ x$grub_platform = xxen ]; then insmod xzio; insmod lzopio; fi</span><br><span class="line">	insmod part_msdos</span><br><span class="line">	insmod ext2</span><br><span class="line">	set root=&apos;hd0,msdos1&apos;</span><br><span class="line">	if [ x$feature_platform_search_hint = xy ]; then</span><br><span class="line">	  search --no-floppy --fs-uuid --set=root --hint-bios=hd0,msdos1 --hint-efi=hd0,msdos1 --hint-baremetal=ahci0,msdos1  1dd33836-1426-45f7-8cfb-5667fb92953d</span><br><span class="line">	else</span><br><span class="line">	  search --no-floppy --fs-uuid --set=root 1dd33836-1426-45f7-8cfb-5667fb92953d</span><br><span class="line">	fi</span><br><span class="line">        linux	/boot/vmlinuz-4.15.0-91-generic root=UUID=1dd33836-1426-45f7-8cfb-5667fb92953d ro find_preseed=/preseed.cfg auto noprompt priority=critical locale=en_US quiet kgdbwait kgdb8250=io,03f8,ttyS0,115200,4 kgdboc=ttyS0,115200 kgdbcon nokaslr</span><br><span class="line">	initrd	/boot/initrd.img-4.15.0-91-generic</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<p>该文件可以添加<code>grup</code>启动选项,只需要常规选项中的内核命令行处增加<code>KGDB</code>选项:<code>kgdbwait kgdb8250=io,03f8,ttyS0,115200,4 kgdboc=ttyS0,115200 kgdbcon nokaslr</code>.</p>
-<p><code>kgdbwait</code>让系统启动时就进入调试模式,<code>kgdboc</code>是<code>KGDB over console</code>的缩写,<code>ttyS0</code>代表通过<code>1</code>号串口进行通信,波特率为<code>115200</code>.后面的<code>nokaslr</code>是禁止内核空间的地址随机化.</p>
-<h3 id="配置host">配置host</h3>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">sudo stty -F /dev/ttyS0 115200</span><br><span class="line"><span class="comment">#设置串口通信的波特率,该选项每次重启会重置</span></span><br><span class="line">sudo stty -F /dev/ttyS0</span><br><span class="line"><span class="comment">#查看是否设置成功</span></span><br></pre></td></tr></table></figure>
-<h3 id="调试-1">调试</h3>
-<p>启动<code>target</code>,开机时按住<code>shift</code>选择对应启动项,进入等待连接状态.</p>
-<p><img src="/png/2021-01-05-21-29-04.png"></p>
-<p><code>host</code>配置好后,<code>gdb</code>连接调试即可.</p>
-<p>因为默认用户没有串口设备的使用权限，所以应该先使用如下命令来增加权限.也可以使用<code>sudo</code>方式来启动<code>gdb</code>.</p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">!sudo usermod -a -G dialout user</span><br></pre></td></tr></table></figure>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">gdb -s /usr/lib/debug/boot/vmlinux-4.10.0-19-generic</span><br><span class="line"><span class="comment">#调试带符号的vmlinux</span></span><br><span class="line">gdb &gt; <span class="built_in">set</span> architecture i386:x86-64:intel</span><br><span class="line"><span class="comment">#设置为64位</span></span><br><span class="line">gdb &gt; dir /usr/src/linux-***</span><br><span class="line"><span class="comment">#设置源代码目录进行源码级调试</span></span><br><span class="line">gdb &gt; target remote /dev/ttyS0</span><br><span class="line"><span class="comment">#连接远端</span></span><br><span class="line">gdb &gt; c</span><br></pre></td></tr></table></figure>
-<p><code>c</code>之后<code>target</code>会进入系统,通过<code>sudo su &amp;&amp; echo g &gt; "/proc/sysrq-trigger"</code>打开<code>target</code>的<code>kgdb</code>调试.</p>
-<p>此时可以在<code>host</code>中下断点,查看内存信息等进行调试了.</p>
+        <h2 id="基础环境">基础环境</h2>
+<h3 id="apt换源">apt换源</h3>
+<p>修改配置文件.</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">sudo gedit /etc/apt/sources.list</span><br><span class="line">sudo apt-get update</span><br><span class="line"><span class="comment">#sudo apt-get upgrade</span></span><br></pre></td></tr></table></figure>
+<p><code>sources.list</code>.</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">#ubuntu16</span></span><br><span class="line">deb http://mirrors.ustc.edu.cn/ubuntu/ xenial main restricted universe multiverse</span><br><span class="line">deb http://mirrors.ustc.edu.cn/ubuntu/ xenial-security main restricted universe multiverse</span><br><span class="line">deb http://mirrors.ustc.edu.cn/ubuntu/ xenial-updates main restricted universe multiverse</span><br><span class="line">deb http://mirrors.ustc.edu.cn/ubuntu/ xenial-proposed main restricted universe multiverse</span><br><span class="line">deb http://mirrors.ustc.edu.cn/ubuntu/ xenial-backports main restricted universe multiverse</span><br><span class="line"><span class="comment">##ubuntu18</span></span><br><span class="line">deb https://mirrors.ustc.edu.cn/ubuntu/ bionic main restricted universe multiverse</span><br><span class="line">deb https://mirrors.ustc.edu.cn/ubuntu/ bionic-updates main restricted universe multiverse</span><br><span class="line">deb https://mirrors.ustc.edu.cn/ubuntu/ bionic-backports main restricted universe multiverse</span><br><span class="line">deb https://mirrors.ustc.edu.cn/ubuntu/ bionic-security main restricted universe multiverse</span><br><span class="line">deb https://mirrors.ustc.edu.cn/ubuntu/ bionic-proposed main restricted universe multiverse</span><br><span class="line"><span class="comment">#ubuntu20</span></span><br><span class="line">deb https://mirrors.ustc.edu.cn/ubuntu/ focal main restricted universe multiverse</span><br><span class="line">deb https://mirrors.ustc.edu.cn/ubuntu/ focal-updates main restricted universe multiverse</span><br><span class="line">deb https://mirrors.ustc.edu.cn/ubuntu/ focal-backports main restricted universe multiverse</span><br><span class="line">deb https://mirrors.ustc.edu.cn/ubuntu/ focal-security main restricted universe multiverse</span><br><span class="line">deb https://mirrors.ustc.edu.cn/ubuntu/ focal-proposed main restricted universe multiverse</span><br></pre></td></tr></table></figure>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">sudo rm /var/lib/dpkg/lock-frontend</span><br><span class="line">sudo rm /var/lib/dpkg/lock</span><br><span class="line">sudo rm /var/cache/apt/archives/lock</span><br></pre></td></tr></table></figure>
+<h3 id="工具">工具</h3>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">#ubuntu16</span></span><br><span class="line">sudo apt-get purge libreoffice-common unity-webapps-common thunderbird totem rhythmbox empathy brasero simple-scan gnome-mahjongg aisleriot gnome-mines cheese gnome-sudoku transmission-common gnome-orca webbrowser-app landscape-client-ui-install deja-dup</span><br><span class="line">sudo add-apt-repository ppa:deadsnakes/ppa</span><br><span class="line">sudo apt-get update</span><br><span class="line">sudo apt-get install python3-pip gdb git vim tmux socat python g++ python3.6 synaptic</span><br><span class="line">sudo rm /usr/bin/python3</span><br><span class="line">sudo ln -sf /usr/bin/python3.6 /usr/bin/python3</span><br><span class="line">sudo rm /usr/bin/python3m</span><br><span class="line">sudo ln -sf /usr/bin/python3.6m /usr/bin/python3m</span><br></pre></td></tr></table></figure>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sudo apt-get install python3-pip gdb git vim tmux socat python g++ python3 synaptic</span><br></pre></td></tr></table></figure>
+<p>常用工具:<code>vscode</code>.</p>
+<h3 id="pip换源">pip换源</h3>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">mkdir ~/.pip</span><br><span class="line">touch ~/.pip/pip.conf</span><br><span class="line">gedit ~/.pip/pip.conf</span><br></pre></td></tr></table></figure>
+<p><code>~/.pip/pip.conf</code>.</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">[global]</span><br><span class="line">index-url = https://pypi.mirrors.ustc.edu.cn/simple</span><br></pre></td></tr></table></figure>
+<h3 id="docker">docker</h3>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">sudo apt-get remove docker docker-engine docker.io containerd runc</span><br><span class="line">sudo apt-get install apt-transport-https ca-certificates curl gnupg-agent software-properties-common</span><br><span class="line">curl -fsSL https://download.docker.com/linux/ubuntu/gpg | sudo apt-key add -</span><br><span class="line">sudo add-apt-repository <span class="string">"deb [arch=amd64] https://mirrors.aliyun.com/docker-ce/linux/ubuntu <span class="variable">$(lsb_release -cs)</span> stable"</span></span><br><span class="line">sudo apt-get update</span><br><span class="line">sudo apt-get install docker-ce docker-ce-cli containerd.io</span><br><span class="line">sudo vim /etc/docker/daemon.json</span><br><span class="line"><span class="comment"># &#123;"registry-mirrors": ["https://docker.mirrors.ustc.edu.cn"]&#125;</span></span><br><span class="line">sudo systemctl start docker</span><br><span class="line">sudo systemctl <span class="built_in">enable</span> docker</span><br></pre></td></tr></table></figure>
+<h2 id="二进制环境配置">二进制环境配置</h2>
+<h3 id="常用动态库">常用动态库</h3>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">sudo apt-get install apt-file</span><br><span class="line">sudo apt-file update</span><br><span class="line"><span class="comment">#apt-file search libcrypto.so.1.0.0</span></span><br><span class="line">sudo apt-get install libssl1.0.0 libssl1.0.0:i386</span><br><span class="line">sudo apt-get install libncurses5-dev libssl-dev</span><br><span class="line">sudo apt-get install libpixman-1-dev</span><br><span class="line">sudo apt-get install libseccomp-dev libseccomp2 seccomp</span><br></pre></td></tr></table></figure>
+<h3 id="x86">x86</h3>
+<p><code>64</code>位系统编译和运行<code>32</code>位程序需要另装库.</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sudo apt-get install gcc-multilib libc6:i386</span><br></pre></td></tr></table></figure>
+<h3 id="调试工具">调试工具</h3>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">wget -O ~/.gdbinit-gef.py -q http://gef.blah.cat/py</span><br><span class="line"><span class="built_in">echo</span> <span class="built_in">source</span> ~/.gdbinit-gef.py &gt;&gt; ~/.gdbinit</span><br></pre></td></tr></table></figure>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">git <span class="built_in">clone</span> https://github.com/pwndbg/pwndbg</span><br><span class="line"><span class="built_in">cd</span> pwndbg</span><br><span class="line">sudo ./setup.sh</span><br></pre></td></tr></table></figure>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">git <span class="built_in">clone</span> https://github.com/longld/peda.git ~/peda</span><br><span class="line"><span class="built_in">echo</span> <span class="string">"source ~/peda/peda.py"</span> &gt;&gt; ~/.gdbinit</span><br></pre></td></tr></table></figure>
+<p>调试其他架构程序.</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sudo apt-get install gdb-multiarch</span><br></pre></td></tr></table></figure>
+<h3 id="pwntools">pwntools</h3>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">sudo apt-get update</span><br><span class="line">sudo apt-get install python3 python3-pip python3-dev git libssl-dev libffi-dev build-essential</span><br><span class="line">sudo python3 -m pip install --upgrade pip</span><br><span class="line">sudo python3 -m pip install --upgrade pwntools</span><br></pre></td></tr></table></figure>
+<h3 id="qume">qume</h3>
+<p>下载最新版源码安装.</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">./configure</span><br><span class="line">sudo make install -j20</span><br></pre></td></tr></table></figure>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sudo apt-get install -y qemu-kvm</span><br></pre></td></tr></table></figure>
+<h3 id="其他常用工具">其他常用工具</h3>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line">sudo add-apt-repository ppa:brightbox/ruby-ng</span><br><span class="line"><span class="comment">#删除:sudo add-apt-repository -r ppa:brightbox/ruby-ng</span></span><br><span class="line">sudo apt-get update</span><br><span class="line">sudo apt-get install ruby2.6 ruby2.6-dev</span><br><span class="line">sudo gem install one_gadget seccomp-tools</span><br><span class="line"></span><br><span class="line">sudo pip3 install setuptools --upgrade</span><br><span class="line">sudo pip3 install lief</span><br><span class="line"></span><br><span class="line">sudo apt-get install binwalk</span><br><span class="line"></span><br><span class="line">sudo apt install musl-tools</span><br></pre></td></tr></table></figure>
+<h3 id="多架构">多架构</h3>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">sudo apt-get install <span class="string">"binfmt*"</span></span><br><span class="line"><span class="comment">#binfmt用来识别多架构文件类型</span></span><br><span class="line">sudo apt-get install gcc-arm-linux-gnueabi g++-arm-linux-gnueabi gcc-aarch64-linux-gnu g++-aarch64-linux-gnu gcc-arm-linux-gnueabihf g++-arm-linux-gnueabihf</span><br><span class="line"><span class="comment">#ARM/AARCH64运行环境+交叉编译链</span></span><br><span class="line">sudo apt-get install linux-libc-dev-mips-cross libc6-mips-cross libc6-dev-mips-cross binutils-mips-linux-gnu gcc-mips-linux-gnu g++-mips-linux-gnu</span><br><span class="line"><span class="comment">#MIPS运行环境+交叉编译链</span></span><br></pre></td></tr></table></figure>
+<h3 id="buildroot交叉编译环境">buildroot交叉编译环境</h3>
+<p>下载<code>buildroot</code>.</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">make menuconfig</span><br><span class="line"><span class="comment">#改变Target Architecture</span></span><br><span class="line"><span class="comment">#Toolchain-&gt;Kernel Headers</span></span><br><span class="line">make -j8</span><br></pre></td></tr></table></figure>
+<h3 id="pwndocker">pwndocker</h3>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">sudo docker pull skysider/pwndocker:latest</span><br><span class="line">sudo docker run -d --rm -h pwndocker --name pwndocker -v ~/docker:/ctf/work -p 23946:23946 --<span class="built_in">cap</span>-add=SYS_PTRACE skysider/pwndocker</span><br><span class="line">sudo docker <span class="built_in">exec</span> -it pwndocker /bin/bash</span><br></pre></td></tr></table></figure>
 
       
     </div>
@@ -637,7 +597,7 @@
       
         <div class="post-tags">
           
-            <a href="/tags/Linux-kernel/" rel="tag"><i class="fa fa-tag"></i> Linux-kernel</a>
+            <a href="/tags/environment/" rel="tag"><i class="fa fa-tag"></i> environment</a>
           
         </div>
       
@@ -650,8 +610,8 @@
         <div class="post-nav">
           <div class="post-nav-next post-nav-item">
             
-              <a href="/posts/59efbcbc/" rel="next" title="CS-BASIC-compiler-principles-语法分析">
-                <i class="fa fa-chevron-left"></i> CS-BASIC-compiler-principles-语法分析
+              <a href="/posts/c766da46/" rel="next" title="w4rd3n-crypto环境搭建">
+                <i class="fa fa-chevron-left"></i> w4rd3n-crypto环境搭建
               </a>
             
           </div>
@@ -660,8 +620,8 @@
 
           <div class="post-nav-prev post-nav-item">
             
-              <a href="/posts/b04c441f/" rel="prev" title="IS-pwn-Linux-glibc-2.23-攻击方式">
-                IS-pwn-Linux-glibc-2.23-攻击方式 <i class="fa fa-chevron-right"></i>
+              <a href="/posts/511fc099/" rel="prev" title="w4rd3n-v8环境搭建">
+                w4rd3n-v8环境搭建 <i class="fa fa-chevron-right"></i>
               </a>
             
           </div>
@@ -736,7 +696,7 @@
                 
                   <a href="/archives/">
                 
-                    <span class="site-state-item-count">124</span>
+                    <span class="site-state-item-count">126</span>
                     <span class="site-state-item-name">日志</span>
                   </a>
                 </div>
@@ -916,7 +876,7 @@
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#安装内核"><span class="nav-number">1.</span> <span class="nav-text">安装内核</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#编译内核"><span class="nav-number">2.</span> <span class="nav-text">编译内核</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#安装符号文件"><span class="nav-number">3.</span> <span class="nav-text">安装符号文件</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#安装源代码"><span class="nav-number">4.</span> <span class="nav-text">安装源代码</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#重新编译gdb"><span class="nav-number">5.</span> <span class="nav-text">重新编译gdb</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#qemu-gdb"><span class="nav-number">6.</span> <span class="nav-text">qemu + gdb</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#busybox"><span class="nav-number">6.1.</span> <span class="nav-text">busybox</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#调试"><span class="nav-number">6.2.</span> <span class="nav-text">调试</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#双机调试"><span class="nav-number">7.</span> <span class="nav-text">双机调试</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#虚拟机配置"><span class="nav-number">7.1.</span> <span class="nav-text">虚拟机配置</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#配置target"><span class="nav-number">7.2.</span> <span class="nav-text">配置target</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#配置host"><span class="nav-number">7.3.</span> <span class="nav-text">配置host</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#调试-1"><span class="nav-number">7.4.</span> <span class="nav-text">调试</span></a></li></ol></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#基础环境"><span class="nav-number">1.</span> <span class="nav-text">基础环境</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#apt换源"><span class="nav-number">1.1.</span> <span class="nav-text">apt换源</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#工具"><span class="nav-number">1.2.</span> <span class="nav-text">工具</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#pip换源"><span class="nav-number">1.3.</span> <span class="nav-text">pip换源</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#docker"><span class="nav-number">1.4.</span> <span class="nav-text">docker</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#二进制环境配置"><span class="nav-number">2.</span> <span class="nav-text">二进制环境配置</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#常用动态库"><span class="nav-number">2.1.</span> <span class="nav-text">常用动态库</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#x86"><span class="nav-number">2.2.</span> <span class="nav-text">x86</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#调试工具"><span class="nav-number">2.3.</span> <span class="nav-text">调试工具</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#pwntools"><span class="nav-number">2.4.</span> <span class="nav-text">pwntools</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#qume"><span class="nav-number">2.5.</span> <span class="nav-text">qume</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#其他常用工具"><span class="nav-number">2.6.</span> <span class="nav-text">其他常用工具</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#多架构"><span class="nav-number">2.7.</span> <span class="nav-text">多架构</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#buildroot交叉编译环境"><span class="nav-number">2.8.</span> <span class="nav-text">buildroot交叉编译环境</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#pwndocker"><span class="nav-number">2.9.</span> <span class="nav-text">pwndocker</span></a></li></ol></li></ol></div>
             
 
           </div>
@@ -948,7 +908,7 @@
       <i class="fa fa-area-chart"></i>
     </span>
     
-    <span title="站点总字数">837k</span>
+    <span title="站点总字数">840k</span>
   
 
   
@@ -957,7 +917,7 @@
       <i class="fa fa-coffee"></i>
     </span>
     
-    <span title="站点阅读时长">12:41</span>
+    <span title="站点阅读时长">12:44</span>
   
 </div>
 
@@ -1606,7 +1566,7 @@
   //$("body").backstretch("/images/background.jpg");
   </script>
   
-  <script type="text/javascript" src="//cdn.bootcss.com/canvas-nest.js/1.0.0/canvas-nest.min.js"></script>
+  <script type="text/javascript" src="//cdn.bootcss.com/canvas-nest.js/1.0.0/canvas-nest.min.js"></script><!-- hexo-inject:begin --><!-- hexo-inject:end -->
   
-<script src="/live2dw/lib/L2Dwidget.min.js?0c58a1486de42ac6cc1c59c7d98ae887"></script><script>L2Dwidget.init({"pluginRootPath":"live2dw/","pluginJsPath":"lib/","pluginModelPath":"assets/","tagMode":false,"debug":false,"model":{"jsonPath":"/live2dw/assets/koharu.model.json"},"display":{"position":"right","width":150,"height":300},"mobile":{"show":false},"log":false});</script><!-- hexo-inject:begin --><!-- hexo-inject:end --></body>
+<script src="/live2dw/lib/L2Dwidget.min.js?0c58a1486de42ac6cc1c59c7d98ae887"></script><script>L2Dwidget.init({"pluginRootPath":"live2dw/","pluginJsPath":"lib/","pluginModelPath":"assets/","tagMode":false,"debug":false,"model":{"jsonPath":"/live2dw/assets/koharu.model.json"},"display":{"position":"right","width":150,"height":300},"mobile":{"show":false},"log":false});</script></body>
 </html>
